@@ -405,15 +405,15 @@ button_options_pressed</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>378</x>
+      <x>385</x>
       <y>714</y>
-      <w>119</w>
+      <w>112</w>
       <h>84</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 button_start_pressed
 /game_paused = false;</panel_attributes>
-    <additional_attributes>80.0;10.0;80.0;100.0</additional_attributes>
+    <additional_attributes>70.0;10.0;70.0;100.0</additional_attributes>
   </element>
   <element>
     <id>UMLState</id>
@@ -480,7 +480,7 @@ button_back_pressed</panel_attributes>
     <coordinates>
       <x>833</x>
       <y>455</y>
-      <w>119</w>
+      <w>112</w>
       <h>238</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
@@ -490,14 +490,15 @@ button_back_pressed</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>973</x>
-      <y>161</y>
-      <w>203</w>
-      <h>532</h>
+      <x>917</x>
+      <y>168</y>
+      <w>161</w>
+      <h>525</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
+button_editprofile_pressed
 /editing_profile = true;</panel_attributes>
-    <additional_attributes>10.0;20.0;270.0;20.0;270.0;740.0</additional_attributes>
+    <additional_attributes>90.0;10.0;130.0;10.0;130.0;660.0;10.0;660.0;10.0;730.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -516,41 +517,41 @@ checkbox_colorblindmode_statechanged
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>763</x>
+      <x>770</x>
       <y>707</y>
-      <w>238</w>
+      <w>224</w>
       <h>105</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 
 checkbox_teachermode_statechanged
 /teachermode = checkbox_teachermode.checked;</panel_attributes>
-    <additional_attributes>150.0;10.0;150.0;110.0;180.0;110.0;180.0;10.0</additional_attributes>
+    <additional_attributes>140.0;10.0;140.0;110.0;170.0;110.0;170.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>273</x>
+      <x>280</x>
       <y>714</y>
-      <w>119</w>
+      <w>112</w>
       <h>84</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 button_pause_pressed
 /game_paused = true;</panel_attributes>
-    <additional_attributes>80.0;10.0;80.0;100.0</additional_attributes>
+    <additional_attributes>70.0;10.0;70.0;100.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>175</x>
+      <x>182</x>
       <y>651</y>
-      <w>133</w>
+      <w>126</w>
       <h>168</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
  button_exit_pressed
  /game_paused = false;</panel_attributes>
-    <additional_attributes>150.0;10.0;80.0;10.0;80.0;220.0;170.0;220.0</additional_attributes>
+    <additional_attributes>140.0;10.0;70.0;10.0;70.0;220.0;160.0;220.0</additional_attributes>
   </element>
 </diagram>
