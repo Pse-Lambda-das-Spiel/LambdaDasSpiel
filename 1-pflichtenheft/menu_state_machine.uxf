@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.0">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>833</x>
+      <y>154</y>
+      <w>147</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>Edit_Profile_Language
+group=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>833</x>
+      <y>238</y>
+      <w>147</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>Edit_Profile_Name
+group=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>833</x>
+      <y>315</y>
+      <w>147</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>Edit_Profile_Avatar
+group=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>903</x>
+      <y>182</y>
+      <w>105</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+button_next_pressed
+group=1</panel_attributes>
+    <additional_attributes>70.0;10.0;70.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>903</x>
+      <y>266</y>
+      <w>105</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+button_next_pressed
+group=1</panel_attributes>
+    <additional_attributes>70.0;10.0;70.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>770</x>
+      <y>21</y>
+      <w>14</w>
+      <h>14</h>
+    </coordinates>
+    <panel_attributes>type=initial</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>770</x>
+      <y>28</y>
+      <w>21</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>784</x>
+      <y>77</y>
+      <w>140</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+[profile_num == 0]</panel_attributes>
+    <additional_attributes>10.0;20.0;180.0;20.0;180.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>546</x>
+      <y>154</y>
+      <w>147</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>Select_Profile</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>609</x>
+      <y>77</y>
+      <w>168</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+[profile_num &gt; 0]</panel_attributes>
+    <additional_attributes>220.0;20.0;10.0;20.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>763</x>
+      <y>77</y>
+      <w>28</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>type=decision</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>686</x>
+      <y>154</y>
+      <w>161</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+button_new_profile_pressed
+/editing_profile = false;</panel_attributes>
+    <additional_attributes>10.0;20.0;210.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>833</x>
+      <y>343</y>
+      <w>119</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+button_finished_pressed</panel_attributes>
+    <additional_attributes>80.0;10.0;80.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>364</x>
+      <y>182</y>
+      <w>266</w>
+      <h>259</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+profile_selected</panel_attributes>
+    <additional_attributes>360.0;10.0;360.0;130.0;10.0;130.0;10.0;350.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>294</x>
+      <y>427</y>
+      <w>154</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>Show_Profile_Greeting</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>322</x>
+      <y>455</y>
+      <w>112</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+timer_elapsed
+/game_paused = false;</panel_attributes>
+    <additional_attributes>70.0;10.0;70.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>280</x>
+      <y>511</y>
+      <w>168</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>Main_Menu
+--
+
+entry / button_start.text = 
+game_paused ? "Continue" : "Start"
+
+
+
+
+
+
+
+
+
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>609</x>
+      <y>511</y>
+      <w>154</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>Achievments_Menu</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>805</x>
+      <y>182</y>
+      <w>105</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+button_prev_pressed
+group=1</panel_attributes>
+    <additional_attributes>70.0;80.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>805</x>
+      <y>266</y>
+      <w>105</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+button_prev_pressed
+group=1</panel_attributes>
+    <additional_attributes>70.0;70.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>441</x>
+      <y>511</y>
+      <w>182</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+button_achievments_pressed</panel_attributes>
+    <additional_attributes>10.0;20.0;240.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>441</x>
+      <y>525</y>
+      <w>182</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+
+button_back_pressed</panel_attributes>
+    <additional_attributes>240.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>609</x>
+      <y>567</y>
+      <w>154</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>Level_Menu</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>609</x>
+      <y>623</y>
+      <w>154</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>Shop_Menu</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>798</x>
+      <y>679</y>
+      <w>154</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>Options_Menu</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>441</x>
+      <y>581</y>
+      <w>182</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+
+button_back_pressed</panel_attributes>
+    <additional_attributes>240.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>441</x>
+      <y>637</y>
+      <w>182</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+
+button_back_pressed</panel_attributes>
+    <additional_attributes>240.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>441</x>
+      <y>693</y>
+      <w>371</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+
+button_back_pressed</panel_attributes>
+    <additional_attributes>510.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>441</x>
+      <y>567</y>
+      <w>182</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+button_levels_pressed</panel_attributes>
+    <additional_attributes>10.0;20.0;240.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>441</x>
+      <y>623</y>
+      <w>182</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+label_coins_pressed</panel_attributes>
+    <additional_attributes>10.0;20.0;240.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>441</x>
+      <y>679</y>
+      <w>371</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+button_options_pressed</panel_attributes>
+    <additional_attributes>10.0;20.0;510.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>294</x>
+      <y>784</y>
+      <w>154</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>Game_Level</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>378</x>
+      <y>714</y>
+      <w>119</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+button_start_pressed
+/game_paused = false;</panel_attributes>
+    <additional_attributes>80.0;10.0;80.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>1078</x>
+      <y>679</y>
+      <w>154</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>Statistics_Menu</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>945</x>
+      <y>679</y>
+      <w>147</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+button_statistics_pressed</panel_attributes>
+    <additional_attributes>10.0;20.0;190.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>945</x>
+      <y>693</y>
+      <w>147</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+
+button_back_pressed</panel_attributes>
+    <additional_attributes>190.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>875</x>
+      <y>434</y>
+      <w>28</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>type=decision</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>441</x>
+      <y>434</y>
+      <w>448</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+[editing_profile == false]
+/profile_num++;</panel_attributes>
+    <additional_attributes>620.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>833</x>
+      <y>455</y>
+      <w>119</w>
+      <h>238</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+[editing_profile == true]</panel_attributes>
+    <additional_attributes>80.0;10.0;80.0;320.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>973</x>
+      <y>161</y>
+      <w>203</w>
+      <h>532</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+/editing_profile = true;</panel_attributes>
+    <additional_attributes>10.0;20.0;270.0;20.0;270.0;740.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>700</x>
+      <y>707</y>
+      <w>252</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+
+checkbox_colorblindmode_statechanged
+/colorblindmode = checkbox_colorblindmode.checked;</panel_attributes>
+    <additional_attributes>160.0;10.0;160.0;50.0;190.0;50.0;190.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>763</x>
+      <y>707</y>
+      <w>238</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+
+checkbox_teachermode_statechanged
+/teachermode = checkbox_teachermode.checked;</panel_attributes>
+    <additional_attributes>150.0;10.0;150.0;110.0;180.0;110.0;180.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>273</x>
+      <y>714</y>
+      <w>119</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+button_pause_pressed
+/game_paused = true;</panel_attributes>
+    <additional_attributes>80.0;10.0;80.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>175</x>
+      <y>651</y>
+      <w>133</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+ button_exit_pressed
+ /game_paused = false;</panel_attributes>
+    <additional_attributes>150.0;10.0;80.0;10.0;80.0;220.0;170.0;220.0</additional_attributes>
+  </element>
+</diagram>
