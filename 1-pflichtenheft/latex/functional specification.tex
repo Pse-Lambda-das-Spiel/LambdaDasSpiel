@@ -1,0 +1,31 @@
+\documentclass[parskip=full]{scrartcl}
+
+\usepackage[utf8]{inputenc} % use utf8 file encoding for TeX sources
+\usepackage[T1]{fontenc} % avoid garbled Unicode text in pdf
+\usepackage[german]{babel} % german hyphenation, quotes, etc
+\usepackage{hyperref} % detailed hyperlink/pdf configuration
+\hypersetup{ % ‘texdoc hyperref‘ for options
+pdftitle={Lamb.da - Das Spiel}
+}
+\usepackage{csquotes} % provides \enquote{} macro for "quotes"
+
+\usepackage{enumerate}
+
+\begin{document}
+
+\title{Lamb.da - Das Spiel}
+%\date{October 12, 123}
+\author{Name, Name, Name}
+\maketitle
+
+\input{./sections/1_introduction.tex}
+\input{./sections/2_target_definition.tex}
+\input{./sections/3_product_application.tex}
+\input{./sections/4_product_environment.tex}
+\input{./sections/5_functional_requirements.tex}
+\input{./sections/6_product_data.tex}
+\input{./sections/7_non_functional_requirements.tex}
+\input{./sections/8_system_models.tex}
+\input{./sections/9_glossary.tex}
+
+\end{document}
