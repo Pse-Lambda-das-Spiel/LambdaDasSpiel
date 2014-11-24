@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>550</x>
+      <y>140</y>
+      <w>380</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>/LambdaTerm/
+--
+--
+/+evaluate(strategy: ReductionStrategy): LambdaTerm/
+/+apply(var: Variable, term: LambdaTerm): LambdaTerm/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>340</y>
+      <w>280</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>LambdaAbstraction
+--
+-variable: Variable
+-term: LambdaTerm
+--
++evaluate(strategy: ReductionStrategy)
+: LambdaTerm
++apply(var: Variable, term: LambdaTerm)
+: LambdaTerm</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>300</x>
+      <y>340</y>
+      <w>290</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Variable
+--
+-color: Color
+--
++evaluate(strategy: ReductionStrategy)
+: LambdaTerm
++apply(var: Variable, term: LambdaTerm)
+: LambdaTerm
++getColor(): Color</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>890</x>
+      <y>340</y>
+      <w>290</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>LambdaApplication
+--
+-terms: List&lt;LambdaTerm&gt;
+--
++evaluate(strategy: ReductionStrategy)
+: LambdaTerm
++apply(var: Variable, term: LambdaTerm)
+: LambdaTerm</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>730</x>
+      <y>240</y>
+      <w>30</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>440</x>
+      <y>280</y>
+      <w>640</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;620.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>440</x>
+      <y>290</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1050</x>
+      <y>290</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>310</x>
+      <y>560</y>
+      <w>200</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>return (this.getColor() == var.getColor()) ? term : this;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>440</x>
+      <y>430</y>
+      <w>150</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=.()</panel_attributes>
+    <additional_attributes>10.0;130.0;130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>660</x>
+      <y>450</y>
+      <w>210</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=.()</panel_attributes>
+    <additional_attributes>10.0;130.0;190.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>570</x>
+      <y>580</y>
+      <w>290</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>LambdaAbstraction result = new LambdaAbstraction();
+result.term = this.term.apply(var, term);
+return result;
+layer=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1030</x>
+      <y>430</y>
+      <w>150</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=.()</panel_attributes>
+    <additional_attributes>10.0;170.0;130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>890</x>
+      <y>600</y>
+      <w>280</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>LambdaApplication result 
+= new LambdaApplication();
+for (int i = 0; i &lt; terms.size(); i++) {
+	result.terms.add(
+	this.terms.get(i).apply(var, term));
+}
+return result;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>300</x>
+      <y>140</y>
+      <w>200</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+ReductionStrategy
+--
+APPLICATIVE_ORDER
+NORMAL_ORDER
+CALL_BY_NAME
+CALL_BY_VALUE</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>390</y>
+      <w>180</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=.()</panel_attributes>
+    <additional_attributes>10.0;110.0;160.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>310</x>
+      <y>500</y>
+      <w>200</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>return this;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>660</x>
+      <y>410</y>
+      <w>220</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=.()</panel_attributes>
+    <additional_attributes>10.0;100.0;200.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>570</x>
+      <y>510</y>
+      <w>200</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>switch (strategy) {
+	// ...
+}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>890</x>
+      <y>510</y>
+      <w>200</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>switch (strategy) {
+	// ...
+}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>990</x>
+      <y>390</y>
+      <w>180</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=.()</panel_attributes>
+    <additional_attributes>10.0;120.0;160.0;10.0</additional_attributes>
+  </element>
+</diagram>

@@ -1,0 +1,60 @@
+\documentclass[parskip=full]{scrartcl}
+
+\usepackage[utf8]{inputenc} % use utf8 file encoding for TeX sources
+\usepackage[T1]{fontenc} % avoid garbled Unicode text in pdf
+\usepackage[german]{babel} % german hyphenation, quotes, etc
+\usepackage{hyperref} % detailed hyperlink/pdf configuration
+\hypersetup{ % ‘texdoc hyperref‘ for options
+pdftitle={Lamb.da - Das Spiel}
+}
+\usepackage{csquotes} % provides \enquote{} macro for "quotes"
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{geometry}
+\usepackage{enumerate}
+\usepackage{titlesec}
+
+\newcommand{\sectionbreak}{\clearpage}
+
+\title{Lamb.da - Das Spiel}
+%\date{October 12, 123}
+\author{ 	
+Kai Fieger, Farid El-Haddad,  Florian Fervers,
+\\
+Robert Hochweiß,  Kay Schmitteckert
+}
+
+\begin{document}
+\maketitle
+	\begin{center}
+	\includegraphics[width=300pt]{../GUI-Entwurf/icon.png}
+	\end{center}
+	
+\newpage
+\tableofcontents
+\newpage
+\input{./sections/01_introduction.tex}
+\newpage
+\input{./sections/02_game_structure.tex}
+\newpage
+\input{./sections/03_target_definition.tex}
+\newpage
+\input{./sections/04_product_application.tex}
+\newpage
+\input{./sections/05_product_environment.tex}
+\newpage
+\input{./sections/06_functional_requirements.tex}
+\newpage
+\input{./sections/07_product_data.tex}
+\newpage
+\input{./sections/08_non_functional_requirements.tex}
+\newpage
+\input{./sections/09_use_cases.tex}
+\newpage
+\input{./sections/10_test_cases.tex}
+\newpage
+\input{./sections/11_system_models.tex}
+\newpage
+\input{./sections/12_glossary.tex}
+
+\end{document}

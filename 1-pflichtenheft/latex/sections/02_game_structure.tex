@@ -1,0 +1,43 @@
+\section{Spielaufbau}
+
+\subsection{Spielelemente}
+
+Das Spiel ist in mehrere Level eingeteilt, welche jeweils ein zu lösendes Problem darstellen. Dabei muss der Spieler die zur Verfügung stehenden Spielelemente so anordnen, dass sie die Zielkriterien erfüllen. Es gibt folgende Spielelemente:
+
+\begin{description}
+\item[Lamm mit Zauberstab] repräsentiert die Abstraktion im $\lambda$-Kalkül. Die Farbe des Lamms $($nicht weiß$)$ beschreibt dabei den durch die Abstraktion gebundenen Variablennamen. Jedes Lamm besitzt eine Anzahl Edelsteinen in derselben Farbe, außerdem hat es befreundete Lämmer in anderen Farben. Alle Edelsteine und Freunde eines Lamms werden vertikal unter diesem dargestellt. Ein Lamm kann sowohl eigene Edelsteine besitzen als auch solche anderer Lämmer aufbewahren.
+\item[Lamm ohne Zauberstab] repräsentiert eine Klammerung im $\lambda$-Kalkül. Die Farbe dieses Lamms ist immer weiß. Lämmer ohne Zauberstab können keine Edelteine besitzen, aber solche anderer Lämmer aufbewahren. Befreundete Lämmer und aufbewahrte Edelsteine werden auch vertikal unter dem weißen Lamm dargestellt. Weiße Lämmer, die nicht mehr gebraucht werden, verabschieden sich vom Spiel und verschwinden.
+\item[Edelstein] repräsentiert eine Variable im $\lambda$-Kalkül. Die Farbe des Edelsteins $($nicht weiß$)$ beschreibt dabei den Variablennamen. Edelsteine können entweder keinem oder genau einem Lamm gehören und von anderen Lämmern als dem Besitzer aufbewahrt werden.
+\item[Freundeskreis] ist eine Gruppe von Spielelementen. Der Freundeskreis eines Lamms setzt sich aus allen von diesem Lamm aufbewahrten Edelsteinen sowie befreundeten Lämmern und deren Freundeskreisen zusammen.
+\end{description}
+
+\subsection{Spielregeln}
+
+Die Spielregeln beschreiben die Art und Weise, wie eine Anordnung von Spielelementen umgewandelt werden kann. 
+
+\begin{description}
+\item[Verzauberungsregel] repräsentiert die $\beta$-Konversion. Ein Lamm mit Zauberstab verzaubert den Freundeskreis, der sich vor ihm befindet. Dabei verwandelt er alle seine Edelsteine in den genannten Freundeskreis. Der ursprüngliche Freundeskreis verschwindet und das zaubernde Lamm verliert sowohl seinen Zauberstab als auch seine Farbe, erhält deshalb die Farbe weiß.
+\item[Farbenregel] repräsentiert die $\alpha$-Konversion. Wenn ein Lamm einen Freundeskreis verzaubert und es dabei im eigenen sowie im verzauberten Freundeskreis zwei Lämmer mit derselben Farbe gibt, wird vor Anwenden der Verzauberungsregel diese Farbe im zweiten Freundeskreis in eine andere noch nicht benutzte Farbe umgewandelt. Dabei müssen alle umgewandelten Spielelemente die gleiche neue Farbe erhalten.
+\item[1. Regel für Lämmer ohne Zauberstab] repräsentiert die Klammerung um eine einzige Abstraktion oder Variable. Wenn ein Lamm ohne Zauberstab nur noch genau einen direkten Freund hat und keine Edelsteine aufbewahrt oder keinen Freund hat und genau einen Edelstein aufbewahrt, verabschiedet sich das Lamm vom Spiel und verschwindet. Dabei wird es durch den aufbewahrten Edelstein oder durch den einzigen direkten Freund inklusive dessen Freundeskreis ersetzt.
+\item[2. Regel für Lämmer ohne Zauberstab] repräsentiert die Linksassoziativität von $\lambda$-Applikationen. Wenn ein Lamm ohne Zauberstab der erste Freund vor allen aufbewahrten Edelsteinen eines anderen Lammes ist, verabschiedet sich das Lamm vom Spiel und verschwindet. Dabei wird es durch seinen Freundeskreis ersetzt.
+\item[Reihenfolge der Regelausführung] \hfill
+\begin{enumerate}
+\item Führe 1. und 2. Regel für Lämmer ohne Zauberstab solange aus, bis sie nicht mehr angewandt werden können.
+\item Führe Verzauberungsregel $($inklusive Farbenregel falls nötig$)$ aus, wenn diese angewandt werden kann. Falls die Regel ausgeführt wurde, gehe zu Schritt 1.
+\item Die Umwandlung ist abgeschlossen.
+\end{enumerate}
+\end{description}
+
+\subsection{Spielmodi}
+
+\begin{description}
+\item[Editor-Modus] \hfill \\ Hier hat der Spieler die Möglichkeit Lämmer und Edelsteine in eine bestimmte Anordnung zu bringen. Durch das Level können dabei bestimmte Einschränkungen vorgegeben sein, z.B. bereits platzierte Spielelemente, begrenzte Anzahl von Spielelementen sowie benutzbaren Farben.
+\item[Reduktions-Modus] \hfill \\ Hier wird eine bestimmte gegebene Anordnung von Spielelementen gemäß den Spielregeln umgewandelt. Der Spieler hat die Möglichkeit die Reduktions-Schritte einzeln oder automatisch per Abspielmodus auszuführen zu lassen. Außerdem kann er einzelne Schritte rückgängig machen.
+\end{description}
+
+\subsection{Leveltypen}
+
+\begin{description}
+\item[Eingabe-Bestimmung] \hfill \\ Das Ziel des Spielers ist es einen Eingabe-Term im Editor-Modus zu finden, welcher durch Ausführen  der Spielregeln im Reduktions-Modus in den im Level gegebenen Ausgabe-Term umgewandelt werden kann. Falls die Reduktion nach einer begrenzten Anzahl von Schritten nicht terminiert, gilt das Level als nicht bestanden.
+\item[Ausgabe-Bestimmung] \hfill \\ Das Ziel des Spielers ist es einen Ausgabe-Term im Editor-Modus zu finden, welcher durch Ausführen  der Spielregeln im Reduktions-Modus aus einem im Level gegebenen Eingabe-Term hervorgeht. Um im Reduktions-Modus nicht die Lösung des Levels zu verraten, kann hier nur eine Level-spezifische Anzahl von Reduktions-Schritten ausgeführt werden.
+\end{description}
