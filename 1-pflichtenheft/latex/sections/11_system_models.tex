@@ -1,5 +1,4 @@
 \section{Systemmodelle}
-% TODO T Nummern anpassen
 
 \subsection{Objektmodelle}
 % UML Klassendiagramme
@@ -36,137 +35,266 @@
 %GUI
 
 \subsection{Benutzerschnittstelle}
-%../GUI-Entwurf/_jpeg_numeration/registration1.gpej
-%1-pflichtenheft/
-\newcounter{B.SS}
-\begin{figure}[H]
 
+% ---------------------- Sprachauswahlmenü ----------------------
+
+\begin{figure}[H]
 \centering
-\refstepcounter{B.SS}\label{fig:Sprachauswahl}
 \includegraphics[scale=0.55]{../gui/_jpeg_numeration/registration1.jpg}
-
-\caption{Sprachauswahl}
-
-
+\caption{Sprachauswahlmenü}
+\label{fig:Sprachauswahlmenu}
 \end{figure}
+\begin{description*}
+\item[S1] Sprachen-Label: Zeigt aktuell ausgewählte Sprache an
+\item[S2] Sprachenauswahl-Buttons: Zum Wechseln der Sprache
+\item[S3] Flaggen-Image: Zeigt aktuell ausgewählte Sprache an
+\item[B1] Weiter-Button: Zum Wechsel in das Namenswahlmenü $($Abb. \ref{fig:Namenswahlmenu}$)$
+\end{description*}
+
+% ---------------------- Namenswahlmenu ----------------------
 
 \begin{figure}[H]
 \centering
-\refstepcounter{B.SS}\label{fig:Namenseingabe} 
-\includegraphics[scale=0.55]
-{../gui/_jpeg_numeration/registration2.jpg}
-\caption{Namenseingabe}
+\includegraphics[scale=0.55]{../gui/_jpeg_numeration/registration2.jpg}
+\caption{Namenswahlmenü}
+\label{fig:Namenswahlmenu}
 \end{figure}
+\begin{description*}
+\item[N1] Namenseingabe-Textbox: Zur Eingabe des Namens
+\item[B2] Zurück-Button: Zum Wechsel in das Sprachauswahlmenü $($Abb. \ref{fig:Sprachauswahlmenu}$)$
+\item[B1] Weiter-Button: Zum Wechsel in das Avatarauswahlmenü $($Abb. \ref{fig:Avatarauswahlmenu}$)$
+\end{description*}
+
+% ---------------------- Avatarauswahlmenü ----------------------
 
 \begin{figure}[H]
 \centering
-\refstepcounter{B.SS}\label{fig:Avatarauswahl}
 \includegraphics[scale=0.55]{../gui/_jpeg_numeration/registration3.jpg}
-\caption{Avatarauswahl}
+\caption{Avatarauswahlmenü}
+\label{fig:Avatarauswahlmenu}
 \end{figure}
+\begin{description*}
+\item[A1] Avatar-Image: Zeigt aktuell ausgewählten Avatar an
+\item[A2] Avatarauswahl-Buttons: Zum Wechseln des Avatars
+\item[B2] Zurück-Button: Zum Wechsel in das Namenswahlmenü $($Abb. \ref{fig:Namenswahlmenu}$)$
+\item[B3] Bestätigungs-Button: Zum Beenden der Profileditierung
+\end{description*}
+
+% ---------------------- Profilauswahlmenu ----------------------
 
 \begin{figure}[H]
 \centering
-\refstepcounter{B.SS}\label{fig:Profilauswahl}
 \includegraphics[scale=0.55]{../gui/_jpeg_numeration/choose_profile.jpg}
-\caption{Profilauswahl}
+\caption{Profilauswahlmenü}
+\label{fig:Profilauswahlmenu}
 \end{figure}
+\begin{description*}
+\item[P1] Name-Button: Zum Einloggen eines Profils
+\item[P2] Konfigurations-Button: Zum Editieren und Löschen eines Profils
+\item[P3] Hinzufügen-Button: Zum Hinzufügen eines Profils
+\item[B3] Bestätigungs-Button: Zum Beenden der Profileditierung
+\end{description*}
+
+% ---------------------- Begrüßungsbildschirm ----------------------
 
 \begin{figure}[H]
 \centering
-\refstepcounter{B.SS}\label{fig:Welcome}
 \includegraphics[scale=0.55]{../gui/_jpeg_numeration/welcome.jpg}
-\caption{Begrüssungsbildschirm}
+\caption{Begrüßungsbildschirm}
+\label{fig:Begrussungsbildschirm}
 \end{figure}
+%\begin{description*}
+%\end{description*}
+
+% ---------------------- Hauptmenü ----------------------
 
 \begin{figure}[H]
 \centering
-\refstepcounter{B.SS}\label{fig:Hauptmenu}
 \includegraphics[scale=0.55]{../gui/_jpeg_numeration/main_manu.jpg}
-\caption{Hauptmenu}
+\caption{Hauptmenü}
+\label{fig:Hauptmenu}
 \end{figure}
+\begin{description*}
+\item[H1] Start-Button: Zum Starten des zuletzt freigeschalteten Levels
+\item[H2] Level-Button: Zum Wechsel in das Levelauswahlmenü $($Abb. \ref{fig:Levelauswahlmenu}$)$
+\item[H3] Erfolge-Button: Zum Wechsel in das Erfolgsmenü $($Abb. \ref{fig:Erfolgsmenu}$)$
+\item[H4] Optionen-Button: Zum Wechsel in das Optionsmenü $($Abb. \ref{fig:Optionsmenu}$)$
+\item[H5] Stumm-Checkbox: Zum An-/Ausschalten der Hintergrundmusik
+\item[H6] Einkaufs-Button: Zum Wechsel in das Einkaufsmenü $($Abb. \ref{fig:Einkaufsmenu}$)$
+\item[H7] Logout-Button: Zum Wechsel in das Profilauswahlmenü $($Abb. \ref{fig:Profilauswahlmenu}$)$
+\end{description*}
+
+% ---------------------- Optionsmenü ----------------------
 
 \begin{figure}[H]
 \centering
-\refstepcounter{B.SS}\label{fig:Einstellungen}
 \includegraphics[scale=0.55]{../gui/_jpeg_numeration/settings.jpg}
-\caption{Einstellungen}
+\caption{Optionsmenü}
+\label{fig:Optionsmenu}
 \end{figure}
+\begin{description*}
+\item[O1] Lehrermodus-Checkbox: Zum Ein-/Ausschalten des Lehrermodus
+\item[O2] Farbenblindenmodus-Checkbox: Zum Ein-/Ausschalten des Farbenblindenmodus
+\item[O3] Statistik-Button: Zum Wechsel in das Statistikmenü $($Abb. \ref{fig:Statistikmenu}$)$
+\item[O4] Geräusche-Slider: Zum Einstellen der Geräuschlautstärke
+\item[O5] Musik-Slider: Zum Einstellen der Hintergrundmusiklautstärke
+\item[O6] Hilfe-Button: Gibt Hilfe zum Optionsmenü
+\item[B2] Zurück-Button: Zum Wechsel in das Hauptmenü $($Abb. \ref{fig:Hauptmenu}$)$
+\end{description*}
+
+% ---------------------- Statistikmenü ----------------------
 
 \begin{figure}[H]
 \centering
-\refstepcounter{B.SS}\label{fig:Statistik}
 \includegraphics[scale=0.55]{../gui/_jpeg_numeration/stat.jpg}
-\caption{Statistik}
+\caption{Statistikmenü}
+\label{fig:Statistikmenu}
 \end{figure}
+\begin{description*}
+\item[Sn] Statistik-Label: Zeigt ein Statistik-Datum an
+\item[B2] Zurück-Button: Zum Wechsel in das Optionsmenü $($Abb. \ref{fig:Optionsmenu}$)$
+\end{description*}
+
+% ---------------------- Editor-Modus ----------------------
 
 \begin{figure}[H]
 \centering
-\refstepcounter{B.SS}\label{fig:game}
 \includegraphics[scale=0.55]{../gui/_jpeg_numeration/game.jpg}
-\caption{Editormodus}
+\caption{Editor-Modus}
+\label{fig:Editor-Modus}
 \end{figure}
+\begin{description*}
+\item[G1] Pause-Button: Zum Anzeigen des Pause-Dialogs $($Abb. \ref{fig:Editor-Modus_Paused}$)$
+\item[G2] Hinweis-Button: Zum Anzeigen von Tipps zum Level
+\item[G3] Hilfe-Button: Gibt Hilfe zum Editor-Modus
+\item[G4] Drag$\&$Drop-Elemente: Zum Erstellen eines Terms
+\item[G5] Reduktions-Button: Zum Wechsel in den Reduktions-Modus $($Abb. \ref{fig:Reduktions-Modus}$)$ mit aktuellem Term und Reduktionsstrategie
+\item[G6] Levelziel-Button: Zum Anzeigen des Levelziels
+\item[G7] Term-View: Zeigt aktuellen Term an
+\item[G8] Reset-Button: Setzt den Term auf auf die Levelvorgabe zurück
+\item[G9] Reduktionsstrategie-Button: Zur Auswahl der Reduktionsstrategie
+\end{description*}
+
+% ---------------------- Editor-Modus pausiert ----------------------
 
 \begin{figure}[H]
 \centering
-\refstepcounter{B.SS}\label{fig:game_paused}
 \includegraphics[scale=0.55]{../gui/_jpeg_numeration/game_paused.jpg}
-\caption{Editormodus pausiert}
+\caption{Editor-Modus pausiert}
+\label{fig:Editor-Modus_Paused}
 \end{figure}
+\begin{description*}
+\item[PM1] Weiterspielen-Button: Schließt den Pause-Dialog
+%TODO schon in G8?
+\item[PM2] Zurücksetzen-Button: Setzt den Term auf auf die Levelvorgabe zurück
+\item[PM3] Hauptmenü-Button: Beendet das Level und wechselt zum Hauptmenü
+\end{description*}
+
+% ------------ Editor-Modus mit aktiviertem Lehrermodus ---------------
 
 \begin{figure}[H]
 \centering
-\refstepcounter{B.SS}\label{fig:game_teachermode}
 \includegraphics[scale=0.55]{../gui/_jpeg_numeration/game_teachermode.jpg}
-\caption{Editormodus mit eingeschaltetem Lehrermodus}
+\caption{Editor-Modus mit aktiviertem Lehrermodus}
+\label{fig:Editor-Modus_TM}
 \end{figure}
+\begin{description*}
+\item[TM1] Lambdaterm-Label: Zeigt aktuellen Term in Lambdakalkül-Schreibeweise an
+\end{description*}
+
+% ---------------------- Reduktions-Modus ----------------------
 
 \begin{figure}[H]
 \centering
-\refstepcounter{B.SS}\label{fig:game_play_started}
 \includegraphics[scale=0.55]{../gui/_jpeg_numeration/game_play_started.jpg}
-\caption{Reduktionsmodus}
+\caption{Reduktions-Modus}
+\label{fig:Reduktions-Modus}
 \end{figure}
+\begin{description*}
+\item[R1] Schritt-Vorwärts-Button: Führt einen Reduktionsschritt aus
+\item[R2] Abspiel-Button: Startet das automatische Reduzieren
+\item[R3] Schritt-Rückwärts-Button: Macht den letzten Reduktionsschritt rückgängig
+\item[R4] Zurück-Button: Wechselt zurück in den Editor-Modus $($Abb. \ref{fig:Editor-Modus}$)$
+\end{description*}
+
+% ---------------------- Levelabschluss ----------------------
 
 \begin{figure}[H]
 \centering
-\refstepcounter{B.SS}\label{fig:game_completed}
 \includegraphics[scale=0.55]{../gui/_jpeg_numeration/game_completed.jpg}
-\caption{Levelabschluss}
+\caption{Levelabschluss-Dialog}
+\label{fig:Reduktions-Modus_Levelabschluss}
 \end{figure}
+\begin{description*}
+\item[LC1] Wiederholen-Button: Startet dasselbe Level erneut
+\item[LC2] Hauptmenü-Button: Wechselt in das Hauptmenü $($Abb. \ref{fig:Hauptmenu}$)$
+\item[LC3] Nächster-Level-Button: Startet das nächste Level
+\end{description*}
+
+% ---------------------- Freier Editor ----------------------
+
+%\begin{figure}[H]
+%\centering
+%\includegraphics[scale=0.55]{../gui/_jpeg_numeration/game_freemode.jpg}
+%\caption{Freier Editor}
+%\label{fig:Freier Editor}
+%\end{figure}
+%\begin{description*}
+%\end{description*}
+
+% ---------------------- Erfolgsmenü ----------------------
 
 \begin{figure}[H]
 \centering
-\refstepcounter{B.SS}\label{fig:game_freemode}
-\includegraphics[scale=0.55]{../gui/_jpeg_numeration/game_freemode.jpg}
-\caption{Freier Editormodus}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\refstepcounter{B.SS}\label{fig:achievments}
 \includegraphics[scale=0.55]{../gui/_jpeg_numeration/achievements.jpg}
-\caption{Achievements}
+\caption{Erfolgsmenü}
+\label{fig:Erfolgsmenu}
 \end{figure}
+\begin{description*}
+\item[K1] Kategorie-Label: Überschrift für eine Menge von Erfolgen
+\item[K2] Achievement-Label: Beschreibung eines einzelnen Erfolges
+\item[B1] Zurück-Button: Wechselt in das Hauptmenü $($Abb. \ref{fig:Hauptmenu}$)$
+\end{description*}
+
+% ---------------------- Levelauswahlmenü ----------------------
 
 \begin{figure}[H]
 \centering
-\refstepcounter{B.SS}\label{fig:level}
 \includegraphics[scale=0.55]{../gui/_jpeg_numeration/level.jpg}
-\caption{Levels}
+\caption{Levelauswahlmenü}
+\label{fig:Levelauswahlmenu}
 \end{figure}
+\begin{description*}
+\item[Ln] Levelstart-Button: Startet das gewählte Level
+\item[L4] Seitenauswahl-Button: Wechselt zwischen Seiten mit Leveln
+\item[L5] Hilfe-Button: Gibt Hilfe zum Levelauswahlmenü
+\item[B2] Zurück-Button: Wechselt in das Hauptmenü $($Abb. \ref{fig:Hauptmenu}$)$
+\end{description*}
+
+% ---------------------- Einkaufsmenü ----------------------
 
 \begin{figure}[H]
-\refstepcounter{B.SS}\label{fig:shop}
 \centering
 \includegraphics[scale=0.55]{../gui/_jpeg_numeration/shop.jpg}
-\caption{Shop}
+\caption{Einkaufsmenü}
+\label{fig:Einkaufsmenu}
 \end{figure}
+\begin{description*}
+\item[E1] Musik-Dropdownmenü: Zeigt kaufbare Hintergrundmusikstücke an
+\item[E2] Hintergrund-Dropdownmenü: Zeigt kaufbare Hintergrundbilder an
+\item[E3] Texturen-Dropdownmenü: Zeigt kaufbare Texturbilder an
+\item[E4] Münzen-Label: Zeigt aktuelle Anzahl von Münzen an
+\item[B2] Zurück-Button: Wechselt in das Hauptmenü $($Abb. \ref{fig:Hauptmenu}$)$
+\end{description*}
+
+% ---------- Einkaufsmenü mit geöffnetem Musik-Dropdownmenü ----------
 
 \begin{figure}[H]
-\refstepcounter{B.SS}\label{fig:shop_popup}
 \centering
 \includegraphics[scale=0.55]{../gui/_jpeg_numeration/shop_popup.jpg}
-\caption{shoppopup}
+\caption{Einkaufsmenü mit geöffnetem Musik-Dropdownmenü}
+\label{fig:Einkaufsmenu_Dropdown}
 \end{figure}
-
+\begin{description*}
+\item[Mn] Shopelement-Button: Gibt Informationen zum kaufbaren Objekt, dient zum Kauf und zur Aktivierung
+\end{description*}
