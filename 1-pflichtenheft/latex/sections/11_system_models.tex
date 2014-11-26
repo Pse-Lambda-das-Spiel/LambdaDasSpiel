@@ -15,10 +15,16 @@
 %\newgeometry{left=40pt}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.4]{../system_models/dynamic_models/menu_state_machine.pdf}
+\includegraphics[scale=0.6]{../system_models/dynamic_models/menu_state_machine.pdf}
 \caption{Zustandsautomat zur Menübedienung}
 \end{figure}
 %\restoregeometry
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{../system_models/dynamic_models/profile_selection_state_machine.pdf}
+\caption{Zustandsautomat zur Profilerstellung/-editierung/-auswahl}
+\end{figure}
 
 \begin{figure}[H]
 \centering
@@ -31,8 +37,6 @@
 \includegraphics[scale=0.55]{../system_models/dynamic_models/reduction_mode_state_machine.pdf}
 \caption{Zustandsautomat zur Funktion des Reduktions-Modus}
 \end{figure}
-
-%GUI
 
 \subsection{Benutzerschnittstelle}
 
@@ -171,8 +175,7 @@
 \item[G5] Reduktions-Button: Zum Wechsel in den Reduktions-Modus $($Abb. \ref{fig:Reduktions-Modus}$)$ mit aktuellem Term und Reduktionsstrategie
 \item[G6] Levelziel-Button: Zum Anzeigen des Levelziels
 \item[G7] Term-View: Zeigt aktuellen Term an
-\item[G8] Reset-Button: Setzt den Term auf auf die Levelvorgabe zurück
-\item[G9] Reduktionsstrategie-Button: Zur Auswahl der Reduktionsstrategie
+\item[G8] Reduktionsstrategie-Button: Zur Auswahl der Reduktionsstrategie
 \end{description*}
 
 % ---------------------- Editor-Modus pausiert ----------------------
@@ -185,7 +188,6 @@
 \end{figure}
 \begin{description*}
 \item[PM1] Weiterspielen-Button: Schließt den Pause-Dialog
-%TODO schon in G8?
 \item[PM2] Zurücksetzen-Button: Setzt den Term auf auf die Levelvorgabe zurück
 \item[PM3] Hauptmenü-Button: Beendet das Level und wechselt zum Hauptmenü
 \end{description*}
