@@ -15,7 +15,7 @@
 %\newgeometry{left=40pt}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.6]{../system_models/dynamic_models/menu_state_machine.pdf}
+\includegraphics[scale=0.65]{../system_models/dynamic_models/menu_state_machine.pdf}
 \caption{Zustandsautomat zur Menübedienung}
 \end{figure}
 %\restoregeometry
@@ -28,14 +28,14 @@
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.55]{../system_models/dynamic_models/game_level_state_machine.pdf}
+\includegraphics[scale=0.65]{../system_models/dynamic_models/game_level_state_machine.pdf}
 \caption{Zustandsautomat zum Ablauf eines Levels}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.55]{../system_models/dynamic_models/reduction_mode_state_machine.pdf}
-\caption{Zustandsautomat zur Funktion des Reduktions-Modus}
+\includegraphics[scale=0.67]{../system_models/dynamic_models/reduction_mode_state_machine.pdf}
+\caption{Zustandsautomat zur Funktion des Reduktionsmodus}
 \end{figure}
 
 \subsection{Benutzerschnittstelle}
@@ -96,7 +96,6 @@
 \item[P1] Name-Button: Zum Einloggen eines Profils
 \item[P2] Konfigurations-Button: Zum Editieren und Löschen eines Profils
 \item[P3] Hinzufügen-Button: Zum Hinzufügen eines Profils
-\item[B3] Bestätigungs-Button: Zum Beenden der Profileditierung
 \end{description*}
 
 % ---------------------- Begrüssungsbildschirm ----------------------
@@ -159,20 +158,20 @@
 \item[B2] Zurück-Button: Zum Wechsel in das Optionsmenü $($Abb. \ref{fig:Optionsmenu}$)$
 \end{description*}
 
-% ---------------------- Editor-Modus ----------------------
+% ---------------------- Editormodus ----------------------
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.55]{../gui/_jpeg_numeration/game.jpg}
-\caption{Editor-Modus}
-\label{fig:Editor-Modus}
+\caption{Editormodus}
+\label{fig:Editormodus}
 \end{figure}
 \begin{description*}
-\item[G1] Pause-Button: Zum Anzeigen des Pause-Dialogs $($Abb. \ref{fig:Editor-Modus_Paused}$)$
+\item[G1] Pause-Button: Zum Anzeigen des Pause-Dialogs $($Abb. \ref{fig:Editormodus_Paused}$)$
 \item[G2] Hinweis-Button: Zum Anzeigen von Tipps zum Level
-\item[G3] Hilfe-Button: Gibt Hilfe zum Editor-Modus
+\item[G3] Hilfe-Button: Gibt Hilfe zum Editormodus
 \item[G4] Drag$\&$Drop-Elemente: Zum Erstellen eines Terms
-\item[G5] Reduktions-Button: Zum Wechsel in den Reduktions-Modus $($Abb. \ref{fig:Reduktions-Modus}$)$ mit aktuellem Term und Reduktionsstrategie
+\item[G5] Reduktions-Button: Zum Wechsel in den Reduktionsmodus $($Abb. \ref{fig:Reduktionsmodus}$)$ mit aktuellem Term und Reduktionsstrategie
 \item[G6] Levelziel-Button: Zum Anzeigen des Levelziels
 \item[G7] Term-View: Zeigt aktuellen Term an
 \item[G8] Reduktionsstrategie-Button: Zur Auswahl der Reduktionsstrategie
@@ -184,7 +183,7 @@
 \centering
 \includegraphics[scale=0.55]{../gui/_jpeg_numeration/game_paused.jpg}
 \caption{Pause-Dialog}
-\label{fig:Editor-Modus_Paused}
+\label{fig:Editormodus_Paused}
 \end{figure}
 \begin{description*}
 \item[PM1] Weiterspielen-Button: Schließt den Pause-Dialog
@@ -192,31 +191,31 @@
 \item[PM3] Hauptmenü-Button: Beendet das Level und wechselt zum Hauptmenü
 \end{description*}
 
-% ------------ Editor-Modus mit aktiviertem Lehrermodus ---------------
+% ------------ Editormodus mit aktiviertem Lehrermodus ---------------
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.55]{../gui/_jpeg_numeration/game_teachermode.jpg}
-\caption{Editor-Modus mit aktiviertem Lehrermodus}
-\label{fig:Editor-Modus_TM}
+\caption{Editormodus mit aktiviertem Lehrermodus}
+\label{fig:Editormodus_TM}
 \end{figure}
 \begin{description*}
 \item[TM1] Lambdaterm-Label: Zeigt aktuellen Term in Lambdakalkül-Schreibeweise an
 \end{description*}
 
-% ---------------------- Reduktions-Modus ----------------------
+% ---------------------- Reduktionsmodus ----------------------
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.55]{../gui/_jpeg_numeration/game_play_started.jpg}
-\caption{Reduktions-Modus}
-\label{fig:Reduktions-Modus}
+\caption{Reduktionsmodus}
+\label{fig:Reduktionsmodus}
 \end{figure}
 \begin{description*}
 \item[R1] Schritt-Rückwärts-Button: Macht den letzten Reduktionsschritt rückgängig
 \item[R2] Abspiel-Button: Startet das automatische Reduzieren
 \item[R3] Schritt-Vorwärts-Button: Führt einen Reduktionsschritt aus
-\item[R4] Zurück-Button: Wechselt zurück in den Editor-Modus $($Abb. \ref{fig:Editor-Modus}$)$
+\item[R4] Zurück-Button: Wechselt zurück in den Editormodus $($Abb. \ref{fig:Editormodus}$)$
 \end{description*}
 
 % ---------------------- Levelabschluss ----------------------
@@ -225,7 +224,7 @@
 \centering
 \includegraphics[scale=0.55]{../gui/_jpeg_numeration/game_completed.jpg}
 \caption{Levelabschluss-Dialog}
-\label{fig:Reduktions-Modus_Levelabschluss}
+\label{fig:Reduktionsmodus_Levelabschluss}
 \end{figure}
 \begin{description*}
 \item[LC1] Wiederholen-Button: Startet dasselbe Level erneut
