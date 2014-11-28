@@ -1,6 +1,4 @@
 \section{Testfälle}
-% TODO T Nummern anpassen
-
 
 \subsection{Globale Testfälle}
 Folgende Funktionssequenzen sind zu überprüfen:
@@ -42,18 +40,45 @@ Folgende Funktionssequenzen sind zu überprüfen:
 
 \item /T150/ Beispiellevel zur Eingabe-Bestimmung
 \begin{itemize}
-\item Der Nutzer startet das Level mit Levelvorgabe $($Abb. \ref{fig:Beispiellevel_Vorgabe}$)$ und Levelziel $($Abb. \ref{fig:Beispiellevel_Ziel}$)$.
-\item Das Programm wechselt zum Editormodus $($Abb. \ref{fig:Editormodus}$)$ und es wird sofort ein Popup-Fenster angezeigt, in dem das Levelziel wie in Abbildung \ref{fig:Beispiellevel_Ziel} angezeigt wird.
-\item Nach dem Schließen des Popups durch Berühren des Fensters sieht der Spieler den Editormodus $($Abb. \ref{fig:Editormodus}$)$ mit dem Term wie in Abbildung \ref{fig:Beispiellevel_Vorgabe}.
-\item Durch Drücken des Hinweis-Buttons $($G2$)$ öffnet sich ein Popup-Fenster, in dem die Hilfestellung zum aktuellen Level wie in Abbildung \ref{fig:Beispiellevel_Hinweis} angezeigt wird. Der Spieler schließt das Popup durch Berühren des Fensters.
-\item Über die Drag\&Drop Geste wählt der Spieler einen weißen Edelstein von der Werkzeugleiste aus und zieht diesen an die Position rechts neben dem roten Edelstein. Bevor er den Zeiger loslässt, erscheint ein weißer Edelstein wie in Abbildung \ref{fig:Beispiellevel_Hinweis}, aber jetzt transparent. Durch Loslassen des Zeigers wird der Edelstein an dieser Stelle im Term platziert, er ist jetzt also nicht mehr transparent.
+\item Der Nutzer startet das Beispiellevel in Abbildung \ref{fig:Beispiellevel}.
+\item Das Programm wechselt zum Editormodus $($Abb. \ref{fig:Editormodus}$)$ und es wird sofort ein Popup-Fenster angezeigt, in dem das Levelziel wie in Abbildung \ref{fig:Beispiellevel}b angezeigt wird.
+\item Nach dem Schließen des Popups durch Berühren des Fensters sieht der Spieler den Editormodus $($Abb. \ref{fig:Editormodus}$)$ mit dem Term wie in Abbildung \ref{fig:Beispiellevel}a.
+\item Durch Drücken des Hinweis-Buttons $($G2$)$ öffnet sich ein Popup-Fenster, in dem die Hilfestellung zum aktuellen Level wie in Abbildung \ref{fig:Beispiellevel}c angezeigt wird. Der Spieler schließt das Popup durch Berühren des Fensters.
+\item Über die Drag\&Drop Geste wählt der Spieler einen weißen Edelstein von der Werkzeugleiste aus und zieht diesen an die Position G9 $($Abb. \ref{fig:Beispiellevel}a$)$. Bevor er den Zeiger loslässt, erscheint ein weißer Edelstein wie in Abbildung \ref{fig:Beispiellevel}c, aber jetzt transparent. Durch Loslassen des Zeigers wird der Edelstein an dieser Stelle im Term platziert, er ist jetzt also nicht mehr transparent.
 \item Durch Drücken des neu hinzugefügten weißen Edelsteins öffnet sich ein Kontextmenü, in dem dem Spieler mehrere Farben zur Verfügung stehen. Er wählt die Farbe rot durch Drücken des entsprechenden Feldes aus, sodass der zuvor weiße Edelstein jetzt rot wird.
 \item Der Spieler versucht das durch das Level bereits vorgegebene blaue Lamm durch die Drag\&Drop Geste auszuwählen und zu verschieben, das Programm unterdrückt dies aber.
 \item Durch Drücken des Reduktions-Buttons $($G5$)$ wechselt das Programm mit dem gerade erstellen Term in den Reduktionsmodus $($Abb. \ref{fig:Reduktionsmodus}$)$.
-\item Der Spieler drückt den Schritt-Vorwärts-Button $($R3$)$ und das Programm führt den ersten Reduktionsschritt $($Abb. \ref{fig:Beispiellevel_Reduktion}$)$ aus. Der Spieler kann eine Animation sehen, in der das rote Lamm den vor sich liegenden grünen Edelstein verzaubert. Dabei verwandeln sich beide rote Edelsteine in grüne Edelsteine, das rote Lamm verliert sowohl seinen Zauberstab als auch seine Farbe - erhält also die Farbe weiß - und verschwindet darauf vom Bildschirm. Der übriggebliebene Term rückt jetzt an die Stelle des roten Lamms.
-\item Der Spieler drückt den Abspiel-Button $($R2$)$. Der automatische Abspielmodus startet und der Abspiel-Button erhält ein Pausesymbol. Wie bereits beschrieben verzaubert das blaue Lamm den ersten vor sich liegenden, grünen Edelstein. Nach der Animation bleiben genau zwei nebeneinander stehende, grüne Edelsteine übrig. Es sind keine weiteren Reduktionsschritte möglich, der Abspiel-Button erhält wieder ein Abspielsymbol.
+\item Der Spieler drückt den Schritt-Vorwärts-Button $($R3$)$ und das Programm führt den ersten Reduktionsschritt $($Abb. \ref{fig:Beispiellevel_Reduktion}$)$ aus. Der Spieler kann eine Animation sehen, in der das rote Lamm den vor sich liegenden grünen Edelstein verzaubert. Dabei verschwindet der grüne Edelstein, es verwandeln sich beide rote Edelsteine in grüne Edelsteine, das rote Lamm verliert sowohl seinen Zauberstab als auch seine Farbe - erhält also die Farbe weiß - und verschwindet darauf auch vom Bildschirm. Der übriggebliebene Term rückt jetzt an die Stelle des roten Lamms.
+\item Der Spieler drückt den Abspiel-Button $($R2$)$. Der automatische Abspielmodus startet und der Abspiel-Button erhält ein Pausesymbol. Das blaue Lamm verzaubert wie oben beschrieben den ersten vor sich liegenden, grünen Edelstein . Nach der Animation bleiben genau zwei nebeneinander stehende, grüne Edelsteine übrig. Es sind keine weiteren Reduktionsschritte möglich, der Abspiel-Button erhält wieder ein Abspielsymbol.
 \item Die Reduktion ist fertig und der reduzierte Term gleicht dem Levelziel, das Level ist also bestanden. Es öffnet sich der Levelabschluss-Dialog $($Abb. \ref{fig:Reduktionsmodus_Levelabschluss}$)$.
 \end{itemize}
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}{.3\textwidth}
+\includegraphics[width=\textwidth]{../gui/level_example/game_wog.jpg}
+\caption{Anfangsanordnung}
+\end{subfigure}
+\begin{subfigure}{.3\textwidth}
+\includegraphics[width=\textwidth]{../gui/level_example/game_finish_wog.jpg}
+\caption{Zielanordnung}
+\end{subfigure}
+\begin{subfigure}{.3\textwidth}
+\includegraphics[width=\textwidth]{../gui/level_example/game_hint_wog.jpg}
+\caption{Hinweis}
+
+\end{subfigure}
+
+\caption{Beispiellevel}
+\label{fig:Beispiellevel}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{../gui/level_example/reduction123_wog.jpg}
+\caption{Beispiellevel Reduktion}
+\label{fig:Beispiellevel_Reduktion}
+\end{figure}
 
 \item /T160/ Level auswählen
 \begin{itemize}
