@@ -17,13 +17,13 @@ Die Spielregeln beschreiben die Art und Weise, wie eine Anordnung von Spieleleme
 
 \begin{description}
 \item[Verzauberungsregel] repräsentiert die $\beta$-Reduktion. Ein Lamm mit Zauberstab verzaubert den Freundeskreis, der sich vor ihm befindet. Dabei verwandelt er alle seine Edelsteine in den genannten Freundeskreis. Der ursprüngliche Freundeskreis verschwindet und das zaubernde Lamm verliert sowohl seinen Zauberstab als auch seine Farbe, erhält deshalb die Farbe weiß.
-\item[Farbenregel] repräsentiert die $\alpha$-Konversion. Wenn ein Lamm einen Freundeskreis verzaubert und es dabei im eigenen sowie im verzauberten Freundeskreis zwei Elemente mit derselben Farbe gibt, wird vor Anwenden der Verzauberungsregel diese Farbe im zweiten Freundeskreis in eine andere noch nicht benutzte Farbe umgewandelt. Dabei müssen alle umgewandelten Spielelemente die gleiche neue Farbe erhalten.
+\item[Umfärbungsregel] repräsentiert die $\alpha$-Konversion. Wenn ein Lamm einen Freundeskreis verzaubert und es dabei im eigenen sowie im verzauberten Freundeskreis zwei Elemente mit derselben Farbe gibt, wird vor Anwenden der Verzauberungsregel diese Farbe im zweiten Freundeskreis in eine andere noch nicht benutzte Farbe umgewandelt. Dabei müssen alle umgewandelten Spielelemente die gleiche neue Farbe erhalten.
 \item[1. Regel für Lämmer ohne Zauberstab] repräsentiert die Klammerung um eine einzige Abstraktion oder Variable. Wenn ein Lamm ohne Zauberstab nur noch genau einen direkten Freund hat und keine Edelsteine aufbewahrt oder keinen Freund hat und genau einen Edelstein aufbewahrt, verabschiedet sich das Lamm vom Spiel und verschwindet. Dabei wird es durch den aufbewahrten Edelstein oder durch den einzigen direkten Freund inklusive dessen Freundeskreis ersetzt.
 \item[2. Regel für Lämmer ohne Zauberstab] repräsentiert die Linksassoziativität von $\lambda$-Applikationen. Wenn ein Lamm ohne Zauberstab der erste Freund vor allen aufbewahrten Edelsteinen eines anderen Lammes ist, verabschiedet sich das Lamm vom Spiel und verschwindet. Dabei wird es durch seinen Freundeskreis ersetzt.
 \item[Reihenfolge der Regelausführung] \hfill
 \begin{enumerate}
 \item Führe 1. und 2. Regel für Lämmer ohne Zauberstab solange aus, bis sie nicht mehr angewandt werden können.
-\item Führe Verzauberungsregel $($inklusive Farbenregel falls nötig$)$ aus, wenn diese angewandt werden kann. Falls die Regel ausgeführt wurde, gehe zu Schritt 1.
+\item Führe Verzauberungsregel $($inklusive Umfärbungsregel falls nötig$)$ aus, wenn diese angewandt werden kann. Falls die Regel ausgeführt wurde, gehe zu Schritt 1.
 \item Die Umwandlung ist abgeschlossen.
 \end{enumerate}
 \end{description}

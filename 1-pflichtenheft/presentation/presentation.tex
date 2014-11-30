@@ -32,7 +32,7 @@
 % *.eps format if you use latex+dvips+ps2pdf, 
 % *.jpg/*.png/*.pdf if you use pdflatex)
 
-\titleimage{../Media/background}
+\titleimage{../media/background}
 
 %% TITLE LOGO
 
@@ -87,233 +87,84 @@
 % change the following line to "ngerman" for German style date and logos
 \selectlanguage{ngerman}
 
-%title page
 \begin{frame}
-\titlepage
+	\titlepage
 \end{frame}
 
-%\titlelogo{logo}
-%\begin{frame}{Motivation}
-%Funktionale Programierung ist
-%\begin{itemize}[<+->]
-
-%\item kompakt
-%\item frei von Seiteneffekten
-%\item unabhängig von Anweisungsreihenfolge
-
- %$\Rightarrow$   leichter verstänlich
- %$\Rightarrow$    weniger Fehler
- 
-
-%\item  Der $\lambda$-Kalkül ist eine Theoritische Grundlage der Funktionale Programierung
-%\item  Funktionale Programierung und $\lambda$-Kalkül sind zu Kopleziert
-%\end{itemize}  
-%\end{frame}
 \begin{frame}{Ziel}
-\begin{itemize}[<+->]
- \item Der $\lambda$-Kalkül für Informatiknachwuchs im Grunschulalter nahebringen
- \item Kinder lernen beim Spielen besser als im Regulären Unterricht 
- \item Enwickelung eines Spiels , das den kinder Spass macht und grund Prinzipien der  $\lambda$-Kalkül beibringt
- \end{itemize}
+	\begin{itemize}[<+->]
+	\item Kindern im Grundschulalter das Konzept des $\lambda$-Kalküls nahebringen
+	\item Lernfortschritt erreichen durch Spielfreude und "`Gamification"'
+	\item Kindgerechte Bedienung
+	\item Funktionen für begleitende Lehrpersonen
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Spielelemente}
+	\centering
+	\begin{tabular}[h]{l | l}
+	Lambda-Kalkül & Lamb.da Analogie \\
+	\hline
+	Variable & \includegraphics[height=1.cm]{pictures/gem_blue} \\
+	Abstraktion & \includegraphics[height=1.cm]{pictures/lamb_blue} \\
+	Klammerung & \includegraphics[height=1.cm]{pictures/lamb_white}
+	\end{tabular}
+\end{frame}
+
+\begin{frame}{Beispielterm}
+	$\lambda x. (\lambda y. y \ (x \ x)) \ z$ \\
+	\vspace{0.3cm}
+	\includegraphics[scale=1.7]{pictures/lamb_long_blue} \hspace{0.5cm} \includegraphics[scale=0.5]{pictures/gem_green} \\
+	\vspace{0.3cm}
+	\includegraphics[scale=1.7]{pictures/lamb_red} \hspace{0.1cm} \includegraphics[scale=1.7]{pictures/lamb_white}\\
+	\vspace{0.3cm}
+	\hspace{0.5cm} \includegraphics[scale=0.5]{pictures/gem_red} \hspace{0.05cm} \hspace{1.7cm} \includegraphics[scale=0.5]{pictures/gem_blue} \hspace{0.05cm} \includegraphics[scale=0.5]{pictures/gem_blue} \\
+\end{frame}
+
+\begin{frame}{Spielregeln}
+	\centering
+	\begin{tabular}[h]{l | l}
+	Lambda-Kalkül & Lamb.da Analogie \\
+	\hline
+	$\beta$-Reduktion & Verzauberungsregel \\
+	$\alpha$-Reduktion & Umfärbungsregel \\
+	Einfache Klammerung & 1. Regel für Lämmer ohne Zauberstab \\
+	Linksassoziativität & 2. Regel für Lämmer ohne Zauberstab
+	\end{tabular}
+\end{frame}
+
+\begin{frame}{Editormodus}
+	Zum Erstellen eines Terms durch den Spieler
+	\includegraphics[scale=0.5]{../gui/_jpeg/game}
+\end{frame}
+
+\begin{frame}{Reduktionsmodus}
+	Zum automatischen Ausführen der Spielregeln
+	\includegraphics[scale=0.5]{../gui/_jpeg/game_play_started}
+\end{frame}
+
+\begin{frame}{Leveltypen}
 	\begin{itemize}
-	\item Weisses Lamm 
-	  
-	  \includegraphics[height=1.cm]{Pictures/lamb_white_wom} \thinspace \thinspace \thinspace \thinspace
-			 $\Leftrightarrow$ 
-			 \thinspace \thinspace \thinspace \thinspace
-			$($
-	\item Farbiges Lamm 
-	%$\lambda$-Abstraktion
-	
-			\includegraphics[height=1.cm]{Pictures/lamb_blue_wm}
-			\thinspace \thinspace \thinspace \thinspace
-			 $\Leftrightarrow$ 
-			 \thinspace \thinspace \thinspace \thinspace
-			$\lambda x.$
-	\item Edelsteine
-
-			\includegraphics[height=1.cm]{Pictures/gem_blue}
-			\thinspace \thinspace \thinspace \thinspace
-			 $\Leftrightarrow$ 
-			 \thinspace \thinspace \thinspace \thinspace
-			$x$
-	\item Lambdaausduck wird durch überainander stehende lämmer representiert 
+	\item Eingabe-Bestimmung: Erstellen eines $\lambda$-Terms, der nach Anwenden der Spielregeln zu einem gegebenen Term wird
+	\item Ausgabe-Bestimmung: Erstellen eines $\lambda$-Terms, der aus einem gegebenen Term durch Anwenden der Spielregeln hervorgeht
 	\end{itemize}
-	
 \end{frame}
 
-\begin{frame}{Spiel Regeln}
-\begin{itemize}
-\item Ein Farbiges Lamm kann das vor ihm Stehende freudschaftkreis verzaubern
-\item zum Farbigem Lamm gehören alle unter Ihm Stehende Edelsteine 
-\item Das zauberende Lamm verliert seinen Zauberstab und seine Farbe , Dabei vewandeln sich , die von ihm betreuten Edelsteine ,   zum Verzauberten Freundenkreis um . 
-\item ein weisses lamm verabschiedet sich vom Spiel wenn direkt unter ihm  genau ein Lamm oder einen Edelstein steht .
-\end{itemize}
+\begin{frame}{Motivation}
+	Elemente zur Verbesserung der Spielfreude und des Lernfortschritts:
+	\begin{itemize}[<+->]
+	\item Münzen: Erhalten nach erfolgreichem Levelabschluss, eintauschen im Shop gegen Belohnungen
+	\item Erfolge: Angezeigt nach bestimmten Leistungen des Spielers
+	\item Sandbox: Ermöglicht das freie Austoben im Lambda-Kalkül
+	\end{itemize}
 \end{frame}
 
-\begin{frame}{Reduktionsbeispiel}
-	
-
-	
-\includegraphics[scale=1,7]{Pictures/lamb_long_blue_wm}\thinspace \thinspace   
- \includegraphics[scale=0.5]{Pictures/gem_green} \thinspace \thinspace 
-\includegraphics[scale=0.5]{Pictures/gem_green}
-\thinspace \thinspace \thinspace \thinspace \thinspace \thinspace $\Leftrightarrow$ \thinspace \thinspace \thinspace \thinspace \thinspace \thinspace ($\lambda x. \lambda y. $ x y) z z
-\\[0.3cm]
-
-\includegraphics[scale=1,7]{Pictures/lamb_red_wm}
-\\[0.3cm]
-\includegraphics[scale=0.5]{Pictures/gem_blue}
-\includegraphics[scale=0.5]{Pictures/gem_red}
-	
-	
+\begin{frame}{Begleitpersonen}
+	Elemente für Eltern und Lehrer:
+	\begin{itemize}[<+->]
+	\item Lehrermodus: Zeigt im Editor-/Reduktionsmodus den aktuellen Term in Lambda-Kalkül Schreibweise an
+	\item Statistik: Gibt Einsicht in das Spielverhalten der Kinder
+	\end{itemize}
 \end{frame}
-
-\begin{frame}{Reduktionsbeispiel}
-	
-	
-	
-\includegraphics[scale=1,7]{Pictures/lamb_long_white_wom}\thinspace \thinspace   
-\includegraphics[scale=0.5]{Pictures/gem_green}
-\thinspace \thinspace \thinspace \thinspace \thinspace \thinspace $\Leftrightarrow$ \thinspace \thinspace \thinspace \thinspace \thinspace \thinspace (($\lambda y. $ z y)  z)
-\\[0.3cm]
-
-\includegraphics[scale=1,7]{Pictures/lamb_red_wm}
-\\[0.3cm]
-\includegraphics[scale=0.5]{Pictures/gem_green}
-\includegraphics[scale=0.5]{Pictures/gem_red}
-	
-	
-	
-\end{frame}
-
-\begin{frame}{Reduktionsbeispiel}
-	
-	
-	
-\includegraphics[scale=1,7]{Pictures/lamb_red_wm}\thinspace \thinspace   
-\includegraphics[scale=0.5]{Pictures/gem_green}
-\thinspace \thinspace \thinspace \thinspace \thinspace \thinspace $\Leftrightarrow$ \thinspace \thinspace \thinspace \thinspace \thinspace \thinspace ($\lambda y. $ z y)  z
-\\[0.3cm]
-\includegraphics[scale=0.5]{Pictures/gem_green}
-\includegraphics[scale=0.5]{Pictures/gem_red}
-	
-	
-	
-\end{frame}
-
-\begin{frame}{Reduktionsbeispiel}
-	
-\includegraphics[scale=1,7]{Pictures/lamb_white_wom}\thinspace \thinspace   
-\thinspace \thinspace \thinspace \thinspace \thinspace \thinspace $\Leftrightarrow$ \thinspace \thinspace \thinspace \thinspace \thinspace \thinspace ( z y)  
-\\[0.3cm]
-\includegraphics[scale=0.5]{Pictures/gem_green}
-\includegraphics[scale=0.5]{Pictures/gem_red}
-\end{frame}
-
-
-\begin{frame}{Reduktionsbeispiel}
-
-\includegraphics[scale=0.5]{Pictures/gem_green}
-\includegraphics[scale=0.5]{Pictures/gem_red}
-\thinspace \thinspace \thinspace \thinspace \thinspace \thinspace $\Leftrightarrow$ \thinspace \thinspace \thinspace \thinspace \thinspace \thinspace  z z  
-\end{frame}
-
-\begin{frame}{Level}
-Das Spiel Hat 2  Levelstypen  : 
-\begin{itemize}
-\item Eingabe-Bestimmung : Der Spieler muss  ein $\lambda$-Term finden der,nach Anwenden Der Spielregeln, zum vorgegebenen Resultat führt 
-\item Ausgabe-Bestimmung : Der Spieler muss , das  nach anwenden der Spielregeln entstehende resultat verraten 
-\end{itemize}
-
-\end{frame}
-
-\begin{frame}{Spieler Motivieren}
-Damit die Kinder sich nicht langweiln , werden Sie duch Belhnung motiviert länger zu Spielen :
-\begin{itemize}[<+->]
-\item Jeder Erfolgreicher Level wird mit Coins Belohnt
-\item Mit Coins kann der Spieler Hintergründe und Songs kaufen 
-\item Es werden versteckte Levels angeboten 
-\item Statstiken ermöglichen dem spieler und den Bertreuer einen Einblick auf dem Verlauf zu haben 
-\end{itemize}
-\end{frame}
-\begin{frame}{Szenario}
-\begin{itemize}
-\item Sprachauswahl
- 
-\includegraphics[scale=0.5]{../gui/_jpeg/registration1}
-
-
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Szenario}
-\begin{itemize}
-\item Nameneingabe
-\includegraphics[scale=0.5]{../gui/_jpeg/registration2}
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Szenario}
-\begin{itemize}
-\item Awatarauswahl
-\includegraphics[scale=0.5]{../gui/_jpeg/registration3}
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Szenario}
-\begin{itemize}
-\item Wilkommenbildschirm
-\includegraphics[scale=0.5]{../gui/_jpeg/welcome}
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Szenario}
-\begin{itemize}
-\item Hauptmenu
-\includegraphics[scale=0.5]{../gui/_jpeg/main_manu}
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Szenario}
-\begin{itemize}
-\item Levelmenu
-\includegraphics[scale=0.5]{../gui/_jpeg/level}
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Szenario}
-\begin{itemize}
-\item Level gestartet 1 
-\includegraphics[scale=0.5]{../gui/_jpeg/game_freemode}
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Szenario}
-\begin{itemize}
-\item Level gestartet 2
-\includegraphics[scale=0.5]{../gui/_jpeg/game_play_started}
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Szenario}
-\begin{itemize}
-\item Level gestartet 2
-\includegraphics[scale=0.5]{../gui/_jpeg/game_completed}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\begin{center}
-
-\color{blue} \Huge Danke fürs Zuhören 
-\\[1cm]
-\color{blue} \Huge Fragen ??
-\end{center}
-\end{frame}
-
 
 \end{document}
