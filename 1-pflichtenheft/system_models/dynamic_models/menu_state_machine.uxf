@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="13.0">
+<diagram program="umlet" version="13.1">
   <zoom_level>7</zoom_level>
   <element>
     <id>UMLState</id>
@@ -44,7 +44,7 @@
     </coordinates>
     <panel_attributes>lt=-&gt;
 
-B1</panel_attributes>
+B2</panel_attributes>
     <additional_attributes>60.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
@@ -172,11 +172,11 @@ symbol=substate</panel_attributes>
     <coordinates>
       <x>420</x>
       <y>616</y>
-      <w>21</w>
+      <w>35</w>
       <h>140</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
-   H1
+ H1
 </panel_attributes>
     <additional_attributes>10.0;10.0;10.0;180.0</additional_attributes>
   </element>
@@ -196,12 +196,12 @@ symbol=substate</panel_attributes>
     <coordinates>
       <x>511</x>
       <y>371</y>
-      <w>21</w>
+      <w>35</w>
       <h>56</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
    
-   O3</panel_attributes>
+O3</panel_attributes>
     <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
   </element>
   <element>
@@ -209,31 +209,31 @@ symbol=substate</panel_attributes>
     <coordinates>
       <x>539</x>
       <y>371</y>
-      <w>21</w>
+      <w>28</w>
       <h>56</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
-   B2</panel_attributes>
+ B2</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>371</x>
+      <x>378</x>
       <y>616</y>
       <w>35</w>
       <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-    LC3</panel_attributes>
-    <additional_attributes>20.0;10.0;20.0;70.0</additional_attributes>
+ LC3</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>308</x>
+      <x>294</x>
       <y>665</y>
-      <w>98</w>
+      <w>112</w>
       <h>35</h>
     </coordinates>
     <panel_attributes>Levelabschlussdialog</panel_attributes>
@@ -242,26 +242,26 @@ symbol=substate</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>343</x>
+      <x>350</x>
       <y>693</y>
       <w>35</w>
       <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-    LC1</panel_attributes>
-    <additional_attributes>20.0;70.0;20.0;10.0</additional_attributes>
+ LC1</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>378</x>
+      <x>385</x>
       <y>693</y>
       <w>35</w>
       <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-    LC2</panel_attributes>
-    <additional_attributes>20.0;70.0;20.0;10.0</additional_attributes>
+ LC2</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLState</id>
@@ -316,11 +316,11 @@ PM3</panel_attributes>
     <coordinates>
       <x>434</x>
       <y>602</y>
-      <w>112</w>
+      <w>119</w>
       <h>175</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
-   Ln
+ Ln
 </panel_attributes>
     <additional_attributes>140.0;10.0;140.0;230.0;10.0;230.0</additional_attributes>
   </element>
@@ -341,12 +341,12 @@ PM3</panel_attributes>
     <coordinates>
       <x>343</x>
       <y>371</y>
-      <w>21</w>
+      <w>35</w>
       <h>56</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 
-   H7</panel_attributes>
+H7</panel_attributes>
     <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
   </element>
   <element>
