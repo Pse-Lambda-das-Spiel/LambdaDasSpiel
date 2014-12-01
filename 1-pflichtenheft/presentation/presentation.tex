@@ -71,13 +71,15 @@
 % for multiline comments
 \usepackage{verbatim} 
 
+\usepackage{color}
+
 % the presentation starts here
 
 \title[Lambda Spiel]{Spass beim Lernen der Lambdakalkülprinzipien}
 %\subtitle{Spielend die Denkweise des Programmierens lernen}
 \author{PSE 2014/2015}
 
-\institute{Farid Elhaddad |  Florian Fervers | Kai Fieger | 	Robert Hochweiss |	Kay Schmitteckert }
+\institute{Farid Elhaddad | Florian Fervers | Kai Fieger | Robert Hochweiss | Kay Schmitteckert}
 \date{\today}
 
 \beamertemplatenavigationsymbolsempty
@@ -112,9 +114,9 @@
 \end{frame}
 
 \begin{frame}{Beispielterm}
-	$\lambda x. (\lambda y. y \ (x \ x)) \ z$ \\
+	$(\textcolor{blue}{\lambda x. } \textcolor{red}{\lambda y. y} \ (\textcolor{blue}{x \ x})) \ \textcolor{green}{z}$ \\
 	\vspace{0.3cm}
-	\includegraphics[scale=1.7]{pictures/lamb_long_blue} \hspace{0.5cm} \includegraphics[scale=0.5]{pictures/gem_green} \\
+	\includegraphics[scale=1.8]{pictures/lamb_long_blue} \hspace{0.8cm}  \includegraphics[scale=0.5]{pictures/gem_green} \\
 	\vspace{0.3cm}
 	\includegraphics[scale=1.7]{pictures/lamb_red} \hspace{0.1cm} \includegraphics[scale=1.7]{pictures/lamb_white}\\
 	\vspace{0.3cm}
@@ -159,12 +161,22 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Begleitpersonen}
+\begin{frame}{Shop}
+	Zum Eintauschen von Münzen gegen Belohnungen
+	\includegraphics[scale=0.5]{../gui/_jpeg/shop_popup}
+\end{frame}
+
+\begin{frame}{Betreuer}
 	Elemente für Eltern und Lehrer:
 	\begin{itemize}[<+->]
 	\item Lehrermodus: Zeigt im Editor-/Reduktionsmodus den aktuellen Term in Lambda-Kalkül Schreibweise an
 	\item Statistik: Gibt Einsicht in das Spielverhalten der Kinder
 	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\centering
+	\huge Vielen Dank für Ihre Aufmerksamkeit!
 \end{frame}
 
 \end{document}
