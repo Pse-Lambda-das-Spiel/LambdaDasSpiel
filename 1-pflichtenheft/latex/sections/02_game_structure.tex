@@ -16,10 +16,10 @@ Das Spiel ist in mehrere Level eingeteilt, welche jeweils ein zu lösendes Probl
 Die Spielregeln beschreiben die Art und Weise, wie eine Anordnung von Spielelementen umgewandelt werden kann. 
 
 \begin{description}
-\item[Verzauberungsregel] repräsentiert die $\beta$-Reduktion. Ein Lamm mit Zauberstab verzaubert den Freundeskreis, der sich vor ihm befindet. Dabei verwandelt er alle seine Edelsteine in den genannten Freundeskreis. Der ursprüngliche Freundeskreis verschwindet und das zaubernde Lamm verliert sowohl seinen Zauberstab als auch seine Farbe, erhält deshalb die Farbe weiß.
+\item[Verzauberungsregel] repräsentiert die $\beta$-Reduktion. Ein Lamm mit Zauberstab verzaubert den Freundeskreis, der sich horizontal vor ihm befindet. Dabei verwandelt er alle seine Edelsteine in den genannten Freundeskreis. Der ursprüngliche Freundeskreis verschwindet und das zaubernde Lamm verliert sowohl seinen Zauberstab als auch seine Farbe, erhält deshalb die Farbe weiß.
 \item[Umfärbungsregel] repräsentiert die $\alpha$-Konversion. Wenn ein Lamm einen Freundeskreis verzaubert und es dabei im eigenen sowie im verzauberten Freundeskreis zwei Elemente mit derselben Farbe gibt, wird vor Anwenden der Verzauberungsregel diese Farbe im zweiten Freundeskreis in eine andere noch nicht benutzte Farbe umgewandelt. Dabei müssen alle umgewandelten Spielelemente die gleiche neue Farbe erhalten.
 \item[1. Regel für Lämmer ohne Zauberstab] repräsentiert die Klammerung um eine einzige Abstraktion oder Variable. Wenn ein Lamm ohne Zauberstab nur noch genau einen direkten Freund hat und keine Edelsteine aufbewahrt oder keinen Freund hat und genau einen Edelstein aufbewahrt, verabschiedet sich das Lamm vom Spiel und verschwindet. Dabei wird es durch den aufbewahrten Edelstein oder durch den einzigen direkten Freund inklusive dessen Freundeskreis ersetzt.
-\item[2. Regel für Lämmer ohne Zauberstab] repräsentiert die Linksassoziativität von $\lambda$-Applikationen. Wenn ein Lamm ohne Zauberstab der erste Freund vor allen aufbewahrten Edelsteinen eines anderen Lammes ist, verabschiedet sich das Lamm vom Spiel und verschwindet. Dabei wird es durch seinen Freundeskreis ersetzt.
+\item[2. Regel für Lämmer ohne Zauberstab] repräsentiert die Linksassoziativität von $\lambda$-Applikationen. Wenn ein Lamm ohne Zauberstab horizontal der erste Freund vor allen aufbewahrten Edelsteinen eines anderen Lammes ist, verabschiedet sich das Lamm vom Spiel und verschwindet. Dabei wird es durch seinen Freundeskreis ersetzt.
 \item[Reihenfolge der Regelausführung] \hfill
 \begin{enumerate}
 \item Führe 1. und 2. Regel für Lämmer ohne Zauberstab solange aus, bis sie nicht mehr angewandt werden können.
@@ -31,13 +31,13 @@ Die Spielregeln beschreiben die Art und Weise, wie eine Anordnung von Spieleleme
 \subsection{Spielmodi}
 
 \begin{description}
-\item[Editormodus] \hfill \\ Hier hat der Spieler die Möglichkeit Lämmer und Edelsteine in eine bestimmte Anordnung zu bringen. Durch das Level können dabei bestimmte Einschränkungen vorgegeben sein, z.B. bereits platzierte Spielelemente, begrenzte Anzahl von Spielelementen sowie benutzbaren Farben.
-\item[Reduktionsmodus] \hfill \\ Hier wird eine bestimmte, gegebene Anordnung von Spielelementen gemäß den Spielregeln umgewandelt. Der Spieler hat die Möglichkeit die Reduktions-Schritte einzeln oder automatisch per Abspielmodus auszuführen zu lassen. Außerdem kann er einzelne Schritte rückgängig machen.
+\item[Editormodus] \hfill \\ Hier hat der Spieler die Möglichkeit, Lämmer und Edelsteine in eine bestimmte Anordnung zu bringen. Durch das Level können dabei bestimmte Einschränkungen vorgegeben sein, z.B. bereits platzierte Spielelemente, begrenzte Anzahl von Spielelementen sowie benutzbare Farben.
+\item[Reduktionsmodus] \hfill \\ Hier wird eine bestimmte, gegebene Anordnung von Spielelementen gemäß den Spielregeln umgewandelt. Der Spieler hat die Möglichkeit, die Reduktionsschritte einzeln oder automatisch per Abspielmodus auszuführen zu lassen. Außerdem kann er einzelne Schritte rückgängig machen.
 \end{description}
 
 \subsection{Leveltypen}
 
 \begin{description}
-\item[Eingabe-Bestimmung] \hfill \\ Das Ziel des Spielers ist es einen Eingabe-Term im Editormodus zu finden, welcher durch Ausführen  der Spielregeln im Reduktionsmodus in den im Level gegebenen Ausgabe-Term umgewandelt werden kann. Falls die Reduktion nach einer begrenzten Anzahl von Schritten nicht terminiert, gilt das Level als nicht bestanden.
-\item[Ausgabe-Bestimmung] \hfill \\ Das Ziel des Spielers ist es einen Ausgabe-Term im Editormodus zu finden, welcher durch Ausführen  der Spielregeln im Reduktionsmodus aus einem im Level gegebenen Eingabe-Term hervorgeht. Um im Reduktionsmodus nicht die Lösung des Levels zu verraten, kann hier nur eine Level-spezifische Anzahl von Reduktions-Schritten ausgeführt werden.
+\item[Eingabe-Bestimmung] \hfill \\ Das Ziel des Spielers ist es, einen Eingabe-Term im Editormodus zu finden, welcher durch Ausführen  der Spielregeln im Reduktionsmodus in den im Level gegebenen Ausgabe-Term umgewandelt werden kann. Falls die Reduktion nach einer begrenzten Anzahl von Schritten nicht terminiert, gilt das Level als nicht bestanden.
+\item[Ausgabe-Bestimmung] \hfill \\ Das Ziel des Spielers ist es, einen Ausgabe-Term im Editormodus zu finden, welcher durch Ausführen  der Spielregeln im Reduktionsmodus aus einem im Level gegebenen Eingabe-Term hervorgeht. Um im Reduktionsmodus nicht die Lösung des Levels zu verraten, kann hier nur eine Level-spezifische Anzahl von Reduktions-Schritten ausgeführt werden.
 \end{description}
