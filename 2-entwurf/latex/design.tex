@@ -1,0 +1,68 @@
+\documentclass[parskip=full]{scrartcl}
+
+\usepackage[utf8]{inputenc} % use utf8 file encoding for TeX sources
+\usepackage[T1]{fontenc} % avoid garbled Unicode text in pdf
+\usepackage[german]{babel} % german hyphenation, quotes, etc
+\usepackage{hyperref} % detailed hyperlink/pdf configuration
+\hypersetup{ % ‘texdoc hyperref‘ for options
+pdftitle={Lamb.da - Das Spiel}
+}
+\usepackage{csquotes} % provides \enquote{} macro for "quotes"
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{geometry}
+\usepackage{enumerate}
+\usepackage{titlesec}
+\usepackage{mdwlist}
+\usepackage{subcaption}
+
+\newcommand{\sectionbreak}{\clearpage}
+
+\title{Lamb.da - Das Spiel}
+\subtitle{Entwurfsdokument}
+%\date{October 12, 123}
+\author{ 	
+Farid El-Haddad,  Florian Fervers,  Kai Fieger,
+\\
+Robert Hochweiß, Kay Schmitteckert
+}
+
+%Header mit KIT-Logo
+\titlehead{
+	\begin{minipage}{14cm}
+		\begin{flushright}
+			\vspace{-25mm}
+			\hspace{-40mm}
+	  	\includegraphics*{kitlogo_de_rgb.pdf} 
+		\end{flushright}
+  	\end{minipage}
+  	\\
+	\centerline{\hrulefill} %Linie unterm Logo
+}
+
+\begin{document}
+\maketitle
+	\begin{center}
+	\includegraphics[width=250pt]{./icon.png}
+	\end{center}
+	
+\newpage
+\tableofcontents
+\newpage
+\input{./sections/01_introduction.tex}
+\newpage
+\input{./sections/02_macro_design.tex}
+\newpage
+\input{./sections/03_micro_design.tex}
+\newpage
+\input{./sections/04_data_structures.tex}
+\newpage
+\input{./sections/05_dynamic_models.tex}
+\newpage
+\input{./sections/06_work_plan.tex}
+\newpage
+\input{./sections/07_glossary.tex}
+\newpage
+\input{./sections/08_attachment.tex}
+
+\end{document}
