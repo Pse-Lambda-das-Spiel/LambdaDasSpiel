@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>280</x>
+      <y>160</y>
+      <w>320</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>InsertionVisitor
+--
+-inserted: LambdaTerm
+-view: LambdaTermView
+-rightSibling: LambdaTerm = null
+-lastVisited: LambdaTerm
+-isSecondApplicationChild: boolean = false
+--
++InsertionVisitor(inserted: LambdaTerm,
+    view: LambdaTermView)
++visit(node: LambdaApplication)
++visit(node: LambdaAbstraction)
++visit(node: LambdaVariable)
+-insertChild(parent: LambdaNodeView)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>660</x>
+      <y>420</y>
+      <w>690</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>parent.insertChild(NodeViewCreator.create(inserted, parent, isSecondApplicationChild, view), rightSibling);
+inserted.accept(new InsertionRecursionVisitor(view));</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>530</x>
+      <y>350</y>
+      <w>150</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>270</y>
+      <w>190</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;40.0;170.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>660</x>
+      <y>90</y>
+      <w>490</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>if (rightSibling == null &amp;&amp; lastVisited == node.getFirstChild()) {
+    rightSibling = node.getSecondChild();
+}
+if (inserted == node.getSecondChild()) { // Parenthesis
+    isSecondApplicationChild = true;
+}
+if (view.hasNodeView(node))
+    insertChild(view.getActor(node));
+} else {
+    lastVisited = node;
+    node.getParent().accept(this);
+}
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>470</x>
+      <y>330</y>
+      <w>210</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;10.0;190.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>660</x>
+      <y>380</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>assert(false);</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>280</x>
+      <y>470</y>
+      <w>320</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>NodeViewCreator
+--
+-result: LambdaNodeView = null
+-parent: LambdaNodeView
+-view: LambdaTermView
+-canCreateApplicationNodeView: boolean
+--
++NodeViewCreator(parent: LambdaNodeView,
+    canCreateApplicationNodeView: boolean,
+    view: LambdaTermView)
++visit(node: LambdaApplication)
++visit(node: LambdaAbstraction)
++visit(node: LambdaVariable)
+_+create(term: LambdaTerm,_
+_    parent: LamdbaNodeView,_
+_    canCreateApplicationNodeView: boolean,_
+_    view: LambdaTermView): LambdaNodeView)_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>470</x>
+      <y>640</y>
+      <w>220</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;40.0;200.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>670</x>
+      <y>620</y>
+      <w>640</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>NodeViewCreator visitor = new NodeViewCreator(parent, canCreateApplicationNodeView, view);
+term.accept(visitor);
+return visitor.result;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>590</y>
+      <w>200</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;30.0;180.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>670</x>
+      <y>550</y>
+      <w>410</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>if (canCreateApplicationNodeView) {
+    result = new LambdaParenthesisView(node, parent, view);
+}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>660</x>
+      <y>340</y>
+      <w>230</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>insertChild(view.getActor(node));</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>320</y>
+      <w>190</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;10.0;170.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>660</x>
+      <y>30</y>
+      <w>180</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>...
+lastVisited = inserted;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>40</y>
+      <w>140</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;240.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>280</x>
+      <y>760</y>
+      <w>340</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>InsertionRecursionVisitor
+--
+-view: LambdaTermView
+--
++InsertionRecursionVisitor(view: LambdaTermView)
++visit(node: LambdaApplication)
++visit(node: LambdaAbstraction)
++visit(node: LambdaVariable)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>820</y>
+      <w>190</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;10.0;170.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>660</x>
+      <y>770</y>
+      <w>520</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>if (node.getFirstChild() != null) {
+    node.accept(new InsertionVisitor(node.getFirstChild(), view));
+}
+if (node.getSecondChild() != null) {
+    node.accept(new InsertionVisitor(node.getSecondChild(), view));
+}</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
