@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>420</x>
+      <y>360</y>
+      <w>320</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>LambdaGame
+--
+_stage: Stage_
+--
++create()
++dispose()
++resume()
++pause()
++render()
++resize()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>940</x>
+      <y>350</y>
+      <w>140</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>ApplicationListener</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>730</x>
+      <y>360</y>
+      <w>290</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;270.0;10.0</additional_attributes>
+  </element>
+</diagram>
