@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
-      <y>200</y>
+      <x>330</x>
+      <y>420</y>
       <w>240</w>
       <h>220</h>
     </coordinates>
@@ -26,43 +26,32 @@
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>120</x>
-      <y>200</y>
-      <w>140</w>
+      <x>40</x>
+      <y>420</y>
+      <w>160</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>LambdaTermVisitor</panel_attributes>
+    <panel_attributes>LambdaTermVisitor&lt;T&gt;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>190</x>
-      <y>210</y>
-      <w>110</w>
-      <h>30</h>
+      <x>120</x>
+      <y>420</y>
+      <w>230</w>
+      <h>50</h>
     </coordinates>
-    <panel_attributes>lt=-</panel_attributes>
-    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>690</x>
-      <y>700</y>
-      <w>320</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>node.setFirst(node.getFirst().accept(this));
-node.setSecond(node.getSecond().accept(this));
-result = node;</panel_attributes>
-    <additional_attributes/>
+    <panel_attributes>lt=-
+&lt;&lt;bind&gt;&gt;
+T -&gt; LambdaTerm</panel_attributes>
+    <additional_attributes>10.0;20.0;210.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
-      <y>30</y>
+      <x>330</x>
+      <y>250</y>
       <w>170</w>
       <h>120</h>
     </coordinates>
@@ -78,8 +67,8 @@ CALL_BY_VALUE</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>490</x>
-      <y>330</y>
+      <x>540</x>
+      <y>550</y>
       <w>80</w>
       <h>110</h>
     </coordinates>
@@ -89,8 +78,8 @@ CALL_BY_VALUE</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>550</x>
-      <y>420</y>
+      <x>600</x>
+      <y>640</y>
       <w>700</w>
       <h>70</h>
     </coordinates>
@@ -101,122 +90,10 @@ result = node;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>280</x>
-      <y>690</y>
-      <w>360</w>
-      <h>180</h>
-    </coordinates>
-    <panel_attributes>ApplicationVisitor
---
--color: Color
--replacing: LambdaTerm
--result: LambdaTerm = null
---
-+ApplicationVisitor(color: Color, replacing: LambdaTerm)
-+visit(node: LambdaApplication)
-+visit(node: LambdaAbstraction)
-+visit(node: LambdaVariable)
-+getResult(): LambdaTerm</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
-      <x>490</x>
-      <y>730</y>
-      <w>220</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;60.0;200.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>470</x>
-      <y>820</y>
-      <w>240</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;10.0;220.0;30.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>690</x>
-      <y>840</y>
-      <w>380</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>result = (color.equals(node.getColor())) ? replacing : node;</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>690</x>
-      <y>770</y>
-      <w>320</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>assert(!color.equals(node.getColor()));
-node.setInside(node.getInside().accept(this));
-result = node;</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>490</x>
-      <y>780</y>
-      <w>220</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;30.0;200.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>380</x>
-      <y>410</y>
-      <w>70</w>
-      <h>300</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-&lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>30.0;280.0;30.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLInterface</id>
-    <coordinates>
-      <x>120</x>
-      <y>690</y>
-      <w>140</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>LambdaTermVisitor</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>190</x>
-      <y>700</y>
-      <w>110</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=-</panel_attributes>
-    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>490</x>
-      <y>140</y>
+      <x>540</x>
+      <y>360</y>
       <w>80</w>
       <h>200</h>
     </coordinates>
@@ -226,8 +103,8 @@ result = node;</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>550</x>
-      <y>110</y>
+      <x>600</x>
+      <y>330</y>
       <w>740</w>
       <h>300</h>
     </coordinates>
@@ -254,8 +131,8 @@ result = node;</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>550</x>
-      <y>500</y>
+      <x>600</x>
+      <y>720</y>
       <w>110</w>
       <h>30</h>
     </coordinates>
@@ -265,8 +142,8 @@ result = node;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>470</x>
-      <y>340</y>
+      <x>520</x>
+      <y>560</y>
       <w>100</w>
       <h>190</h>
     </coordinates>

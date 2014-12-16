@@ -1,81 +1,145 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="13.0">
+  <help_text>
+
+// Uncomment the following line to change the fontsize and font:
+// fontsize=14
+// fontfamily=SansSerif //possible: SansSerif,Serif,Monospaced
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Welcome to UMLet!
+//
+// Double-click on elements to add them to the diagram, or to copy them
+// Edit elements by modifying the text in this panel
+// Hold Ctrl to select multiple elements
+// Use Ctrl+mouse to select via lasso
+//
+// Use +/- or Ctrl+mouse wheel to zoom
+// Drag a whole relation at its central square icon
+//
+// Press Ctrl+C to copy the whole diagram to the system clipboard (then just paste it to, eg, Word)
+// Edit the files in the "palettes" directory to create your own element palettes
+//
+// Select "Custom Elements &gt; New..." to create new element types
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// This text will be stored with each diagram;  use it for notes.</help_text>
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>360</x>
-      <y>410</y>
-      <w>280</w>
-      <h>180</h>
+      <x>430</x>
+      <y>360</y>
+      <w>430</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>ReductionModel
 --
--currentStep: int
--history: Stack&lt;LambdaTerm&gt;
+-history: Stack&lt;LambdaAbstraction&gt;
 -paused: boolean = true
+-strategy: ReductionStrategy
+-current: LambdaAbstraction
 --
-+ReductionModel(term: LambdaTerm)
++ReductionModel(term: LambdaAbstraction, strategy: ReductionStrategy)
 +play()
 +pause()
 +step()
-+stepRevert()</panel_attributes>
++stepRevert()
++stepFinished()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>630</x>
-      <y>400</y>
-      <w>290</w>
-      <h>50</h>
+      <x>480</x>
+      <y>460</y>
+      <w>410</w>
+      <h>40</h>
     </coordinates>
-    <panel_attributes>lt=-
-&lt;&lt;bind&gt;&gt;
-Observer -&gt; ReductionModelObserver</panel_attributes>
-    <additional_attributes>10.0;20.0;270.0;20.0</additional_attributes>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;20.0;390.0;10.0</additional_attributes>
   </element>
   <element>
-    <id>UMLClass</id>
+    <id>UMLNote</id>
     <coordinates>
-      <x>900</x>
-      <y>390</y>
-      <w>210</w>
-      <h>50</h>
+      <x>870</x>
+      <y>460</y>
+      <w>120</w>
+      <h>30</h>
     </coordinates>
-    <panel_attributes>template=Observer: Class
-Observable
---</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>360</x>
-      <y>160</y>
-      <w>450</w>
-      <h>180</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;interface&gt;&gt;
-ReductionModelObserver
---
---
-+removeTerm(removed: LambdaTerm)
-+replaceVariable(replaced: LambdaVariable, replacing: LambdaTerm)
-+setColor(edited: LambdaValue, color: Color)
-+setTerm(term: LambdaTerm)</panel_attributes>
+    <panel_attributes>paused = false;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>470</x>
-      <y>330</y>
-      <w>70</w>
+      <x>480</x>
+      <y>500</y>
+      <w>410</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;10.0;390.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>870</x>
+      <y>500</y>
+      <w>490</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>history.push((LambdaAbstraction) current.accept(new CopyVisitor()));
+current.accept(new BetaReductionVisitor(strategy));
+step++;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>870</x>
+      <y>770</y>
+      <w>340</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>if (!paused) {
+    step();
+}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>530</x>
+      <y>540</y>
+      <w>360</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;10.0;340.0;250.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>520</y>
+      <w>370</w>
       <h>100</h>
     </coordinates>
-    <panel_attributes>lt=&lt;.
-&lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>30.0;10.0;30.0;80.0</additional_attributes>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;10.0;350.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>870</x>
+      <y>580</y>
+      <w>340</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
   </element>
 </diagram>

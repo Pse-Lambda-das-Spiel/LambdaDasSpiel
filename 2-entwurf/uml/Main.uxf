@@ -5,13 +5,13 @@
     <id>UMLClass</id>
     <coordinates>
       <x>420</x>
-      <y>360</y>
+      <y>440</y>
       <w>320</w>
       <h>150</h>
     </coordinates>
     <panel_attributes>LambdaGame
 --
-_stage: Stage_
+SPECIFIC CONTROLLERS
 --
 +create()
 +dispose()
@@ -22,25 +22,112 @@ _stage: Stage_
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLInterface</id>
+    <id>UMLClass</id>
     <coordinates>
-      <x>940</x>
-      <y>350</y>
-      <w>140</w>
-      <h>60</h>
+      <x>420</x>
+      <y>200</y>
+      <w>320</w>
+      <h>90</h>
     </coordinates>
-    <panel_attributes>ApplicationListener</panel_attributes>
+    <panel_attributes>Controller
+--
+game: LambdaGame
+--
++setGame(game: LambdaGame)
++getGame(): LambdaGame</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>730</x>
-      <y>360</y>
+      <y>200</y>
       <w>290</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;10.0;270.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>970</x>
+      <y>190</y>
+      <w>80</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>gdx.Screen</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>480</y>
+      <w>310</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;10.0;290.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>770</x>
+      <y>480</y>
+      <w>360</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes> // initialize all controllers
+reductionController = new ReductionViewController();
+reductionController.setGame(this);
+
+setScreen(STARTING CONTROLLER);</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>960</x>
+      <y>440</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>gdx.Game</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>730</x>
+      <y>440</y>
+      <w>250</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>230.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>500</y>
+      <w>300</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;10.0;280.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>770</x>
+      <y>590</y>
+      <w>360</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes> // dispose o all controllers
+reductionController.dispose();</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

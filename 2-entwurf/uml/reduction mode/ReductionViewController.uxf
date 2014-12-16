@@ -4,63 +4,68 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>290</x>
-      <y>320</y>
-      <w>340</w>
-      <h>180</h>
+      <x>220</x>
+      <y>280</y>
+      <w>390</w>
+      <h>270</h>
     </coordinates>
     <panel_attributes>ReductionViewController
 --
 -model: ReductionModel
 -stage: scene2d.Stage
--lambdaTermView: LambdaTermView
+-lambdaTermView: LambdaTermView = null
 -inputProcessor: InputMultiplexer
 --
-+ReductionViewController(term: LambdaTerm)</panel_attributes>
++ReductionViewController()
++update(term: LambdaTerm, strategy: ReductionStrategy)
+
++dispose()
++show()
++hide()
++resume()
++pause()
++render(delta: float)
++resize(width: int, height: int)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>590</x>
-      <y>410</y>
-      <w>80</w>
-      <h>40</h>
+      <x>400</x>
+      <y>350</y>
+      <w>270</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;10.0;60.0;20.0</additional_attributes>
+    <additional_attributes>10.0;30.0;250.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
       <x>650</x>
-      <y>410</y>
+      <y>330</y>
       <w>490</w>
-      <h>280</h>
+      <h>210</h>
     </coordinates>
-    <panel_attributes>model = new ReductionModel(term);
-model.addObserver(this);
-
-lambdaTermView = new LambdaTermView(term, ?);
-stage.addActor(lambdaTermView);
-lambdaTermView.setLocation(???);
-
-inputProcessor = new InputMultiplexer();
+    <panel_attributes>inputProcessor = new InputMultiplexer();
 inputProcessor.addProcessor(new GestureDetector.GestureAdapter(){
     public boolean zoom(float initialDistance, float distance) {
         ...
     }
-    // etc
+    // pan etc
 });
 inputProcessor.addProcessor(stage);
-Gdx.input.setInputProcessor(inputProcessor);</panel_attributes>
+
+stage = new Stage(new ScreenViewport());
+
+ // Add ui elements and events to control ReductionModel etc</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>760</x>
-      <y>310</y>
+      <x>710</x>
+      <y>270</y>
       <w>180</w>
       <h>60</h>
     </coordinates>
@@ -70,12 +75,110 @@ Gdx.input.setInputProcessor(inputProcessor);</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>620</x>
-      <y>320</y>
-      <w>240</w>
+      <x>600</x>
+      <y>280</y>
+      <w>210</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
-    <additional_attributes>10.0;10.0;220.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;190.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>530</x>
+      <y>230</y>
+      <w>280</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;50.0;260.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>760</x>
+      <y>220</y>
+      <w>80</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Controller</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>440</y>
+      <w>390</w>
+      <h>350</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;10.0;370.0;330.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>650</x>
+      <y>750</y>
+      <w>490</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Gdx.input.setInputProcessor(inputProcessor);
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>590</x>
+      <y>390</y>
+      <w>80</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>650</x>
+      <y>550</y>
+      <w>490</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>model = new ReductionModel(term, strategy);
+model.addObserver(this);
+
+if (lambdaTermView != null) {
+    stage.removeActor(lambdaTermView);
+}
+lambdaTermView = new LambdaTermView(term, ?);
+stage.addActor(lambdaTermView);
+lambdaTermView.setLocation(???);</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>410</x>
+      <y>520</y>
+      <w>260</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;10.0;240.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>650</x>
+      <y>710</y>
+      <w>570</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>stage.getViewPort().setScreenSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

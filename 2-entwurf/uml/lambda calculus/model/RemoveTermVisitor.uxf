@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>390</x>
+      <y>270</y>
+      <w>290</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>RemoveTermVisitor
+--
+-removed: LambdaTerm = null
+--
++RemoveTermVisitor()
++visit(node: LambdaApplication)
++visit(node: LambdaAbstraction)
++visit(node: LambdaVariable)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>270</y>
+      <w>230</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt;&lt;bind&gt;&gt;
+T -&gt; Object</panel_attributes>
+    <additional_attributes>10.0;20.0;210.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>100</x>
+      <y>270</y>
+      <w>160</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>LambdaTermVisitor&lt;T&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>320</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;20.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>700</x>
+      <y>280</y>
+      <w>570</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>if (removed == null) {
+    assert(!node.isRoot());
+    removed = node;
+    node.getParent().accept(this);
+} else {
+    if (node.getFirst() == removed) {
+        node.setFirst(null);
+    } else if (node.getSecond() == removed) {
+        node.setSecond(null);
+    }
+}</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
