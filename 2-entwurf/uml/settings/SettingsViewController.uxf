@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>510</x>
+      <y>240</y>
+      <w>300</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>	//initializes stage, inputProcessor, gui elements and 
+settings = ProfileModel.currentProfile.getSettings();
+settings.addObserver(this);</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>210</y>
+      <w>130</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+</panel_attributes>
+    <additional_attributes>110.0;30.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>220</x>
+      <y>140</y>
+      <w>260</w>
+      <h>370</h>
+    </coordinates>
+    <panel_attributes>SettingsViewController
+--
+-settings: SettingsModel
+-stage: scene2d.Stage
+-inputProcessor: InputMultiplexer
+--
++SettingsViewController()
++update()
+
++dispose()
++show()
++hide()
++resume()
++pause()
++render(delta: float)
++resize(width: int, height: int)
+
+-setTeacher(value: boolean)
+-setColorblind(value: boolean)
+-musicSliderChangedTo(value: float)
+-soundSliderChangedTo(value: float)
+-gotoMainMenu()
+-gotoStatistics()
+-showHelp()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>510</x>
+      <y>110</y>
+      <w>180</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>SettingsModelObserver</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>470</x>
+      <y>120</y>
+      <w>140</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;20.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>560</x>
+      <y>60</y>
+      <w>80</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Controller</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>420</x>
+      <y>70</y>
+      <w>190</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;70.0;170.0;10.0</additional_attributes>
+  </element>
+</diagram>

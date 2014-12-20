@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>620</x>
+      <y>120</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Observable</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>580</x>
+      <y>130</y>
+      <w>100</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>80.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>270</x>
+      <y>160</y>
+      <w>320</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>SettingsModel
+--
+-musicVolume: float
+-soundVolume: float
+-teacher: boolean
+-colorblind: boolean
+--
++SettingsModel()
++notify()
++getMusicVolume(): float
++setMusicVolume(musicVolume: float)
++getSoundVolume(): float
++setSoundVolume(SoundVolume: float)
++isTeacher(): boolean
++setTeacher(teacher: boolean)
++isColorblind(): boolean
++setColorblind(colorblind: boolean)</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
