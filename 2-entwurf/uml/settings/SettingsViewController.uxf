@@ -4,21 +4,19 @@
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>510</x>
-      <y>240</y>
-      <w>300</w>
-      <h>90</h>
+      <x>500</x>
+      <y>230</y>
+      <w>250</w>
+      <h>50</h>
     </coordinates>
-    <panel_attributes>	//initializes stage, inputProcessor, gui elements and 
-settings = ProfileModel.currentProfile.getSettings();
-settings.addObserver(this);</panel_attributes>
+    <panel_attributes>	//initializes stage, inputProcessor, gui elements</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
-      <y>210</y>
+      <x>390</x>
+      <y>200</y>
       <w>130</w>
       <h>50</h>
     </coordinates>
@@ -29,8 +27,8 @@ settings.addObserver(this);</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>220</x>
-      <y>140</y>
+      <x>210</x>
+      <y>130</y>
       <w>260</w>
       <h>370</h>
     </coordinates>
@@ -63,8 +61,8 @@ settings.addObserver(this);</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>510</x>
-      <y>110</y>
+      <x>500</x>
+      <y>100</y>
       <w>180</w>
       <h>60</h>
     </coordinates>
@@ -74,8 +72,8 @@ settings.addObserver(this);</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>470</x>
-      <y>120</y>
+      <x>460</x>
+      <y>110</y>
       <w>140</w>
       <h>40</h>
     </coordinates>
@@ -85,8 +83,8 @@ settings.addObserver(this);</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>560</x>
-      <y>60</y>
+      <x>550</x>
+      <y>50</y>
       <w>80</w>
       <h>60</h>
     </coordinates>
@@ -96,12 +94,36 @@ settings.addObserver(this);</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>420</x>
-      <y>70</y>
+      <x>410</x>
+      <y>60</y>
       <w>190</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;70.0;170.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>490</x>
+      <y>330</y>
+      <w>290</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>settings = ProfileModel.currentProfile.getSettings();
+settings.addObserver(this);
+	//show screen</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>290</x>
+      <y>270</y>
+      <w>220</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-()</panel_attributes>
+    <additional_attributes>200.0;60.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
