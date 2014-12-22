@@ -1,0 +1,16 @@
+
+1-pflichtenheft/latex/functional_specification.aux
+
+*.log
+
+*.out
+
+*.gz
+
+*.toc
+
+*.aux
+
+*.nav
+
+*.snm

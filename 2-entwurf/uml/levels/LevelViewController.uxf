@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>130</y>
+      <w>240</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>LevelmenuViewController
+--
+-model: LevelmenuModel
+-stage: scene2d.Stage
+-InputProcessor: InputMultiplexer
+--
++LevelmenuViewController()
++update(levelinfo: byte[])
+
+-startLevel(level_id: int): Level
+-toMainmenu()
+
++dispose()
++show()
++hide()
++resume()
++pause()
++render(delta: float)
++resize(width: int, height: int)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>440</x>
+      <y>80</y>
+      <w>380</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>/dient dazu, um anzuzeigen, welches Level gelockt ist und welches nicht</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>90</y>
+      <w>250</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>230.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>200</x>
+      <y>210</y>
+      <w>20</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>230</x>
+      <y>250</y>
+      <w>20</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>240</x>
+      <y>260</y>
+      <w>210</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;190.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>430</x>
+      <y>360</y>
+      <w>340</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>/ID == 0 for sandbox
+/ID == 1 to levels.length() for real level</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

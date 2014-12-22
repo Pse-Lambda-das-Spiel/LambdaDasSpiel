@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>140</y>
+      <w>250</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>Level
+--
+-ID: int
+-currentLevel: Level
+-levels: ArrayList&lt;Level&gt;
+-levelInfo: byte[]
+-goal: LambdaTerm
+--
++Level()
++getLevels(): ArrayList&lt;Level&gt;
++getID(): int
++getLevelInfo(): byte[]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>350</x>
+      <y>240</y>
+      <w>20</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>100</y>
+      <w>90</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;160.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>430</x>
+      <y>80</y>
+      <w>310</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>/loads all levels from json into a list
+sorted per ID
+
+levels[0].ID == 0 == Level with ID == 0
+levels[1].ID == 1 == Level with ID == 1
+...
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>290</x>
+      <y>290</y>
+      <w>20</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>270</y>
+      <w>160</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;40.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>440</x>
+      <y>250</y>
+      <w>370</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>for(int i = 0; i &lt; levels.length(); i++) {
+   switch(levels[i]) {
+      case 0:
+          /displays level locked
+          break;
+      case 1:
+          /displays level activated	
+          break;
+      case 2:
+          /displays level activated &amp; completed
+          break;
+   }
+}
+
+/dient lediglich dazu, um anzuzeigen, welches Level gelockt ist und welches nicht
+(/besser mit enum?)</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
