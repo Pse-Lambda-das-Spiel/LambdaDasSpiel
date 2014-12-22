@@ -9,9 +9,9 @@
       <w>240</w>
       <h>300</h>
     </coordinates>
-    <panel_attributes>LevelmenuViewController
+    <panel_attributes>LevelViewController
 --
--model: LevelmenuModel
+-model: LevelModel
 -stage: scene2d.Stage
 -InputProcessor: InputMultiplexer
 --
