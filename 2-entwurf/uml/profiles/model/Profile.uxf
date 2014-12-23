@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>340</x>
+      <y>170</y>
+      <w>310</w>
+      <h>420</h>
+    </coordinates>
+    <panel_attributes>Profile
+--
+-name: String
+-avatarPath: String
+-language: I18NBundle
+-levelIndex: int
+-musicOn: boolean
+-purchased: int[]
+-settings: SettingsModel
+(-achievements: AchievementModel
+ -statistics: StatisticsModel)
+--
++Profile(name: String)
++notify()
++getName(): String
++getAvatarPath(): String
++setAvatarPath(avatarPath: String)
++getLanguage(): I18NBundle
++setLanguage(language: I18NBundle)
++getLevelIndex(): int
++setLevelIndex(levelIndex: int)
++isMusicOn(): boolean
++setMusicOn(musicOn: boolean)
++getPurchased(): int[]
++getSettings(): SettingsModel
+(+getAchievements(): AchievementModel 
+ +getStatistics(): StatisticsModel)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>680</x>
+      <y>130</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Observable</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>630</x>
+      <y>140</y>
+      <w>110</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+</diagram>

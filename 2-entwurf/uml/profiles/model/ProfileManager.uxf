@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>120</y>
+      <w>340</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>ProfileManager
+--
+_-manager: ProfileManager_
+-currentProfile: Profile
+-profiles: List&lt;Profile&gt;
+--
+-ProfileManager()
+_+getManager(): ProfileManager_
+
++notify()
++getCurrentProfile(): Profile
++setCurrentProfile(name: String): boolean
++getNames(): List&lt;String&gt;
++getProfile(name: String): Profile
++addProfile(name: String): boolean
++changeName(old: String, new: String): boolean
++save(name: String)
++delete(name: String)
+ 
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>490</x>
+      <y>130</y>
+      <w>310</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>profiles = load list of all profiles from files</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>310</x>
+      <y>150</y>
+      <w>200</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+</panel_attributes>
+    <additional_attributes>180.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>540</x>
+      <y>330</y>
+      <w>270</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>replaces old-Profile with identical 
+profile that has new as name.
+returns false if new is already taken</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>460</x>
+      <y>320</y>
+      <w>100</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+</panel_attributes>
+    <additional_attributes>80.0;20.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>480</x>
+      <y>400</y>
+      <w>230</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>saves the Profile with Profile.getName().equals(name)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>320</x>
+      <y>360</y>
+      <w>180</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+</panel_attributes>
+    <additional_attributes>160.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>290</x>
+      <y>370</y>
+      <w>40</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=-()</panel_attributes>
+    <additional_attributes>20.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>490</x>
+      <y>260</y>
+      <w>220</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>creates new Profile(name)
+and adds it to the profiles list
+returns false if name was taken</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>380</x>
+      <y>270</y>
+      <w>130</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-()</panel_attributes>
+    <additional_attributes>110.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>310</x>
+      <y>460</y>
+      <w>230</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>deletes the Profile with Profile.getName().equals(name)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>480</x>
+      <y>70</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Observable</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>80</y>
+      <w>140</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>120.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>500</x>
+      <y>170</y>
+      <w>250</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>if (manager == null) {
+   manager = new ProfileManager();
+}
+return manager;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>190</y>
+      <w>160</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+</panel_attributes>
+    <additional_attributes>140.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+</diagram>
