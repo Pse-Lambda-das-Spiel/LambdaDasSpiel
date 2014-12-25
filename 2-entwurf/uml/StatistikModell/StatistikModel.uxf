@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>110</y>
+      <w>440</w>
+      <h>340</h>
+    </coordinates>
+    <panel_attributes>
+StatistikModel
+--
+-playedTime : int
+-solvedLevels : ArrayList&lt;Level&gt;
+-numberOfTrial : int
+-successRate : float
+
+--
+
++getPlayedTime():int
++ getSolvedLevels() : ArrayList&lt;Level&gt;
++getNumberOfTrial(): int
++getSuccessRate() : float
++setPlayedTime(int) 
++addSolvedLevel(Level)
++setNumberOfTrial(int) 
++setSuccessRate(float)  
++resetStatistic()
+
+group=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
