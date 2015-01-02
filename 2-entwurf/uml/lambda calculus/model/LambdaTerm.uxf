@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>460</x>
-      <y>30</y>
+      <x>490</x>
+      <y>10</y>
       <w>350</w>
       <h>100</h>
     </coordinates>
@@ -20,8 +20,8 @@ LambdaTermObserver
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>460</x>
-      <y>200</y>
+      <x>490</x>
+      <y>180</y>
       <w>280</w>
       <h>160</h>
     </coordinates>
@@ -32,7 +32,6 @@ LambdaTermObserver
 +accept(visitor: LambdaTermVisitor&lt;T&gt;): T
 +notify(notifier: Consumer&lt;Observer&gt;)
 +isRoot(): boolean
-+isAbstraction(): boolean
 +isValue(): boolean
 +getParent(): LambdaTerm</panel_attributes>
     <additional_attributes/>
@@ -40,10 +39,10 @@ LambdaTermObserver
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>430</x>
-      <y>450</y>
+      <x>460</x>
+      <y>430</y>
       <w>280</w>
-      <h>180</h>
+      <h>150</h>
     </coordinates>
     <panel_attributes>LambdaApplication
 --
@@ -61,8 +60,8 @@ LambdaTermObserver
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>720</x>
-      <y>450</y>
+      <x>750</x>
+      <y>430</y>
       <w>280</w>
       <h>100</h>
     </coordinates>
@@ -78,10 +77,10 @@ LambdaTermObserver
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>610</x>
-      <y>710</y>
+      <x>640</x>
+      <y>690</y>
       <w>280</w>
-      <h>140</h>
+      <h>110</h>
     </coordinates>
     <panel_attributes>LambdaAbstraction
 --
@@ -89,15 +88,14 @@ LambdaTermObserver
 --
 +accept(visitor: LambdaTermVisitor&lt;T&gt;): T
 +setInside(inside: LambdaTerm)
-+getInside(): LambdaTerm
-+isAbstraction(): boolean</panel_attributes>
++getInside(): LambdaTerm</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
-      <y>710</y>
+      <x>930</x>
+      <y>690</y>
       <w>290</w>
       <h>70</h>
     </coordinates>
@@ -110,8 +108,8 @@ LambdaTermObserver
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>730</x>
-      <y>190</y>
+      <x>760</x>
+      <y>170</y>
       <w>290</w>
       <h>50</h>
     </coordinates>
@@ -123,8 +121,8 @@ Observer -&gt; LambdaTermObserver</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>530</x>
-      <y>350</y>
+      <x>560</x>
+      <y>330</y>
       <w>30</w>
       <h>120</h>
     </coordinates>
@@ -134,8 +132,8 @@ Observer -&gt; LambdaTermObserver</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>600</x>
-      <y>350</y>
+      <x>630</x>
+      <y>330</y>
       <w>210</w>
       <h>120</h>
     </coordinates>
@@ -145,8 +143,8 @@ Observer -&gt; LambdaTermObserver</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>800</x>
-      <y>540</y>
+      <x>830</x>
+      <y>520</y>
       <w>30</w>
       <h>190</h>
     </coordinates>
@@ -156,8 +154,8 @@ Observer -&gt; LambdaTermObserver</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>960</x>
-      <y>540</y>
+      <x>990</x>
+      <y>520</y>
       <w>30</w>
       <h>190</h>
     </coordinates>
@@ -167,8 +165,8 @@ Observer -&gt; LambdaTermObserver</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1000</x>
-      <y>180</y>
+      <x>1030</x>
+      <y>160</y>
       <w>210</w>
       <h>50</h>
     </coordinates>
@@ -180,8 +178,8 @@ Observable
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>100</x>
-      <y>200</y>
+      <x>130</x>
+      <y>180</y>
       <w>240</w>
       <h>150</h>
     </coordinates>
@@ -199,8 +197,8 @@ LambdaTermVisitor
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>560</x>
-      <y>650</y>
+      <x>590</x>
+      <y>630</y>
       <w>170</w>
       <h>40</h>
     </coordinates>
@@ -211,19 +209,19 @@ return visitor.getResult();</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>710</x>
-      <y>250</y>
-      <w>120</w>
+      <x>610</x>
+      <y>230</y>
+      <w>250</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;40.0;100.0;10.0</additional_attributes>
+    <additional_attributes>10.0;40.0;230.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>810</x>
-      <y>250</y>
+      <x>840</x>
+      <y>230</y>
       <w>160</w>
       <h>90</h>
     </coordinates>
@@ -238,19 +236,19 @@ return visitor.getResult();</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>330</x>
-      <y>250</y>
-      <w>150</w>
+      <y>230</y>
+      <w>180</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;20.0;130.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;160.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>590</x>
-      <y>120</y>
+      <x>620</x>
+      <y>100</y>
       <w>70</w>
       <h>100</h>
     </coordinates>
@@ -261,19 +259,19 @@ return visitor.getResult();</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>820</x>
-      <y>770</y>
+      <x>850</x>
+      <y>750</y>
       <w>90</w>
-      <h>110</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;10.0;70.0;90.0</additional_attributes>
+    <additional_attributes>10.0;10.0;70.0;70.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>640</x>
-      <y>860</y>
+      <x>670</x>
+      <y>820</y>
       <w>390</w>
       <h>80</h>
     </coordinates>
@@ -286,8 +284,8 @@ return visitor.getResult();</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>660</x>
-      <y>510</y>
+      <x>690</x>
+      <y>490</y>
       <w>70</w>
       <h>160</h>
     </coordinates>
@@ -297,8 +295,8 @@ return visitor.getResult();</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>270</x>
-      <y>320</y>
+      <x>300</x>
+      <y>300</y>
       <w>40</w>
       <h>70</h>
     </coordinates>
@@ -308,8 +306,8 @@ return visitor.getResult();</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>230</x>
-      <y>370</y>
+      <x>260</x>
+      <y>350</y>
       <w>210</w>
       <h>30</h>
     </coordinates>
