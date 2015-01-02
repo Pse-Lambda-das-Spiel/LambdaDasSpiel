@@ -69,36 +69,6 @@
 
 \subsection{\texttt{package lambda.model.lambdaterm}}
 
-\subsubsection{\normalfont \texttt{public interface \textbf{LambdaTermObserver}}}
-
-\begin{description}
-\item[Beschreibung] \hfill \\ Repräsentiert einen Beobachter eines Lambda-Terms, welcher über Änderungen am Term informiert wird.
-
-\item[Methoden] \hfill \\
-	\vspace{-.8cm}
-	\begin{itemize}
-		\item $\texttt{public void \textbf{replaceTerm}(LambdaTerm old, LambdaTerm new)}$ \\ Nachricht, dass der gegebene alte Term durch den gegebenen neuen ersetzt wird. Einer von beiden Parametern kann $\texttt{null}$ sein, niemals aber beide.
-		\begin{description}
-			\item[Parameter] \hfill \\
-			\vspace{-.8cm}
-			\begin{itemize}
-				\item $\texttt{LambdaTerm old}$ \\ Der ersetzte Term.
-				\item $\texttt{LambdaTerm new}$ \\ Der neue Term.
-			\end{itemize}
-		\end{description}
-		
-		\item $\texttt{public void \textbf{setColor}(LambdaValue term, Color color)}$ \\ Nachricht, dass die Farbe des gegebenen Terms durch die gegebene neue Farbe ersetzt wird.
-		\begin{description}
-			\item[Parameter] \hfill \\
-			\vspace{-.8cm}
-			\begin{itemize}
-				\item $\texttt{LambdaValue term}$ \\ Der veränderte Term.
-				\item $\texttt{Color color}$ \\ Die neue Farbe des Terms.
-			\end{itemize}
-		\end{description}
-	\end{itemize}
-\end{description}
-
 \subsubsection{\normalfont \texttt{public abstract class \textbf{LambdaTerm} implements Observable<LambdaTermObserver>}}
 
 \begin{description}
@@ -106,7 +76,7 @@
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{private LambdaTerm \textbf{parent}}$ \\ Der Elternknoten dieses Terms.
+		\item $\texttt{private LambdaTerm \textbf{parent}}$ \\ Der Elternknoten dieses Terms. Kann auch $\texttt{null}$ sein, falls der Knoten eine Wurzel ist.
 	\end{itemize}
 	
 \item[Konstruktoren] \hfill \\
@@ -117,7 +87,7 @@
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms.
+				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms. Kann auch $\texttt{null}$ sein, falls der Knoten eine Wurzel ist.
 			\end{itemize}
 		\end{description}
 	\end{itemize}
@@ -137,15 +107,15 @@
 			\begin{itemize}
 				\item $\texttt{LambdaTermVisitor<T> visitor}$ \\ Der Besucher, der entgegen genommen wird.
 			\end{itemize}
-			\item[Exceptions] \hfill \\
-			\vspace{-.8cm}
-			\begin{itemize}
-				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{visitor == null}$ ist.
-			\end{itemize}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
 				\item Gibt den Rückgabewert des Besuchers zurück.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{visitor == null}$ ist.
 			\end{itemize}
 		\end{description}
 		
@@ -178,6 +148,36 @@
 	\end{itemize}
 \end{description}
 
+\subsubsection{\normalfont \texttt{public interface \textbf{LambdaTermObserver}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Beobachter eines Lambda-Terms, welcher über Änderungen am Term informiert wird.
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{replaceTerm}(LambdaTerm old, LambdaTerm new)}$ \\ Wird aufgerufen um dem Beobachter mitzuteilen, dass der gegebene alte Term durch den gegebenen neuen ersetzt wird. Einer von beiden Parametern kann $\texttt{null}$ sein, niemals aber beide.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm old}$ \\ Der ersetzte Term.
+				\item $\texttt{LambdaTerm new}$ \\ Der neue Term.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{setColor}(LambdaValue term, Color color)}$ \\ Wird aufgerufen um dem Beobachter mitzuteilen, dass die Farbe des gegebenen Terms durch die gegebene neue Farbe ersetzt wird.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaValue term}$ \\ Der veränderte Term.
+				\item $\texttt{Color color}$ \\ Die neue Farbe des Terms.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
 \subsubsection{\normalfont \texttt{public class \textbf{LambdaApplication} extends LambdaTerm}}
 
 \begin{description}
@@ -197,7 +197,7 @@
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms.
+				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms. $\texttt{null}$ ist erlaubt, resultiert aber in einem ungültigen Lambda-Term.
 			\end{itemize}
 		\end{description}
 	\end{itemize}
@@ -212,7 +212,7 @@
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{LambdaTerm first}$ \\ Der neue linke Kindknoten.
+				\item $\texttt{LambdaTerm first}$ \\ Der neue linke Kindknoten. $\texttt{null}$ ist erlaubt, resultiert aber in einem ungültigen Lambda-Term.
 			\end{itemize}
 		\end{description}
 		
@@ -230,7 +230,7 @@
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{LambdaTerm second}$ \\ Der neue rechte Kindknoten.
+				\item $\texttt{LambdaTerm second}$ \\ Der neue rechte Kindknoten. $\texttt{null}$ ist erlaubt, resultiert aber in einem ungültigen Lambda-Term.
 			\end{itemize}
 		\end{description}
 		
@@ -245,7 +245,7 @@
 	\end{itemize}
 \end{description}
 
-\subsubsection{\normalfont \texttt{public class \textbf{LambdaValue} extends LambdaTerm}}
+\subsubsection{\normalfont \texttt{public abstract class \textbf{LambdaValue} extends LambdaTerm}}
 
 \begin{description}
 \item[Beschreibung] \hfill \\ Repräsentiert einen Wert - d.h. Abstraktion oder Variable - im Lambda-Kalkül.
@@ -263,7 +263,7 @@
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms.
+				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms. $\texttt{null}$ ist erlaubt, falls der Term eine Wurzel ist.
 				\item $\texttt{Color color}$ \\ Die Farbe dieses Wertes.
 			\end{itemize}
 			\item[Exceptions] \hfill \\
@@ -318,7 +318,7 @@
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{private LambdaTerm \textbf{inside}}$ \\ Der Term innerhalb der Applikation.
+		\item $\texttt{private LambdaTerm \textbf{inside}}$ \\ Der Term innerhalb der Applikation. Kann $\texttt{null}$ sein, resultiert aber in einem ungültigen Term.
 	\end{itemize}
 	
 \item[Konstruktoren] \hfill \\
@@ -329,8 +329,13 @@
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms.
+				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms. Kann $\texttt{null}$ sein, falls der Term eine Wurzel ist.
 				\item $\texttt{Color color}$ \\ Die Farbe der in dieser Abstraktion gebundenen Variable.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{color == null}$ ist.
 			\end{itemize}
 		\end{description}
 	\end{itemize}
@@ -345,7 +350,7 @@
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{LambdaTerm inside}$ \\ Der neue innere Term.
+				\item $\texttt{LambdaTerm inside}$ \\ Der neue innere Term. Kann $\texttt{null}$ sein, resultiert aber in einem ungültigen Term.
 			\end{itemize}
 		\end{description}
 		
@@ -373,8 +378,13 @@
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms.
+				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms. Kann $\texttt{null}$ sein, falls der Term eine Wurzel ist.
 				\item $\texttt{Color color}$ \\ Die Farbe der Variable.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{color == null}$ ist.
 			\end{itemize}
 		\end{description}
 	\end{itemize}
@@ -407,7 +417,7 @@
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{LambdaApplication node}$ \\ Die besuchte Applikation.
+				\item $\texttt{LambdaApplication node}$ \\ Die besuchte Applikation. Ist nie $\texttt{null}$.
 			\end{itemize}
 		\end{description}
 		
@@ -416,7 +426,7 @@
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{LambdaAbstraction node}$ \\ Die besuchte Abstraktion.
+				\item $\texttt{LambdaAbstraction node}$ \\ Die besuchte Abstraktion. Ist nie $\texttt{null}$.
 			\end{itemize}
 		\end{description}
 		
@@ -425,7 +435,7 @@
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{LambdaVariable node}$ \\ Die besuchte Variable.
+				\item $\texttt{LambdaVariable node}$ \\ Die besuchte Variable. Ist nie $\texttt{null}$.
 			\end{itemize}
 		\end{description}
 		
@@ -448,7 +458,7 @@
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{private LambdaTerm \textbf{result}}$ \\ Der Rückgabewert des Besuchs.
+		\item $\texttt{private LambdaTerm \textbf{result}}$ \\ Der Term nach der Alpha-Konversion.
 	\end{itemize}
 
 \item[Konstruktoren] \hfill \\
@@ -586,6 +596,11 @@
 			\begin{itemize}
 				\item $\texttt{Color color}$ \\ Die zu überprüfende Farbe.
 			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{color == null}$ ist.
+			\end{itemize}
 		\end{description}
 	\end{itemize}
 
@@ -624,7 +639,7 @@
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item Gibt zurück, ob die Farbe gebunden ist.
+				\item Gibt zurück, ob die Variable mit der gegebenen Farbe gebunden ist.
 			\end{itemize}
 		\end{description}
 	\end{itemize}
@@ -655,13 +670,18 @@
 				\item $\texttt{Color color}$ \\ Die Farbe der zu ersetzenden Variablen.
 				\item $\texttt{LambdaTerm applicant}$ \\ Das Argument der Applikation.
 			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{color == null}$ oder $\texttt{applicant == null}$ ist.
+			\end{itemize}
 		\end{description}
 	\end{itemize}
 
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation und traversiert weiter zu beiden Kindknoten. Dabei werden die Kindknoten auf die Rückgabewerte beider Besuche gesetzt.
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation und traversiert weiter zu beiden Kindknoten. Dabei werden die Kindknoten auf die Rückgabewerte beider Besuche gesetzt. Speichert als Rückgabewert den besuchten Term.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -670,7 +690,7 @@
 			\end{itemize}
 		\end{description}
 		
-		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Besucht die gegebene Abstraktion und traversiert weiter zum Kindknoten. Dabei wird der Kindknoten auf den Rückgabewert des Besuchs gesetzt.
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Besucht die gegebene Abstraktion und traversiert weiter zum Kindknoten. Dabei wird der Kindknoten auf den Rückgabewert des Besuchs gesetzt. Speichert als Rückgabewert den besuchten Term.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -679,7 +699,7 @@
 			\end{itemize}
 		\end{description}
 		
-		\item $\texttt{public void \textbf{visit}(LambdaVariable node)}$ \\ Besucht die gegebene Variable und speichert wenn nötig als Rückgabewert das Argument der Applikation.
+		\item $\texttt{public void \textbf{visit}(LambdaVariable node)}$ \\ Besucht die gegebene Variable und speichert wenn nötig als Rückgabewert $\texttt{applicant}$.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -688,7 +708,7 @@
 			\end{itemize}
 		\end{description}
 		
-		\item $\texttt{public LambdaTerm \textbf{getResult}()}$ \\ Gibt den Term zurück, der besucht wurde.
+		\item $\texttt{public LambdaTerm \textbf{getResult}()}$ \\ Gibt den Term nach der Applikation zurück.
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
@@ -762,7 +782,7 @@
 \subsubsection{\normalfont \texttt{public class \textbf{RemoveTermVisitor} implements LambdaTermVisitor<Object>}}
 
 \begin{description}
-\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur, welcher einen Term aus der Datenstruktur entfernt.
+\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur, welcher den besuchten Term aus der Datenstruktur entfernt.
 
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
@@ -779,7 +799,7 @@
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation. Falls noch kein zu entfernender Term gespeichert ist, speichere diese Applikation und traversiere zum Elternknoten. Falls ein zu entfernender Term - Kindknoten in der Applikation - gespeichert ist, ersetze diesen durch $\texttt{null}$.
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation. Falls noch kein zu entfernender Term gespeichert ist, speichere diese Applikation und traversiere zum Elternknoten, falls dieser nicht $\texttt{null}$ ist. Ansonsten ist der Term bereits aus der Baumstruktur entfernt. Falls ein zu entfernender Term - Kindknoten in der Applikation - gespeichert ist, ersetze diesen durch $\texttt{null}$.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -788,7 +808,7 @@
 			\end{itemize}
 		\end{description}
 		
-		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Besucht die gegebene Abstraktion. Falls noch kein zu entfernender Term gespeichert ist, speichere diese Abstraktion und traversiere zum Elternknoten. Falls ein zu entfernender Term - Kindknoten der Abstraktion - gespeichert ist, ersetze diesen durch $\texttt{null}$.
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Besucht die gegebene Abstraktion. Falls noch kein zu entfernender Term gespeichert ist, speichere diese Abstraktion und traversiere zum Elternknoten, falls dieser nicht $\texttt{null}$ ist. Ansonsten ist der Term bereits aus der Baumstruktur entfernt. Falls ein zu entfernender Term - Kindknoten der Abstraktion - gespeichert ist, ersetze diesen durch $\texttt{null}$.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -797,7 +817,7 @@
 			\end{itemize}
 		\end{description}
 		
-		\item $\texttt{public void \textbf{visit}(LambdaVariable node)}$ \\ Speichere die Variable als zu entfernenden Term und traversiere zum Elternknoten.
+		\item $\texttt{public void \textbf{visit}(LambdaVariable node)}$ \\ Speichere die Variable als zu entfernenden Term und traversiere zum Elternknoten, falls dieser nicht $\texttt{null}$ ist. Ansonsten ist der Term bereits aus der Baumstruktur entfernt.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
