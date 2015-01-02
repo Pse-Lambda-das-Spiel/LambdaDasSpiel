@@ -26,11 +26,11 @@ result = node;</panel_attributes>
     <panel_attributes>ApplicationVisitor
 --
 -color: Color
--replacing: LambdaTerm
+-applicant: LambdaTerm
 -result: LambdaTerm = null
 -hasCheckedAlphaConversion: boolean = false
 --
-+ApplicationVisitor(color: Color, replacing: LambdaTerm)
++ApplicationVisitor(color: Color, applicant: LambdaTerm)
 +visit(node: LambdaApplication)
 +visit(node: LambdaAbstraction)
 +visit(node: LambdaVariable)
@@ -69,7 +69,7 @@ result = node;</panel_attributes>
       <h>50</h>
     </coordinates>
     <panel_attributes>checkAlphaConversion(node);
-result = (color.equals(node.getColor())) ? replacing.accept(new CopyVisitor()) : node;</panel_attributes>
+result = (color.equals(node.getColor())) ? applicant.accept(new CopyVisitor()) : node;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -132,13 +132,13 @@ T -&gt; LambdaTerm</panel_attributes>
     <panel_attributes>if (!hasCheckedAlphaConversion) {
     hasCheckedAlphaConversion = true;
     Set&lt;Color&gt; intersection = node.accept(new ColorCollectionVisitor());
-    intersection.retainAll(replacing.accept(new ColorCollectionVisitor()));
+    intersection.retainAll(applicant.accept(new ColorCollectionVisitor()));
     for (Color color : intersection) {
-        if (!color.equals(this.color) &amp;&amp; !replacing.getParent().accept(new IsColorBoundVisitor(color))) {
-            replacing.accept(new AlphaConversionVisitor(color, GENERATE NEW COLOR));
+        if (!color.equals(this.color) &amp;&amp; !applicant.getParent().accept(new IsColorBoundVisitor(color))) {
+            applicant.accept(new AlphaConversionVisitor(color, GENERATE NEW COLOR));
         }
     }
-    replacing.accept(new RemoveTermVisitor());
+    applicant.accept(new RemoveTermVisitor());
 }</panel_attributes>
     <additional_attributes/>
   </element>
@@ -148,12 +148,13 @@ T -&gt; LambdaTerm</panel_attributes>
       <x>320</x>
       <y>590</y>
       <w>310</w>
-      <h>120</h>
+      <h>140</h>
     </coordinates>
     <panel_attributes>ColorCollectionVisitor
 --
 -result: Set&lt;Color&gt;
 --
++ColorCollectionVisitor()
 +visit(node: LambdaApplication)
 +visit(node: LambdaAbstraction)
 +visit(node: LambdaVariable)
@@ -164,12 +165,12 @@ T -&gt; LambdaTerm</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>530</x>
-      <y>650</y>
+      <y>670</y>
       <w>130</w>
-      <h>80</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;10.0;110.0;60.0</additional_attributes>
+    <additional_attributes>10.0;10.0;110.0;40.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>

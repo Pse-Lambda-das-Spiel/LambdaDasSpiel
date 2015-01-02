@@ -1,1 +1,896 @@
 \section{Feinentwurf}
+
+\subsection{\texttt{package lambda}}
+
+\subsubsection{\normalfont \texttt{public class \textbf{Observable}<Observer>}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert ein Objekt, das von Beobachtern überwacht werden kann. Dabei informiert das Objekt alle Beobachter, sobald Änderungen an ihm vorgenommen werden.
+
+\item[Typ-Parameter] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{<Observer>}$ \\ Der Typ eines Beobachters.
+	\end{itemize}
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private List<Observer> \textbf{observers}}$ \\ Die Liste der Beobachter dieses Objektes.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{Observable}()}$ \\ Instanziiert ein Objekt dieser Klasse.
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{addObserver}(Observer o)}$ \\ Fügt den gegebenen Beobachter diesem Objekt hinzu, sodass dieser bei Änderungen informiert wird.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{Observer o}$ \\ Der neue Beobachter.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{o == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{removeObserver}(Observer o)}$ \\ Entfernt den Beobachter aus der Liste, falls dieser darin existiert, sodass dieser nicht mehr bei Änderungen informiert wird.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{Observer o}$ \\ Der zu entfernende Beobachter.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{o == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{notify}(Consumer<Observer> notifier)}$ \\ Ruft die gegebene Funktion auf allen Beobachtern auf. Wird benutzt, um Beobachter über Änderungen am Objekt zu informieren.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{Consumer<Observer> notifier}$ \\ Die Funktion, die auf allen Beobachtern ausgeführt wird.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsection{\texttt{package lambda.model.lambdaterm}}
+
+\subsubsection{\normalfont \texttt{public interface \textbf{LambdaTermObserver}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Beobachter eines Lambda-Terms, welcher über Änderungen am Term informiert wird.
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{replaceTerm}(LambdaTerm old, LambdaTerm new)}$ \\ Nachricht, dass der gegebene alte Term durch den gegebenen neuen ersetzt wird. Einer von beiden Parametern kann $\texttt{null}$ sein, niemals aber beide.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm old}$ \\ Der ersetzte Term.
+				\item $\texttt{LambdaTerm new}$ \\ Der neue Term.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{setColor}(LambdaValue term, Color color)}$ \\ Nachricht, dass die Farbe des gegebenen Terms durch die gegebene neue Farbe ersetzt wird.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaValue term}$ \\ Der veränderte Term.
+				\item $\texttt{Color color}$ \\ Die neue Farbe des Terms.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public abstract class \textbf{LambdaTerm} implements Observable<LambdaTermObserver>}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Term im Lambda-Kalkül bzw. ein Knoten in der Baumstruktur eines Lambda-Terms.
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private LambdaTerm \textbf{parent}}$ \\ Der Elternknoten dieses Terms.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LambdaTerm}(LambdaTerm parent)}$ \\ Instanziiert ein Objekt dieser Klasse mit dem gegebenen Elternknoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public abstract <T> T \textbf{accept}(LambdaTermVisitor<T> visitor)}$ \\ Nimmt den gegebenen Besucher entgegen und ruft dessen $\texttt{visit}$-Methode auf. Die Rückgabe des Besuchers wird auch von dieser Methode zurückgegeben.
+		\begin{description}
+			\item[Typ-Parameter] \hfill \\
+				\vspace{-.8cm}
+				\begin{itemize}
+					\item $\texttt{<T>}$ \\ Der Typ des Rückgabewertes des Besuchers. Wird benötigt, um verschiedene Rückgabewerte von verschiedenen Besucherklassen zu ermöglichen.
+				\end{itemize}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTermVisitor<T> visitor}$ \\ Der Besucher, der entgegen genommen wird.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{visitor == null}$ ist.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt den Rückgabewert des Besuchers zurück.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public boolean \textbf{isRoot}()}$ \\ Gibt zurück, ob dieser Knoten die Wurzel ist. Ein Knoten ist eine Wurzel, wenn sein Elternknoten $\texttt{null}$ ist.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob dieser Knoten die Wurzel ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public boolean \textbf{isValue}()}$ \\ Gibt zurück, ob dieser Term ein Wert - d.h. eine Abstraktion oder Variable - ist. Gibt in der Standard-Implementierung $\texttt{false}$ zurück und wird von entsprechenden Unterklassen überschrieben.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob dieser Term ein Wert ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaTerm \textbf{getParent}()}$ \\ Gibt den Elternknoten dieses Knotens wieder oder $\texttt{null}$, falls dieser Knoten eine Wurzel ist.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Der Elternknoten dieses Knotens.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{LambdaApplication} extends LambdaTerm}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert eine Applikation im Lambda-Kalkül.
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private LambdaTerm \textbf{first}}$ \\ Linker bzw. erster Kindknoten der Applikation.
+		\item $\texttt{private LambdaTerm \textbf{second}}$ \\ Rechter bzw. zweiter Kindknoten der Applikation.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LambdaApplication}(LambdaTerm parent)}$ \\ Instanziiert ein Objekt dieser Klasse mit dem gegebenen Elternknoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public <T> T \textbf{accept}(LambdaTermVisitor<T> visitor)}$ \\ Siehe $\texttt{LambdaTerm.accept}$
+		
+		\item $\texttt{public void \textbf{setFirst}(LambdaTerm first)}$ \\ Setzt den linken bzw. ersten Kindknoten dieser Applikation und informiert alle Beobachter über diese Änderung.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm first}$ \\ Der neue linke Kindknoten.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaTerm \textbf{getFirst}()}$ \\ Gibt den linken bzw. ersten Kindknoten dieser Applikation zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item  Der linke Kindknoten dieser Applikation.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{setSecond}(LambdaTerm second)}$ \\ Setzt den rechten bzw. zweiten Kindknoten dieser Applikation und informiert alle Beobachter über diese Änderung.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm second}$ \\ Der neue rechte Kindknoten.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaTerm \textbf{getSecond}()}$ \\ Gibt den rechten bzw. zweiten Kindknoten dieser Applikation zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item  Der rechte Kindknoten dieser Applikation.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{LambdaValue} extends LambdaTerm}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Wert - d.h. Abstraktion oder Variable - im Lambda-Kalkül.
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private Color \textbf{color}}$ \\ Die Farbe dieses Wertes, äquivalent zum Variablennamen.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LambdaValue}(LambdaTerm parent, Color color)}$ \\ Instanziiert ein Objekt dieser Klasse mit dem gegebenen Elternknoten und der gegebenen Farbe.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms.
+				\item $\texttt{Color color}$ \\ Die Farbe dieses Wertes.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{color == null}$ ist.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public boolean \textbf{isValue}()}$ \\ Gibt zurück, ob dieser Term ein Wert ist. Überschreibt die Funktion in $\texttt{LambdaTerm}$ und gibt hier immer $\texttt{true}$ zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob dieser Term ein Wert ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{setColor}(Color color)}$ \\ Setzt die Farbe dieses Wertes und informiert alle Beobachter über diese Änderung.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{Color color}$ \\ Die neue Farbe.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{color == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public Color \textbf{getColor}()}$ \\ Gibt die Farbe dieses Wertes zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Die Farbe dieses Wertes.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{LambdaAbstraction} extends LambdaValue}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert eine Abstraktion im Lambda-Kalkül.
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private LambdaTerm \textbf{inside}}$ \\ Der Term innerhalb der Applikation.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LambdaAbstraction}(LambdaTerm parent, Color color)}$ \\ Instanziiert ein Objekt dieser Klasse mit dem gegebenen Elternknoten und der gegebenen Farbe.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms.
+				\item $\texttt{Color color}$ \\ Die Farbe der in dieser Abstraktion gebundenen Variable.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public <T> T \textbf{accept}(LambdaTermVisitor<T> visitor)}$ \\ Siehe $\texttt{LambdaTerm.accept}$
+		
+		\item $\texttt{public void \textbf{setInside}(LambdaTerm inside)}$ \\ Setzt den Term innerhalb der Abstraktion und informiert alle Beobachter über diese Änderung.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm inside}$ \\ Der neue innere Term.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaTerm \textbf{getInside}()}$ \\ Gibt den Term innerhalb der Abstraktion zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Der innere Term.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{LambdaVariable} extends LambdaValue}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert eine Variable im Lambda-Kalkül.
+
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LambdaVariable}(LambdaTerm parent, Color color)}$ \\ Instanziiert ein Objekt dieser Klasse mit dem gegebenen Elternknoten und der gegebenen Farbe.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms.
+				\item $\texttt{Color color}$ \\ Die Farbe der Variable.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public <T> T \textbf{accept}(LambdaTermVisitor<T> visitor)}$ \\ Siehe $\texttt{LambdaTerm.accept}$
+	\end{itemize}
+\end{description}
+
+\subsection{\texttt{package lambda.model.lambdaterm.visitor}}
+
+\subsubsection{\normalfont \texttt{public interface \textbf{LambdaTermVisitor<R>}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur. Der Besucher kann Operationen an der Datenstruktur ausführen und hat optional einen Rückgabewert.
+
+\item[Typ-Parameter] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{<R>}$ \\ Der Typ des Rückgabewertes.
+	\end{itemize}
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaApplication node}$ \\ Die besuchte Applikation.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Besucht die gegebene Abstraktion.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaAbstraction node}$ \\ Die besuchte Abstraktion.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaVariable node)}$ \\ Besucht die gegebene Variable.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaVariable node}$ \\ Die besuchte Variable.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public R \textbf{getResult}()}$ \\ Gibt das Resultat der Besucheroperation zurück. Wird nur nach einem Besuch ausgeführt. Gibt in der Standard-Implementierung $\texttt{null}$ zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Das Resultat der Besucheroperation.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{AlphaConversionVisitor} implements LambdaTermVisitor<LambdaTerm>}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur, welcher eine Alpha-Konversion auf ihr ausführt.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private LambdaTerm \textbf{result}}$ \\ Der Rückgabewert des Besuchs.
+	\end{itemize}
+
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{AlphaConversionVisitor}(Color old, Color new)}$ \\ Instanziiert ein Objekt dieser Klasse mit der gegebenen ersetzten und ersetzenden Farbe.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{Color old}$ \\ Die zu ersetzende Farbe.
+				\item $\texttt{Color new}$ \\ Die neue Farbe.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation und traversiert weiter zu beiden Kindknoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaApplication node}$ \\ Die besuchte Applikation.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Besucht die gegebene Abstraktion. Dabei wird die Farbe wenn nötig ersetzt und weiter zum Kindknoten traversiert.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaAbstraction node}$ \\ Die besuchte Abstraktion.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaVariable node)}$ \\ Besucht die gegebene Variable und ersetzt die Farbe wenn nötig.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaVariable node}$ \\ Die besuchte Variable.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaTerm \textbf{getResult}()}$ \\ Gibt den Term zurück, der besucht wurde.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Der besuchte Term.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{ColorCollectionVisitor} implements LambdaTermVisitor<Set<Color>{}>}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur, der die Menge der benutzten Farben in diesem Term zurückgibt.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private Set<Color> \textbf{result}}$ \\ Die Menge aller benutzten Farben.
+	\end{itemize}
+
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ColorCollectionVisitor}()}$ \\ Instanziiert ein Objekt dieser Klasse.
+	\end{itemize}
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation und traversiert weiter zu beiden Kindknoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaApplication node}$ \\ Die besuchte Applikation.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Besucht die gegebene Abstraktion. Dabei wird die Farbe zur Menge hinzugefügt und weiter zum Kindknoten traversiert.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaAbstraction node}$ \\ Die besuchte Abstraktion.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaVariable node)}$ \\ Besucht die gegebene Variable und fügt die Farbe zur Menge hinzu.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaVariable node}$ \\ Die besuchte Variable.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public Set<Color> \textbf{getResult}()}$ \\ Gibt die Menge der Farben zurück, die in dem besuchten Term benutzt werden.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Die Menge der benutzten Farben.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{IsColorBoundVisitor} implements LambdaTermVisitor<Boolean>}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur, der zurückgibt, ob eine Variable mit der gegebenen Farbe in diesem Term gebunden ist.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private Color \textbf{color}}$ \\ Die zu überprüfende Farbe.
+		\item $\texttt{private boolean \textbf{result}}$ \\ Der Rückgabewert des Besuchs.
+	\end{itemize}
+
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{IsColorBoundVisitor}(Color color)}$ \\ Instanziiert ein Objekt dieser Klasse mit der zu überprüfenden Farbe.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{Color color}$ \\ Die zu überprüfende Farbe.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation und traversiert wenn möglich weiter zum Elternknoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaApplication node}$ \\ Die besuchte Applikation.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Besucht die gegebene Abstraktion und überprüft, ob die Farbe hier gebunden ist. Traversiert wenn nötig und möglich weiter zum Elternknoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaAbstraction node}$ \\ Die besuchte Abstraktion.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaVariable node)}$ \\ Besucht die gegebene Variable und traversiert weiter zum Elternknoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaVariable node}$ \\ Die besuchte Variable.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public Boolean \textbf{getResult}()}$ \\ Gibt zurück, ob die Variable mit der gegebenen Farbe im Term gebunden ist.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob die Farbe gebunden ist.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{ApplicationVisitor} implements LambdaTermVisitor<LambdaTerm>}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur, welcher eine Applikation ausführt.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private Color \textbf{color}}$ \\ Die Farbe der zu ersetzenden Variablen.
+		\item $\texttt{private LambdaTerm \textbf{applicant}}$ \\ Das Argument der Applikation.
+		\item $\texttt{private LambdaTerm \textbf{result}}$ \\ Der Term nach der Applikation.
+		\item $\texttt{private boolean \textbf{hasCheckedAlphaConversion}}$ \\ Initialisiert mit $\texttt{false}$. Speichert, ob bereits überprüft wurde, ob eine Alpha-Konversion vor der Applikation notwendig ist.
+	\end{itemize}
+
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ApplicationVisitor}(Color color, LambdaTerm applicant)}$ \\ Instanziiert ein Objekt dieser Klasse mit der gegebenen Variablenfarbe und dem gegebenen Argument.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{Color color}$ \\ Die Farbe der zu ersetzenden Variablen.
+				\item $\texttt{LambdaTerm applicant}$ \\ Das Argument der Applikation.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation und traversiert weiter zu beiden Kindknoten. Dabei werden die Kindknoten auf die Rückgabewerte beider Besuche gesetzt.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaApplication node}$ \\ Die besuchte Applikation.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Besucht die gegebene Abstraktion und traversiert weiter zum Kindknoten. Dabei wird der Kindknoten auf den Rückgabewert des Besuchs gesetzt.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaAbstraction node}$ \\ Die besuchte Abstraktion.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaVariable node)}$ \\ Besucht die gegebene Variable und speichert wenn nötig als Rückgabewert das Argument der Applikation.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaVariable node}$ \\ Die besuchte Variable.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaTerm \textbf{getResult}()}$ \\ Gibt den Term zurück, der besucht wurde.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Der besuchte Term.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{private void \textbf{checkAlphaConversion}()}$ \\ Überprüft, ob eine Alpha-Konversion notwendig ist, falls dies noch nicht getan wurde, und führt diese wenn nötig aus. Entfernt danach das Argument der Applikation aus dem LambdaTerm.
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{CopyVisitor} implements LambdaTermVisitor<LambdaTerm>}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur, welcher die Datenstruktur kopiert und die Kopie zurückgibt.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private LambdaTerm \textbf{result}}$ \\ Die Kopie.
+	\end{itemize}
+
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{CopyVisitor}()}$ \\ Instanziiert ein Objekt dieser Klasse.
+	\end{itemize}
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation und erstellt eine Kopie. Traversiert zu beiden Kindknoten und speichert die Rückgabewerte dieser Besuche in den Kindknoten der Kopie.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaApplication node}$ \\ Die besuchte Applikation.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Besucht die gegebene Abstraktion und erstellt eine Kopie. Traversiert zum Kindknoten und speichert den Rückgabewert dieses Besuchs im Kindknoten der Kopie.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaAbstraction node}$ \\ Die besuchte Abstraktion.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaVariable node)}$ \\ Besucht die gegebene Variable und speichert als Rückgabewert eine Kopie dieser Variable.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaVariable node}$ \\ Die besuchte Variable.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaTerm \textbf{getResult}()}$ \\ Gibt die Kopie zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Die Kopie.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{RemoveTermVisitor} implements LambdaTermVisitor<Object>}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur, welcher einen Term aus der Datenstruktur entfernt.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private LambdaTerm \textbf{removed}}$ \\ Der zu entfernende Term. Initialisiert mit $\texttt{null}$.
+	\end{itemize}
+
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{RemoveTermVisitor}()}$ \\ Instanziiert ein Objekt dieser Klasse.
+	\end{itemize}
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation. Falls noch kein zu entfernender Term gespeichert ist, speichere diese Applikation und traversiere zum Elternknoten. Falls ein zu entfernender Term - Kindknoten in der Applikation - gespeichert ist, ersetze diesen durch $\texttt{null}$.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaApplication node}$ \\ Die besuchte Applikation.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Besucht die gegebene Abstraktion. Falls noch kein zu entfernender Term gespeichert ist, speichere diese Abstraktion und traversiere zum Elternknoten. Falls ein zu entfernender Term - Kindknoten der Abstraktion - gespeichert ist, ersetze diesen durch $\texttt{null}$.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaAbstraction node}$ \\ Die besuchte Abstraktion.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaVariable node)}$ \\ Speichere die Variable als zu entfernenden Term und traversiere zum Elternknoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaVariable node}$ \\ Die besuchte Variable.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public abstract class \textbf{BetaReductionVisitor} implements LambdaTermVisitor<LambdaTerm>}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur, der eine einzelne Beta-Reduktion gemäß einer Reduktionsstrategie durchführt. Dabei sind Strategien durch Unterklassen dieses Besuchers gegeben.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{protected LambdaTerm \textbf{result}}$ \\ Der Term nach der Beta-Reduktion.
+		\item $\texttt{protected boolean \textbf{hasReduced}}$ \\ Speichert, ob von diesem Besucher bereits eine Reduktion durchgeführt wurde. Initialisiert mit $\texttt{false}$.
+		\item $\texttt{protected LambdaTerm \textbf{applicant}}$ \\ Falls der Elternknoten des aktuell besuchten Knotens eine Applikation ist, speichert diese Variable das Argument der Applikation. Initialisiert mit $\texttt{null}$.
+	\end{itemize}
+
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{BetaReductionVisitor}()}$ \\ Instanziiert ein Objekt dieser Klasse.
+	\end{itemize}
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation und ruft die $\texttt{reduce}$-Funktion auf, welche von der Reduktionsstrategie implementiert wird, falls noch keine Reduktion von diesem Besucher durchgeführt wurde. Ansonsten wird als Resultat der besuchte Knoten gespeichert.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaApplication node}$ \\ Die besuchte Applikation.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Besucht die gegebene Abstraktion und ruft die $\texttt{reduce}$-Funktion auf, welche von der Reduktionsstrategie implementiert wird, falls noch keine Reduktion von diesem Besucher durchgeführt wurde. Ansonsten wird als Resultat der besuchte Knoten gespeichert.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaAbstraction node}$ \\ Die besuchte Abstraktion.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaVariable node)}$ \\ Besucht die gegebene Variable und ruft die $\texttt{reduce}$-Funktion auf, welche von der Reduktionsstrategie implementiert wird, falls noch keine Reduktion von diesem Besucher durchgeführt wurde. Ansonsten wird als Resultat der besuchte Knoten gespeichert.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaVariable node}$ \\ Die besuchte Variable.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaTerm \textbf{getResult}()}$ \\ Gibt das Resultat der Reduktion zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Der reduzierte Term.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public abstract void \textbf{reduce}(LambdaApplication node)}$ \\ Reduziert die gegebene Applikation. Implementiert von der Reduktionsstrategie.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaApplication node}$ \\ Die zu reduzierende Applikation.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public abstract void \textbf{reduce}(LambdaAbstraction node)}$ \\ Reduziert die gegebene Abstraktion. Implementiert von der Reduktionsstrategie.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaAbstraction node}$ \\ Die zu reduzierende Abstraktion.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public abstract void \textbf{reduce}(LambdaVariable node)}$ \\ Reduziert die gegebene Variable. Implementiert von der Reduktionsstrategie.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaVariable node}$ \\ Die zu reduzierende Variable.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}

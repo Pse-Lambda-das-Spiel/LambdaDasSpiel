@@ -14,8 +14,9 @@ Observable
 --
 -observers: List&lt;Observer&gt;
 --
-+addObserver(o:Observer)
-+removeObserver(o:Observer)
++Observable()
++addObserver(o: Observer)
++removeObserver(o: Observer)
 +notify(notifier: Consumer&lt;Observer&gt;)</panel_attributes>
     <additional_attributes/>
   </element>
@@ -23,18 +24,18 @@ Observable
     <id>Relation</id>
     <coordinates>
       <x>610</x>
-      <y>330</y>
-      <w>180</w>
-      <h>70</h>
+      <y>360</y>
+      <w>170</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;50.0;160.0;10.0</additional_attributes>
+    <additional_attributes>10.0;40.0;150.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>770</x>
-      <y>320</y>
+      <x>760</x>
+      <y>350</y>
       <w>90</w>
       <h>40</h>
     </coordinates>
