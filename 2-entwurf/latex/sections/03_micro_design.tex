@@ -63,16 +63,22 @@
 			\begin{itemize}
 				\item $\texttt{Consumer<Observer> notifier}$ \\ Die Funktion, die auf allen Beobachtern ausgeführt wird.
 			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{notifier == null}$ ist.
+			\end{itemize}
 		\end{description}
 	\end{itemize}
 \end{description}
 
 \subsection{\texttt{package lambda.model.lambdaterm}}
 
-\subsubsection{\normalfont \texttt{public abstract class \textbf{LambdaTerm} implements Observable<LambdaTermObserver>}}
+\subsubsection{\normalfont \texttt{public abstract class \textbf{LambdaTerm}}}
 
 \begin{description}
 \item[Beschreibung] \hfill \\ Repräsentiert einen Term im Lambda-Kalkül bzw. ein Knoten in der Baumstruktur eines Lambda-Terms.
+
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
@@ -119,12 +125,17 @@
 			\end{itemize}
 		\end{description}
 		
-		\item $\texttt{public boolean \textbf{isRoot}()}$ \\ Gibt zurück, ob dieser Knoten die Wurzel ist. Ein Knoten ist eine Wurzel, wenn sein Elternknoten $\texttt{null}$ ist.
+		\item $\texttt{public void \textbf{notifyRoot}(Consumer<LambdaTermObserver> notifier)}$ \\ Gibt die Nachricht weiter zur Wurzel, wo die Beobachter informiert werden.
 		\begin{description}
-			\item[Rückgabe] \hfill \\
+			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item Gibt zurück, ob dieser Knoten die Wurzel ist.
+				\item $\texttt{Consumer<LambdaTermObserver> notifier}$ \\ Die Funktion, die auf allen Beobachtern ausgeführt wird.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{notifier == null}$ ist.
 			\end{itemize}
 		\end{description}
 		
@@ -396,6 +407,62 @@
 	\end{itemize}
 \end{description}
 
+\subsubsection{\normalfont \texttt{public class \textbf{LambdaRoot} extends LambdaTerm implements Observable<LambdaTermObserver>}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert die Wurzel eines Lambda-Terms. Die Wurzel eines gültigen Terms muss immer eine Instanz dieser Klasse sein.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private LambdaTerm \textbf{child}}$ \\ Kind der Wurzel der Applikation.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LambdaRoot}()}$ \\ Instanziiert ein Objekt dieser Klasse ohne Elternknoten.
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public <T> T \textbf{accept}(LambdaTermVisitor<T> visitor)}$ \\ Siehe $\texttt{LambdaTerm.accept}$
+		
+		\item $\texttt{public void \textbf{notifyRoot}(Consumer<LambdaTermObserver> notifier)}$ \\ Überschreibt die Funktion von $\texttt{LambdaTerm}$, um die Nachricht vom Kindknoten entgegenzunehmen und $\texttt{notify}$ damit aufzurufen.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{Consumer<LambdaTermObserver> notifier}$ \\ Die Funktion, die auf allen Beobachtern ausgeführt wird.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{notifier == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{setChild}(LambdaTerm child)}$ \\ Setzt den  Kindknoten dieser Wurzel und informiert alle Beobachter über diese Änderung.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm child}$ \\ Der neue Kindknoten. $\texttt{null}$ ist erlaubt, resultiert aber in einem ungültigen Lambda-Term.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaTerm \textbf{getChild}()}$ \\ Gibt den Kindknoten dieser Wurzel zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item  Der Kindknoten dieser Wurzel.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
 \subsection{\texttt{package lambda.model.lambdaterm.visitor}}
 
 \subsubsection{\normalfont \texttt{public interface \textbf{LambdaTermVisitor<R>}}}
@@ -412,6 +479,15 @@
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaRoot node)}$ \\ Besucht die gegebene Wurzel.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaRoot node}$ \\ Die besuchte Wurzel. Ist nie $\texttt{null}$.
+			\end{itemize}
+		\end{description}
+			
 		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation.
 		\begin{description}
 			\item[Parameter] \hfill \\
@@ -450,7 +526,7 @@
 	\end{itemize}
 \end{description}
 
-\subsubsection{\normalfont \texttt{public class \textbf{AlphaConversionVisitor} implements LambdaTermVisitor<LambdaTerm>}}
+\subsubsection{\normalfont \texttt{public class \textbf{AlphaConversionVisitor} implements LambdaTermVisitor<Object>}}
 
 \begin{description}
 \item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur, welcher eine Alpha-Konversion auf ihr ausführt.
@@ -458,7 +534,8 @@
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{private LambdaTerm \textbf{result}}$ \\ Der Term nach der Alpha-Konversion.
+		\item $\texttt{private Color \textbf{old}}$ \\ Die zu ersetzende Farbe.
+		\item $\texttt{private Color \textbf{new}}$ \\ Die neue Farbe.
 	\end{itemize}
 
 \item[Konstruktoren] \hfill \\
@@ -478,7 +555,16 @@
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation und traversiert weiter zu beiden Kindknoten.
+		\item $\texttt{public void \textbf{visit}(LambdaRoot node)}$ \\ Besucht die gegebene Wurzel und traversiert wenn möglich weiter zum Kindknoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaRoot node}$ \\ Die besuchte Wurzel.
+			\end{itemize}
+		\end{description}
+			
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation und traversiert wenn möglich weiter zu beiden Kindknoten.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -487,7 +573,7 @@
 			\end{itemize}
 		\end{description}
 		
-		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Besucht die gegebene Abstraktion. Dabei wird die Farbe wenn nötig ersetzt und weiter zum Kindknoten traversiert.
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Besucht die gegebene Abstraktion. Dabei wird die Farbe wenn nötig ersetzt und wenn möglich weiter zum Kindknoten traversiert.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -502,15 +588,6 @@
 			\vspace{-.8cm}
 			\begin{itemize}
 				\item $\texttt{LambdaVariable node}$ \\ Die besuchte Variable.
-			\end{itemize}
-		\end{description}
-		
-		\item $\texttt{public LambdaTerm \textbf{getResult}()}$ \\ Gibt den Term zurück, der besucht wurde.
-		\begin{description}
-			\item[Rückgabe] \hfill \\
-			\vspace{-.8cm}
-			\begin{itemize}
-				\item Der besuchte Term.
 			\end{itemize}
 		\end{description}
 	\end{itemize}
@@ -536,7 +613,16 @@
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation und traversiert weiter zu beiden Kindknoten.
+		\item $\texttt{public void \textbf{visit}(LambdaRoot node)}$ \\ Besucht die gegebene Wurzel und traversiert wenn möglich weiter zum Kindknoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaRoot node}$ \\ Die besuchte Wurzel.
+			\end{itemize}
+		\end{description}
+				
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation und traversiert wenn möglich weiter zu beiden Kindknoten.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -545,7 +631,7 @@
 			\end{itemize}
 		\end{description}
 		
-		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Besucht die gegebene Abstraktion. Dabei wird die Farbe zur Menge hinzugefügt und weiter zum Kindknoten traversiert.
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Besucht die gegebene Abstraktion. Dabei wird die Farbe zur Menge hinzugefügt und wenn möglich weiter zum Kindknoten traversiert.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -607,6 +693,15 @@
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaRoot node)}$ \\ Besucht die gegebene Wurzel und beendet die Traversierung hier.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaRoot node}$ \\ Die besuchte Wurzel.
+			\end{itemize}
+		\end{description}
+				
 		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation und traversiert wenn möglich weiter zum Elternknoten.
 		\begin{description}
 			\item[Parameter] \hfill \\
@@ -681,6 +776,15 @@
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaRoot node)}$ \\ Kann nie aufgerufen werden, da der besuchte Knoten keinen Elternknoten hat, von wo aus eine Applikation ausgeführt werden könnte.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaRoot node}$ \\ Die besuchte Wurzel.
+			\end{itemize}
+		\end{description}
+				
 		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation und traversiert weiter zu beiden Kindknoten. Dabei werden die Kindknoten auf die Rückgabewerte beider Besuche gesetzt. Speichert als Rückgabewert den besuchten Term.
 		\begin{description}
 			\item[Parameter] \hfill \\
@@ -741,6 +845,15 @@
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaRoot node)}$ \\ Besucht die gegebene Wurzel und erstellt eine Kopie. Traversiert zum Kindknoten und speichert den Rückgabewert dieses Besuchs im Kindknoten der Kopie.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaRoot node}$ \\ Die besuchte Wurzel.
+			\end{itemize}
+		\end{description}
+				
 		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation und erstellt eine Kopie. Traversiert zu beiden Kindknoten und speichert die Rückgabewerte dieser Besuche in den Kindknoten der Kopie.
 		\begin{description}
 			\item[Parameter] \hfill \\
@@ -799,6 +912,15 @@
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaRoot node)}$ \\ Falls ein zu entfernender Term - Kindknoten der Wurzel - gespeichert ist, setzte den Kindknoten auf $\texttt{null}$.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaRoot node}$ \\ Die besuchte Wurzel.
+			\end{itemize}
+		\end{description}
+				
 		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation. Falls noch kein zu entfernender Term gespeichert ist, speichere diese Applikation und traversiere zum Elternknoten, falls dieser nicht $\texttt{null}$ ist. Ansonsten ist der Term bereits aus der Baumstruktur entfernt. Falls ein zu entfernender Term - Kindknoten in der Applikation - gespeichert ist, ersetze diesen durch $\texttt{null}$.
 		\begin{description}
 			\item[Parameter] \hfill \\
@@ -850,7 +972,16 @@
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation und ruft die $\texttt{reduce}$-Funktion auf, welche von der Reduktionsstrategie implementiert wird, falls noch keine Reduktion von diesem Besucher durchgeführt wurde. Ansonsten wird als Resultat der besuchte Knoten gespeichert.
+		\item $\texttt{public void \textbf{visit}(LambdaRoot node)}$ \\ Traversiere weiter zum Kindknoten und setze diesen auf das Resultat des Besuchs. Speichere als Rückgabewert die besuchte Wurzel.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaRoot node}$ \\ Die besuchte Wurzel.
+			\end{itemize}
+		\end{description}
+				
+		\item $\texttt{public abstract void \textbf{visit}(LambdaApplication node)}$ \\ Implementiert von der Reduktionsstrategie. Führt entsprechende Operationen zur Reduktion am Term aus $($siehe Unterklassen$)$. Gibt in der Standard-Implementierung nur den besuchten Knoten zurück.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -859,7 +990,7 @@
 			\end{itemize}
 		\end{description}
 		
-		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Besucht die gegebene Abstraktion und ruft die $\texttt{reduce}$-Funktion auf, welche von der Reduktionsstrategie implementiert wird, falls noch keine Reduktion von diesem Besucher durchgeführt wurde. Ansonsten wird als Resultat der besuchte Knoten gespeichert.
+		\item $\texttt{public abstract void \textbf{visit}(LambdaAbstraction node)}$ \\ Implementiert von der Reduktionsstrategie. Führt entsprechende Operationen zur Reduktion am Term aus $($siehe Unterklassen$)$. Gibt in der Standard-Implementierung nur den besuchten Knoten zurück.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -868,7 +999,7 @@
 			\end{itemize}
 		\end{description}
 		
-		\item $\texttt{public void \textbf{visit}(LambdaVariable node)}$ \\ Besucht die gegebene Variable und ruft die $\texttt{reduce}$-Funktion auf, welche von der Reduktionsstrategie implementiert wird, falls noch keine Reduktion von diesem Besucher durchgeführt wurde. Ansonsten wird als Resultat der besuchte Knoten gespeichert.
+		\item $\texttt{public abstract void \textbf{visit}(LambdaVariable node)}$ \\ Implementiert von der Reduktionsstrategie. Führt entsprechende Operationen zur Reduktion am Term aus $($siehe Unterklassen$)$. Gibt in der Standard-Implementierung nur den besuchten Knoten zurück.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -885,31 +1016,142 @@
 				\item Der reduzierte Term.
 			\end{itemize}
 		\end{description}
-		
-		\item $\texttt{public abstract void \textbf{reduce}(LambdaApplication node)}$ \\ Reduziert die gegebene Applikation. Implementiert von der Reduktionsstrategie.
+	\end{itemize}
+\end{description}
+
+\subsection{\texttt{package lambda.model.lambdaterm.visitor.strategy}}
+
+\subsubsection{\normalfont \texttt{public class \textbf{ReductionStrategyNormalOrder} extends BetaReductionVisitor}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur, der eine einzelne Beta-Reduktion gemäß der Normal-Order Strategie durchführt.
+
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ReductionStrategyNormalOrder}()}$ \\ Instanziiert ein Objekt dieser Klasse.
+	\end{itemize}
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Falls noch keine Applikation ausgeführt wurde, traversiert erst zum linken Kind mit rechtem Kind als Argument und dann, falls dort keine Applikation ausgeführt wurde, zum rechten Kind ohne Argument. Rückgabewert ist der linke Kindknoten, falls dort die Applikation ausgeführt wurde, ansonsten der besuchte Knoten.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{LambdaApplication node}$ \\ Die zu reduzierende Applikation.
+				\item $\texttt{LambdaApplication node}$ \\ Die besuchte Applikation.
 			\end{itemize}
 		\end{description}
 		
-		\item $\texttt{public abstract void \textbf{reduce}(LambdaAbstraction node)}$ \\ Reduziert die gegebene Abstraktion. Implementiert von der Reduktionsstrategie.
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Falls bereits eine Applikation ausgeführt wurde, gibt nur den besuchten Knoten zurück. Ansonsten, falls ein Argument gegeben ist, führt damit eine Applikation auf dieser Abstraktion aus. Rückgabewert ist das Resultat der Applikation. Traversiert ansonsten zum Kindknoten und gibt den besuchten Knoten zurück.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{LambdaAbstraction node}$ \\ Die zu reduzierende Abstraktion.
+				\item $\texttt{LambdaAbstraction node}$ \\ Die besuchte Abstraktion.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{ReductionStrategyApplicativeOrder} extends BetaReductionVisitor}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur, der eine einzelne Beta-Reduktion gemäß der Applicative-Order Strategie durchführt.
+
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ReductionStrategyApplicativeOrder}()}$ \\ Instanziiert ein Objekt dieser Klasse.
+	\end{itemize}
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Falls bereits eine Applikation ausgeführt wurde, gibt den besuchten Knoten zurück. Traversiert ansonsten erst zum linken Kind mit rechtem Kind als Argument und dann, falls dort keine Applikation ausgeführt wurde, zum rechten Kind ohne Argument. Rückgabewert ist der linke Kindknoten, falls dort die Applikation ausgeführt wurde, ansonsten der besuchte Knoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaApplication node}$ \\ Die besuchte Applikation.
 			\end{itemize}
 		\end{description}
 		
-		\item $\texttt{public abstract void \textbf{reduce}(LambdaVariable node)}$ \\ Reduziert die gegebene Variable. Implementiert von der Reduktionsstrategie.
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Falls bereits eine Applikation ausgeführt wurde, gibt den besuchten Knoten zurück. Traversiert ansonsten zum Kindknoten und gibt den besuchten Knoten zurück. Falls danach noch keine Applikation ausgeführt wurde und ein Argument gegeben ist, führt damit eine Applikation auf dieser Abstraktion aus. Rückgabewert ist dann das Resultat der Applikation.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{LambdaVariable node}$ \\ Die zu reduzierende Variable.
+				\item $\texttt{LambdaAbstraction node}$ \\ Die besuchte Abstraktion.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{ReductionStrategyCallByValue} extends BetaReductionVisitor}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur, der eine einzelne Beta-Reduktion gemäß der Call-By-Value Strategie durchführt.
+
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ReductionStrategyCallByValue}()}$ \\ Instanziiert ein Objekt dieser Klasse.
+	\end{itemize}
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Falls bereits eine Applikation ausgeführt wurde, gibt den besuchten Knoten zurück. Traversiert ansonsten erst zum rechten Kind ohne Argument und dann, falls dort keine Applikation ausgeführt wurde, zum linken Kind mit rechtem Kind als Argument. Rückgabewert ist der linke Kindknoten, falls dort die Applikation ausgeführt wurde, ansonsten der besuchte Knoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaApplication node}$ \\ Die besuchte Applikation.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Falls bereits eine Applikation ausgeführt wurde, gibt den besuchten Knoten zurück. Falls ansonsten ein Argument gegeben und ein Wert - d.h. Abstraktion oder Variable - ist, führt damit eine Applikation auf dieser Abstraktion aus. Rückgabewert ist dann das Resultat der Applikation, ansonsten der besuchte Knoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaAbstraction node}$ \\ Die besuchte Abstraktion.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{ReductionStrategyCallByName} extends BetaReductionVisitor}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur, der eine einzelne Beta-Reduktion gemäß der Call-By-Name Strategie durchführt.
+
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ReductionStrategyCallByName}()}$ \\ Instanziiert ein Objekt dieser Klasse.
+	\end{itemize}
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Falls noch keine Applikation ausgeführt wurde, traversiert erst zum linken Kind mit rechtem Kind als Argument und dann, falls dort keine Applikation ausgeführt wurde, zum rechten Kind ohne Argument. Rückgabewert ist der linke Kindknoten, falls dort die Applikation ausgeführt wurde, ansonsten der besuchte Knoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaApplication node}$ \\ Die besuchte Applikation.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Falls bereits eine Applikation ausgeführt wurde, gibt nur den besuchten Knoten zurück. Ansonsten, falls ein Argument gegeben ist, führt damit eine Applikation auf dieser Abstraktion aus. Rückgabewert ist das Resultat der Applikation. Traversiert nicht weiter zum Kindknoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaAbstraction node}$ \\ Die besuchte Abstraktion.
 			\end{itemize}
 		\end{description}
 	\end{itemize}
