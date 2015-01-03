@@ -6,15 +6,15 @@
     <coordinates>
       <x>520</x>
       <y>250</y>
-      <w>240</w>
+      <w>280</w>
       <h>220</h>
     </coordinates>
     <panel_attributes>CopyVisitor
 --
 -result: LambdaTerm = null
 --
-+CopyVisitor(strategy: 
-    ReductionStrategy)
++CopyVisitor(strategy: ReductionStrategy)
++visit(node: LambdaRoot)
 +visit(node: LambdaApplication)
 +visit(node: LambdaAbstraction)
 +visit(node: LambdaVariable)
@@ -49,18 +49,18 @@ T -&gt; LambdaTerm</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>730</x>
-      <y>320</y>
-      <w>80</w>
-      <h>40</h>
+      <y>350</y>
+      <w>110</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;20.0;60.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;90.0;90.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>790</x>
-      <y>270</y>
+      <x>820</x>
+      <y>380</y>
       <w>340</w>
       <h>190</h>
     </coordinates>
@@ -72,7 +72,7 @@ if (node.getFirst() != null) {
 if (node.getSecond() != null) {
     secondChild = node.getSecond().accept(this);
 }
-result = new LambdaApplication();
+result = new LambdaApplication(/*COPY*/);
 result.setFirst(firstChild);
 result.setSecond(secondChild);</panel_attributes>
     <additional_attributes/>
@@ -98,5 +98,27 @@ result.setSecond(secondChild);</panel_attributes>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;110.0;40.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>690</x>
+      <y>310</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>820</x>
+      <y>330</y>
+      <w>340</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes> // Should never happen</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

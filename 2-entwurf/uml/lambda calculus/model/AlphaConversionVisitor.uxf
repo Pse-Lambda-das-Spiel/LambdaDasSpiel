@@ -13,13 +13,12 @@
 --
 -old: Color
 -new: Color
--result: LambdaTerm
 --
 +AlphaConversionVisitor(old: Color, new: Color)
++visit(node: LambdaRoot)
 +visit(node: LambdaApplication)
 +visit(node: LambdaAbstraction)
-+visit(node: LambdaVariable)
-+getResult(): LambdaTerm</panel_attributes>
++visit(node: LambdaVariable)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -32,7 +31,7 @@
     </coordinates>
     <panel_attributes>lt=-
 &lt;&lt;bind&gt;&gt;
-T -&gt; LambdaTerm</panel_attributes>
+T -&gt; Object</panel_attributes>
     <additional_attributes>10.0;20.0;210.0;20.0</additional_attributes>
   </element>
   <element>
@@ -55,8 +54,7 @@ T -&gt; LambdaTerm</panel_attributes>
       <h>60</h>
     </coordinates>
     <panel_attributes>node.getFirst().accept(this);
-node.getSecond().accept(this);
-result = node;</panel_attributes>
+node.getSecond().accept(this);</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -76,12 +74,11 @@ result = node;</panel_attributes>
       <x>730</x>
       <y>420</y>
       <w>310</w>
-      <h>80</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>if (node.getColor().equals(old)) {
     node.setColor(new);
-}
-result = node;</panel_attributes>
+}</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

@@ -7,13 +7,14 @@
       <x>390</x>
       <y>270</y>
       <w>290</w>
-      <h>220</h>
+      <h>140</h>
     </coordinates>
     <panel_attributes>RemoveTermVisitor
 --
 -removed: LambdaTerm = null
 --
 +RemoveTermVisitor()
++visit(node: LambdaRoot)
 +visit(node: LambdaApplication)
 +visit(node: LambdaAbstraction)
 +visit(node: LambdaVariable)</panel_attributes>
@@ -49,10 +50,10 @@ T -&gt; Object</panel_attributes>
       <x>600</x>
       <y>320</y>
       <w>120</w>
-      <h>40</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;20.0;100.0;10.0</additional_attributes>
+    <additional_attributes>10.0;40.0;100.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
@@ -63,7 +64,7 @@ T -&gt; Object</panel_attributes>
       <h>190</h>
     </coordinates>
     <panel_attributes>if (removed == null) {
-    assert(!node.isRoot());
+    assert(node.getParent() != null);
     removed = node;
     node.getParent().accept(this);
 } else {
@@ -72,6 +73,32 @@ T -&gt; Object</panel_attributes>
     } else if (node.getSecond() == removed) {
         node.setSecond(null);
     }
+}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>560</x>
+      <y>230</y>
+      <w>160</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;110.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>700</x>
+      <y>180</y>
+      <w>570</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>if (removed == null) {
+    // Cant happen
+} else {
+    node.setChild(null);
 }</panel_attributes>
     <additional_attributes/>
   </element>
