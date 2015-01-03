@@ -4,22 +4,22 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>470</x>
-      <y>680</y>
-      <w>300</w>
-      <h>350</h>
+      <x>520</x>
+      <y>640</y>
+      <w>330</w>
+      <h>330</h>
     </coordinates>
-    <panel_attributes>/LambdaNodeView/
+    <panel_attributes>/LambdaNodeViewController/
 --
 -linkedTerm: LambdaTerm
--view: LambdaTermView
--parent: LambdaNodeView
--children: List&lt;LambdaNodeView&gt;
+-view: LambdaTermViewController
+-parent: LambdaNodeViewController
+-children: List&lt;LambdaNodeViewController&gt;
 --
 +LambdaNodeView(linkedTerm: LambdaTerm,
-    parent: LambdaNodeView, 
-    view: LambdaTermView)
-+getParent(): LambdaNodeView
+    parent: LambdaNodeViewController, 
+    view: LambdaTermViewController)
++getParent(): LambdaNodeViewController
 +isRoot(): boolean
 +getLinkedTerm(): LambdaTerm
 
@@ -35,37 +35,39 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>470</x>
-      <y>260</y>
-      <w>350</w>
+      <x>520</x>
+      <y>220</y>
+      <w>390</w>
       <h>330</h>
     </coordinates>
-    <panel_attributes>LambdaTermView
+    <panel_attributes>LambdaTermViewController
 --
--root: LambdaNodeView
--animated: boolean
 -inputListener: scene2d.ClickListener
--controller: LambdaTermInputListener = null
+-editable: boolean
+-selection: LambdaTermNodeViewController = null
 --
-+LambdaTermView(root: LambdaAbstraction, 
-    animated: boolean)
-+setController(controller: LambdaTermController);
++LambdaTermView(root: LambdaRoot, editable: boolean)
+
 +replaceTerm(old: LambdaTerm, new: LambdaTerm)
 +setColor(term: LambdaTerm, color: Color)
-~getActor(term: LambdaTerm): LambdaNodeView
 
-~hasNodeView(term: LambdaTerm): boolean
-~addNodeView(term: LamdbdaTerm,
-    nodeView: LambdaNodeView)
-~removeNodeView(term: LambdaTerm,
-    nodeView: LambdaNodeView)</panel_attributes>
+#getActor(term: LambdaTerm): LambdaNodeViewController
+#hasNodeView(term: LambdaTerm): boolean
+#addNodeView(term: LamdbdaTerm,
+    nodeView: LambdaNodeViewController)
+#removeNodeView(term: LambdaTerm,
+    nodeView: LambdaNodeViewController)
+
++isEditable(): boolean
+
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>190</x>
-      <y>480</y>
+      <x>240</x>
+      <y>440</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -75,8 +77,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>770</y>
+      <x>330</x>
+      <y>730</y>
       <w>210</w>
       <h>30</h>
     </coordinates>
@@ -86,8 +88,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>190</x>
-      <y>770</y>
+      <x>240</x>
+      <y>730</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -97,8 +99,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>480</y>
+      <x>330</x>
+      <y>440</y>
       <w>210</w>
       <h>30</h>
     </coordinates>
@@ -108,8 +110,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>510</x>
-      <y>590</y>
+      <x>560</x>
+      <y>550</y>
       <w>130</w>
       <h>110</h>
     </coordinates>
@@ -122,8 +124,8 @@ m1=1
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>290</x>
-      <y>390</y>
+      <x>340</x>
+      <y>350</y>
       <w>160</w>
       <h>60</h>
     </coordinates>
@@ -133,8 +135,8 @@ m1=1
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>370</x>
-      <y>400</y>
+      <x>420</x>
+      <y>360</y>
       <w>120</w>
       <h>30</h>
     </coordinates>
@@ -144,19 +146,19 @@ m1=1
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>800</x>
-      <y>390</y>
-      <w>120</w>
-      <h>40</h>
+      <x>860</x>
+      <y>330</y>
+      <w>110</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;20.0;100.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;90.0;30.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>900</x>
-      <y>320</y>
+      <x>950</x>
+      <y>280</y>
       <w>420</w>
       <h>130</h>
     </coordinates>
@@ -172,8 +174,8 @@ m1=1
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>640</x>
-      <y>600</y>
+      <x>690</x>
+      <y>560</y>
       <w>170</w>
       <h>50</h>
     </coordinates>
@@ -183,8 +185,8 @@ m1=1
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>610</x>
-      <y>590</y>
+      <x>660</x>
+      <y>550</y>
       <w>50</w>
       <h>50</h>
     </coordinates>
@@ -194,23 +196,23 @@ m1=1
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>150</x>
-      <y>1020</y>
+      <x>200</x>
+      <y>960</y>
       <w>360</w>
-      <h>240</h>
+      <h>260</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;220.0;10.0;140.0;340.0;140.0;340.0;10.0</additional_attributes>
+    <additional_attributes>10.0;240.0;10.0;160.0;340.0;160.0;340.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>1240</y>
+      <x>50</x>
+      <y>1200</y>
       <w>340</w>
       <h>160</h>
     </coordinates>
-    <panel_attributes>LambdaAbstractionView
+    <panel_attributes>LambdaAbstractionViewController
 --
 -color: Color
 --
@@ -224,12 +226,12 @@ m1=1
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>350</x>
-      <y>1240</y>
+      <x>400</x>
+      <y>1200</y>
       <w>330</w>
       <h>160</h>
     </coordinates>
-    <panel_attributes>LambdaParanthesisView
+    <panel_attributes>LambdaParanthesisViewController
 --
 --
 +LambdaApplicationView(term: LambdaApplication, 
@@ -242,8 +244,8 @@ m1=1
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
-      <y>740</y>
+      <x>620</x>
+      <y>700</y>
       <w>290</w>
       <h>170</h>
     </coordinates>
@@ -253,10 +255,10 @@ m1=1
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>840</x>
-      <y>600</y>
+      <x>890</x>
+      <y>560</y>
       <w>460</w>
-      <h>180</h>
+      <h>300</h>
     </coordinates>
     <panel_attributes>float width = max((children.size() - 1) * HORIZONTAL_SPACING, 0);
 for (LambdaNodeView child : children) {
@@ -267,29 +269,35 @@ if (!isRoot()) {
     parent.updateWidth();
 } else {
     updatePosition(0.0f, 0.0f);
-}</panel_attributes>
+}
+
+addListener(new InputListener(){
+    // events control model via linkedTerm if view.isEditable()
+    // optionally add view.selection (not editable) and remove 
+    // selected term from tree
+});</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>540</x>
-      <y>1020</y>
+      <x>590</x>
+      <y>960</y>
       <w>30</w>
-      <h>240</h>
+      <h>260</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;220.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;240.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>700</x>
-      <y>1240</y>
+      <x>750</x>
+      <y>1200</y>
       <w>330</w>
       <h>160</h>
     </coordinates>
-    <panel_attributes>LambdaVariableView
+    <panel_attributes>LambdaVariableViewController
 --
 -color: Color
 --
@@ -303,32 +311,32 @@ if (!isRoot()) {
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>730</x>
-      <y>1020</y>
+      <x>780</x>
+      <y>960</y>
       <w>30</w>
-      <h>240</h>
+      <h>260</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;220.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;240.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>710</x>
-      <y>950</y>
+      <x>760</x>
+      <y>910</y>
       <w>150</w>
-      <h>40</h>
+      <h>160</h>
     </coordinates>
     <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;10.0;130.0;20.0</additional_attributes>
+    <additional_attributes>10.0;10.0;130.0;140.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>840</x>
-      <y>910</y>
+      <x>890</x>
+      <y>990</y>
       <w>460</w>
-      <h>190</h>
+      <h>200</h>
     </coordinates>
     <panel_attributes>if (rightSibling == null) { // Insert at end of list
     children.add(child);
@@ -347,19 +355,19 @@ updateWidth();</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>710</x>
-      <y>460</y>
-      <w>210</w>
-      <h>60</h>
+      <x>790</x>
+      <y>420</y>
+      <w>180</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;40.0;190.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;160.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>900</x>
-      <y>460</y>
+      <x>950</x>
+      <y>420</y>
       <w>320</w>
       <h>60</h>
     </coordinates>
@@ -371,14 +379,14 @@ nodeView.addListener(inputListener);</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>840</x>
-      <y>790</y>
+      <x>890</x>
+      <y>870</y>
       <w>460</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>setPosition(x, y);
 y += getHeight() + VERTICAL_SPACING;
-for (LambdaNodeView child : children) {
+for (LambdaNodeViewController child : children) {
     child.updatePosition(x, y);
     x += child.getWidth() + HORIZONTAL_SPACING;
 }</panel_attributes>
@@ -387,53 +395,54 @@ for (LambdaNodeView child : children) {
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>680</x>
-      <y>850</y>
+      <x>730</x>
+      <y>860</y>
       <w>180</w>
-      <h>80</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;60.0;160.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;160.0;80.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>840</x>
-      <y>1110</y>
+      <x>60</x>
+      <y>1020</y>
       <w>460</w>
-      <h>40</h>
+      <h>70</h>
     </coordinates>
     <panel_attributes>children.remove(child);
-view.removeNodeView(child.getTerm(), child);</panel_attributes>
+view.removeNodeView(child.getTerm(), child);
+updateWidth(); // ?</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>720</x>
-      <y>980</y>
-      <w>140</w>
-      <h>180</h>
+      <x>450</x>
+      <y>940</y>
+      <w>360</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;10.0;120.0;160.0</additional_attributes>
+    <additional_attributes>340.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>720</x>
-      <y>520</y>
-      <w>200</w>
-      <h>50</h>
+      <x>790</x>
+      <y>450</y>
+      <w>180</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;10.0;180.0;30.0</additional_attributes>
+    <additional_attributes>10.0;10.0;160.0;60.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>900</x>
-      <y>530</y>
+      <x>950</x>
+      <y>490</y>
       <w>320</w>
       <h>60</h>
     </coordinates>
@@ -445,64 +454,36 @@ nodeView.removeListener(inputListener);</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>760</x>
-      <y>140</y>
-      <w>160</w>
-      <h>250</h>
+      <x>890</x>
+      <y>130</y>
+      <w>80</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;230.0;140.0;10.0</additional_attributes>
+    <additional_attributes>10.0;180.0;60.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>900</x>
-      <y>70</y>
-      <w>670</w>
-      <h>240</h>
+      <x>950</x>
+      <y>0</y>
+      <w>420</w>
+      <h>270</h>
     </coordinates>
     <panel_attributes>...
-this.root = new LambdaNodeView(null, this){
+root.addObserver(this);
+
+ // Root node view
+addNodeView(root, new LambdaNodeView(root, null, this){
     float getMinWidth() {return 0.0f;}
-};
-terms.put(root, this.root);
-addTerm(root.getInside());
-inputListener = new ClickListener(){
-    public clicked(InputEvent event, float x, float y) {
-        if (LambdaTermView.this.controller != null) {
-            LambdaTermView.this.controller.clicked(((LambdaNodeView) event.getTarget()).getLinkedTerm());
-        }
-    }
-    // dragged etc
+});
+
+ // Traverse lambda tree to create all node views
+root.accept(new ViewInsertionVisitor(root.getChild(), this));
+
+inputListener = new ???Listener(){
+    // 
 };</panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>470</x>
-      <y>50</y>
-      <w>300</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;interface&gt;&gt;
-LambdaTermInputListener
---
---
-+clicked(term: LambdaTerm)
-+dragged(term: LambdaTerm, x: float, y: float)</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>600</x>
-      <y>130</y>
-      <w>70</w>
-      <h>150</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-&lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>30.0;10.0;30.0;130.0</additional_attributes>
   </element>
 </diagram>
