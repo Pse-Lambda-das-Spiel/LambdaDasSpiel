@@ -37,12 +37,13 @@
     </coordinates>
     <panel_attributes>ReductionModel
 --
--history: Stack&lt;LambdaAbstraction&gt;
+-history: Stack&lt;LambdaRoot&gt;
 -paused: boolean = true
 -strategy: ReductionStrategy
--current: LambdaAbstraction
+-current: LambdaRoot
+-step: int = 0
 --
-+ReductionModel(term: LambdaAbstraction, strategy: ReductionStrategy)
++ReductionModel(term: LambdaRoot, strategy: ReductionStrategy)
 +play()
 +pause()
 +step()
@@ -56,10 +57,10 @@
       <x>480</x>
       <y>460</y>
       <w>410</w>
-      <h>40</h>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;20.0;390.0;10.0</additional_attributes>
+    <additional_attributes>10.0;30.0;390.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
@@ -78,10 +79,10 @@
       <x>480</x>
       <y>500</y>
       <w>410</w>
-      <h>30</h>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;10.0;390.0;10.0</additional_attributes>
+    <additional_attributes>10.0;30.0;390.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
@@ -91,7 +92,7 @@
       <w>490</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>history.push((LambdaAbstraction) current.accept(new CopyVisitor()));
+    <panel_attributes>history.push((LambdaRoot) current.accept(new CopyVisitor()));
 current.accept(new BetaReductionVisitor(strategy));
 step++;</panel_attributes>
     <additional_attributes/>
@@ -100,7 +101,7 @@ step++;</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>870</x>
-      <y>770</y>
+      <y>630</y>
       <w>340</w>
       <h>60</h>
     </coordinates>
@@ -113,23 +114,23 @@ step++;</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>530</x>
-      <y>540</y>
+      <y>550</y>
       <w>360</w>
-      <h>270</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;10.0;340.0;250.0</additional_attributes>
+    <additional_attributes>10.0;10.0;340.0;100.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>520</x>
-      <y>520</y>
+      <y>530</y>
       <w>370</w>
-      <h>100</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;10.0;350.0;80.0</additional_attributes>
+    <additional_attributes>10.0;10.0;350.0;70.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
@@ -137,9 +138,10 @@ step++;</panel_attributes>
       <x>870</x>
       <y>580</y>
       <w>340</w>
-      <h>170</h>
+      <h>40</h>
     </coordinates>
-    <panel_attributes/>
+    <panel_attributes>assert(history.size() &gt; 0);
+current.setChild(history.pop().getChild());</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
