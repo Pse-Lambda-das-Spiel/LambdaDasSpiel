@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>130</y>
+      <w>310</w>
+      <h>470</h>
+    </coordinates>
+    <panel_attributes>ProfileModel
+--
+-name: String
+-avatarPath: String
+-language: I18NBundle
+-levelIndex: int
+-musicOn: boolean
+-coins: int
+-purchased: int[]
+-settings: SettingsModel
+(-achievements: AchievementModel
+ -statistics: StatisticsModel)
+--
++ProfileModel(name: String)
++getName(): String
++getAvatarPath(): String
++setAvatarPath(avatarPath: String)
++getLanguage(): I18NBundle
++setLanguage(language: I18NBundle)
++getLevelIndex(): int
++setLevelIndex(levelIndex: int)
++isMusicOn(): boolean
++setMusicOn(musicOn: boolean)
++getCoins(): int
++setCoins(coins: int)
++getPurchased(): int[]
++getSettings(): SettingsModel
++setSettings(settings: SettingsModel)
+(+getAchievements(): AchievementModel 
+ +getStatistics(): StatisticsModel)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>200</y>
+      <w>270</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+ProfileModelObserver
+--
+--
++changedName(name: String)
++changedAvatar(path: String)
++changedLevelIndex(index: int)
++changedMusicOn(musicOn: boolean)
++changedCoins(coins: int)
+(?purchased)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>680</x>
+      <y>120</y>
+      <w>160</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>template=Observer: Class
+Observable
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>430</x>
+      <y>120</y>
+      <w>270</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt;&lt;bind&gt;&gt;
+Observer-&gt;ProfileModelObserver</panel_attributes>
+    <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>430</x>
+      <y>210</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>130.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>500</x>
+      <y>380</y>
+      <w>280</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>if(ProfileManager.getManager()
+.getCurrentProfile() == this) {
+ProfileManager.getManager().
+setLanguage(language);
+)
+this.language = language;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>370</y>
+      <w>120</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-()</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+</diagram>
