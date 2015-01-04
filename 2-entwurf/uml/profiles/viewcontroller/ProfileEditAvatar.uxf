@@ -12,7 +12,7 @@
     <panel_attributes>ProfileEditAvatar
 --
 -profile: ProfileModel
--data: ProfileEditModel
+-data: ProfileEditAvatarModel
 -stage: scene2d.Stage
 -inputProcessor: InputMultiplexer
 --
@@ -70,5 +70,27 @@
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>110.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>560</x>
+      <y>240</y>
+      <w>200</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>ProfileEditAvatarObserver</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>230</y>
+      <w>130</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>110.0;30.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
