@@ -9,7 +9,7 @@
       <w>210</w>
       <h>100</h>
     </coordinates>
-    <panel_attributes>Item
+    <panel_attributes>ShopItem
 --
 -ID: int
 -price: int
@@ -26,7 +26,7 @@
       <w>210</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>Sound
+    <panel_attributes>Music
 --
 -sound: File
 --
@@ -41,7 +41,7 @@
       <w>210</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>Image
+    <panel_attributes>BackgroundImage
 --
 -image: File
 --

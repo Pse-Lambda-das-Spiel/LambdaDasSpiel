@@ -4,55 +4,33 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
+      <x>90</x>
       <y>40</y>
       <w>250</w>
-      <h>200</h>
+      <h>230</h>
     </coordinates>
     <panel_attributes>ShopModel
 --
 -purchasedItems: int[]
--sounds: ArrayList&lt;Sound&gt;
--images: ArrayList&lt;Image&gt;
--sprites: ArrayList&lt;Sprite&gt;
+-acitavedItems: int[]
+-sounds: List&lt;Sound&gt;
+-images: List&lt;Image&gt;
+-sprites: List&lt;Sprite&gt;
 --
 ShopModel()
 
-+getSounds(): ArrayList&lt;Sound&gt;
-+getImages(): ArrayList&lt;Image&gt;
-+getSprites(): ArrayList&lt;Sprite&gt;
-+getPurchasedItems(): int[]</panel_attributes>
++getSounds(): List&lt;Sound&gt;
++getImages(): List&lt;Image&gt;
++getSprites(): List&lt;Sprite&gt;
++getPurchasedItems(): int[]
++getActivatedItems(): int[]</panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>40</x>
-      <y>320</y>
-      <w>100</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>Item</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>80</x>
-      <y>230</y>
-      <w>50</w>
-      <h>110</h>
-    </coordinates>
-    <panel_attributes>m1=1
-m2=0..*
-lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
   </element>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>270</x>
-      <y>210</y>
+      <x>280</x>
+      <y>220</y>
       <w>20</w>
       <h>60</h>
     </coordinates>
@@ -62,27 +40,29 @@ lt=&lt;&lt;&lt;&lt;-</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>180</y>
-      <w>250</w>
-      <h>70</h>
+      <x>290</x>
+      <y>200</y>
+      <w>110</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>230.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>90.0;10.0;10.0;40.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>510</x>
-      <y>160</y>
+      <x>380</x>
+      <y>180</y>
       <w>350</w>
-      <h>140</h>
+      <h>180</h>
     </coordinates>
     <panel_attributes>/das ProfileModel braucht noch ein Integer-Array, in welches die IDs eingetragen werden von bereits erwrobenen Artikeln. Hier dargestellt als "ProfileModel.purchased[]"
 
 getPurchasedItems() {
    return ProfileModel.purchased;
 }
+
+/ ANALOG FÜR ACTIVATED ITEAMS
       
       
    </panel_attributes>

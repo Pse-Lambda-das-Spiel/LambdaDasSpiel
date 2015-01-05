@@ -18,8 +18,7 @@
 +ShopViewController()
 +update()
 
--buy(item_id: int): Item
--toMainmenu()
+-buy(item_id: int)
 
 +dispose()
 +show()
