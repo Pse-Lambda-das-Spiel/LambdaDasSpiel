@@ -23,7 +23,7 @@ LambdaTermObserver
       <x>430</x>
       <y>250</y>
       <w>390</w>
-      <h>170</h>
+      <h>180</h>
     </coordinates>
     <panel_attributes>/LambdaTerm/
 --
@@ -35,7 +35,8 @@ LambdaTermObserver
 +notifyRoot(notifier: Consumer&lt;LambdaTermObserver&gt;)
 +isValue(): boolean
 +getParent(): LambdaTerm
-+isLocked(): boolean</panel_attributes>
++isLocked(): boolean
+/+equals(term: LambdaTerm): boolean/</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -44,7 +45,7 @@ LambdaTermObserver
       <x>290</x>
       <y>500</y>
       <w>390</w>
-      <h>170</h>
+      <h>180</h>
     </coordinates>
     <panel_attributes>LambdaApplication
 --
@@ -57,7 +58,7 @@ LambdaTermObserver
 +getFirst(): LambdaTerm
 +setSecond(term: LambdaTerm)
 +getSecond(): LambdaTerm
-</panel_attributes>
++equals(term: LambdaTerm): boolean</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -84,7 +85,7 @@ LambdaTermObserver
       <x>480</x>
       <y>760</y>
       <w>460</w>
-      <h>120</h>
+      <h>140</h>
     </coordinates>
     <panel_attributes>LambdaAbstraction
 --
@@ -93,7 +94,8 @@ LambdaTermObserver
 +LambdaAbstraction(parent: LambdaTerm, color: Color, locked: boolean)
 +accept(visitor: LambdaTermVisitor&lt;T&gt;): T
 +setInside(inside: LambdaTerm)
-+getInside(): LambdaTerm</panel_attributes>
++getInside(): LambdaTerm
++equals(term: LambdaTerm): boolean</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -102,13 +104,14 @@ LambdaTermObserver
       <x>950</x>
       <y>760</y>
       <w>450</w>
-      <h>70</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>LambdaVariable
 --
 --
 +LambdaVariable(parent: LambdaTerm, color: Color, locked: boolean)
-+accept(visitor: LambdaTermVisitor&lt;T&gt;): T</panel_attributes>
++accept(visitor: LambdaTermVisitor&lt;T&gt;): T
++equals(term: LambdaTerm): boolean</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -116,35 +119,35 @@ LambdaTermObserver
     <coordinates>
       <x>830</x>
       <y>20</y>
-      <w>270</w>
+      <w>350</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=-
 &lt;&lt;bind&gt;&gt;
 Observer -&gt; LambdaTermObserver</panel_attributes>
-    <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;330.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>500</x>
-      <y>410</y>
+      <y>420</y>
       <w>30</w>
-      <h>110</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>570</x>
-      <y>410</y>
+      <y>420</y>
       <w>210</w>
-      <h>110</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;</panel_attributes>
-    <additional_attributes>190.0;90.0;190.0;50.0;10.0;50.0;10.0;10.0</additional_attributes>
+    <additional_attributes>190.0;80.0;190.0;40.0;10.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -167,19 +170,6 @@ Observer -&gt; LambdaTermObserver</panel_attributes>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;</panel_attributes>
     <additional_attributes>10.0;150.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1080</x>
-      <y>10</y>
-      <w>210</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>template=Observer: Class
-Observable
---</panel_attributes>
-    <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
@@ -265,16 +255,16 @@ return visitor.getResult();</panel_attributes>
       <x>790</x>
       <y>840</y>
       <w>90</w>
-      <h>70</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;10.0;70.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;70.0;70.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
       <x>610</x>
-      <y>890</y>
+      <y>910</y>
       <w>390</w>
       <h>80</h>
     </coordinates>
@@ -367,6 +357,17 @@ return visitor.getResult();</panel_attributes>
       <h>30</h>
     </coordinates>
     <panel_attributes>LambdaTerm(null, true);</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>1090</x>
+      <y>20</y>
+      <w>160</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Observable&lt;Observer&gt;</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

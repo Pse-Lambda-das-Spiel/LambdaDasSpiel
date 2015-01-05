@@ -7,7 +7,7 @@
       <x>290</x>
       <y>270</y>
       <w>240</w>
-      <h>190</h>
+      <h>210</h>
     </coordinates>
     <panel_attributes>BetaReductionVisitor
 --
@@ -20,7 +20,8 @@
 +visit(node: LambdaApplication)
 +visit(node: LambdaAbstraction)
 +visit(node: LambdaVariable)
-+getResult(): LambdaTerm</panel_attributes>
++getResult(): LambdaTerm
++hasReduced(): boolean</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -210,12 +211,12 @@ node.setLeft(node.getLeft().accept(this));</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>510</x>
-      <y>450</y>
+      <y>470</y>
       <w>120</w>
-      <h>130</h>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>100.0;110.0;10.0;110.0;10.0;10.0</additional_attributes>
+    <additional_attributes>100.0;90.0;10.0;90.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -255,23 +256,23 @@ node.setLeft(node.getLeft().accept(this));</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>490</x>
-      <y>450</y>
+      <y>470</y>
       <w>140</w>
-      <h>400</h>
+      <h>380</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>120.0;380.0;10.0;380.0;10.0;10.0</additional_attributes>
+    <additional_attributes>120.0;360.0;10.0;360.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>470</x>
-      <y>450</y>
+      <y>470</y>
       <w>160</w>
-      <h>530</h>
+      <h>510</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>140.0;510.0;10.0;510.0;10.0;10.0</additional_attributes>
+    <additional_attributes>140.0;490.0;10.0;490.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>

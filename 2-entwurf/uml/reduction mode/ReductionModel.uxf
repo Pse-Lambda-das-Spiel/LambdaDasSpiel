@@ -30,118 +30,217 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>430</x>
+      <x>410</x>
       <y>360</y>
-      <w>430</w>
-      <h>220</h>
+      <w>450</w>
+      <h>310</h>
     </coordinates>
     <panel_attributes>ReductionModel
 --
 -history: Stack&lt;LambdaRoot&gt;
 -paused: boolean = true
--strategy: ReductionStrategy
+-pauseRequested: boolean = false
+-strategy: BetaReductionVisitor
 -current: LambdaRoot
 -step: int = 0
+-busy: boolean = false
+-level: LevelModel
 --
-+ReductionModel(term: LambdaRoot, strategy: ReductionStrategy)
++ReductionModel(term: LambdaRoot, strategy: BetaReductionVisitor,
+    level: LevelModel)
 +play()
 +pause()
 +step()
 +stepRevert()
-+stepFinished()</panel_attributes>
+
+-setPaused(paused: boolean);
+-setBusy(busy: boolean);</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>480</x>
-      <y>460</y>
-      <w>410</w>
-      <h>50</h>
+      <x>460</x>
+      <y>390</y>
+      <w>440</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;30.0;390.0;10.0</additional_attributes>
+    <additional_attributes>10.0;170.0;420.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>870</x>
-      <y>460</y>
-      <w>120</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>paused = false;</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>480</x>
-      <y>500</y>
-      <w>410</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;30.0;390.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>870</x>
-      <y>500</y>
-      <w>490</w>
+      <x>880</x>
+      <y>380</y>
+      <w>320</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>history.push((LambdaRoot) current.accept(new CopyVisitor()));
-current.accept(new BetaReductionVisitor(strategy));
-step++;</panel_attributes>
+    <panel_attributes>assert(paused &amp;&amp; !pauseRequested &amp;&amp; !busy);
+setPaused(false);
+step();</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>460</x>
+      <y>580</y>
+      <w>440</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;10.0;420.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>870</x>
-      <y>630</y>
+      <x>880</x>
+      <y>510</y>
+      <w>590</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>assert(!busy &amp;&amp; !pauseRequested);
+ // start in new thread
+setBusy(true);
+do {
+    history.push((LambdaRoot) current.accept(new CopyVisitor()));
+    BetaReductionVisitor visitor = new BetaReductionVisitor(strategy);
+    current.accept(visitor); 
+    step++;
+    if (!visitor.hasReduced()) {
+        notify((observer) -&gt; observer.reductionFinished(current.equals(level.getLevelTarget())));
+    }
+} while (!pauseRequested);
+setBusy(false);
+setPaused(true);</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>510</x>
+      <y>600</y>
+      <w>390</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;10.0;370.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>880</x>
+      <y>760</y>
       <w>340</w>
-      <h>60</h>
+      <h>90</h>
     </coordinates>
-    <panel_attributes>if (!paused) {
-    step();
-}</panel_attributes>
+    <panel_attributes>assert(history.size() &gt; 0);
+assert(paused);
+setBusy(true);
+current.setChild(history.pop().getChild());
+setBusy(false);</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>460</x>
+      <y>130</y>
+      <w>360</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+ReductionModelObserver
+--
+--
++pauseChanged(paused: boolean)
++busyChanged(busy: boolean)
++reductionFinished(levelComplete: boolean)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>530</x>
-      <y>550</y>
-      <w>360</w>
+      <x>480</x>
+      <y>480</y>
+      <w>420</w>
       <h>120</h>
     </coordinates>
     <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;10.0;340.0;100.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>520</x>
-      <y>530</y>
-      <w>370</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;10.0;350.0;70.0</additional_attributes>
+    <additional_attributes>10.0;100.0;400.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>870</x>
-      <y>580</y>
-      <w>340</w>
-      <h>40</h>
+      <x>880</x>
+      <y>450</y>
+      <w>320</w>
+      <h>50</h>
     </coordinates>
-    <panel_attributes>assert(history.size() &gt; 0);
-current.setChild(history.pop().getChild());</panel_attributes>
+    <panel_attributes>assert(!paused);
+pauseRequested = true;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>620</x>
+      <y>220</y>
+      <w>70</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>30.0;10.0;30.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>80</x>
+      <y>390</y>
+      <w>350</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt;&lt;bind&gt;&gt;
+Observer -&gt; ReductionModelObserver</panel_attributes>
+    <additional_attributes>330.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>0</x>
+      <y>390</y>
+      <w>160</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Observable&lt;Observer&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>610</x>
+      <y>630</y>
+      <w>290</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;10.0;270.0;240.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>880</x>
+      <y>860</y>
+      <w>430</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>if (this.paused != paused) {
+    this.paused = paused;
+    notify((observer) -&gt; observer.pauseChanged(paused));
+}</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
