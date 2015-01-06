@@ -33,7 +33,7 @@
       <x>410</x>
       <y>360</y>
       <w>450</w>
-      <h>310</h>
+      <h>340</h>
     </coordinates>
     <panel_attributes>ReductionModel
 --
@@ -54,7 +54,9 @@
 +stepRevert()
 
 -setPaused(paused: boolean);
--setBusy(busy: boolean);</panel_attributes>
+-setBusy(busy: boolean);
+
++getLevel(): LevelModel</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

@@ -83,17 +83,19 @@
 	\vspace{-.8cm}
 	\begin{itemize}
 		\item $\texttt{private LambdaTerm \textbf{parent}}$ \\ Der Elternknoten dieses Terms. Kann auch $\texttt{null}$ sein, falls der Knoten eine Wurzel ist.
+		\item $\texttt{private boolean \textbf{locked}}$ \\ Gibt an, ob dieser Knoten im Editor verändert werden kann.
 	\end{itemize}
 	
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public \textbf{LambdaTerm}(LambdaTerm parent)}$ \\ Instanziiert ein Objekt dieser Klasse mit dem gegebenen Elternknoten.
+		\item $\texttt{public \textbf{LambdaTerm}(LambdaTerm parent, boolean locked)}$ \\ Instanziiert ein Objekt dieser Klasse mit dem gegebenen Elternknoten.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
 				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms. Kann auch $\texttt{null}$ sein, falls der Knoten eine Wurzel ist.
+				\item $\texttt{boolean locked}$ \\ Gibt an, ob dieser Knoten im Editor verändert werden kann.
 			\end{itemize}
 		\end{description}
 	\end{itemize}
@@ -156,6 +158,24 @@
 				\item Der Elternknoten dieses Knotens.
 			\end{itemize}
 		\end{description}
+		
+		\item $\texttt{public boolean \textbf{isLocked}()}$ \\ Gibt zurück, ob dieser Knoten im Editor verändert werden kann.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob dieser Knoten im Editor verändert werden kann.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public boolean \textbf{equals}(Object o)}$ \\ Gibt zurück, ob dieses und das gegebene Element gleich sind.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob dieses und das gegebene Element gleich sind.
+			\end{itemize}
+		\end{description}
 	\end{itemize}
 \end{description}
 
@@ -203,12 +223,13 @@
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public \textbf{LambdaApplication}(LambdaTerm parent)}$ \\ Instanziiert ein Objekt dieser Klasse mit dem gegebenen Elternknoten.
+		\item $\texttt{public \textbf{LambdaApplication}(LambdaTerm parent, boolean locked)}$ \\ Instanziiert ein Objekt dieser Klasse mit dem gegebenen Elternknoten.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
 				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms. $\texttt{null}$ ist erlaubt, resultiert aber in einem ungültigen Lambda-Term.
+				\item $\texttt{boolean locked}$ \\ Gibt an, ob dieser Knoten im Editor verändert werden kann.
 			\end{itemize}
 		\end{description}
 	\end{itemize}
@@ -253,6 +274,15 @@
 				\item  Der rechte Kindknoten dieser Applikation.
 			\end{itemize}
 		\end{description}
+		
+		\item $\texttt{public boolean \textbf{equals}(Object o)}$ \\ Gibt zurück, ob dieses und das gegebene Element gleich sind. Zwei Applikationen sind gleich, wenn beide rechte Kindknoten gleich und beide linke Kindknoten gleich sind.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob dieses und das gegebene Element gleich sind.
+			\end{itemize}
+		\end{description}
 	\end{itemize}
 \end{description}
 
@@ -269,13 +299,14 @@
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public \textbf{LambdaValue}(LambdaTerm parent, Color color)}$ \\ Instanziiert ein Objekt dieser Klasse mit dem gegebenen Elternknoten und der gegebenen Farbe.
+		\item $\texttt{public \textbf{LambdaValue}(LambdaTerm parent, Color color, boolean locked)}$ \\ Instanziiert ein Objekt dieser Klasse mit dem gegebenen Elternknoten und der gegebenen Farbe.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
 				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms. $\texttt{null}$ ist erlaubt, falls der Term eine Wurzel ist.
 				\item $\texttt{Color color}$ \\ Die Farbe dieses Wertes.
+				\item $\texttt{boolean locked}$ \\ Gibt an, ob dieser Knoten im Editor verändert werden kann.
 			\end{itemize}
 			\item[Exceptions] \hfill \\
 			\vspace{-.8cm}
@@ -335,13 +366,14 @@
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public \textbf{LambdaAbstraction}(LambdaTerm parent, Color color)}$ \\ Instanziiert ein Objekt dieser Klasse mit dem gegebenen Elternknoten und der gegebenen Farbe.
+		\item $\texttt{public \textbf{LambdaAbstraction}(LambdaTerm parent, Color color, boolean locked)}$ \\ Instanziiert ein Objekt dieser Klasse mit dem gegebenen Elternknoten und der gegebenen Farbe.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
 				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms. Kann $\texttt{null}$ sein, falls der Term eine Wurzel ist.
 				\item $\texttt{Color color}$ \\ Die Farbe der in dieser Abstraktion gebundenen Variable.
+				\item $\texttt{boolean locked}$ \\ Gibt an, ob dieser Knoten im Editor verändert werden kann.
 			\end{itemize}
 			\item[Exceptions] \hfill \\
 			\vspace{-.8cm}
@@ -373,6 +405,15 @@
 				\item Der innere Term.
 			\end{itemize}
 		\end{description}
+		
+		\item $\texttt{public boolean \textbf{equals}(Object o)}$ \\ Gibt zurück, ob dieses und das gegebene Element gleich sind. Zwei Abstraktionen sind gleich, wenn beide dieselbe Farbe haben und die Kindknoten gleich sind.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob dieses und das gegebene Element gleich sind.
+			\end{itemize}
+		\end{description}
 	\end{itemize}
 \end{description}
 
@@ -384,13 +425,14 @@
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public \textbf{LambdaVariable}(LambdaTerm parent, Color color)}$ \\ Instanziiert ein Objekt dieser Klasse mit dem gegebenen Elternknoten und der gegebenen Farbe.
+		\item $\texttt{public \textbf{LambdaVariable}(LambdaTerm parent, Color color, boolean locked)}$ \\ Instanziiert ein Objekt dieser Klasse mit dem gegebenen Elternknoten und der gegebenen Farbe.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
 				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms. Kann $\texttt{null}$ sein, falls der Term eine Wurzel ist.
 				\item $\texttt{Color color}$ \\ Die Farbe der Variable.
+				\item $\texttt{boolean locked}$ \\ Gibt an, ob dieser Knoten im Editor verändert werden kann.
 			\end{itemize}
 			\item[Exceptions] \hfill \\
 			\vspace{-.8cm}
@@ -405,6 +447,15 @@
 	\begin{itemize}
 		\item $\texttt{public <T> T \textbf{accept}(LambdaTermVisitor<T> visitor)}$ \\ Siehe $\texttt{LambdaTerm.accept}$
 	\end{itemize}
+	
+	\item $\texttt{public boolean \textbf{equals}(Object o)}$ \\ Gibt zurück, ob dieses und das gegebene Element gleich sind. Zwei Variablen sind gleich, wenn beide dieselbe Farbe haben.
+	\begin{description}
+		\item[Rückgabe] \hfill \\
+		\vspace{-.8cm}
+		\begin{itemize}
+			\item Gibt zurück, ob dieses und das gegebene Element gleich sind.
+		\end{itemize}
+	\end{description}
 \end{description}
 
 \subsubsection{\normalfont \texttt{public class \textbf{LambdaRoot} extends LambdaTerm implements Observable<LambdaTermObserver>}}
@@ -458,6 +509,15 @@
 			\vspace{-.8cm}
 			\begin{itemize}
 				\item  Der Kindknoten dieser Wurzel.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public boolean \textbf{equals}(Object o)}$ \\ Gibt zurück, ob dieses und das gegebene Element gleich sind. Zwei Wurzeln sind gleich, wenn beide Kindknoten gleich sind.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob dieses und das gegebene Element gleich sind.
 			\end{itemize}
 		\end{description}
 	\end{itemize}

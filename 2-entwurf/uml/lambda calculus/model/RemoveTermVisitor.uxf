@@ -96,7 +96,7 @@ T -&gt; Object</panel_attributes>
       <h>90</h>
     </coordinates>
     <panel_attributes>if (removed == null) {
-    // Cant happen
+    assert(false);
 } else {
     node.setChild(null);
 }</panel_attributes>
