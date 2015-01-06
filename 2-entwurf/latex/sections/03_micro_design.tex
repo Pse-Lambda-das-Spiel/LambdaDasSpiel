@@ -1216,3 +1216,313 @@
 		\end{description}
 	\end{itemize}
 \end{description}
+
+\subsection{\texttt{package lambda.viewcontroller}}
+
+\subsubsection{\normalfont \texttt{public class \textbf{LambdaTermViewController} extends scene2d.Group implements LambdaTermObserver}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Kontrolliert die Darstellung von und Benutzerinteraktion mit einem Lambda-Term.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private scene2d.ClickListener \textbf{inputListener}}$ \\ Empfängt und bearbeitet UI-Events.
+		\item $\texttt{private boolean \textbf{editable}}$ \\ Gibt an, ob Änderungen am Term durch den Benutzer zugelassen sind.
+		\item $\texttt{private LambdaNodeViewController \textbf{selection}}$ \\ Enthält den Term, den der Benutzer per Drag\&Drop-Geste auswählt. Initialisiert mit $\texttt{null}$.
+		\item $\texttt{private Map<LambdaTerm, LambdaNodeViewController \textbf{nodeViewMap}}$ \\ Speichert alle View-Knoten als Wert zum verknüpften Lambda-Term als Schlüssel. Dabei wird die Identität der Schlüssel per Referenzvergleich anstatt deren inhaltlicher Gleichheit per $\texttt{LambdaTerm.equals}$-Vergleich zum Abbilden benutzt.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LambdaTermViewController}(LambdaRoot root, boolean editable)}$ \\ Instanziiert ein Objekt dieser Klasse mit dem gegebenen Lambda-Term. Fügt sich selber dem gegebenen Lambda-Term als Beobachter hinzu. Erstellt die Wurzel des View-Baumes vom Typ $\texttt{LambdaNodeViewController}$ und fügt dann rekursiv alle Knoten des gegebenen Lambda-Terms per $\texttt{ViewInsertionVisitor}$ dieser Wurzel hinzu. Erstellt den Event-Listener als anonyme innere Klasse, um Benutzerinteraktionen \(Drag-Event, Drop-Event\) zu verarbeiten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaRoot root}$ \\ Der dargestellte Lambda-Term.
+				\item $\texttt{boolean editable}$ \\ Gibt an, ob Änderungen am Term durch den Benutzer zugelassen sind.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{root == null}$ ist.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{replaceTerm}(LambdaTerm old, LambdaTerm new)}$ \\ Wird vom Lambda-Term aufgerufen um mitzuteilen, dass der gegebene alte Term durch den gegebenen neuen ersetzt wird. Löscht den View-Knoten zum alten Term per $\texttt{ViewRemovalVisitor}$ aus dem View-Baum und fügt den View-Knoten des neuen Terms per $\texttt{ViewInsertionVisitor}$ dem View-Baum hinzu. Wenn einer der beiden Terme $\texttt{null}$ ist, wird der entsprechende Schritt übersprungen.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm old}$ \\ Der ersetzte Term.
+				\item $\texttt{LambdaTerm new}$ \\ Der neue Term.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{setColor}(LambdaValue term, Color color)}$ \\ Wird vom Lambda-Term aufgerufen um mitzuteilen, dass die Farbe des gegebenen Terms durch die gegebene neue Farbe ersetzt wird. Setzt dabei die Farbe des View-Knotens zum gegebenen Term auf die gegebene Farbe.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaValue term}$ \\ Der veränderte Term.
+				\item $\texttt{Color color}$ \\ Die neue Farbe des Terms.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{protected LambdaNodeViewController \textbf{getNodeView}(LambdaTerm term)}$ \\ Gibt den View-Knoten zum gegebenen Lambda-Term zurück oder $\texttt{null}$, falls zum Term kein View-Knoten existiert.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaValue term}$ \\ Der Lambda-Term.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Der View-Knoten zum gegebenen Lambda-Term zurück oder $\texttt{null}$, falls zum Term kein View-Knoten existiert.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{term == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{protected boolean \textbf{hasNodeView}(LambdaTerm term)}$ \\ Gibt zurück, ob zum gegebenen Lambda-Term ein View-Knoten existiert.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaValue term}$ \\ Der Lambda-Term.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob zum gegebenen Lambda-Term ein View-Knoten existiert.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{term == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{protected void \textbf{addNodeView}(LambdaNodeViewController nodeView)}$ \\ Fügt den gegebenen View-Knoten zur $\texttt{nodeViewMap}$ und zur $\texttt{scene2d.Group}$ hinzu.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaNodeViewController nodeView}$ \\ Der View-Knoten, der hinzugefügt wird.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{nodeView == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{protected void \textbf{removeNodeView}(LambdaNodeViewController nodeView)}$ \\ Löscht den gegebenen View-Knoten aus der $\texttt{nodeViewMap}$ und der $\texttt{scene2d.Group}$.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaNodeViewController nodeView}$ \\ Der View-Knoten, der gelöscht wird.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{nodeView == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public boolean \textbf{isEditable}()}$ \\ Gibt zurück, ob Änderungen am Lambda-Term durch den Benutzer zugelassen sind.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob Änderungen am Lambda-Term durch den Benutzer zugelassen sind.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{setSelection}(LambdaTerm term)}$ \\ Erstellt einen neuen, nicht editierbaren $\texttt{LambdaNodeViewController}$ und speichert diesen in $\texttt{selection}$.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm term}$ \\ Der Term, zu dem ein View-Knoten erstellt wird.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{term == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaNodeViewController \textbf{getSelection}()}$ \\ Gibt den aktuell ausgewählten View-Knoten des Benutzers zurück oder $\texttt{null}$, falls kein Knoten ausgewählt ist.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Der aktuell ausgewählte View-Knoten oder $\texttt{null}$, falls kein Element ausgewählt ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaNodeViewController \textbf{getParentFromPosition}(float x, float y)}$ \\ Hilfsfunktion um Elemente an der Zeigerposition einzufügen. Gibt dabei das Element zurück, welches der Elternknoten zum eingefügten Knoten wäre, falls das Element an der gegebenen Position eingefügt würde. Falls die Position über dem Wurzel-Knoten ist, wird die Wurzel zurückgegeben.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{float x}$ \\ Die X-Koordinate der Einfügeposition.
+				\item $\texttt{float x}$ \\ Die Y-Koordinate der Einfügeposition.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Der Elternknoten zur gegebenen Einfügeposition.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaNodeViewController \textbf{getChildIndexFromPosition}(float x, float y)}$ \\ Hilfsfunktion um Elemente an der Zeigerposition einzufügen. Gibt den Kindindex zurück, den ein Knoten hätte, welcher an dieser Position in den Baum unter dem Elternknoten $\texttt{getParentFromPosition(x, y)}$ eingefügt würde. Ein Kind an erster Stelle hat Index 0, ein Kind an letzter Stelle hat Index $\texttt{children.size()}$.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{float x}$ \\ Die X-Koordinate der Einfügeposition.
+				\item $\texttt{float x}$ \\ Die Y-Koordinate der Einfügeposition.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Der Kindindex an der gegebenen Einfügeposition.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public gdx.math.Rectangle \textbf{getGapRectangle}(float x, float y)}$ \\ Gibt das Rechteck zurück, an welchem ein Knoten eingefügt wird, wenn der Zeiger an der gegebenen Position losgelassen wird. Die Breite des Rechtecks entspricht der Lücke zwischen zwei horizontal nebeneinanderliegenden Knoten. Dient zum Markieren der Stelle, an der ein Knoten eingefügt werden kann.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{float x}$ \\ Die X-Koordinate der Einfügeposition.
+				\item $\texttt{float x}$ \\ Die Y-Koordinate der Einfügeposition.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Das Einfügerechteck an der gegebenen Zeigerposition.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public abstract class \textbf{LambdaNodeViewController} extends scene2d.Actor}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen View-Knoten im View-Baum eines Lambda-Terms. Im Gegensatz zur Lambda-Term Datenstruktur kann ein View-Knoten beliebig viele Kindknoten haben.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private LambdaTerm \textbf{linkedTerm}}$ \\ Der Lambda-Term, der durch diesen View-Knoten angezeigt wird.
+		\item $\texttt{private LambdaTermViewController \textbf{viewController}}$ \\ Der ViewController, in dem dieser View-Knoten angezeigt wird.
+		\item $\texttt{private LambdaNodeViewController \textbf{parent}}$ \\ Der View-Elternknoten dieses Knotens.
+		\item $\texttt{private List<LambdaNodeViewController> \textbf{children}}$ \\ Die Liste der View-Kindknoten dieses Knotens.
+	\end{itemize}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LambdaTerm}(LambdaTerm parent, boolean locked)}$ \\ Instanziiert ein Objekt dieser Klasse mit dem gegebenen Elternknoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms. Kann auch $\texttt{null}$ sein, falls der Knoten eine Wurzel ist.
+				\item $\texttt{boolean locked}$ \\ Gibt an, ob dieser Knoten im Editor verändert werden kann.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public abstract <T> T \textbf{accept}(LambdaTermVisitor<T> visitor)}$ \\ Nimmt den gegebenen Besucher entgegen und ruft dessen $\texttt{visit}$-Methode auf. Die Rückgabe des Besuchers wird auch von dieser Methode zurückgegeben.
+		\begin{description}
+			\item[Typ-Parameter] \hfill \\
+				\vspace{-.8cm}
+				\begin{itemize}
+					\item $\texttt{<T>}$ \\ Der Typ des Rückgabewertes des Besuchers. Wird benötigt, um verschiedene Rückgabewerte von verschiedenen Besucherklassen zu ermöglichen.
+				\end{itemize}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTermVisitor<T> visitor}$ \\ Der Besucher, der entgegen genommen wird.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt den Rückgabewert des Besuchers zurück.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{visitor == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{notifyRoot}(Consumer<LambdaTermObserver> notifier)}$ \\ Gibt die Nachricht weiter zur Wurzel, wo die Beobachter informiert werden.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{Consumer<LambdaTermObserver> notifier}$ \\ Die Funktion, die auf allen Beobachtern ausgeführt wird.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{notifier == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public boolean \textbf{isValue}()}$ \\ Gibt zurück, ob dieser Term ein Wert - d.h. eine Abstraktion oder Variable - ist. Gibt in der Standard-Implementierung $\texttt{false}$ zurück und wird von entsprechenden Unterklassen überschrieben.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob dieser Term ein Wert ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaTerm \textbf{getParent}()}$ \\ Gibt den Elternknoten dieses Knotens wieder oder $\texttt{null}$, falls dieser Knoten eine Wurzel ist.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Der Elternknoten dieses Knotens.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public boolean \textbf{isLocked}()}$ \\ Gibt zurück, ob dieser Knoten im Editor verändert werden kann.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob dieser Knoten im Editor verändert werden kann.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public boolean \textbf{equals}(Object o)}$ \\ Gibt zurück, ob dieses und das gegebene Element gleich sind.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob dieses und das gegebene Element gleich sind.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
