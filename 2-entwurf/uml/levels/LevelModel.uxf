@@ -7,22 +7,32 @@
       <x>70</x>
       <y>110</y>
       <w>250</w>
-      <h>230</h>
+      <h>380</h>
     </coordinates>
     <panel_attributes>Level
 --
 -ID: int
--levels: List&lt;Level&gt;
+_-levels: List&lt;Level&gt;_
 -levelInfo: Status
 -goal: LambdaTerm
 -hint: LambdaTerm
+-music: Sound
+-bgImage: Image
+-sprite: Sprite
 --
 +Level()
-+getLevels(): List&lt;Level&gt;
+_+getLevels(): List&lt;Level&gt;_
 +getID(): int
 +getLevelInfo(): Status
-+Status
-+getHint()</panel_attributes>
++LevelStatus
++getHint(): LambdaTerm
+
++getMusic(): Sound
++setMusic(music: Sound)
++getBgImage(): Image
++setBgImage(image: Image)
++getSprite(): Sprite
++setSprite(sprite: Sprite)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -63,8 +73,8 @@ sorted per ID
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>230</x>
-      <y>260</y>
+      <x>170</x>
+      <y>320</y>
       <w>20</w>
       <h>60</h>
     </coordinates>
@@ -74,13 +84,13 @@ sorted per ID
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>240</x>
-      <y>270</y>
-      <w>280</w>
+      <x>180</x>
+      <y>300</y>
+      <w>340</w>
       <h>60</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;10.0;260.0;40.0</additional_attributes>
+    <additional_attributes>10.0;40.0;320.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
@@ -95,6 +105,41 @@ sorted per ID
      ACTIVATED,
      COMPLETED
 }</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>270</x>
+      <y>380</y>
+      <w>20</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>390</y>
+      <w>120</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;100.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>370</x>
+      <y>460</y>
+      <w>290</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>/set items from the shop to use in sandbox (Shop.activate(ID))
+/setters only work for level with ID = 0
+/each level of difficulty has his own items</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

@@ -4,12 +4,12 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>350</x>
-      <y>110</y>
+      <x>250</x>
+      <y>30</y>
       <w>210</w>
       <h>100</h>
     </coordinates>
-    <panel_attributes>ShopItem
+    <panel_attributes>ShopItemModel
 --
 -ID: int
 -price: int
@@ -21,53 +21,53 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>110</x>
-      <y>280</y>
+      <x>10</x>
+      <y>200</y>
       <w>210</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>Music
+    <panel_attributes>MusicModel
 --
--sound: File
+-sound: Sound
 --
-+getSound(): File</panel_attributes>
++getSound(): Sound</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>350</x>
-      <y>280</y>
+      <x>250</x>
+      <y>200</y>
       <w>210</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>BackgroundImage
+    <panel_attributes>BackgroundImageModel
 --
--image: File
+-bgImage: Image
 --
-+getImage(): File</panel_attributes>
++getImage(): Image</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>590</x>
-      <y>280</y>
+      <x>490</x>
+      <y>200</y>
       <w>210</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>Sprite
+    <panel_attributes>SpriteModel
 --
--sprite: File
+-sprite: Sprite
 --
-+getSprite(): File</panel_attributes>
++getSprite(): Sprite</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>200</x>
-      <y>170</y>
+      <x>100</x>
+      <y>90</y>
       <w>170</w>
       <h>130</h>
     </coordinates>
@@ -77,8 +77,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>550</x>
-      <y>170</y>
+      <x>450</x>
+      <y>90</y>
       <w>160</w>
       <h>130</h>
     </coordinates>
@@ -88,25 +88,12 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>440</x>
-      <y>200</y>
+      <x>340</x>
+      <y>120</y>
       <w>30</w>
       <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>250</x>
-      <y>420</y>
-      <w>470</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>Muss noch schauen wie man das mit den einzelnen Items umsetzt.
-Also, dass zum Item ein "Sound" gehört bzw. wie man den richtig einbindet.
-bg=yellow</panel_attributes>
-    <additional_attributes/>
   </element>
 </diagram>

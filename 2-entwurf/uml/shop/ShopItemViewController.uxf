@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>10</y>
+      <w>260</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>ShopItemViewController
+--
+-model: ShopItemModel
+-stage: scene2d.Stage
+-InputProcessor: InputMultiplexer
+--
++ShopItemViewController()
+
++dispose()
++show()
++hide()
++resume()
++pause()
++render(delta: float)
++resize(width: int, height: int)</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
