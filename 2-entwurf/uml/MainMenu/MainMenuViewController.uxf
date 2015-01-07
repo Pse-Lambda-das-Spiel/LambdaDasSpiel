@@ -4,19 +4,18 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>310</x>
-      <y>180</y>
-      <w>240</w>
-      <h>260</h>
+      <x>280</x>
+      <y>230</y>
+      <w>250</w>
+      <h>280</h>
     </coordinates>
-    <panel_attributes>ProfileEditAvatar
+    <panel_attributes>MainMenuViewController
 --
 -profile: ProfileModel
--data: ProfileEditAvatarModel
 -stage: scene2d.Stage
 -inputProcessor: InputMultiplexer
 --
-+ProfileEditAvatar()
++MainMenuViewController()
 +dispose()
 +show()
 +hide()
@@ -25,25 +24,16 @@
 +render(delta: float)
 +resize(width: int, height: int)
 +changedProfile()
-+changedAvatar()</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLInterface</id>
-    <coordinates>
-      <x>570</x>
-      <y>190</y>
-      <w>180</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>ProfileManagerObserver</panel_attributes>
++changedLanguage()
++changedAvatar()
++changedCoins()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLInterface</id>
     <coordinates>
       <x>600</x>
-      <y>140</y>
+      <y>190</y>
       <w>80</w>
       <h>60</h>
     </coordinates>
@@ -51,48 +41,58 @@
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
+    <id>UMLInterface</id>
     <coordinates>
-      <x>540</x>
-      <y>150</y>
-      <w>110</w>
+      <x>560</x>
+      <y>290</y>
+      <w>160</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>lt=-
-</panel_attributes>
-    <additional_attributes>90.0;10.0;10.0;40.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>540</x>
-      <y>200</y>
-      <w>130</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=-</panel_attributes>
-    <additional_attributes>110.0;10.0;10.0;10.0</additional_attributes>
+    <panel_attributes>ProfileModelObserver</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>560</x>
+      <x>570</x>
       <y>240</y>
-      <w>200</w>
+      <w>180</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>ProfileEditAvatarObserver</panel_attributes>
+    <panel_attributes>ProfileManagerObserver</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>540</x>
-      <y>230</y>
+      <x>520</x>
+      <y>270</y>
       <w>130</w>
-      <h>50</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
-    <additional_attributes>110.0;30.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;110.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>200</y>
+      <w>130</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>110.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>250</y>
+      <w>150</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;10.0</additional_attributes>
   </element>
 </diagram>

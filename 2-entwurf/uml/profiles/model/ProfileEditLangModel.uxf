@@ -48,23 +48,23 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>50</x>
+      <x>230</x>
       <y>110</y>
-      <w>350</w>
+      <w>170</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 ProfileEditLangObserver
 --
 --
-+changedLang(lang: I18NBundle, langpic: String)</panel_attributes>
++changedLang()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>410</x>
-      <y>100</y>
+      <y>110</y>
       <w>160</w>
       <h>50</h>
     </coordinates>
@@ -77,14 +77,14 @@ Observable
     <id>Relation</id>
     <coordinates>
       <x>440</x>
-      <y>140</y>
+      <y>150</y>
       <w>270</w>
-      <h>100</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=-
 &lt;&lt;bind&gt;&gt;
 Observer-&gt;ProfileEditLangObserver</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>

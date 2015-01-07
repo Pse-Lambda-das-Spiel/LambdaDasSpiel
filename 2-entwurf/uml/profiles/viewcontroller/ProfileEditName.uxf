@@ -11,8 +11,6 @@
     </coordinates>
     <panel_attributes>ProfileEditName
 --
--profile: ProfileModel
--manager: ProfileManager
 -stage: scene2d.Stage
 -inputProcessor: InputMultiplexer
 --
@@ -24,7 +22,8 @@
 +pause()
 +render(delta: float)
 +resize(width: int, height: int)
-</panel_attributes>
++changedProfile()
++changedLanguage()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
