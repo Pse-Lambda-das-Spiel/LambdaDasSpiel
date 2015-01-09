@@ -4,19 +4,22 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>190</x>
-      <y>150</y>
+      <x>50</x>
+      <y>170</y>
       <w>320</w>
-      <h>250</h>
+      <h>290</h>
     </coordinates>
     <panel_attributes>SettingsModel
 --
+-musicOn: boolean
 -musicVolume: float
 -soundVolume: float
 -teacher: boolean
 -colorblind: boolean
 --
 +SettingsModel()
++isMusicOn(): boolean
++setMusicOn(musicOn: boolean)
 +getMusicVolume(): float
 +setMusicVolume(musicVolume: float)
 +getSoundVolume(): float
@@ -30,10 +33,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>680</x>
-      <y>170</y>
+      <x>540</x>
+      <y>190</y>
       <w>160</w>
-      <h>50</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>template=Observer: Class
 Observable
@@ -43,8 +46,8 @@ Observable
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>500</x>
-      <y>180</y>
+      <x>360</x>
+      <y>200</y>
       <w>200</w>
       <h>60</h>
     </coordinates>
@@ -57,15 +60,16 @@ SettingsModelObserver</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>610</x>
-      <y>280</y>
-      <w>210</w>
-      <h>120</h>
+      <x>430</x>
+      <y>300</y>
+      <w>180</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 SettingsModelObserver
 --
 --
++changedMusicOn()
 +changedMusicVolume()
 +changedSoundVolume()
 +changedTeacher()
@@ -75,13 +79,13 @@ SettingsModelObserver
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>500</x>
-      <y>280</y>
-      <w>130</w>
+      <x>360</x>
+      <y>300</y>
+      <w>90</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>110.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>70.0;20.0;10.0;20.0</additional_attributes>
   </element>
 </diagram>

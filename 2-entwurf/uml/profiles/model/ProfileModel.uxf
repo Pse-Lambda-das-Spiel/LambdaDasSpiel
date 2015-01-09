@@ -7,7 +7,7 @@
       <x>130</x>
       <y>130</y>
       <w>310</w>
-      <h>470</h>
+      <h>400</h>
     </coordinates>
     <panel_attributes>ProfileModel
 --
@@ -15,9 +15,8 @@
 -avatarPath: String
 -language: I18NBundle
 -levelIndex: int
--musicOn: boolean
 -coins: int
--purchased: int[]
+-purchased: ItemStatus[]
 -settings: SettingsModel
 (-achievements: AchievementModel
  -statistics: StatisticsModel)
@@ -30,13 +29,10 @@
 +setLanguage(language: I18NBundle)
 +getLevelIndex(): int
 +setLevelIndex(levelIndex: int)
-+isMusicOn(): boolean
-+setMusicOn(musicOn: boolean)
 +getCoins(): int
 +setCoins(coins: int)
-+getPurchased(): int[]
++getPurchased(): ItemStatus[]
 +getSettings(): SettingsModel
-+setSettings(settings: SettingsModel)
 (+getAchievements(): AchievementModel 
  +getStatistics(): StatisticsModel)</panel_attributes>
     <additional_attributes/>
@@ -44,21 +40,22 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>560</x>
+      <x>500</x>
       <y>200</y>
       <w>270</w>
-      <h>150</h>
+      <h>160</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 ProfileModelObserver
 --
 --
-+changedName(name: String)
-+changedAvatar(path: String)
-+changedLevelIndex(index: int)
-+changedMusicOn(musicOn: boolean)
-+changedCoins(coins: int)
-(?purchased)</panel_attributes>
++changedAvatar()
++changedCoins()
+
+	//TODO vv
++changedPurchased()?
++changedLevelIndex()?
+LevelStatus[] statt levelindex?</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -92,12 +89,12 @@ Observer-&gt;ProfileModelObserver</panel_attributes>
     <coordinates>
       <x>430</x>
       <y>210</y>
-      <w>150</w>
+      <w>90</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>130.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>70.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
@@ -105,7 +102,7 @@ Observer-&gt;ProfileModelObserver</panel_attributes>
       <x>500</x>
       <y>380</y>
       <w>280</w>
-      <h>120</h>
+      <h>110</h>
     </coordinates>
     <panel_attributes>if(ProfileManager.getManager()
 .getCurrentProfile() == this) {

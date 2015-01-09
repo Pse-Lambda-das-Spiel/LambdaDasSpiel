@@ -7,7 +7,7 @@
       <x>200</x>
       <y>180</y>
       <w>260</w>
-      <h>230</h>
+      <h>260</h>
     </coordinates>
     <panel_attributes>ProfileEditLang
 --
@@ -24,6 +24,8 @@
 +pause()
 +render(delta: float)
 +resize(width: int, height: int)
++changedProfile()
++changedLang()
 </panel_attributes>
     <additional_attributes/>
   </element>
