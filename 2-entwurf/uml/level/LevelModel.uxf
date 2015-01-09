@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>40</y>
+      <w>360</w>
+      <h>340</h>
+    </coordinates>
+    <panel_attributes>LevelModel
+--
+-ID: int
+-start: LambdaRoot
+-goal: LambdaRoot
+-hint: LambdaRoot
+-tutorial: List&lt;TutorialMessage&gt;
+-availableRedStrats: List&lt;ReductionStrategy&gt;
+-usableElements: List&lt;ElementType&gt;
+-difficulty: int
+-assets: Assets
+--
++LevelModel()
++getID(): int
++getGoal(): LambdaRoot
++getStart(): LambdaRoot
++getHint(): LambdaRoot
++getTutorial(): List&lt;TutorialMessage&gt;
++getAvailableredStrats(): List&lt;ReductionStrategy&gt; 
++getUsableElements(): List&lt;ElementType&gt;
++getDifficulty(): int
++getAssets(): Assets
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>430</x>
+      <y>40</y>
+      <w>210</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+ReductionStrategy
+--
+   NORMAL_ORDER
+   APPLICATIVE_ORDER
+   CALL_BY_NAME
+   CALL_BY_VALUE</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>430</x>
+      <y>170</y>
+      <w>210</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+ElementType
+--
+     VARIABLE
+     ABSTRACTION
+     PARANTHESIS</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

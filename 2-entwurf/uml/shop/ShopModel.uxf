@@ -4,128 +4,21 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>30</x>
+      <x>40</x>
       <y>30</y>
-      <w>390</w>
-      <h>240</h>
+      <w>570</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>ShopModel
 --
--purchasedItems: ItemStatus[]
--sounds: DropDownMenuViewController&lt;Sound&gt;
--images: DropDownMenuViewController&lt;Image&gt;
--sprites: DropDownMenuViewController&lt;Sprite&gt;
+-musics: ShopItemTypeModel&lt;Music&gt;
+-images: ShopItemTypeModel&lt;Image&gt;
+-elementUIContextFamilies: ShopItemTypeModel&lt;ElementUIContextFamily&gt;
 --
 +ShopModel()
-
-+getSounds(): List&lt;Sound&gt;
-+getImages(): List&lt;Image&gt;
-+getSprites(): List&lt;Sprite&gt;
-+getPurchasedItems(): ItemStatus[]
-+ItemStatus</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLInterface</id>
-    <coordinates>
-      <x>280</x>
-      <y>190</y>
-      <w>20</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>290</x>
-      <y>180</y>
-      <w>170</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>150.0;20.0;10.0;30.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>440</x>
-      <y>170</y>
-      <w>340</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>array of an enum which contains the status of the items. eg.: ItemStatus[item.ID] == ItemStatus.PURCHASED shows that the item with the ID item.ID has purchased.</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLInterface</id>
-    <coordinates>
-      <x>120</x>
-      <y>210</y>
-      <w>20</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>130</x>
-      <y>320</y>
-      <w>190</w>
-      <h>100</h>
-    </coordinates>
-    <panel_attributes>public enum ItemStatus {
-   PURCHASED,
-   ACTIVATED,
-   NOT_PURCHASED
-}</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>130</x>
-      <y>220</y>
-      <w>120</w>
-      <h>120</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;10.0;100.0;100.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLInterface</id>
-    <coordinates>
-      <x>230</x>
-      <y>150</y>
-      <w>20</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>240</x>
-      <y>140</y>
-      <w>210</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;30.0;190.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>430</x>
-      <y>130</y>
-      <w>190</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>return sounds.getItems()</panel_attributes>
++getMusics(): ShopItemTypeModel&lt;Music&gt;
++getImages(): ShopItemTypeModel&lt;Image&gt;
++getElementUIContextFamilies(): ShopItemTypeModel&lt;ElementUIContextFamily&gt;</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>400</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>LevelContext
+--
+levelModel: LevelModel
+music: String
+image: String
+tutorials: List&lt;String&gt;
+elementUIContextFamily: ElementUIContextFamily
+
+--
++LevelContext(levelModel: LevelModel)
++getLevelModel(): LevelModel
++getMusic(): String
++getImage(): String
++getTutorials(): List&lt;String&gt;
++getElementUIContextFamily(): ElementUIContextFamily</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>210</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>TutorialMessage
+--
+-ID: String
+-message: String
+-bounds: Rectangle
+-arrowStart: Vector2
+-arrowEnd: Vector2
+--
++TutorialMessage()
++getID(): String
++getMessage(): String
++getBounds(): Rectangle
++getArrowStart(): Vector2
++getArrowEnd(): Vector2</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
