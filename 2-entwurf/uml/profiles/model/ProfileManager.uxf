@@ -7,7 +7,7 @@
       <x>190</x>
       <y>170</y>
       <w>340</w>
-      <h>290</h>
+      <h>280</h>
     </coordinates>
     <panel_attributes>ProfileManager
 --
@@ -21,12 +21,11 @@ _+getManager(): ProfileManager_
 +getCurrentProfile(): ProfileModel
 +setCurrentProfile(name: String): boolean
 +getNames(): List&lt;String&gt;
-+getProfile(name: String): ProfileModel
 +createProfile(): ProfileModel
 +changeName(old: String, new: String): boolean
 +save(name: String)
 +delete(name: String)
-+setLanguage(lang: I18NBundle)
++setLanguage(lang: String)
 +getLanguage(): I18NBundle
 </panel_attributes>
     <additional_attributes/>
@@ -70,13 +69,13 @@ returns null if name was taken or max profile number reached</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>460</x>
+      <x>450</x>
       <y>320</y>
-      <w>110</w>
-      <h>60</h>
+      <w>120</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=-()</panel_attributes>
-    <additional_attributes>90.0;10.0;10.0;40.0</additional_attributes>
+    <additional_attributes>100.0;10.0;10.0;30.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>

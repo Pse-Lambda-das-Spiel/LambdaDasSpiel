@@ -7,31 +7,28 @@
       <x>130</x>
       <y>130</y>
       <w>310</w>
-      <h>400</h>
+      <h>360</h>
     </coordinates>
     <panel_attributes>ProfileModel
 --
 -name: String
--avatarPath: String
--language: I18NBundle
+-avatar: String
+-language: String
 -levelIndex: int
--coins: int
--purchased: ItemStatus[]
 -settings: SettingsModel
+-shop: ShopModel
 (-achievements: AchievementModel
  -statistics: StatisticsModel)
 --
 +ProfileModel(name: String)
 +getName(): String
-+getAvatarPath(): String
-+setAvatarPath(avatarPath: String)
-+getLanguage(): I18NBundle
-+setLanguage(language: I18NBundle)
++getAvatar(): String
++setAvatar(avatar: String)
++getLanguage(): String
++setLanguage(language: String)
 +getLevelIndex(): int
 +setLevelIndex(levelIndex: int)
-+getCoins(): int
-+setCoins(coins: int)
-+getPurchased(): ItemStatus[]
++getShop(): ShopModel
 +getSettings(): SettingsModel
 (+getAchievements(): AchievementModel 
  +getStatistics(): StatisticsModel)</panel_attributes>
@@ -50,10 +47,9 @@ ProfileModelObserver
 --
 --
 +changedAvatar()
-+changedCoins()
 
 	//TODO vv
-+changedPurchased()?
+Coins hier oder im ShopModel?
 +changedLevelIndex()?
 LevelStatus[] statt levelindex?</panel_attributes>
     <additional_attributes/>
@@ -99,8 +95,8 @@ Observer-&gt;ProfileModelObserver</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>500</x>
-      <y>380</y>
+      <x>490</x>
+      <y>390</y>
       <w>280</w>
       <h>110</h>
     </coordinates>
@@ -115,12 +111,12 @@ this.language = language;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
+      <x>380</x>
       <y>370</y>
-      <w>120</w>
-      <h>60</h>
+      <w>130</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=-()</panel_attributes>
-    <additional_attributes>100.0;10.0;10.0;40.0</additional_attributes>
+    <additional_attributes>110.0;20.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>

@@ -11,39 +11,17 @@
     </coordinates>
     <panel_attributes>ProfileEditLangModel
 --
--lang: List&lt;I18NBundle&gt;
+-lang: List&lt;String&gt;
 -langpic: List&lt;String&gt;
 -selectedLang: int
 --
 +ProfileEditLangModel()
-+setLang(lang: I18NBundle)
++setLang(lang: String)
 +nextLang()
 +previousLang()
-+getLang(): I18NBundle
++getLang(): String
 +getLangPic(): String</panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>510</x>
-      <y>280</y>
-      <w>190</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>Loads language bundels and paths to language-pictures(flags)</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>440</x>
-      <y>290</y>
-      <w>90</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=-()</panel_attributes>
-    <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
