@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>300</x>
+      <y>30</y>
+      <w>670</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>AchievementManager
+--
+-achievements: Map&lt;int, AchievementModel&gt;
+-unlockedAchievements: Map&lt;int, AchievementModel&gt;
+-lockedAchievements: Map&lt;int, Achievement&gt;
+--
++AchievementManager()
++initializeAchievements()
++getAchievements(): Map&lt;int, Achievement&gt;
++getUnlockedAchievements: Map&lt;int, AchievementsModel&gt;
++getLockedAchievements: Map&lt;int, Achievement&gt;
++moveAchievement(source: Map&lt;int, AchievementModel&gt;, goal: Map&lt;int, Achievement&gt;)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>140</x>
+      <y>30</y>
+      <w>180</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;160.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>50</x>
+      <y>20</y>
+      <w>160</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>AchievementModel</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

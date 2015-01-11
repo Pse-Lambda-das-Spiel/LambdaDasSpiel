@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>340</x>
+      <y>10</y>
+      <w>560</w>
+      <h>370</h>
+    </coordinates>
+    <panel_attributes>/AchievementModel/
+--
+-id: int
+-description: String
+-requirementDescription: String
+-iconPathAchievementLocked: String
+-iconPathAchievementUnlocked: String
+-locked: boolean
+--
++AchievementModel()
+/+initialize()/
+/+meetRequirements(statistic: StatisticModel): boolean/
++getId(): int
++getDescription(): String
++getRequirementDescription(): String
++getIconPathAchievementLocked(): String
++getIconPathAchievementUnlocked(): String
++isLocked(): boolean
++setId(id: int)
++setDescription(description: String)
++setRequirementDescription(requirementDescription: String)
++setIconPathAchievementLocked(iconPathAchievementLocked: String)
++setIconPathAchievementUnlocked(iconPathAchievementUnlocked: String)
++setLocked(locked: boolean)
+
+
+ 
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>940</x>
+      <y>280</y>
+      <w>410</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>LevelAchievementModel
+--
+--
++LevelAchievementModel()
++initialize()
++meetRequirements(statistic: StatisticModel): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>940</x>
+      <y>170</y>
+      <w>400</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>TimeAchievementModel
+--
+--
++TimeAchievementModel()
++initialize()
++meetRequirements(statistic: StatisticModel): boolean
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>200</x>
+      <y>590</y>
+      <w>300</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>/PerLevelAchievementModel/
+--
+--
++PerLevelAchievementModel()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1050</x>
+      <y>440</y>
+      <w>400</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>LambPlacedAchievementModel
+--
+--
++LambPlacedAchievementModel()
++initialize()
++meetRequirements(statistic: StatisticModel): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>610</x>
+      <y>440</y>
+      <w>410</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>LambEnchantedAchievementModel
+--
+--
++LambEnchantedAchievementModel()
++initialize()
++meetRequirements(statistic: StatisticModel): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>450</y>
+      <w>400</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>GemEnchantedAchievementModel
+--
+--
++GemEnchantedAchievementModel()
++initialize()
++meetRequirements(statistic: StatisticModel): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>740</y>
+      <w>410</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>GemEnchantedPerLevelAchievementModel
+--
+--
++GemEnchantedPerLevelAchievementModel()
++initialize()
++meetRequirements(statistic: StatisticModel): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>310</x>
+      <y>860</y>
+      <w>400</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>LambEnchantedPerLevelAchievementModel
+--
+--
++LambEnchantedPerLevelAchievementModel()
++initialize()
++meetRequirements(statistic: StatisticModel): boolean
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>920</x>
+      <y>740</y>
+      <w>410</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>GemPlacedPerLevelAchievementModel
+--
+--
++GemPlacedPerLevelAchievementModel()
++initialize()
++meetRequirements(statistic: StatisticModel): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>490</x>
+      <y>740</y>
+      <w>410</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>LambPlacedPerLevelAchievementModel
+--
+--
++LambPlacedPerLevelAchievementModel()
++initialize()
++meetRequirements(statistic: StatisticModel): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>540</x>
+      <y>560</y>
+      <w>410</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>GemPlacedAchievementModel
+--
+--
++GemPlacedAchievementModel()
++initialize()
++meetRequirements(statistic: StatisticModel): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>10</y>
+      <w>230</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+AchievementModelObserver
+--
+--
++changedLockedStatus(id: int)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>230</x>
+      <y>0</y>
+      <w>130</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1190</x>
+      <y>0</y>
+      <w>160</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>template=Observer: Class
+Observable
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>890</x>
+      <y>0</y>
+      <w>320</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt;&lt;bind&gt;&gt;
+Observer-&gt;AchievementModelObserver</panel_attributes>
+    <additional_attributes>10.0;20.0;300.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>890</x>
+      <y>110</y>
+      <w>280</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;260.0;10.0;260.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>890</x>
+      <y>260</y>
+      <w>280</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;260.0;10.0;260.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>370</y>
+      <w>30</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>630</x>
+      <y>370</y>
+      <w>30</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>890</x>
+      <y>370</y>
+      <w>260</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;240.0;10.0;240.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>370</y>
+      <w>30</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>450</x>
+      <y>370</y>
+      <w>30</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;220.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>640</y>
+      <w>30</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>470</x>
+      <y>640</y>
+      <w>50</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;30.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>420</x>
+      <y>640</y>
+      <w>30</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;220.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>640</y>
+      <w>520</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;500.0;100.0</additional_attributes>
+  </element>
+</diagram>
