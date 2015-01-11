@@ -17,8 +17,8 @@
 -levelIndex: int
 -settings: SettingsModel
 -shop: ShopModel
-(-achievements: AchievementModel
- -statistics: StatisticsModel)
+-achievements: AchievementManager
+-statistics: StatisticsModel
 --
 +ProfileModel(name: String)
 +getName(): String
@@ -28,30 +28,10 @@
 +setLanguage(language: String)
 +getLevelIndex(): int
 +setLevelIndex(levelIndex: int)
-+getShop(): ShopModel
 +getSettings(): SettingsModel
-(+getAchievements(): AchievementModel 
- +getStatistics(): StatisticsModel)</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>500</x>
-      <y>200</y>
-      <w>270</w>
-      <h>160</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;interface&gt;&gt;
-ProfileModelObserver
---
---
-+changedAvatar()
-
-	//TODO vv
-Coins hier oder im ShopModel?
-+changedLevelIndex()?
-LevelStatus[] statt levelindex?</panel_attributes>
++getShop(): ShopModel
++getAchievements(): AchievementManager
++getStatistics(): StatisticsModel</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -118,5 +98,24 @@ this.language = language;</panel_attributes>
     </coordinates>
     <panel_attributes>lt=-()</panel_attributes>
     <additional_attributes>110.0;20.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>500</x>
+      <y>220</y>
+      <w>270</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+ProfileModelObserver
+--
+--
++changedAvatar()
+
+	//TODO vv
+Coins hier oder im ShopModel?
++changedLevelIndex()?</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
