@@ -7,7 +7,7 @@
       <x>300</x>
       <y>30</y>
       <w>670</w>
-      <h>190</h>
+      <h>220</h>
     </coordinates>
     <panel_attributes>AchievementManager
 --
@@ -17,23 +17,25 @@
 --
 +AchievementManager()
 +initializeAchievements()
++checkAchievements(statistic: StatisticModel)
 +getAchievements(): Map&lt;int, Achievement&gt;
 +getUnlockedAchievements: Map&lt;int, AchievementsModel&gt;
 +getLockedAchievements: Map&lt;int, Achievement&gt;
-+moveAchievement(source: Map&lt;int, AchievementModel&gt;, goal: Map&lt;int, Achievement&gt;)</panel_attributes>
++addAchievement(achievement: AchievementModel): boolean
++removeAchievement(achievement: AchievementModel): boolean</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>140</x>
+      <x>130</x>
       <y>30</y>
-      <w>180</w>
+      <w>190</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n</panel_attributes>
-    <additional_attributes>10.0;10.0;160.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;170.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLInterface</id>

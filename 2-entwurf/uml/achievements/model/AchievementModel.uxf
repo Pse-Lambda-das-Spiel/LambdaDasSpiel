@@ -7,11 +7,12 @@
       <x>340</x>
       <y>10</y>
       <w>560</w>
-      <h>370</h>
+      <h>440</h>
     </coordinates>
     <panel_attributes>/AchievementModel/
 --
 -id: int
+-index: int
 -description: String
 -requirementDescription: String
 -iconPathAchievementLocked: String
@@ -21,13 +22,16 @@
 +AchievementModel()
 /+initialize()/
 /+meetRequirements(statistic: StatisticModel): boolean/
++notify(Consumer&lt;AchievementModelObserver&gt;)
 +getId(): int
++getIndex(): int
 +getDescription(): String
 +getRequirementDescription(): String
 +getIconPathAchievementLocked(): String
 +getIconPathAchievementUnlocked(): String
 +isLocked(): boolean
 +setId(id: int)
++setIndex(Index: int)
 +setDescription(description: String)
 +setRequirementDescription(requirementDescription: String)
 +setIconPathAchievementLocked(iconPathAchievementLocked: String)
@@ -76,7 +80,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>200</x>
-      <y>590</y>
+      <y>610</y>
       <w>300</w>
       <h>60</h>
     </coordinates>
@@ -107,7 +111,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>610</x>
-      <y>440</y>
+      <y>480</y>
       <w>410</w>
       <h>90</h>
     </coordinates>
@@ -123,7 +127,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>10</x>
-      <y>450</y>
+      <y>500</y>
       <w>400</w>
       <h>90</h>
     </coordinates>
@@ -204,7 +208,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>540</x>
-      <y>560</y>
+      <y>580</y>
       <w>410</w>
       <h>90</h>
     </coordinates>
@@ -295,23 +299,23 @@ Observer-&gt;AchievementModelObserver</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>360</x>
-      <y>370</y>
+      <y>440</y>
       <w>30</w>
-      <h>100</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>630</x>
-      <y>370</y>
+      <y>440</y>
       <w>30</w>
-      <h>90</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -328,66 +332,66 @@ Observer-&gt;AchievementModelObserver</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>570</x>
-      <y>370</y>
+      <y>440</y>
       <w>30</w>
-      <h>210</h>
+      <h>160</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;190.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>450</x>
-      <y>370</y>
+      <y>440</y>
       <w>30</w>
-      <h>240</h>
+      <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;220.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>370</x>
-      <y>640</y>
+      <y>660</y>
       <w>30</w>
-      <h>120</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>470</x>
-      <y>640</y>
+      <y>660</y>
       <w>50</w>
-      <h>120</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;30.0;100.0</additional_attributes>
+    <additional_attributes>10.0;10.0;30.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>420</x>
-      <y>640</y>
+      <y>660</y>
       <w>30</w>
-      <h>240</h>
+      <h>220</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;220.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;200.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>490</x>
-      <y>640</y>
+      <y>660</y>
       <w>520</w>
-      <h>120</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;500.0;100.0</additional_attributes>
+    <additional_attributes>10.0;10.0;500.0;80.0</additional_attributes>
   </element>
 </diagram>
