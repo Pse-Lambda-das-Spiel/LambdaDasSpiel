@@ -13,7 +13,7 @@
 --
 -model: ShopItemModel
 -stage: scene2d.Stage
--InputProcessor: InputMultiplexer
+-inputProcessor: InputMultiplexer
 --
 +ShopItemViewController()
 

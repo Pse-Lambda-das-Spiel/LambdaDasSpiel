@@ -13,7 +13,7 @@
 --
 -model: ShopModel
 -stage: scene2d.Stage
--InputProcessor: InputMultiplexer
+-inputProcessor: InputMultiplexer
 -items: List&lt;DropDownMenuViewController&gt;
 --
 +ShopViewController()

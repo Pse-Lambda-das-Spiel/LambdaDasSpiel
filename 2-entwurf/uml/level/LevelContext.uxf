@@ -11,11 +11,11 @@
     </coordinates>
     <panel_attributes>LevelContext
 --
-levelModel: LevelModel
-music: String
-image: String
-tutorials: List&lt;String&gt;
-elementUIContextFamily: ElementUIContextFamily
+-levelModel: LevelModel
+-music: String
+-image: String
+-tutorials: List&lt;String&gt;
+-elementUIContextFamily: ElementUIContextFamily
 
 --
 +LevelContext(levelModel: LevelModel)

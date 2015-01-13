@@ -12,7 +12,7 @@
     <panel_attributes>LevelSelectionViewController
 --
 -stage: scene2d.Stage
--InputProcessor: InputMultiplexer
+-inputProcessor: InputMultiplexer
 --
 +LevelSelectionViewController()
 

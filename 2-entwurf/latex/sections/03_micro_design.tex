@@ -2809,6 +2809,86 @@
 
 		\end{itemize}
 	\end{description}
+	
+	
+	
+	
+
+\subsubsection{\normalfont \texttt{public class \textbf{LevelContext}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Shop, der es dem Benutzer ermöglicht seine erspielten Münzen gegen Belohnungen einzutauschen.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private LevelModel \textbf{levelModel}}$ \\ LevelModel, welches alle weiteren Daten enthält, die für den LevelContext ausgelesen werden müssen.
+		\item $\texttt{private String \textbf{music}}$ \\ Musik, welche während des Levels im Editormodus im Hintergrund abläuft.
+		\item $\texttt{private String \textbf{image}}$ \\ Bild, welches während des Levels im Editormodus im Hintergrund angezeigt wird.
+		\item $\texttt{private List<String> \textbf{tutorials}}$ \\ Liste, welche alle Bezeichner für Anleitungen enthält, welche für das Level abgespielt werden müssen.
+		\item $\texttt{private ElementUIContextFamily \textbf{elementUIContextFamily}}$ \\ Familie von Sprites, welche im Editormodus die Spielelemente für die Lambda-Abstraktion, die Lambda-Variable und die Lambda-Klammerung darstellen.
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LevelContext}()}$ \\ Instanziert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public LevelModel \textbf{levelModel}}$ \\ Gibt die ID des Levels zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{levelModel}$ zurück.
+			\end{itemize}
+			\end{description}
+		
+		\item $\texttt{public String \textbf{music}}$ \\ Gibt den Starterm des Levels zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{music}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public String \textbf{image}}$ \\ Gibt den Zielgerm des Levels zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{image}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public List<String> \textbf{tutorials}}$ \\ Gibt einen Hinweis zum Level.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{tutorials}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public ElementUIContextFamily \textbf{elementUIContextFamily}}$ \\ Gibt eine Liste mit allen Anleitungen zurück, welche zum Level gehören.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{elementUIContextFamily}$ zurück.
+			\end{itemize}
+			\end{description}
+
+		\end{itemize}
+	\end{description}
+		
+	
+
 
 
 
@@ -2823,8 +2903,8 @@
 	\vspace{-.8cm}
 	\begin{itemize}	
 		\item $\texttt{private ShopModel \textbf{model}}$ \\ 
-		\item $\texttt{private scene2d.Stage \textbf{stage}}$ \\ 		
-		\item $\texttt{private InputMultiplexer \textbf{InputProcessor}}$ \\ 
+		\item $\texttt{private scene2d.Stage \textbf{stage}}$ \\ 2D-Scene-Graph, der die Hierarchie der gesamten grafischen Komponenten (Akteure mit Typ $\texttt{scene2d.Actor}$ des Screens (der aktuell angezeigte Bildschirm) enthält. 
+		\item $\texttt{private InputMultiplexer \textbf{inputProcessor}}$ \\ Delegiert die Eingabe-Ereignisse an die geordnete Liste der InputProcessor, die die Ereignisse empfangen und weiterverarbeiten.
 		\item $\texttt{private List<DropDownMenuViewController> \textbf{items}}$ \\ 
 		\end{itemize}
 	
@@ -2862,8 +2942,8 @@
 	\vspace{-.8cm}
 	\begin{itemize}	
 		\item $\texttt{private ShopItemModel \textbf{model}}$ \\ 
-		\item $\texttt{private scene2d.Stage \textbf{stage}}$ \\ 		
-		\item $\texttt{private InputMultiplexer \textbf{InputProcessor}}$ \\ 
+		\item $\texttt{private scene2d.Stage \textbf{stage}}$ \\ 2D-Scene-Graph, der die Hierarchie der gesamten grafischen Komponenten (Akteure mit Typ $\texttt{scene2d.Actor}$ des Screens (der aktuell angezeigte Bildschirm) enthält. 
+		\item $\texttt{private InputMultiplexer \textbf{inputProcessor}}$ \\ Delegiert die Eingabe-Ereignisse an die geordnete Liste der InputProcessor, die die Ereignisse empfangen und weiterverarbeiten.
 		\end{itemize}
 	
 \item[Konstruktoren] \hfill \\
@@ -2907,8 +2987,8 @@
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}	
-		\item $\texttt{private scene2d.Stage \textbf{stage}}$ \\ 		
-		\item $\texttt{private InputMultiplexer \textbf{InputProcessor}}$ \\ 
+		\item $\texttt{private scene2d.Stage \textbf{stage}}$ \\ 2D-Scene-Graph, der die Hierarchie der gesamten grafischen Komponenten (Akteure mit Typ $\texttt{scene2d.Actor}$ des Screens (der aktuell angezeigte Bildschirm) enthält. 
+		\item $\texttt{private InputMultiplexer \textbf{inputProcessor}}$ \\ Delegiert die Eingabe-Ereignisse an die geordnete Liste der InputProcessor, die die Ereignisse empfangen und weiterverarbeiten.
 		\end{itemize}
 	
 \item[Konstruktoren] \hfill \\
@@ -2921,12 +3001,12 @@
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public void \textbf{startLevel}()}$ \\ 
+		\item $\texttt{public void \textbf{startLevel}()}$ \\ Erstellt einen neuen LevelContext mit dem gewählten LevelModel.
 			\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{LevelModel level}$ \\ 
+				\item $\texttt{LevelModel level}$ \\ Entspricht dem Level, welches gestartet werden soll.
 			\end{itemize}
 			\end{description}
 			
@@ -2938,16 +3018,7 @@
 
 \subsubsection{\normalfont \texttt{public class \textbf{ElementUIContext}}}
 
-\begin{description}
-\item[Beschreibung] \hfill \\ 
-\item[Attribute] \hfill \\
-	\vspace{-.8cm}
-	\begin{itemize}	
-		\item $\texttt{private AbstractionUIContext \textbf{abstractionUIContext}}$ \\ 		
-		\item $\texttt{private VariableUIContext \textbf{variableUIContext}}$ \\ 
-		\item $\texttt{private ParanthesisUIContext \textbf{paranthesisUIContext}}$ \\ 
-		\end{itemize}
-	
+
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
@@ -2966,8 +3037,8 @@
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}	
-		\item $\texttt{private Sprite \textbf{sprite}}$ \\ 		
-		\item $\texttt{private Animation \textbf{animation}}$ \\ 
+		\item $\texttt{private Sprite \textbf{sprite}}$ \\ Enthält das Sprite-File, welches zum Anzeigen einer Lambda-Abstraktion bzw. eines Lammes mit Zauberstab auf dem Spielfeld verwendet wird.
+		\item $\texttt{private Animation \textbf{animation}}$ \\ Beinhaltet eine Animation in Form einer Spritesheet für das verlängern, sowie das verschwinden vom Sprite.
 		\end{itemize}
 	
 \item[Konstruktoren] \hfill \\
@@ -2979,7 +3050,7 @@
 	
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
-		\item $\texttt{public Sprite \textbf{getSprite}()}$ \\ 
+		\item $\texttt{public Sprite \textbf{getSprite}()}$ \\ Gibt das Sprite-File zurück, welches die Lambda-Abstraktion bzw. das Lamm mit Zauberstab darstellt.
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
@@ -2988,7 +3059,7 @@
 			\end{itemize}
 			\end{description}
 			
-		\item $\texttt{public Animation \textbf{getAnimation}()}$ \\ 
+		\item $\texttt{public Animation \textbf{getAnimation}()}$ \\ Gibt die Animation zurück, welche beim Verlängern und Verschwinden des Sprites abgespielt wird.
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
@@ -3008,8 +3079,8 @@
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}	
-		\item $\texttt{private Sprite \textbf{sprite}}$ \\ 		
-		\item $\texttt{private Animation \textbf{animation}}$ \\ 
+		\item $\texttt{private Sprite \textbf{sprite}}$ \\ Enthält das Sprite-File, welches zum Anzeigen einer Lambda-Variablen bzw. eines Edelsteins auf dem Spielfeld verwendet wird.
+		\item $\texttt{private Animation \textbf{animation}}$ \\ Beinhaltet eine Animation in Form einer Spritesheet für das verschwinden vom Sprite.
 		\end{itemize}
 	
 \item[Konstruktoren] \hfill \\
@@ -3021,7 +3092,7 @@
 	
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
-		\item $\texttt{public Sprite \textbf{getSprite}()}$ \\ 
+		\item $\texttt{public Sprite \textbf{getSprite}()}$ \\ Gibt das Sprite-File zurück, welches die Lambda-Variable bzw. den Edelstein darstellt.
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
@@ -3030,7 +3101,7 @@
 			\end{itemize}
 			\end{description}
 			
-		\item $\texttt{public Animation \textbf{getAnimation}()}$ \\ 
+		\item $\texttt{public Animation \textbf{getAnimation}()}$ \\ Gibt die Animation zurück, welche beim Verschwinden des Sprites abgespielt wird.
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
@@ -3050,8 +3121,8 @@
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}	
-		\item $\texttt{private Sprite \textbf{sprite}}$ \\ 		
-		\item $\texttt{private Animation \textbf{animation}}$ \\ 
+		\item $\texttt{private Sprite \textbf{sprite}}$ \\ Enthält das Sprite-File, welches zum Anzeigen einer Klammernd bzw. eines Lammes ohne Zauberstab verwendet wird.
+		\item $\texttt{private Animation \textbf{animation}}$ \\ Beinhaltet eine Animation in Form einer Spritesheet für das verlängern, sowie das verschwinden vom Sprite.
 		\end{itemize}
 	
 \item[Konstruktoren] \hfill \\
@@ -3063,7 +3134,7 @@
 	
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
-		\item $\texttt{public Sprite \textbf{getSprite}()}$ \\ 
+		\item $\texttt{public Sprite \textbf{getSprite}()}$ \\ Gibt das Sprite-File zurück, welches die Lambda-Klammerung bzw. das Lamm ohne Zauberstab auf dem Spielfeld darstellt.
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
@@ -3072,7 +3143,7 @@
 			\end{itemize}
 			\end{description}
 			
-		\item $\texttt{public Animation \textbf{getAnimation}()}$ \\ 
+		\item $\texttt{public Animation \textbf{getAnimation}()}$ \\ Gibt die Animation zurück, welche beim Verlängern und Verschwinden des Sprites abgespielt wird.
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
@@ -3092,9 +3163,9 @@
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}	
-		\item $\texttt{private AbstractionUIContext \textbf{abstractionUIContext}}$ \\ 		
-		\item $\texttt{private VariableUIContext \textbf{variableUIContext}}$ \\ 
-		\item $\texttt{private ParanthesisUIContext \textbf{paranthesisUIContext}}$ \\ 
+		\item $\texttt{private AbstractionUIContext \textbf{abstractionUIContext}}$ \\ Entspricht der Lambda-Abstraktion bzw. dem Lamm mit Zauberstab auf dem Spielfeld, welche gleichzeitig die eigene Animation enthält.
+		\item $\texttt{private VariableUIContext \textbf{variableUIContext}}$ \\ Entspricht der Variable bzw. dem Edelstein auf dem Spielfeld, welche gleichzeitig die eigene Animation enthält.
+		\item $\texttt{private ParanthesisUIContext \textbf{paranthesisUIContext}}$ \\ Entspricht den Klammern bzw. dem Lamm ohne Zauberstab auf dem Spielfeld, welche gleichzeitig die eigene Animation enthält.
 		\end{itemize}
 	
 \item[Konstruktoren] \hfill \\
@@ -3106,7 +3177,7 @@
 	
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
-		\item $\texttt{public AbstractionUIContext \textbf{getAbstractionUIContext}()}$ \\ 
+		\item $\texttt{public AbstractionUIContext \textbf{getAbstractionUIContext}()}$ \\ Gibt die Lambda-Abstraktion zurück, welche gleichzeitig die eigene Animation enthält.
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
@@ -3115,7 +3186,7 @@
 			\end{itemize}
 			\end{description}
 			
-		\item $\texttt{public VariableUIContext \textbf{getVariableUIContext}()}$ \\ 
+		\item $\texttt{public VariableUIContext \textbf{getVariableUIContext}()}$ \\ Gibt die Lambda-Variable zurück, welche gleichzeitig die eigene Animation enthält.
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
@@ -3124,7 +3195,7 @@
 			\end{itemize}
 			\end{description}
 			
-		\item $\texttt{public ParanthesisUIContext \textbf{getParanthesisUIContext}()}$ \\ 
+		\item $\texttt{public ParanthesisUIContext \textbf{getParanthesisUIContext}()}$ \\ Gibt die Lambda-Klammerung zurück, welche gleichzeitig die eigene Animation enthält.
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
@@ -3144,11 +3215,11 @@
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}	
-		\item $\texttt{private final String \textbf{ID}}$ \\ 		
-		\item $\texttt{private String \textbf{message}}$ \\ 
-		\item $\texttt{private Rectangle \textbf{bounds}}$ \\ 		
-		\item $\texttt{private Vector2 \textbf{arrowStart}}$ \\ 
-		\item $\texttt{private Vectror2 \textbf{arrowEnd}}$ \\ 		
+		\item $\texttt{private final String \textbf{ID}}$ \\ Eindeutiger Bezeichner für den Teil der Anleitung für das Spiel.
+		\item $\texttt{private String \textbf{message}}$ \\ Nachricht, welche ein Spielelement oder einen Button genau erklärt.
+		\item $\texttt{private Rectangle \textbf{bounds}}$ \\ Bereich, in welchem $\texttt{message}$ angezeigt wird.
+		\item $\texttt{private Vector2 \textbf{arrowStart}}$ \\ Startpunkt eines Vektors, welcher immer von $\texttt{Rectangle}$ ausgeht.
+		\item $\texttt{private Vectror2 \textbf{arrowEnd}}$ \\ Endpunkt eines Vektors, welcher immer auf ein Spielelement oder einen Button zeigt, welcher genau erläutert wird.
 
 		\end{itemize}
 	
@@ -3161,7 +3232,7 @@
 	
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
-		\item $\texttt{public String \textbf{getID}()}$ \\ 
+		\item $\texttt{public String \textbf{getID}()}$ \\ Gibt den Bezeichner zurück, mit welchem sich der Teil der Anleitung für das Spiel.
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
@@ -3170,7 +3241,7 @@
 			\end{itemize}
 			\end{description}
 			
-		\item $\texttt{public String \textbf{getMessage}()}$ \\ 
+		\item $\texttt{public String \textbf{getMessage}()}$ \\ Gibt den Text zurück, mit welchem ein Spielelement oder ein Button erläutert wird.
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
@@ -3179,7 +3250,7 @@
 			\end{itemize}
 			\end{description}
 
-		\item $\texttt{public Rectangle \textbf{getBounds}()}$ \\ 
+		\item $\texttt{public Rectangle \textbf{getBounds}()}$ \\ Gibt den Bereich zurück, in welchem $\texttt{message}$ angezeigt wird.
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
@@ -3188,7 +3259,7 @@
 			\end{itemize}
 			\end{description}
 			
-		\item $\texttt{public Vector2 \textbf{getArrowStart}()}$ \\ 
+		\item $\texttt{public Vector2 \textbf{getArrowStart}()}$ \\ Gibt den Startpunkt des Vektors zurück, welcher von $\texttt{Rectangle}$ ausgeht, um ein Spielelement oder Button zu erläutern.
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
@@ -3197,7 +3268,7 @@
 			\end{itemize}
 			\end{description}
 
-		\item $\texttt{public Vector2 \textbf{getArrowEnd}()}$ \\ 
+		\item $\texttt{public Vector2 \textbf{getArrowEnd}()}$ \\ Gibt den Endpunkt des Vektors zurück, welcher auf ein Spielelement oder einen Button zeigt, um dieses bzw. diesen zu erläutern.
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
@@ -3205,13 +3276,6 @@
 				\item Gibt $\texttt{arrowEnd}$ zurück.
 			\end{itemize}
 			\end{description}
-			
-
-
-
-
-
-
 
 		
 	\end{description}

@@ -4,10 +4,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>340</x>
+      <x>320</x>
       <y>230</y>
       <w>310</w>
-      <h>240</h>
+      <h>260</h>
     </coordinates>
     <panel_attributes>ShopItemModel
 --
@@ -25,13 +25,14 @@
 +getPurchased(): boolean
 +buy()
 +activate()
++draw()
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>110</x>
+      <x>130</x>
       <y>540</y>
       <w>210</w>
       <h>70</h>
@@ -46,7 +47,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>340</x>
+      <x>370</x>
       <y>540</y>
       <w>210</w>
       <h>70</h>
@@ -61,7 +62,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>570</x>
+      <x>610</x>
       <y>540</y>
       <w>210</w>
       <h>70</h>
@@ -76,40 +77,40 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>200</x>
-      <y>460</y>
-      <w>170</w>
-      <h>100</h>
+      <x>220</x>
+      <y>480</y>
+      <w>160</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>150.0;10.0;10.0;80.0</additional_attributes>
+    <additional_attributes>140.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>530</x>
-      <y>460</y>
+      <x>570</x>
+      <y>480</y>
       <w>140</w>
-      <h>100</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;120.0;80.0</additional_attributes>
+    <additional_attributes>10.0;10.0;120.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>430</x>
-      <y>460</y>
-      <w>30</w>
-      <h>100</h>
+      <x>420</x>
+      <y>480</y>
+      <w>70</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+    <additional_attributes>10.0;10.0;50.0;60.0</additional_attributes>
   </element>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>550</x>
+      <x>540</x>
       <y>50</y>
       <w>60</w>
       <h>60</h>
@@ -120,18 +121,18 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>440</x>
+      <x>420</x>
       <y>60</y>
-      <w>150</w>
+      <w>160</w>
       <h>190</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>130.0;10.0;10.0;170.0</additional_attributes>
+    <additional_attributes>140.0;10.0;10.0;170.0</additional_attributes>
   </element>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>630</x>
+      <x>620</x>
       <y>0</y>
       <w>180</w>
       <h>60</h>
@@ -142,7 +143,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>510</x>
+      <x>490</x>
       <y>10</y>
       <w>380</w>
       <h>240</h>
@@ -150,12 +151,12 @@
     <panel_attributes>lt=-
 &lt;&lt;bind&gt;&gt;
 Observer -&gt; ShopItemModelObserver</panel_attributes>
-    <additional_attributes>10.0;220.0;200.0;10.0</additional_attributes>
+    <additional_attributes>10.0;220.0;210.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>30</x>
+      <x>20</x>
       <y>60</y>
       <w>300</w>
       <h>90</h>
