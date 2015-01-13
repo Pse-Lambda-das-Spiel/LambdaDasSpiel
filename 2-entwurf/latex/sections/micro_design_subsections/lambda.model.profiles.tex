@@ -1,0 +1,393 @@
+\subsection{\texttt{package lambda.model.profiles}}
+
+\subsubsection{\normalfont \texttt{public interface \textbf{ProfileModelObserver}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Stellt einen Beobachter eines ProfileModels dar, welcher über Änderungen informiert wird.
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{default public void \textbf{changedAvatar}()}$ \\ Wird aufgerufen um dem Beobachter mitzuteilen, 
+		dass sich die ID des Avatars, durch den sich das Avatarbild unter den Assets finden lässt, geändert hat. Die Standard-Implementierung ist leer.
+		\item $\texttt{default public void \textbf{changedLevelIndex}()}$ \\ Wird aufgerufen um dem Beobachter mitzuteilen, 
+		dass sich der Level-Fortschritt des Spielers geändert hat. Die Standard-Implementierung ist leer.
+		\item $\texttt{default public void \textbf{changedCoins}()}$ \\ Wird aufgerufen um dem Beobachter mitzuteilen, 
+		dass die Anzahl an Münzen geändert hat. Die Standard-Implementierung ist leer.
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{ProfileModel} implements Observable<ProfileModelObserver>}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert ein komplettes Benutzerprofil.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private String \textbf{name}}$ \\ Gibt den Name des Profils an, wodurch es eindeutig zu identifizieren ist. 
+		\item $\texttt{private String \textbf{avatar}}$ \\ Gibt die ID des Avatars an, durch den sich das Avatarbild unter den Assets finden lässt.
+		\item $\texttt{private String \textbf{language}}$ \\ Gibt die ID der Sprache an, durch den sich das Sprachpaket unter den Assets finden lässt.
+		\item $\texttt{private int \textbf{levelIndex}}$ \\ Gibt die Nummer des ersten, noch nicht bestandenen Levels an.
+		\item $\texttt{private int \textbf{coins}}$ \\ Gibt die Anzahl an Münzen des Spielers an.
+		\item $\texttt{private SettingsModel \textbf{settings}}$ \\ Stellt eine Referenz zu den, zum Profil gehörenden, Einstellungen dar.
+		\item $\texttt{private ShopModel \textbf{shop}}$ \\ Stellt eine Referenz zu dem, zum Profil gehörenden, Shop dar.
+		\item $\texttt{private StatisticsModel \textbf{statistics}}$ \\ Stellt eine Referenz zu den, zum Profil gehörenden, Statistiken dar.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ProfileModel}(String name)}$ \\ Instanziiert ein Objekt dieser Klasse.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{String name}$ \\ Der Name des neuen Profils. $\texttt{null}$ ist erlaubt, resultiert in einem ""-String als Name.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public String \textbf{getName}()}$ \\ Gibt den Profil-Name zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt den Profil-Name zurück.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public String \textbf{getAvatar}()}$ \\ Gibt die ID des Avatars zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt die ID des Avatars zurück.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{setAvatar}(String avatar)}$ \\ Setzt die Avatar-ID neu und informiert alle Beobachter über diese Änderung.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{String avatar}$ \\ Die ID unter dem der neue Avatar zu finden ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public String \textbf{getLanguage}()}$ \\ Gibt die ID des Sprachpakets zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt die ID des Sprachpakets zurück.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{setLanguage}(String language)}$ \\ Setzt die Sprachpaket-ID neu.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{String language}$ \\  Die ID unter dem das neue Sprachpaket zu finden ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public int \textbf{getLevelIndex}()}$ \\ Gibt die Nummer des ersten, noch nicht bestandenen Levels zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt die Nummer des ersten, noch nicht bestandenen Levels zurück.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{setLevelIndex}(int levelIndex)}$ \\ Setzt die Nummer des ersten, noch nicht bestandenen Levels und informiert alle Beobachter über diese Änderung.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int levelIndex}$ \\ Den Wert auf den der Level-Index gesetzt werden soll.		
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{IllegalArgumentException}$ \\ Falls $\texttt{levelIndex < 1}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public int \textbf{getCoins}()}$ \\ Gibt die Anzahl an Münzen zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt die Anzahl an Münzen zurück.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{setCoins}(int coins)}$ \\ Setzt die Anzahl der Münzen und informiert alle Beobachter über diese Änderung.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int coins}$ \\ Die neue Anzahl an Münzen.	
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{IllegalArgumentException}$ \\ Falls $\texttt{coins < 0}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public SettingsModel \textbf{getSettings}()}$ \\ Gibt die Referenz auf die Einstellungen zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt die Referenz auf die Einstellungen zurück.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public ShopModel \textbf{getShop}()}$ \\ Gibt die Referenz auf den Shop zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt die Referenz auf den Shop zurück.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public StatisticsModel \textbf{getStatistics}()}$ \\ Gibt die Referenz auf die Statistiken zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt die Referenz auf die Statistiken zurück.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public interface \textbf{ProfileManagerObserver}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Stellt einen Beobachter eines ProfileManagers dar, welcher über Änderungen informiert wird.
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{default public void \textbf{changedProfile}()}$ \\ Wird aufgerufen um dem Beobachter mitzuteilen, 
+		dass der ProfileManager ein anderes Profil ausgewählt hat. Die Standard-Implementierung ist leer.
+		\item $\texttt{default public void \textbf{changedNames}()}$ \\ Wird aufgerufen um dem Beobachter mitzuteilen, 
+		dass es eine Änderung der Profil-Namen gab. Die Standard-Implementierung ist leer.
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{ProfileManager} implements Observable<ProfileManagerObserver>}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Verwaltet alle Profile des Spiels.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private static final int \textbf{MAX\_NUMBER\_OF\_PROFILES}}$ \\ Gibt die maximal erlaubte Anzahl an Profilen an.
+		\item $\texttt{private static ProfileManager \textbf{manager}}$ \\ Stellt die einzige Instanz dar, die vom ProfileManager gleichzeitig existieren darf.
+		\item $\texttt{private final ProfileEditModel \textbf{PROFILE\_EDIT}}$ \\ Model, das von der Profileeditierung/erstellung verwendet wird. 
+		\item $\texttt{private ProfileModel \textbf{currentProfile}}$ \\ Gibt das momentan im Spiel ausgewählte Profil an.
+		\item $\texttt{private List<ProfileModel> \textbf{profiles}}$ \\ Stellt eine Liste aller im Spiel vorhandenen Profile dar.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private \textbf{ProfileManager}()}$ \\ Instanziiert ein Objekt dieser Klasse, lädt alle gespeicherten ProfileModels und erstellt das ProfileEditModel.
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public static ProfileManager \textbf{getManager}()}$ \\ Nimmt die existierende ProfileManager-Instanz oder erstellt eine Neue und gibt diese zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item  Nimmt die existierende ProfileManager-Instanz oder erstellt eine Neue und gibt diese zurück.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public ProfileModel \textbf{getCurrentProfile}()}$ \\ Gibt das ausgewählte Profil zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt das ausgewählte Profil zurück.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public boolean \textbf{setCurrentProfile}(String name)}$ \\ Setzt das ausgewählte Profil neu und informiert alle Beobachter über diese Änderung.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{String name}$ \\ Name des neuen Profils.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob der ProfileManager das gegebene Profil finden konnte.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public List<String> \textbf{getNames}()}$ \\ Gibt eine Liste aller Profil-Namen zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt eine Liste aller Profil-Namen zurück.	
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public ProfileModel \textbf{createProfile}()}$ \\ Erstellt ein neues Profil mit einem leeren String als Namen, gibt dieses zurück und informiert alle Beobachter über diese Änderung.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Neues Profil. $\texttt{null}$ falls \textbf{MAX\_NUMBER\_OF\_PROFILES} erreicht wurde oder "" als Name schon vorkommt, was nicht passieren sollte.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public boolean \textbf{changeName}(String old, String new)}$ \\ Ersetzt das Profil mit Namen old durch ein Profil mit dem Namen new, aber sonst identischen Werten und informiert alle Beobachter über diese Änderung.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob die Methode erfolgreich war.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{save}(String name)}$ \\ Sichert das angegebene Profil als Datei.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{String name}$ \\ Der Name des Profils, das gespeichert werden soll.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{delete}(String name)}$ \\ Löscht das angegebene Profil komplett (auch Datei) und informiert alle Beobachter über diese Änderung.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{String name}$ \\ Der Name des Profils, das gelöscht werden soll.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public ProfileEditModel \textbf{getProfileEdit}()}$ \\ Gibt das ProfileEditModel zurück, das von der Profilbearbeitung verwendet werden sollte.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt das ProfileEditModel zurück, das von der Profilbearbeitung verwendet werden sollte.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public interface \textbf{ProfileEditObserver}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Stellt einen Beobachter eines ProfileEditModels dar, welcher über Änderungen der Sprach- und Avatarauswahl informiert wird.
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{default public void \textbf{changedLanguage}()}$ \\ Wird aufgerufen um dem Beobachter mitzuteilen, 
+		dass im ProfileEditModel eine andere Sprache ausgewählt wurde. Die Standard-Implementierung ist leer.
+		\item $\texttt{default public void \textbf{changedAvatar}()}$ \\ Wird aufgerufen um dem Beobachter mitzuteilen, 
+		dass im ProfileEditModel ein anderer Avatar ausgewählt wurde. Die Standard-Implementierung ist leer.
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{ProfileEditModel} implements Observable<ProfileEditObserver>}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert die Logik hinter der Sprach- und Avatarauswahl für die Profilbearbeitung
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private List<String> \textbf{lang}}$ \\ Stellt eine Liste an IDs dar, durch die alle Sprachpakete des Spiels gefunden werden können.
+		\item $\texttt{private List<String> \textbf{langpic}}$ \\ Stellt eine, zu \textbf{lang} passende, Liste an IDs dar, durch die alle Bilder der Landesflaggen gefunden werden können.
+		\item $\texttt{private int \textbf{selectedLang}}$ \\ Die aktuelle Position in der \textbf{lang}- und  \textbf{langpic}-List.
+		\item $\texttt{private List<String> \textbf{avatar}}$ \\ Stellt eine Liste an IDs dar, durch die alle Avatarbilder des Spiels gefunden werden können.
+		\item $\texttt{private int \textbf{selectedAvatar}}$ \\ Die aktuelle Position in der \textbf{avatar}-Liste.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ProfileEditLangModel}()}$ \\ Instanziiert ein Objekt dieser Klasse und dessen Attribute.
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}		
+		\item $\texttt{public void \textbf{setLang}(String lang)}$ \\ Setzt die Sprachauswahl neu.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{String name}$ \\ ID der entsprechenden Sprache.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{nextLang}()}$ \\ Wählt die nächste Sprache aus und informiert alle Beobachter über diese Änderung.
+		
+		\item $\texttt{public void \textbf{previousLang}()}$ \\ Wählt die vorherige Sprache aus und informiert alle Beobachter über diese Änderung.
+		
+		\item $\texttt{public String \textbf{getLang}()}$ \\ Gibt die ID des Sprachpakets der gewählten Sprache zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt die ID des Sprachpakets der gewählten Sprache zurück.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public String \textbf{getLangPic}()}$ \\ Gibt die ID des Bildes der gewählten Sprache zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt die ID des Bildes der gewählten Sprache zurück.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{setAvatar}(String avatar)}$ \\ Setzt die Avatarauswahl neu.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{String avatar}$ \\ ID des entsprechenden Avatars.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{nextAvatar}()}$ \\ Wählt den nächsten Avatar aus und informiert alle Beobachter über diese Änderung.
+		
+		\item $\texttt{public void \textbf{previousAvatar}()}$ \\ Wählt den vorherige Avatar aus und informiert alle Beobachter über diese Änderung.
+		
+		\item $\texttt{public String \textbf{getAvatar}()}$ \\ Gibt die gewählte Avatar-ID zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt die gewählte Avatar-ID zurück.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
