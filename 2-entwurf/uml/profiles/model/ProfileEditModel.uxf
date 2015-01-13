@@ -7,35 +7,42 @@
       <x>270</x>
       <y>220</y>
       <w>210</w>
-      <h>180</h>
+      <h>280</h>
     </coordinates>
-    <panel_attributes>ProfileEditLangModel
+    <panel_attributes>ProfileEditModel
 --
 -lang: List&lt;String&gt;
 -langpic: List&lt;String&gt;
 -selectedLang: int
+-avatar: List&lt;String&gt;
+-selectedAvatar: int
 --
-+ProfileEditLangModel()
++ProfileEditModel()
 +setLang(lang: String)
 +nextLang()
 +previousLang()
 +getLang(): String
-+getLangPic(): String</panel_attributes>
++getLangPic(): String
++setAvatar(avatar: String)
++nextAvatar()
++previousAvatar()
++getAvatar(): String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>230</x>
-      <y>110</y>
-      <w>170</w>
-      <h>70</h>
+      <x>220</x>
+      <y>100</y>
+      <w>180</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
-ProfileEditLangObserver
+ProfileEditObserver
 --
 --
-+changedLang()</panel_attributes>
++changedLanguage()
++changedAvatar()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -56,24 +63,24 @@ Observable
     <coordinates>
       <x>440</x>
       <y>150</y>
-      <w>270</w>
+      <w>240</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=-
 &lt;&lt;bind&gt;&gt;
-Observer-&gt;ProfileEditLangObserver</panel_attributes>
+Observer-&gt;ProfileEditObserver</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>330</x>
-      <y>170</y>
+      <y>180</y>
       <w>70</w>
-      <h>70</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
   </element>
 </diagram>

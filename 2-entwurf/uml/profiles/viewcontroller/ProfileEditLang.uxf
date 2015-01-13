@@ -5,14 +5,13 @@
     <id>UMLClass</id>
     <coordinates>
       <x>200</x>
-      <y>180</y>
+      <y>190</y>
       <w>260</w>
-      <h>260</h>
+      <h>240</h>
     </coordinates>
     <panel_attributes>ProfileEditLang
 --
 -profile: ProfileModel
--data: ProfileEditLangModel
 -stage: scene2d.Stage
 -inputProcessor: InputMultiplexer
 --
@@ -25,7 +24,7 @@
 +render(delta: float)
 +resize(width: int, height: int)
 +changedProfile()
-+changedLang()
++changedLanguage()
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -33,7 +32,7 @@
     <id>UMLInterface</id>
     <coordinates>
       <x>480</x>
-      <y>190</y>
+      <y>200</y>
       <w>180</w>
       <h>60</h>
     </coordinates>
@@ -44,7 +43,7 @@
     <id>UMLInterface</id>
     <coordinates>
       <x>510</x>
-      <y>140</y>
+      <y>150</y>
       <w>80</w>
       <h>60</h>
     </coordinates>
@@ -55,7 +54,7 @@
     <id>Relation</id>
     <coordinates>
       <x>450</x>
-      <y>150</y>
+      <y>160</y>
       <w>110</w>
       <h>60</h>
     </coordinates>
@@ -67,7 +66,7 @@
     <id>Relation</id>
     <coordinates>
       <x>450</x>
-      <y>190</y>
+      <y>200</y>
       <w>130</w>
       <h>40</h>
     </coordinates>
@@ -78,19 +77,19 @@
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>470</x>
-      <y>240</y>
-      <w>180</w>
+      <x>490</x>
+      <y>250</y>
+      <w>140</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>ProfileEditLangObserver</panel_attributes>
+    <panel_attributes>ProfileEditObserver</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>450</x>
-      <y>230</y>
+      <y>240</y>
       <w>120</w>
       <h>50</h>
     </coordinates>
