@@ -7,15 +7,13 @@
       <x>50</x>
       <y>170</y>
       <w>320</w>
-      <h>290</h>
+      <h>200</h>
     </coordinates>
     <panel_attributes>SettingsModel
 --
 -musicOn: boolean
 -musicVolume: float
 -soundVolume: float
--teacher: boolean
--colorblind: boolean
 --
 +SettingsModel()
 +isMusicOn(): boolean
@@ -23,11 +21,7 @@
 +getMusicVolume(): float
 +setMusicVolume(musicVolume: float)
 +getSoundVolume(): float
-+setSoundVolume(SoundVolume: float)
-+isTeacher(): boolean
-+setTeacher(teacher: boolean)
-+isColorblind(): boolean
-+setColorblind(colorblind: boolean)</panel_attributes>
++setSoundVolume(SoundVolume: float)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -62,8 +56,8 @@ SettingsModelObserver</panel_attributes>
     <coordinates>
       <x>430</x>
       <y>300</y>
-      <w>180</w>
-      <h>130</h>
+      <w>190</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 SettingsModelObserver
@@ -71,9 +65,7 @@ SettingsModelObserver
 --
 +changedMusicOn()
 +changedMusicVolume()
-+changedSoundVolume()
-+changedTeacher()
-+changedColorblind()</panel_attributes>
++changedSoundVolume()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

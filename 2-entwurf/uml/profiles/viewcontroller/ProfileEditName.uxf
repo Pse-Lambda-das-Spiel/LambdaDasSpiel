@@ -40,12 +40,12 @@
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>540</x>
+      <x>530</x>
       <y>220</y>
-      <w>160</w>
+      <w>180</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>ProfileModelObserver</panel_attributes>
+    <panel_attributes>ProfileManagerObserver</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -69,5 +69,27 @@
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>90.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>550</x>
+      <y>280</y>
+      <w>140</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>ProfileEditObserver</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>510</x>
+      <y>260</y>
+      <w>120</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;40.0</additional_attributes>
   </element>
 </diagram>

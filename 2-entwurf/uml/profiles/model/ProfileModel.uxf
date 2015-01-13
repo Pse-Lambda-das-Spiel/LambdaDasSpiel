@@ -4,10 +4,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>130</x>
+      <x>200</x>
       <y>130</y>
-      <w>310</w>
-      <h>360</h>
+      <w>240</w>
+      <h>320</h>
     </coordinates>
     <panel_attributes>ProfileModel
 --
@@ -17,7 +17,6 @@
 -levelIndex: int
 -settings: SettingsModel
 -shop: ShopModel
--achievements: AchievementManager
 -statistics: StatisticsModel
 --
 +ProfileModel(name: String)
@@ -30,7 +29,6 @@
 +setLevelIndex(levelIndex: int)
 +getSettings(): SettingsModel
 +getShop(): ShopModel
-+getAchievements(): AchievementManager
 +getStatistics(): StatisticsModel</panel_attributes>
     <additional_attributes/>
   </element>
@@ -38,7 +36,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>680</x>
-      <y>120</y>
+      <y>110</y>
       <w>160</w>
       <h>50</h>
     </coordinates>
@@ -51,7 +49,7 @@ Observable
     <id>Relation</id>
     <coordinates>
       <x>430</x>
-      <y>120</y>
+      <y>110</y>
       <w>270</w>
       <h>50</h>
     </coordinates>
@@ -73,49 +71,20 @@ Observer-&gt;ProfileModelObserver</panel_attributes>
     <additional_attributes>70.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>490</x>
-      <y>390</y>
-      <w>280</w>
-      <h>110</h>
-    </coordinates>
-    <panel_attributes>if(ProfileManager.getManager()
-.getCurrentProfile() == this) {
-ProfileManager.getManager().
-setLanguage(language);
-)
-this.language = language;</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>380</x>
-      <y>370</y>
-      <w>130</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=-()</panel_attributes>
-    <additional_attributes>110.0;20.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
       <x>500</x>
       <y>220</y>
-      <w>270</w>
-      <h>160</h>
+      <w>180</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 ProfileModelObserver
 --
 --
 +changedAvatar()
-
-	//TODO vv
-Coins hier oder im ShopModel?
-+changedLevelIndex()?</panel_attributes>
++changedLevelIndex()
++changedCoins()</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
