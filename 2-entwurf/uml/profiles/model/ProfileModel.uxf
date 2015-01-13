@@ -7,7 +7,7 @@
       <x>200</x>
       <y>130</y>
       <w>240</w>
-      <h>320</h>
+      <h>370</h>
     </coordinates>
     <panel_attributes>ProfileModel
 --
@@ -15,6 +15,7 @@
 -avatar: String
 -language: String
 -levelIndex: int
+-coins: int
 -settings: SettingsModel
 -shop: ShopModel
 -statistics: StatisticsModel
@@ -27,6 +28,8 @@
 +setLanguage(language: String)
 +getLevelIndex(): int
 +setLevelIndex(levelIndex: int)
++getCoins(): int
++setCoins(coins: int)
 +getSettings(): SettingsModel
 +getShop(): ShopModel
 +getStatistics(): StatisticsModel</panel_attributes>
