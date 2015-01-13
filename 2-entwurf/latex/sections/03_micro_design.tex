@@ -2379,3 +2379,521 @@
 \subsection{\texttt{package lambda.viewcontroller.achievements}}
 % content of the package
 \input{./sections/micro_design_subsections/lambda.viewcontroller.achievements.tex}
+
+
+
+
+\subsection{\texttt{package lambda.model.shop}}
+
+\subsubsection{\normalfont \texttt{public class \textbf{ShopModel}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Shop, der es dem Benutzer ermöglicht seine erspielten Münzen gegen Belohnungen einzutauschen.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private ShopItemTypeModel<Music> \textbf{musics}}$ \\ Stellt im Shop die zu kaufenden Items des Typs $\texttt{Music}$ dar.
+		\item $\texttt{private ShopItemTypeModel<Image> \textbf{images}}$ \\ Stellt im Shop die zu kaufenden Items des Typs $\texttt{Image}$ dar.		
+		\item $\texttt{private ShopItemTypeModel<ElementUIContextFamily> \textbf{elementUIContextFamilies}}$ \\ Stellt im Shop die zu kaufenden Items des Typs $\texttt{ElementUIContextFamily}$ dar.
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ShopModel}()}$ \\ Instanziert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public ShopItemTypeModel<Music> \textbf{getMusics}()}$ \\ Gibt das Attribut $\texttt{musics}$ zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{musics}$ zurück.
+			\end{itemize}
+			\end{description}
+		
+		\item $\texttt{public ShopItemTypeModel<Image> \textbf{getImages}()}$ \\ Gibt das Attribut $\texttt{images}$ zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{images}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public ShopItemTypeModel<ElementUIContextFamily> \textbf{getElementUIContextFamily}()}$ \\ Gibt das Attribut $\texttt{elementUIContextFamilies}$ zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{elementUIContextFamilies}$ zurück.
+			\end{itemize}
+			\end{description}
+
+		\end{itemize}
+	\end{description}
+
+
+
+
+
+
+
+
+
+
+
+\subsubsection{\normalfont \texttt{public abstract class \textbf{ShopItemModel}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert ein allgemeines Item, welches man im Shop erwerben kann.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private String \textbf{ID}}$ \\ Gibt den eindeutigen Bezeichner des Items an.
+		\item $\texttt{private int \textbf{price}}$ \\ Gibt an für wie viele Münzen dieses Item erworben werden kann.
+		\item $\texttt{private ShopModel \textbf{shop}}$ \\ Hält die Referenz auf das ShopModel.
+		\item $\texttt{private ShopItemTypeModel \textbf{shopItemType}}$ \\ 	Hält eine Referenz auf ein ShopItemTypeModel, um das aktivierte Item zu setzen.
+		\item $\texttt{private boolean \textbf{purchased}}$ \\ Gibt an, ob das Item erworben wurde oder nicht und wird mit $\texttt{false}$ initialisiert. Bei dem Wert $\texttt{true}$ wurde das Item bereits erworben, bei $\texttt{false}$ nicht.
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ShopItemModel}()}$ \\ Instanziert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public String \textbf{getID}()}$ \\ Gibt den Bezeichner des Items zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{ID}$ zurück.
+			\end{itemize}
+			\end{description}
+		
+		\item $\texttt{public int \textbf{getPRICE}()}$ \\ Gibt zurück für welche Anzahl an Münzen dieses Item erworben werden kann.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{PRICE}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public int \textbf{getShop}()}$ \\ Gibt das ShopModel zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{shop}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public int \textbf{getShopItemType}()}$ \\ Gibt das ShopItemTypeModel zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{shopItemType}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public int \textbf{getPurchased}()}$ \\ Gibt über den boolean zurück, ob das Item erworben wurde oder nicht (bei $\texttt{true}$ erworben, bei $\texttt{false}$ noch nicht erworben).
+		
+			
+		\item $\texttt{public void \textbf{buy}()}$ \\ Vergleicht die Anzahl der Münzen des Benutzerprofils mit $\texttt{price}$ und falls diese Anzahl größer oder gleich groß ist, wird $\texttt{purchased}$ von $\texttt{false}$ auf $\texttt{true}$ gesetzt.
+
+
+			
+		\item $\texttt{public void \textbf{activate}()}$ \\ Prüft, ob das Item schon erworben wurde $\texttt{(purchased == true)}$ und setzt dann, insofern dies geschehen ist, das Item als aktuell aktiviertes Item in der entsprechenden Kategorie.
+		\begin{description}
+		\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{purchased}$ zurück.
+			\end{itemize}
+
+		\end{description}
+	\end{itemize}
+\end{description}
+
+
+\subsubsection{\normalfont \texttt{public class \textbf{MusicModel} extends ShopItemModel}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert ein Musik-Item, welches im Shop erworben werden kann.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private Music \textbf{music}}$ \\ Enthält ein Musikstück, welches im Shop erworben werden kann.
+
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{MusicModel}()}$ \\ Instanziert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public Music \textbf{getMusic}()}$ \\ Gibt das Musik-File zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{music}$ zurück.
+			\end{itemize}
+			\end{description}
+		
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{BackgroundImageModel} extends ShopItemModel}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert ein Hintergrundbild-Item, welches im Shop erworben werden kann.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private Music \textbf{music}}$ \\ Enthält ein Hintergrundbild, welches im Shop erworben werden kann.
+
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ImageModel}()}$ \\ Instanziert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public Image \textbf{getBackgroundImage}()}$ \\ Gibt das Image-File zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{image}$ zurück.
+			\end{itemize}
+			\end{description}
+		
+	\end{itemize}
+\end{description}
+
+
+\subsubsection{\normalfont \texttt{public class \textbf{SpriteModel} extends ShopItemModel}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert ein Sprite-Item, welches ein Teil eines ElementUIContextFamily-Objektes ist, welches im Shop erworben werden kann.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private Sprite \textbf{sprite}}$ \\ Enthält ein Sprite, welches Teil eines ElementUIConext-Objektes ist.
+
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ImageModel}()}$ \\ Instanziert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public Image \textbf{getSprite}()}$ \\ Gibt das Sprite-File zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{sprite}$ zurück.
+			\end{itemize}
+			\end{description}
+		
+	\end{itemize}
+\end{description}
+
+
+
+
+\subsubsection{\normalfont \texttt{public class \textbf{ShopItemTypeModel<T>}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert eine ganze Kategorie von erwerbbaren Items.
+
+\item[Typ-Parameter] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{<Observer>}$ \\ Der Typ einer Kategorie.
+	\end{itemize}
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private String \textbf{typeName}}$ \\ Gibt den Namen des Item-Typs an.
+		\item $\texttt{private List<T> \textbf{items}}$ \\ Enthält alle Items vom Typ des Typ-Parameters.
+		\item $\texttt{private T \textbf{activatedItem}}$ \\ Enthält das aktuell aktivierte Item vom Typ des Typ-Parameters.
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ShopItemTypeModel}()}$ \\ Instanziert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public String \textbf{getTypeName}()}$ \\ Gibt den Namen der Kategorie zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{typeName}$ zurück.
+			\end{itemize}
+			\end{description}
+		
+		\item $\texttt{public List<T> \textbf{getItems}()}$ \\ Gibt die Liste zurück, welche alle Items des gesetzten Typ-Parameters enthält.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{items}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public T \textbf{getActivatedItems}()}$ \\ Gibt das Item vom gesetzten Typ zurück, welches aktuell aktiviert ist.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{activatedItem}$ zurück.
+			\end{itemize}
+			\end{description}
+
+	\end{itemize}
+\end{description}
+
+
+\subsection{\texttt{package lambda.model.level}}
+
+\subsubsection{\normalfont \texttt{public class \textbf{LevelModel}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Shop, der es dem Benutzer ermöglicht seine erspielten Münzen gegen Belohnungen einzutauschen.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private int \textbf{ID}}$ \\ Ist der eindeutige Identifizierer eines Levels.
+		\item $\texttt{private LambdaRoot \textbf{start}}$ \\ Enthält den Startterm eines Levels.
+		\item $\texttt{private LambdaRoot \textbf{goal}}$ \\ Enthält den Zielterm eines Levels.
+		\item $\texttt{private LambdaRoot \textbf{hint}}$ \\ Enthält einen Lösungshinweis für ein Levels.
+		\item $\texttt{private List<TutorialMessage> \textbf{tutorials}}$ \\ Enthält alle Tutorials, die für das Level benötigt werden.
+		\item $\texttt{private List<ReductionStrategy> \textbf{availableRedStrats}}$ \\ Enthält alle Reduktionsstrategien, welche man für das Level verwenden darf.
+		\item $\texttt{private List<ElementType> \textbf{usableElements}}$ \\ Enthält alle Elementtypen, die im Level in derElementen-Leiste im Editormodus für das Level verfügbar sind.
+		\item $\texttt{private int \textbf{difficulty}}$ \\ Beschreibt den Schwierigkeitsgrad des Levels aufsteigend von 1.
+		\item $\texttt{private Assets \textbf{assets}}$ \\ Referenz zu den Assets.
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LevelModel}()}$ \\ Instanziert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public int \textbf{getID}()}$ \\ Gibt die ID des Levels zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{ID}$ zurück.
+			\end{itemize}
+			\end{description}
+		
+		\item $\texttt{public LambdaRoot \textbf{getStart}()}$ \\ Gibt den Starterm des Levels zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{start}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public LambdaRoot \textbf{getGoal}()}$ \\ Gibt den Zielgerm des Levels zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{goal}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public LambdaRoot \textbf{getHint}()}$ \\ Gibt einen Hinweis zum Level.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{hint}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public List<TutorialMessage> \textbf{getTutorials}()}$ \\ Gibt eine Liste mit allen Anleitungen zurück, welche zum Level gehören.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{tutorials}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public List<ReductionStrategy> \textbf{getAvailableRedStrats}()}$ \\ Gibt eine Liste zurück mit allen Reduktionsstrategien, welche man für dieses Level verwenden darf.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{availableRedStrats}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public List<ElementType> \textbf{getUsableElements}()}$ \\ Gibt eine Liste mit Elementtypen zurück, welche zum Lösen des Levels benutzt werden dürfen.
+			\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{usableElements}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public int \textbf{getDifficulty}()}$ \\ Gibt den Schwierigkeitsgrad in Form einer Zahl zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{difficulty}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public Assets \textbf{getAssets}()}$ \\ Gibt $\texttt{assets}$ zurück
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{assets}$ zurück.
+			\end{itemize}
+			\end{description}
+
+		\end{itemize}
+	\end{description}
+
+
+
+\subsection{\texttt{package lambda.viewcontroller.shop}}
+
+\subsubsection{\normalfont \texttt{public class \textbf{ShopViewControllerl} extends Controller}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Shop, der es dem Benutzer ermöglicht seine erspielten Münzen gegen Belohnungen einzutauschen.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private ShopModel \textbf{model}}$ \\ 
+		\item $\texttt{private scene2d.Stage \textbf{stage}}$ \\ 		
+		\item $\texttt{private InputMultiplexer \textbf{InputProcessor}}$ \\ 
+		\item $\texttt{private List<DropDownMenuViewController> \textbf{items}}$ \\ 
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ShopViewController}()}$ \\ Instanziert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public List<DropDownMenuViewController> \textbf{getItems}()}$ \\ Gibt eine Liste mit DropDownViewControllern zurück, welche für den Shop benötigt werden, um die Items anzuzeigen.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{items}$ zurück.
+			\end{itemize}
+			\end{description}
+		
+		\item $\texttt{public void \textbf{update}()}$ \\.
+
+
+		\end{itemize}
+	\end{description}
+	
+	
+\subsubsection{\normalfont \texttt{public class \textbf{ShopItemViewControllerl} extends Controller}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ 
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private ShopItemModel \textbf{model}}$ \\ 
+		\item $\texttt{private scene2d.Stage \textbf{stage}}$ \\ 		
+		\item $\texttt{private InputMultiplexer \textbf{InputProcessor}}$ \\ 
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ShopItemViewController}()}$ \\ Instanziert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{purchasedChanged}()}$ \\ 
+			\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{boolean purchased}$ \\ 
+			\end{itemize}
+			\end{description}
+		
+		\item $\texttt{public void \textbf{activatedChanged}()}$ \\.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{boolean activated}$ \\ 
+			\end{itemize}
+			\end{description}
+			
+
+		\end{itemize}
+	\end{description}
