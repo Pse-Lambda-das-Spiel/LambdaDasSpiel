@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>190</x>
+      <y>170</y>
+      <w>340</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>ProfileManager
+--
+_+MAX_NUMBER_OF_PROFILES: int_
+_-manager: ProfileManager_
+-PROFILE_EDIT: ProfileEditModel
+-currentProfile: ProfileModel
+-profiles: List&lt;ProfileModel&gt;
+--
+-ProfileManager()
+_+getManager(): ProfileManager_
++getCurrentProfile(): ProfileModel
++setCurrentProfile(name: String): boolean
++getNames(): List&lt;String&gt;
++createProfile(): ProfileModel
++changeName(old: String, new: String): boolean
++save(name: String)
++delete(name: String)
++getProfileEdit(): ProfileEditModel</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>440</x>
+      <y>90</y>
+      <w>270</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt;&lt;bind&gt;&gt;
+Observer-&gt;ProfileManagerObserver</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>170</x>
+      <y>50</y>
+      <w>180</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+ProfileManagerObserver
+--
+--
++changedProfile()
++changedNames()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>240</x>
+      <y>120</y>
+      <w>70</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>380</x>
+      <y>50</y>
+      <w>160</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>template=Observer: Class
+Observable
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
