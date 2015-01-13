@@ -4,32 +4,84 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>110</y>
-      <w>440</w>
-      <h>340</h>
+      <x>120</x>
+      <y>0</y>
+      <w>370</w>
+      <h>690</h>
     </coordinates>
     <panel_attributes>
 StatistikModel
 --
--playedTime : int
--solvedLevels : ArrayList&lt;Level&gt;
--numberOfTrial : int
+-GemPlaced : int
+-playedTime : long
+-solved : int
+-played : int
+-success : int
 -successRate : float
-
+-owner : ProfileModel
+- packagesComplete : int
+- usedHints : int
+-GemsEnchanted :int
+-GemsPlaced : int 
+-LambsEnchanted : int
+-LambsPlaced : int
 --
-
-+getPlayedTime():int
-+ getSolvedLevels() : ArrayList&lt;Level&gt;
-+getNumberOfTrial(): int
++getPlayedTime():long
++ getSolvedLevels() : List&lt;int&gt;
++getPlayed(): int
++getSuccess() : int
 +getSuccessRate() : float
-+setPlayedTime(int) 
-+addSolvedLevel(Level)
-+setNumberOfTrial(int) 
-+setSuccessRate(float)  
-+resetStatistic()
++addSolvedLevel(int)
++getOwner(): ProfileModel
++setPlayedTime(playTime:long) 
++setPlayed(played:int) 
++setSuccessRate() 
++setSuccess(success : int) 
++resetStatistics()
++getpackagesComplete() : int
++setpackagesComplete(packagesComplete : int)
++getusedHints() : int
++setusedHints(usedHints : int)
++getGemsEnchanted():int 
++setGemsEnchanted(GemsEnchanted : int )
++getLambsEnchanted() : int
++setLambsEnchanted(LambsEnchanted : int)
++getGemPlaced():int
++setGemPlaced(GemPlaced : int)
++getGemPlaced():int
++setGemPlaced(GemPlaced : int)
++getLambsPlaced():int
++setLambsPlaced(LambsPlaced : int )
 
 group=1</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>710</x>
+      <y>10</y>
+      <w>190</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>LevelSattistic
+--
+-levelID : ID
+--
+getLevelID() : int
+setLevel(levelID: int ) 
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>10</y>
+      <w>250</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;230.0;10.0</additional_attributes>
   </element>
 </diagram>
