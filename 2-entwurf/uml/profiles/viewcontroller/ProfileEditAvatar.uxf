@@ -7,11 +7,10 @@
       <x>310</x>
       <y>180</y>
       <w>240</w>
-      <h>260</h>
+      <h>240</h>
     </coordinates>
     <panel_attributes>ProfileEditAvatar
 --
--profile: ProfileModel
 -stage: scene2d.Stage
 -inputProcessor: InputMultiplexer
 --

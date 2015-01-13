@@ -181,8 +181,8 @@
 	\begin{itemize}
 		\item $\texttt{default public void \textbf{changedProfile}()}$ \\ Wird aufgerufen um dem Beobachter mitzuteilen, 
 		dass der ProfileManager ein anderes Profil ausgewählt hat. Die Standard-Implementierung ist leer.
-		\item $\texttt{default public void \textbf{changedNames}()}$ \\ Wird aufgerufen um dem Beobachter mitzuteilen, 
-		dass es eine Änderung der Profil-Namen gab. Z.B. löschen/erstellen/umbenennen eines Profils. Die Standard-Implementierung ist leer.
+		\item $\texttt{default public void \textbf{changedProfileList}()}$ \\ Wird aufgerufen um dem Beobachter mitzuteilen, 
+		dass es eine Änderung der Profile gab, wie das Löschen/Erstellen/Umbenennen eines Profils. Die Standard-Implementierung ist leer.
 	\end{itemize}
 \end{description}
 
@@ -196,7 +196,7 @@
 	\begin{itemize}
 		\item $\texttt{private static final int \textbf{MAX\_NUMBER\_OF\_PROFILES}}$ \\ Gibt die maximal erlaubte Anzahl an Profilen an.
 		\item $\texttt{private static ProfileManager \textbf{manager}}$ \\ Stellt die einzige Instanz dar, die vom ProfileManager gleichzeitig existieren darf.
-		\item $\texttt{private final ProfileEditModel \textbf{PROFILE\_EDIT}}$ \\ Model, das von der Profileeditierung/erstellung verwendet wird. 
+		\item $\texttt{private ProfileEditModel \textbf{profileEdit}}$ \\ Model, das von der Profileeditierung/erstellung verwendet wird. 
 		\item $\texttt{private ProfileModel \textbf{currentProfile}}$ \\ Gibt das momentan im Spiel ausgewählte Profil an.
 		\item $\texttt{private List<ProfileModel> \textbf{profiles}}$ \\ Stellt eine Liste aller im Spiel vorhandenen Profile dar.
 	\end{itemize}
@@ -242,6 +242,20 @@
 			\end{itemize}
 		\end{description}
 		
+		\item $\texttt{public boolean \textbf{changeCurrentName}(String newName)}$ \\ Ersetzt das ausgewählte Profil durch ein Profil mit dem Namen "newName", aber sonst identischen Werten. Beobachter werden nicht über einen Profilwechsel informiert.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{String newName}$ \\ Neuer Namen des Profils
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob die Methode erfolgreich war (d.h. ob es noch kein anderes Profil gibt das ebenfalls newName heißt) 
+			\end{itemize}
+		\end{description}
+		
 		\item $\texttt{public List<String> \textbf{getNames}()}$ \\ Gibt eine Liste aller Profil-Namen zurück.
 		\begin{description}
 			\item[Rückgabe] \hfill \\
@@ -257,15 +271,6 @@
 			\vspace{-.8cm}
 			\begin{itemize}
 				\item Neues Profil. $\texttt{null}$ falls \textbf{MAX\_NUMBER\_OF\_PROFILES} erreicht wurde oder "" als Name schon vorkommt, was nicht passieren sollte.
-			\end{itemize}
-		\end{description}
-		
-		\item $\texttt{public boolean \textbf{changeName}(String old, String new)}$ \\ Ersetzt das Profil mit Namen old durch ein Profil mit dem Namen new, aber sonst identischen Werten und informiert alle Beobachter über diese Änderung.
-		\begin{description}
-			\item[Rückgabe] \hfill \\
-			\vspace{-.8cm}
-			\begin{itemize}
-				\item Gibt zurück, ob die Methode erfolgreich war.
 			\end{itemize}
 		\end{description}
 		

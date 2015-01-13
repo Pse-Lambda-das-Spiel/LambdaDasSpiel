@@ -5,15 +5,15 @@
     <id>UMLClass</id>
     <coordinates>
       <x>190</x>
-      <y>170</y>
-      <w>340</w>
+      <y>200</y>
+      <w>350</w>
       <h>270</h>
     </coordinates>
     <panel_attributes>ProfileManager
 --
 _+MAX_NUMBER_OF_PROFILES: int_
 _-manager: ProfileManager_
--PROFILE_EDIT: ProfileEditModel
+-profileEdit: ProfileEditModel
 -currentProfile: ProfileModel
 -profiles: List&lt;ProfileModel&gt;
 --
@@ -21,9 +21,9 @@ _-manager: ProfileManager_
 _+getManager(): ProfileManager_
 +getCurrentProfile(): ProfileModel
 +setCurrentProfile(name: String): boolean
++changeCurrentName(newName: String): boolean
 +getNames(): List&lt;String&gt;
 +createProfile(): ProfileModel
-+changeName(old: String, new: String): boolean
 +save(name: String)
 +delete(name: String)
 +getProfileEdit(): ProfileEditModel</panel_attributes>
@@ -33,7 +33,7 @@ _+getManager(): ProfileManager_
     <id>Relation</id>
     <coordinates>
       <x>440</x>
-      <y>90</y>
+      <y>120</y>
       <w>270</w>
       <h>100</h>
     </coordinates>
@@ -46,7 +46,7 @@ Observer-&gt;ProfileManagerObserver</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>170</x>
-      <y>50</y>
+      <y>80</y>
       <w>180</w>
       <h>80</h>
     </coordinates>
@@ -55,14 +55,15 @@ ProfileManagerObserver
 --
 --
 +changedProfile()
-+changedNames()</panel_attributes>
++changedProfileList()
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>240</x>
-      <y>120</y>
+      <y>150</y>
       <w>70</w>
       <h>70</h>
     </coordinates>
@@ -74,7 +75,7 @@ ProfileManagerObserver
     <id>UMLClass</id>
     <coordinates>
       <x>380</x>
-      <y>50</y>
+      <y>80</y>
       <w>160</w>
       <h>50</h>
     </coordinates>
