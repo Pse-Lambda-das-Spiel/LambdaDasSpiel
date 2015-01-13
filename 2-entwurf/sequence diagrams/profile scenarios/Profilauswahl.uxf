@@ -4,8 +4,8 @@
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>220</x>
-      <y>30</y>
+      <x>130</x>
+      <y>80</y>
       <w>120</w>
       <h>30</h>
     </coordinates>
@@ -15,8 +15,8 @@
   <element>
     <id>UMLActor</id>
     <coordinates>
-      <x>110</x>
-      <y>30</y>
+      <x>20</x>
+      <y>70</y>
       <w>60</w>
       <h>100</h>
     </coordinates>
@@ -26,10 +26,10 @@
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>130</x>
-      <y>120</y>
+      <x>40</x>
+      <y>160</y>
       <w>20</w>
-      <h>470</h>
+      <h>630</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -37,10 +37,10 @@
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>270</x>
-      <y>130</y>
+      <x>180</x>
+      <y>190</y>
       <w>20</w>
-      <h>400</h>
+      <h>560</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -48,8 +48,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>140</x>
-      <y>110</y>
+      <x>50</x>
+      <y>170</y>
       <w>150</w>
       <h>60</h>
     </coordinates>
@@ -62,19 +62,19 @@ button</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>270</x>
-      <y>50</y>
+      <x>180</x>
+      <y>100</y>
       <w>30</w>
-      <h>100</h>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>370</x>
-      <y>30</y>
+      <x>280</x>
+      <y>240</y>
       <w>120</w>
       <h>30</h>
     </coordinates>
@@ -84,19 +84,19 @@ button</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>410</x>
-      <y>50</y>
+      <x>320</x>
+      <y>260</y>
       <w>30</w>
-      <h>110</h>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>120</y>
+      <x>190</x>
+      <y>270</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -107,8 +107,8 @@ getManager()</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>410</x>
-      <y>140</y>
+      <x>320</x>
+      <y>290</y>
       <w>20</w>
       <h>20</h>
     </coordinates>
@@ -118,8 +118,8 @@ getManager()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>140</y>
+      <x>190</x>
+      <y>290</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -130,8 +130,8 @@ manager</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>160</y>
+      <x>190</x>
+      <y>310</y>
       <w>280</w>
       <h>40</h>
     </coordinates>
@@ -142,8 +142,8 @@ setCurrentProfile("User")</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>510</x>
-      <y>30</y>
+      <x>420</x>
+      <y>240</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
@@ -153,8 +153,8 @@ setCurrentProfile("User")</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>410</x>
-      <y>150</y>
+      <x>450</x>
+      <y>260</y>
       <w>30</w>
       <h>90</h>
     </coordinates>
@@ -162,32 +162,10 @@ setCurrentProfile("User")</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>410</x>
-      <y>210</y>
-      <w>30</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>lt=..</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>540</x>
-      <y>50</y>
-      <w>30</w>
-      <h>150</h>
-    </coordinates>
-    <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>540</x>
-      <y>180</y>
+      <x>450</x>
+      <y>330</y>
       <w>20</w>
       <h>210</h>
     </coordinates>
@@ -197,8 +175,8 @@ setCurrentProfile("User")</panel_attributes>
   <element>
     <id>UMLFrame</id>
     <coordinates>
-      <x>460</x>
-      <y>200</y>
+      <x>370</x>
+      <y>350</y>
       <w>330</w>
       <h>180</h>
     </coordinates>
@@ -208,8 +186,8 @@ setCurrentProfile("User")</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>550</x>
-      <y>220</y>
+      <x>460</x>
+      <y>370</y>
       <w>230</w>
       <h>70</h>
     </coordinates>
@@ -220,8 +198,8 @@ notify(o-&gt;o.changedProfile())</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>550</x>
-      <y>270</y>
+      <x>460</x>
+      <y>420</y>
       <w>20</w>
       <h>60</h>
     </coordinates>
@@ -231,8 +209,8 @@ notify(o-&gt;o.changedProfile())</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>550</x>
-      <y>320</y>
+      <x>460</x>
+      <y>470</y>
       <w>40</w>
       <h>60</h>
     </coordinates>
@@ -242,8 +220,8 @@ notify(o-&gt;o.changedProfile())</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>370</y>
+      <x>190</x>
+      <y>520</y>
       <w>280</w>
       <h>40</h>
     </coordinates>
@@ -254,21 +232,21 @@ notify(o-&gt;o.changedProfile())</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>400</y>
+      <x>190</x>
+      <y>590</y>
       <w>220</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 super.getGame().setScreen(
 super.getGame().mainmenu)</panel_attributes>
-    <additional_attributes>20.0;30.0;10.0;10.0</additional_attributes>
+    <additional_attributes>20.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>280</x>
-      <y>430</y>
+      <x>190</x>
+      <y>630</y>
       <w>20</w>
       <h>60</h>
     </coordinates>
@@ -278,41 +256,8 @@ super.getGame().mainmenu)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>540</x>
-      <y>380</y>
-      <w>30</w>
-      <h>140</h>
-    </coordinates>
-    <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>540</x>
-      <y>490</y>
-      <w>30</w>
-      <h>120</h>
-    </coordinates>
-    <panel_attributes>lt=..</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>270</x>
-      <y>520</y>
-      <w>30</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>270</x>
-      <y>550</y>
+      <x>450</x>
+      <y>530</y>
       <w>30</w>
       <h>60</h>
     </coordinates>
@@ -322,12 +267,34 @@ super.getGame().mainmenu)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>480</y>
+      <x>190</x>
+      <y>680</y>
       <w>40</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;30.0;20.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>80</x>
+      <y>230</y>
+      <w>640</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>selectProfile</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>740</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=..</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
   </element>
 </diagram>
