@@ -74,7 +74,7 @@
 
 \subsection{\texttt{package lambda.model.lambdaterm}}
 
-\subsubsection{\normalfont \texttt{public abstract class \textbf{LambdaTerm}}}
+\subsubsection{\normalfont \texttt{public abstract class \textbf{LambdaTerm} }}
 
 \begin{description}
 \item[Beschreibung] \hfill \\ Repräsentiert einen Term im Lambda-Kalkül bzw. ein Knoten in der Baumstruktur eines Lambda-Terms.
@@ -1811,6 +1811,10 @@
 	\end{itemize}
 \end{description}
 
+\subsection{\texttt{package lambda.model.achievements}}
+% content of the package
+\input{./sections/micro_design_subsections/lambda.model.achievements.tex}
+
 \subsection{\texttt{package lambda.viewcontroller.lambdaterm}}
 
 \subsubsection{\normalfont \texttt{public class \textbf{LambdaTermViewController} extends scene2d.Group implements LambdaTermObserver}}
@@ -2371,3 +2375,7 @@
 		\item $\texttt{private void \textbf{checkAlphaConversion}()}$ \\ Überprüft, ob eine Alpha-Konversion notwendig ist, falls dies noch nicht getan wurde, und führt diese wenn nötig aus. Entfernt danach das Argument der Applikation aus dem LambdaTerm.
 	\end{itemize}
 \end{description}
+
+\subsection{\texttt{package lambda.viewcontroller.achievements}}
+% content of the package
+\input{./sections/micro_design_subsections/lambda.viewcontroller.achievements.tex}

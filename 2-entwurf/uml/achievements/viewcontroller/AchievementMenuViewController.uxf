@@ -7,17 +7,19 @@
       <x>340</x>
       <y>100</y>
       <w>380</w>
-      <h>250</h>
+      <h>260</h>
     </coordinates>
     <panel_attributes>AchievementMenuViewController
 --
 -renderAchievementsMap: Map&lt;int, String&gt;
--achievmentManager: AchievementManager
--stage: scene2d.stage
+-achievementManager: AchievementManager
+-stage: scene2d.Stage
+-inputProcessor: InputMultiplexer
 --
-+AchievmentMenuViewController()
-+changedLockedStatus(id: int)
++AchievementMenuViewController()
++changedLockedState(id: int)
 +update(index: int)
++getAchievementManager(): AchievementManager
 +dispose()
 +show()
 +hide()
@@ -39,7 +41,7 @@
 AchievementModelObserver
 --
 --
-+changedLockedStatus(id: int)</panel_attributes>
++changedLockedState(id: int)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

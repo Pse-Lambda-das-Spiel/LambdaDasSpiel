@@ -6,36 +6,23 @@
     <coordinates>
       <x>300</x>
       <y>30</y>
-      <w>670</w>
-      <h>220</h>
+      <w>470</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>AchievementManager
 --
--achievements: Map&lt;int, AchievementModel&gt;
 -unlockedAchievements: Map&lt;int, AchievementModel&gt;
 -lockedAchievements: Map&lt;int, Achievement&gt;
 --
 +AchievementManager()
 +initializeAchievements()
-+checkAchievements(statistic: StatisticModel)
-+getAchievements(): Map&lt;int, Achievement&gt;
++checkUnlockedAchievements(statistic: StatisticModel)
 +getUnlockedAchievements: Map&lt;int, AchievementsModel&gt;
 +getLockedAchievements: Map&lt;int, Achievement&gt;
 +addAchievement(achievement: AchievementModel): boolean
-+removeAchievement(achievement: AchievementModel): boolean</panel_attributes>
++moveToUnlockedAchievements(id: in): boolean
++moveToLockedAchievements(id: int): boolean</panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>130</x>
-      <y>30</y>
-      <w>190</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-m1=0..n</panel_attributes>
-    <additional_attributes>10.0;10.0;170.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLInterface</id>
@@ -47,5 +34,16 @@ m1=0..n</panel_attributes>
     </coordinates>
     <panel_attributes>AchievementModel</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>130</x>
+      <y>30</y>
+      <w>190</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>170.0;10.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
