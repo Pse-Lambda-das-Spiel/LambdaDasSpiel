@@ -1,0 +1,61 @@
+\subsection{\texttt{package lambda.viewcontroller.settings}}
+
+\subsubsection{\normalfont \texttt{public class \textbf{SettingsViewController} extends Controller implements ProfileManagerObserver, SettingsModelObserver}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Kontrolliert und regelt die Darstellung der (Ton-)Einstellungen.
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private SettingsModel \textbf{settings}}$ \\ SettingsModel das aktuell verwendet wird. Die \textbf{SettingsViewController}-Instanz ist immer ihr Beobachter/Observer.
+		\item $\texttt{private scene2d.Stage \textbf{stage}}$ \\ 2D-Scene-Graph, der die Hierarchie der gesamten grafischen Komponenten(Akteure mit Typ $\texttt{scene2d.Actor}$ des Screens (der aktuell angezeigte Bildschirm) enthält. 
+		\item $\texttt{private InputMultiplexer \textbf{inputProcessor}}$ \\ Delegiert die Eingabe-Ereignisse an die geordnete Liste der InputProcessor, die die Ereignisse empfangen und weiterverarbeiten.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{SettingsViewController}()}$ \\ Instanziiert ein Objekt dieser Klasse und fügt sich selbst dem ProfileManager als Beobachter/Observer hinzu.
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}		
+		\item $\texttt{public void \textbf{changedProfile}()}$ \\ Aktualisiert nach einem Profilwechsel das SettingsModel, Sprache der Textausgabe und die Regler auf dem Bildschirm.
+				
+		\item $\texttt{public void \textbf{changedMusicOn}()}$ \\ Stellt die Musik im Spiel entweder an oder aus.
+				
+		\item $\texttt{public void \textbf{changedMusicVolume}()}$ \\ Aktualisiert die Lautstärke mit der die Musik abgespielt wird (falls diese an ist).
+		
+		\item $\texttt{public void \textbf{changedSoundVolume}()}$ \\ Aktualisiert die Lautstärke sonstiger Geräusche im Spiel.
+				
+		\item $\texttt{public void \textbf{dispose}()}$ \\ Wird aufgerufen, wenn der Screen all seine Ressourcen freigeben soll.
+		
+		\item $\texttt{public void \textbf{show}()}$ \\ Wird automatisch aufgerufen, wenn der Screen als aktueller Screen für das Spiel gesetzt wird.
+	
+		\item $\texttt{public void \textbf{hide}()}$ \\ Wird automatisch aufgerufen, wenn der Screen nicht mehr der aktuelle Screen des Spiels ist.
+	
+		\item $\texttt{public void \textbf{resume}()}$ \\ Wird automatisch aufgerufen, wenn die Applikation nach einem pausierten Zustand fortgesetzt wird.	
+	
+		\item $\texttt{public void \textbf{pause}()}$ \\ Wird automatisch aufgerufen, wenn die Applikation pausiert wird.
+	
+		\item $\texttt{public void \textbf{render}(float delta)}$ \\ Wird automatisch zum Zeichnen und Darstellen des Screens aufgerufen.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{float delta}$ \\ Die Zeit in Sekunden seit dem letzten Aufruf dieser Methode.
+			\end{itemize}
+		\end{description}	
+	
+		\item $\texttt{public void \textbf{resize}(int width, int height)}$ \\ Wird automatisch aufgerufen, wenn sich die Bildschirmgröße geändert hat.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int width}$ \\ Die neue Breite in Pixel.
+				\item $\texttt{int height}$ \\ Die neue Höhe in Pixel.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}

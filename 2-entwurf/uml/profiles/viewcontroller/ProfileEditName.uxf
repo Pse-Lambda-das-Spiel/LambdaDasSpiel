@@ -7,10 +7,11 @@
       <x>270</x>
       <y>220</y>
       <w>250</w>
-      <h>230</h>
+      <h>240</h>
     </coordinates>
     <panel_attributes>ProfileEditName
 --
+-profile: ProfileModel
 -stage: scene2d.Stage
 -inputProcessor: InputMultiplexer
 --
