@@ -2159,7 +2159,7 @@
 \subsubsection{\normalfont \texttt{public class \textbf{LevelModel}}}
 
 \begin{description}
-\item[Beschreibung] \hfill \\ Repräsentiert einen Shop, der es dem Benutzer ermöglicht seine erspielten Münzen gegen Belohnungen einzutauschen.
+\item[Beschreibung] \hfill \\ Repräsentiert ein Level mit allen erforderlichen Daten.
 
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
@@ -2170,7 +2170,7 @@
 		\item $\texttt{private LambdaRoot \textbf{hint}}$ \\ Enthält einen Lösungshinweis für ein Levels.
 		\item $\texttt{private List<TutorialMessage> \textbf{tutorials}}$ \\ Enthält alle Tutorials, die für das Level benötigt werden.
 		\item $\texttt{private List<ReductionStrategy> \textbf{availableRedStrats}}$ \\ Enthält alle Reduktionsstrategien, welche man für das Level verwenden darf.
-		\item $\texttt{private List<ElementType> \textbf{usableElements}}$ \\ Enthält alle Elementtypen, die im Level in derElementen-Leiste im Editormodus für das Level verfügbar sind.
+		\item $\texttt{private List<ElementType> \textbf{usableElements}}$ \\ Enthält alle Elementtypen, die im Level in der Elementen-Leiste im Editormodus für das Level verfügbar sind.
 		\item $\texttt{private int \textbf{difficulty}}$ \\ Beschreibt den Schwierigkeitsgrad des Levels aufsteigend von 1.
 		\item $\texttt{private Assets \textbf{assets}}$ \\ Referenz zu den Assets.
 		\end{itemize}
@@ -2276,14 +2276,14 @@
 \subsubsection{\normalfont \texttt{public class \textbf{LevelContext}}}
 
 \begin{description}
-\item[Beschreibung] \hfill \\ Repräsentiert einen Shop, der es dem Benutzer ermöglicht seine erspielten Münzen gegen Belohnungen einzutauschen.
+\item[Beschreibung] \hfill \\ Repräsentiert einen vollständigen Level-Kontext mit allen Daten vom LedelModel, sowie weiteren Angaben zur Hintergrundmusik, Hintergrundbild und der ElementUIContextFamily.
 
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
 		\item $\texttt{private LevelModel \textbf{levelModel}}$ \\ LevelModel, welches alle weiteren Daten enthält, die für den LevelContext ausgelesen werden müssen.
-		\item $\texttt{private String \textbf{music}}$ \\ Musik, welche während des Levels im Editormodus im Hintergrund abläuft.
-		\item $\texttt{private String \textbf{image}}$ \\ Bild, welches während des Levels im Editormodus im Hintergrund angezeigt wird.
+		\item $\texttt{private String \textbf{music}}$ \\ Musik, welche während des Levels im Editor- und Reduktionsmodus im Hintergrund abläuft.
+		\item $\texttt{private String \textbf{image}}$ \\ Bild, welches während des Levels im Editor- und Reduktionsmodus im Hintergrund angezeigt wird.
 		\item $\texttt{private List<String> \textbf{tutorials}}$ \\ Liste, welche alle Bezeichner für Anleitungen enthält, welche für das Level abgespielt werden müssen.
 		\item $\texttt{private ElementUIContextFamily \textbf{elementUIContextFamily}}$ \\ Familie von Sprites, welche im Editormodus die Spielelemente für die Lambda-Abstraktion, die Lambda-Variable und die Lambda-Klammerung darstellen.
 		\end{itemize}
@@ -2356,7 +2356,7 @@
 \subsubsection{\normalfont \texttt{public class \textbf{ShopViewController} extends Controller}}
 
 \begin{description}
-\item[Beschreibung] \hfill \\ Repräsentiert einen Shop, der es dem Benutzer ermöglicht seine erspielten Münzen gegen Belohnungen einzutauschen.
+\item[Beschreibung] \hfill \\ Kontrolliert und regelt die Darstellung des Shopmenüs und damit der einzelnen erwerbbaren Items und die Benutzerinteraktion mit dem Menü.
 
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
@@ -2396,7 +2396,7 @@
 \subsubsection{\normalfont \texttt{public class \textbf{ShopItemViewController} extends Controller}}
 
 \begin{description}
-\item[Beschreibung] \hfill \\ 
+\item[Beschreibung] \hfill \\ Kontrolliert und regelt die Darstellung des Items innerhalb des Shops und damit die Benutzerinteraktion mit dem Item.
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}	
@@ -2442,7 +2442,7 @@
 	\subsubsection{\normalfont \texttt{public class \textbf{LevelSelectionViewController} extends Controller}}
 
 \begin{description}
-\item[Beschreibung] \hfill \\ 
+\item[Beschreibung] \hfill \\ Kontrolliert und regelt die Darstellung des Levelauswahlmenüs und damit der einzelnen Level und die Benutzerinteraktion mit dem Menü.
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}	
@@ -2476,8 +2476,14 @@
 
 
 \subsubsection{\normalfont \texttt{public class \textbf{ElementUIContext}}}
+<<<<<<< HEAD
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert den grafischen Kontext eines Spielelements auf dem Spielfeld.
+
+=======
 
 \begin{description}
+>>>>>>> FETCH_HEAD
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
@@ -2492,7 +2498,7 @@
 	\subsubsection{\normalfont \texttt{public class \textbf{AbstractionUIContext} extends ElementUIContext}}
 
 \begin{description}
-\item[Beschreibung] \hfill \\ 
+\item[Beschreibung] \hfill \\ Beschreibt die Lambda-Abstraktion, welche auf dem Spielfeld als Lamm mit Zauberstab dargestellt wird.
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}	
@@ -2534,7 +2540,7 @@
 		\subsubsection{\normalfont \texttt{public class \textbf{VariableUIContext} extends ElementUIContext}}
 
 \begin{description}
-\item[Beschreibung] \hfill \\ 
+\item[Beschreibung] \hfill \\ Beschreibt die Lambda-Variable, welche auf dem Spielfeld als Edelstein dargestellt wird.
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}	
@@ -2576,7 +2582,7 @@
 		\subsubsection{\normalfont \texttt{public class \textbf{ParanthesisUIContext} extends ElementUIContext}}
 
 \begin{description}
-\item[Beschreibung] \hfill \\ 
+\item[Beschreibung] \hfill \\ Beschreibt die Lambda-Klammerung, welche auf dem Spielfeld als Lamm ohne Zauberstab dargestellt wird.
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}	
@@ -2618,7 +2624,7 @@
 	\subsubsection{\normalfont \texttt{public class \textbf{ElementUIContextFamily}}}
 
 \begin{description}
-\item[Beschreibung] \hfill \\ 
+\item[Beschreibung] \hfill \\ Repräsentiert eine Familie von Spielelementen. 
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}	
@@ -2670,7 +2676,7 @@
 \subsubsection{\normalfont \texttt{public class \textbf{TutorialMessage}}}
 
 \begin{description}
-\item[Beschreibung] \hfill \\ 
+\item[Beschreibung] \hfill \\ Repräsentiert einen einzigen Anleitungsdialog, um ein Spielelement oder einen Button genau zu erläutern.
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}	
@@ -2738,3 +2744,128 @@
 
 		
 	\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{AssetModel}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Enthält alle erfordelichen Daten, welche für das gesamte Spiel benötigt werden. Die Daten werden durch eine JSON-Datei geladen.
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private Map<String, Sound> \textbf{sounds}}$ \\ Map, welche alle Sounds enthält, die für das Spiel benötigt werden. Jeder Sound hat einen eindeutigen Bezeichner, welcher als Key dient.
+		\item $\texttt{private Map<String, Music> \textbf{music}}$ \\ Map, welche jedes Musikstück enthält, die für das Spiel benötigt werden. Jedes Musikstück hat einen eindeutigen Bezeichner, welcher als Key dient.
+		\item $\texttt{private Map<int, DifficultySettings> \textbf{difficultySettings}}$ \\ Map, welche alle Einstellungen für einen Schwierigkeitsgrad eines Levels enthält. Jede Einstellung für einen Schwierigkeitsgrad hat einen eindeutigen Indentfizierer, welcher als Key dient.
+		\item $\texttt{private Map<String, Image> \textbf{images}}$ \\ Map, welche alle Bilder enthält, die für das Spiel benötigt werden. Jedes Bild hat einen eindeutigen Bezeichner, welcher als Key dient.
+		\item $\texttt{private Map<String, TutorialMessage> \textbf{tutorials}}$ \\ Map, welche alle Anleitungen enthält, die für alle Levels benötigt werden. Jedes Tutorial hat einen eindeutigen Bezeichner, welcher als Key dient.
+		\item $\texttt{private Map<int, LevelModel> \textbf{levels}}$ \\ Map, welche alle Level-Modelle enthält, die für das Spiel benötigt werden. Jedes Level-Modell hat einen eindeutigen Identifizierer, welcher als Key dient.
+
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{AssetModel}()}$ \\ Instanziert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+		\item $\texttt{public Map<String, Sound> \textbf{sounds}}$ \\ 
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{sounds}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public Map<String, Music> \textbf{music}}$ \\ 
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{music}$ zurück.
+			\end{itemize}
+			\end{description}
+
+		\item $\texttt{public Map<int, DifficultySettings> \textbf{difficultySettings}}$ \\ 
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{difficultySettings}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public Map<String, Image> \textbf{images}}$\\ 
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{imagest}$ zurück.
+			\end{itemize}
+			\end{description}
+
+		\item $\texttt{public Map<String, TutorialMessage> \textbf{tutorials}}$ \\ 
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{tutorials}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public Map<int, LevelModel> \textbf{levels}}$ \\ 
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{levels}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+	\end{description}
+			
+\subsubsection{\normalfont \texttt{public class \textbf{DifficultySettings}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Enthält die erforderlichen Bezeichner, um die gewünschten Daten für einen bestimmten Schwierigkeitsgrad aus dem AssetModel zu laden.
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private String \textbf{music}}$ \\ Bezeichner, welcher benutzt wird, um die erforderliche Musik für einen bestimmten Schwierigkeitsgrad aus dem AssetModel zu laden.
+		\item $\texttt{private String \textbf{bgImage}}$ \\ Bezeichner, welcher benutzt wird, um das erforderliche Hintergrundbild für einen bestimmten Schwierigkeitsgrad aus dem AssetModel zu laden.
+
+
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{DifficultySettings}()}$ \\ Instanziert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+		\item $\texttt{public String \textbf{music}}$ \\ Gibt den Bezeichner zurück, mit welchem man die Musik für diesen Schwierigkeitsgrad aus dem AssetModel lädt.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{music}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public String \textbf{Bigamie}}$ \\ Gibt den Bezeichner zurück, mit welchem man das Hintergrundbild für diesen Schwierigkeitsgrad aus dem AssetModel lädt.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{bgImage}$ zurück.
+			\end{itemize}
+			\end{description}
+
+		
+	\end{description}
+
