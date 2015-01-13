@@ -7,21 +7,18 @@
       <x>300</x>
       <y>30</y>
       <w>470</w>
-      <h>200</h>
+      <h>150</h>
     </coordinates>
     <panel_attributes>AchievementManager
 --
--unlockedAchievements: Map&lt;int, AchievementModel&gt;
--lockedAchievements: Map&lt;int, Achievement&gt;
+-achievements: Map&lt;int, AchievementModel&gt;
 --
 +AchievementManager()
 +initializeAchievements()
-+checkUnlockedAchievements(statistic: StatisticModel)
-+getUnlockedAchievements: Map&lt;int, AchievementsModel&gt;
-+getLockedAchievements: Map&lt;int, Achievement&gt;
-+addAchievement(achievement: AchievementModel): boolean
-+moveToUnlockedAchievements(id: in): boolean
-+moveToLockedAchievements(id: int): boolean</panel_attributes>
++checkAllAchievements(statistic: StatisticModel)
++getAchievements: Map&lt;int, AchievementsModel&gt;
++addAchievement(achievement: AchievementModel)
++removeAchievement(id: int)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

@@ -7,7 +7,7 @@
       <x>380</x>
       <y>10</y>
       <w>560</w>
-      <h>440</h>
+      <h>430</h>
     </coordinates>
     <panel_attributes>/AchievementModel/
 --
@@ -21,7 +21,7 @@
 --
 +AchievementModel()
 /+initialize()/
-/+meetRequirements(statistic: StatisticModel): boolean/
+/+checkRequirements(statistic: StatisticModel)/
 +getId(): int
 +getIndex(): int
 +getDescription(): String
@@ -46,32 +46,34 @@
     <id>UMLClass</id>
     <coordinates>
       <x>980</x>
-      <y>280</y>
+      <y>260</y>
       <w>410</w>
-      <h>90</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>LevelAchievementModel
 --
+-reqLevelCompleted: int
 --
-+LevelAchievementModel()
++LevelAchievementModel(reqLevelCompleted: int)
 +initialize()
-+meetRequirements(statistic: StatisticModel): boolean</panel_attributes>
++checkRequirements(statistic: StatisticModel)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>980</x>
-      <y>170</y>
+      <y>140</y>
       <w>400</w>
-      <h>80</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>TimeAchievementModel
 --
+-reqTimePlayed: int
 --
-+TimeAchievementModel()
++TimeAchievementModel(reqTimePlayed: int)
 +initialize()
-+meetRequirements(statistic: StatisticModel): boolean
++checkRequirements(statistic: StatisticModel)
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -79,7 +81,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>240</x>
-      <y>710</y>
+      <y>700</y>
       <w>300</w>
       <h>60</h>
     </coordinates>
@@ -94,80 +96,85 @@
     <id>UMLClass</id>
     <coordinates>
       <x>1090</x>
-      <y>440</y>
+      <y>400</y>
       <w>400</w>
-      <h>90</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>LambsPlacedAchievementModel
 --
+-reqLambsPlaced: int
 --
-+LambPlacedAchievementModel()
++LambPlacedAchievementModel(reqLambsPlaced: int)
 +initialize()
-+meetRequirements(statistic: StatisticModel): boolean</panel_attributes>
++checkRequirements(statistic: StatisticModel)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>650</x>
-      <y>480</y>
-      <w>410</w>
-      <h>90</h>
+      <y>460</y>
+      <w>340</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>LambsEnchantedAchievementModel
 --
+-reqLambsEnchanted: int
 --
-+LambEnchantedAchievementModel()
++LambEnchantedAchievementModel(reqLambsEnchanted: int)
 +initialize()
-+meetRequirements(statistic: StatisticModel): boolean</panel_attributes>
++checkRequirements(statistic: StatisticModel)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>90</x>
-      <y>600</y>
-      <w>400</w>
-      <h>90</h>
+      <x>40</x>
+      <y>580</y>
+      <w>450</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>GemsEnchantedAchievementModel
 --
+-reqGemsEnchanted: int
 --
-+GemEnchantedAchievementModel()
++GemsEnchantedAchievementModel(reqGemsEnchanted: int)
 +initialize()
-+meetRequirements(statistic: StatisticModel): boolean</panel_attributes>
++checkRequirements(statistic: StatisticModel)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>50</x>
-      <y>810</y>
+      <y>790</y>
       <w>410</w>
-      <h>90</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>GemsEnchantedPerLevelAchievementModel
 --
+-reqGemsEnchantedPerLevel: int
 --
-+GemEnchantedPerLevelAchievementModel()
++GemsEnchantedPerLevelAchievementModel(reqGemsEnchantedperLevel: int)
 +initialize()
-+meetRequirements(statistic: StatisticModel): boolean</panel_attributes>
++checkRequirements(statistic: StatisticModel)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>350</x>
-      <y>910</y>
-      <w>400</w>
-      <h>90</h>
+      <y>920</y>
+      <w>580</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>LambsEnchantedPerLevelAchievementModel
 --
+-reqLambsEnchantedPerLevel: int
 --
-+LambEnchantedPerLevelAchievementModel()
++LambsEnchantedPerLevelAchievementModel(reqLambsEnchantedPerLevel: int)
 +initialize()
-+meetRequirements(statistic: StatisticModel): boolean
++checkRequirements(statistic: StatisticModel)
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -175,48 +182,51 @@
     <id>UMLClass</id>
     <coordinates>
       <x>640</x>
-      <y>700</y>
-      <w>410</w>
-      <h>90</h>
+      <y>690</y>
+      <w>510</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>GemsPlacedPerLevelAchievementModel
 --
+-reqGemsPlacedPerLevel: int
 --
-+GemPlacedPerLevelAchievementModel()
++GemsPlacedPerLevelAchievementModel(reqGemsPlacedperLevel: int)
 +initialize()
-+meetRequirements(statistic: StatisticModel): boolean</panel_attributes>
++checkRequirements(statistic: StatisticModel)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>510</x>
-      <y>810</y>
-      <w>410</w>
-      <h>90</h>
+      <y>800</y>
+      <w>520</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>LambsPlacedPerLevelAchievementModel
 --
+-reqLambsPlacedPerLevel: int
 --
-+LambPlacedPerLevelAchievementModel()
++LambsPlacedPerLevelAchievementModel(reqLambsPlacedPerLevel: int)
 +initialize()
-+meetRequirements(statistic: StatisticModel): boolean</panel_attributes>
++checkRequirements(statistic: StatisticModel)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>580</x>
-      <y>580</y>
-      <w>410</w>
-      <h>90</h>
+      <y>570</y>
+      <w>470</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>GemsPlacedAchievementModel
 --
+-reqPlacedGems: int
 --
-+GemPlacedAchievementModel()
++GemsPlacedAchievementModel(reqPlacedGems: int)
 +initialize()
-+meetRequirements(statistic: StatisticModel): boolean</panel_attributes>
++checkRequirements(statistic: StatisticModel)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -278,16 +288,16 @@ Observer-&gt;AchievementModelObserver</panel_attributes>
       <x>930</x>
       <y>110</y>
       <w>280</w>
-      <h>80</h>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;260.0;10.0;260.0;60.0</additional_attributes>
+    <additional_attributes>10.0;10.0;260.0;10.0;260.0;30.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>930</x>
-      <y>260</y>
+      <y>240</y>
       <w>280</w>
       <h>40</h>
     </coordinates>
@@ -298,12 +308,12 @@ Observer-&gt;AchievementModelObserver</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>670</x>
-      <y>440</y>
+      <y>430</y>
       <w>30</w>
-      <h>60</h>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -311,16 +321,16 @@ Observer-&gt;AchievementModelObserver</panel_attributes>
       <x>930</x>
       <y>370</y>
       <w>260</w>
-      <h>90</h>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;240.0;10.0;240.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;240.0;10.0;240.0;30.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>610</x>
-      <y>440</y>
+      <y>430</y>
       <w>30</w>
       <h>160</h>
     </coordinates>
@@ -331,7 +341,7 @@ Observer-&gt;AchievementModelObserver</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>490</x>
-      <y>440</y>
+      <y>430</y>
       <w>30</w>
       <h>290</h>
     </coordinates>
@@ -342,18 +352,18 @@ Observer-&gt;AchievementModelObserver</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>410</x>
-      <y>760</y>
+      <y>750</y>
       <w>30</w>
-      <h>70</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>510</x>
-      <y>760</y>
+      <y>750</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -364,34 +374,35 @@ Observer-&gt;AchievementModelObserver</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>460</x>
-      <y>760</y>
+      <y>750</y>
       <w>30</w>
-      <h>170</h>
+      <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>490</y>
+      <y>470</y>
       <w>410</w>
-      <h>80</h>
+      <h>100</h>
     </coordinates>
-    <panel_attributes>HintAchievementModel
+    <panel_attributes>HintsAchievementModel
 --
+-reqHintsNotUsed: int
 --
-+HintAchievementModel()
++HintAchievementModel(reqHintsNotUsed: int)
 +initialize()
-+meetRequirements(statistic: StatisticModel): boolean</panel_attributes>
++checkRequirements(statistic: StatisticModel)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>530</x>
-      <y>720</y>
+      <y>710</y>
       <w>130</w>
       <h>30</h>
     </coordinates>
@@ -401,23 +412,23 @@ Observer-&gt;AchievementModelObserver</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>450</x>
-      <y>440</y>
-      <w>30</w>
-      <h>180</h>
+      <x>400</x>
+      <y>430</y>
+      <w>80</w>
+      <h>170</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
+    <additional_attributes>60.0;10.0;10.0;150.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>390</x>
-      <y>440</y>
+      <y>430</y>
       <w>30</w>
-      <h>70</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
   </element>
 </diagram>
