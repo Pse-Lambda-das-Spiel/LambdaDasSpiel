@@ -6,19 +6,23 @@
     <coordinates>
       <x>340</x>
       <y>230</y>
-      <w>210</w>
-      <h>180</h>
+      <w>310</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>ShopItemModel
 --
 -ID: String
--price: int
+-PRICE: int
 -shop: ShopModel
+-shopItemType: ShopItemTypeModel
 -purchased: boolean
 --
 +ShopItemModel()
 +getID(): int
-+getPrice(): int
++getPRICE(): int
++getShop(): ShopModel
++getShopItemType(): ShopItemTypeModel
++getPurchased(): boolean
 +buy()
 +activate()
 </panel_attributes>
@@ -73,103 +77,34 @@
     <id>Relation</id>
     <coordinates>
       <x>200</x>
-      <y>400</y>
+      <y>460</y>
       <w>170</w>
-      <h>160</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>150.0;10.0;10.0;140.0</additional_attributes>
+    <additional_attributes>150.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>530</x>
-      <y>400</y>
+      <y>460</y>
       <w>140</w>
-      <h>160</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;120.0;140.0</additional_attributes>
+    <additional_attributes>10.0;10.0;120.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>430</x>
-      <y>400</y>
+      <y>460</y>
       <w>30</w>
-      <h>160</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLInterface</id>
-    <coordinates>
-      <x>410</x>
-      <y>360</y>
-      <w>20</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>420</x>
-      <y>250</y>
-      <w>170</w>
-      <h>150</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;130.0;150.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>570</x>
-      <y>230</y>
-      <w>510</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>/prüft ob genug coins
-/setzt im shopmodel von Not:purchased auf purchased</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLInterface</id>
-    <coordinates>
-      <x>420</x>
-      <y>380</y>
-      <w>20</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>430</x>
-      <y>340</y>
-      <w>160</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;60.0;140.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>570</x>
-      <y>320</y>
-      <w>600</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>prüft, ob purchased
-setzt im shopmodel von purchased auf acitvated
-</panel_attributes>
-    <additional_attributes/>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>UMLInterface</id>
@@ -192,22 +127,6 @@ setzt im shopmodel von purchased auf acitvated
     </coordinates>
     <panel_attributes/>
     <additional_attributes>130.0;10.0;10.0;170.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>30</x>
-      <y>160</y>
-      <w>210</w>
-      <h>110</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
-ItemStatus
---
-   PURCHASED
-   ACTIVATED
-   NOT_PURCHASED</panel_attributes>
-    <additional_attributes/>
   </element>
   <element>
     <id>UMLInterface</id>

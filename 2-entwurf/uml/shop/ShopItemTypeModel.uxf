@@ -7,7 +7,7 @@
       <x>30</x>
       <y>40</y>
       <w>370</w>
-      <h>170</h>
+      <h>180</h>
     </coordinates>
     <panel_attributes>template=T: Class extends ShopItemModel
 ShopItemTypeModel
@@ -19,7 +19,8 @@ ShopItemTypeModel
 +ShopItemTypeModel&lt;T&gt;
 +getTypeName(): String
 +getItems(): List&lt;T&gt;
-+getActivatedItem(): T</panel_attributes>
++getActivatedItem(): T
++setActivatedItem(item: ShopItemModel)</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
