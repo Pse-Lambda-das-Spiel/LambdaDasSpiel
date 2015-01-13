@@ -42,8 +42,8 @@ LambdaTermObserver
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>290</x>
-      <y>500</y>
+      <x>0</x>
+      <y>740</y>
       <w>390</w>
       <h>180</h>
     </coordinates>
@@ -64,7 +64,7 @@ LambdaTermObserver
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>690</x>
+      <x>610</x>
       <y>500</y>
       <w>430</w>
       <h>120</h>
@@ -82,8 +82,8 @@ LambdaTermObserver
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>480</x>
-      <y>760</y>
+      <x>400</x>
+      <y>740</y>
       <w>460</w>
       <h>140</h>
     </coordinates>
@@ -101,8 +101,8 @@ LambdaTermObserver
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>950</x>
-      <y>760</y>
+      <x>870</x>
+      <y>740</y>
       <w>450</w>
       <h>90</h>
     </coordinates>
@@ -130,7 +130,18 @@ Observer -&gt; LambdaTermObserver</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>500</x>
+      <x>340</x>
+      <y>420</y>
+      <w>190</w>
+      <h>340</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;320.0;10.0;150.0;170.0;150.0;170.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>670</x>
       <y>420</y>
       <w>30</w>
       <h>100</h>
@@ -141,35 +152,24 @@ Observer -&gt; LambdaTermObserver</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
-      <y>420</y>
-      <w>210</w>
-      <h>100</h>
+      <x>690</x>
+      <y>610</y>
+      <w>30</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;</panel_attributes>
-    <additional_attributes>190.0;80.0;190.0;40.0;10.0;40.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>770</x>
+      <x>930</x>
       <y>610</y>
       <w>30</w>
-      <h>170</h>
+      <h>150</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;150.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1010</x>
-      <y>610</y>
-      <w>30</w>
-      <h>170</h>
-    </coordinates>
-    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;150.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -189,40 +189,6 @@ LambdaTermVisitor
 +visit(node: LambdaAbstraction)
 +visit(node: LambdaVariable)
 +getResult(): T</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>530</x>
-      <y>700</y>
-      <w>170</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>visitor.visit(this);
-return visitor.getResult();</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>790</x>
-      <y>310</y>
-      <w>80</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;40.0;60.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>850</x>
-      <y>310</y>
-      <w>190</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>parent.notifyRoot(notifier);</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -248,42 +214,6 @@ return visitor.getResult();</panel_attributes>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
     <additional_attributes>10.0;20.0;90.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>790</x>
-      <y>840</y>
-      <w>90</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;10.0;70.0;70.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>610</x>
-      <y>910</y>
-      <w>390</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>if (this.inside != inside) {
-    notify((observer) -&gt; observer.replaceNode(inside, result));
-    this.inside = inside;
-}</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>570</x>
-      <y>580</y>
-      <w>90</w>
-      <h>140</h>
-    </coordinates>
-    <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;10.0;70.0;120.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -314,50 +244,6 @@ return visitor.getResult();</panel_attributes>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>890</x>
-      <y>160</y>
-      <w>110</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>notify(notifier);</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>820</x>
-      <y>110</y>
-      <w>90</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;10.0;70.0;60.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>570</x>
-      <y>50</y>
-      <w>340</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;10.0;320.0;40.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>890</x>
-      <y>70</y>
-      <w>170</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>LambdaTerm(null, true);</panel_attributes>
-    <additional_attributes/>
   </element>
   <element>
     <id>UMLInterface</id>
