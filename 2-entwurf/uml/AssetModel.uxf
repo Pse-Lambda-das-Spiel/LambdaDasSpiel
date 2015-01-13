@@ -13,7 +13,7 @@
 --
 -sounds: Map&lt;String, Sound&gt;
 -music: Map&lt;Strings, Music&gt;
--difficulty: Map&lt;int, DifficultySettings&gt;
+-difficultySettings: Map&lt;int, DifficultySettings&gt;
 -images: Map&lt;String, Image&gt;
 -tutorials: Map&lt;String, TutorialMessage&gt;
 -levels: Map&lt;int, LevelModel&gt;
@@ -26,40 +26,5 @@
 +getTutorials(): Map&lt;String, TutorialMessage&gt;
 +getevels(): Map&lt;int, LevelModel&gt;</panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>370</x>
-      <y>80</y>
-      <w>140</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes> //bgImages
- //buttons
- //avatar</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLInterface</id>
-    <coordinates>
-      <x>230</x>
-      <y>80</y>
-      <w>20</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>240</x>
-      <y>80</y>
-      <w>150</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;20.0;130.0;30.0</additional_attributes>
   </element>
 </diagram>

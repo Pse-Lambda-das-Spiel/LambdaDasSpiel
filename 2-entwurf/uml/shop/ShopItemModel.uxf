@@ -110,28 +110,6 @@
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>540</x>
-      <y>50</y>
-      <w>60</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>Actor</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>420</x>
-      <y>60</y>
-      <w>160</w>
-      <h>190</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>140.0;10.0;10.0;170.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLInterface</id>
-    <coordinates>
       <x>620</x>
       <y>0</y>
       <w>180</w>
@@ -167,6 +145,28 @@ ShopItemModelObserver
 --
 +purchasedChanged(purchased: boolean)
 +activatedChanged(activated: boolean)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>420</x>
+      <y>60</y>
+      <w>160</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>140.0;10.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>540</x>
+      <y>50</y>
+      <w>60</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Actor</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

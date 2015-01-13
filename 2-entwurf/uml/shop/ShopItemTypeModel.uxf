@@ -6,7 +6,7 @@
     <coordinates>
       <x>30</x>
       <y>40</y>
-      <w>370</w>
+      <w>410</w>
       <h>180</h>
     </coordinates>
     <panel_attributes>template=T: Class extends ShopItemModel
