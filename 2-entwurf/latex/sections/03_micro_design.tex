@@ -2456,7 +2456,7 @@
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{private String \textbf{ID}}$ \\ Gibt den eindeutigen Bezeichner des Items an.
+		\item $\texttt{private final String \textbf{ID}}$ \\ Gibt den eindeutigen Bezeichner des Items an.
 		\item $\texttt{private int \textbf{price}}$ \\ Gibt an für wie viele Münzen dieses Item erworben werden kann.
 		\item $\texttt{private ShopModel \textbf{shop}}$ \\ Hält die Referenz auf das ShopModel.
 		\item $\texttt{private ShopItemTypeModel \textbf{shopItemType}}$ \\ 	Hält eine Referenz auf ein ShopItemTypeModel, um das aktivierte Item zu setzen.
@@ -2705,7 +2705,7 @@
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{private int \textbf{ID}}$ \\ Ist der eindeutige Identifizierer eines Levels.
+		\item $\texttt{private final int \textbf{ID}}$ \\ Ist der eindeutige Identifizierer eines Levels.
 		\item $\texttt{private LambdaRoot \textbf{start}}$ \\ Enthält den Startterm eines Levels.
 		\item $\texttt{private LambdaRoot \textbf{goal}}$ \\ Enthält den Zielterm eines Levels.
 		\item $\texttt{private LambdaRoot \textbf{hint}}$ \\ Enthält einen Lösungshinweis für ein Levels.
@@ -2814,7 +2814,7 @@
 
 \subsection{\texttt{package lambda.viewcontroller.shop}}
 
-\subsubsection{\normalfont \texttt{public class \textbf{ShopViewControllerl} extends Controller}}
+\subsubsection{\normalfont \texttt{public class \textbf{ShopViewController} extends Controller}}
 
 \begin{description}
 \item[Beschreibung] \hfill \\ Repräsentiert einen Shop, der es dem Benutzer ermöglicht seine erspielten Münzen gegen Belohnungen einzutauschen.
@@ -2854,7 +2854,7 @@
 	\end{description}
 	
 	
-\subsubsection{\normalfont \texttt{public class \textbf{ShopItemViewControllerl} extends Controller}}
+\subsubsection{\normalfont \texttt{public class \textbf{ShopItemViewController} extends Controller}}
 
 \begin{description}
 \item[Beschreibung] \hfill \\ 
@@ -2896,4 +2896,322 @@
 			
 
 		\end{itemize}
+	\end{description}
+	
+\subsection{\texttt{package lambda.viewcontroller.level}}
+	
+	\subsubsection{\normalfont \texttt{public class \textbf{LevelSelectionViewController} extends Controller}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ 
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private scene2d.Stage \textbf{stage}}$ \\ 		
+		\item $\texttt{private InputMultiplexer \textbf{InputProcessor}}$ \\ 
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LevelSelectionViewController}()}$ \\ Instanziert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{startLevel}()}$ \\ 
+			\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LevelModel level}$ \\ 
+			\end{itemize}
+			\end{description}
+			
+
+		\end{itemize}
+	\end{description}
+
+
+
+\subsubsection{\normalfont \texttt{public class \textbf{ElementUIContext}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ 
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private AbstractionUIContext \textbf{abstractionUIContext}}$ \\ 		
+		\item $\texttt{private VariableUIContext \textbf{variableUIContext}}$ \\ 
+		\item $\texttt{private ParanthesisUIContext \textbf{paranthesisUIContext}}$ \\ 
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ElementUIContext}()}$ \\ Instanziert ein Objekt dieser Klasse.
+
+	
+		\end{itemize}
+	\end{description}
+	
+	
+	
+	\subsubsection{\normalfont \texttt{public class \textbf{AbstractionUIContext} extends ElementUIContext}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ 
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private XYZ \textbf{sprite}}$ \\ 		
+		\item $\texttt{private XYZ \textbf{animation}}$ \\ 
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{AbstractionUIContext}()}$ \\ Instanziert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+		\item $\texttt{public XYZ \textbf{getSprite}()}$ \\ 
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{sprite}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public XYZ \textbf{getAnimation}()}$ \\ 
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{animation}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+			
+			
+	\end{description}	
+
+		\subsubsection{\normalfont \texttt{public class \textbf{VariableUIContext} extends ElementUIContext}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ 
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private XYZ \textbf{sprite}}$ \\ 		
+		\item $\texttt{private XYZ \textbf{animation}}$ \\ 
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{VariableUIContext}()}$ \\ Instanziert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+		\item $\texttt{public XYZ \textbf{getSprite}()}$ \\ 
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{sprite}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public XYZ \textbf{getAnimation}()}$ \\ 
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{animation}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+			
+
+	\end{description}
+			
+		\subsubsection{\normalfont \texttt{public class \textbf{ParanthesisUIContext} extends ElementUIContext}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ 
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private XYZ \textbf{sprite}}$ \\ 		
+		\item $\texttt{private XYZ \textbf{animation}}$ \\ 
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ParanthesisUIContext}()}$ \\ Instanziert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+		\item $\texttt{public XYZ \textbf{getSprite}()}$ \\ 
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{sprite}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public XYZ \textbf{getAnimation}()}$ \\ 
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{animation}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		
+	\end{description}
+			
+
+	\subsubsection{\normalfont \texttt{public class \textbf{ElementUIContextFamily}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ 
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private AbstractionUIContext \textbf{abstractionUIContext}}$ \\ 		
+		\item $\texttt{private VariableUIContext \textbf{variableUIContext}}$ \\ 
+		\item $\texttt{private ParanthesisUIContext \textbf{paranthesisUIContext}}$ \\ 
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ElementUIContextFamily}()}$ \\ Instanziert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+		\item $\texttt{public AbstractionUIContext \textbf{getAbstractionUIContext}()}$ \\ 
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{items}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public VariableUIContext \textbf{getVariableUIContext}()}$ \\ 
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{items}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public ParanthesisUIContext \textbf{getParanthesisUIContext}()}$ \\ 
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{items}$ zurück.
+			\end{itemize}
+			\end{description}
+
+		
+	\end{description}
+
+
+\subsubsection{\normalfont \texttt{public class \textbf{TutorialMessage}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ 
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private final String \textbf{ID}}$ \\ 		
+		\item $\texttt{private String \textbf{message}}$ \\ 
+		\item $\texttt{private Rectangle \textbf{bounds}}$ \\ 		
+		\item $\texttt{private Vector2 \textbf{arrowStart}}$ \\ 
+		\item $\texttt{private Vectror2 \textbf{arrowEnd}}$ \\ 		
+
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{TutorialMessage}()}$ \\ Instanziert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+		\item $\texttt{public String \textbf{getID}()}$ \\ 
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{ID}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public String \textbf{getMessage}()}$ \\ 
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{message}$ zurück.
+			\end{itemize}
+			\end{description}
+
+		\item $\texttt{public Rectangle \textbf{getBounds}()}$ \\ 
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{bounds}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public Vector2 \textbf{getArrowStart}()}$ \\ 
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{arrowStart}$ zurück.
+			\end{itemize}
+			\end{description}
+
+		\item $\texttt{public Vector2 \textbf{getArrowEnd}()}$ \\ 
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{arrowEnd}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+
+
+
+
+
+
+
+		
 	\end{description}
