@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <help_text/>
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>130</y>
+      <w>380</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>StatistikViewController
+--
+- curentStatistic : StatistikModel
+-curentLevelStatistic : LevelSattistic
+--
++getCurentStatistic():StatistikModel
++setCurentstatistic(model:StatistikModel)
++getCurentLevelStatistic():StatistikModel
++setCurentLevelStatistic(model:LevelStatistic)
++update()
++loadStatisticModel(ProfileModelId : int)
++storeStatisticModel(ProfileModelId : int)
++loadLevelstatistics(LevlId : int, ProfileModelId : int)
++storeLevelstatistics(LevlId : int, ProfileModelId : int)
++show()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>30</y>
+      <w>100</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>Cotroller
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>40</y>
+      <w>30</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>130</x>
+      <y>250</y>
+      <w>300</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=StatistikModel
+</panel_attributes>
+    <additional_attributes>280.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+</diagram>
