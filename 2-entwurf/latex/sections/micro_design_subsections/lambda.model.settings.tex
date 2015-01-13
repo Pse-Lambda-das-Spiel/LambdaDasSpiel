@@ -1,0 +1,96 @@
+\subsection{\texttt{package lambda.model.settings}}
+
+\subsubsection{\normalfont \texttt{public interface \textbf{SettingsModelObserver}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Stellt einen Beobachter eines SettingModels dar, welcher über geänderte Einstellungen informiert wird.
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{default public void \textbf{changedMusicOn}()}$ \\ Wird aufgerufen um dem Beobachter mitzuteilen, 
+		dass sich der Status, ob Musik gespielt werden soll oder nicht, geändert hat. Die Standard-Implementierung ist leer.
+		\item $\texttt{default public void \textbf{changedMusicVolume}()}$ \\ Wird aufgerufen um dem Beobachter mitzuteilen, 
+		dass sich die Musiklautstärke geändert hat. Die Standard-Implementierung ist leer.
+		\item $\texttt{default public void \textbf{changedSoundVolume}()}$ \\ Wird aufgerufen um dem Beobachter mitzuteilen, 
+		dass sich die Geräuschlautstärke geändert hat. Die Standard-Implementierung ist leer.
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{SettingsModel} extends Observable<SettingsModelObserver>}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert Einstellungen eines Profils bezüglich der Tonausgabe.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private boolean \textbf{musicOn}}$ \\ Gibt an, ob die Hintergrundmusik laufen soll oder nicht.
+		\item $\texttt{private float \textbf{musicVolume}}$ \\ Gibt die Musiklautstärke in Prozent an. (0 bis 100)
+		\item $\texttt{private float \textbf{soundVolume}}$ \\ Gibt die Lautstärke von Geräuschen in Prozent an. (0 bis 100)
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{SettingsModel}()}$ \\ Instanziiert ein Objekt dieser Klasse und initialisiert Attribute mit Standardwerten.
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public boolean \textbf{isMusicOn}()}$ \\ Gibt zurück, ob Musik abgespielt werden soll.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob Musik abgespielt werden soll.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{setMusicOn}(boolean musicOn)}$ \\ Setzt den Status, ob Musik abgespielt werden soll und informiert alle Beobachter über diese Änderung.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{boolean musicOn}$ \\ Gibt an, ob Musik abgespielt werden soll.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public float \textbf{getMusicVolume}()}$ \\ Gibt die Musiklautstärke in Prozent zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt die Musiklautstärke in Prozent zurück.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{setMusicVolume}(float musicVolume)}$ \\ Setzt die Musiklautstärke und informiert alle Beobachter über diese Änderung.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{float musicVolume}$ \\ Die neue Lautstärke der Musik. Sollte zwischen 0 und 100 liegen.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public float \textbf{getSoundVolume}()}$ \\ Gibt die Geräuschlautstärke in Prozent zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt die Geräuschlautstärke in Prozent zurück.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{setSoundVolume}(float soundVolume)}$ \\ Setzt die Geräuschlautstärke und informiert alle Beobachter über diese Änderung.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{float soundVolume}$ \\ Die neue Lautstärke der Geräusche. Sollte zwischen 0 und 100 liegen.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
