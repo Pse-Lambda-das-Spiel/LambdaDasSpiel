@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>30</y>
+      <w>240</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>template=T: Class
+&lt;&lt;interface&gt;&gt;
+LambdaTermVisitor
+--
+--
++visit(node: LambdaRoot)
++visit(node: LambdaApplication)
++visit(node: LambdaAbstraction)
++visit(node: LambdaVariable)
++getResult(): T</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
