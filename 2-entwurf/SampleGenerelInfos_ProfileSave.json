@@ -1,6 +1,11 @@
 {
-	"level" : {
-		"LEVELID" : 4 ,
+	"profil_generel_infos" : {
+		"name" : "Norman",
+		"avatar" : "a3",
+		"language" : "de",
+		"levelindex" : 5 ,
+		"coins": 12,
+
 		"difficulty" : 1 ,
 		"availableRedStrats" : [
 			{
@@ -15,7 +20,7 @@
 		],
 		"tutorial" : [
 			{
-			"TUTORIALID": "40"
+			"tutorialid": "40"
 			}
 		],
 		"constellations" : {
