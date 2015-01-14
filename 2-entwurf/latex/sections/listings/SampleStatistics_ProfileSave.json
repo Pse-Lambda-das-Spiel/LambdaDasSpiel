@@ -1,0 +1,10 @@
+{
+	"statistics" : {
+		"successRate" : 0.1,
+		"gemsEnchanted" : 30,
+		"gemsPlaced": 12, 
+		"lambsEnchanted" : 20,
+		"lambsPlaced" : 14
+	}
+}
+
