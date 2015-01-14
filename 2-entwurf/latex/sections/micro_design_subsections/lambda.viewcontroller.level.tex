@@ -1,0 +1,501 @@
+\subsection{\texttt{package lambda.viewcontroller.level}}
+	
+	\subsubsection{\normalfont \texttt{public class \textbf{LevelSelectionViewController} extends Controller}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Kontrolliert und regelt die Darstellung des Levelauswahlmenüs und damit der einzelnen Level und die Benutzerinteraktion mit dem Menü.
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private scene2d.Stage \textbf{stage}}$ \\ 2D-Scene-Graph, der die Hierarchie der gesamten grafischen Komponenten (Akteure mit Typ $\texttt{scene2d.Actor}$ des Screens (der aktuell angezeigte Bildschirm) enthält. 
+		\item $\texttt{private InputMultiplexer \textbf{inputProcessor}}$ \\ Delegiert die Eingabe-Ereignisse an die geordnete Liste der InputProcessor, die die Ereignisse empfangen und weiterverarbeiten.
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LevelSelectionViewController}()}$ \\ instanziiert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{startLevel}(LevelModel level)}$ \\ Erstellt einen neuen LevelContext mit dem gewählten LevelModel.
+			\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LevelModel level}$ \\ Entspricht dem Level, welches gestartet werden soll.
+			\end{itemize}
+			\end{description}
+			
+
+		\end{itemize}
+	\end{description}
+
+
+
+\subsubsection{\normalfont \texttt{public class \textbf{ElementUIContext}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert den grafischen Kontext eines Spielelements auf dem Spielfeld.
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ElementUIContext}()}$ \\ instanziiert ein Objekt dieser Klasse.
+
+	
+	\end{itemize}
+\end{description}
+	
+	
+	
+	\subsubsection{\normalfont \texttt{public class \textbf{AbstractionUIContext} extends ElementUIContext}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Beschreibt die Lambda-Abstraktion, welche auf dem Spielfeld als Lamm mit Zauberstab dargestellt wird.
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private Sprite \textbf{sprite}}$ \\ Enthält das Sprite-File, welches zum Anzeigen einer Lambda-Abstraktion bzw. eines Lammes mit Zauberstab auf dem Spielfeld verwendet wird.
+		\item $\texttt{private Animation \textbf{animation}}$ \\ Beinhaltet eine Animation in Form einer Spritesheet für das verlängern, sowie das verschwinden vom Sprite.
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{AbstractionUIContext}()}$ \\ instanziiert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+		\item $\texttt{public Sprite \textbf{getSprite}()}$ \\ Gibt das Sprite-File zurück, welches die Lambda-Abstraktion bzw. das Lamm mit Zauberstab darstellt.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{sprite}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public Animation \textbf{getAnimation}()}$ \\ Gibt die Animation zurück, welche beim Verlängern und Verschwinden des Sprites abgespielt wird.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{animation}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+			
+			
+	\end{description}	
+
+		\subsubsection{\normalfont \texttt{public class \textbf{VariableUIContext} extends ElementUIContext}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Beschreibt die Lambda-Variable, welche auf dem Spielfeld als Edelstein dargestellt wird.
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private Sprite \textbf{sprite}}$ \\ Enthält das Sprite-File, welches zum Anzeigen einer Lambda-Variablen bzw. eines Edelsteins auf dem Spielfeld verwendet wird.
+		\item $\texttt{private Animation \textbf{animation}}$ \\ Beinhaltet eine Animation in Form einer Spritesheet für das verschwinden vom Sprite.
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{VariableUIContext}()}$ \\ instanziiert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+		\item $\texttt{public Sprite \textbf{getSprite}()}$ \\ Gibt das Sprite-File zurück, welches die Lambda-Variable bzw. den Edelstein darstellt.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{sprite}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public Animation \textbf{getAnimation}()}$ \\ Gibt die Animation zurück, welche beim Verschwinden des Sprites abgespielt wird.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{animation}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+			
+
+	\end{description}
+			
+		\subsubsection{\normalfont \texttt{public class \textbf{ParanthesisUIContext} extends ElementUIContext}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Beschreibt die Lambda-Klammerung, welche auf dem Spielfeld als Lamm ohne Zauberstab dargestellt wird.
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private Sprite \textbf{sprite}}$ \\ Enthält das Sprite-File, welches zum Anzeigen einer Klammernd bzw. eines Lammes ohne Zauberstab verwendet wird.
+		\item $\texttt{private Animation \textbf{animation}}$ \\ Beinhaltet eine Animation in Form einer Spritesheet für das verlängern, sowie das verschwinden vom Sprite.
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ParanthesisUIContext}()}$ \\ instanziiert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+		\item $\texttt{public Sprite \textbf{getSprite}()}$ \\ Gibt das Sprite-File zurück, welches die Lambda-Klammerung bzw. das Lamm ohne Zauberstab auf dem Spielfeld darstellt.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{sprite}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public Animation \textbf{getAnimation}()}$ \\ Gibt die Animation zurück, welche beim Verlängern und Verschwinden des Sprites abgespielt wird.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{animation}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		
+	\end{description}
+			
+
+	\subsubsection{\normalfont \texttt{public class \textbf{ElementUIContextFamily}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert eine Familie von Spielelementen. 
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private AbstractionUIContext \textbf{abstractionUIContext}}$ \\ Entspricht der Lambda-Abstraktion bzw. dem Lamm mit Zauberstab auf dem Spielfeld, welche gleichzeitig die eigene Animation enthält.
+		\item $\texttt{private VariableUIContext \textbf{variableUIContext}}$ \\ Entspricht der Variable bzw. dem Edelstein auf dem Spielfeld, welche gleichzeitig die eigene Animation enthält.
+		\item $\texttt{private ParanthesisUIContext \textbf{paranthesisUIContext}}$ \\ Entspricht den Klammern bzw. dem Lamm ohne Zauberstab auf dem Spielfeld, welche gleichzeitig die eigene Animation enthält.
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ElementUIContextFamily}()}$ \\ instanziiert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+		\item $\texttt{public AbstractionUIContext \textbf{getAbstractionUIContext}()}$ \\ Gibt die Lambda-Abstraktion zurück, welche gleichzeitig die eigene Animation enthält.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{items}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public VariableUIContext \textbf{getVariableUIContext}()}$ \\ Gibt die Lambda-Variable zurück, welche gleichzeitig die eigene Animation enthält.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{items}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public ParanthesisUIContext \textbf{getParanthesisUIContext}()}$ \\ Gibt die Lambda-Klammerung zurück, welche gleichzeitig die eigene Animation enthält.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{items}$ zurück.
+			\end{itemize}
+			\end{description}
+
+		
+	\end{description}
+
+
+\subsubsection{\normalfont \texttt{public class \textbf{TutorialMessage}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen einzigen Anleitungsdialog, um ein Spielelement oder einen Button genau zu erläutern.
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private final String \textbf{ID}}$ \\ Eindeutiger Bezeichner für den Teil der Anleitung für das Spiel.
+		\item $\texttt{private String \textbf{message}}$ \\ Nachricht, welche ein Spielelement oder einen Button genau erklärt.
+		\item $\texttt{private Rectangle \textbf{bounds}}$ \\ Bereich, in welchem $\texttt{message}$ angezeigt wird.
+		\item $\texttt{private Vector2 \textbf{arrowStart}}$ \\ Startpunkt eines Vektors, welcher immer von $\texttt{Rectangle}$ ausgeht.
+		\item $\texttt{private Vectror2 \textbf{arrowEnd}}$ \\ Endpunkt eines Vektors, welcher immer auf ein Spielelement oder einen Button zeigt, welcher genau erläutert wird.
+
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{TutorialMessage}()}$ \\ instanziiert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+		\item $\texttt{public String \textbf{getID}()}$ \\ Gibt den Bezeichner zurück, mit welchem sich der Teil der Anleitung für das Spiel.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{ID}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public String \textbf{getMessage}()}$ \\ Gibt den Text zurück, mit welchem ein Spielelement oder ein Button erläutert wird.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{message}$ zurück.
+			\end{itemize}
+			\end{description}
+
+		\item $\texttt{public Rectangle \textbf{getBounds}()}$ \\ Gibt den Bereich zurück, in welchem $\texttt{message}$ angezeigt wird.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{bounds}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public Vector2 \textbf{getArrowStart}()}$ \\ Gibt den Startpunkt des Vektors zurück, welcher von $\texttt{Rectangle}$ ausgeht, um ein Spielelement oder Button zu erläutern.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{arrowStart}$ zurück.
+			\end{itemize}
+			\end{description}
+
+		\item $\texttt{public Vector2 \textbf{getArrowEnd}()}$ \\ Gibt den Endpunkt des Vektors zurück, welcher auf ein Spielelement oder einen Button zeigt, um dieses bzw. diesen zu erläutern.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{arrowEnd}$ zurück.
+			\end{itemize}
+			\end{description}
+
+		
+	\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{AssetModel}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Enthält alle erfordelichen Daten, welche für das gesamte Spiel benötigt werden. Die Daten werden durch eine JSON-Datei geladen.
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private static AssetModel \textbf{assets}}$ \\ Statische Instanz von sich selbst, damit von jeder Klasse auf die Assets zugegriffen werden kann.
+		\item $\texttt{private Map<String, Sound> \textbf{sounds}}$ \\ Map, welche alle Sounds enthält, die für das Spiel benötigt werden. Jeder Sound hat einen eindeutigen Bezeichner, welcher als Key dient.
+		\item $\texttt{private Map<String, Music> \textbf{music}}$ \\ Map, welche jedes Musikstück enthält, die für das Spiel benötigt werden. Jedes Musikstück hat einen eindeutigen Bezeichner, welcher als Key dient.
+		\item $\texttt{private Map<int, DifficultySettings> \textbf{difficultySettings}}$ \\ Map, welche alle Einstellungen für einen Schwierigkeitsgrad eines Levels enthält. Jede Einstellung für einen Schwierigkeitsgrad hat einen eindeutigen Indentfizierer, welcher als Key dient.
+		\item $\texttt{private Map<String, Image> \textbf{images}}$ \\ Map, welche alle Bilder enthält, die für das Spiel benötigt werden. Jedes Bild hat einen eindeutigen Bezeichner, welcher als Key dient.
+		\item $\texttt{private Map<String, TutorialMessage> \textbf{tutorials}}$ \\ Map, welche alle Anleitungen enthält, die für alle Levels benötigt werden. Jedes Tutorial hat einen eindeutigen Bezeichner, welcher als Key dient.
+		\item $\texttt{private Map<int, LevelModel> \textbf{levels}}$ \\ Map, welche alle Level-Modelle enthält, die für das Spiel benötigt werden. Jedes Level-Modell hat einen eindeutigen Identifizierer, welcher als Key dient.
+
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private \textbf{AssetModel}()}$ \\ instanziiert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+		\item $\texttt{public AssetModel \textbf{getAssets}()}$ \\ 
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{assets}$ zurück.
+			\end{itemize}
+			\end{description}
+	
+		\item $\texttt{public Sound \textbf{getSoundByKey}(String key)}$ \\ 
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{String key}$ \\ Key, um das entsprechende Objekt aus der Map zu holen.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt einen $\texttt{Sound}$-Objekt zurück, welches nach dem Parameter $\texttt{key}$ aus der Map $\texttt{sounds}$ geholt wird.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public Music \textbf{getMusicByKey}(String key)}$ \\ 
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{String key}$ \\ Key, um das entsprechende Objekt aus der Map zu holen.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt ein $\texttt{Music}$-Objekt zurück, welches nach dem Parameter $\texttt{key}$ aus der Map $\texttt{music}$ geholt wird.
+			\end{itemize}
+			\end{description}
+
+		\item $\texttt{public DifficultySettings \textbf{getDifficultySettingByKey}(int key)}$ \\ 
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int key}$ \\ Key, um das entsprechende Objekt aus der Map zu holen.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt ein $\texttt{DifficultySetting}$-Objekt zurück, welches nach dem Parameter $\texttt{key}$ aus der Map $\texttt{difficultySettings}$ geholt wird.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public Image \textbf{getImageByKey}(String key)}$\\ 
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{String key}$ \\ Key, um das entsprechende Objekt aus der Map zu holen.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt ein $\texttt{Image}$-Objekt zurück, welches nach dem Parameter $\texttt{key}$ aus der Map $\texttt{images}$
+			\end{itemize}
+			\end{description}
+
+		\item $\texttt{public TutorialMessage \textbf{getTutorialByKey}(String key)}$ \\ 
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{String key}$ \\ Key, um das entsprechende Objekt aus der Map zu holen.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt eine $\texttt{TutorialMessage}$-Objekt zurück, welches nach dem Parameter $\texttt{key}$ aus der Map $\texttt{tutorialMessages}$
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public LevelModel \textbf{getLevelByKey}(int key)}$ \\ 
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int key}$ \\ Key, um das entsprechende Objekt aus der Map zu holen.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt ein $\texttt{LevelModel}$-Objekt zurück, welches nach dem Parameter $\texttt{key}$ aus der Map $\texttt{levels}$ geholt wird.
+			\end{itemize}
+			\end{description}
+			
+	\end{description}
+			
+\subsubsection{\normalfont \texttt{public class \textbf{DifficultySetting}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Enthält die erforderlichen Bezeichner, um die gewünschten Daten für einen bestimmten Schwierigkeitsgrad aus dem AssetModel zu laden.
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private String \textbf{music}}$ \\ Bezeichner, welcher benutzt wird, um die erforderliche Musik für einen bestimmten Schwierigkeitsgrad aus dem AssetModel zu laden.
+		\item $\texttt{private String \textbf{bgImage}}$ \\ Bezeichner, welcher benutzt wird, um das erforderliche Hintergrundbild für einen bestimmten Schwierigkeitsgrad aus dem AssetModel zu laden.
+
+
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{DifficultySettings}()}$ \\ instanziiert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+		\item $\texttt{public String \textbf{music}}$ \\ Gibt den Bezeichner zurück, mit welchem man die Musik für diesen Schwierigkeitsgrad aus dem AssetModel lädt.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{music}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public String \textbf{bgImage}}$ \\ Gibt den Bezeichner zurück, mit welchem man das Hintergrundbild für diesen Schwierigkeitsgrad aus dem AssetModel lädt.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{bgImage}$ zurück.
+			\end{itemize}
+			\end{description}
+
+		
+	\end{description}
+	
+	
+\subsubsection{\normalfont \texttt{public class \textbf{DropDownMenuViewController}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Enthält die erforderlichen Bezeichner, um die gewünschten Daten für einen bestimmten Schwierigkeitsgrad aus dem AssetModel zu laden.
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private ShopItemTypeModel<T> \textbf{shopItemTypeModel}}$ \\ Kategorie, welche sich nach dem Typ-Parameter orientiert und alle Items dieser Kategorie enthält.
+		\item $\texttt{private boolean \textbf{open}}$ \\ Gibt an, ob die Kategorie mit den entsprechenden Items ausgefahren wurde oder nicht.
+
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{DropDownMenuViewController}()}$ \\ instanziiert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+		\item $\texttt{public boolean \textbf{open}}$ \\ Dient der Anzeige, ob die Kategorie ausgefahren wurde oder nicht.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{open}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		
+	\end{description}	
+

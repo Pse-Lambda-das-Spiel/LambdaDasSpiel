@@ -1,0 +1,72 @@
+\subsection{\texttt{package lambda}}
+
+\subsubsection{\normalfont \texttt{public class \textbf{Observable}<Observer>}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert ein Objekt, das von Beobachtern überwacht werden kann. Dabei informiert das Objekt alle Beobachter, sobald Änderungen an ihm vorgenommen werden.
+
+\item[Typ-Parameter] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{<Observer>}$ \\ Der Typ eines Beobachters.
+	\end{itemize}
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private List<Observer> \textbf{observers}}$ \\ Die Liste der Beobachter dieses Objektes.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{Observable}()}$ \\ instanziiert ein Objekt dieser Klasse.
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{addObserver}(Observer o)}$ \\ Fügt den gegebenen Beobachter diesem Objekt hinzu, sodass dieser bei Änderungen informiert wird.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{Observer o}$ \\ Der neue Beobachter.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{o == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{removeObserver}(Observer o)}$ \\ Entfernt den Beobachter aus der Liste, falls dieser darin existiert, sodass dieser nicht mehr bei Änderungen informiert wird.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{Observer o}$ \\ Der zu entfernende Beobachter.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{o == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{notify}(Consumer<Observer> notifier)}$ \\ Ruft die gegebene Funktion auf allen Beobachtern auf. Wird benutzt, um Beobachter über Änderungen am Objekt zu informieren.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{Consumer<Observer> notifier}$ \\ Die Funktion, die auf allen Beobachtern ausgeführt wird.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{notifier == null}$ ist.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+

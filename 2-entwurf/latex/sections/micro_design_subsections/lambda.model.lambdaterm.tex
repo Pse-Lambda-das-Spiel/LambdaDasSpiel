@@ -1,0 +1,486 @@
+\subsection{\texttt{package lambda.model.lambdaterm}}
+
+\subsubsection{\normalfont \texttt{public abstract class \textbf{LambdaTerm} }}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Term im Lambda-Kalkül bzw. ein Knoten in der Baumstruktur eines Lambda-Terms.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private LambdaTerm \textbf{parent}}$ \\ Der Elternknoten dieses Terms. Kann auch $\texttt{null}$ sein, falls der Knoten eine Wurzel ist.
+		\item $\texttt{private boolean \textbf{locked}}$ \\ Gibt an, ob dieser Knoten im Editor verändert werden kann.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LambdaTerm}(LambdaTerm parent, boolean locked)}$ \\ instanziiert ein Objekt dieser Klasse mit dem gegebenen Elternknoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms. Kann auch $\texttt{null}$ sein, falls der Knoten eine Wurzel ist.
+				\item $\texttt{boolean locked}$ \\ Gibt an, ob dieser Knoten im Editor verändert werden kann.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public abstract <T> T \textbf{accept}(LambdaTermVisitor<T> visitor)}$ \\ Nimmt den gegebenen Besucher entgegen und ruft dessen $\texttt{visit}$-Methode auf. Die Rückgabe des Besuchers wird auch von dieser Methode zurückgegeben.
+		\begin{description}
+			\item[Typ-Parameter] \hfill \\
+				\vspace{-.8cm}
+				\begin{itemize}
+					\item $\texttt{<T>}$ \\ Der Typ des Rückgabewertes des Besuchers. Wird benötigt, um verschiedene Rückgabewerte von verschiedenen Besucherklassen zu ermöglichen.
+				\end{itemize}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTermVisitor<T> visitor}$ \\ Der Besucher, der entgegen genommen wird.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt den Rückgabewert des Besuchers zurück.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{visitor == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{notifyRoot}(Consumer<LambdaTermObserver> notifier)}$ \\ Gibt die Nachricht weiter zur Wurzel, wo die Beobachter informiert werden.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{Consumer<LambdaTermObserver> notifier}$ \\ Die Funktion, die auf allen Beobachtern ausgeführt wird.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{notifier == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public boolean \textbf{isValue}()}$ \\ Gibt zurück, ob dieser Term ein Wert - d.h. eine Abstraktion oder Variable - ist. Gibt in der Standard-Implementierung $\texttt{false}$ zurück und wird von entsprechenden Unterklassen überschrieben.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob dieser Term ein Wert ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaTerm \textbf{getParent}()}$ \\ Gibt den Elternknoten dieses Knotens wieder oder $\texttt{null}$, falls dieser Knoten eine Wurzel ist.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Der Elternknoten dieses Knotens.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public boolean \textbf{isLocked}()}$ \\ Gibt zurück, ob dieser Knoten im Editor verändert werden kann.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob dieser Knoten im Editor verändert werden kann.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public boolean \textbf{equals}(Object o)}$ \\ Gibt zurück, ob dieses und das gegebene Element gleich sind.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob dieses und das gegebene Element gleich sind.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public interface \textbf{LambdaTermObserver}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Beobachter eines Lambda-Terms, welcher über Änderungen am Term informiert wird.
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{replaceTerm}(LambdaTerm old, LambdaTerm new)}$ \\ Wird aufgerufen um dem Beobachter mitzuteilen, dass der gegebene alte Term durch den gegebenen neuen ersetzt wird. Einer von beiden Parametern kann $\texttt{null}$ sein, niemals aber beide.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm old}$ \\ Der ersetzte Term.
+				\item $\texttt{LambdaTerm new}$ \\ Der neue Term.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{setColor}(LambdaValue term, Color color)}$ \\ Wird aufgerufen um dem Beobachter mitzuteilen, dass die Farbe des gegebenen Terms durch die gegebene neue Farbe ersetzt wird.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaValue term}$ \\ Der veränderte Term.
+				\item $\texttt{Color color}$ \\ Die neue Farbe des Terms.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{LambdaApplication} extends LambdaTerm}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert eine Applikation im Lambda-Kalkül.
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private LambdaTerm \textbf{first}}$ \\ Linker bzw. erster Kindknoten der Applikation.
+		\item $\texttt{private LambdaTerm \textbf{second}}$ \\ Rechter bzw. zweiter Kindknoten der Applikation.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LambdaApplication}(LambdaTerm parent, boolean locked)}$ \\ instanziiert ein Objekt dieser Klasse mit dem gegebenen Elternknoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms. $\texttt{null}$ ist erlaubt, resultiert aber in einem ungültigen Lambda-Term.
+				\item $\texttt{boolean locked}$ \\ Gibt an, ob dieser Knoten im Editor verändert werden kann.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public <T> T \textbf{accept}(LambdaTermVisitor<T> visitor)}$ \\ Siehe $\texttt{LambdaTerm.accept}$
+		
+		\item $\texttt{public void \textbf{setFirst}(LambdaTerm first)}$ \\ Setzt den linken bzw. ersten Kindknoten dieser Applikation und informiert alle Beobachter über diese Änderung.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm first}$ \\ Der neue linke Kindknoten. $\texttt{null}$ ist erlaubt, resultiert aber in einem ungültigen Lambda-Term.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaTerm \textbf{getFirst}()}$ \\ Gibt den linken bzw. ersten Kindknoten dieser Applikation zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item  Der linke Kindknoten dieser Applikation.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{setSecond}(LambdaTerm second)}$ \\ Setzt den rechten bzw. zweiten Kindknoten dieser Applikation und informiert alle Beobachter über diese Änderung.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm second}$ \\ Der neue rechte Kindknoten. $\texttt{null}$ ist erlaubt, resultiert aber in einem ungültigen Lambda-Term.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaTerm \textbf{getSecond}()}$ \\ Gibt den rechten bzw. zweiten Kindknoten dieser Applikation zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item  Der rechte Kindknoten dieser Applikation.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public boolean \textbf{equals}(Object o)}$ \\ Gibt zurück, ob dieses und das gegebene Element gleich sind. Zwei Applikationen sind gleich, wenn beide rechte Kindknoten gleich und beide linke Kindknoten gleich sind.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob dieses und das gegebene Element gleich sind.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public abstract class \textbf{LambdaValue} extends LambdaTerm}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Wert - d.h. Abstraktion oder Variable - im Lambda-Kalkül.
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private Color \textbf{color}}$ \\ Die Farbe dieses Wertes, äquivalent zum Variablennamen.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LambdaValue}(LambdaTerm parent, Color color, boolean locked)}$ \\ instanziiert ein Objekt dieser Klasse mit dem gegebenen Elternknoten und der gegebenen Farbe.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms. $\texttt{null}$ ist erlaubt, falls der Term eine Wurzel ist.
+				\item $\texttt{Color color}$ \\ Die Farbe dieses Wertes.
+				\item $\texttt{boolean locked}$ \\ Gibt an, ob dieser Knoten im Editor verändert werden kann.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{color == null}$ ist.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public boolean \textbf{isValue}()}$ \\ Gibt zurück, ob dieser Term ein Wert ist. Überschreibt die Funktion in $\texttt{LambdaTerm}$ und gibt hier immer $\texttt{true}$ zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob dieser Term ein Wert ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{setColor}(Color color)}$ \\ Setzt die Farbe dieses Wertes und informiert alle Beobachter über diese Änderung.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{Color color}$ \\ Die neue Farbe.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{color == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public Color \textbf{getColor}()}$ \\ Gibt die Farbe dieses Wertes zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Die Farbe dieses Wertes.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{LambdaAbstraction} extends LambdaValue}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert eine Abstraktion im Lambda-Kalkül.
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private LambdaTerm \textbf{inside}}$ \\ Der Term innerhalb der Applikation. Kann $\texttt{null}$ sein, resultiert aber in einem ungültigen Term.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LambdaAbstraction}(LambdaTerm parent, Color color, boolean locked)}$ \\ instanziiert ein Objekt dieser Klasse mit dem gegebenen Elternknoten und der gegebenen Farbe.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms. Kann $\texttt{null}$ sein, falls der Term eine Wurzel ist.
+				\item $\texttt{Color color}$ \\ Die Farbe der in dieser Abstraktion gebundenen Variable.
+				\item $\texttt{boolean locked}$ \\ Gibt an, ob dieser Knoten im Editor verändert werden kann.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{color == null}$ ist.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public <T> T \textbf{accept}(LambdaTermVisitor<T> visitor)}$ \\ Siehe $\texttt{LambdaTerm.accept}$
+		
+		\item $\texttt{public void \textbf{setInside}(LambdaTerm inside)}$ \\ Setzt den Term innerhalb der Abstraktion und informiert alle Beobachter über diese Änderung.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm inside}$ \\ Der neue innere Term. Kann $\texttt{null}$ sein, resultiert aber in einem ungültigen Term.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaTerm \textbf{getInside}()}$ \\ Gibt den Term innerhalb der Abstraktion zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Der innere Term.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public boolean \textbf{equals}(Object o)}$ \\ Gibt zurück, ob dieses und das gegebene Element gleich sind. Zwei Abstraktionen sind gleich, wenn beide dieselbe Farbe haben und die Kindknoten gleich sind.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob dieses und das gegebene Element gleich sind.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{LambdaVariable} extends LambdaValue}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert eine Variable im Lambda-Kalkül.
+
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LambdaVariable}(LambdaTerm parent, Color color, boolean locked)}$ \\ instanziiert ein Objekt dieser Klasse mit dem gegebenen Elternknoten und der gegebenen Farbe.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm parent}$ \\ Der Elternknoten dieses Terms. Kann $\texttt{null}$ sein, falls der Term eine Wurzel ist.
+				\item $\texttt{Color color}$ \\ Die Farbe der Variable.
+				\item $\texttt{boolean locked}$ \\ Gibt an, ob dieser Knoten im Editor verändert werden kann.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{color == null}$ ist.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public <T> T \textbf{accept}(LambdaTermVisitor<T> visitor)}$ \\ Siehe $\texttt{LambdaTerm.accept}$
+	\end{itemize}
+	
+	\item $\texttt{public boolean \textbf{equals}(Object o)}$ \\ Gibt zurück, ob dieses und das gegebene Element gleich sind. Zwei Variablen sind gleich, wenn beide dieselbe Farbe haben.
+	\begin{description}
+		\item[Rückgabe] \hfill \\
+		\vspace{-.8cm}
+		\begin{itemize}
+			\item Gibt zurück, ob dieses und das gegebene Element gleich sind.
+		\end{itemize}
+	\end{description}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{LambdaRoot} extends LambdaTerm implements Observable<LambdaTermObserver>}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert die Wurzel eines Lambda-Terms. Die Wurzel eines gültigen Terms muss immer eine Instanz dieser Klasse sein.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private LambdaTerm \textbf{child}}$ \\ Kind der Wurzel der Applikation.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LambdaRoot}()}$ \\ instanziiert ein Objekt dieser Klasse ohne Elternknoten.
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public <T> T \textbf{accept}(LambdaTermVisitor<T> visitor)}$ \\ Siehe $\texttt{LambdaTerm.accept}$
+		
+		\item $\texttt{public void \textbf{notifyRoot}(Consumer<LambdaTermObserver> notifier)}$ \\ Überschreibt die Funktion von $\texttt{LambdaTerm}$, um die Nachricht vom Kindknoten entgegenzunehmen und $\texttt{notify}$ damit aufzurufen.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{Consumer<LambdaTermObserver> notifier}$ \\ Die Funktion, die auf allen Beobachtern ausgeführt wird.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{notifier == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{setChild}(LambdaTerm child)}$ \\ Setzt den  Kindknoten dieser Wurzel und informiert alle Beobachter über diese Änderung.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm child}$ \\ Der neue Kindknoten. $\texttt{null}$ ist erlaubt, resultiert aber in einem ungültigen Lambda-Term.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaTerm \textbf{getChild}()}$ \\ Gibt den Kindknoten dieser Wurzel zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item  Der Kindknoten dieser Wurzel.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public boolean \textbf{equals}(Object o)}$ \\ Gibt zurück, ob dieses und das gegebene Element gleich sind. Zwei Wurzeln sind gleich, wenn beide Kindknoten gleich sind.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob dieses und das gegebene Element gleich sind.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public final class \textbf{LambdaUtils}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Liefert statische Methoden zum einfachen Bearbeiten eines Lambda-Terms.
+
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private \textbf{LambdaUtils}()}$ \\ Um zu verhindern, dass diese Klasse instanziiert wird.
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public static LambdaRoot \textbf{split}(LambdaTerm term)}$ \\ Entfernt den gegebenen Knoten aus seinem Elternknoten und fügt ihn in eine neue Wurzel des Typs $\texttt{LambdaRoot}$ ein. Gibt die neue Wurzel zurück.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm term}$ \\ Der Term, der abgespalten werden soll.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Der abgespaltene Term in einer neuen Wurzel.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{term == null}$ ist.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
