@@ -9,7 +9,7 @@
 	\begin{itemize}
 		\item $\texttt{private Map<int, String> \textbf{renderAchievementsMap}}$ \\ Die Repräsentation aller Erfolge, die dargestellt werden. Gespeichert wird der Pfad zum Piktogramm des jeweiligen Erfolgs, abhängig davon, ob der Erfolg freigeschaltet ist oder nicht. Als Key wird der jeweilige Index verwendet, der auch die Anzeigereihenfolge bestimmt.
 		\item $\texttt{private scene2d.Stage \textbf{stage}}$ \\ 2D-Scene-Graph, der die Hierarchie der gesamten grafischen Komponenten (Akteure mit Typ $\texttt{scene2d.Actor}$ des Screens (der aktuell angezeigte Bildschirm) enthält. 
-	
+		\end{itemize}
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
@@ -35,7 +35,7 @@
 			
 		\item $\texttt{public void \textbf{update}()}$ \\ Aktualisiert über den Manager alle Erfolge.
 		
-		\item $\texttt{public void \textbf{changedProfile()}$ \\ Siehe Dokumentation von Interface ProfileManagerObserver.
+		\item $\texttt{public void \textbf{changedProfile}()}$ \\ Siehe Dokumentation von Interface ProfileManagerObserver.
 	
 		\item $\texttt{public void \textbf{dispose}()}$ \\ Wird aufgerufen, wenn der Screen all seine Ressourcen freigeben soll.
 		
