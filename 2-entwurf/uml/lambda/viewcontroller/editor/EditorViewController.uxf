@@ -57,8 +57,8 @@
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>760</x>
-      <y>200</y>
+      <x>770</x>
+      <y>130</y>
       <w>80</w>
       <h>60</h>
     </coordinates>
@@ -71,27 +71,27 @@
       <x>570</x>
       <y>230</y>
       <w>250</w>
-      <h>80</h>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
-    <additional_attributes>10.0;10.0;230.0;60.0</additional_attributes>
+    <additional_attributes>10.0;10.0;230.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>560</x>
-      <y>210</y>
-      <w>250</w>
-      <h>40</h>
+      <y>140</y>
+      <w>260</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
-    <additional_attributes>10.0;20.0;230.0;10.0</additional_attributes>
+    <additional_attributes>10.0;90.0;240.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLInterface</id>
     <coordinates>
       <x>730</x>
-      <y>270</y>
+      <y>220</y>
       <w>150</w>
       <h>60</h>
     </coordinates>
