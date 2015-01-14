@@ -1,0 +1,21 @@
+\section{Grobentwurf}
+
+\subsection{libGDX}
+%kann auch gelöscht werden wenn jemand was Besseres einfällt
+libGDX ist ein Framework allein für die Spieleentwicklung und wurde gewählt um die Entwicklung des Produkts zu vereinfachen.
+Viele von uns benötigte Funktionalitäten sind in libGDX schon mit inbegriffen, wodurch wir erheblich Implementierungsarbeit einsparen.
+Dabei wird es zum Beispiel einfach gemacht die Benutzeroberfläche oder Animationen zu erstellen.
+Zusätzlich soll das Produkt auf mehreren Plattformen laufen, sodass uns libGDX erlaubt es möglichst plattformneutral zu entwickeln 
+und relativ einfach entsprechende, spezialisierte Programmversionen zu erstellen.
+
+
+\subsection{Model-View-Controller}
+
+\subsection{Observer}
+
+\subsection{Visitor}
+
+\subsection{Singleton-Pattern}
+Da wir verschiedene Klassen benötigen von denen es aber nur ein Objekt geben soll und ein globaler sowie einfacher Zugriff auf diese Objekte geben soll, bietet sich das Singleton-Pattern natürlich besonders an. So gibt es beispielsweise die Klasse $\texttt{AssetModel}$, welche alle benötigten Ressourcen für die Applikation enthält und von mehreren Klassen gleichzeitig benutzt wird.
+
+\subsection{Strategy}

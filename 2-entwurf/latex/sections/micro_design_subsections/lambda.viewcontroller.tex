@@ -28,7 +28,64 @@
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item Die Referenz zur Haupeklasse.
+				\item Die Referenz zur Hauptklasse.
+			\end{itemize}
+		\end{description}
+				
+		\item $\texttt{public void \textbf{dispose}()}$ \\ Wird aufgerufen, wenn der Screen all seine Ressourcen freigeben soll.
+		
+		\item $\texttt{public void \textbf{show}()}$ \\ Wird automatisch aufgerufen, wenn der Screen als aktueller Screen für das Spiel gesetzt wird.
+	
+		\item $\texttt{public void \textbf{hide}()}$ \\ Wird automatisch aufgerufen, wenn der Screen nicht mehr der aktuelle Screen des Spiels ist.
+	
+		\item $\texttt{public void \textbf{resume}()}$ \\ Wird automatisch aufgerufen, wenn die Applikation nach einem pausierten Zustand fortgesetzt wird.	
+	
+		\item $\texttt{public void \textbf{pause}()}$ \\ Wird automatisch aufgerufen, wenn die Applikation pausiert wird.
+	
+		\item $\texttt{public void \textbf{render}(float delta)}$ \\ Wird automatisch zum Zeichnen und Darstellen des Screens aufgerufen.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{float delta}$ \\ Die Zeit in Sekunden seit dem letzten Aufruf dieser Methode.
+			\end{itemize}
+		\end{description}	
+	
+		\item $\texttt{public void \textbf{resize}(int width, int height)}$ \\ Wird automatisch aufgerufen, wenn sich die Bildschirmgröße geändert hat.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int width}$ \\ Die neue Breite in Pixel.
+				\item $\texttt{int height}$ \\ Die neue Höhe in Pixel.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{Controller} implements Screen}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Ein Ladebildschirm, der beim Starten der Applikation erscheint solange alle Ressourcen geladen werden.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private scene2d.Stage \textbf{stage}}$ \\ 2D-Scene-Graph, der die Hierarchie der gesamten grafischen Komponenten (Akteure mit Typ $\texttt{scene2d.Actor}$ des Screens (der aktuell angezeigte Bildschirm) enthält. 
+		\item $\texttt{private Image \textbf{loadingImage}}$ \\ Das Image, welches im Ladebildschirm angezeigt werden soll.
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+
+		
+		\item $\texttt{public Image \textbf{getLoadingImage}()}$ \\ Gibt das Image für den Ladebildschirm zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Das Image, welches im Ladebildschirm angezeigt wird.
 			\end{itemize}
 		\end{description}
 				
