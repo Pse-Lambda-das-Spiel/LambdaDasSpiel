@@ -22,8 +22,8 @@
 +update()
 +loadStatisticModel(profileModelId: int)
 +storeStatisticModel(profileModelId: int)
-+loadLevelstatistics(levlId: int, profileModelId: int)
-+storeLevelstatistics(levlId: int, profileModelId: int)
++loadLevelstatistics(levlId: String, profileModelId: String)
++storeLevelstatistics(levlId: String, profileModelId: String)
 +show()</panel_attributes>
     <additional_attributes/>
   </element>
