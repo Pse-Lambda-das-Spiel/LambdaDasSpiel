@@ -8,8 +8,13 @@ Dabei wird es zum Beispiel einfach gemacht die Benutzeroberfläche oder Animatio
 Zusätzlich soll das Produkt auf mehreren Plattformen laufen, sodass uns libGDX erlaubt es möglichst plattformneutral zu entwickeln 
 und relativ einfach entsprechende, spezialisierte Programmversionen zu erstellen.
 
-
 \subsection{Model-View-Controller}
+Das Prinzip von Model-View-Controller (MVC) ist allgemein weit verbreitet und heute schon nahezu Standard für Entwurf von Softwaresystemen. 
+MVC erlaubt uns ein gut gekapseltes Programm zu erstellen. Dies erleichtert die Implementierung bzw. den Entwurf, da Klassen teils in sich abgeschlossen sind
+und eine logische Einheit bilden. Durch MVC und unser dazugehöriges Beobachter-Muster (siehe Observer) erhalten Klassen eine lose Kopplung,
+die Flexibilität und auch die einfache Wiederverwertung von Klassen ermöglicht, sollte das Programm oder Programmteile weiterentwickelt werden.
+Im Gegensatz zum Standard MVC-Modell haben wir, aufgrund einer gewissen, schon von libGDX vorgegebenen Vermischung von View und Controller,
+auf getrennte View und Controller verzichtet. So besteht unser Modell aus Model und "ViewControllern", wie man im Feinentwurf sehen wird.
 
 \subsection{Observer}
 
