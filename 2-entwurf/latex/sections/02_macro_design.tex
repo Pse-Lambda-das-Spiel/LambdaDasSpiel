@@ -16,13 +16,17 @@ Im Gegensatz zum Standard MVC-Modell haben wir, aufgrund einer gewissen, schon v
 auf getrennte View und Controller verzichtet. So besteht unser Modell aus Model und "ViewControllern", wie man im Feinentwurf sehen wird.
 
 \subsection{Observer}
-Das Observer/Beobachter-Modell ist integraler Bestandteil unseres Entwurfs nach dem Model-View-Controller-Prinzip.
+Das Observer/Beobachter-Muster ist integraler Bestandteil unseres Entwurfs nach dem Model-View-Controller-Prinzip.
 Es erzeugt eine starke Flexibilität der Implementierung, so können beobachtete Objekte und Beobachter beliebig untereinander ausgetauscht werden.
 Dies erhöht die Modifizierbarkeit und Erweiterbarkeit des Programms enorm und erzwingt auch eine Abkapselung der Klassen.
 Ebenfalls ermöglicht uns das Observer-Pattern eine Datenkonsistenz aufrecht zu erhalten. Ändert sich zum Beispiel das Spielerprofil, 
 werden automatisch alle davon betroffenen Objekte aktualisiert.
 
 \subsection{Visitor}
+Das Visitor/Besucher-Muster ist nützlich, da die Lambda-Terme durch eine Baumstruktur dargestellt werden, auf der eine Reihe von Operationen
+ausgeführt werden müssen. Ohne das Besucher-Muster wäre dies extrem umständlich und die Klassen der Lambda-Terme würden unübersichtlicher
+werden. Durch das Besucher-Muster wird es uns erlaubt einfach neue Operationen hinzuzufügen, was wiederum die Modifizierbarkeit erhöht.
+Dabei muss nichts an den besuchten Klassen geändert werden und die Operationslogik liegt zentral im entsprechenden Visitor vor.
 
 \subsection{Singleton}
 Da wir verschiedene Klassen benötigen von denen es aber nur ein Objekt geben soll und ein globaler sowie einfacher Zugriff auf diese Objekte geben soll, bietet sich das Singleton-Pattern natürlich besonders an. So gibt es beispielsweise die Klasse $\texttt{AssetModel}$, welche alle benötigten Ressourcen für die Applikation enthält und von mehreren Klassen gleichzeitig benutzt wird.
