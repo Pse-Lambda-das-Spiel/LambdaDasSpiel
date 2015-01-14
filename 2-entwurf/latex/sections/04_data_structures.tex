@@ -1,1 +1,89 @@
 \section{Datenstrukturen}
+
+\subsection{JSON}
+Wir verwenden für das Abspeichern von zahlreichen logischen Komponenten unserer Applikation das weit verbreitete JSON (JavaScript Object Notation) Format. Das JSON Format wird von uns jedoch auch für einige rein auszulesende logische Komponenten verwendet wie beispielsweise unsere Level.
+Wir haben uns für das JSON Format und nicht für andere Formate wie beispielsweise XML entschieden, da es \begin{itemize}
+	\item eine einfache Gestaltung und Syntax besitzt.
+	\item leicht zu lesen und zu bearbeiten ist.
+	\item leicht auszutauschen und zu erweitern ist.
+	\item einen geringeren Overhead als XML besitzt.
+	\item mit der vorhandenen LibGDX API bereits eine ausreichend gute Unterstützung genießt.
+\end{itemize} 
+
+In den folgenden Abschnitten wird erläutert werden, wie genau die Abspeicherung im JSON Format aussehen wird.
+
+\subsection{Level}
+
+Unsere Level werden aus bereits vorher erstellten JSON-Dateien mittels gewisser Helper-Klassen ausgelesen. Diese JSON-Dateien befinden sich im Verzeichnis "`/assets/level"'. Das "`/assets"'-Verzeichnis ist laut der LibGDX Dokumentation das Stammverzeichnis, aus dem alle Assets geladen werden können, wie bsp. auch png- und mp3-Dateien.
+
+Zum Auslesen und späteren Erstellen der Level werden folgende Dinge jeweils für ein Level gespeichert: 
+\begin{itemize}
+	\item Die ID des Levels
+	\item Der Schwierigkeitsgrad des Levels
+	\item Der Spielmodus des Levels, wobei der Modus, in dem bereits das Endergebnis aller Konversionen der Spielelemente als Ziel angezeigt wird und man mit Hilfe einer gegebenen Anfangskonstellation auf dem Spielfeld diese Endkonstellation erreichen muss, als Standard-Modus bezeichnet wird.
+	\item Die Liste aller verfügbaren Reduktionsstrategien für die $\beta$-Reduktionen der Spielelemente.
+	\item Benutzbare Spielelemente
+	\item Alle Tutorial-Nachrichten
+	\item Die Start-Konstellation der Spielelemente auf Spielfeld, die Zielkonstellation sowie einen Hinweis zur Lösung des Levels. All diese Konstellationen sind aus baumartig-strukturierten Knoten aufgebaut. Diese Knoten und ihren Attribute sind in den Klassendokumentationen aus dem Kapitel Feinentwurf beschrieben worden (siehe die Klassenstruktur von LambdaTerm.	
+\end{itemize}
+
+Die SampleLevel.json im Anhang zeigt wie eine beispielhafte Level-JSON-Datei aussehen kann.
+\lstinputlisting[frame=single,label=beispielcode,caption=Ein Beispiel]{sections/listings/SampleLevel.json}
+
+\subsection{Profile}
+
+Die innerhalb von mehreren Spielsitzungen erstellten Spielerprofile werden sowohl auf mehrere JSON-Dateien gespeichert als auch aus diesen bei Bedarf geladen. Diese JSON-Dateien werden im lokalen Programmverzeichnis unserer Applikation gespeichert (dies entspricht dem Hauptverzeichnis bei Desktop-System und den privaten Programmdateien unter Android). Im lokalen Programmverzeichnis werden die Profile im Verzeichnis "`/profiles"' abgespeichert. Innerhalb dieses Verzeichnisses wird pro Profil ein ein weiteres eigenes Verzeichnis erstellt und nach dem Profilnamen benannt, in dem die profilspezifischen Daten gespeichert werden. Es wird im "`/profiles"'-Verzeichnis außerdem noch eine JSON-Datei zur Auflistung aller Profile mit deren Namen angelegt. Dies wird hier nun noch näher erklärt, indem aufgelistet wird, was für die Benutzerprofile gespeichert wird:
+
+\begin{itemize}
+	\item Es werden natürlich allgemeine Informationen zum Profil gespeichert, wie 
+	\begin{itemize}
+		\item der Name des Profils
+		\item der ausgewählte Avatar
+		\item ein Länderkürzel welches für die ausgewählte Sprache steht
+		\item der Levelfortschrittsindex
+		\item der Münzstand des Spielers
+	\end{itemize}
+	\item Es werden auch die Einstellungen des Benutzers im Profil gespeichert und zwar
+	\begin{itemize}
+		\item ob die Hintergrundmusik überhaupt zurzeit aktiviert ist
+		\item die zuletzt gewählte Hintergrundmusik-Lautstärke
+		\item die zuletzt gewählte Sound- und Effekt-Lautstärke
+	\end{itemize}
+	\item Es werden die Shop-Daten gespeichert:
+		\item die Hintergrundmelodien mit der jeweiligen ID und der Information ob sie vom Benutzer gekauft wurden
+		\item die Hintergründe mit der jeweiligen ID und der Information ob sie vom Benutzer gekauft wurden
+		\item die Texturen (Avatare) mit der jeweiligen ID und der Information ob sie vom Benutzer gekauft wurden
+		\item die IDs der jeweiligen für der Sandbox aktivierten gekauften Hintergründe und Hintergrundmelodien
+	\item Es wird auch die Statistik des Benutzers gespeichert wie bspw.:
+	\begin{itemize}
+		\item die bisher gespielte Zeit
+		\item wie viele Level ohne Nutzung des Hinweises gelöst wurden
+		\item die Levelversuchs-Erfolgsrate
+		\item die verzauberten und platzierten Spielelemente (Edelsteine und Lämmer) im gesamten Spielverlauf 
+		\item die meisten verzauberten und platzierten Spielelemente (Edelsteine und Lämmer) in einem Level
+	\end{itemize}
+\end{itemize}
+
+Die erreichten Erfolge werden nicht für das Profil gespeichert, sondern werden mit jedem Appstart und Profilwechsel anhand der Benutzerstatistik neu berechnet. Jedoch befindet sich bei den Assets eine JSON-Datei mit einer Auflistung aller Achievement-IDs, mit denen mit Hilfe von weiteren Assets die Erfolge angelegt werden. Die Shop-Elemente werden  auch auf diese Weise mit ihrer ID und ihrem Preis geladen. Es ist nicht notwendig das zuletzt benutzte Profil zu speichern, da die Applikation immer im Profilauswahlmenü startet.
+
+Die beispielhaften JSON-Dateien im Anhang zeigen nochmal wie eben genannten profilspezifischen Daten in JSON-Dateien gespeichert sind (dabei ist der Shop der Einfachheit halber auf ein Element pro Kategorie beschränkt und im bei der Statistik handelt es sich nur um einen kleinen Ausschnitt aller gespeicherten Daten, was jedoch für die Verdeutlichung der Struktur ausreicht):
+
+\subsection{Sprachen}
+
+Die einzelnen Strings der Applikation wie bspw. der Name eines Menüs oder einzelnen Beschreibungen oder Meldungen werden jeweils in einem I18N-Bundle gespeichert, wobei es sich um eine properties-Datei handelt, die nach dem Key-Value-Prinzip aufgebaut ist, folgendes beispielhaftes Beispiel verdeutlicht dies: 
+
+mainmenu = Hauptmenü
+settingsmenu = Einstellungsmenu
+ach02 = Du hast das Spiel 5 Stunden lang gespielt!
+
+Es handelt sich dabei um eine eigene von den LibGDX-Entwicklern erstellte, plattformunabhängigen Lösung des Lokalisierungsproblems. Die Bundles werden dabei nach folgenden Schema angelegt (Die Properties-Dateiendung wird der Einfachheit halber weglassen):
+\begin{itemize}
+	\item StringBundle\_de
+	\item StringBundle\_en
+	\item StringBundle\_fr
+\end{itemize}
+
+Diese Bundles werden nun aus einem eigenen entsprechenden Verzeichnis aus dem "/assets"'-Verzeichnis geladen und können leicht gewechselt und durch weitere Sprachen erweitert werden (es muss auch das jeweilige Länderkürzel angegeben werden, ansonsten wird Standard-Bundle, StringBundle.properties in dem Fall, geladen).
+
+
+
