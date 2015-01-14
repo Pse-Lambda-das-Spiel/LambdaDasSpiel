@@ -8,9 +8,9 @@
 			\vspace{-.8cm}
 			\begin{itemize}
 				\item $\texttt{private int \textbf{OwnerID}}$ \\ Die kennzeichnende ID des Profils zu dem Die Statistik gehört .
-				\item $\texttt{private int \textbf{playedTime}}$ \\ die gespielte Zeit in Secunden .
-				\item $\texttt{private String \textbf{solved}}$ \\ die Anzahl der gelösten Levels .
-				\item $\texttt{private String \textbf{played}}$ \\ die Anzahl der gespielten Levels .
+				\item $\texttt{private int \textbf{playedTime}}$ \\ die gespielte Zeit in Secunden.
+				\item $\texttt{private String \textbf{solved}}$ \\ die Anzahl der gelösten Levels.
+				\item $\texttt{private String \textbf{played}}$ \\ die Anzahl der gespielten Levels.
 				\item $\texttt{private String \textbf{successRate}}$ \\die Erfolgsquote
 				\item $\texttt{private String \textbf{usedHints}}$ \\  die Anzahl der levels, die ohne Hinweise Freigeschaltet wurden .
 				\item $\texttt{private boolean \textbf{gemsEnchanted}}$ \\ Anzahl der Verzauberten Edelsteinen 
@@ -27,9 +27,10 @@
 				\item[Rückgage] \hfill \\
 					\vspace{-.8cm}
 					\begin{itemize}
-						\item $\texttt{OwnerID }$ \\Die ID des Statisticbesitzers 					\end{itemize}	
+						\item $\texttt{OwnerID }$ \\Die ID des Statistikbesitzers 					
+						\end{itemize}	
 					\end{description}
-				\item $\texttt{public  long \textbf{getPlayedTime}()}$ \\ gibt die gesamt gespielte Zeit in secunden zurück .
+				\item $\texttt{public  long \textbf{getPlayedTime}()}$ \\ Gibt die gesamt gespielte Zeit in Sekunden zurück .
 				\begin{description}
 				\item[Rückgage] \hfill \\
 					\vspace{-.8cm}
@@ -37,104 +38,104 @@
 						\item $\texttt{playedTime }$ \\die gesamt gespielte Zeit in secunden 
 					\end{itemize}	
 					\end{description}
-					\item $\texttt{public  int \textbf{getPlayed}()}$ \\ gibt die Anzahl der gespielten Levels zurück .
+					\item $\texttt{public  int \textbf{getPlayed}()}$ \\ Gibt die Anzahl der gespielten Levels zurück .
 				\begin{description}
 				\item[Rückgage] \hfill \\
 					\vspace{-.8cm}
 					\begin{itemize}
-						\item $\texttt{played }$ \\Die Anzahl der gespielten Levels
+						\item $\texttt{played }$ \\ Die Anzahl der gespielten Levels
 					\end{itemize}	
 					\end{description}
-					\item $\texttt{public  int \textbf{getSolved}()}$ \\ gibt die Anzahl der gelösten Levels zurück .
+					\item $\texttt{public  int \textbf{getSolved}()}$ \\ Gibt die Anzahl der gelösten Levels zurück.
 				\begin{description}
 				\item[Rückgage] \hfill \\
 					\vspace{-.8cm}
 					\begin{itemize}
-						\item $\texttt{Solved }$ \\Die Anzahl der gelösten Levels
-					\end{itemize}	
-					\end{description}
-			
-			
-			\item $\texttt{public  float \textbf{getSuccessRate}()}$ \\ gibt die ERfolgsquote zurück .
-				\begin{description}
-				\item[Rückgage] \hfill \\
-					\vspace{-.8cm}
-					\begin{itemize}
-						\item $\texttt{successRate }$ \\Die ERfolgsquote 
+						\item $\texttt{Solved }$ \\ Die Anzahl der gelösten Levels.
 					\end{itemize}	
 					\end{description}
 			
-\item $\texttt{public  int \textbf{getusedHints}()}$ \\ gibt die Anzahl der Benötigten Hinweise zurück .
+			
+			\item $\texttt{public  float \textbf{getSuccessRate}()}$ \\ Gibt die Erfolgsquote zurück.
 				\begin{description}
 				\item[Rückgage] \hfill \\
 					\vspace{-.8cm}
 					\begin{itemize}
-						\item $\texttt{usedHints }$ \\Anzahl der Benötigten Hinweise
+						\item $\texttt{successRate }$ \\ Die Erfolgsquote 
+					\end{itemize}	
+					\end{description}
+			
+\item $\texttt{public  int \textbf{getusedHints}()}$ \\ Gibt die Anzahl der benutzten Hinweise zurück.
+				\begin{description}
+				\item[Rückgage] \hfill \\
+					\vspace{-.8cm}
+					\begin{itemize}
+						\item $\texttt{usedHints }$ \\ Anzahl der benutzten Hinweise.
 					\end{itemize}	
 					\end{description}
 					
-					\item $\texttt{public  int \textbf{getGemsEnchanted()}()}$ \\ gibt die Anzahl der verzauberten Edelsteine zurück .
+					\item $\texttt{public  int \textbf{getGemsEnchanted()}()}$ \\ gibt die Anzahl der verzauberten Edelsteine zurück.
 				\begin{description}
 				\item[Rückgage] \hfill \\
 					\vspace{-.8cm}
 					\begin{itemize}
-						\item $\texttt{GemsEnchanted }$ \\Anzahl der verzauberten Edelsteine
+						\item $\texttt{GemsEnchanted }$ \\ Anzahl der verzauberten Edelsteine.
 					\end{itemize}	
 					\end{description}
-					\item $\texttt{public  int \textbf{getGemsPlaced()}()}$ \\ gibt die Anzahl der gespielten Edelsteine zurück .
+					\item $\texttt{public  int \textbf{getGemsPlaced()}()}$ \\ Gibt die Anzahl der gesetzten Edelsteine zurück.
 				\begin{description}
 				\item[Rückgage] \hfill \\
 					\vspace{-.8cm}
 					\begin{itemize}
-						\item $\texttt{GemsPlaced }$ \\Anzahl der gespielten Edelsteine
+						\item $\texttt{GemsPlaced }$ \\ Anzahl der gesetzten Edelsteine.
 					\end{itemize}	
 					\end{description}
-					\item $\texttt{public  void \textbf{setPlayedTime}(PlayedTime : long)}$ \\ setzt die Anzahl der gespielten  Secunden .
+					\item $\texttt{public  void \textbf{setPlayedTime}(PlayedTime : long)}$ \\ Setzt die Anzahl der gespielten Sekunden.
 				\begin{description}
 				\item[Parameter] \hfill \\
 					\vspace{-.8cm}
 					\begin{itemize}
-						\item $\texttt{GemsPlaced }$ \\Anzahl der gespielten  Secunden
+						\item $\texttt{GemsPlaced }$ \\ Anzahl der gespielten Sekunden.
 					\end{itemize}	
 					\end{description}			
 					
-\item $\texttt{public  void \textbf{setPlayed}( int played )}$ \\ Stzt die Anzahl der gespielten Levels  .
+\item $\texttt{public  void \textbf{setPlayed}( int played )}$ \\ Setzt die Anzahl der gespielten Levels.
 				\begin{description}
 				\item[Parameter] \hfill \\
 					\vspace{-.8cm}
 					\begin{itemize}
-						\item $\texttt{played }$ \\Die Anzahl der gespielten Levels
+						\item $\texttt{played }$ \\ Die Anzahl der gespielten Levels
 					\end{itemize}	
 					\end{description}
-					\item $\texttt{public  void  \textbf{setSolved}( int solved)}$ \\ gibt die Anzahl der gelösten Levels zurück .
+					\item $\texttt{public  void  \textbf{setSolved}( int solved)}$ \\ Gibt die Anzahl der gelösten Levels zurück.
 				\begin{description}
 				\item[Parameter] \hfill \\
 					\vspace{-.8cm}
 					\begin{itemize}
-						\item $\texttt{Solved }$ \\Die Anzahl der gelösten Levels
+						\item $\texttt{Solved }$ \\ Die Anzahl der gelösten Levels.
 					\end{itemize}	
 					\end{description}
 			
 			
-			\item $\texttt{public  void \textbf{setSuccessRate}()}$ \\ Berechnet die neue  ERfolgsquote aus der Anzahl der  gespielte und gelöste Levels und setzt sie  .
+			\item $\texttt{public  void \textbf{setSuccessRate}()}$ \\ Berechnet die neue Erfolgsquote aus der Anzahl der gespielten und gelösten Levels und setzt sie neu.
 				\begin{description}
 				\item[Exeption] \hfill \\
 					\vspace{-.8cm}
 					\begin{itemize}
-						\item $\texttt{ArithmeticExeption }$ \\falls die Anzahl der gespielten Levels gleich 0 ist
+						\item $\texttt{ArithmeticExeption }$ \\ Falls die Anzahl der gespielten Levels gleich 0 ist.
 					\end{itemize}	
 					\end{description}
 			
-\item $\texttt{public  void \textbf{setusedHints}(int usedHints)}$ \\ setzt die Anzahl der Benötigten Hinweise  .
+\item $\texttt{public  void \textbf{setusedHints}(int usedHints)}$ \\ Setzt die Anzahl der benutzten Hinweise.
 				\begin{description}
 				\item[Parameter] \hfill \\
 					\vspace{-.8cm}
 					\begin{itemize}
-						\item $\texttt{usedHints }$ \\Anzahl der Benötigten Hinweise
+						\item $\texttt{usedHints }$ \\ Anzahl der benutzten Hinweise
 					\end{itemize}	
 					\end{description}					
 				
-					\item $\texttt{public  void \textbf{setGemsEnchanted}(GemsEnchanted : int)}$ \\ setzt die Anzahl der verzauberten Edelsteine  .
+					\item $\texttt{public  void \textbf{setGemsEnchanted}(GemsEnchanted : int)}$ \\ setzt die Anzahl der verzauberten Edelsteine.
 				\begin{description}
 				\item[Parameter] \hfill \\
 					\vspace{-.8cm}
@@ -142,24 +143,24 @@
 						\item $\texttt{GemsEnchanted }$ \\Anzahl der verzauberten Edelsteine
 					\end{itemize}	
 					\end{description}
-					\item $\texttt{public  void \textbf{setGemsPlaced}(GemsPlaced : int)}$ \\ gibt die Anzahl der gespielten Edelsteine zurück .
+					\item $\texttt{public  void \textbf{setGemsPlaced}(GemsPlaced : int)}$ \\ gibt die Anzahl der gespielten Edelsteine zurück.
 				\begin{description}
 				\item[Parameter] \hfill \\
 					\vspace{-.8cm}
 					\begin{itemize}
-						\item $\texttt{GemsPlaced }$ \\Anzahl der gespielten Edelsteine
+						\item $\texttt{GemsPlaced }$ \\ Anzahl der gespielten Edelsteine.
 					\end{itemize}	
 					\end{description}
 			\end{itemize}
 		\end{description}
-\subsubsection{\normalfont \texttt{public abstract class \textbf{LevelStatisticModel} extends}  StatisticModel} 
+\subsubsection{\normalfont \texttt{public abstract class \textbf{LevelStatisticModel} extends StatisticModel}} 
 \begin{description}
 		
-		\item[Beschreibung] \hfill \\ Repräsentiert ein Levelstatistik.
+		\item[Beschreibung] \hfill \\ Repräsentiert eine Levelstatistik.
 		\item[Attribute] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{private int \textbf{LevelID}}$ \\ Die kennzeichnende ID des Levels zu dem Die Statistik gehört . zu jedem Spieler wir für die von Ihm gespielten Levels eine Statistic gespeicher.				
+				\item $\texttt{private int \textbf{LevelID}}$ \\ Die kennzeichnende ID des Levels zu dem die Statistik gehört. Zu jedem Spieler werden die von ihm gespielten Levels eine Statistik gespeichert.				
 			\end{itemize}
 		\end{description}
 				
