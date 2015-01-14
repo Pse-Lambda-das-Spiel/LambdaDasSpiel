@@ -1,0 +1,28 @@
+{
+	"shop_status" : {
+		"ACTIVATEDMUSICID": "m2",
+		"ACTIVATEDBKIMAGE": "bk3",
+		"musics" : [
+			{
+				"MUSICID": "m2",
+				"PRICE" : 20,
+				"purchased" : true
+			}
+		],
+		"backgroundImages" : [
+			{
+				"BKID": "bk2",
+				"PRICE" : 25,
+				"purchased" : true
+			}
+		],
+		"sprites" : [
+			{
+				"SPRITEID": "sp4",
+				"PRICE" : 15,
+				"purchased" : false
+			}
+		]
+	}
+}
+

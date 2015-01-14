@@ -39,27 +39,16 @@
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLInterface</id>
-    <coordinates>
-      <x>600</x>
-      <y>140</y>
-      <w>80</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>Controller</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
-      <x>540</x>
-      <y>150</y>
-      <w>110</w>
-      <h>60</h>
+      <x>500</x>
+      <y>110</y>
+      <w>30</w>
+      <h>90</h>
     </coordinates>
-    <panel_attributes>lt=-
+    <panel_attributes>lt=&lt;&lt;-
 </panel_attributes>
-    <additional_attributes>90.0;10.0;10.0;40.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -93,5 +82,16 @@
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>110.0;30.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>460</x>
+      <y>90</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Controller</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
