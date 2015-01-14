@@ -5,39 +5,31 @@
     <id>UMLClass</id>
     <coordinates>
       <x>10</x>
-      <y>10</y>
+      <y>0</y>
       <w>370</w>
       <h>690</h>
     </coordinates>
     <panel_attributes>StatisticModel
 --
+-ownerID: String
 -playedTime: long
 -solved: int
 -played: int
--success: int
 -successRate: float
--owner: ProfileModel
--packagesComplete: int
 -usedHints: int
 -gemsEnchanted: int
 -gemsPlaced: int 
 -lambsEnchanted: int
 -lambsPlaced: int
 --
-+getPlayedTime():long
++getOwnerID(): String
++getPlayedTime():long 
++setPlayedTime(playedTime:long )
 +getSolved(): int
++setSolved(solved: int)
 +getPlayed(): int
-+getSuccess(): int
++setPlayed(played: int)
 +getSuccessRate(): float
-+addSolvedLevel(levelId: int)
-+getOwner(): ProfileModel
-+setPlayedTime(playTime: long) 
-+setPlayed(played: int) 
-+setSuccessRate() 
-+setSuccess(success: int) 
-+resetStatistics()
-+getPackagesComplete(): int
-+setPackagesComplete(packagesComplete: int)
 +getusedHints(): int
 +setusedHints(usedHints: int)
 +getGemsEnchanted():int 
@@ -56,7 +48,7 @@ group=1</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>650</x>
-      <y>100</y>
+      <y>90</y>
       <w>190</w>
       <h>80</h>
     </coordinates>
@@ -71,7 +63,7 @@ getLevelId() : String</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>370</x>
-      <y>140</y>
+      <y>130</y>
       <w>300</w>
       <h>40</h>
     </coordinates>
