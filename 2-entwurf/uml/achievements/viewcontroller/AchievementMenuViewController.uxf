@@ -12,14 +12,12 @@
     <panel_attributes>AchievementMenuViewController
 --
 -renderAchievementsMap: Map&lt;int, AchievementMenuViewController&gt;
--achievementManager: AchievementManager
 -stage: scene2d.Stage
 --
 +AchievementMenuViewController()
-+initialize()
++addAchievement(achievement: AchievementViewController)
 +update()
-+getAchievementManager(): AchievementManager
-+setAchievementManager(achievementManager: AchievementManager)
++changedProfile()
 +dispose()
 +show()
 +hide()
@@ -33,7 +31,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>520</x>
-      <y>50</y>
+      <y>40</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -44,12 +42,12 @@
     <id>Relation</id>
     <coordinates>
       <x>560</x>
-      <y>70</y>
+      <y>60</y>
       <w>30</w>
-      <h>70</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>UMLInterface</id>
@@ -102,6 +100,7 @@
 +AchievementViewController(achievement: AchievementModel)
 +draw(batch: Batch, parentAlpha: float)
 +changedLockedState()
++getAchievement(): AchievementModel
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -156,18 +155,6 @@ AchievementModelObserver
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>250</x>
-      <y>290</y>
-      <w>130</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=-
-m1=</panel_attributes>
-    <additional_attributes>10.0;10.0;110.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
       <x>580</x>
       <y>390</y>
       <w>30</w>
@@ -175,5 +162,45 @@ m1=</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>120</y>
+      <w>180</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+ProfileManagerObserver
+--
+--
++changedProfile()
++changedProfileList()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>260</x>
+      <y>140</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>250</x>
+      <y>280</y>
+      <w>130</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
   </element>
 </diagram>

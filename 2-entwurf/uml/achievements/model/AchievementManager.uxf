@@ -7,16 +7,18 @@
       <x>300</x>
       <y>30</y>
       <w>470</w>
-      <h>150</h>
+      <h>180</h>
     </coordinates>
     <panel_attributes>AchievementManager
 --
+_-manager: AchievementManager_
 -achievements: Map&lt;int, AchievementModel&gt;
 --
-+AchievementManager()
+-AchievementManager()
+_+getManager(): AchievementManager_
 +initializeAchievements()
 +checkAllAchievements(statistic: StatisticModel)
-+getAchievements: Map&lt;int, AchievementsModel&gt;
++getAchievements(): Map&lt;int, AchievementsModel&gt;
 +addAchievement(achievement: AchievementModel)
 +removeAchievement(id: int)</panel_attributes>
     <additional_attributes/>
@@ -42,5 +44,29 @@
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>170.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>810</x>
+      <y>100</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Resettet alle Erfolge</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>110</y>
+      <w>340</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=
+</panel_attributes>
+    <additional_attributes>320.0;20.0;10.0;20.0</additional_attributes>
   </element>
 </diagram>
