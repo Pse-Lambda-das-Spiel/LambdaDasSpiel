@@ -1,0 +1,81 @@
+{
+	"level" : {
+		"levelid" : 4 ,
+		"difficulty" : 1 ,
+		"availableRedStrats": [
+			{
+			"normal_order" : true
+			}
+		],
+		"usuableElements" : [
+			{
+			"VARIABLE" : true,
+			"ABSTRACTION" : true,
+			}
+		],
+		"tutorial" : [
+			{
+			"tutorialid": "40"
+			}
+		],
+		"constellations" : {
+			"_comment" : "(lambdax.x)y , x is blue and y is red",
+			"start" : {
+				"parent" : null,
+				"locked" : true,
+				"child" : {
+					"type" : "application",
+					"locked" : true,
+					"first" : {
+						"type" : "abstraction",
+						"locked" : false,
+						"color" : "blue",
+						"inside" : {
+							"type" : "variable",
+							"locked" : false,
+							"color" : "no_color"
+						}
+					},
+					"second" : {
+						"type" : "variable",
+						"locked" : false,
+						"color" : "no_color",
+					}			
+				}
+			},
+			"goal" : {
+				"parent" : null,
+				"locked" : true,
+				"child" : {
+					"type" : "variable",
+					"locked" : false,
+					"color" : "red",
+				}
+			},
+			"hint" : {
+				"parent" : null,
+				"locked" : true,
+				"child" : {
+					"type" : "application",
+					"locked" : true,
+					"first" : {
+						"type" : "abstraction",
+						"locked" : false,
+						"color" : "blue",
+						"inside" : {
+							"type" : "variable",
+							"locked" : false,
+							"color" : "blue"
+						}
+					},
+					"second" : {
+						"type" : "variable",
+						"locked" : false,
+						"color" : "no_color",
+					}			
+				}
+			},
+		}
+	}
+}
+
