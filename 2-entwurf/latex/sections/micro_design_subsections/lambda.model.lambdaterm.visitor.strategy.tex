@@ -1,0 +1,137 @@
+\subsection{\texttt{package lambda.model.lambdaterm.visitor.strategy}}
+
+\subsubsection{\normalfont \texttt{public class \textbf{ReductionStrategyNormalOrder} extends BetaReductionVisitor}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur, der eine einzelne Beta-Reduktion gemäß der Normal-Order Strategie durchführt.
+
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ReductionStrategyNormalOrder}()}$ \\ instanziiert ein Objekt dieser Klasse.
+	\end{itemize}
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Falls noch keine Applikation ausgeführt wurde, traversiert erst zum linken Kind mit rechtem Kind als Argument und dann, falls dort keine Applikation ausgeführt wurde, zum rechten Kind ohne Argument. Rückgabewert ist der linke Kindknoten, falls dort die Applikation ausgeführt wurde, ansonsten der besuchte Knoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaApplication node}$ \\ Die besuchte Applikation.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Falls bereits eine Applikation ausgeführt wurde, gibt nur den besuchten Knoten zurück. Ansonsten, falls ein Argument gegeben ist, führt damit eine Applikation auf dieser Abstraktion aus. Rückgabewert ist das Resultat der Applikation. Traversiert ansonsten zum Kindknoten und gibt den besuchten Knoten zurück.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaAbstraction node}$ \\ Die besuchte Abstraktion.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{ReductionStrategyApplicativeOrder} extends BetaReductionVisitor}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur, der eine einzelne Beta-Reduktion gemäß der Applicative-Order Strategie durchführt.
+
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ReductionStrategyApplicativeOrder}()}$ \\ instanziiert ein Objekt dieser Klasse.
+	\end{itemize}
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Falls bereits eine Applikation ausgeführt wurde, gibt den besuchten Knoten zurück. Traversiert ansonsten erst zum linken Kind mit rechtem Kind als Argument und dann, falls dort keine Applikation ausgeführt wurde, zum rechten Kind ohne Argument. Rückgabewert ist der linke Kindknoten, falls dort die Applikation ausgeführt wurde, ansonsten der besuchte Knoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaApplication node}$ \\ Die besuchte Applikation.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Falls bereits eine Applikation ausgeführt wurde, gibt den besuchten Knoten zurück. Traversiert ansonsten zum Kindknoten und gibt den besuchten Knoten zurück. Falls danach noch keine Applikation ausgeführt wurde und ein Argument gegeben ist, führt damit eine Applikation auf dieser Abstraktion aus. Rückgabewert ist dann das Resultat der Applikation.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaAbstraction node}$ \\ Die besuchte Abstraktion.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{ReductionStrategyCallByValue} extends BetaReductionVisitor}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur, der eine einzelne Beta-Reduktion gemäß der Call-By-Value Strategie durchführt.
+
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ReductionStrategyCallByValue}()}$ \\ instanziiert ein Objekt dieser Klasse.
+	\end{itemize}
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Falls bereits eine Applikation ausgeführt wurde, gibt den besuchten Knoten zurück. Traversiert ansonsten erst zum rechten Kind ohne Argument und dann, falls dort keine Applikation ausgeführt wurde, zum linken Kind mit rechtem Kind als Argument. Rückgabewert ist der linke Kindknoten, falls dort die Applikation ausgeführt wurde, ansonsten der besuchte Knoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaApplication node}$ \\ Die besuchte Applikation.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Falls bereits eine Applikation ausgeführt wurde, gibt den besuchten Knoten zurück. Falls ansonsten ein Argument gegeben und ein Wert - d.h. Abstraktion oder Variable - ist, führt damit eine Applikation auf dieser Abstraktion aus. Rückgabewert ist dann das Resultat der Applikation, ansonsten der besuchte Knoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaAbstraction node}$ \\ Die besuchte Abstraktion.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{ReductionStrategyCallByName} extends BetaReductionVisitor}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur, der eine einzelne Beta-Reduktion gemäß der Call-By-Name Strategie durchführt.
+
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ReductionStrategyCallByName}()}$ \\ instanziiert ein Objekt dieser Klasse.
+	\end{itemize}
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Falls noch keine Applikation ausgeführt wurde, traversiert erst zum linken Kind mit rechtem Kind als Argument und dann, falls dort keine Applikation ausgeführt wurde, zum rechten Kind ohne Argument. Rückgabewert ist der linke Kindknoten, falls dort die Applikation ausgeführt wurde, ansonsten der besuchte Knoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaApplication node}$ \\ Die besuchte Applikation.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Falls bereits eine Applikation ausgeführt wurde, gibt nur den besuchten Knoten zurück. Ansonsten, falls ein Argument gegeben ist, führt damit eine Applikation auf dieser Abstraktion aus. Rückgabewert ist das Resultat der Applikation. Traversiert nicht weiter zum Kindknoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaAbstraction node}$ \\ Die besuchte Abstraktion.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}

@@ -1,0 +1,473 @@
+\subsection{\texttt{package lambda.viewcontroller.lambdaterm}}
+
+\subsubsection{\normalfont \texttt{public class \textbf{LambdaTermViewController} extends scene2d.Group implements LambdaTermObserver}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Kontrolliert die Darstellung von und Benutzerinteraktion mit einem Lambda-Term.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private scene2d.ClickListener \textbf{inputListener}}$ \\ Empfängt und bearbeitet UI-Events.
+		\item $\texttt{private boolean \textbf{editable}}$ \\ Gibt an, ob Änderungen am Term durch den Benutzer zugelassen sind.
+		\item $\texttt{private LambdaNodeViewController \textbf{selection}}$ \\ Enthält den Term, den der Benutzer per Drag\&Drop-Geste auswählt. Initialisiert mit $\texttt{null}$.
+		\item $\texttt{private Map<LambdaTerm, LambdaNodeViewController \textbf{nodeViewMap}}$ \\ Speichert alle View-Knoten als Wert zum verknüpften Lambda-Term als Schlüssel. Dabei wird die Identität der Schlüssel per Referenzvergleich anstatt deren inhaltlicher Gleichheit per $\texttt{LambdaTerm.equals}$-Vergleich zum Abbilden benutzt.
+		\item $\texttt{private LambdaRoot \textbf{term}}$ \\ Der angezeigte Lambda-Term.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LambdaTermViewController}(LambdaRoot root, boolean editable)}$ \\ instanziiert ein Objekt dieser Klasse mit dem gegebenen Lambda-Term. Fügt sich selber dem gegebenen Lambda-Term als Beobachter hinzu. Erstellt die Wurzel des View-Baumes vom Typ $\texttt{LambdaNodeViewController}$ und fügt dann rekursiv alle Knoten des gegebenen Lambda-Terms per $\texttt{ViewInsertionVisitor}$ dieser Wurzel hinzu.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaRoot root}$ \\ Der dargestellte Lambda-Term.
+				\item $\texttt{boolean editable}$ \\ Gibt an, ob Änderungen am Term durch den Benutzer zugelassen sind.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{root == null}$ ist.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{replaceTerm}(LambdaTerm old, LambdaTerm new)}$ \\ Wird vom Lambda-Term aufgerufen um mitzuteilen, dass der gegebene alte Term durch den gegebenen neuen ersetzt wird. Löscht den View-Knoten zum alten Term per $\texttt{ViewRemovalVisitor}$ aus dem View-Baum und fügt den View-Knoten des neuen Terms per $\texttt{ViewInsertionVisitor}$ dem View-Baum hinzu. Wenn einer der beiden Terme $\texttt{null}$ ist, wird der entsprechende Schritt übersprungen.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm old}$ \\ Der ersetzte Term.
+				\item $\texttt{LambdaTerm new}$ \\ Der neue Term.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{setColor}(LambdaValue term, Color color)}$ \\ Wird vom Lambda-Term aufgerufen um mitzuteilen, dass die Farbe des gegebenen Terms durch die gegebene neue Farbe ersetzt wird. Setzt dabei die Farbe des View-Knotens zum gegebenen Term auf die gegebene Farbe.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaValue term}$ \\ Der veränderte Term.
+				\item $\texttt{Color color}$ \\ Die neue Farbe des Terms.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{protected LambdaNodeViewController \textbf{getNodeView}(LambdaTerm term)}$ \\ Gibt den View-Knoten zum gegebenen Lambda-Term zurück oder $\texttt{null}$, falls zum Term kein View-Knoten existiert.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaValue term}$ \\ Der Lambda-Term.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Der View-Knoten zum gegebenen Lambda-Term zurück oder $\texttt{null}$, falls zum Term kein View-Knoten existiert.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{term == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{protected boolean \textbf{hasNodeView}(LambdaTerm term)}$ \\ Gibt zurück, ob zum gegebenen Lambda-Term ein View-Knoten existiert.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaValue term}$ \\ Der Lambda-Term.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob zum gegebenen Lambda-Term ein View-Knoten existiert.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{term == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{protected void \textbf{addNodeView}(LambdaNodeViewController nodeView)}$ \\ Fügt den gegebenen View-Knoten zur $\texttt{nodeViewMap}$ und zur $\texttt{scene2d.Group}$ hinzu.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaNodeViewController nodeView}$ \\ Der View-Knoten, der hinzugefügt wird.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{nodeView == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{protected void \textbf{removeNodeView}(LambdaNodeViewController nodeView)}$ \\ Löscht den gegebenen View-Knoten aus der $\texttt{nodeViewMap}$ und der $\texttt{scene2d.Group}$.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaNodeViewController nodeView}$ \\ Der View-Knoten, der gelöscht wird.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{nodeView == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public boolean \textbf{isEditable}()}$ \\ Gibt zurück, ob Änderungen am Lambda-Term durch den Benutzer zugelassen sind.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob Änderungen am Lambda-Term durch den Benutzer zugelassen sind.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{setSelection}(LambdaTerm term)}$ \\ Falls nicht $\texttt{term == null}$ ist, erstellt einen neuen, nicht editierbaren $\texttt{LambdaTermViewController}$ und speichert diesen in $\texttt{selection}$. Fügt den neuen ViewController der View-Hierarchie hinzu. Fügt außerdem dem neuen ViewController Event-Handler hinzu: Mit dem $\texttt{touchUp}$ Event wird der ausgewählte Term an der aktuellen Zeigerposition mit Hilfe von $\texttt{getParentFromPosition}$ und $\texttt{getChildIndexFromPosition}$ eingefügt. Ansonsten wird der aktuell ausgewählte ViewController gelöscht und aus der View-Hierarchie entfernt.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm term}$ \\ Der Term, zu dem ein View-Knoten erstellt wird.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaTermViewController \textbf{getSelection}()}$ \\ Gibt den aktuell ausgewählten Knoten als ViewController zurück oder $\texttt{null}$, falls kein Knoten ausgewählt ist.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Der aktuell ausgewählte View-Knoten oder $\texttt{null}$, falls kein Element ausgewählt ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaNodeViewController \textbf{getParentFromPosition}(float x, float y)}$ \\ Hilfsfunktion um Elemente an der Zeigerposition einzufügen. Gibt dabei das Element zurück, welches der Elternknoten zum eingefügten Knoten wäre, falls das Element an der gegebenen Position eingefügt würde. Falls die Position über dem Wurzel-Knoten ist, wird die Wurzel zurückgegeben.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{float x}$ \\ Die X-Koordinate der Einfügeposition.
+				\item $\texttt{float y}$ \\ Die Y-Koordinate der Einfügeposition.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Der Elternknoten zur gegebenen Einfügeposition.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaNodeViewController \textbf{getChildIndexFromPosition}(float x, float y)}$ \\ Hilfsfunktion um Elemente an der Zeigerposition einzufügen. Gibt den Kindindex zurück, den ein Knoten hätte, welcher an dieser Position in den Baum unter dem Elternknoten $\texttt{getParentFromPosition(x, y)}$ eingefügt würde. Ein Kind an erster Stelle hat Index 0, ein Kind an letzter Stelle hat Index $\texttt{children.size()}$.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{float x}$ \\ Die X-Koordinate der Einfügeposition.
+				\item $\texttt{float y}$ \\ Die Y-Koordinate der Einfügeposition.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Der Kindindex an der gegebenen Einfügeposition.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public gdx.math.Rectangle \textbf{getGapRectangle}(float x, float y)}$ \\ Gibt das Rechteck zurück, an welchem ein Knoten eingefügt wird, wenn der Zeiger an der gegebenen Position losgelassen wird. Die Breite des Rechtecks entspricht der Lücke zwischen zwei horizontal nebeneinanderliegenden Knoten. Dient zum Markieren der Stelle, an der ein Knoten eingefügt werden kann.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{float x}$ \\ Die X-Koordinate der Einfügeposition.
+				\item $\texttt{float y}$ \\ Die Y-Koordinate der Einfügeposition.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Das Einfügerechteck an der gegebenen Zeigerposition.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public abstract class \textbf{LambdaNodeViewController} extends scene2d.Actor}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen View-Knoten im View-Baum eines Lambda-Terms. Im Gegensatz zur Lambda-Term Datenstruktur kann ein View-Knoten beliebig viele Kindknoten haben.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private LambdaTerm \textbf{linkedTerm}}$ \\ Der Lambda-Term Knoten, der durch diesen View-Knoten angezeigt wird.
+		\item $\texttt{private LambdaTermViewController \textbf{viewController}}$ \\ Der ViewController, in dem dieser View-Knoten angezeigt wird.
+		\item $\texttt{private LambdaNodeViewController \textbf{parent}}$ \\ Der View-Elternknoten dieses Knotens.
+		\item $\texttt{private List<LambdaNodeViewController> \textbf{children}}$ \\ Die Liste der View-Kindknoten dieses Knotens.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LambdaNodeViewController}(LambdaTerm linkedTerm, LambdaNodeViewController parent, LambdaTermViewController view)}$ \\ instanziiert ein Objekt dieser Klasse, das den gegebenen Lambda-Term Knoten auf der gegebenen View anzeigt, mit dem gegebenen Elternknoten. Falls der ViewController durch den Spieler editierbar ist, werden diesem $\texttt{Actor}$ Event-Handler hinzugefügt, die das Model entsprechend der Benutzerevents verändern: Mit dem $\texttt{longPress}$ Event wird der angezeigte Lambda-Term mit Hilfe von $\texttt{LambdaUtils.split}$ aus dem Baum entfernt im ViewController als aktuell ausgewählter Term gesetzt. Mit dem $\texttt{tap}$ Event wird ein Popup zur Auswahl der Farbe für den angezeigten Lambda-Term aufgerufen.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTerm \textbf{linkedTerm}}$ \\ Der Lambda-Term, der durch diesen View-Knoten angezeigt wird.
+				\item $\texttt{LambdaTermViewController \textbf{viewController}}$ \\ Der ViewController, in dem dieser View-Knoten angezeigt wird.
+				\item $\texttt{LambdaNodeViewController \textbf{parent}}$ \\ Der View-Elternknoten dieses Knotens.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{linkedTerm == null}$ oder $\texttt{view == null}$ ist.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public LambdaNodeViewController \textbf{getParent}()}$ \\ Gibt den View-Elternknoten dieses View-Knotens zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Der View-Elternknoten dieses View-Knotens.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public boolean \textbf{isRoot}()}$ \\ Gibt zurück, ob dieser View-Knoten eine Wurzel ist. Ein View-Knoten ist eine Wurzel, falls $\texttt{parent == null}$ ist.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt zurück, ob dieser View-Knoten eine Wurzel ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LambdaTerm \textbf{getLinkedTerm}()}$ \\ Gibt den Lambda-Term Knoten zurück, der von diesem View-Knoten angezeigt wird.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt den Lambda-Term Knoten zurück, der von diesem View-Knoten angezeigt wird.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{updateWidth}()}$ \\ Berechnet und setzt die eigene Breite mit Hilfe der Breiten seiner View-Kindknoten. Ruft rekursiv $\texttt{updateWidth}$ des View-Elternknotens auf, falls dieser Knoten keine Wurzel ist. Im Falle einer Wurzel wird die Position mit Hilfe von $\texttt{updatePosition}$ mit dem Ursprung als Argument aktualisiert. % TODO Animationen, Context
+		
+		\item $\texttt{public void \textbf{updatePosition}(float x, float y)}$ \\ Setzt die eigene Position auf die gegebenen Koordinaten. Berechnet die Positionen der View-Kindknoten und ruft rekursiv deren $\texttt{updatePosition}$ auf. % TODO Animationen, Context
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{float x}$ \\ Die neue X-Koordinate des View-Knotens.
+				\item $\texttt{float y}$ \\ Die neue Y-Koordinate des View-Knotens.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public abstract float \textbf{getMinWidth}()}$ \\ Gibt die minimale Breite dieses View-Knotens zurück. Wird von Unterklassen überschrieben.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Die minimale Breite dieses View-Knotens.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{insertChild}(LambdaNodeViewController child, LambdaTerm rightSibling)}$ \\ Fügt den gegebenen View-Kindknoten links neben dem Knoten, der den gegebenen Lambda-Term anzeigt, ein. Falls $\texttt{rightSibling == null}$ ist, wird der Term an letzter Stelle in der Liste \(ganze rechts\) eingefügt. Teilt dem Lambda-Term ViewController über $\texttt{addNodeView}$ mit, dass der gegebene View-Kindknoten neu hinzugefügt wurde. Ruft $\texttt{updateWidth}$ des eigenen Knotens auf und animiert die Veränderung. Blockiert den Prozessfaden, bis die Animation beendet wurde.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaNodeViewController child}$ \\ Der neue View-Kindknoten.
+				\item $\texttt{LambdaTerm rightSibling}$ \\ Der Term, neben dem der neue Kindknoten links eingefügt wird.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{child == null}$ ist.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{removeChild}(LambdaNodeViewController child)}$ \\ Entfernt den gegebenen View-Kindknoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaNodeViewController child}$ \\ Der zu entfernende View-Kindknoten. Teilt dem Lambda-Term ViewController über $\texttt{removeNodeView}$ mit, dass der gegebene View-Kindknoten entfernt wurde. Ruft $\texttt{updateWidth}$ des eigenen Knotens auf und animiert die Veränderung. Blockiert den Prozessfaden, bis die Animation beendet wurde.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{child == null}$ ist.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{LambdaAbstractionViewController} extends LambdaNodeViewController}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen View-Knoten einer Lambda-Abstraktion im View-Baum eines Lambda-Terms.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private Color \textbf{color}}$ \\ Die Farbe der Abstraktion.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LambdaAbstractionViewController}(LambdaAbstraktion linkedTerm, LambdaNodeViewController parent, LambdaTermViewController view)}$ \\ instanziiert ein Objekt dieser Klasse, das den gegebenen Abstraktions-Knoten auf der gegebenen View anzeigt, mit dem gegebenen Elternknoten. Ruft dabei den Elternkonstruktor mit genau diesen Argumenten auf.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaAbstraktion linkedTerm}$ \\ Die Lambda-Abstraktion, die durch diesen View-Knoten angezeigt wird.
+				\item $\texttt{LambdaTermViewController viewController}$ \\ Der ViewController, in dem dieser View-Knoten angezeigt wird.
+				\item $\texttt{LambdaNodeViewController parent}$ \\ Der View-Elternknoten dieses Knotens.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{linkedTerm == null}$ oder $\texttt{view == null}$ ist. Wird vom Elternkonstruktor aus kontrolliert.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{draw}(Batch batch, float parentAlpha)}$ \\ Zeichnet diesen View-Knoten auf dem gegebenen Batch mit dem gegebenen Alpha-Wert.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{Batch batch}$ \\ Der Batch, auf dem gezeichnet wird.
+				\item $\texttt{float parentAlpha}$ \\ Der Alpha-Wert, mit dem gezeichnet wird.
+			\end{itemize}
+		\end{description}
+			
+		\item $\texttt{public float \textbf{getMinWidth}()}$ \\ Gibt die minimale Breite zurück, die der View-Knoten einer Abstraktion haben kann.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Die minimale Breite dieses View-Knotens.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{LambdaApplicationViewController} extends LambdaNodeViewController}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen View-Knoten einer Lambda-Applikation im View-Baum eines Lambda-Terms.
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LambdaApplicationViewController}(LambdaApplication linkedTerm, LambdaNodeViewController parent, LambdaTermViewController view)}$ \\ instanziiert ein Objekt dieser Klasse, das den gegebenen Applikations-Knoten auf der gegebenen View anzeigt, mit dem gegebenen Elternknoten. Ruft dabei den Elternkonstruktor mit genau diesen Argumenten auf.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaApplication linkedTerm}$ \\ Die Lambda-Applikation, die durch diesen View-Knoten angezeigt wird.
+				\item $\texttt{LambdaTermViewController viewController}$ \\ Der ViewController, in dem dieser View-Knoten angezeigt wird.
+				\item $\texttt{LambdaNodeViewController parent}$ \\ Der View-Elternknoten dieses Knotens.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{linkedTerm == null}$ oder $\texttt{view == null}$ ist. Wird vom Elternkonstruktor aus kontrolliert.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{draw}(Batch batch, float parentAlpha)}$ \\ Zeichnet diesen View-Knoten auf dem gegebenen Batch mit dem gegebenen Alpha-Wert.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{Batch batch}$ \\ Der Batch, auf dem gezeichnet wird.
+				\item $\texttt{float parentAlpha}$ \\ Der Alpha-Wert, mit dem gezeichnet wird.
+			\end{itemize}
+		\end{description}
+			
+		\item $\texttt{public float \textbf{getMinWidth}()}$ \\ Gibt die minimale Breite zurück, die der View-Knoten einer Applikation haben kann.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Die minimale Breite dieses View-Knotens.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{LambdaVariableViewController} extends LambdaNodeViewController}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen View-Knoten einer Lambda-Variable im View-Baum eines Lambda-Terms.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private Color \textbf{color}}$ \\ Die Farbe der Variable.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{LambdaVariableViewController}(LambdaVariable linkedTerm, LambdaNodeViewController parent, LambdaTermViewController view)}$ \\ instanziiert ein Objekt dieser Klasse, das den gegebenen Variablen-Knoten auf der gegebenen View anzeigt, mit dem gegebenen Elternknoten. Ruft dabei den Elternkonstruktor mit genau diesen Argumenten auf.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaVariable linkedTerm}$ \\ Die Lambda-Variable, die durch diesen View-Knoten angezeigt wird.
+				\item $\texttt{LambdaTermViewController viewController}$ \\ Der ViewController, in dem dieser View-Knoten angezeigt wird.
+				\item $\texttt{LambdaNodeViewController parent}$ \\ Der View-Elternknoten dieses Knotens.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{linkedTerm == null}$ oder $\texttt{view == null}$ ist. Wird vom Elternkonstruktor aus kontrolliert.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{draw}(Batch batch, float parentAlpha)}$ \\ Zeichnet diesen View-Knoten auf dem gegebenen Batch mit dem gegebenen Alpha-Wert. % TODO Animationen, Context
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{Batch batch}$ \\ Der Batch, auf dem gezeichnet wird.
+				\item $\texttt{float parentAlpha}$ \\ Der Alpha-Wert, mit dem gezeichnet wird.
+			\end{itemize}
+		\end{description}
+			
+		\item $\texttt{public float \textbf{getMinWidth}()}$ \\ Gibt die minimale Breite zurück, die der View-Knoten einer Variable haben kann.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Die minimale Breite dieses View-Knotens.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}

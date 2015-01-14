@@ -1,0 +1,85 @@
+\subsection{\texttt{package lambda.viewcontroller.shop}}
+
+\subsubsection{\normalfont \texttt{public class \textbf{ShopViewController} extends Controller}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Kontrolliert und regelt die Darstellung des Shopmenüs und damit der einzelnen erwerbbaren Items und die Benutzerinteraktion mit dem Menü.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private ShopModel \textbf{model}}$ \\ 
+		\item $\texttt{private scene2d.Stage \textbf{stage}}$ \\ 2D-Scene-Graph, der die Hierarchie der gesamten grafischen Komponenten (Akteure mit Typ $\texttt{scene2d.Actor}$ des Screens (der aktuell angezeigte Bildschirm) enthält. 
+		\item $\texttt{private InputMultiplexer \textbf{inputProcessor}}$ \\ Delegiert die Eingabe-Ereignisse an die geordnete Liste der InputProcessor, die die Ereignisse empfangen und weiterverarbeiten.
+		\item $\texttt{private List<DropDownMenuViewController> \textbf{items}}$ \\ 
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ShopViewController}()}$ \\ instanziiert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public List<DropDownMenuViewController> \textbf{getItems}()}$ \\ Gibt eine Liste mit DropDownViewControllern zurück, welche für den Shop benötigt werden, um die Items anzuzeigen.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{items}$ zurück.
+			\end{itemize}
+			\end{description}
+		
+		\item $\texttt{public void \textbf{update}()}$ \\.
+
+
+		\end{itemize}
+	\end{description}
+	
+	
+\subsubsection{\normalfont \texttt{public class \textbf{ShopItemViewController} extends Controller}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Kontrolliert und regelt die Darstellung des Items innerhalb des Shops und damit die Benutzerinteraktion mit dem Item.
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private ShopItemModel \textbf{model}}$ \\ 
+		\item $\texttt{private scene2d.Stage \textbf{stage}}$ \\ 2D-Scene-Graph, der die Hierarchie der gesamten grafischen Komponenten (Akteure mit Typ $\texttt{scene2d.Actor}$ des Screens (der aktuell angezeigte Bildschirm) enthält. 
+		\item $\texttt{private InputMultiplexer \textbf{inputProcessor}}$ \\ Delegiert die Eingabe-Ereignisse an die geordnete Liste der InputProcessor, die die Ereignisse empfangen und weiterverarbeiten.
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ShopItemViewController}()}$ \\ instanziiert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{purchasedChanged}(boolean purchased)}$ \\ Aktualisiert die Anzeige eines Items im Shop nach einem erfolgreichen Erwerb oder Profilwechsel.	
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{boolean purchased}$ \\ Gibt an, ob das Item erworben wird oder nach einem Profilwechsel, ob dieses Profil das Item nicht erworben hat.
+			\end{itemize}
+			\end{description}
+		
+		\item $\texttt{public void \textbf{activatedChanged}(boolean activated)}$ \\ Aktualisiert die Anzeige eines Items im Shop nach Änderung des aktivierten Items oder Profilwechsel.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{boolean activated}$ \\ Gibt an, ob das Item aktiviert oder deaktiviert wird bzw. nach einem Profilwechsel, ob dieses aktiviert oder nicht aktiviert ist.
+			\end{itemize}
+			\end{description}
+
+		\end{itemize}
+	\end{description}
+	
