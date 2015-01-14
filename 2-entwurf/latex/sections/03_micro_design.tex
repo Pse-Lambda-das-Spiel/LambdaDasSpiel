@@ -2102,7 +2102,7 @@
 \item[Typ-Parameter] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{<Observer>}$ \\ Der Typ einer Kategorie.
+		\item $\texttt{<Tr>}$ \\ Der Typ einer Kategorie.
 	\end{itemize}
 
 \item[Attribute] \hfill \\
@@ -2172,7 +2172,6 @@
 		\item $\texttt{private List<ReductionStrategy> \textbf{availableRedStrats}}$ \\ Enthält alle Reduktionsstrategien, welche man für das Level verwenden darf.
 		\item $\texttt{private List<ElementType> \textbf{usableElements}}$ \\ Enthält alle Elementtypen, die im Level in der Elementen-Leiste im Editormodus für das Level verfügbar sind.
 		\item $\texttt{private int \textbf{difficulty}}$ \\ Beschreibt den Schwierigkeitsgrad des Levels aufsteigend von 1.
-		\item $\texttt{private Assets \textbf{assets}}$ \\ Referenz zu den Assets.
 		\end{itemize}
 	
 \item[Konstruktoren] \hfill \\
@@ -2254,15 +2253,6 @@
 			\vspace{-.8cm}
 			\begin{itemize}
 				\item Gibt $\texttt{difficulty}$ zurück.
-			\end{itemize}
-			\end{description}
-			
-		\item $\texttt{public Assets \textbf{getAssets}()}$ \\ Gibt $\texttt{assets}$ zurück
-		\begin{description}
-			\item[Rückgabe] \hfill \\
-			\vspace{-.8cm}
-			\begin{itemize}
-				\item Gibt $\texttt{assets}$ zurück.
 			\end{itemize}
 			\end{description}
 
@@ -2415,8 +2405,8 @@
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public void \textbf{purchasedChanged}()}$ \\ Aktualisiert die Anzeige eines Items im Shop nach einem erfolgreichen Erwerb oder Profilwechsel.	
-			\begin{description}
+		\item $\texttt{public void \textbf{purchasedChanged}(boolean purchased)}$ \\ Aktualisiert die Anzeige eines Items im Shop nach einem erfolgreichen Erwerb oder Profilwechsel.	
+		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
@@ -2424,7 +2414,7 @@
 			\end{itemize}
 			\end{description}
 		
-		\item $\texttt{public void \textbf{activatedChanged}()}$ \\ Aktualisiert die Anzeige eines Items im Shop nach Änderung des aktivierten Items oder Profilwechsel.
+		\item $\texttt{public void \textbf{activatedChanged}(boolean activated)}$ \\ Aktualisiert die Anzeige eines Items im Shop nach Änderung des aktivierten Items oder Profilwechsel.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -2432,7 +2422,6 @@
 				\item $\texttt{boolean activated}$ \\ Gibt an, ob das Item aktiviert oder deaktiviert wird bzw. nach einem Profilwechsel, ob dieses aktiviert oder nicht aktiviert ist.
 			\end{itemize}
 			\end{description}
-			
 
 		\end{itemize}
 	\end{description}
@@ -2460,7 +2449,7 @@
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public void \textbf{startLevel}()}$ \\ Erstellt einen neuen LevelContext mit dem gewählten LevelModel.
+		\item $\texttt{public void \textbf{startLevel}(LevelModel level)}$ \\ Erstellt einen neuen LevelContext mit dem gewählten LevelModel.
 			\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -2747,6 +2736,7 @@
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}	
+		\item $\texttt{private static AssetModel \textbf{assets}}$ \\ Statische Instanz von sich selbst, damit von jeder Klasse auf die Assets zugegriffen werden kann.
 		\item $\texttt{private Map<String, Sound> \textbf{sounds}}$ \\ Map, welche alle Sounds enthält, die für das Spiel benötigt werden. Jeder Sound hat einen eindeutigen Bezeichner, welcher als Key dient.
 		\item $\texttt{private Map<String, Music> \textbf{music}}$ \\ Map, welche jedes Musikstück enthält, die für das Spiel benötigt werden. Jedes Musikstück hat einen eindeutigen Bezeichner, welcher als Key dient.
 		\item $\texttt{private Map<int, DifficultySettings> \textbf{difficultySettings}}$ \\ Map, welche alle Einstellungen für einen Schwierigkeitsgrad eines Levels enthält. Jede Einstellung für einen Schwierigkeitsgrad hat einen eindeutigen Indentfizierer, welcher als Key dient.
@@ -2759,69 +2749,108 @@
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public \textbf{AssetModel}()}$ \\ instanziiert ein Objekt dieser Klasse.
+		\item $\texttt{private \textbf{AssetModel}()}$ \\ instanziiert ein Objekt dieser Klasse.
 
 	\end{itemize}
 	
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
-		\item $\texttt{public Map<String, Sound> \textbf{sounds}}$ \\ 
+		\item $\texttt{public AssetModel \textbf{getAssets}()}$ \\ 
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item Gibt $\texttt{sounds}$ zurück.
+				\item Gibt $\texttt{assets}$ zurück.
+			\end{itemize}
+			\end{description}
+	
+		\item $\texttt{public Sound \textbf{getSoundByKey}(String key)}$ \\ 
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{String key}$ \\ Key, um das entsprechende Objekt aus der Map zu holen.
+			\end{itemize}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt einen $\texttt{Sound}$-Objekt zurück, welches nach dem Parameter $\texttt{key}$ aus der Map $\texttt{sounds}$ geholt wird.
 			\end{itemize}
 			\end{description}
 			
-		\item $\texttt{public Map<String, Music> \textbf{music}}$ \\ 
+		\item $\texttt{public Music \textbf{getMusicByKey}(String key)}$ \\ 
 		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{String key}$ \\ Key, um das entsprechende Objekt aus der Map zu holen.
+			\end{itemize}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item Gibt $\texttt{music}$ zurück.
+				\item Gibt ein $\texttt{Music}$-Objekt zurück, welches nach dem Parameter $\texttt{key}$ aus der Map $\texttt{music}$ geholt wird.
 			\end{itemize}
 			\end{description}
 
-		\item $\texttt{public Map<int, DifficultySettings> \textbf{difficultySettings}}$ \\ 
+		\item $\texttt{public DifficultySettings \textbf{getDifficultySettingByKey}(int key)}$ \\ 
 		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int key}$ \\ Key, um das entsprechende Objekt aus der Map zu holen.
+			\end{itemize}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item Gibt $\texttt{difficultySettings}$ zurück.
+				\item Gibt ein $\texttt{DifficultySetting}$-Objekt zurück, welches nach dem Parameter $\texttt{key}$ aus der Map $\texttt{difficultySettings}$ geholt wird.
 			\end{itemize}
 			\end{description}
 			
-		\item $\texttt{public Map<String, Image> \textbf{images}}$\\ 
+		\item $\texttt{public Image \textbf{getImageByKey}(String key)}$\\ 
 		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{String key}$ \\ Key, um das entsprechende Objekt aus der Map zu holen.
+			\end{itemize}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item Gibt $\texttt{imagest}$ zurück.
+				\item Gibt ein $\texttt{Image}$-Objekt zurück, welches nach dem Parameter $\texttt{key}$ aus der Map $\texttt{images}$
 			\end{itemize}
 			\end{description}
 
-		\item $\texttt{public Map<String, TutorialMessage> \textbf{tutorials}}$ \\ 
+		\item $\texttt{public TutorialMessage \textbf{getTutorialByKey}(String key)}$ \\ 
 		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{String key}$ \\ Key, um das entsprechende Objekt aus der Map zu holen.
+			\end{itemize}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item Gibt $\texttt{tutorials}$ zurück.
+				\item Gibt eine $\texttt{TutorialMessage}$-Objekt zurück, welches nach dem Parameter $\texttt{key}$ aus der Map $\texttt{tutorialMessages}$
 			\end{itemize}
 			\end{description}
 			
-		\item $\texttt{public Map<int, LevelModel> \textbf{levels}}$ \\ 
+		\item $\texttt{public LevelModel \textbf{getLevelByKey}(int key)}$ \\ 
 		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int key}$ \\ Key, um das entsprechende Objekt aus der Map zu holen.
+			\end{itemize}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item Gibt $\texttt{levels}$ zurück.
+				\item Gibt ein $\texttt{LevelModel}$-Objekt zurück, welches nach dem Parameter $\texttt{key}$ aus der Map $\texttt{levels}$ geholt wird.
 			\end{itemize}
 			\end{description}
 			
 	\end{description}
 			
-\subsubsection{\normalfont \texttt{public class \textbf{DifficultySettings}}}
+\subsubsection{\normalfont \texttt{public class \textbf{DifficultySetting}}}
 
 \begin{description}
 \item[Beschreibung] \hfill \\ Enthält die erforderlichen Bezeichner, um die gewünschten Daten für einen bestimmten Schwierigkeitsgrad aus dem AssetModel zu laden.
