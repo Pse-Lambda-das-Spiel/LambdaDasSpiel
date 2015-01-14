@@ -27,8 +27,7 @@ Zum Auslesen und späteren Erstellen der Level werden folgende Dinge jeweils fü
 	\item Die Start-Konstellation der Spielelemente auf Spielfeld, die Zielkonstellation sowie einen Hinweis zur Lösung des Levels. All diese Konstellationen sind aus baumartig-strukturierten Knoten aufgebaut. Diese Knoten und ihren Attribute sind in den Klassendokumentationen aus dem Kapitel Feinentwurf beschrieben worden (siehe die Klassenstruktur von LambdaTerm.	
 \end{itemize}
 
-Die SampleLevel.json im Anhang zeigt wie eine beispielhafte Level-JSON-Datei aussehen kann.
-\lstinputlisting[frame=single,label=beispielcode,caption=Ein Beispiel]{sections/listings/SampleLevel.json}
+\lstinputlisting[language=json,firstnumber=1,frame=single,label=beispielcode,caption=Beispiel in Form einer JSON]{sections/listings/SampleLevel.json}
 
 \subsection{Profile}
 
@@ -65,7 +64,13 @@ Die innerhalb von mehreren Spielsitzungen erstellten Spielerprofile werden sowoh
 \end{itemize}
 
 Die erreichten Erfolge werden nicht für das Profil gespeichert, sondern werden mit jedem Appstart und Profilwechsel anhand der Benutzerstatistik neu berechnet. Jedoch befindet sich bei den Assets eine JSON-Datei mit einer Auflistung aller Achievement-IDs, mit denen mit Hilfe von weiteren Assets die Erfolge angelegt werden. Die Shop-Elemente werden  auch auf diese Weise mit ihrer ID und ihrem Preis geladen. Es ist nicht notwendig das zuletzt benutzte Profil zu speichern, da die Applikation immer im Profilauswahlmenü startet.
-
+	\newpage
+\lstinputlisting[language=json,firstnumber=1,frame=single,label=beispielcode,caption=Beispiel in Form einer JSON]{sections/listings/SampleGenerelInfos_ProfileSave.json}
+	\newpage
+\lstinputlisting[language=json,firstnumber=1,frame=single,label=beispielcode,caption=Beispiel in Form einer JSON]{sections/listings/SampleSettings_ProfileSave.json}
+\lstinputlisting[language=json,firstnumber=1,frame=single,label=beispielcode,caption=Beispiel in Form einer JSON]{sections/listings/SampleShopStatus_ProfileSave.json}
+	\newpage
+\lstinputlisting[language=json,firstnumber=1,frame=single,label=beispielcode,caption=Beispiel in Form einer JSON]{sections/listings/SampleStatistics_ProfileSave.json}
 Die beispielhaften JSON-Dateien im Anhang zeigen nochmal wie eben genannten profilspezifischen Daten in JSON-Dateien gespeichert sind (dabei ist der Shop der Einfachheit halber auf ein Element pro Kategorie beschränkt und im bei der Statistik handelt es sich nur um einen kleinen Ausschnitt aller gespeicherten Daten, was jedoch für die Verdeutlichung der Struktur ausreicht):
 
 \subsection{Sprachen}
