@@ -4,54 +4,50 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>120</x>
-      <y>0</y>
+      <x>0</x>
+      <y>50</y>
       <w>370</w>
       <h>690</h>
     </coordinates>
-    <panel_attributes>
-StatistikModel
+    <panel_attributes>StatisticModel
 --
--GemPlaced : int
--playedTime : long
--solved : int
--played : int
--success : int
--successRate : float
--owner : ProfileModel
-- packagesComplete : int
-- usedHints : int
--GemsEnchanted :int
--GemsPlaced : int 
--LambsEnchanted : int
--LambsPlaced : int
+-playedTime: long
+-solved: int
+-played: int
+-success: int
+-successRate: float
+-owner: ProfileModel
+-packagesComplete: int
+-usedHints: int
+-gemsEnchanted: int
+-gemsPlaced: int 
+-lambsEnchanted: int
+-lambsPlaced: int
 --
 +getPlayedTime():long
-+ getSolvedLevels() : List&lt;int&gt;
++getSolvedLevels(): List&lt;int&gt;
 +getPlayed(): int
-+getSuccess() : int
-+getSuccessRate() : float
-+addSolvedLevel(int)
++getSuccess(): int
++getSuccessRate(): float
++addSolvedLevel(levelId: int)
 +getOwner(): ProfileModel
-+setPlayedTime(playTime:long) 
-+setPlayed(played:int) 
++setPlayedTime(playTime: long) 
++setPlayed(played: int) 
 +setSuccessRate() 
-+setSuccess(success : int) 
++setSuccess(success: int) 
 +resetStatistics()
-+getpackagesComplete() : int
-+setpackagesComplete(packagesComplete : int)
-+getusedHints() : int
-+setusedHints(usedHints : int)
++getpackagesComplete(): int
++setpackagesComplete(packagesComplete: int)
++getusedHints(): int
++setusedHints(usedHints: int)
 +getGemsEnchanted():int 
-+setGemsEnchanted(GemsEnchanted : int )
-+getLambsEnchanted() : int
-+setLambsEnchanted(LambsEnchanted : int)
-+getGemPlaced():int
-+setGemPlaced(GemPlaced : int)
-+getGemPlaced():int
-+setGemPlaced(GemPlaced : int)
-+getLambsPlaced():int
-+setLambsPlaced(LambsPlaced : int )
++setGemsEnchanted(gemsEnchanted: int )
++getLambsEnchanted(): int
++setLambsEnchanted(LambsEnchanted: int)
++getGemsPlaced():int
++setGemsPlaced(gemsPlaced : int)
++getLambsPlaced(): int
++setLambsPlaced(lambsPlaced : int )
 
 group=1</panel_attributes>
     <additional_attributes/>
@@ -59,12 +55,12 @@ group=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>710</x>
-      <y>10</y>
+      <x>590</x>
+      <y>60</y>
       <w>190</w>
-      <h>130</h>
+      <h>100</h>
     </coordinates>
-    <panel_attributes>LevelSattistic
+    <panel_attributes>LevelStatistic
 --
 -levelID : ID
 --
@@ -76,8 +72,8 @@ setLevel(levelID: int )
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>480</x>
-      <y>10</y>
+      <x>360</x>
+      <y>60</y>
       <w>250</w>
       <h>30</h>
     </coordinates>

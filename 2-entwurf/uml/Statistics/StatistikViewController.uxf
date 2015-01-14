@@ -5,32 +5,32 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>410</x>
+      <x>290</x>
       <y>130</y>
       <w>380</w>
       <h>230</h>
     </coordinates>
-    <panel_attributes>StatistikViewController
+    <panel_attributes>StatisticViewController
 --
-- curentStatistic : StatistikModel
--curentLevelStatistic : LevelSattistic
+-curentStatistic: StatistikModel
+-curentLevelStatistic: LevelSattistic
 --
-+getCurentStatistic():StatistikModel
-+setCurentstatistic(model:StatistikModel)
-+getCurentLevelStatistic():StatistikModel
-+setCurentLevelStatistic(model:LevelStatistic)
++getCurentStatistic(): StatisticModel
++setCurentstatistic(model: StatisticModel)
++getCurentLevelStatistic(): StatisticModel
++setCurentLevelStatistic(model: LevelStatistic)
 +update()
-+loadStatisticModel(ProfileModelId : int)
-+storeStatisticModel(ProfileModelId : int)
-+loadLevelstatistics(LevlId : int, ProfileModelId : int)
-+storeLevelstatistics(LevlId : int, ProfileModelId : int)
++loadStatisticModel(profileModelId: int)
++storeStatisticModel(profileModelId: int)
++loadLevelstatistics(levlId: int, profileModelId: int)
++storeLevelstatistics(levlId: int, profileModelId: int)
 +show()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>560</x>
+      <x>440</x>
       <y>30</y>
       <w>100</w>
       <h>20</h>
@@ -42,7 +42,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>600</x>
+      <x>480</x>
       <y>40</y>
       <w>30</w>
       <h>110</h>
@@ -53,7 +53,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>130</x>
+      <x>10</x>
       <y>250</y>
       <w>300</w>
       <h>50</h>
