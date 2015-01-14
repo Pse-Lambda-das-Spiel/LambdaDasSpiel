@@ -1,0 +1,73 @@
+\subsection{\texttt{package lambda.viewcontroller.editor}}
+
+\subsubsection{\normalfont \texttt{public class \textbf{EditorViewController} extends Controller implements EditorModelObserver}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Der ViewController zum Editor-Modus.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{EditorModel \textbf{model}}$ \\ Die Daten und Logik des Editors.
+		\item $\texttt{scene2d.Stage \textbf{stage}}$ \\ Enthält alle anzuzeigenden Elemente.
+		\item $\texttt{LambdaTermViewController \textbf{lambdaTerm}}$ \\ Zeigt und animiert den aktuellen Lambda Term. Bietet außerdem Funktionen zum Editieren des Terms. Initialisiert mit $\texttt{null}$.
+		\item $\texttt{InputMultiplexer \textbf{inputProcesser}}$ \\ Nimmt UI-Events entgegen und behandelt diese.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{EditorViewController}()}$ \\ Instanziiert ein Objekt dieser Klasse und initialisiert dabei $\texttt{stage}$, $\texttt{inputProcessor}$ und alle UI-Elemente.
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{update}(LevelContext context)}$ \\ Aktualisiert den ViewController, sodass dieser den Editor im gegebenen Level-Kontext anzeigt.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LevelContext context}$ \\ Der neue Level-Kontext.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{strategyChanged}(ReductionStrategy strategy)}$ \\ Aufgerufen, falls die aktuelle Reduktionsstragie geändert wird. Passt entsprechend den Reduktionsstrategie-Button an.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{ReductionStrategy strategy}$ \\ Die neue Reduktionsstrategie.
+			\end{itemize}
+		\end{description}
+				
+		\item $\texttt{public void \textbf{dispose}()}$ \\ Wird aufgerufen, wenn der Screen all seine Ressourcen freigeben soll.
+		
+		\item $\texttt{public void \textbf{show}()}$ \\ Wird automatisch aufgerufen, wenn der Screen als aktueller Screen für das Spiel gesetzt wird.
+	
+		\item $\texttt{public void \textbf{hide}()}$ \\ Wird automatisch aufgerufen, wenn der Screen nicht mehr der aktuelle Screen des Spiels ist.
+	
+		\item $\texttt{public void \textbf{resume}()}$ \\ Wird automatisch aufgerufen, wenn die Applikation nach einem pausierten Zustand fortgesetzt wird.	
+	
+		\item $\texttt{public void \textbf{pause}()}$ \\ Wird automatisch aufgerufen, wenn die Applikation pausiert wird.
+	
+		\item $\texttt{public void \textbf{render}(float delta)}$ \\ Wird automatisch zum Zeichnen und Darstellen des Screens aufgerufen.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{float delta}$ \\ Die Zeit in Sekunden seit dem letzten Aufruf dieser Methode.
+			\end{itemize}
+		\end{description}	
+	
+		\item $\texttt{public void \textbf{resize}(int width, int height)}$ \\ Wird automatisch aufgerufen, wenn sich die Bildschirmgröße geändert hat.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int width}$ \\ Die neue Breite in Pixel.
+				\item $\texttt{int height}$ \\ Die neue Höhe in Pixel.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}

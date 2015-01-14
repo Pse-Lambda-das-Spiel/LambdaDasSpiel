@@ -30,10 +30,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>490</x>
-      <y>420</y>
+      <x>410</x>
+      <y>410</y>
       <w>450</w>
-      <h>340</h>
+      <h>330</h>
     </coordinates>
     <panel_attributes>ReductionModel
 --
@@ -42,28 +42,27 @@
 -pauseRequested: boolean = false
 -strategy: BetaReductionVisitor
 -current: LambdaRoot
--step: int = 0
 -busy: boolean = false
--level: LevelModel
+-context: LevelContext
 --
 +ReductionModel(term: LambdaRoot, strategy: BetaReductionVisitor,
-    level: LevelModel)
+    context: LevelContext)
 +play()
 +pause()
 +step()
 +stepRevert()
 
--setPaused(paused: boolean);
--setBusy(busy: boolean);
++getLevelContext(): LevelContext
 
-+getLevel(): LevelModel</panel_attributes>
+-setPaused(paused: boolean);
+-setBusy(busy: boolean);</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>540</x>
-      <y>190</y>
+      <x>460</x>
+      <y>180</y>
       <w>360</w>
       <h>100</h>
     </coordinates>
@@ -79,8 +78,8 @@ ReductionModelObserver
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>700</x>
-      <y>280</y>
+      <x>620</x>
+      <y>270</y>
       <w>70</w>
       <h>160</h>
     </coordinates>
@@ -91,8 +90,8 @@ ReductionModelObserver
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>160</x>
-      <y>450</y>
+      <x>80</x>
+      <y>440</y>
       <w>350</w>
       <h>50</h>
     </coordinates>
@@ -104,8 +103,8 @@ Observer -&gt; ReductionModelObserver</panel_attributes>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>80</x>
-      <y>450</y>
+      <x>0</x>
+      <y>440</y>
       <w>160</w>
       <h>60</h>
     </coordinates>

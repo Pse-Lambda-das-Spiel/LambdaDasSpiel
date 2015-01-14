@@ -39,7 +39,7 @@
 --
 -strategy: ...
 -current: LambdaRoot
--level: LevelModel
+-context: LevelContext
 --
 +EditorModel(level: LevelModel)
 +setStrategy(strategy: ...)
@@ -95,30 +95,6 @@ Observer -&gt; EditorModelObserver</panel_attributes>
       <h>60</h>
     </coordinates>
     <panel_attributes>Observable&lt;Observer&gt;</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>560</x>
-      <y>400</y>
-      <w>210</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;10.0;190.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>750</x>
-      <y>380</y>
-      <w>230</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>...
-current = level.getStartTerm();
- // set default strategy</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

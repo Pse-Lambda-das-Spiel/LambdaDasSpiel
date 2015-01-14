@@ -1,0 +1,78 @@
+\subsection{\texttt{package lambda.model.editor}}
+
+\subsubsection{\normalfont \texttt{public class \textbf{EditorModel} extends Observable<EditorModelObserver}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Hält Informationen über den Editor-Modus.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private ReductionStrategy \textbf{strategy}}$ \\ Speichert die aktuell ausgewählte Reduktionsstrategie.
+		\item $\texttt{private LambdaRoot \textbf{current}}$ \\ Speichert den aktuellen Term.
+		\item $\texttt{private LevelContext \textbf{context}}$ \\ Enthält alle wichtige Daten für das Spielen des aktuellen Levels.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{EditorModel}(LevelContext context)}$ \\ Instanziiert ein Objekt dieser Klasse mit dem gegebenen Level-Kontext.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LevelContext context}$ \\ Der Level-Kontext.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{setStrategy}(ReductionStrategy strategy)}$ \\ Setzt die Reduktionsstrategie und benachrichtigt alle Observer, falls daran eine Änderung vorliegt.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{ReductionStrategy strategy}$ \\ Die neue Reduktionsstrategie.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public ReductionModel \textbf{createReductionModel}()}$ \\ Erstellt das Reduktions-Model zum aktuellen Zustand, in dem sich der Editor befindet.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Ein Reduktions-Model zum aktuellen Editor-Zustand.
+			\end{itemize}
+		\end{description}
+	
+		\item $\texttt{public LevelContext \textbf{getLevelContext}()}$ \\ Gibt den Level-Kontext zurück, mit dem diese Reduktion ausgeführt wird.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Der Level-Kontext, mit dem diese Reduktion ausgeführt wird.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public interface \textbf{EditorModelObserver}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Stellt Methoden zur Verfügung, die von einem $\texttt{EditorModel}$ als Nachrichten an seine Observer aufgerufen werden.
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{strategyChanged}(ReductionStrategy strategy)}$ \\ Aufgerufen, falls die aktuelle Reduktionsstragie geändert wird.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{ReductionStrategy strategy}$ \\ Die neue Reduktionsstrategie.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}

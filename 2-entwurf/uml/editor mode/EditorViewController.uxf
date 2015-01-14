@@ -28,8 +28,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>350</x>
-      <y>240</y>
+      <x>190</x>
+      <y>230</y>
       <w>390</w>
       <h>330</h>
     </coordinates>
@@ -41,7 +41,7 @@
 -inputProcessor: InputMultiplexer
 --
 +EditorViewController()
-+update(level: LevelModel)
++update(context: LevelContext)
 
 +dispose()
 +show()
@@ -51,46 +51,14 @@
 +render(delta: float)
 +resize(width: int, height: int)
 
-+strategyChanged(strategy: ...)
-
-+getLevel(): LevelModel</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>510</x>
-      <y>310</y>
-      <w>290</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;30.0;270.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>780</x>
-      <y>290</y>
-      <w>490</w>
-      <h>160</h>
-    </coordinates>
-    <panel_attributes>stage = new Stage(new ScreenViewport());
-
-inputProcessor = new InputMultiplexer();
-inputProcessor.addProcessor(new GestureDetector.GestureAdapter(){
-    // pan zoom etc
-});
-inputProcessor.addProcessor(stage);
-
- // Add ui elements and events to control EditorModel etc</panel_attributes>
++strategyChanged(strategy: ...)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>890</x>
-      <y>160</y>
+      <x>760</x>
+      <y>200</y>
       <w>80</w>
       <h>60</h>
     </coordinates>
@@ -100,60 +68,30 @@ inputProcessor.addProcessor(stage);
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>530</x>
-      <y>350</y>
-      <w>270</w>
-      <h>160</h>
+      <x>570</x>
+      <y>230</y>
+      <w>250</w>
+      <h>80</h>
     </coordinates>
-    <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;10.0;250.0;140.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>780</x>
-      <y>460</y>
-      <w>490</w>
-      <h>180</h>
-    </coordinates>
-    <panel_attributes>model = new EditorModel(level);
-model.addObserver(this);
-
-if (lambdaTerm != null) {
-    stage.removeActor(lambdaTerm);
-}
-lambdaTerm = new LambdaTermViewController(term, false);
-stage.addActor(lambdaTermView);
-lambdaTermView.setLocation(...);</panel_attributes>
-    <additional_attributes/>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;230.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>730</x>
-      <y>240</y>
-      <w>220</w>
-      <h>30</h>
+      <x>560</x>
+      <y>210</y>
+      <w>250</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
-    <additional_attributes>10.0;10.0;200.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>720</x>
-      <y>170</y>
-      <w>220</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>lt=-</panel_attributes>
-    <additional_attributes>10.0;70.0;200.0;10.0</additional_attributes>
+    <additional_attributes>10.0;20.0;230.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>860</x>
-      <y>230</y>
+      <x>730</x>
+      <y>270</y>
       <w>150</w>
       <h>60</h>
     </coordinates>
