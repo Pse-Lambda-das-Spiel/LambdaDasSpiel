@@ -63,7 +63,7 @@
 	\end{itemize}
 \end{description}
 
-\subsubsection{\normalfont \texttt{public class \textbf{Controller} implements Screen}}
+\subsubsection{\normalfont \texttt{public class \textbf{AssetViewController} extends Controller}}
 
 \begin{description}
 \item[Beschreibung] \hfill \\ Ein Ladebildschirm, der beim Starten der Applikation erscheint solange alle Ressourcen geladen werden.
@@ -86,6 +86,15 @@
 			\vspace{-.8cm}
 			\begin{itemize}
 				\item Das Image, welches im Ladebildschirm angezeigt wird.
+			\end{itemize}
+		\end{description}
+
+		\item $\texttt{public void \textbf{loadProgressChanged}(float percentage)}$ \\ Aktualisiert nach Laden von immer mehr Ressourcen die Anzeige auf dem Bildschirm bis alle Assets geladen wurden.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{float percentage}$ \\ Prozentuale Angabe wie viele Assets schon geladen wurden.
 			\end{itemize}
 		\end{description}
 				
