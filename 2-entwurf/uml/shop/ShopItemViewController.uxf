@@ -7,7 +7,7 @@
       <x>50</x>
       <y>150</y>
       <w>320</w>
-      <h>270</h>
+      <h>260</h>
     </coordinates>
     <panel_attributes>ShopItemViewController
 --
@@ -16,10 +16,9 @@
 -inputProcessor: InputMultiplexer
 --
 +ShopItemViewController()
-
 +purchasedChanged(purchased: boolean)
 +activatedChanged(activated: boolean)
-
++draw()
 +dispose()
 +show()
 +hide()
@@ -32,7 +31,7 @@
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>430</x>
+      <x>420</x>
       <y>160</y>
       <w>180</w>
       <h>60</h>
@@ -45,21 +44,21 @@
     <coordinates>
       <x>360</x>
       <y>170</y>
-      <w>170</w>
+      <w>160</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
-    <additional_attributes>150.0;10.0;10.0;30.0</additional_attributes>
+    <additional_attributes>140.0;10.0;10.0;30.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>140</x>
       <y>50</y>
-      <w>100</w>
+      <w>110</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>Controller</panel_attributes>
+    <panel_attributes>scene2d.Actor</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

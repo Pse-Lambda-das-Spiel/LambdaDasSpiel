@@ -7,7 +7,7 @@
       <x>16</x>
       <y>144</y>
       <w>352</w>
-      <h>280</h>
+      <h>264</h>
     </coordinates>
     <panel_attributes>LambdaGame
 --
@@ -17,7 +17,6 @@
 -mainMenuVC: MainMenuViewController
 -settingsVC: SettingsViewController
 -shopVC: ShopViewController
--shopItemVC: ShopItemViewController
 --
 +getAchievementMenuVC(): AchievementMenuViewController
 +getDropDownMenuVC(): DropDownMenuViewController
@@ -25,7 +24,6 @@
 +getMainMenuVC(): MainMenuViewController
 +getSettingsVC(): SettingsViewController
 +getShopVC(): ShopViewController
-+getShopItemVC(): ShopItemViewController
 +create()
 +dispose()
 +resume()

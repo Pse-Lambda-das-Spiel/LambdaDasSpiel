@@ -1,6 +1,6 @@
 \subsection{\texttt{package lambda.viewcontroller.shop}}
 
-\subsubsection{\normalfont \texttt{public class \textbf{ShopViewController} extends Controller}}
+\subsubsection{\normalfont \texttt{public class \textbf{ShopViewController} extends scene2d.Actor}}
 
 \begin{description}
 \item[Beschreibung] \hfill \\ Kontrolliert und regelt die Darstellung des Shopmenüs und damit der einzelnen erwerbbaren Items und die Benutzerinteraktion mit dem Menü.
@@ -40,7 +40,7 @@
 	\end{description}
 	
 	
-\subsubsection{\normalfont \texttt{public class \textbf{ShopItemViewController} extends Controller}}
+\subsubsection{\normalfont \texttt{public class \textbf{ShopItemViewController} extends Controller implements ShopItemModelObserver}}
 
 \begin{description}
 \item[Beschreibung] \hfill \\ Kontrolliert und regelt die Darstellung des Items innerhalb des Shops und damit die Benutzerinteraktion mit dem Item.
@@ -79,6 +79,21 @@
 				\item $\texttt{boolean activated}$ \\ Gibt an, ob das Item aktiviert oder deaktiviert wird bzw. nach einem Profilwechsel, ob dieses aktiviert oder nicht aktiviert ist.
 			\end{itemize}
 			\end{description}
+			
+		\item $\texttt{public void \textbf{dispose}()}$ \\ Wird aufgerufen, wenn der Screen all seine Ressourcen freigeben soll.
+		
+		\item $\texttt{public void \textbf{show}()}$ \\ Wird automatisch aufgerufen, wenn der Screen als aktueller Screen für das Spiel gesetzt wird.
+	
+		\item $\texttt{public void \textbf{hide}()}$ \\ Wird automatisch aufgerufen, wenn der Screen nicht mehr der aktuelle Screen des Spiels ist.
+	
+		\item $\texttt{public void \textbf{resume}()}$ \\ Wird automatisch aufgerufen, wenn die Applikation nach einem pausierten Zustand fortgesetzt wird.	
+	
+		\item $\texttt{public void \textbf{pause}()}$ \\ Wird automatisch aufgerufen, wenn die Applikation pausiert wird.
+	
+		\item $\texttt{public void \textbf{render}(float delta)}$ \\ Wird automatisch zum Zeichnen und Darstellen des Screens aufgerufen.
+			
+		\item $\texttt{public void \textbf{draw}()}$ \\ Aktualisiert die Anzeige eines Items im Shop nach Änderung des aktivierten Items oder Profilwechsel.
+
 
 		\end{itemize}
 	\end{description}
