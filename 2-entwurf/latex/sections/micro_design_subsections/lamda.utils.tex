@@ -1,0 +1,103 @@
+\subsection{\texttt{package lambda.util}}
+
+\subsubsection{\normalfont \texttt{public class \textbf{LevelLoadHelper}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Lädt ein Level nach einer ID.
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{loadLevel}(int id)}$ \\ Lädt ein Level nach einer ID.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int Id}$ \\ Id eines Levels.
+			\end{itemize}
+		\end{description}
+		
+			\end{itemize}
+\end{description}
+		
+		\subsubsection{\normalfont \texttt{public class \textbf{ProfileSaveHelper}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Helferklasse für verschiedene Zustandsspeicherungen für das Profil.
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{saveProfile}(int id)}$ \\ Lädt ein Level nach einer ID.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int Id}$ \\ Id eines Levels.
+			\end{itemize}
+		\end{description}
+		
+		\begin{itemize}
+		\item $\texttt{public void \textbf{saveSettings}(String profileName, SettingsModel settings)}$ \\ Speicher den Zustand der aktuellen Einstellungen.
+				\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{String profileName}$ \\ Id eines Profils.
+								\item $\texttt{SettingsModel settings}$ \\ Das aktuelle Model der Einstellungen.
+			\end{itemize}
+		\end{description}
+		
+			\begin{itemize}
+		\item $\texttt{public void \textbf{saveShopState}(String profileName, ShopModel shop)}$ \\ Speichert den Zustand des aktuellen Shops.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{String profileName}$ \\ Id eines Profils
+								\item $\texttt{ShopModel shop}$ \\ Das aktuelle Model vom Shop.
+			\end{itemize}
+		\end{description}
+			\end{itemize}
+\end{description}
+		
+				\subsubsection{\normalfont \texttt{public class \textbf{ProfileSaveHelper}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Helferklasse, um Zustände in ein Profil zu laden.
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{loadProfile}(String name)}$ \\ Lädt ein Level nach einer ID.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{String name}$ \\ Id eines Profils.
+			\end{itemize}
+		\end{description}
+		
+		\begin{itemize}
+		\item $\texttt{public void \textbf{loadSettings}(gdx.utils.JsonValue settingsJson, SettingsModel settings)}$ \\ Speicher den Zustand der aktuellen Einstellungen.
+				\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{gdx.utils.JsonValue settingsJson}$ \\ Json-Datei zur Einstellung.
+								\item $\texttt{SettingsModel settings}$ \\ Das aktuelle Model der Einstellungen.
+			\end{itemize}
+		\end{description}
+		
+			\begin{itemize}
+		\item $\texttt{public void \textbf{loadShopState}(gdx.utils.JsonValue shopJson, ShopModel shop)}$ \\ Speichert den Zustand des aktuellen Shops.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{gdx.utils.JsonValue shopJson}$ \\ Json-Datei zum Shop.
+								\item $\texttt{ShopModel shop}$ \\ Das aktuelle Model vom Shop.
+			\end{itemize}
+		\end{description}
+			\end{itemize}
+\end{description}

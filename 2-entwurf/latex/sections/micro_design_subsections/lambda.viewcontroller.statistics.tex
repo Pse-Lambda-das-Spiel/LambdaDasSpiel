@@ -3,12 +3,12 @@
 \subsubsection{\normalfont \texttt{public class \textbf{AchievementMenuViewController} extends Controller implements AchievementModelObserver}}
 
 \begin{description}
-\item[Beschreibung] \hfill \\Ladet Speichert aktuelisiert und zeigt  Statistiken des aktuellen Spielers allgemein und Levelsweise an.  
+\item[Beschreibung] \hfill \\Ladet, speichert, aktualisiert und zeigt Statistiken des aktuellen Spielers allgemein und levelsweise an.  
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{private  \textbf{CurentStatistic:}}$ \\ Die allgemeine Statistiken des aktuellen Spiellers
-		\item $\texttt{private AchievementManager \textbf{CurentLevelStatistic:}}$ \\ Die Statistiken des Spielers zu einem  Level
+		\item $\texttt{private  \textbf{currentStatistic}}$ \\ Die allgemeine Statistiken des aktuellen Spielers.
+		\item $\texttt{private AchievementManager \textbf{currentLevelStatistic}}$ \\ Die Statistiken des Spielers zu einem Level.
 	\end{itemize}
 	
 \item[Methoden] \hfill \\
@@ -19,19 +19,19 @@
 					\item[Rückgabe] \hfill \\
 					\vspace{-.8cm}
 					\begin{itemize}
-						\item Die Aktuelle Statistik des Spielers.
+						\item Die aktuelle Statistik des Spielers.
 					\end{itemize}
 				\end{description}
 				
-		\item $\texttt{public void \textbf{setCurentStatistic}(statistic : StatisticModel)}$ \\ setzt die Aktuelle Statistik des  letzten gespielten Levls .
+		\item $\texttt{public void \textbf{setCurentStatistic}(StatisticModel statistic)}$ \\ setzt die Aktuelle Statistik des  letzten gespielten Levles.
 				\begin{description}
 					\item[Parameter] \hfill \\
 					\vspace{-.8cm}
 					\begin{itemize}
-						\item Die Aktuelle Statistik  des letzten gespielten Levels .
+						\item Die aktuelle Statistik des zuletzt gespielten Levels.
 					\end{itemize}
 				\end{description}
-		\item $\texttt{public void \textbf{setCurentLevelStatistic}(levelStatistic :LevelStatistic)}$ \\ setzt die Aktuelle Statistik eines gespielten Levls .
+		\item $\texttt{public void \textbf{setCurentLevelStatistic}(LevelStatistic levelStatistic)}$ \\ setzt die Aktuelle Statistik eines gespielten Levels.
 				\begin{description}
 					\item[Parameter] \hfill \\
 					\vspace{-.8cm}
@@ -39,25 +39,25 @@
 						\item Die Aktuelle Statistik  des  gespielten Levels.
 					\end{itemize}
 				\end{description}
-				\item $\texttt{public void \textbf{load}(levelStatisticID : String , OwnerID : String)}$ \\ ladet die gespeicherten Statistiken .
+				\item $\texttt{public void \textbf{load}(String levelStatisticID, String OwnerID)}$ \\ Lädt die gespeicherten Statistiken.
 				\begin{description}
 					\item[Parameter] \hfill \\
 					\vspace{-.8cm}
 					\begin{itemize}
-						\item die Id des Spielers .
-						\item die Id des Levels .
+						\item Die Id des Spielers.
+						\item Die Id des Levels.
 					\end{itemize}
 				\end{description}
-				\item $\texttt{public void \textbf{load}(OwnerID : String)}$ \\ ladet die gespeicherten Statistiken des Spielers.
+				\item $\texttt{public void \textbf{load}(String OwnerID)}$ \\ Lädt die gespeicherten Statistiken des Spielers.
 				\begin{description}
 					\item[Parameter] \hfill \\
 					\vspace{-.8cm}
 					\begin{itemize}
-						\item die Id des Spielers .
+						\item Die Id des Spielers.
 					\end{itemize}
 				\end{description}
 				
-				\item $\texttt{public void \textbf{update}()}$ \\ aktualisiert die Statistiken .
+				\item $\texttt{public void \textbf{update}()}$ \\ Aktualisiert die Statistiken.
 				
 				
 					
