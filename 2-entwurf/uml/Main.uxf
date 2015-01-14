@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="13.0">
+<diagram program="umlet" version="13.1">
   <zoom_level>8</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>56</x>
-      <y>280</y>
-      <w>256</w>
-      <h>144</h>
+      <x>16</x>
+      <y>144</y>
+      <w>352</w>
+      <h>280</h>
     </coordinates>
     <panel_attributes>LambdaGame
 --
-SPECIFIC CONTROLLERS
-assets: AssetModel
+-achievementMenuVC: AchievementMenuViewController
+-dropDownMenuVC: DropDownMenuViewController
+-statisticVC: StatisticViewController
+-mainMenuVC: MainMenuViewController
+-settingsVC: SettingsViewController
+-shopVC: ShopViewController
+-shopItemVC: ShopItemViewController
 --
-+getAssets(): AssetModel
++getAchievementMenuVC(): AchievementMenuViewController
++getDropDownMenuVC(): DropDownMenuViewController
++getStatisticVC(): StatisticViewController
++getMainMenuVC(): MainMenuViewController
++getSettingsVC(): SettingsViewController
++getShopVC(): ShopViewController
++getShopItemVC(): ShopItemViewController
 +create()
 +dispose()
 +resume()
@@ -26,8 +37,8 @@ assets: AssetModel
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>56</x>
-      <y>88</y>
+      <x>16</x>
+      <y>32</y>
       <w>256</w>
       <h>72</h>
     </coordinates>
@@ -50,8 +61,8 @@ game: LambdaGame
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>304</x>
-      <y>88</y>
+      <x>264</x>
+      <y>32</y>
       <w>232</w>
       <h>24</h>
     </coordinates>
@@ -61,8 +72,8 @@ game: LambdaGame
   <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>488</x>
-      <y>80</y>
+      <x>448</x>
+      <y>24</y>
       <w>80</w>
       <h>48</h>
     </coordinates>
@@ -70,36 +81,10 @@ game: LambdaGame
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>120</x>
-      <y>328</y>
-      <w>232</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;30.0;270.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>336</x>
-      <y>312</y>
-      <w>288</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes> // initialize all controllers
-reductionController = new ReductionViewController();
-reductionController.setGame(this);
-
-setScreen(STARTING CONTROLLER);</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>488</x>
-      <y>280</y>
+      <x>448</x>
+      <y>144</y>
       <w>80</w>
       <h>24</h>
     </coordinates>
@@ -109,35 +94,12 @@ setScreen(STARTING CONTROLLER);</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>304</x>
-      <y>280</y>
-      <w>200</w>
+      <x>360</x>
+      <y>144</y>
+      <w>104</w>
       <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>230.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>120</x>
-      <y>360</y>
-      <w>232</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;10.0;270.0;80.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>336</x>
-      <y>400</y>
-      <w>288</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes> // dispose o all controllers
-reductionController.dispose();</panel_attributes>
-    <additional_attributes/>
+    <additional_attributes>110.0;10.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
