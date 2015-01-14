@@ -2415,21 +2415,21 @@
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public void \textbf{purchasedChanged}()}$ \\ 
+		\item $\texttt{public void \textbf{purchasedChanged}()}$ \\ Aktualisiert die Anzeige eines Items im Shop nach einem erfolgreichen Erwerb oder Profilwechsel.	
 			\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{boolean purchased}$ \\ 
+				\item $\texttt{boolean purchased}$ \\ Gibt an, ob das Item erworben wird oder nach einem Profilwechsel, ob dieses Profil das Item nicht erworben hat.
 			\end{itemize}
 			\end{description}
 		
-		\item $\texttt{public void \textbf{activatedChanged}()}$ \\.
+		\item $\texttt{public void \textbf{activatedChanged}()}$ \\ Aktualisiert die Anzeige eines Items im Shop nach Änderung des aktivierten Items oder Profilwechsel.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{boolean activated}$ \\ 
+				\item $\texttt{boolean activated}$ \\ Gibt an, ob das Item aktiviert oder deaktiviert wird bzw. nach einem Profilwechsel, ob dieses aktiviert oder nicht aktiviert ist.
 			\end{itemize}
 			\end{description}
 			
@@ -2863,4 +2863,38 @@
 
 		
 	\end{description}
+	
+	
+\subsubsection{\normalfont \texttt{public class \textbf{DropDownMenuViewController}}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Enthält die erforderlichen Bezeichner, um die gewünschten Daten für einen bestimmten Schwierigkeitsgrad aus dem AssetModel zu laden.
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}	
+		\item $\texttt{private ShopItemTypeModel<T> \textbf{shopItemTypeModel}}$ \\ Kategorie, welche sich nach dem Typ-Parameter orientiert und alle Items dieser Kategorie enthält.
+		\item $\texttt{private boolean \textbf{open}}$ \\ Gibt an, ob die Kategorie mit den entsprechenden Items ausgefahren wurde oder nicht.
+
+		\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{DropDownMenuViewController}()}$ \\ instanziiert ein Objekt dieser Klasse.
+
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+		\item $\texttt{public boolean \textbf{open}}$ \\ Dient der Anzeige, ob die Kategorie ausgefahren wurde oder nicht.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{open}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		
+	\end{description}	
 
