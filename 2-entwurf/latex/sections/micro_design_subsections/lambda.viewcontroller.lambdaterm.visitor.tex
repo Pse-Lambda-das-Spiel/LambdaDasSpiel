@@ -3,32 +3,33 @@
 \subsubsection{\normalfont \texttt{public class \textbf{ViewInsertionVisitor} implements LambdaTermVisitor<Object>}}
 
 \begin{description}
-\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur, welcher rekursiv View-Knoten eines gegebenen Lambda-Terms erstellt und in eine gegebenen Lambda-Term ViewController einfügt. Dabei traversiert der Besucher so lange nach oben, bis ein Elternknoten gefunden ist, zu dem ein View-Knoten im Lambda-Term ViewController existiert. Dort wird ein neuer View-Kindknoten erstellt und eingefügt.
+\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur, welcher rekursiv View-Knoten eines gegebenen Lambda-Terms erstellt und in einen Lambda-Term ViewController einfügt. Dabei traversiert der Besucher so lange nach oben, bis ein Elternknoten gefunden ist, zu dem ein View-Knoten im Lambda-Term ViewController existiert. Dort wird ein neuer View-Kindknoten erstellt und eingefügt. Der zuerst besuchte Knoten muss der Elternknoten des einzufügenden Knotens sein.
 
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
 		\item $\texttt{private LambdaTerm \textbf{inserted}}$ \\ Der Lambda-Term, zu dem View-Knoten erstellt werden.
 		\item $\texttt{private LambdaTermViewController \textbf{viewController}}$ \\ Der Lambda-Term ViewController, in den die erstellen View-Knoten eingefügt werden.
-		\item $\texttt{private LambdaTerm \textbf{rightSibling}}$ \\ Der Knoten rechts neben dem eingefügten Knoten, falls der Elternknoten eine Applikation ist. Initialisiert mit $\texttt{null.}$
-		\item $\texttt{private LambdaTerm \textbf{lastVisited}}$ \\ 
+		\item $\texttt{private LambdaTerm \textbf{rightSibling}}$ \\ Der Knoten rechts neben $\texttt{inserted}$, falls der Elternknoten eine Applikation ist. Initialisiert mit $\texttt{null}$.
+		\item $\texttt{private LambdaTerm \textbf{lastVisited}}$ \\ Der zuletzt besuchte Term. Initialisiert mit $\texttt{inserted}$.
+		\item $\texttt{private boolean \textbf{isSecondApplicationChild}}$ \\ Gibt ab, ob $\texttt{inserted}$ das rechte Kind einer Applikation ist. Nur dann, $\texttt{inserted}$ selber eine Applikation ist, kann dazu ein Klammer View-Knoten erstellt werden.  Initialisiert mit $\texttt{false}$.
 	\end{itemize}
 
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public \textbf{ApplicationVisitor}(Color color, LambdaTerm applicant)}$ \\ instanziiert ein Objekt dieser Klasse mit der gegebenen Variablenfarbe und dem gegebenen Argument.
+		\item $\texttt{public \textbf{ViewInsertionVisitor}(LambdaTerm inserted, LambdaTermViewController view)}$ \\ Instanziiert ein Objekt dieser Klasse, der rekursiv zum gegebenen Term View-Knoten erstellt und in die gegebene View einfügt.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{Color color}$ \\ Die Farbe der zu ersetzenden Variablen.
-				\item $\texttt{LambdaTerm applicant}$ \\ Das Argument der Applikation.
+				\item $\texttt{LambdaTerm inserted}$ \\ Der Knoten, zu dem View-Knoten erstellt und in die View eingefügt werden.
+				\item $\texttt{LambdaTermViewController view}$ \\ Die View, in die Knoten eingefügt werden.
 			\end{itemize}
 			\item[Exceptions] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{color == null}$ oder $\texttt{applicant == null}$ ist.
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{inserted == null}$ oder $\texttt{view == null}$ ist.
 			\end{itemize}
 		\end{description}
 	\end{itemize}
@@ -36,7 +37,16 @@
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public void \textbf{visit}(LambdaRoot node)}$ \\ Kann nie aufgerufen werden, da der besuchte Knoten keinen Elternknoten hat, von wo aus eine Applikation ausgeführt werden könnte.
+		\item $\texttt{private void \textbf{insert}(LambdaNodeViewController parent)}$ \\ Erstellt einen neuen $\texttt{LambdaNodeViewController}$ zu $\texttt{inserted}$ mit Hilfe des Besuchers $\texttt{NodeViewControllerCreator}$ und fügt diesen als Kind in den gegebenen Elternknoten ein. Traversiert dann mit Hilfe des Besuchers $\texttt{InsertionRecursionVisitor}$ weiter zu den Kindknoten von $\texttt{inserted}$.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaNodeViewController parent}$ \\ Der Elternknoten, unter dem der neue View-Knoten eingefügt wird.
+			\end{itemize}
+		\end{description}
+	
+		\item $\texttt{public void \textbf{visit}(LambdaRoot node)}$ \\ Fügt mit Hilfe von $\texttt{insert()}$ einen neuen View-Knoten unter den View-Knoten zu $\texttt{node}$ ein.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -45,7 +55,7 @@
 			\end{itemize}
 		\end{description}
 				
-		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Besucht die gegebene Applikation und traversiert weiter zu beiden Kindknoten. Dabei werden die Kindknoten auf die Rückgabewerte beider Besuche gesetzt. Speichert als Rückgabewert den besuchten Term.
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Falls der zuletzt besuchte Knoten das linke Kind der besuchten Applikation ist und bisher $\texttt{rightSibling}$ noch leer ist, speichert darin das rechte Kind der besuchten Applikation. Falls der einzufügende Knoten das rechte Kind der besuchten Applikation ist, setzt $\texttt{isSecondApplicationChild}$ auf $\texttt{true}$. Wenn zum Schluss noch kein View-Knoten zum besuchten Knoten existiert, wird weiter zum Elternknoten traversiert. Sonst wird mit Hilfe von $\texttt{insert()}$ ein neuer View-Knoten unter den View-Knoten zu $\texttt{node}$ eingefügt, falls $\texttt{isSecondApplicationChild == true}$ ist, oder zu den Kindknoten von $\texttt{inserted}$ mit Hilfe des Besuchers $\texttt{InsertionRecursionVisitor}$ traversiert, falls $\texttt{isSecondApplicationChild == false}$ ist.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -54,7 +64,7 @@
 			\end{itemize}
 		\end{description}
 		
-		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Besucht die gegebene Abstraktion und traversiert weiter zum Kindknoten. Dabei wird der Kindknoten auf den Rückgabewert des Besuchs gesetzt. Speichert als Rückgabewert den besuchten Term.
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Fügt mit Hilfe von $\texttt{insert()}$ einen neuen View-Knoten unter den View-Knoten zu $\texttt{node}$ ein.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -63,7 +73,80 @@
 			\end{itemize}
 		\end{description}
 		
-		\item $\texttt{public void \textbf{visit}(LambdaVariable node)}$ \\ Besucht die gegebene Variable und speichert wenn nötig als Rückgabewert $\texttt{applicant}$.
+		\item $\texttt{public void \textbf{visit}(LambdaVariable node)}$ \\ Kann nicht eintreten, da eine Variable keine Kindknoten hat.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaVariable node}$ \\ Die besuchte Variable.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{NodeViewControllerCreator} implements LambdaTermVisitor<LambdaNodeViewController>}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer LambdaTerm Baumstruktur, der einen neuen $\texttt{LambdaNodeViewController}$ zum besuchten Knoten erstellt.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private LambdaNodeViewController \textbf{result}}$ \\ Der erstellte $\texttt{LambdaNodeViewController}$. Initialisiert mit $\texttt{null}$.
+		\item $\texttt{private LambdaNodeViewController \textbf{parent}}$ \\ Der View-Elternknoten des erstellten View-Knotens.
+		\item $\texttt{private LambdaTermViewController \textbf{view}}$ \\ Der ViewController, zu dem der View-Knoten erstellt wird.
+	\end{itemize}
+
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{NodeViewControllerCreator}(LambdaNodeViewController parent, LambdaTermViewController view)}$ \\ Instanziiert ein Objekt dieser Klasse, das einen neuen $\texttt{LambdaNodeViewController}$ unter dem gegebenen View-Elternknoten zum gegebenen ViewController ertellt.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaNodeViewController parent}$ \\ Der View-Elternknoten, unter dem der erstellte View-Knoten eingefügt wird.
+				\item $\texttt{LambdaTermViewController view}$ \\ Die View, zu dem der View-Knoten erstellt wird.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{parent == null}$ oder $\texttt{view == null}$ ist.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaRoot node)}$ \\ Kann nicht eintreten, da zur Wurzel nie ein $\texttt{LambdaNodeViewController}$ erstellt wird.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaRoot node}$ \\ Die besuchte Wurzel.
+			\end{itemize}
+		\end{description}
+				
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Erstellt einen neuen $\texttt{LambdaParanthesisViewController}$ zum besuchten Knoten mit den gegebenen Parametern und speichert diesen als Rückgabewert des Besuchs ab.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaApplication node}$ \\ Die besuchte Applikation.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Erstellt einen neuen $\texttt{LambdaAbstractionViewController}$ zum besuchten Knoten mit den gegebenen Parametern und speichert diesen als Rückgabewert des Besuchs ab.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaAbstraction node}$ \\ Die besuchte Abstraktion.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaVariable node)}$ \\ Erstellt einen neuen $\texttt{LambdaVariableViewController}$ zum besuchten Knoten mit den gegebenen Parametern und speichert diesen als Rückgabewert des Besuchs ab.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -72,15 +155,153 @@
 			\end{itemize}
 		\end{description}
 		
-		\item $\texttt{public LambdaTerm \textbf{getResult}()}$ \\ Gibt den Term nach der Applikation zurück.
+		\item $\texttt{public LambdaNodeViewController \textbf{getResult}()}$ \\ Gibt den zuvor erstellten $\texttt{LambdaNodeViewController}$ als Resultat des Besuchs zurück.
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item Der besuchte Term.
+				\item Das Resultat des Besuchs.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{InsertionRecursionVisitor} implements LambdaTermVisitor<Object>}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\  Repräsentiert einen Besucher auf einer LambdaTerm Baumstruktur, der zu allen Kindern des besuchten Knotens neue $\texttt{InsertionVisitor}$ schickt und so durch den Baum traversiert.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private LambdaTermViewController \textbf{view}}$ \\ Der ViewController, in den View-Knoten eingefügt werden.
+	\end{itemize}
+
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{InsertionRecursionVisitor}(LambdaTermViewController view)}$ \\ Instanziiert ein Objekt dieser Klasse, das zu jedem Kind eines besuchten Knoten neue $\texttt{InsertionVisitor}$ schickt.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTermViewController view}$ \\ Der ViewController, in den View-Knoten eingefügt werden.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{view == null}$ ist.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaRoot node)}$ \\ Kann nicht eintreten, da zur Wurzel nie ein $\texttt{LambdaNodeViewController}$ erstellt wird.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaRoot node}$ \\ Die besuchte Wurzel.
+			\end{itemize}
+		\end{description}
+				
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Schickt einen neuen $\texttt{InsertionVisitor}$ zu beiden Kindknoten, falls diese nicht $\texttt{null}$ sind.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaApplication node}$ \\ Die besuchte Applikation.
 			\end{itemize}
 		\end{description}
 		
-		\item $\texttt{private void \textbf{checkAlphaConversion}()}$ \\ Überprüft, ob eine Alpha-Konversion notwendig ist, falls dies noch nicht getan wurde, und führt diese wenn nötig aus. Entfernt danach das Argument der Applikation aus dem LambdaTerm.
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Schickt einen neuen $\texttt{InsertionVisitor}$ zum Kindknoten, falls dieser nicht $\texttt{null}$ ist.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaAbstraction node}$ \\ Die besuchte Abstraktion.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaVariable node)}$ \\ Leere Methode. Beendet hier die Traversierung.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaVariable node}$ \\ Die besuchte Variable.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{ViewRemovalVisitor} implements LambdaTermVisitor<Object>}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Repräsentiert einen Besucher auf einer Lambda-Term Baumstruktur, welcher den gegebenen zuerst die Kindknoten des besuchten View-Knotens, und dann denn besuchten Knoten selber aus der View-Baumstruktur entfernt.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private LambdaTermViewController \textbf{view}}$ \\ Der Lambda-Term ViewController, aus dem View-Knoten entfernt werden.
+	\end{itemize}
+
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{ViewRemovalVisitor}(LambdaTermViewController view)}$ \\ Instanziiert ein Objekt dieser Klasse, das den besuchten Knoten und alle Kindknoten rekursiv aus der Baumstruktur entfernt.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaTermViewController view}$ \\ Der Lambda-Term ViewController, aus dem View-Knoten entfernt werden.
+			\end{itemize}
+			\item[Exceptions] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{NullPointerException}$ \\ Falls $\texttt{view == null}$ ist.
+			\end{itemize}
+		\end{description}
+	\end{itemize}
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{visit}(LambdaRoot node)}$ \\ Kann nicht eintreten, da die Wurzel keinen Elternknoten hat.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaRoot node}$ \\ Die besuchte Wurzel.
+			\end{itemize}
+		\end{description}
+				
+		\item $\texttt{public void \textbf{visit}(LambdaApplication node)}$ \\ Traversiert zu beiden Kindknoten, falls diese nicht $\texttt{null}$ sind, und entfernt dann den View-Knoten zum besuchten Knoten aus dessen View-Elternknoten, falls ein View-Knoten zum besuchten Knoten existiert.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaApplication node}$ \\ Die besuchte Applikation.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaAbstraction node)}$ \\ Traversiert zum Kindknoten, falls dieser nicht $\texttt{null}$ ist, und entfernt dann den View-Knoten zum besuchten Knoten aus dessen View-Elternknoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaAbstraction node}$ \\ Die besuchte Abstraktion.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public void \textbf{visit}(LambdaVariable node)}$ \\ Entfernt dann den View-Knoten zum besuchten Knoten aus dessen View-Elternknoten.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{LambdaVariable node}$ \\ Die besuchte Variable.
+			\end{itemize}
+		\end{description}
 	\end{itemize}
 \end{description}

@@ -4,16 +4,16 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>390</x>
-      <y>400</y>
+      <x>400</x>
+      <y>390</y>
       <w>320</w>
       <h>130</h>
     </coordinates>
     <panel_attributes>ViewRemovalVisitor
 --
--view: LambdaTermView
+-view: LambdaTermViewController
 --
-+ViewRemovalVisitor(view: LambdaTermView)
++ViewRemovalVisitor(view: LambdaTermViewController)
 +visit(node: LambdaRoot)
 +visit(node: LambdaApplication)
 +visit(node: LambdaAbstraction)
@@ -21,41 +21,10 @@
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>600</x>
-      <y>480</y>
-      <w>160</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;10.0;140.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>740</x>
-      <y>480</y>
-      <w>590</w>
-      <h>180</h>
-    </coordinates>
-    <panel_attributes>if (node.getFirstChild() != null) {
-    node.getFirstChild().accept(this);
-}
-if (node.getSecondChild() != null) {
-    node.getSecondChild().accept(this);
-}
-if (view.hasNodeView(node)) {
-    LambdaNodeView actor = view.getActor(node);
-    actor.getParent().removeChild(actor);
-}</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>UMLInterface</id>
     <coordinates>
-      <x>140</x>
-      <y>390</y>
+      <x>150</x>
+      <y>380</y>
       <w>160</w>
       <h>60</h>
     </coordinates>
@@ -65,8 +34,8 @@ if (view.hasNodeView(node)) {
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>220</x>
-      <y>390</y>
+      <x>230</x>
+      <y>380</y>
       <w>190</w>
       <h>50</h>
     </coordinates>
@@ -74,27 +43,5 @@ if (view.hasNodeView(node)) {
 &lt;&lt;bind&gt;&gt;
 T -&gt; Object</panel_attributes>
     <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>560</x>
-      <y>450</y>
-      <w>200</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=()-</panel_attributes>
-    <additional_attributes>10.0;20.0;180.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>740</x>
-      <y>440</y>
-      <w>120</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>assert(false);</panel_attributes>
-    <additional_attributes/>
   </element>
 </diagram>
