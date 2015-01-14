@@ -7,24 +7,26 @@
       <x>20</x>
       <y>20</y>
       <w>330</w>
-      <h>240</h>
+      <h>270</h>
     </coordinates>
     <panel_attributes>AssetModel
 --
+_-assets: AssetModel_
 -sounds: Map&lt;String, Sound&gt;
 -music: Map&lt;Strings, Music&gt;
--difficultySettings: Map&lt;int, DifficultySettings&gt;
+-difficultySettings: Map&lt;int, DifficultySetting&gt;
 -images: Map&lt;String, Image&gt;
 -tutorials: Map&lt;String, TutorialMessage&gt;
 -levels: Map&lt;int, LevelModel&gt;
 --
-+AssetModel()
-+getSounds(): Map&lt;String, Sound&gt;
-+getMusic(): Map&lt;Strings, Music&gt;
-+getDifficulty(): Map&lt;int, DifficultySettings&gt;
-+getImages(): Map&lt;String, Image&gt;
-+getTutorials(): Map&lt;String, TutorialMessage&gt;
-+getevels(): Map&lt;int, LevelModel&gt;</panel_attributes>
+-AssetModel()
+_+getAssets(): AssetModel_
++getSoundByKey(): Sound
++getMusicByKey(): Music
++getDifficultySettingByKey(): DifficultySetting
++getImageByKey(): Image
++getTutorialByKey(): TutorialMessage
++getLevelByKey(): LevelModel</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

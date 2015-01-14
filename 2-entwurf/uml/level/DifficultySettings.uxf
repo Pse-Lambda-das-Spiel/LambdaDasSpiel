@@ -9,12 +9,12 @@
       <w>210</w>
       <h>110</h>
     </coordinates>
-    <panel_attributes>DifficultySettings
+    <panel_attributes>DifficultySetting
 --
 -music: String
 -bgImage: String
 --
-+DifficultySettings()
++DifficultySetting()
 +getMusic(): String
 +getBgImage(): String</panel_attributes>
     <additional_attributes/>
