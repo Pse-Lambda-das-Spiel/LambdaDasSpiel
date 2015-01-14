@@ -7,7 +7,7 @@
       <x>40</x>
       <y>40</y>
       <w>360</w>
-      <h>340</h>
+      <h>320</h>
     </coordinates>
     <panel_attributes>LevelModel
 --
@@ -19,7 +19,6 @@
 -availableRedStrats: List&lt;ReductionStrategy&gt;
 -usableElements: List&lt;ElementType&gt;
 -difficulty: int
--assets: Assets
 --
 +LevelModel()
 +getID(): int
@@ -30,7 +29,6 @@
 +getAvailableredStrats(): List&lt;ReductionStrategy&gt; 
 +getUsableElements(): List&lt;ElementType&gt;
 +getDifficulty(): int
-+getAssets(): Assets
 </panel_attributes>
     <additional_attributes/>
   </element>
