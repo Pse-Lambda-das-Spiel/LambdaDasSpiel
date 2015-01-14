@@ -136,7 +136,7 @@ manager</panel_attributes>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-setCurrentProfile("User")</panel_attributes>
+setCurrentProfile(button.getText())</panel_attributes>
     <additional_attributes>260.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
@@ -296,5 +296,16 @@ super.getGame().mainmenu)</panel_attributes>
     </coordinates>
     <panel_attributes>lt=..</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>320</x>
+      <y>300</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=..</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
   </element>
 </diagram>
