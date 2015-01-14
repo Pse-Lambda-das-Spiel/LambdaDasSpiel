@@ -7,7 +7,7 @@
       <x>16</x>
       <y>144</y>
       <w>352</w>
-      <h>264</h>
+      <h>440</h>
     </coordinates>
     <panel_attributes>LambdaGame
 --
@@ -17,6 +17,13 @@
 -mainMenuVC: MainMenuViewController
 -settingsVC: SettingsViewController
 -shopVC: ShopViewController
+-profileSelectionVC: ProfileSelection
+-langEditVC: ProfileEditLang
+-nameEditVC: ProfileEditName
+-avatarEditVC: ProfileEditAvatar
+-levelSelectionVC: LevelSelectionViewController
+-editorVC: EditorViewController
+-reductionVC: ReductionViewController
 --
 +getAchievementMenuVC(): AchievementMenuViewController
 +getDropDownMenuVC(): DropDownMenuViewController
@@ -24,6 +31,13 @@
 +getMainMenuVC(): MainMenuViewController
 +getSettingsVC(): SettingsViewController
 +getShopVC(): ShopViewController
++getProfileSelectionVC(): ProfileSelection
++getLangEditVC(): ProfileEditLang
++getNameEditVC(): ProfileEditName
++getAvatarEditVC(): ProfileEditAvatar
++getLevelSelectionVC(): LevelSelectionViewController
++getEditorVC(): EditorViewController
++getReductionVC(): ReductionViewController
 +create()
 +dispose()
 +resume()

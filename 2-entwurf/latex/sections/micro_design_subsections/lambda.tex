@@ -86,6 +86,14 @@
 		\item $\texttt{private ShopViewController \textbf{shopVC}}$ \\ ViewController zum Shopmenü
 		\item $\texttt{private ShopItemViewController \textbf{shopItemVC}}$ \\ ViewController zu einem Shop-Item
 		
+		\item $\texttt{private ProfileSelection \textbf{profileSelectionVC}}$ \\ ViewController zur Profilauswahl
+		\item $\texttt{private ProfileEditLang \textbf{langEditVC}}$ \\ ViewController zur Sprachauswahl
+		\item $\texttt{private ProfileEditName \textbf{nameEditVC}}$ \\ ViewController zur Namenstahl
+		\item $\texttt{private ProfileEditAvatar \textbf{avatarEditVC}}$ \\ ViewController zur Avatarauswahl
+		\item $\texttt{private LevelSelectionViewController \textbf{levelSelectionVC}}$ \\ ViewController zur Levelwahl
+		\item $\texttt{private EditorViewController \textbf{editorVC}}$ \\ ViewController zum Editormodus
+		\item $\texttt{private ReductionViewController \textbf{reductionVC}}$ \\ ViewController zum Reduktionsmodus
+		
 		\end{itemize}
 	
 	
@@ -101,7 +109,7 @@
 			\end{itemize}
 			\end{description}
 		
-		\item $\texttt{public DropDownMenuViewController \textbf{achievementMenuVC}()}$ \\ Gibt den ViewController zum Drop-Downmenü zurück
+		\item $\texttt{public DropDownMenuViewController \textbf{getDropDownMenuVC}()}$ \\ Gibt den ViewController zum Drop-Downmenü zurück
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
@@ -110,7 +118,7 @@
 			\end{itemize}
 			\end{description}
 			
-		\item $\texttt{public StatisticViewController \textbf{achievementMenuVC}()}$ \\ Gibt den ViewController zum Statistikmenü zurück
+		\item $\texttt{public StatisticViewController \textbf{getStatisticVC}()}$ \\ Gibt den ViewController zum Statistikmenü zurück
 			\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
@@ -119,7 +127,7 @@
 			\end{itemize}
 			\end{description}
 			
-		\item $\texttt{public MainMenuViewController \textbf{achievementMenuVC}()}$ \\ Gibt den ViewController zum Hauptmenü zurück
+		\item $\texttt{public MainMenuViewController \textbf{getMainMenuVC}()}$ \\ Gibt den ViewController zum Hauptmenü zurück
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
@@ -128,7 +136,7 @@
 			\end{itemize}
 			\end{description}
 			
-		\item $\texttt{public SettingsViewController \textbf{achievementMenuVC}()}$ \\ Gibt den ViewController zum Einstellungsmenü zurück
+		\item $\texttt{public SettingsViewController \textbf{getSettingsVC}()}$ \\ Gibt den ViewController zum Einstellungsmenü zurück
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
@@ -137,7 +145,7 @@
 			\end{itemize}
 			\end{description}
 			
-		\item $\texttt{public ShopViewController \textbf{achievementMenuVC}()}$ \\ Gibt den ViewController zum Shopmenü zurück
+		\item $\texttt{public ShopViewController \textbf{getShopVC}()}$ \\ Gibt den ViewController zum Shopmenü zurück
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
@@ -146,14 +154,77 @@
 			\end{itemize}
 			\end{description}
 			
-		\item $\texttt{public ShopItemViewController \textbf{achievementMenuVC}()}$ \\ Gibt den ViewController zu einem Shop-Item zurück
+		\item $\texttt{public ShopItemViewController \textbf{getShopItemVC}()}$ \\ Gibt den ViewController zu einem Shop-Item zurück
 			\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
 				\item Gibt $\texttt{shopItemVC}$ zurück.
 			\end{itemize}
-			\end{description}
+		\end{description}
+			
+		\item $\texttt{public ProfileSelection \textbf{profileSelectionVC}()}$ \\ Gibt den ViewController zur Profilauswahl zurück
+			\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{profileSelectionVC}$ zurück.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public ProfileEditLang \textbf{getLangEditVC}()}$ \\ Gibt den ViewController zur Sprachauswahl zurück
+			\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{langEditVC}$ zurück.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public ProfileEditName \textbf{getNameEditVC}()}$ \\ Gibt den ViewController zur Namenswahl zurück
+			\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{nameEditVC}$ zurück.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public ProfileEditAvatar \textbf{getAvatarEditVC}()}$ \\ Gibt den ViewController zur Avatarauswahl zurück
+			\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{avatarEditVC}$ zurück.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public LevelSelectionViewController \textbf{getLevelSelectionVC}()}$ \\ Gibt den ViewController zur Levelwahl zurück
+			\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{shopItemVC}$ zurück.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public EditViewController \textbf{getEditorVC}()}$ \\ Gibt den ViewController zum Editormodus zurück
+			\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{editorVC}$ zurück.
+			\end{itemize}
+		\end{description}
+		
+		\item $\texttt{public ReductionViewController \textbf{getReductionVC}()}$ \\ Gibt den ViewController zum Reduktionsmodus zurück
+			\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{reductionVC}$ zurück.
+			\end{itemize}
+		\end{description}
 
 		\item $\texttt{public void \textbf{create}()}$ \\ Erstellt alle ViewController, die in dieser Klasse gehalten werden.
 		\item $\texttt{public void \textbf{dispose}()}$ \\ Ruft von jedem ViewController die Methode $\texttt{dispose}$() auf.
