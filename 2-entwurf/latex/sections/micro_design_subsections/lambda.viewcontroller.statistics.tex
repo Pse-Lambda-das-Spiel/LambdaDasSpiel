@@ -1,0 +1,67 @@
+\subsection{\texttt{package lambda.viewcontroller.achievements}}
+
+\subsubsection{\normalfont \texttt{public class \textbf{AchievementMenuViewController} extends Controller implements AchievementModelObserver}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\Ladet Speichert aktuelisiert und zeigt  Statistiken des aktuellen Spielers allgemein und Levelsweise an.  
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private  \textbf{CurentStatistic:}}$ \\ Die allgemeine Statistiken des aktuellen Spiellers
+		\item $\texttt{private AchievementManager \textbf{CurentLevelStatistic:}}$ \\ Die Statistiken des Spielers zu einem  Level
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public StatisticModel \textbf{getCurentStatistic}()}$ \\ Gibt die Aktuelle Statistik des Spielers zurück.
+				\begin{description}
+					\item[Rückgabe] \hfill \\
+					\vspace{-.8cm}
+					\begin{itemize}
+						\item Die Aktuelle Statistik des Spielers.
+					\end{itemize}
+				\end{description}
+				
+		\item $\texttt{public void \textbf{setCurentStatistic}(statistic : StatisticModel)}$ \\ setzt die Aktuelle Statistik des  letzten gespielten Levls .
+				\begin{description}
+					\item[Parameter] \hfill \\
+					\vspace{-.8cm}
+					\begin{itemize}
+						\item Die Aktuelle Statistik  des letzten gespielten Levels .
+					\end{itemize}
+				\end{description}
+		\item $\texttt{public void \textbf{setCurentLevelStatistic}(levelStatistic :LevelStatistic)}$ \\ setzt die Aktuelle Statistik eines gespielten Levls .
+				\begin{description}
+					\item[Parameter] \hfill \\
+					\vspace{-.8cm}
+					\begin{itemize}
+						\item Die Aktuelle Statistik  des  gespielten Levels.
+					\end{itemize}
+				\end{description}
+				\item $\texttt{public void \textbf{load}(levelStatisticID : String , OwnerID : String)}$ \\ ladet die gespeicherten Statistiken .
+				\begin{description}
+					\item[Parameter] \hfill \\
+					\vspace{-.8cm}
+					\begin{itemize}
+						\item die Id des Spielers .
+						\item die Id des Levels .
+					\end{itemize}
+				\end{description}
+				\item $\texttt{public void \textbf{load}(OwnerID : String)}$ \\ ladet die gespeicherten Statistiken des Spielers.
+				\begin{description}
+					\item[Parameter] \hfill \\
+					\vspace{-.8cm}
+					\begin{itemize}
+						\item die Id des Spielers .
+					\end{itemize}
+				\end{description}
+				
+				\item $\texttt{public void \textbf{update}()}$ \\ aktualisiert die Statistiken .
+				
+				
+					
+			
+		
+	\end{itemize}
+\end{description}
