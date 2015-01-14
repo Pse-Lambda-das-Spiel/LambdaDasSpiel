@@ -17,17 +17,17 @@
 				\item $\texttt{private boolean \textbf{gemsPlaced}}$ \\ Anzahl der gesamt benutzten Edelsteinen .
 			\end{itemize}
 			
-		begin
+		
 			
 		\item[Methoden] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-			\item $\texttt{public  String \textbf{getOwnerId}()}$ \\ gibt die ID des Statisticbesityers zurück .
+			\item $\texttt{public  String \textbf{getOwnerId}()}$ \\ gibt die ID des Statisticbesiters zurück .
 				\begin{description}
 				\item[Rückgage] \hfill \\
 					\vspace{-.8cm}
 					\begin{itemize}
-						\item $\texttt{OwnerID }$ \\Die ID des Statisticbesityers 					\end{itemize}	
+						\item $\texttt{OwnerID }$ \\Die ID des Statisticbesitzers 					\end{itemize}	
 					\end{description}
 				\item $\texttt{public  long \textbf{getPlayedTime}()}$ \\ gibt die gesamt gespielte Zeit in secunden zurück .
 				\begin{description}
@@ -152,3 +152,15 @@
 					\end{description}
 			\end{itemize}
 		\end{description}
+\subsubsection{\normalfont \texttt{public abstract class \textbf{LevelStatisticModel} extends}  StatisticModel} 
+\begin{description}
+		
+		\item[Beschreibung] \hfill \\ Repräsentiert ein Levelstatistik.
+		\item[Attribute] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{private int \textbf{LevelID}}$ \\ Die kennzeichnende ID des Levels zu dem Die Statistik gehört . zu jedem Spieler wir für die von Ihm gespielten Levels eine Statistic gespeicher.				
+			\end{itemize}
+		\end{description}
+				
+			
