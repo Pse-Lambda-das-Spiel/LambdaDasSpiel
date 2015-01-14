@@ -160,7 +160,7 @@ selectProfile</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 super.getGame().setScreen(
-super.getGame().profileEditLang)</panel_attributes>
+super.getGame().getLangEditVC())</panel_attributes>
     <additional_attributes>20.0;30.0;10.0;10.0</additional_attributes>
   </element>
   <element>
