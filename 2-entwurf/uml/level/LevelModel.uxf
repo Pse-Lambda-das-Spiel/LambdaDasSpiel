@@ -4,10 +4,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>40</x>
+      <x>30</x>
       <y>40</y>
       <w>360</w>
-      <h>320</h>
+      <h>340</h>
     </coordinates>
     <panel_attributes>LevelModel
 --
@@ -19,6 +19,7 @@
 -availableRedStrats: List&lt;ReductionStrategy&gt;
 -usableElements: List&lt;ElementType&gt;
 -difficulty: int
+-standardMode: boolean
 --
 +LevelModel()
 +getID(): int
@@ -29,13 +30,14 @@
 +getAvailableredStrats(): List&lt;ReductionStrategy&gt; 
 +getUsableElements(): List&lt;ElementType&gt;
 +getDifficulty(): int
++isStandardMode(): boolean
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>430</x>
+      <x>420</x>
       <y>40</y>
       <w>210</w>
       <h>120</h>
@@ -52,7 +54,7 @@ ReductionStrategy
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>430</x>
+      <x>420</x>
       <y>170</y>
       <w>210</w>
       <h>100</h>

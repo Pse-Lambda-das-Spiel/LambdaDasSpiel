@@ -2172,6 +2172,7 @@
 		\item $\texttt{private List<ReductionStrategy> \textbf{availableRedStrats}}$ \\ Enthält alle Reduktionsstrategien, welche man für das Level verwenden darf.
 		\item $\texttt{private List<ElementType> \textbf{usableElements}}$ \\ Enthält alle Elementtypen, die im Level in der Elementen-Leiste im Editormodus für das Level verfügbar sind.
 		\item $\texttt{private int \textbf{difficulty}}$ \\ Beschreibt den Schwierigkeitsgrad des Levels aufsteigend von 1.
+		\item $\texttt{private boolean \textbf{standardMode}}$ \\ Beschreibt, ob man die Anfangs- oder Endkonstellation bestimmen muss, um das Level erfolgreich abzuschließen.
 		\end{itemize}
 	
 \item[Konstruktoren] \hfill \\
@@ -2253,6 +2254,15 @@
 			\vspace{-.8cm}
 			\begin{itemize}
 				\item Gibt $\texttt{difficulty}$ zurück.
+			\end{itemize}
+			\end{description}
+			
+		\item $\texttt{public boolean \textbf{isStandardMode}()}$ \\ Gibt in Form eines Wahrheitswertes zurück, ob man die Anfangs- oder Entkonstellation bestimmen muss, um das Level erfolgreich abzuschließen.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Gibt $\texttt{true}$ zurück, falls man die Anfangskonstellation bestimmen muss, $\texttt{false}$ sonst
 			\end{itemize}
 			\end{description}
 
