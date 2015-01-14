@@ -8,18 +8,18 @@
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{default public void \textbf{changedLockedState}(int id)}$ \\ Wird aufgerufen um dem Beobachter mitzuteilen, dass sich der Zustand des Erfolgs, also ob dieser freigeschaltet ist oder nicht, geändert hat. Die Standard-Implementierung ist leer.
+		\item $\texttt{default public void \textbf{changedLockedState}(String id)}$ \\ Wird aufgerufen um dem Beobachter mitzuteilen, dass sich der Zustand des Erfolgs, also ob dieser freigeschaltet ist oder nicht, geändert hat. Die Standard-Implementierung ist leer.
 			\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{int id}$ \\ Die ID des Erfolgs mit dem geänderten Zustand.
+				\item $\texttt{String id}$ \\ Die ID des Erfolgs mit dem geänderten Zustand.
 			\end{itemize}
 			\end{description}
 	\end{itemize}
 \end{description}
 
-\subsubsection{\normalfont \texttt{public abstract class \textbf{AchievementModel} implements Observable<AchievementModelObserver>}}
+\subsubsection{\normalfont \texttt{public abstract class \textbf{AchievementModel} extends Observable<AchievementModelObserver>}}
 
 \begin{description}
 \item[Beschreibung] \hfill \\ Repräsentiert einen Erfolg.
@@ -30,8 +30,6 @@
 		\item $\texttt{private int \textbf{index}}$ \\ Der Index des Erfolgs der dessen Platz in einer geordneten Auflistung bestimmt.
 		\item $\texttt{private String \textbf{description}}$ \\ Die Beschreibung des freigeschalteten Erfolgs.
 		\item $\texttt{private String \textbf{requirementDescription}}$ \\ Die Beschreibung der Bedingungen des Erfolgs.
-		\item $\texttt{private String \textbf{iconPathAchievementLocked}}$ \\Der Pfad zum Piktogramm des nicht freigeschalteten Erfolgs, der beim Laden des jeweiligen Piktogramms hilft.
-		\item $\texttt{private String \textbf{iconPathAchievementUnlocked}}$ \\ Der Pfad zum Piktogramm der nicht freigeschalteten Erfolgs, der beim Laden des jeweiligen Piktogramms hilft.
 		\item $\texttt{private boolean \textbf{locked}}$ \\ Gibt an, ob die Bedingungen des Erfolgs erfüllt sind und der Erfolgs damit freigeschaltet ist oder nicht.
 	\end{itemize}
 	
@@ -44,9 +42,9 @@
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public abstract void \textbf{initialize}()}$ \\ Initialisiert den Erfolg.
+		\item $\texttt{public abstract void \textbf{initialize}()}$ \\ Initialisiert den Erfolg und setzt ihn auf seinen Startzustand.
 		
-		\item $\texttt{public abstract boolean \textbf{meetRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind.
+		\item $\texttt{public abstract boolean \textbf{checkRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind und setzt dessen Zustand entsprechend.
 		\begin{description}
 		\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -101,24 +99,6 @@
 			\end{itemize}
 		\end{description}
 
-\item $\texttt{public String \textbf{getIconPathAchievementLocked}()}$ \\ Gibt den Pfad zum Piktogramm des nicht freigeschalteten Erfolgs zurück.
-		\begin{description}
-			\item[Rückgabe] \hfill \\
-			\vspace{-.8cm}
-			\begin{itemize}
-				\item Der Pfad zum Piktogramm des nicht freigeschalteten Erfolgs.
-			\end{itemize}
-		\end{description}
-
-\item $\texttt{public String \textbf{getIconPathAchievementUnlocked}()}$ \\ Gibt den Pfad zum Piktogramm des freigeschalteten Erfolgs zurück.
-		\begin{description}
-			\item[Rückgabe] \hfill \\
-			\vspace{-.8cm}
-			\begin{itemize}
-				\item Der Pfad zum Piktogramm des freigeschalteten Erfolgs.
-			\end{itemize}
-		\end{description}
-
 \item $\texttt{public boolean \textbf{isLocked}()}$ \\ Gibt an, ob der Erfolg freigeschaltet ist oder nicht.
 		\begin{description}
 			\item[Rückgabe] \hfill \\
@@ -128,12 +108,12 @@
 			\end{itemize}
 		\end{description}
 
-	\item $\texttt{public void \textbf{setId}(int id)}$ \\ Setzt eine neue ID für diesen Erfolg.
+	\item $\texttt{public void \textbf{setId}(String id)}$ \\ Setzt eine neue ID für diesen Erfolg.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{int id}$ \\ Die neue ID.
+				\item $\texttt{String id}$ \\ Die neue ID.
 			\end{itemize}
 		\end{description}
 
@@ -142,7 +122,7 @@
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{int id}$ \\ Der neue Index.
+				\item $\texttt{String id}$ \\ Der neue Index.
 			\end{itemize}
 		\end{description}
 		
@@ -163,24 +143,6 @@
 				\item $\texttt{String requirementsDescription}$ \\ Die neue Beschreibung für die Bedingungen dieses Erfolgs.
 			\end{itemize}
 		\end{description}
-
-	\item $\texttt{public void \textbf{setIconPathAchievementLocked}(String iconPathAchievementLocked)}$ \\ Setzt einen neuen Pfad zum Piktogramm des nicht freischalteten Erfolgs.
-		\begin{description}
-			\item[Parameter] \hfill \\
-			\vspace{-.8cm}
-			\begin{itemize}
-				\item $\texttt{String iconPathAchievementLocked}$ \\ Der neue Pfad zum Piktogramm des nicht freigeschalteten Erfolgs.
-			\end{itemize}
-		\end{description}
-	
-	\item $\texttt{public void \textbf{setIconPathAchievementUnlocked}(String iconPathAchievementUnlocked)}$ \\ Setzt einen neuen Pfad zum Piktogramm des freischalteten Erfolgs.
-		\begin{description}
-			\item[Parameter] \hfill \\
-			\vspace{-.8cm}
-			\begin{itemize}
-				\item $\texttt{String iconPathAchievementUnlocked}$ \\ Der neue Pfad zum Piktogramm des freigeschalteten Erfolgs.
-			\end{itemize}
-		\end{description}
 		
 	\item $\texttt{public void \textbf{setLocked}(boolean locked)}$ \\ Setzt diesen Erfolg auf den Zustand freigeschaltet oder nicht freigeschaltet.
 		\begin{description}
@@ -196,21 +158,38 @@
 
 \subsubsection{\normalfont \texttt{public class \textbf{TimeAchievementModel} extends AchievementModel}}
 
+
+
 \begin{description}
+
 \item[Beschreibung] \hfill \\ Repräsentiert einen Erfolg, der nach dem Spielen einer bestimmten Zeitspanne freigeschaltet wird.
+
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private int \textbf{reqTimePlayed}}$ \\ Multiplikator für die Bedingungsberechnung.
+	\end{itemize}
 	
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public \textbf{TimeAchievementModel}()}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\item $\texttt{public \textbf{TimeAchievementModel}( int reqTimePlayed)}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int reqTimePlayed}$ \\ Multiplikator für die Bedingungsberechnung.
+			\end{itemize}
+		\end{description}
+		
 	\end{itemize}
 	
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public void \textbf{initialize}()}$ \\ Initialisiert den Erfolg.
+		\item $\texttt{public void \textbf{initialize}()}$ \\ Initialisiert den Erfolg und setzt ihn auf seinen Startzustand.
 		
-		\item $\texttt{public boolean \textbf{meetRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind.
+		\item $\texttt{public boolean \textbf{checkRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind und setzt dessen Zustand entsprechend.
 		\begin{description}
 		\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -236,18 +215,31 @@
 \begin{description}
 \item[Beschreibung] \hfill \\ Repräsentiert einen Erfolg, der nach dem erfolgreichen ersten Abschluss einer bestimmten Mindestanzahl von Level freigeschaltet wird.
 	
+item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private int \textbf{reqLevelCompleted}}$ \\ Multiplikator für die Bedingungsberechnung.
+	\end{itemize}	
+	
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public \textbf{LevelAchievementModel}()}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\item $\texttt{public \textbf{LevelAchievementModel}(int reqLevelCompleted)}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int reqLevelCompleted}$ \\ Multiplikator für die Bedingungsberechnung.
+			\end{itemize}
+		\end{description}
 	\end{itemize}
 	
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public void \textbf{initialize}()}$ \\ Initialisiert den Erfolg.
+		\item $\texttt{public void \textbf{initialize}()}$ \\ Initialisiert den Erfolg und setzt ihn auf seinen Startzustand.
 		
-		\item $\texttt{public boolean \textbf{meetRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind.
+		\item $\texttt{public boolean \textbf{checkRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind und setzt dessen Zustand entsprechend.
 		\begin{description}
 		\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -274,18 +266,31 @@
 \begin{description}
 \item[Beschreibung] \hfill \\ Repräsentiert einen Erfolg, der nach dem Verzaubern einer bestimmten Mindestanzahl von Edelsteinen freigeschaltet wird.
 	
+item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private int \textbf{reqGemsEnchanted}}$ \\ Multiplikator für die Bedingungsberechnung.
+	\end{itemize}	
+	
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public \textbf{GemsEnchantedAchievementModel}()}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\item $\texttt{public \textbf{GemsEnchantedAchievementModel}(int reqGemsEnchanted)}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int reqGemsEnchanted}$ \\ Multiplikator für die Bedingungsberechnung.
+			\end{itemize}
+		\end{description}
 	\end{itemize}
 	
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public void \textbf{initialize}()}$ \\ Initialisiert den Erfolg.
+		\item $\texttt{public void \textbf{initialize}()}$ \\ Initialisiert den Erfolg und setzt ihn auf seinen Startzustand.
 		
-		\item $\texttt{public boolean \textbf{meetRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind.
+		\item $\texttt{public boolean \textbf{checkRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind und setzt dessen Zustand entsprechend.
 		\begin{description}
 		\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -312,18 +317,31 @@
 \begin{description}
 \item[Beschreibung] \hfill \\ Repräsentiert einen Erfolg, der nach dem Verzaubern einer bestimmten Mindestanzahl von Lämmern freigeschaltet wird.
 
+item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private int \textbf{reqLambsEnchanted}}$ \\ Multiplikator für die Bedingungsberechnung.
+	\end{itemize}
+
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public \textbf{LambsEnchantedAchievementModel}()}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\item $\texttt{public \textbf{LambsEnchantedAchievementModel}(int reqLambsEnchanted)}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int reqLambsEnchanted}$ \\ Multiplikator für die Bedingungsberechnung.
+			\end{itemize}
+		\end{description}
 	\end{itemize}
 	
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-				\item $\texttt{public void \textbf{initialize}()}$ \\ Initialisiert den Erfolg.
+				\item $\texttt{public void \textbf{initialize}()}$ \\ Initialisiert den Erfolg und setzt ihn auf seinen Startzustand.
 		
-		\item $\texttt{public boolean \textbf{meetRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind.
+		\item $\texttt{public boolean \textbf{checkRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind und setzt dessen Zustand entsprechend.
 		\begin{description}
 		\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -350,18 +368,31 @@
 \begin{description}
 \item[Beschreibung] \hfill \\ Repräsentiert einen Erfolg, der nach dem Platzieren einer bestimmten Mindestanzahl von Edelsteinen auf dem Spielfeld freigeschaltet wird.
 	
+item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private int \textbf{reqGemsPlaced}}$ \\ Multiplikator für die Bedingungsberechnung.
+	\end{itemize}	
+	
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public \textbf{GemsPlacedAchievementModel}()}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\item $\texttt{public \textbf{GemsPlacedAchievementModel}(int reqGemsPlaced)}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int reqGemsPlaced}$ \\ Multiplikator für die Bedingungsberechnung.
+			\end{itemize}
+		\end{description}
 	\end{itemize}
 	
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-				\item $\texttt{public void \textbf{initialize}()}$ \\ Initialisiert den Erfolg.
+				\item $\texttt{public void \textbf{initialize}()}$ \\ Initialisiert den Erfolg und setzt ihn auf seinen Startzustand.
 		
-		\item $\texttt{public boolean \textbf{meetRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind.
+		\item $\texttt{public boolean \textbf{checkRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind und setzt dessen Zustand entsprechend.
 		\begin{description}
 		\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -388,18 +419,31 @@
 \begin{description}
 \item[Beschreibung] \hfill \\ Repräsentiert einen Erfolg, der nach dem Platzieren einer bestimmten Mindestanzahl von Lämmern auf dem Spielfeld freigeschaltet wird.
 	
+item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private int \textbf{reqLambsPlaced}}$ \\ Multiplikator für die Bedingungsberechnung.
+	\end{itemize}	
+	
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public \textbf{LambsPlacedAchievementModel}()}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\item $\texttt{public \textbf{LambsPlacedAchievementModel}(int reqLambsPlaced)}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int reqLambsPlacedPlaced}$ \\ Multiplikator für die Bedingungsberechnung.
+			\end{itemize}
+		\end{description}
 	\end{itemize}
 	
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public void \textbf{initialize}()}$ \\ Initialisiert den Erfolg.
+		\item $\texttt{public void \textbf{initialize}()}$ \\ Initialisiert den Erfolg und setzt ihn auf seinen Startzustand.
 		
-		\item $\texttt{public boolean \textbf{meetRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind.
+		\item $\texttt{public boolean \textbf{checkRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind und setzt dessen Zustand entsprechend.
 		\begin{description}
 		\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -426,18 +470,31 @@
 \begin{description}
 \item[Beschreibung] \hfill \\ Repräsentiert einen Erfolg, der freigeschaltet wird, nachdem eine bestimmte Mindestanzahl von Level erfolgreich ohne Nutzung des Hinweises abgeschlossen wurden.
 	
+item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private int \textbf{reqHintsNotUsed}}$ \\ Multiplikator für die Bedingungsberechnung.
+	\end{itemize}	
+	
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public \textbf{HintslAchievementModel}()}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\item $\texttt{public \textbf{HintslAchievementModel}(int reqHintsNotUsed)}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int reqNotUsed}$ \\ Multiplikator für die Bedingungsberechnung.
+			\end{itemize}
+		\end{description}
 	\end{itemize}
 	
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public void \textbf{initialize}()}$ \\ Initialisiert den Erfolg.
+		\item $\texttt{public void \textbf{initialize}()}$ \\ Initialisiert den Erfolg und setzt ihn auf seinen Startzustand.
 		
-		\item $\texttt{public boolean \textbf{meetRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind.
+		\item $\texttt{public boolean \textbf{checkRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind und setzt dessen Zustand entsprechend.
 		\begin{description}
 		\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -479,18 +536,31 @@
 \begin{description}
 \item[Beschreibung] \hfill \\ Repräsentiert einen Erfolg, der freigeschaltet wird, falls eine bestimmte Mindestanzahl von Edelsteinen in einem Level verzaubert werden.
 	
+item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private int \textbf{reqGemsPerLevel}}$ \\ Multiplikator für die Bedingungsberechnung.
+	\end{itemize}	
+	
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public \textbf{GemsEnchantedPerLevelAchievementModel}()}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\item $\texttt{public \textbf{GemsEnchantedPerLevelAchievementModel}(int reqGemsEnchantedPerLevel)}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int reqGemsEnchantedPerLevel}$ \\ Multiplikator für die Bedingungsberechnung.
+			\end{itemize}
+		\end{description}
 	\end{itemize}
 	
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-				\item $\texttt{public void \textbf{initialize}()}$ \\ Initialisiert den Erfolg.
+				\item $\texttt{public void \textbf{initialize}()}$ \\ Initialisiert den Erfolg und setzt ihn auf seinen Startzustand.
 		
-		\item $\texttt{public boolean \textbf{meetRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind.
+		\item $\texttt{public boolean \textbf{checkRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind und setzt dessen Zustand entsprechend.
 		\begin{description}
 		\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -516,10 +586,23 @@
 \begin{description}
 \item[Beschreibung] \hfill \\ Repräsentiert einen Erfolg, der freigeschaltet wird, wenn eine bestimmte Mindestanzahl Lämmern in einem Level verzaubert werden.
 	
+item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private int \textbf{reqLambsEnchantedPerLevel}}$ \\ Multiplikator für die Bedingungsberechnung.
+	\end{itemize}	
+	
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public \textbf{LambsEnchantedPerLevelAchievementModel}()}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\item $\texttt{public \textbf{LambsEnchantedPerLevelAchievementModel}(int LambsEnchantedPerLevel)}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int reqLambsEnchantedperLevel}$ \\ Multiplikator für die Bedingungsberechnung.
+			\end{itemize}
+		\end{description}
 	\end{itemize}
 	
 \item[Methoden] \hfill \\
@@ -527,7 +610,7 @@
 	\begin{itemize}
 				\item $\texttt{public void \textbf{initialize}()}$ \\ Initialisiert den Erfolg
 		
-		\item $\texttt{public boolean \textbf{meetRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind.
+		\item $\texttt{public boolean \textbf{checkRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind und setzt dessen Zustand entsprechend.
 		\begin{description}
 		\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -553,18 +636,31 @@
 \begin{description}
 \item[Beschreibung] \hfill \\ Repräsentiert einen Erfolg, der freigeschaltet wird, falls eine bestimmte Mindestanzahl von Edelsteinen in einem Level auf dem Spielfeld platziert wird.
 	
+item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private int \textbf{reqGemsPlacedPerLevel}}$ \\ Multiplikator für die Bedingungsberechnung.
+	\end{itemize}	
+	
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public \textbf{GemsPlacedPerLevelAchievementModel}()}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\item $\texttt{public \textbf{GemsPlacedPerLevelAchievementModel}(int GemsPlacedPerLevel)}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int reqGemsPlacedPlacedPerLevel}$ \\ Multiplikator für die Bedingungsberechnung.
+			\end{itemize}
+		\end{description}
 	\end{itemize}
 	
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-				\item $\texttt{public void \textbf{initialize}()}$ \\ Initialisiert den Erfolg.
+				\item $\texttt{public void \textbf{initialize}()}$ \\ Initialisiert den Erfolg und setzt ihn auf seinen Startzustand.
 		
-		\item $\texttt{public boolean \textbf{meetRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind.
+		\item $\texttt{public boolean \textbf{checkRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind und setzt dessen Zustand entsprechend.
 		\begin{description}
 		\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -590,18 +686,32 @@
 \begin{description}
 \item[Beschreibung] \hfill \\ Repräsentiert einen Erfolg, der freigeschaltet wird, wenn eine bestimmte Mindestanzahl von Lämmern in einem Level auf dem Spielfeld platziert wird.
 	
+	
+item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private int \textbf{reqLambsPlacedPerLevel}}$ \\ Multiplikator für die Bedingungsberechnung.
+	\end{itemize}	
+	
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public \textbf{LambsPlacedPerLevelAchievementModel}()}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\item $\texttt{public \textbf{LambsPlacedPerLevelAchievementModel}(int reqLambsPlacedPerLevel)}$ \\ Instanziiert ein Objekt dieser Klasse. Setzt $\texttt{locked}$ auf $\texttt{false}$.
+		\begin{description}
+			\item[Parameter] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item $\texttt{int reqLambsPlacedPer Level}$ \\ Multiplikator für die Bedingungsberechnung.
+			\end{itemize}
+		\end{description}
 	\end{itemize}
 	
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-				\item $\texttt{public void \textbf{initialize}()}$ \\ Initialisiert den Erfolg.
+				\item $\texttt{public void \textbf{initialize}()}$ \\ Initialisiert den Erfolg und setzt ihn auf seinen Startzustand.
 		
-		\item $\texttt{public boolean \textbf{meetRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind.
+		\item $\texttt{public boolean \textbf{checkRequirements}(StatisticModel statistic)}$ \\ Prüft anhand der übergebenen Statistik, ob die Bedingungen dieses Erfolgs erfüllt sind und setzt dessen Zustand entsprechend.
 		\begin{description}
 		\item[Parameter] \hfill \\
 			\vspace{-.8cm}
@@ -629,28 +739,36 @@
 \item[Attribute] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{private Map<int, AchievementModel> \textbf{unlockedAchievements}}$ \\ Ansammlung aller freigeschalteten Erfolge.
-		\item $\texttt{private Map<int, AchievementModel> \textbf{lockedAchievements}}$ \\ Ansammlung aller nicht freigeschalteten Erfolge.
-	\end{itemize}
-	
+		\item $\texttt{private static Map<int, AchievementModel> \textbf{manager}}$ \\ Einzige Instanz des AchievementManagers.
+		\item $\texttt{private Map<int, AchievementModel> \textbf{achievements}}$ \\ Ansammlung aller Erfolge.
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-		\item $\texttt{public \textbf{AchievementManager}()}$ \\ Instanziiert ein Objekt dieser Klasse.
+		\item $\texttt{private \textbf{AchievementManager}()}$ \\ Um zu verhindern, dass diese Klasse instanziiert wird.
 	\end{itemize}
 	
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
 	\begin{itemize}
-	
+		
+		\item $\texttt{public static AchievementManager \textbf{getManager}()}$ \\ Gibt Referenz auf einzige Instanz der Klasse zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Refernz auf einzige Instanz von AchievementManager.
+			\end{itemize}
+		\end{description}
+		
+		
 		\item $\texttt{public void \textbf{initializeAchievements}()}$ \\ Initialisiert alle Erfolge.
 	
-		\item $\texttt{public void \textbf{checkUnlockedAchievements}(StatisticModel statistic)}$ \\ Überprüft alle nicht freigeschalteten Erfolge anhand der übergebenen und aktuellen Statistik, ob deren Bedingungen erfüllt sind und sortiert sie gegebenenfalls in die Ansammlung  der freigeschalteten Erfolge ein.
+		\item $\texttt{public void \textbf{checkAchievements}(StatisticModel statistic)}$ \\ Überprüft alle Erfolge anhand der übergebenen und aktuellen Statistik, ob deren Bedingungen erfüllt sind und setzt ihren Status gegebenenfalls neu.
 		\begin{description}
 		\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{StatisticModel statistic}$ \\ Die Statistik anhand derer die Überprüfung aller nicht freigeschalteter Erfolge geschieht. 
+				\item $\texttt{StatisticModel statistic}$ \\ Die Statistik anhand derer die Überprüfung aller Erfolge geschieht. 
 			\end{itemize}
 			\item[Exceptions] \hfill \\
 			\vspace{-.8cm}
@@ -659,35 +777,21 @@
 			\end{itemize}
 		\end{description}	
 		
-		\item $\texttt{public Map<int, AchievementModel> \textbf{getUnlockedAchievements}()}$ \\ Gibt die Ansammlung aller freigeschalteter Erfolge zurück.
+		\item $\texttt{public Map<int, AchievementModel> \textbf{getAchievements}()}$ \\ Gibt die Ansammlung aller Erfolge zurück.
 		\begin{description}
 			\item[Rückgabe] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item Die Ansammlung aller freigeschalteter Erfolge.
+				\item Die Ansammlung aller Erfolge.
 			\end{itemize}
 		\end{description}
 		
-		\item $\texttt{public Map<int, AchievementModel> \textbf{getLockedAchievements}()}$ \\ Gibt die Ansammlung aller nicht freigeschalteter Erfolge zurück.
-		\begin{description}
-			\item[Rückgabe] \hfill \\
-			\vspace{-.8cm}
-			\begin{itemize}
-				\item Die Ansammlung aller nicht freigeschalteten Erfolge.
-			\end{itemize}
-		\end{description}
-		
-		\item $\texttt{public boolean \textbf{addAchievement}(AchievementModel achievement)}$ \\ Überprüft, ob der Erfolg freigeschaltet ist oder nicht und fügt ihn anschließend der entsprechenden Ansammlung hinzu.
+		\item $\texttt{public void \textbf{addAchievement}(AchievementModel achievement)}$ \\ Fügt den übergebenen Erfolg hinzu, falls dieser noch nicht vorhanden ist.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
 				\item $\texttt{AchievementModel achievement}$ \\ Der zu hinzufügende Erfolg.
-			\end{itemize}
-			\item[Rückgabe] \hfill \\
-			\vspace{-.8cm}
-			\begin{itemize}
-				\item Gibt $\texttt{true}$ zurück,falls das Hinzufügen in einer der Ansammlungen erfolgreich war oder $\texttt{false}$, falls der Erfolg schon in einer der Ansammlungen vorhanden ist und das Hinzufügen damit nicht erfolgreich war.
 			\end{itemize}
 			\item[Exceptions] \hfill \\
 			\vspace{-.8cm}
@@ -696,17 +800,12 @@
 			\end{itemize}
 		\end{description}	
 
-	\item $\texttt{public boolean \textbf{moveToUnlockedAchievements}(int id)}$ \\ Verschiebt den bereits vorhandenen Erfolg von der Ansammlung der nicht freigeschalteten Erfolge zu der Ansammlung der freigeschalteten Erfolge.
+	\item $\texttt{public boolean \textbf{removeAchievement}(String id)}$ \\ löscht den Erfolg mit der übergebenen Id.
 		\begin{description}
 			\item[Parameter] \hfill \\
 			\vspace{-.8cm}
 			\begin{itemize}
-				\item $\texttt{int id}$ \\ Die ID des zu verschiebenden Erfolgs.
-			\end{itemize}
-			\item[Rückgabe] \hfill \\
-			\vspace{-.8cm}
-			\begin{itemize}
-				\item Gibt $\texttt{true}$ zurück,falls das Verschieben des Erfolgs erfolgreich war und $\texttt{false}$, falls sich der Erfolg bereits in der Ansammlung der freigeschalteten Erfolge befand und damit das Verschieben nicht erfolgreich war.
+				\item $\texttt{String id}$ \\ Die ID des zu löschenden Erfolgs.
 			\end{itemize}
 			\item[Exceptions] \hfill \\
 			\vspace{-.8cm}
@@ -715,23 +814,5 @@
 			\end{itemize}
 		\end{description}	
 
-\item $\texttt{public boolean \textbf{moveToLockedAchievements}(int id)}$ \\ Verschiebt die bereits vorhandenen Erfolge von der Ansammlung der freigeschalteten Erfolge zu der Ansammlung der nicht freigeschalteten Erfolge.
-		\begin{description}
-			\item[Parameter] \hfill \\
-			\vspace{-.8cm}
-			\begin{itemize}
-				\item $\texttt{int id}$ \\ Die ID des zu verschiebenden Erfolgs.
-			\end{itemize}
-			\item[Rückgabe] \hfill \\
-			\vspace{-.8cm}
-			\begin{itemize}
-				\item Gibt $\texttt{true}$ zurück,falls das Verschieben des Erfolgs erfolgreich war und $\texttt{false}$, falls sich der Erfolg bereits in der Ansammlung der nicht freigeschalteten Erfolge befand und damit das Verschieben nicht erfolgreich war.
-			\end{itemize}
-			\item[Exceptions] \hfill \\
-			\vspace{-.8cm}
-			\begin{itemize}
-				\item $\texttt{IllegalArgumentException}$ \\ Falls $\texttt{id}$ in keiner der beiden Ansammlungen von Erfolgen vorhanden ist.
-			\end{itemize}
-		\end{description}	
 	\end{itemize}
 \end{description}

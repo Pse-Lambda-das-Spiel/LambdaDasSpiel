@@ -1,6 +1,6 @@
 \subsection{\texttt{package lambda.viewcontroller.achievements}}
 
-\subsubsection{\normalfont \texttt{public class \textbf{AchievementMenuViewController} extends Controller implements AchievementModelObserver}}
+\subsubsection{\normalfont \texttt{public class \textbf{AchievementMenuViewController} extends Controller implements profilManagerObserver}}
 
 \begin{description}
 \item[Beschreibung] \hfill \\ Kontrolliert und regelt die Darstellung des Erfolgsmenüs und damit der einzelnen Erfolge und die Benutzerinteraktion mit dem Menü.
@@ -8,10 +8,7 @@
 	\vspace{-.8cm}
 	\begin{itemize}
 		\item $\texttt{private Map<int, String> \textbf{renderAchievementsMap}}$ \\ Die Repräsentation aller Erfolge, die dargestellt werden. Gespeichert wird der Pfad zum Piktogramm des jeweiligen Erfolgs, abhängig davon, ob der Erfolg freigeschaltet ist oder nicht. Als Key wird der jeweilige Index verwendet, der auch die Anzeigereihenfolge bestimmt.
-		\item $\texttt{private AchievementManager \textbf{achievementManager}}$ \\ Verwaltet und kontrolliert alle Erfolge.
 		\item $\texttt{private scene2d.Stage \textbf{stage}}$ \\ 2D-Scene-Graph, der die Hierarchie der gesamten grafischen Komponenten (Akteure mit Typ $\texttt{scene2d.Actor}$ des Screens (der aktuell angezeigte Bildschirm) enthält. 
-		\item $\texttt{private InputMultiplexer \textbf{inputProcessor}}$ \\ Delegiert die Eingabe-Ereignisse an die geordnete Liste der InputProcessor, die die Ereignisse empfangen und weiterverarbeiten.
-	\end{itemize}
 	
 \item[Konstruktoren] \hfill \\
 	\vspace{-.8cm}
@@ -36,29 +33,10 @@
 				\end{itemize}
 			\end{description}	
 			
-		\item $\texttt{public void \textbf{update}(int index)}$ \\ Aktualisiert den entsprechenden repräsentierten Erfolg der den übergebenen Index besitzt in $\texttt{renderAchievementMap}$.
-			\begin{description}
-				\item[Parameter] \hfill \\
-				\vspace{-.8cm}
-				\begin{itemize}
-					\item $\texttt{int index}$ \\ Der Index des zu aktualisierenden Erfolgs.
-				\end{itemize}
-				\item[Exceptions] \hfill \\
-				\vspace{-.8cm}
-				\begin{itemize}
-					\item $\texttt{IllegalArgumentException}$ \\ Falls $\texttt{index}$ nicht in $\texttt{renderAchievementMap}$ vorhanden ist.
-				\end{itemize}
-			\end{description}	
-	
-		\item $\texttt{public AchievementManager \textbf{getAchievementManager}()}$ \\ Gibt eine Referenz auf $\texttt{achievementManager}$ und damit auf die Verwaltung der Erfolge zurück.
-		\begin{description}
-			\item[Rückgabe] \hfill \\
-			\vspace{-.8cm}
-			\begin{itemize}
-				\item Der Manager der Erfolge.
-			\end{itemize}
-		\end{description}	
+		\item $\texttt{public void \textbf{update}()}$ \\ Aktualisiert über den Manager alle Erfolge.
 		
+		\item $\texttt{public void \textbf{changedProfile()}$ \\ Siehe Dokumentation von Interface ProfileManagerObserver.
+	
 		\item $\texttt{public void \textbf{dispose}()}$ \\ Wird aufgerufen, wenn der Screen all seine Ressourcen freigeben soll.
 		
 		\item $\texttt{public void \textbf{show}()}$ \\ Wird automatisch aufgerufen, wenn der Screen als aktueller Screen für das Spiel gesetzt wird.
@@ -88,5 +66,63 @@
 			\end{itemize}
 		\end{description}
 		
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{AchievementViewController} extends scene2d.Actor implements profilAchievementModelObserver}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Ist für die Darstellung des einzelnen Erfolgs verantwortlich.
+\item[Attribute] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{private AchievementModel \textbf{achievement}}$ \\ Der beobachtete Erfolg.
+		\item $\texttt{private InputMultiplexer \textbf{inputProcessor}}$ \\ Delegiert die Eingabe-Ereignisse an die geordnete Liste der InputProcessor, die die Ereignisse empfangen und weiterverarbeiten.
+	\end{itemize}
+	
+\item[Konstruktoren] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public \textbf{AchievementViewController}()}$ \\ Instanziiert ein Objekt dieser Klasse.
+	\end{itemize}
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public void \textbf{changedLockedState}(int id)}$ \\ Wird aufgerufen um dem Beobachter mitzuteilen, dass sich der Zustand des Erfolgs, also ob dieser freigeschaltet ist oder nicht, geändert hat.
+			\begin{description}
+				\item[Parameter] \hfill \\
+				\vspace{-.8cm}
+				\begin{itemize}
+					\item $\texttt{int id}$ \\ Die ID des Erfolgs mit dem geänderten Zustand.
+				\end{itemize}
+				\item[Exceptions] \hfill \\
+				\vspace{-.8cm}
+				\begin{itemize}
+					\item $\texttt{IllegalArgumentException}$ \\ Falls $\texttt{id}$ nicht bei den Erfolgen vorhanden ist.
+				\end{itemize}
+			\end{description}	
+			
+			\item $\texttt{public void \textbf{draw}(Batch batch, float parentAlpha}$ \\ Zeichnet den Actor.
+			\begin{description}
+				\item[Parameter] \hfill \\
+				\vspace{-.8cm}
+				\begin{itemize}
+					\item $\texttt{Batch batch}$ \\ Siehe Dokumention von scene2d.Actor.
+					\item $\texttt{float parentAlpha}$ \\ Siehe Dokumention von scene2d.Actor.
+				\end{itemize}
+			\end{description}	
+			
+		\item $\texttt{public void \textbf{changedlockedState}()}$ \\ Siehe Dokumentation von AchievementModelObserver.
+	
+		\item $\texttt{public Achievement \textbf{getAchievement}()}$ \\ Gibt Erfolg zurück.
+		\begin{description}
+			\item[Rückgabe] \hfill \\
+			\vspace{-.8cm}
+			\begin{itemize}
+				\item Der zurück gegebene Erfolg.
+			\end{itemize}
+		\end{description}	
+	
 	\end{itemize}
 \end{description}
