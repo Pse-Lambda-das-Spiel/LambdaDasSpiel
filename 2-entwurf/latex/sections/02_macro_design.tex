@@ -1,7 +1,6 @@
 \section{Grobentwurf}
 
 \subsection{libGDX}
-%kann auch gelöscht werden wenn jemand was Besseres einfällt
 libGDX ist ein auf Java basierendes Framework allein für Spieleentwicklung und wurde gewählt um die Entwicklung des Produkts zu vereinfachen.
 Viele von uns benötigte Funktionalitäten sind in diesem Framework schon implementiert, wodurch wir erhebliche Implementierungsarbeit und auch Zeit einsparen.
 Dabei wird es beispielsweise einfach gemacht die Benutzeroberfläche oder Animationen zu erstellen und zu verwalten.
@@ -25,7 +24,9 @@ werden automatisch alle davon betroffenen Objekte aktualisiert.
 
 \subsection{Visitor}
 
-\subsection{Singleton-Pattern}
+\subsection{Singleton}
 Da wir verschiedene Klassen benötigen von denen es aber nur ein Objekt geben soll und ein globaler sowie einfacher Zugriff auf diese Objekte geben soll, bietet sich das Singleton-Pattern natürlich besonders an. So gibt es beispielsweise die Klasse $\texttt{AssetModel}$, welche alle benötigten Ressourcen für die Applikation enthält und von mehreren Klassen gleichzeitig benutzt wird.
 
 \subsection{Strategy}
+Das Strategie-Modell bietet sich bei unserem Entwurf besonders bei der Beta-Reduktion an, da wir an dieser Stelle mehrere Reduktionsstrategien in unsere Lernapplikation verwenden.
+MORE TO DO
