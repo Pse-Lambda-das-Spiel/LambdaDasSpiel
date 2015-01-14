@@ -7,8 +7,8 @@
     <coordinates>
       <x>290</x>
       <y>130</y>
-      <w>380</w>
-      <h>230</h>
+      <w>510</w>
+      <h>270</h>
     </coordinates>
     <panel_attributes>StatisticViewController
 --
@@ -20,8 +20,8 @@
 +getCurentLevelStatistic(): StatisticModel
 +setCurentLevelStatistic(model: LevelStatistic)
 +update()
-+loadStatisticModel(profileModelId: int)
-+storeStatisticModel(profileModelId: int)
++loadStatisticModel(profileModelId: String)
++storeStatisticModel(profileModelId: String)
 +loadLevelstatistics(levlId: String, profileModelId: String)
 +storeLevelstatistics(levlId: String, profileModelId: String)
 +show()</panel_attributes>

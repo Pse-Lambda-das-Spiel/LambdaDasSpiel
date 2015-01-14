@@ -52,4 +52,30 @@
 group=1</panel_attributes>
     <additional_attributes/>
   </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>650</x>
+      <y>100</y>
+      <w>190</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>SimpleClass
+--
+LevelId: String
+--
+getLevelId() : String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>140</y>
+      <w>300</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;20.0;280.0;10.0</additional_attributes>
+  </element>
 </diagram>
