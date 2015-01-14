@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>40</y>
+      <w>410</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>template=T: Class extends ShopItemModel
+ShopItemTypeModel
+--
+-typeName: String
+-items: List&lt;T&gt;
+-activatedItem: T
+--
++ShopItemTypeModel&lt;T&gt;
++getTypeName(): String
++getItems(): List&lt;T&gt;
++getActivatedItem(): T
++setActivatedItem(item: ShopItemModel)</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

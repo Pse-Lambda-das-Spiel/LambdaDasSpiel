@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>400</x>
+      <y>390</y>
+      <w>320</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>ViewRemovalVisitor
+--
+-view: LambdaTermViewController
+--
++ViewRemovalVisitor(view: LambdaTermViewController)
++visit(node: LambdaRoot)
++visit(node: LambdaApplication)
++visit(node: LambdaAbstraction)
++visit(node: LambdaVariable)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>150</x>
+      <y>380</y>
+      <w>160</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>LambdaTermVisitor&lt;T&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>230</x>
+      <y>380</y>
+      <w>190</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt;&lt;bind&gt;&gt;
+T -&gt; Object</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+</diagram>

@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>290</x>
+      <y>270</y>
+      <w>240</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>BetaReductionVisitor
+--
+#result: LambdaTerm = null
+#hasReduced: boolean = false
+#applicant: LambdaTerm = null
+--
++BetaReductionVisitor()
++visit(node: LambdaRoot)
++visit(node: LambdaApplication)
++visit(node: LambdaAbstraction)
++visit(node: LambdaVariable)
++getResult(): LambdaTerm
++hasReduced(): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>0</x>
+      <y>280</y>
+      <w>160</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>LambdaTermVisitor&lt;T&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>80</x>
+      <y>280</y>
+      <w>230</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt;&lt;bind&gt;&gt;
+T -&gt; LambdaTerm</panel_attributes>
+    <additional_attributes>10.0;20.0;210.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>610</x>
+      <y>270</y>
+      <w>260</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>ReductionStrategyNormalOrder
+--
+--
++ReductionStrategyNormalOrder()
++visit(node: LambdaApplication)
++visit(node: LambdaAbstraction)
++getResult(): LambdaTerm</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>940</x>
+      <y>310</y>
+      <w>470</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>if (applicant != null) {
+    result = node.accept(new ApplicationVisitor(node.getColor(), applicant);
+    hasReduced = true;
+} else {
+    applicant = null;
+    node.setInside(node.getInside().accept(this));
+    result = node;
+}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>840</x>
+      <y>330</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>300</y>
+      <w>110</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>940</x>
+      <y>90</y>
+      <w>470</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>applicant = node.getRight();
+node.setLeft(node.getLeft().accept(this));
+if (node.getRight() != null)
+{
+    applicant = null;
+    node.setRight(node.getRight().accept(this));
+    result = node;
+}
+else
+{
+    result = node.getLeft();
+}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>840</x>
+      <y>190</y>
+      <w>120</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;130.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>610</x>
+      <y>540</y>
+      <w>260</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>ReductionStrategyCallByValue
+--
+--
++ReductionStrategyCallByValue()
++visit(node: LambdaApplication)
++visit(node: LambdaAbstraction)
++getResult(): LambdaTerm</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>940</x>
+      <y>650</y>
+      <w>470</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>if (applicant != null &amp;&amp; applicant.isValue()) {
+    result = node.accept(new ApplicationVisitor(node.getColor(), applicant);
+    hasReduced = true;
+} else {
+    result = node;
+}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>840</x>
+      <y>600</y>
+      <w>120</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>840</x>
+      <y>570</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;20.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>940</x>
+      <y>560</y>
+      <w>470</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>applicant = null;
+node.setRight(node.getRight().accept(this));
+applicant = node.getRight();
+node.setLeft(node.getLeft().accept(this));</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>510</x>
+      <y>470</y>
+      <w>120</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>100.0;90.0;10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>610</x>
+      <y>810</y>
+      <w>260</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>ReductionStrategyCallByName
+--
+--
++ReductionStrategyCallByName()
++visit(node: LambdaApplication)
++visit(node: LambdaAbstraction)
++getResult(): LambdaTerm</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>610</x>
+      <y>940</y>
+      <w>260</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>ReductionStrategyApplicativeOrder
+--
+--
++ReductionStrategyApplicativeOrder()
++visit(node: LambdaApplication)
++visit(node: LambdaAbstraction)
++getResult(): LambdaTerm</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>470</y>
+      <w>140</w>
+      <h>380</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>120.0;360.0;10.0;360.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>470</x>
+      <y>470</y>
+      <w>160</w>
+      <h>510</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>140.0;490.0;10.0;490.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>460</x>
+      <y>240</y>
+      <w>130</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;130.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>570</x>
+      <y>220</y>
+      <w>300</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>node.setChild(node.getChild().accept(this));</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

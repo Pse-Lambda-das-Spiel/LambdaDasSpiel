@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>320</x>
+      <y>320</y>
+      <w>110</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=()-</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>410</x>
+      <y>310</y>
+      <w>380</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>LambdaRoot root = new LambdaRoot();
+node.getParent().accept(new RemoveTermVisitor(node));
+root.setChild(node);
+return root;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>290</y>
+      <w>280</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>LambdaUtils
+--
+--
+_+split(term: LambdaTerm): LambdaRoot_
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

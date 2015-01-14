@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>16</x>
+      <y>144</y>
+      <w>352</w>
+      <h>264</h>
+    </coordinates>
+    <panel_attributes>LambdaGame
+--
+-achievementMenuVC: AchievementMenuViewController
+-dropDownMenuVC: DropDownMenuViewController
+-statisticVC: StatisticViewController
+-mainMenuVC: MainMenuViewController
+-settingsVC: SettingsViewController
+-shopVC: ShopViewController
+--
++getAchievementMenuVC(): AchievementMenuViewController
++getDropDownMenuVC(): DropDownMenuViewController
++getStatisticVC(): StatisticViewController
++getMainMenuVC(): MainMenuViewController
++getSettingsVC(): SettingsViewController
++getShopVC(): ShopViewController
++create()
++dispose()
++resume()
++pause()
++render()
++resize()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>16</x>
+      <y>32</y>
+      <w>256</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Controller
+--
+game: LambdaGame
+--
++setGame(game: LambdaGame)
++getGame(): LambdaGame
+
++dispose()
++show()
++hide()
++resume()
++pause()
++render(delta: float)
++resize(width: int, height: int)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>264</x>
+      <y>32</y>
+      <w>232</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;270.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>448</x>
+      <y>24</y>
+      <w>80</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>gdx.Screen</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>448</x>
+      <y>144</y>
+      <w>80</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>gdx.Game</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>144</y>
+      <w>104</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>110.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

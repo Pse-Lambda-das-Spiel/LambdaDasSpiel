@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>470</x>
+      <y>610</y>
+      <w>330</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>/LambdaNodeViewController/
+--
+-linkedTerm: LambdaTerm
+-view: LambdaTermViewController
+-parent: LambdaNodeViewController
+-children: List&lt;LambdaNodeViewController&gt;
+--
++LambdaNodeViewController(linkedTerm: LambdaTerm,
+    parent: LambdaNodeViewController, 
+    view: LambdaTermViewController)
++getParent(): LambdaNodeViewController
++isRoot(): boolean
++getLinkedTerm(): LambdaTerm
+
++updateWidth()
++updatePosition(x: float, y: float)
+/+getMinWidth(): float/
+
++insertChild(child: LambdaNodeViewController,
+    rightSibling: LambdaTerm)
++removeChild(child: LambdaNodeViewController)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>470</x>
+      <y>160</y>
+      <w>390</w>
+      <h>370</h>
+    </coordinates>
+    <panel_attributes>LambdaTermViewController
+--
+-inputListener: scene2d.ClickListener
+-editable: boolean
+-selection: LambdaTermViewController = null
+-term: LambdaRoot
+--
++LambdaTermViewController(root: LambdaRoot, editable: boolean)
+
++replaceTerm(old: LambdaTerm, new: LambdaTerm)
++setColor(term: LambdaTerm, color: Color)
+
+#getNodeView(term: LambdaTerm): LambdaNodeViewController
+#hasNodeView(term: LambdaTerm): boolean
+#addNodeView(nodeView: LambdaNodeViewController)
+#removeNodeView(nodeView: LambdaNodeViewController)
+
++isEditable(): boolean
++setSelection(term: LambdaRoot)
++getSelection(): LambdaTermViewController
+-getParentFromPosition(x: float, y: float): 
+    LambdaNodeViewController
+-getChildIndexFromPosition(x: float, y: float): int
+-getGapRectangle(x: float, y:float): gdx.math.Rectangle</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>190</x>
+      <y>410</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>scene2d.Group</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>700</y>
+      <w>210</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;190.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>190</x>
+      <y>700</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>scene2d.Actor</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>410</y>
+      <w>210</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;190.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>510</x>
+      <y>530</y>
+      <w>130</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=[term: LambdaTerm]-&gt;
+m2=0..1
+m1=1
+</panel_attributes>
+    <additional_attributes>60.0;10.0;60.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>290</x>
+      <y>320</y>
+      <w>160</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>LambdaTermObserver</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>330</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>150</x>
+      <y>930</y>
+      <w>360</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;290.0;10.0;160.0;340.0;160.0;340.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>1220</y>
+      <w>340</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>LambdaAbstractionViewController
+--
+-color: Color
+--
++LambdaAbstractionView(term: LambdaAbstraction,
+    parent: LambdaNodeView,
+    view: LambdaTermView)
++draw(batch: Batch, alpha: float)
++getMinWidth(): float</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>1220</y>
+      <w>330</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>LambdaParanthesisViewController
+--
+--
++LambdaApplicationView(term: LambdaApplication, 
+    parent: LambdaNodeView,
+    view: LambdaTermView)
++draw(batch: Batch, alpha: float)
++getMinWidth(): float</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>930</y>
+      <w>30</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;290.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>700</x>
+      <y>1220</y>
+      <w>330</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>LambdaVariableViewController
+--
+-color: Color
+--
++LambdaVariableView(term: LambdaVariable,
+    parent: LambdaNodeView,
+    view: LambdaTermView)
++draw(batch: Batch, alpha: float)
++getMinWidth(): float</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>730</x>
+      <y>930</y>
+      <w>30</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;290.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

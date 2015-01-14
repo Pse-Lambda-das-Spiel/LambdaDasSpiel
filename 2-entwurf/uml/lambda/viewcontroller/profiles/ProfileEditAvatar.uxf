@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>310</x>
+      <y>180</y>
+      <w>240</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>ProfileEditAvatar
+--
+-stage: scene2d.Stage
+-inputProcessor: InputMultiplexer
+--
++ProfileEditAvatar()
++dispose()
++show()
++hide()
++resume()
++pause()
++render(delta: float)
++resize(width: int, height: int)
++changedProfile()
++changedLanguage()
++changedAvatar()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>570</x>
+      <y>190</y>
+      <w>180</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>ProfileManagerObserver</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>500</x>
+      <y>110</y>
+      <w>30</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>200</y>
+      <w>130</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>110.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>590</x>
+      <y>240</y>
+      <w>140</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>ProfileEditObserver</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>230</y>
+      <w>130</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>110.0;30.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>460</x>
+      <y>90</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Controller</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>30</y>
+      <w>570</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>ShopModel
+--
+-musics: ShopItemTypeModel&lt;Music&gt;
+-images: ShopItemTypeModel&lt;Image&gt;
+-elementUIContextFamilies: ShopItemTypeModel&lt;ElementUIContextFamily&gt;
+--
++ShopModel()
++getMusics(): ShopItemTypeModel&lt;Music&gt;
++getImages(): ShopItemTypeModel&lt;Image&gt;
++getElementUIContextFamilies(): ShopItemTypeModel&lt;ElementUIContextFamily&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

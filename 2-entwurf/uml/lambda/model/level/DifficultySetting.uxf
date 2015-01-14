@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>40</y>
+      <w>210</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>DifficultySetting
+--
+-music: String
+-bgImage: String
+--
++DifficultySetting()
++getMusic(): String
++getBgImage(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

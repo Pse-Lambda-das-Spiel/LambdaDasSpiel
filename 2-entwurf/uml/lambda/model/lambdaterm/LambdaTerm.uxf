@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>10</y>
+      <w>350</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+LambdaTermObserver
+--
+--
++replaceTerm(old: LambdaTerm, new: LambdaTerm)
++setColor(term: LambdaValue, color: Color)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>430</x>
+      <y>250</y>
+      <w>390</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>/LambdaTerm/
+--
+-parent: LambdaTerm
+-locked: boolean
+--
++LambdaTerm(parent: LambdaTerm, locked: boolean)
+/+accept(visitor: LambdaTermVisitor&lt;T&gt;): T/
++notifyRoot(notifier: Consumer&lt;LambdaTermObserver&gt;)
++isValue(): boolean
++getParent(): LambdaTerm
++setParent(parent: LambdaTerm)
++isLocked(): boolean
++setLocked(locked: boolean)
+/+equals(term: LambdaTerm): boolean/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>740</y>
+      <w>390</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>LambdaApplication
+--
+-first: LambdaTerm = null
+-second: LambdaTerm = null
+--
++LambdaApplication(parent: LambdaTerm, locked: boolean)
++accept(visitor: LambdaTermVisitor&lt;T&gt;): T
++setFirst(term: LambdaTerm)
++getFirst(): LambdaTerm
++setSecond(term: LambdaTerm)
++getSecond(): LambdaTerm
++equals(term: LambdaTerm): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>610</x>
+      <y>500</y>
+      <w>430</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>LambdaValue
+--
+-color: Color
+--
++LambdaValue(parent: LambdaTerm, color: Color, locked: boolean)
++setColor(color: Color)
++getColor(): Color
++isValue(): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>400</x>
+      <y>740</y>
+      <w>460</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>LambdaAbstraction
+--
+-inside: LambdaTerm = null
+--
++LambdaAbstraction(parent: LambdaTerm, color: Color, locked: boolean)
++accept(visitor: LambdaTermVisitor&lt;T&gt;): T
++setInside(inside: LambdaTerm)
++getInside(): LambdaTerm
++equals(term: LambdaTerm): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>870</x>
+      <y>740</y>
+      <w>450</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>LambdaVariable
+--
+--
++LambdaVariable(parent: LambdaTerm, color: Color, locked: boolean)
++accept(visitor: LambdaTermVisitor&lt;T&gt;): T
++equals(term: LambdaTerm): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>830</x>
+      <y>20</y>
+      <w>350</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt;&lt;bind&gt;&gt;
+Observer -&gt; LambdaTermObserver</panel_attributes>
+    <additional_attributes>10.0;20.0;330.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>340</x>
+      <y>450</y>
+      <w>190</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;290.0;10.0;120.0;170.0;120.0;170.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>670</x>
+      <y>450</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>690</x>
+      <y>610</y>
+      <w>30</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>930</x>
+      <y>610</y>
+      <w>30</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>70</x>
+      <y>250</y>
+      <w>240</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>template=T: Class
+&lt;&lt;interface&gt;&gt;
+LambdaTermVisitor
+--
+--
++visit(node: LambdaRoot)
++visit(node: LambdaApplication)
++visit(node: LambdaAbstraction)
++visit(node: LambdaVariable)
++getResult(): T</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>300</y>
+      <w>180</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;160.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>50</y>
+      <w>110</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;90.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>460</x>
+      <y>0</y>
+      <w>380</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>LambdaRoot
+--
+-child: LambdaTerm = null
+--
++LambdaRoot()
++accept(visitor: LambdaTermVisitor&lt;T&gt;): T
++setChild(child: LambdaTerm)
++getChild(): LambdaTerm
++notifyRoot(notifier: Consumer&lt;LambdaTermObserver&gt;)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>580</x>
+      <y>140</y>
+      <w>30</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>1090</x>
+      <y>20</y>
+      <w>160</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Observable&lt;Observer&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

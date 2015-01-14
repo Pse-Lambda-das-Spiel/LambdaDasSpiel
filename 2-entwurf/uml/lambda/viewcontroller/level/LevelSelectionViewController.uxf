@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>63</x>
+      <y>81</y>
+      <w>225</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>LevelSelectionViewController
+--
+-stage: scene2d.Stage
+-inputProcessor: InputMultiplexer
+--
++LevelSelectionViewController()
+
+-startLevel(level: LevelModel)
+
++dispose()
++show()
++hide()
++resume()
++pause()
++render(delta: float)
++resize(width: int, height: int)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>180</x>
+      <y>9</y>
+      <w>90</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Controller
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>216</x>
+      <y>27</y>
+      <w>27</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+</diagram>
