@@ -15,4 +15,11 @@
 
 *.snm
 
+*.xml
+
+*.properties
+
+*.mf
+
 2-entwurf/latex/design.synctex.gz(busy)
+/3-implementierung/nbproject/private/
