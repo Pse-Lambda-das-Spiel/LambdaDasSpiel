@@ -1,6 +1,7 @@
 package lambda.model.levels;
 
 import java.util.List;
+import lambda.model.shop.ElementUIContextFamily;
 
 /**
  * Represents the whole level context. Includes everything about the level and the difficulty
@@ -63,7 +64,7 @@ public class LevelContext {
      *
      * @return elementUIContextFamily
      */
-    public ElementUIContextFamily getElementUIContextFamily() {
+    public lambda.model.shop.ElementUIContextFamily getElementUIContextFamily() {
         return elementUIContextFamily;
     }
 

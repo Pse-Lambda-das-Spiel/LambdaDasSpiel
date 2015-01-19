@@ -1,7 +1,5 @@
 package lambda.model.shop;
 
-import lambda.model.levels.ElementUIContextFamily;
-
 /**
  * Represents
  *
