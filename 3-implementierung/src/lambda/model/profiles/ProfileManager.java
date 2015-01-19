@@ -16,7 +16,7 @@ import lambda.util.ProfileSaveHelper;
  * @author Kai Fieger
  */
 public class ProfileManager extends Observable<ProfileManagerObserver> {
-
+    
     /**
      * The maximum number of allowed profiles.
      */

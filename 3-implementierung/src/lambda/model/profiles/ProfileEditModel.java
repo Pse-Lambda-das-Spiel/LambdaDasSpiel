@@ -3,7 +3,6 @@ package lambda.model.profiles;
 import java.util.LinkedList;
 import java.util.List;
 
-import lambda.AssetModel;
 import lambda.Observable;
 
 /**
@@ -19,7 +18,6 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
     private int selectedLang;
     private List<String> avatar;
     private int selectedAvatar;
-    private AssetModel assets;
 
     /**
 	 * Creates a new ProfileEditModel-object.
@@ -31,17 +29,16 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         selectedLang = 0;
         avatar = new LinkedList<String>();
         selectedAvatar = 0;
-        assets = AssetModel.getAssets();
         
 
         //TODO get keys from filenames in lang folder
-        lang.add(assets.getLanguageByKey("de"));
-        lang.add(assets.getLanguageByKey("en"));
-        lang.add(assets.getLanguageByKey("fr"));
+        lang.add("de");
+        lang.add("en");
+        lang.add("fr");
         
-        langPic.add(assets.getImageByKey("flagDe"));
-        langPic.add(assets.getImageByKey("flagEn"));
-        langPic.add(assets.getImageByKey("flagFr"));        
+        langPic.add("flagDe");
+        langPic.add("flagEn");
+        langPic.add("flagFr");        
     }
 
     /**
@@ -118,7 +115,7 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         }
         this.avatar = new LinkedList<String>();
         for (int i = 0; i < AVATAR_NUMBER; i++) {
-            this.avatar.add(assets.getImageByKey("a" + i));
+            this.avatar.add("a" + i);
         }
         //TODO add bought avatar id's to selection
         selectedAvatar = this.avatar.indexOf(avatar);
