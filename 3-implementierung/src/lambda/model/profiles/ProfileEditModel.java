@@ -6,7 +6,7 @@ import java.util.List;
 import lambda.Observable;
 
 /**
- * Represents the logic behind the editing of a profile.
+ * Represents the logic behind the editing-screen of a profile's avatar and language.
  * 
  * @author Kai Fieger
  */
@@ -14,7 +14,7 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
 
     private final static int AVATAR_NUMBER = 10;
     private List<String> lang;
-    private List<String> langPic;
+    //private List<String> langPic;
     private int selectedLang;
     private List<String> avatar;
     private int selectedAvatar;
@@ -25,20 +25,20 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
 	 */
     public ProfileEditModel() {
         lang = new LinkedList<String>();
-        langPic = new LinkedList<String>();
+        //langPic = new LinkedList<String>();
         selectedLang = 0;
         avatar = new LinkedList<String>();
         selectedAvatar = 0;
-        
 
         //TODO get keys from filenames in lang folder
         lang.add("de");
         lang.add("en");
-        lang.add("fr");
+        lang.add("fr");   
         
-        langPic.add("flagDe");
-        langPic.add("flagEn");
-        langPic.add("flagFr");        
+        avatar = new LinkedList<String>();
+        for (int i = 0; i < AVATAR_NUMBER; i++) {
+            this.avatar.add("a" + i);
+        }
     }
 
     /**
@@ -98,7 +98,7 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
      * @return flag ID
      */
     public String getLangPic() {
-        return langPic.get(selectedLang);
+        return lang.get(selectedLang) + "Flag";
     }
 
     /**
@@ -113,10 +113,7 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         if (avatar == null) {
             throw new IllegalArgumentException("avatar cannot be null");
         }
-        this.avatar = new LinkedList<String>();
-        for (int i = 0; i < AVATAR_NUMBER; i++) {
-            this.avatar.add("a" + i);
-        }
+        this.avatar = this.avatar.subList(0, AVATAR_NUMBER - 1);
         //TODO add bought avatar id's to selection
         selectedAvatar = this.avatar.indexOf(avatar);
         if (selectedAvatar == -1) {

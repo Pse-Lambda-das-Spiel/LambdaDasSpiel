@@ -31,7 +31,7 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
             throw new IllegalArgumentException("name cannot be null");
         }
         this.name = name;
-        avatar = null;
+        avatar = "a0";
         language = "de";
         levelIndex = 1;
         coins = 0;
