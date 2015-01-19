@@ -1,5 +1,7 @@
 package lambda.model.levels;
 
+import java.util.List;
+
 /**
  * Represents the whole level context. Includes everything about the level and the difficulty
  *

@@ -1,4 +1,8 @@
 package lambda.model.levels;
+
+import java.util.List;
+import lambda.model.lambdaterm.LambdaRoot;
+
 /**
  * Represents a level
  *
