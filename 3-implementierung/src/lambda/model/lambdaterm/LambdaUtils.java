@@ -29,6 +29,10 @@ public final class LambdaUtils {
         closingParanthesis[0] = false;
         result.setChild(fromString(string, index, 0, -1, closingParanthesis));
         
+        if (!result.accept(new IsValidVisitor())) {
+            throw new ParseException("Parsing resulted in an invalid term!", -1);
+        }
+        
         return result;
     }
     

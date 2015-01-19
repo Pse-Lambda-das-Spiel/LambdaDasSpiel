@@ -3,6 +3,7 @@ package lambda.model.lambdaterm;
 import java.util.function.Consumer;
 import lambda.Observable;
 import lambda.model.lambdaterm.visitor.CopyVisitor;
+import lambda.model.lambdaterm.visitor.IsValidVisitor;
 import lambda.model.lambdaterm.visitor.LambdaTermVisitor;
 import lambda.model.lambdaterm.visitor.ToStringVisitor;
 
@@ -124,8 +125,13 @@ public abstract class LambdaTerm extends Observable<LambdaTermObserver> {
      */
     @Override
     public String toString() {
+        assert(!(this instanceof LambdaRoot)); // Overriden by LambdaRoot
         LambdaRoot temp = new LambdaRoot();
         temp.setChild(this.accept(new CopyVisitor()));
-        return temp.accept(new ToStringVisitor());
+        if (temp.accept(new IsValidVisitor())) {
+            return temp.accept(new ToStringVisitor());
+        } else {
+            return "Invalid";
+        }
     }
 }

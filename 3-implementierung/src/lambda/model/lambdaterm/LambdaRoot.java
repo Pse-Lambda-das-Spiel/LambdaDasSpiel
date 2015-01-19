@@ -1,7 +1,9 @@
 package lambda.model.lambdaterm;
 
 import java.util.Objects;
+import lambda.model.lambdaterm.visitor.IsValidVisitor;
 import lambda.model.lambdaterm.visitor.LambdaTermVisitor;
+import lambda.model.lambdaterm.visitor.ToStringVisitor;
 
 /**
  * Represents a root object in a lambda term tree.
@@ -83,5 +85,19 @@ public class LambdaRoot extends LambdaTerm {
     @Override
     public int hashCode() {
         return 327 * getClass().hashCode() + 42 * Objects.hashCode(child);
+    }
+    
+    /**
+     * Returns a string representation of this object.
+     * 
+     * @return a string representation of this object.
+     */
+    @Override
+    public String toString() {
+        if (this.accept(new IsValidVisitor())) {
+            return this.accept(new ToStringVisitor());
+        } else {
+            return "Invalid";
+        }
     }
 }
