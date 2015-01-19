@@ -44,6 +44,9 @@ public class LambdaAbstraction extends LambdaValue {
     public void setInside(LambdaTerm inside) {
         notify((observer) -> observer.replaceTerm(this.inside, inside));
         this.inside = inside;
+        if (inside != null) {
+            inside.setParent(this);
+        }
     }
     
     /**

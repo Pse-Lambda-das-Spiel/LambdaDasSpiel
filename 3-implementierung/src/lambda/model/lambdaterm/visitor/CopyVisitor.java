@@ -36,7 +36,6 @@ public class CopyVisitor implements LambdaTermVisitor<LambdaTerm> {
         LambdaTerm child = null;
         if (node.getChild() != null) {
             child = node.getChild().accept(this);
-            child.setParent(root);
         }
         
         root.setChild(child);
@@ -56,11 +55,9 @@ public class CopyVisitor implements LambdaTermVisitor<LambdaTerm> {
         LambdaTerm right = null;
         if (node.getLeft() != null) {
             left = node.getLeft().accept(this);
-            left.setParent(application);
         }
         if (node.getRight() != null) {
             right = node.getRight().accept(this);
-            right.setParent(application);
         }
         
         application.setLeft(left);
@@ -80,7 +77,6 @@ public class CopyVisitor implements LambdaTermVisitor<LambdaTerm> {
         LambdaTerm inside = null;
         if (node.getInside() != null) {
             inside = node.getInside().accept(this);
-            inside.setParent(abstraction);
         }
         
         abstraction.setInside(inside);

@@ -20,13 +20,14 @@ public final class LambdaUtils {
      * @return the parsed lambda term
      * @throws ParseException if the string could not be parsed as a lambda term
      */
-    public static LambdaTerm fromString(String string) throws ParseException {
+    public static LambdaRoot fromString(String string) throws ParseException {
         LambdaRoot result = new LambdaRoot();
         
         int[] index = new int[1]; // Reference to a single integer
         index[0] = 0;
-        result.setChild(fromString(string, index));
-        result.getChild().setParent(result);
+        boolean[] closingParanthesis = new boolean[1]; // Reference to a single boolean
+        closingParanthesis[0] = false;
+        result.setChild(fromString(string, index, 0, -1, closingParanthesis));
         
         return result;
     }
@@ -39,12 +40,11 @@ public final class LambdaUtils {
      * @return the parsed lambda term
      * @throws ParseException if the string could not be parsed as a lambda term
      */
-    private static LambdaTerm fromString(String string, int[] index) throws ParseException {
+    private static LambdaTerm fromString(String string, int[] index, int depth, int lastParenthesisOpenDepth, boolean[] closingParanthesis) throws ParseException {
         List<LambdaTerm> terms = new LinkedList<>();
         
         // Adds all terms on this layer to list terms
-        boolean closeParanthesis = false;
-        while (index[0] < string.length() && !closeParanthesis) {
+        while (index[0] < string.length() && !(closingParanthesis[0] && depth > lastParenthesisOpenDepth)) { // not at end of string and not ended by closing parenthesis
             switch (string.charAt(index[0])) {
                 case '/': { // New abstraction
                     // Bound variable
@@ -63,19 +63,18 @@ public final class LambdaUtils {
                     // Inside term
                     ++index[0];
                     LambdaAbstraction abstraction = new LambdaAbstraction(null, new Color(variableName, variableName, variableName), false); // TODO: Generate color from variable name?
-                    abstraction.setInside(fromString(string, index));
-                    abstraction.getInside().setParent(abstraction);
+                    abstraction.setInside(fromString(string, index, depth + 1, lastParenthesisOpenDepth, closingParanthesis));
                     terms.add(abstraction);
                     break;
                 }
                 case '(': {
                     ++index[0];
-                    terms.add(fromString(string, index));
+                    terms.add(fromString(string, index, depth + 1, depth, closingParanthesis));
                     break;
                 }
                 case ')': {
                     ++index[0];
-                    closeParanthesis = true;
+                    closingParanthesis[0] = true;
                     break;
                 }
                 case ' ': { // Skip spaces
@@ -85,8 +84,12 @@ public final class LambdaUtils {
                 default: { // New variable
                     char variableName = string.charAt(index[0]++);
                     terms.add(new LambdaVariable(null, new Color(variableName, variableName, variableName), false));// TODO: Generate color from variable name?
+                    break;
                 }
             }
+        }
+        if (closingParanthesis[0] == true && depth == lastParenthesisOpenDepth + 1) {
+            closingParanthesis[0] = false;
         }
         
         // Return 
@@ -99,18 +102,14 @@ public final class LambdaUtils {
             LambdaApplication current = new LambdaApplication(null, false);
             
             current.setLeft(terms.get(0));
-            terms.get(0).setParent(current);
             current.setRight(terms.get(1));
-            terms.get(1).setParent(current);
             
             for (int i = 2; i < terms.size(); i++) {
                 // New application as parent of last application
                 LambdaApplication application = new LambdaApplication(null, false);
-                current.setParent(application);
                 
                 application.setLeft(current);
                 application.setRight(terms.get(i));
-                terms.get(i).setParent(application);
                 
                 current = application;
             }

@@ -22,9 +22,13 @@ public class ToStringVisitor implements LambdaTermVisitor<String> {
      */
     private String result;
     /**
-     * Indicates whether the currently visited node is a right child of an application. Possibly requires paranthesis.
+     * Indicates whether the currently visited node is the right child of an application. Possibly requires paranthesis.
      */
     private boolean isRightApplicationChild;
+    /**
+     * Indicates whether the currently visited node is the left child of an application. Possibly requires paranthesis.
+     */
+    private boolean isLeftApplicationChild;
     
     /**
      * Creates a new ToStringVisitor.
@@ -56,10 +60,13 @@ public class ToStringVisitor implements LambdaTermVisitor<String> {
     public void visit(LambdaApplication node) {
         checkValidity(node);
         boolean paranthesis = isRightApplicationChild;
+        isLeftApplicationChild = true;
         isRightApplicationChild = false;
         String left = node.getLeft().accept(this);
+        isLeftApplicationChild = false;
         isRightApplicationChild = true;
         String right = node.getRight().accept(this);
+        isLeftApplicationChild = false;
         isRightApplicationChild = false;
         result = (paranthesis ? "(" : "") + left + " " + right + (paranthesis ? ")" : "");
     }
@@ -73,7 +80,10 @@ public class ToStringVisitor implements LambdaTermVisitor<String> {
     @Override
     public void visit(LambdaAbstraction node) {
         checkValidity(node);
-        result = "/" + ((char) node.getColor().getRed()) + "." + node.getInside().accept(this);
+        boolean paranthesis = isLeftApplicationChild || isRightApplicationChild;
+        isLeftApplicationChild = false;
+        isRightApplicationChild = false;
+        result = (paranthesis ? "(" : "") + "/" + Character.toString((char) node.getColor().getRed()) + "." + node.getInside().accept(this) + (paranthesis ? ")" : "");
     }
     
     /**
@@ -85,7 +95,7 @@ public class ToStringVisitor implements LambdaTermVisitor<String> {
     @Override
     public void visit(LambdaVariable node) {
         checkValidity(node);
-        result = "" + ((char) node.getColor().getRed());
+        result = Character.toString((char) node.getColor().getRed());
     }
     
     /**

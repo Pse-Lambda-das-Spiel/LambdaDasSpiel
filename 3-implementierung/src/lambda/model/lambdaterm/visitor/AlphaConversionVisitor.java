@@ -26,6 +26,10 @@ public class AlphaConversionVisitor implements LambdaTermVisitor {
      * Stores whether the visitor has checked the visited term for validity.
      */
     private boolean hasCheckedValidity;
+    /** 
+     * Indicates whether the old color is bound by an abstraction between the first visited node and the current node.
+     */
+    private boolean colorBound;
     
     /**
      * Creates a new alpha conversion visitor.
@@ -41,6 +45,7 @@ public class AlphaConversionVisitor implements LambdaTermVisitor {
         this.oldColor = oldColor;
         this.newColor = newColor;
         hasCheckedValidity = false;
+        colorBound = false;
     }
 
     /**
@@ -69,7 +74,7 @@ public class AlphaConversionVisitor implements LambdaTermVisitor {
     }
     
     /**
-     * Visits the given lambda abstraction and replaces the color if possible. Then traverses to the child node.
+     * Visits the given lambda abstraction and replaces the color if necessary. Then traverses to the child node.
      * 
      * @param node the abstraction to be visited
      * @throws InvalidLambdaTermException if the visited term is invalid
@@ -77,14 +82,20 @@ public class AlphaConversionVisitor implements LambdaTermVisitor {
     @Override
     public void visit(LambdaAbstraction node) {
         checkValidity(node);
-        if (node.getColor().equals(oldColor)) {
+        boolean bindsOldColor = node.getColor().equals(oldColor);
+        if (bindsOldColor) {
+            assert(!colorBound); // Checked in validity test
+            colorBound = true;
             node.setColor(newColor);
         }
         node.getInside().accept(this);
+        if (bindsOldColor) {
+            colorBound = false;
+        }
     }
     
     /**
-     * Visits the given lambda variable and replaces the color if possible.
+     * Visits the given lambda variable and replaces the color if necessary.
      * 
      * @param node the variable to be visited
      * @throws InvalidLambdaTermException if the visited term is invalid
@@ -92,7 +103,7 @@ public class AlphaConversionVisitor implements LambdaTermVisitor {
     @Override
     public void visit(LambdaVariable node) {
         checkValidity(node);
-        if (node.getColor().equals(oldColor)) {
+        if (node.getColor().equals(oldColor) && colorBound) {
             node.setColor(newColor);
         }
     }

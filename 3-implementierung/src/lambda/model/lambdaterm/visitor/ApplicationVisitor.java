@@ -116,13 +116,22 @@ public class ApplicationVisitor implements LambdaTermVisitor<LambdaTerm> {
                 throw new InvalidLambdaTermException("Cannot perform an application on an invalid lambda term!");
             }
             
-            // Perform alpha conversion in the applicant if applicant and term inside abstraction share a color and that color isn't the color of the currently reducing abstraction
-            Set<Color> collidingColors = term.accept(new ColorCollectionVisitor());
-            collidingColors.retainAll(applicant.accept(new ColorCollectionVisitor()));
+            // Perform alpha conversion if necessary
+            // Find intersection of bound variables in left term and free variables in right term
+            Set<Color> collidingColors = term.accept(new ColorCollectionVisitor(ColorCollectionVisitor.Type.BOUND));
+            collidingColors.retainAll(applicant.accept(new ColorCollectionVisitor(ColorCollectionVisitor.Type.FREE)));
+            collidingColors.remove(this.color);
             for (Color collision : collidingColors) {
-                if (!collision.equals(this.color) && !applicant.getParent().accept(new IsColorBoundVisitor(color))) {
-                    applicant.accept(new AlphaConversionVisitor(color, Color.WHITE)); // TODO: generate new color
+                // TODO: generate new color
+                Color replacingColor = new Color(0, 0, 0);
+                for (char v = 'a'; v <= 'z'; v++) {
+                    replacingColor = new Color(v, v, v);
+                    if (!applicant.getParent().accept(new IsColorBoundVisitor(color)) && !term.accept(new ColorCollectionVisitor(ColorCollectionVisitor.Type.ALL)).contains(replacingColor)  && !applicant.accept(new ColorCollectionVisitor(ColorCollectionVisitor.Type.ALL)).contains(replacingColor)) {
+                        break;
+                    }
                 }
+                
+                term.accept(new AlphaConversionVisitor(collision, replacingColor));
             }
             
             // Remove applicant to tell application that it was reduced

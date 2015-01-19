@@ -50,9 +50,6 @@ public class IsColorBoundVisitor implements LambdaTermVisitor<Boolean> {
     @Override
     public void visit(LambdaRoot node) {
         checkValidity(node);
-        if (!result) {
-            node.getChild().accept(this);
-        }
     }
     
     /**
@@ -64,8 +61,7 @@ public class IsColorBoundVisitor implements LambdaTermVisitor<Boolean> {
     public void visit(LambdaApplication node) {
         checkValidity(node);
         if (!result) {
-            node.getLeft().accept(this);
-            node.getRight().accept(this);
+            node.getParent().accept(this);
         }
     }
     
@@ -80,12 +76,16 @@ public class IsColorBoundVisitor implements LambdaTermVisitor<Boolean> {
         checkValidity(node);
         // assert(!node.getColor().equals(color)); // Checked in validity
         if (!result) {
-            node.getInside().accept(this);
+            if (node.getColor().equals(color)) {
+                result = true;
+            } else {
+                node.getParent().accept(this);
+            }
         }
     }
     
     /**
-     * Visits the given lambda variable and replaces the color if possible.
+     * Visits the given lambda variable and traverses to the parent node .
      * 
      * @param node the variable to be visited
      * @throws InvalidLambdaTermException if the visited term is invalid
@@ -93,8 +93,8 @@ public class IsColorBoundVisitor implements LambdaTermVisitor<Boolean> {
     @Override
     public void visit(LambdaVariable node) {
         checkValidity(node);
-        if (!result && node.getColor().equals(color)) {
-            result = true;
+        if (!result) {
+            node.getParent().accept(this);
         }
     }
     
@@ -111,5 +111,15 @@ public class IsColorBoundVisitor implements LambdaTermVisitor<Boolean> {
                 throw new InvalidLambdaTermException("Cannot check if a color is bound in an invalid lambda term!");
             }
         }
+    }
+    
+    /**
+     * Returns whether the given color is bound in the visited term.
+     * 
+     * @return true if the given color is bound in the visited term, false otherwise
+     */
+    @Override
+    public Boolean getResult() {
+        return result;
     }
 }

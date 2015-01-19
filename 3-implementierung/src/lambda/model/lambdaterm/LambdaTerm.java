@@ -2,7 +2,9 @@ package lambda.model.lambdaterm;
 
 import java.util.function.Consumer;
 import lambda.Observable;
+import lambda.model.lambdaterm.visitor.CopyVisitor;
 import lambda.model.lambdaterm.visitor.LambdaTermVisitor;
+import lambda.model.lambdaterm.visitor.ToStringVisitor;
 
 /**
  * Represents a lambda term/ node in a lambda term tree.
@@ -114,4 +116,16 @@ public abstract class LambdaTerm extends Observable<LambdaTermObserver> {
      */
     @Override
     public abstract int hashCode();
+    
+    /**
+     * Returns a string representation of this object.
+     * 
+     * @return a string representation of this object.
+     */
+    @Override
+    public String toString() {
+        LambdaRoot temp = new LambdaRoot();
+        temp.setChild(this.accept(new CopyVisitor()));
+        return temp.accept(new ToStringVisitor());
+    }
 }

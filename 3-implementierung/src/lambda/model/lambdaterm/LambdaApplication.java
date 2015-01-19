@@ -45,6 +45,9 @@ public class LambdaApplication extends LambdaTerm {
     public void setLeft(LambdaTerm left) {
         notify((observer) -> observer.replaceTerm(this.left, left));
         this.left = left;
+        if (left != null) {
+            left.setParent(this);
+        }
     }
     
     /**
@@ -64,6 +67,9 @@ public class LambdaApplication extends LambdaTerm {
     public void setRight(LambdaTerm right) {
         notify((observer) -> observer.replaceTerm(this.right, right));
         this.right = right;
+        if (right != null) {
+            right.setParent(this);
+        }
     }
 
     /**

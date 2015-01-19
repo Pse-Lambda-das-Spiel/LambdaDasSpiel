@@ -16,15 +16,39 @@ import lambda.model.lambdaterm.LambdaVariable;
  */
 public class ColorCollectionVisitor implements LambdaTermVisitor<Set<Color>> {
     /**
+     * Indicates which colors should be collected by this visitor.
+     */
+    public enum Type {
+        /**
+         * Collect all colors.
+         */
+        ALL,
+        /**
+         * Collect only colors of bound variables.
+         */
+        BOUND,
+        /**
+         * Collect only colors of free variables.
+         */
+        FREE
+    }
+    /**
      * The set of used colors.
      */
     private final Set<Color> result;
+    /**
+     * Indicates which colors should be collected by this visitor.
+     */
+    private final Type type;
     
     /**
      * Creates a ColorCollectionVisitor.
+     * 
+     * @param type indicates which colors should be collected by this visitor.
      */
-    public ColorCollectionVisitor() {
+    public ColorCollectionVisitor(Type type) {
         result = new HashSet<>();
+        this.type = type;
     }
 
     /**
@@ -56,27 +80,32 @@ public class ColorCollectionVisitor implements LambdaTermVisitor<Set<Color>> {
     }
     
     /**
-     * Visits the given lambda abstraction and saves the color. Then traverses to the child node if possible.
+     * Visits the given lambda abstraction and saves the color if necessary. Then traverses to the child node if possible.
      * 
      * @param node the abstraction to be visited
      */
     @Override
     public void visit(LambdaAbstraction node) {
-        result.add(node.getColor());
+        if (type == Type.ALL || type == Type.BOUND) {
+            result.add(node.getColor());
+        }
         if (node.getInside() != null) {
             node.getInside().accept(this);
         }
     }
     
     /**
-     * Visits the given lambda variable and adds the color.
+     * Visits the given lambda variable and saves the color if necessary.
      * 
      * @param node the variable to be visited
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
     public void visit(LambdaVariable node) {
-        result.add(node.getColor());
+        boolean bound = node.accept(new IsColorBoundVisitor(node.getColor()));
+        if (type == Type.ALL || (type == Type.BOUND && bound) || (type == Type.FREE && !bound)) {
+            result.add(node.getColor());
+        }
     }
     
     /**
