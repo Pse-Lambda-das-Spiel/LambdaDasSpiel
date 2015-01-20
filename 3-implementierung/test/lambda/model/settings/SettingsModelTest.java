@@ -1,7 +1,8 @@
 package lambda.model.settings;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.After;
 import org.junit.Before;
@@ -41,20 +42,12 @@ public class SettingsModelTest implements SettingsModelObserver {
     @Test
     public void testSetMusicOn() {
         settings.setMusicOn(true);
-        if (!settings.isMusicOn()) {
-            fail("musicOn not true");
-        }
-        if (!calledChangedMusicOn) {
-            fail("setMusicOn didn't call changedMusicOn()");
-        }
+        assertTrue(settings.isMusicOn());
+        assertTrue(calledChangedMusicOn);
         calledChangedMusicOn = false;
         settings.setMusicOn(false);
-        if (settings.isMusicOn()) {
-            fail("musicOn not false");
-        }
-        if (!calledChangedMusicOn) {
-            fail("setMusicOn didn't call changedMusicOn()");
-        }
+        assertFalse(settings.isMusicOn());
+        assertTrue(calledChangedMusicOn);
     }
     
     /**
@@ -66,9 +59,7 @@ public class SettingsModelTest implements SettingsModelObserver {
         float testValue = 12.12f;
         settings.setMusicVolume(testValue);
         assertEquals(testValue, settings.getMusicVolume(), EPSILON);
-        if (!calledChangedMusicVolume) {
-            fail("setMusicVolume didn't call changedMusicVolume()");
-        }
+        assertTrue(calledChangedMusicVolume);
     }
     
     /**
@@ -80,9 +71,7 @@ public class SettingsModelTest implements SettingsModelObserver {
         float testValue = 12.12f;
         settings.setSoundVolume(testValue);
         assertEquals(testValue, settings.getSoundVolume(), EPSILON);
-        if (!calledChangedSoundVolume) {
-            fail("setSoundVolume didn't call changedSoundVolume()");
-        }
+        assertTrue(calledChangedSoundVolume);
     }
     
     /**
@@ -110,13 +99,11 @@ public class SettingsModelTest implements SettingsModelObserver {
     @Override
     public void changedMusicVolume() {
         calledChangedMusicVolume = true;
-
     }
 
     @Override
     public void changedSoundVolume() {
         calledChangedSoundVolume = true;
-
     }
     
 }

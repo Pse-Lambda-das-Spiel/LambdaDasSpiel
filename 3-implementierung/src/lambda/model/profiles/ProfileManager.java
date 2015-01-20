@@ -1,6 +1,7 @@
 package lambda.model.profiles;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
      * The maximum number of allowed profiles.
      */
     public static final int MAX_NUMBER_OF_PROFILES = 6;
-    private static final String PROFILE_FOLDER = "./profiles";
+    public static final String PROFILE_FOLDER = "./profiles";
     private static ProfileManager manager;
     private final ProfileEditModel profileEdit;
     private ProfileModel currentProfile;
@@ -32,7 +33,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
         currentProfile = null;
         profiles = loadProfiles(new File(PROFILE_FOLDER));
     }
-
+    
     /**
      * Returns an (/the only) instance of ProfileManager.
      * 
@@ -44,7 +45,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
         }
         return manager;
     }
-
+    
     /**
      * Returns the currently selected profile.
      * 
@@ -99,8 +100,8 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
             }
         }
         ProfileModel newProfile = new ProfileModel(name, currentProfile);
-        save(name);
         profiles.add(profiles.indexOf(currentProfile), newProfile);
+        save(name);
         delete(currentProfile.getName());
         currentProfile = newProfile;
         notify(o -> o.changedProfileList());
@@ -112,11 +113,11 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
      * 
      * @return name array
      */
-    public String[] getNames() {
-        String[] names = new String[profiles.size()];
+    public List<String> getNames() {
+        List<String> names = new ArrayList<String>();
         int i = 0;
         for (ProfileModel profile : profiles) {
-            names[i++] = profile.getName();
+            names.add(profile.getName());
         }
         return names;
     }
@@ -138,6 +139,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
             }
             ProfileModel newProfile = new ProfileModel("");
             profiles.add(newProfile);
+            notify(o -> o.changedProfileList());
             return newProfile;
         }
         return null;
@@ -202,8 +204,22 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
 
     private List<ProfileModel> loadProfiles(File profileFolder) {
         List<ProfileModel> profiles = new LinkedList<ProfileModel>();
-        for (File file : profileFolder.listFiles()) {
-            profiles.add(ProfileLoadHelper.loadProfile(file.getName()));
+        if (!profileFolder.exists()) {
+            profileFolder.mkdir();
+        } else {
+            if (!profileFolder.canRead()) {
+                throw new InvalidProfilesException("can't read " + profileFolder.getPath());
+            }
+            if (!profileFolder.isDirectory()) {
+                throw new InvalidProfilesException(profileFolder.getPath() + " isn't a directory");
+            }
+            for (File file : profileFolder.listFiles()) {
+                ProfileModel profile = ProfileLoadHelper.loadProfile(file.getName());
+                if (!file.getName().equals(profile.getName())) {
+                    throw new InvalidProfilesException("a profile's name and it's save folder's name aren't the same");
+                }
+                profiles.add(ProfileLoadHelper.loadProfile(file.getName()));
+            }
         }
         return profiles;
     }
@@ -211,7 +227,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     private void deleteFolder(File folder) {
         for (File file : folder.listFiles()) {
             if (file.isDirectory()) {
-                deleteFolder(folder);
+                deleteFolder(file);
             }
             file.delete();
         }

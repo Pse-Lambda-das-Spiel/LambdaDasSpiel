@@ -2,7 +2,7 @@ package lambda.model.profiles;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
@@ -79,14 +79,10 @@ public class ProfileModelTest implements ProfileModelObserver {
         profile.setLanguage("en");
         assertEquals("en", profile.getLanguage());
         profile.setLevelIndex(2);
-        if (!calledChangedLevelIndex) {
-            fail("setLevelIndex didn't call changedLevelIndex()");
-        }
+        assertTrue(calledChangedLevelIndex);
         assertEquals(2, profile.getLevelIndex());
         profile.setCoins(100);
-        if (!calledChangedCoins) {
-            fail("setCoins didn't call changedCoins()");
-        }
+        assertTrue(calledChangedCoins);
         assertEquals(100, profile.getCoins());
         assertNotNull(profile.getSettings());
         assertNotNull(profile.getShop());

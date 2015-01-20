@@ -2,7 +2,7 @@ package lambda.model.profiles;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,16 +45,12 @@ public class ProfileEditModelTest implements ProfileEditObserver {
         edit.nextLang();
         assertNotEquals(start, edit.getLang());
         assertEquals(edit.getLang() + "Flag", edit.getLangPic());
-        if (!calledChangedLanguage) {
-            fail("nextLang didn't call changedLanguage()");
-        }
+        assertTrue(calledChangedLanguage);
         calledChangedLanguage = false;
         edit.previousLang();
         assertEquals(start, edit.getLang());
         assertEquals(start + "Flag", edit.getLangPic());
-        if (!calledChangedLanguage) {
-            fail("previousLang didn't call changedLanguage()");
-        }
+        assertTrue(calledChangedLanguage);
     }
     
     /**
@@ -102,15 +98,11 @@ public class ProfileEditModelTest implements ProfileEditObserver {
         String start = edit.getAvatar();
         edit.nextAvatar();
         assertNotEquals(start, edit.getAvatar());
-        if (!calledChangedAvatar) {
-            fail("nextAvatar didn't call changedAvatar()");
-        }
+        assertTrue(calledChangedAvatar);
         calledChangedAvatar = false;
         edit.previousAvatar();
         assertEquals(start, edit.getAvatar());
-        if (!calledChangedAvatar) {
-            fail("previousAvatar didn't call changedAvatar()");
-        }
+        assertTrue(calledChangedAvatar);
     }
     
     /**
