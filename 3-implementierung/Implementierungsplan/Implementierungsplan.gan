@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2015-01-15" view-index="1" gantt-divider-location="523" resource-divider-location="353" version="2.7" locale="de">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2015-01-15" view-index="0" gantt-divider-location="523" resource-divider-location="353" version="2.7" locale="de">
     <description/>
-    <view zooming-state="default:2" id="gantt-chart">
+    <view zooming-state="default:1" id="gantt-chart">
         <field id="tpd3" name="Vorgang" width="64" order="0"/>
         <field id="tpd4" name="Anfang" width="17" order="1"/>
         <field id="tpd5" name="Ende" width="18" order="2"/>
@@ -50,7 +50,7 @@
         <task id="39" name="lambda.viewcontroller.settings" color="#8cb6ce" meeting="false" start="2015-01-22" duration="7" complete="0" expand="true"/>
         <task id="43" name="lambda.viewcontroller.AssetViewController" color="#8cb6ce" meeting="false" start="2015-01-22" duration="7" complete="0" expand="true"/>
         <task id="45" name="lambda.viewcontroller.shop" color="#8cb6ce" meeting="false" start="2015-01-22" duration="7" complete="0" expand="true"/>
-        <task id="47" name="Assets (Grafiken)" color="#8cb6ce" meeting="false" start="2015-01-22" duration="17" complete="0" expand="true"/>
+        <task id="47" name="Assets (Grafiken &amp; Musik &amp; Soundeffekte)" color="#8cb6ce" meeting="false" start="2015-01-22" duration="17" complete="0" expand="true"/>
         <task id="49" name="lambda.viewcontroller.lambdaterm" color="#8cb6ce" meeting="false" start="2015-01-22" duration="7" complete="0" expand="true"/>
         <task id="51" name="lambda.model.reduction" color="#8cb6ce" meeting="false" start="2015-01-22" duration="7" complete="0" expand="true"/>
         <task id="53" name="lambda.model.editor" color="#8cb6ce" meeting="false" start="2015-01-22" duration="7" complete="0" expand="true"/>
@@ -66,7 +66,9 @@
         <task id="75" name="Assets (JSON-Ressourcen)" color="#8cb6ce" meeting="false" start="2015-01-29" duration="7" complete="0" expand="true"/>
         <task id="77" name="Sprachen-Bundles (Deutsch &amp; Englisch)" color="#8cb6ce" meeting="false" start="2015-01-29" duration="7" complete="0" expand="true"/>
         <task id="79" name="Sprachen-Bundle (Französisch)" color="#8cb6ce" meeting="false" start="2015-02-01" duration="4" complete="0" expand="true"/>
-        <task id="81" name="Puffer für Kontrolle und Überarbeitung" color="#8cb6ce" meeting="false" start="2015-02-05" duration="5" complete="0" expand="true"/>
+        <task id="82" name="Animationen" color="#8cb6ce" meeting="false" start="2015-01-29" duration="7" complete="0" expand="true"/>
+        <task id="91" name="Dialogs" color="#8cb6ce" meeting="false" start="2015-01-29" duration="7" complete="0" expand="true"/>
+        <task id="93" name="Puffer für Fehlerkorrekturen" color="#8cb6ce" meeting="false" start="2015-02-05" duration="6" complete="0" expand="true"/>
     </tasks>
     <resources>
         <resource id="0" name="Kai Fieger" function="SoftwareDevelopment:2" contacts="" phone=""/>
@@ -80,14 +82,16 @@
         <allocation task-id="6" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="37" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="39" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="81" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="91" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="93" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="9" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="11" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="15" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="43" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="45" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="47" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="81" resource-id="1" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="82" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="93" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="18" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="20" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="22" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
@@ -98,12 +102,13 @@
         <allocation task-id="64" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="66" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="69" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="81" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="93" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="26" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="55" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="59" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="79" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="81" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="82" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="93" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="28" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="30" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="32" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
@@ -114,7 +119,7 @@
         <allocation task-id="73" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="75" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="77" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="81" resource-id="4" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="93" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
     </allocations>
     <vacations/>
     <taskdisplaycolumns>
