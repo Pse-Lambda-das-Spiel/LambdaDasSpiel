@@ -13,7 +13,7 @@ import lambda.model.lambdaterm.LambdaVariable;
  * 
  * @author Florian Fervers
  */
-public class IsColorBoundVisitor implements LambdaTermVisitor<Boolean> {
+public class IsColorBoundVisitor extends ValidLambdaTermVisitor<Boolean> {
     /**
      * The color to be checked.
      */
@@ -22,10 +22,6 @@ public class IsColorBoundVisitor implements LambdaTermVisitor<Boolean> {
      * Stores whether the given color is bound in the visited term.
      */
     private boolean result;
-    /**
-     * Stores whether the visitor has checked the visited term for validity.
-     */
-    private boolean hasCheckedValidity;
     
     /**
      * Creates a new IsColorBoundVisitor.
@@ -34,46 +30,43 @@ public class IsColorBoundVisitor implements LambdaTermVisitor<Boolean> {
      * @throws IllegalArgumentException if oldColor is null or newColor is null
      */
     public IsColorBoundVisitor(Color color) {
+        super("Cannot check if a color is bound in an invalid lambda term!");
         if (color == null) {
             throw new IllegalArgumentException("Color cannot be null!");
         }
         this.color = color;
         result = false;
-        hasCheckedValidity = false;
     }
 
     /**
-     * Visits the given lambda root and traverses to the child node.
+     * Visits the given lambda root and does nothing.
      * 
      * @param node the root to be visited
      */
     @Override
-    public void visit(LambdaRoot node) {
-        checkValidity(node);
+    public void visitValid(LambdaRoot node) {
     }
     
     /**
-     * Visits the given lambda application and traverses to both child nodes.
+     * Visits the given lambda application and traverses to the parent node.
      * 
      * @param node the application to be visited
      */
     @Override
-    public void visit(LambdaApplication node) {
-        checkValidity(node);
+    public void visitValid(LambdaApplication node) {
         if (!result) {
             node.getParent().accept(this);
         }
     }
     
     /**
-     * Visits the given lambda abstraction and checks if the color is bound here. Then traverses to the child node.
+     * Visits the given lambda abstraction and checks if the color is bound here. Then traverses to the parent node.
      * 
      * @param node the abstraction to be visited
      * @throws InvalidLambdaTermException if the visited abstraction binds the color that is being checked
      */
     @Override
-    public void visit(LambdaAbstraction node) {
-        checkValidity(node);
+    public void visitValid(LambdaAbstraction node) {
         // assert(!node.getColor().equals(color)); // Checked in validity
         if (!result) {
             if (node.getColor().equals(color)) {
@@ -91,25 +84,9 @@ public class IsColorBoundVisitor implements LambdaTermVisitor<Boolean> {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaVariable node) {
-        checkValidity(node);
+    public void visitValid(LambdaVariable node) {
         if (!result) {
             node.getParent().accept(this);
-        }
-    }
-    
-    /**
-     * Checks the given term for validity and throws an exception if the term is invalid.
-     * 
-     * @param term the term to be checked
-     * @throws InvalidLambdaTermException if the term is invalid
-     */
-    private void checkValidity(LambdaTerm term) {
-        if (!hasCheckedValidity) {
-            hasCheckedValidity = true;
-            if (!term.accept(new IsValidVisitor())) {
-                throw new InvalidLambdaTermException("Cannot check if a color is bound in an invalid lambda term!");
-            }
         }
     }
     

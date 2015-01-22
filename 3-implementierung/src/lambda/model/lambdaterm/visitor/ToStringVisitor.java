@@ -12,11 +12,7 @@ import lambda.model.lambdaterm.LambdaVariable;
  * 
  * @author Florian Fervers
  */
-public class ToStringVisitor implements LambdaTermVisitor<String> {
-    /**
-     * Stores whether the visitor has checked the visited term for validity.
-     */
-    private boolean hasCheckedValidity;
+public class ToStringVisitor extends ValidLambdaTermVisitor<String> {
     /**
      * Stores the resulting string.
      */
@@ -34,7 +30,7 @@ public class ToStringVisitor implements LambdaTermVisitor<String> {
      * Creates a new ToStringVisitor.
      */
     public ToStringVisitor() {
-        hasCheckedValidity = false;
+        super("Cannot convert an invalid lambda term to string!");
         isRightApplicationChild = false;
     }
 
@@ -45,8 +41,7 @@ public class ToStringVisitor implements LambdaTermVisitor<String> {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaRoot node) {
-        checkValidity(node);
+    public void visitValid(LambdaRoot node) {
         result = node.getChild().accept(this);
     }
     
@@ -57,8 +52,7 @@ public class ToStringVisitor implements LambdaTermVisitor<String> {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaApplication node) {
-        checkValidity(node);
+    public void visitValid(LambdaApplication node) {
         boolean paranthesis = isRightApplicationChild;
         isLeftApplicationChild = true;
         isRightApplicationChild = false;
@@ -78,8 +72,7 @@ public class ToStringVisitor implements LambdaTermVisitor<String> {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaAbstraction node) {
-        checkValidity(node);
+    public void visitValid(LambdaAbstraction node) {
         boolean paranthesis = isLeftApplicationChild || isRightApplicationChild;
         isLeftApplicationChild = false;
         isRightApplicationChild = false;
@@ -93,24 +86,8 @@ public class ToStringVisitor implements LambdaTermVisitor<String> {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaVariable node) {
-        checkValidity(node);
+    public void visitValid(LambdaVariable node) {
         result = Character.toString((char) node.getColor().getRed());
-    }
-    
-    /**
-     * Checks the given term for validity and throws an exception if the term is invalid.
-     * 
-     * @param term the term to be checked
-     * @throws InvalidLambdaTermException if the term is invalid
-     */
-    private void checkValidity(LambdaTerm term) {
-        if (!hasCheckedValidity) {
-            hasCheckedValidity = true;
-            if (!term.accept(new IsValidVisitor())) {
-                throw new InvalidLambdaTermException("Cannot convert an invalid lambda term to string!");
-            }
-        }
     }
     
     /**

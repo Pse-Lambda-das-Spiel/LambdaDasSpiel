@@ -28,8 +28,7 @@ public class ReductionStrategyCallByValue extends BetaReductionVisitor {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaApplication node) {
-        checkValidity(node);
+    public void visitValid(LambdaApplication node) {
         if (!hasReduced) {
             // Continue if no reduction was performed so far
             // Right child first
@@ -63,8 +62,7 @@ public class ReductionStrategyCallByValue extends BetaReductionVisitor {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaAbstraction node) {
-        checkValidity(node);
+    public void visitValid(LambdaAbstraction node) {
         if (!hasReduced && applicant != null && applicant.isValue()) {
             // Perform application if argument is a value (abstraction or variable)
             result = node.getInside().accept(new ApplicationVisitor(node.getColor(), applicant));

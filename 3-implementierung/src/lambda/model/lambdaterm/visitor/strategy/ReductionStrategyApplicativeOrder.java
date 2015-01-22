@@ -29,8 +29,7 @@ public class ReductionStrategyApplicativeOrder extends BetaReductionVisitor {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaApplication node) {
-        checkValidity(node);
+    public void visitValid(LambdaApplication node) {
         if (!hasReduced) {
             // Continue if no reduction was performed so far
             // Right child first
@@ -64,8 +63,7 @@ public class ReductionStrategyApplicativeOrder extends BetaReductionVisitor {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaAbstraction node) {
-        checkValidity(node);
+    public void visitValid(LambdaAbstraction node) {
         if (!hasReduced) {
             // Traverse down the tree
             LambdaTerm myApplicant = applicant; // Save applicant since it can be changed down the tree

@@ -14,11 +14,7 @@ import lambda.model.lambdaterm.LambdaVariable;
  * 
  * @author Florian Fervers
  */
-public class IsAlphaEquivalentVisitor implements LambdaTermVisitor<Boolean> {
-    /**
-     * Stores whether the visitor has checked the visited term for validity.
-     */
-    private boolean hasCheckedValidity;
+public class IsAlphaEquivalentVisitor extends ValidLambdaTermVisitor<Boolean> {
     /**
      * The other lambda term to compare the visited term with.
      */
@@ -39,12 +35,13 @@ public class IsAlphaEquivalentVisitor implements LambdaTermVisitor<Boolean> {
      * @throws IllegalArgumentException if other is null
      */
     public IsAlphaEquivalentVisitor(LambdaTerm other) {
+        super("Cannot perform an alpha equivalence check on an invalid lambda term!");
         if (other == null) {
             throw new IllegalArgumentException("Lambda term cannot be null!");
         }
-        hasCheckedValidity = false;
-        checkValidity(other);
-        hasCheckedValidity = false;
+        if (!other.accept(new IsValidVisitor())) {
+            throw new InvalidLambdaTermException("Cannot perform an alpha equivalence check on an invalid lambda term!");
+        }
         this.other = other;
         result = true;
         colorMap = new Stack<>();
@@ -57,8 +54,7 @@ public class IsAlphaEquivalentVisitor implements LambdaTermVisitor<Boolean> {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaRoot node) {
-        checkValidity(node);
+    public void visitValid(LambdaRoot node) {
         result &= other instanceof LambdaRoot;
         if (result) {
             other = ((LambdaRoot) other).getChild();
@@ -73,8 +69,7 @@ public class IsAlphaEquivalentVisitor implements LambdaTermVisitor<Boolean> {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaApplication node) {
-        checkValidity(node);
+    public void visitValid(LambdaApplication node) {
         result &= other instanceof LambdaApplication;
         if (result) {
             LambdaApplication otherApplication = ((LambdaApplication) other);
@@ -92,8 +87,7 @@ public class IsAlphaEquivalentVisitor implements LambdaTermVisitor<Boolean> {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaAbstraction node) {
-        checkValidity(node);
+    public void visitValid(LambdaAbstraction node) {
         result &= other instanceof LambdaAbstraction;
         if (result) {
             // Push to stack: Translation from visited color to other term's color
@@ -115,8 +109,7 @@ public class IsAlphaEquivalentVisitor implements LambdaTermVisitor<Boolean> {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaVariable node) {
-        checkValidity(node);
+    public void visitValid(LambdaVariable node) {
         result &= other instanceof LambdaVariable;
         if (result) {
             Color otherColor = ((LambdaVariable) other).getColor();
@@ -136,21 +129,6 @@ public class IsAlphaEquivalentVisitor implements LambdaTermVisitor<Boolean> {
             if (result && !bound && !node.getColor().equals(otherColor)) {
                 // Color of visited variable is free => colors should be equal
                 result = false;
-            }
-        }
-    }
-    
-    /**
-     * Checks the given term for validity and throws an exception if the term is invalid.
-     * 
-     * @param term the term to be checked
-     * @throws InvalidLambdaTermException if the term is invalid
-     */
-    private void checkValidity(LambdaTerm term) {
-        if (!hasCheckedValidity) {
-            hasCheckedValidity = true;
-            if (!term.accept(new IsValidVisitor())) {
-                throw new InvalidLambdaTermException("Cannot perform an alpha equivalence check on an invalid lambda term!");
             }
         }
     }

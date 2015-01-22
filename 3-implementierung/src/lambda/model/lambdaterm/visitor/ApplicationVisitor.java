@@ -14,7 +14,7 @@ import lambda.model.lambdaterm.LambdaVariable;
  * 
  * @author Florian Fervers
  */
-public class ApplicationVisitor implements LambdaTermVisitor<LambdaTerm> {
+public class ApplicationVisitor extends ValidLambdaTermVisitor<LambdaTerm> {
     /**
      * The color of the variables that are replaced in the application.
      */
@@ -28,9 +28,9 @@ public class ApplicationVisitor implements LambdaTermVisitor<LambdaTerm> {
      */
     private LambdaTerm result;
     /**
-     * Stores whether the visitor has checked the visited term for validity and if an alpha conversion is necessary before the application.
+     * Stores whether the visitor has checked if an alpha conversion is necessary before the application.
      */
-    private boolean hasCheckedValidityAndAlphaConversion;
+    private boolean hasCheckedAlphaConversion;
     
     /**
      * Creates a new application visitor.
@@ -40,6 +40,7 @@ public class ApplicationVisitor implements LambdaTermVisitor<LambdaTerm> {
      * @throws IllegalArgumentException if color is null or applicant is null
      */
     public ApplicationVisitor(Color color, LambdaTerm applicant) {
+        super("Cannot perform an application on an invalid lambda term!");
         if (color == null) {
             throw new IllegalArgumentException("Color cannot be null!");
         }
@@ -49,7 +50,7 @@ public class ApplicationVisitor implements LambdaTermVisitor<LambdaTerm> {
         this.color = color;
         this.applicant = applicant;
         result = null;
-        hasCheckedValidityAndAlphaConversion = false;
+        hasCheckedAlphaConversion = false;
     }
 
     /**
@@ -58,7 +59,7 @@ public class ApplicationVisitor implements LambdaTermVisitor<LambdaTerm> {
      * @param node the root to be visited
      */
     @Override
-    public void visit(LambdaRoot node) {
+    public void visitValid(LambdaRoot node) {
         assert(false);
     }
     
@@ -69,8 +70,8 @@ public class ApplicationVisitor implements LambdaTermVisitor<LambdaTerm> {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaApplication node) {
-        checkValidityAndAlphaConversion(node);
+    public void visitValid(LambdaApplication node) {
+        checkAlphaConversion(node);
         node.setLeft(node.getLeft().accept(this));
         node.setRight(node.getRight().accept(this));
         result = node;
@@ -83,8 +84,8 @@ public class ApplicationVisitor implements LambdaTermVisitor<LambdaTerm> {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaAbstraction node) {
-        checkValidityAndAlphaConversion(node);
+    public void visitValid(LambdaAbstraction node) {
+        checkAlphaConversion(node);
         node.setInside(node.getInside().accept(this));
         result = node;
     }
@@ -96,8 +97,8 @@ public class ApplicationVisitor implements LambdaTermVisitor<LambdaTerm> {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaVariable node) {
-        checkValidityAndAlphaConversion(node);
+    public void visitValid(LambdaVariable node) {
+        checkAlphaConversion(node);
         result = node.getColor().equals(color) ? applicant.accept(new CopyVisitor()) : node;
     }
     
@@ -107,15 +108,9 @@ public class ApplicationVisitor implements LambdaTermVisitor<LambdaTerm> {
      * @param term the term to be checked
      * @throws InvalidLambdaTermException if the term is invalid
      */
-    private void checkValidityAndAlphaConversion(LambdaTerm term) {
-        if (!hasCheckedValidityAndAlphaConversion) {
-            hasCheckedValidityAndAlphaConversion = true;
-            
-            // Check term validity
-            if (!term.accept(new IsValidVisitor())) {
-                throw new InvalidLambdaTermException("Cannot perform an application on an invalid lambda term!");
-            }
-            
+    private void checkAlphaConversion(LambdaTerm term) {
+        if (!hasCheckedAlphaConversion) {
+            hasCheckedAlphaConversion = true;
             // Perform alpha conversion if necessary
             // Find intersection of bound variables in left term and free variables in right term
             Set<Color> collidingColors = term.accept(new ColorCollectionVisitor(ColorCollectionVisitor.Type.BOUND));
@@ -134,7 +129,7 @@ public class ApplicationVisitor implements LambdaTermVisitor<LambdaTerm> {
                 term.accept(new AlphaConversionVisitor(collision, replacingColor));
             }
             
-            // Remove applicant to tell application that it was reduced
+            // Remove applicant to tell application that it was reduced => application result is in left child node
             applicant.accept(new RemoveTermVisitor());
         }
     }

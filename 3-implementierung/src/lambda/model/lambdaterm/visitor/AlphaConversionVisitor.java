@@ -5,7 +5,6 @@ import lambda.model.lambdaterm.InvalidLambdaTermException;
 import lambda.model.lambdaterm.LambdaAbstraction;
 import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.LambdaRoot;
-import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.LambdaVariable;
 
 /**
@@ -13,7 +12,7 @@ import lambda.model.lambdaterm.LambdaVariable;
  * 
  * @author Florian Fervers
  */
-public class AlphaConversionVisitor implements LambdaTermVisitor {
+public class AlphaConversionVisitor extends ValidLambdaTermVisitor {
     /**
      * The old color to be replaced.
      */
@@ -22,10 +21,6 @@ public class AlphaConversionVisitor implements LambdaTermVisitor {
      * The new replacing color;
      */
     private final Color newColor;
-    /**
-     * Stores whether the visitor has checked the visited term for validity.
-     */
-    private boolean hasCheckedValidity;
     /** 
      * Indicates whether the old color is bound by an abstraction between the first visited node and the current node.
      */
@@ -39,12 +34,12 @@ public class AlphaConversionVisitor implements LambdaTermVisitor {
      * @throws IllegalArgumentException if oldColor is null or newColor is null
      */
     public AlphaConversionVisitor(Color oldColor, Color newColor) {
+        super("Cannot perform an alpha conversion on an invalid term!");
         if (oldColor == null || newColor == null) {
             throw new IllegalArgumentException("Colors cannot be null!");
         }
         this.oldColor = oldColor;
         this.newColor = newColor;
-        hasCheckedValidity = false;
         colorBound = false;
     }
 
@@ -55,8 +50,7 @@ public class AlphaConversionVisitor implements LambdaTermVisitor {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaRoot node) {
-        checkValidity(node);
+    public void visitValid(LambdaRoot node) {
         node.getChild().accept(this);
     }
     
@@ -67,8 +61,7 @@ public class AlphaConversionVisitor implements LambdaTermVisitor {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaApplication node) {
-        checkValidity(node);
+    public void visitValid(LambdaApplication node) {
         node.getLeft().accept(this);
         node.getRight().accept(this);
     }
@@ -80,8 +73,7 @@ public class AlphaConversionVisitor implements LambdaTermVisitor {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaAbstraction node) {
-        checkValidity(node);
+    public void visitValid(LambdaAbstraction node) {
         boolean bindsOldColor = node.getColor().equals(oldColor);
         if (bindsOldColor) {
             assert(!colorBound); // Checked in validity test
@@ -101,25 +93,9 @@ public class AlphaConversionVisitor implements LambdaTermVisitor {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaVariable node) {
-        checkValidity(node);
+    public void visitValid(LambdaVariable node) {
         if (node.getColor().equals(oldColor) && colorBound) {
             node.setColor(newColor);
-        }
-    }
-    
-    /**
-     * Checks the given term for validity and throws an exception if the term is invalid.
-     * 
-     * @param term the term to be checked
-     * @throws InvalidLambdaTermException if the term is invalid
-     */
-    private void checkValidity(LambdaTerm term) {
-        if (!hasCheckedValidity) {
-            hasCheckedValidity = true;
-            if (!term.accept(new IsValidVisitor())) {
-                throw new InvalidLambdaTermException("Cannot perform an alpha conversion on an invalid lambda term!");
-            }
         }
     }
 }

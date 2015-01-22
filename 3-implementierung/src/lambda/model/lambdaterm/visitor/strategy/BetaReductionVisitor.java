@@ -6,15 +6,14 @@ import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.LambdaVariable;
-import lambda.model.lambdaterm.visitor.IsValidVisitor;
-import lambda.model.lambdaterm.visitor.LambdaTermVisitor;
+import lambda.model.lambdaterm.visitor.ValidLambdaTermVisitor;
 
 /**
  * Represents a visitor on a lambda term that performs a beta reduction. Can only visit a valid lambda term. Subclasses override visit methods with their reduction strategies functionality.
  * 
  * @author Florian Fervers
  */
-public abstract class BetaReductionVisitor implements LambdaTermVisitor<LambdaTerm> {
+public abstract class BetaReductionVisitor extends ValidLambdaTermVisitor<LambdaTerm> {
     /**
      * Stores the resulting lambda term after the reduction.
      */
@@ -36,6 +35,7 @@ public abstract class BetaReductionVisitor implements LambdaTermVisitor<LambdaTe
      * Creates a new beta reduction visitor.
      */
     public BetaReductionVisitor() {
+        super("Cannot perform a beta reduction on an invalid term.");
         result = null;
         hasReduced = false;
         applicant = null;
@@ -49,8 +49,7 @@ public abstract class BetaReductionVisitor implements LambdaTermVisitor<LambdaTe
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaRoot node) {
-        checkValidity(node);
+    public void visitValid(LambdaRoot node) {
         node.setChild(node.getChild().accept(this));
         result = node;
     }
@@ -62,8 +61,7 @@ public abstract class BetaReductionVisitor implements LambdaTermVisitor<LambdaTe
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaApplication node) {
-        checkValidity(node);
+    public void visitValid(LambdaApplication node) {
         result = node;
     }
     
@@ -74,8 +72,7 @@ public abstract class BetaReductionVisitor implements LambdaTermVisitor<LambdaTe
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaAbstraction node) {
-        checkValidity(node);
+    public void visitValid(LambdaAbstraction node) {
         result = node;
     }
     
@@ -86,24 +83,8 @@ public abstract class BetaReductionVisitor implements LambdaTermVisitor<LambdaTe
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visit(LambdaVariable node) {
-        checkValidity(node);
+    public void visitValid(LambdaVariable node) {
         result = node;
-    }
-    
-    /**
-     * Checks the given term for validity and throws an exception if the term is invalid.
-     * 
-     * @param term the term to be checked
-     * @throws InvalidLambdaTermException if the term is invalid
-     */
-    protected void checkValidity(LambdaTerm term) {
-        if (!hasCheckedValidity) {
-            hasCheckedValidity = true;
-            if (!term.accept(new IsValidVisitor())) {
-                throw new InvalidLambdaTermException("Cannot perform a beta reduction on an invalid lambda term!");
-            }
-        }
     }
     
     /**
