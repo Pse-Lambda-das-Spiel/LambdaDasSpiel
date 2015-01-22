@@ -2,6 +2,7 @@
 	"level" : {
 		"LEVELID" : 4 ,
 		"difficulty" : 1 ,
+		"standardMode" : true,
 		"availableRedStrats" : [
 			{
 			"normal_order" : true

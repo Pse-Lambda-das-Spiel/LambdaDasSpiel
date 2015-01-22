@@ -1,10 +1,12 @@
+package lambda.model.statistics;
+
 
 /**
+ * Class Represents  everything there is to know about the things a
+ * user has done within the game .
  * 
  * @author Farid
  *
- * Class Represents  everything there is to know about the things a
-* user has done within the game .
  */
 public class Statistic {
 /**

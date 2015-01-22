@@ -1,8 +1,10 @@
+package lambda.model.statistics;
+
 /**
+ * Represents - in the database -to every unlocked level everything there is to know about the things a
+ * user has done within the game .
  * 
  * @author Farid
- *Represents - in the database -to every unlocked level everything there is to know about the things a
-* user has done within the game .
  */
 public class LevelStatistic extends Statistic{
 /**

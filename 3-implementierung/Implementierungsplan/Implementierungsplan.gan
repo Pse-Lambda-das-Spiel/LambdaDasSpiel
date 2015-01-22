@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2015-01-15" view-index="0" gantt-divider-location="523" resource-divider-location="353" version="2.7" locale="de">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2015-01-15" view-index="0" gantt-divider-location="523" resource-divider-location="339" version="2.7" locale="de">
     <description/>
     <view zooming-state="default:1" id="gantt-chart">
         <field id="tpd3" name="Vorgang" width="64" order="0"/>
         <field id="tpd4" name="Anfang" width="17" order="1"/>
         <field id="tpd5" name="Ende" width="18" order="2"/>
+        <option id="color.recent"><![CDATA[#ff0000 #ff0000]]></option>
     </view>
     <view id="resource-table">
         <field id="0" name="Ressource" width="100" order="0"/>
@@ -32,43 +33,86 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="0" name="lambda.model.profiles" color="#8cb6ce" meeting="false" start="2015-01-15" duration="7" complete="0" expand="true"/>
-        <task id="6" name="lambda.model.settings" color="#8cb6ce" meeting="false" start="2015-01-15" duration="7" complete="0" expand="true"/>
-        <task id="9" name="lambda.model.shop" color="#8cb6ce" meeting="false" start="2015-01-15" duration="7" complete="0" expand="true"/>
-        <task id="11" name="lambda.model.level" color="#8cb6ce" meeting="false" start="2015-01-15" duration="7" complete="0" expand="true"/>
-        <task id="15" name="lambda.AssetModel" color="#8cb6ce" meeting="false" start="2015-01-15" duration="7" complete="0" expand="true"/>
-        <task id="18" name="lambda.Observable" color="#8cb6ce" meeting="false" start="2015-01-15" duration="7" complete="0" expand="true"/>
-        <task id="20" name="lambda.model.lambdaterm" color="#8cb6ce" meeting="false" start="2015-01-15" duration="7" complete="0" expand="true"/>
-        <task id="22" name="lambda.model.lambdaterm.visitor" color="#8cb6ce" meeting="false" start="2015-01-15" duration="7" complete="0" expand="true"/>
-        <task id="24" name="lambda.model.lambdaterm.visitor.strategy" color="#8cb6ce" meeting="false" start="2015-01-15" duration="7" complete="0" expand="true"/>
-        <task id="26" name="lambda.model.statistics" color="#8cb6ce" meeting="false" start="2015-01-15" duration="7" complete="0" expand="true"/>
-        <task id="28" name="lambda.model.achievements" color="#8cb6ce" meeting="false" start="2015-01-15" duration="7" complete="0" expand="true"/>
-        <task id="30" name="lambda.LambdaGame" color="#8cb6ce" meeting="false" start="2015-01-15" duration="7" complete="0" expand="true"/>
-        <task id="32" name="lambda.viewcontroller.Controller" color="#8cb6ce" meeting="false" start="2015-01-15" duration="7" complete="0" expand="true"/>
-        <task id="35" name="lambda.util" color="#8cb6ce" meeting="false" start="2015-01-15" duration="7" complete="0" expand="true"/>
-        <task id="37" name="lambda.viewcontroller.profiles" color="#8cb6ce" meeting="false" start="2015-01-22" duration="7" complete="0" expand="true"/>
-        <task id="39" name="lambda.viewcontroller.settings" color="#8cb6ce" meeting="false" start="2015-01-22" duration="7" complete="0" expand="true"/>
-        <task id="43" name="lambda.viewcontroller.AssetViewController" color="#8cb6ce" meeting="false" start="2015-01-22" duration="7" complete="0" expand="true"/>
-        <task id="45" name="lambda.viewcontroller.shop" color="#8cb6ce" meeting="false" start="2015-01-22" duration="7" complete="0" expand="true"/>
-        <task id="47" name="Assets (Grafiken &amp; Musik &amp; Soundeffekte)" color="#8cb6ce" meeting="false" start="2015-01-22" duration="17" complete="0" expand="true"/>
-        <task id="49" name="lambda.viewcontroller.lambdaterm" color="#8cb6ce" meeting="false" start="2015-01-22" duration="7" complete="0" expand="true"/>
-        <task id="51" name="lambda.model.reduction" color="#8cb6ce" meeting="false" start="2015-01-22" duration="7" complete="0" expand="true"/>
-        <task id="53" name="lambda.model.editor" color="#8cb6ce" meeting="false" start="2015-01-22" duration="7" complete="0" expand="true"/>
-        <task id="55" name="lambda.viewcontroller.statistics" color="#8cb6ce" meeting="false" start="2015-01-22" duration="7" complete="0" expand="true"/>
-        <task id="59" name="lambda.viewcontroller.mainmenu" color="#8cb6ce" meeting="false" start="2015-01-22" duration="7" complete="0" expand="true"/>
-        <task id="60" name="lambda.viewcontroller.achievements" color="#8cb6ce" meeting="false" start="2015-01-22" duration="7" complete="0" expand="true"/>
-        <task id="62" name="lambda.viewcontroller.level" color="#8cb6ce" meeting="false" start="2015-01-22" duration="7" complete="0" expand="true"/>
-        <task id="64" name="lambda.viewcontroller.lambdaterm.visitor" color="#8cb6ce" meeting="false" start="2015-01-29" duration="7" complete="0" expand="true"/>
-        <task id="66" name="lambda.viewcontroller.reduction" color="#8cb6ce" meeting="false" start="2015-01-29" duration="7" complete="0" expand="true"/>
-        <task id="69" name="lambda.viewcontroller.editor" color="#8cb6ce" meeting="false" start="2015-01-29" duration="7" complete="0" expand="true"/>
-        <task id="71" name="lambda.TextInput" color="#8cb6ce" meeting="false" start="2015-01-29" duration="7" complete="0" expand="true"/>
-        <task id="73" name="Level" color="#8cb6ce" meeting="false" start="2015-01-29" duration="7" complete="0" expand="true"/>
-        <task id="75" name="Assets (JSON-Ressourcen)" color="#8cb6ce" meeting="false" start="2015-01-29" duration="7" complete="0" expand="true"/>
-        <task id="77" name="Sprachen-Bundles (Deutsch &amp; Englisch)" color="#8cb6ce" meeting="false" start="2015-01-29" duration="7" complete="0" expand="true"/>
-        <task id="79" name="Sprachen-Bundle (Französisch)" color="#8cb6ce" meeting="false" start="2015-02-01" duration="4" complete="0" expand="true"/>
+        <task id="0" name="lambda.model.profiles" color="#8cb6ce" meeting="false" start="2015-01-18" duration="4" complete="0" expand="true">
+            <depend id="37" type="2" difference="0" hardness="Strong"/>
+            <depend id="59" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="6" name="lambda.model.settings" color="#8cb6ce" meeting="false" start="2015-01-15" duration="3" complete="0" expand="true">
+            <depend id="0" type="2" difference="0" hardness="Strong"/>
+            <depend id="39" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="9" name="lambda.model.shop" color="#8cb6ce" meeting="false" start="2015-01-17" duration="2" complete="0" thirdDate="2015-01-17" thirdDate-constraint="1" expand="true">
+            <depend id="45" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="11" name="lambda.model.level" color="#8cb6ce" meeting="false" start="2015-01-15" duration="2" complete="0" expand="true">
+            <depend id="51" type="2" difference="0" hardness="Strong"/>
+            <depend id="53" type="2" difference="0" hardness="Strong"/>
+            <depend id="62" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="15" name="lambda.AssetModel" color="#8cb6ce" meeting="false" start="2015-01-19" duration="3" complete="0" thirdDate="2015-01-19" thirdDate-constraint="1" expand="true">
+            <depend id="43" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="18" name="lambda.Observable" color="#8cb6ce" meeting="false" start="2015-01-15" duration="1" complete="0" expand="true"/>
+        <task id="20" name="lambda.model.lambdaterm" color="#8cb6ce" meeting="false" start="2015-01-15" duration="2" complete="0" expand="true">
+            <depend id="22" type="2" difference="0" hardness="Strong"/>
+            <depend id="49" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="22" name="lambda.model.lambdaterm.visitor" color="#8cb6ce" meeting="false" start="2015-01-17" duration="3" complete="0" expand="true">
+            <depend id="24" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="24" name="lambda.model.lambdaterm.visitor.strategy" color="#8cb6ce" meeting="false" start="2015-01-20" duration="2" complete="0" expand="true">
+            <depend id="51" type="2" difference="0" hardness="Strong"/>
+            <depend id="53" type="2" difference="0" hardness="Strong"/>
+            <depend id="64" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="26" name="lambda.model.statistics" color="#8cb6ce" meeting="false" start="2015-01-15" duration="7" complete="0" expand="true">
+            <depend id="28" type="1" difference="0" hardness="Strong"/>
+            <depend id="55" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="28" name="lambda.model.achievements" color="#8cb6ce" meeting="false" start="2015-01-17" duration="2" complete="0" thirdDate="2015-01-17" thirdDate-constraint="1" expand="true">
+            <depend id="60" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="30" name="lambda.LambdaGame" color="#8cb6ce" meeting="false" start="2015-01-16" duration="1" complete="0" expand="true"/>
+        <task id="32" name="lambda.viewcontroller.Controller" color="#8cb6ce" meeting="false" start="2015-01-15" duration="1" complete="0" expand="true">
+            <depend id="30" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="35" name="lambda.util" color="#8cb6ce" meeting="false" start="2015-01-19" duration="3" complete="0" thirdDate="2015-01-19" thirdDate-constraint="1" expand="true"/>
+        <task id="37" name="lambda.viewcontroller.profiles" color="#8cb6ce" meeting="false" start="2015-01-25" duration="4" complete="0" thirdDate="2015-01-25" thirdDate-constraint="1" expand="true"/>
+        <task id="39" name="lambda.viewcontroller.settings" color="#8cb6ce" meeting="false" start="2015-01-22" duration="3" complete="0" thirdDate="2015-01-22" thirdDate-constraint="1" expand="true"/>
+        <task id="43" name="lambda.viewcontroller.AssetViewController" color="#8cb6ce" meeting="false" start="2015-01-26" duration="2" complete="0" thirdDate="2015-01-26" thirdDate-constraint="1" expand="true">
+            <depend id="82" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="45" name="lambda.viewcontroller.shop" color="#8cb6ce" meeting="false" start="2015-01-22" duration="7" complete="0" thirdDate="2015-01-22" thirdDate-constraint="1" expand="true"/>
+        <task id="47" name="Assets (Grafiken &amp; Musik &amp; Soundeffekte)" color="#8cb6ce" meeting="false" start="2015-01-22" duration="13" complete="0" thirdDate="2015-01-22" thirdDate-constraint="1" expand="true"/>
+        <task id="49" name="lambda.viewcontroller.lambdaterm" color="#8cb6ce" meeting="false" start="2015-01-24" duration="5" complete="0" thirdDate="2015-01-24" thirdDate-constraint="1" expand="true">
+            <depend id="64" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="51" name="lambda.model.reduction" color="#8cb6ce" meeting="false" start="2015-01-22" duration="2" complete="0" thirdDate="2015-01-22" thirdDate-constraint="1" expand="true">
+            <depend id="66" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="53" name="lambda.model.editor" color="#8cb6ce" meeting="false" start="2015-01-22" duration="1" complete="0" thirdDate="2015-01-22" thirdDate-constraint="1" expand="true">
+            <depend id="69" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="55" name="lambda.viewcontroller.statistics" color="#8cb6ce" meeting="false" start="2015-01-22" duration="3" complete="0" thirdDate="2015-01-22" thirdDate-constraint="1" expand="true"/>
+        <task id="59" name="lambda.viewcontroller.mainmenu" color="#8cb6ce" meeting="false" start="2015-01-25" duration="4" complete="0" thirdDate="2015-01-25" thirdDate-constraint="1" expand="true"/>
+        <task id="60" name="lambda.viewcontroller.achievements" color="#8cb6ce" meeting="false" start="2015-01-22" duration="3" complete="0" thirdDate="2015-01-22" thirdDate-constraint="1" expand="true"/>
+        <task id="62" name="lambda.viewcontroller.level" color="#8cb6ce" meeting="false" start="2015-01-25" duration="4" complete="0" thirdDate="2015-01-25" thirdDate-constraint="1" expand="true"/>
+        <task id="64" name="lambda.viewcontroller.lambdaterm.visitor" color="#8cb6ce" meeting="false" start="2015-01-29" duration="2" complete="0" thirdDate="2015-01-29" thirdDate-constraint="1" expand="true">
+            <depend id="66" type="2" difference="0" hardness="Strong"/>
+            <depend id="69" type="2" difference="0" hardness="Strong"/>
+            <depend id="82" type="1" difference="0" hardness="Strong"/>
+        </task>
+        <task id="66" name="lambda.viewcontroller.reduction" color="#8cb6ce" meeting="false" start="2015-02-02" duration="3" complete="0" thirdDate="2015-02-02" thirdDate-constraint="1" expand="true"/>
+        <task id="69" name="lambda.viewcontroller.editor" color="#8cb6ce" meeting="false" start="2015-01-31" duration="2" complete="0" expand="true"/>
+        <task id="71" name="lambda.TextInput" color="#8cb6ce" meeting="false" start="2015-01-29" duration="1" complete="0" expand="true"/>
+        <task id="73" name="Level JSON-Dateien" color="#8cb6ce" meeting="false" start="2015-02-01" duration="2" complete="0" thirdDate="2015-02-01" thirdDate-constraint="1" expand="true"/>
+        <task id="75" name="Assets (JSON-Ressourcen)" color="#8cb6ce" meeting="false" start="2015-02-03" duration="2" complete="0" expand="true"/>
+        <task id="77" name="Sprachen-Bundles (Deutsch &amp; Englisch)" color="#8cb6ce" meeting="false" start="2015-01-30" duration="2" complete="0" expand="true">
+            <depend id="79" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="79" name="Sprachen-Bundle (Französisch)" color="#8cb6ce" meeting="false" start="2015-02-01" duration="1" complete="0" expand="true"/>
         <task id="82" name="Animationen" color="#8cb6ce" meeting="false" start="2015-01-29" duration="7" complete="0" expand="true"/>
         <task id="91" name="Dialogs" color="#8cb6ce" meeting="false" start="2015-01-29" duration="7" complete="0" expand="true"/>
-        <task id="93" name="Puffer für Fehlerkorrekturen" color="#8cb6ce" meeting="false" start="2015-02-05" duration="6" complete="0" expand="true"/>
     </tasks>
     <resources>
         <resource id="0" name="Kai Fieger" function="SoftwareDevelopment:2" contacts="" phone=""/>
@@ -83,15 +127,13 @@
         <allocation task-id="37" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="39" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="91" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="93" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="9" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="11" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="15" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="43" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="45" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="47" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="82" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="93" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="43" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="50.0"/>
+        <allocation task-id="45" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="50.0"/>
+        <allocation task-id="47" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="50.0"/>
+        <allocation task-id="82" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="50.0"/>
         <allocation task-id="18" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="20" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="22" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
@@ -102,13 +144,11 @@
         <allocation task-id="64" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="66" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="69" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="93" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="26" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="55" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="59" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="79" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="82" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="93" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="28" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="30" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="32" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
@@ -119,7 +159,6 @@
         <allocation task-id="73" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="75" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="77" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="93" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
     </allocations>
     <vacations/>
     <taskdisplaycolumns>
