@@ -88,6 +88,6 @@ public class LambdaAbstraction extends LambdaValue {
      */
     @Override
     public int hashCode() {
-        return 334 * getClass().hashCode() + 38 * Objects.hashCode(inside) + 458 * getColor().hashCode();
+        return getClass().hashCode() + Objects.hashCode(inside) + getColor().hashCode();
     }
 }

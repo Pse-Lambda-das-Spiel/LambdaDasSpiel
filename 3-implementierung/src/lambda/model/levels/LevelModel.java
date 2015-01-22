@@ -1,7 +1,5 @@
 package lambda.model.levels;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import lambda.model.lambdaterm.LambdaRoot;
 
@@ -39,7 +37,7 @@ public class LevelModel {
                       LambdaRoot goal, LambdaRoot hint,
                       List<TutorialMessage> tutorial, List<ReductionStrategy> availableRedStrats,
                       List<ElementType> useableElements, int difficulty, boolean standardMode) {
-        this.ID = ID;
+        this.id = ID;
         this.start = start;
         this.goal = goal;
         this.hint = hint;
@@ -180,5 +178,10 @@ public class LevelModel {
      */
     public void setHint(LambdaRoot hint) {
         this.hint = hint;
+    }
+    
+    public ReductionStrategy getDefaultStrategy() {
+        // TODO
+        return null;
     }
 }

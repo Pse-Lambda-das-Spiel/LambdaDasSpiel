@@ -84,7 +84,7 @@ public class LambdaRoot extends LambdaTerm {
      */
     @Override
     public int hashCode() {
-        return 327 * getClass().hashCode() + 42 * Objects.hashCode(child);
+        return getClass().hashCode() + Objects.hashCode(child);
     }
     
     /**

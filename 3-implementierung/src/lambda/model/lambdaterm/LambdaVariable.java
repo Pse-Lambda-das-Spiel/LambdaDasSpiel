@@ -1,7 +1,6 @@
 package lambda.model.lambdaterm;
 
 import java.awt.Color;
-import java.util.Objects;
 import lambda.model.lambdaterm.visitor.LambdaTermVisitor;
 
 /**
@@ -61,6 +60,6 @@ public class LambdaVariable extends LambdaValue {
      */
     @Override
     public int hashCode() {
-        return 560 * getClass().hashCode() + 191 * getColor().hashCode();
+        return getClass().hashCode() + getColor().hashCode();
     }
 }

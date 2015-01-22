@@ -7,6 +7,8 @@ import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.LambdaVariable;
 import lambda.model.lambdaterm.visitor.ValidLambdaTermVisitor;
+import lambda.model.levels.ReductionStrategy;
+import static lambda.model.levels.ReductionStrategy.NORMAL_ORDER;
 
 /**
  * Represents a visitor on a lambda term that performs a beta reduction. Can only visit a valid lambda term. Subclasses override visit methods with their reduction strategies functionality.
@@ -26,20 +28,48 @@ public abstract class BetaReductionVisitor extends ValidLambdaTermVisitor<Lambda
      * Stores an applicant (i.e. right child of an application). When an abstraction is reached and an applicant is present the application is performed.
      */
     protected LambdaTerm applicant;
+    
     /**
-     * Stores whether the visitor has checked the visited term for validity.
+     * Creates a new beta reduction visitor from the given reduction srategy constant.
+     * 
+     * @param strategy the reduction srategy constant
+     * @return the new beta reduction visitor
      */
-    private boolean hasCheckedValidity;
+    public static BetaReductionVisitor fromReductionStrategy(ReductionStrategy strategy) {
+        switch (strategy) {
+            case NORMAL_ORDER: {
+                return new ReductionStrategyNormalOrder();
+            }
+            case APPLICATIVE_ORDER: {
+                return new ReductionStrategyApplicativeOrder();
+            }
+            case CALL_BY_NAME: {
+                return new ReductionStrategyCallByName();
+            }
+            case CALL_BY_VALUE: {
+                return new ReductionStrategyCallByValue();
+            }
+            default: {
+                throw new IllegalArgumentException("Invalid reduction strategy!");
+            }
+        }
+    }
     
     /**
      * Creates a new beta reduction visitor.
      */
     public BetaReductionVisitor() {
         super("Cannot perform a beta reduction on an invalid term.");
+        reset();
+    }
+    
+    /**
+     * Resets the visitor to be able to visit a new lambda term.
+     */
+    public final void reset() {
         result = null;
         hasReduced = false;
         applicant = null;
-        hasCheckedValidity = false;
     }
 
     /**

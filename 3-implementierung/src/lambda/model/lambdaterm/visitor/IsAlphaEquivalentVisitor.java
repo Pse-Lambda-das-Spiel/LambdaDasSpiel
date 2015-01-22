@@ -24,7 +24,7 @@ public class IsAlphaEquivalentVisitor extends ValidLambdaTermVisitor<Boolean> {
      */
     private boolean result;
     /**
-     * Stores the color translations of bound colors from the visited term to the other term. All elements are arrays of length 2. Everytime an abstraction is visited the color translation is pushed on the stack and popped when the abstraction if left.
+     * Stores the color translations of bound colors from the visited term to the other term. All elements are arrays of length 2. Everytime an abstraction is visited the color translation is pushed on the stack and popped when the abstraction is left.
      */
     private Stack<Color[]> colorMap;
     
@@ -119,7 +119,7 @@ public class IsAlphaEquivalentVisitor extends ValidLambdaTermVisitor<Boolean> {
                 assert(colorTranslation.length == 2);
                 if (colorTranslation[0].equals(node.getColor())) {
                     bound = true;
-                    // Color of visited variable is bound => color of other variable should be translated color
+                    // Visited variable is bound => color of other variable should be translated color
                     if (!colorTranslation[1].equals(otherColor)) {
                         result = false;
                         break;
@@ -127,7 +127,7 @@ public class IsAlphaEquivalentVisitor extends ValidLambdaTermVisitor<Boolean> {
                 }
             }
             if (result && !bound && !node.getColor().equals(otherColor)) {
-                // Color of visited variable is free => colors should be equal
+                // Visited variable is free => colors should be equal
                 result = false;
             }
         }
