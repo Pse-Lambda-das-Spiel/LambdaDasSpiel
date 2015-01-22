@@ -1,5 +1,9 @@
 package lambda.model.shop;
 
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+
+
 /**
  * Represents
  *
@@ -7,8 +11,8 @@ package lambda.model.shop;
  */
 public class ShopModel {
 
-    private ShopItemTypeModel<Music> musics;
-    private ShopItemTypeModel<Image> images;
+    private ShopItemTypeModel<MusicItemModel> musics;
+    private ShopItemTypeModel<BackgroundImageItemModel> images;
     private ShopItemTypeModel<ElementUIContextFamily> elementUIContextFamilies;
 
     /**
@@ -22,7 +26,7 @@ public class ShopModel {
      *
      * @return
      */
-    public ShopItemTypeModel<Music> getMusics() {
+    public ShopItemTypeModel<MusicItemModel> getMusics() {
         return musics;
     }
 
@@ -30,7 +34,7 @@ public class ShopModel {
      *
      * @return
      */
-    public ShopItemTypeModel<Image> getImages() {
+    public ShopItemTypeModel<BackgroundImageItemModel> getImages() {
         return images;
     }
 

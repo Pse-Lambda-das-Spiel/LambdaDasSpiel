@@ -1,5 +1,7 @@
 package lambda.model.shop;
 
+import com.badlogic.gdx.audio.Music;
+
 /**
  * Represents a item which is available in the shop
  *
@@ -7,8 +9,8 @@ package lambda.model.shop;
  */
 public class ShopItemModel implements ShopItemModelObserver {
 
-    private String ID;
-    private int PRICE;
+    private String id;
+    private int price;
     private ShopModel shop;
     private ShopItemTypeModel shopItemType;
 
@@ -48,7 +50,7 @@ public class ShopItemModel implements ShopItemModelObserver {
      * @return ID
      */
     public String getID() {
-        return ID;
+        return id;
     }
 
     /**
@@ -57,7 +59,7 @@ public class ShopItemModel implements ShopItemModelObserver {
      * @return PRICE
      */
     public int getPRICE() {
-        return PRICE;
+        return price;
     }
 
     /**
