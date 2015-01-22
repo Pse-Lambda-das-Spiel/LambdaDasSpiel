@@ -5,8 +5,11 @@ import java.io.File;
 import lambda.model.profiles.ProfileManager;
 import lambda.model.profiles.ProfileModel;
 
-public class ProfileLoadHelper {
+public final class ProfileLoadHelper {
 
+	private ProfileLoadHelper() {
+	}
+	
     public static ProfileModel loadProfile(String name) {
         File a = new File(ProfileManager.PROFILE_FOLDER + "/" + name);
         if (a.exists()) {

@@ -20,14 +20,36 @@ public class LevelModel {
     private List<ReductionStrategy> availableRedStrats;
     private List<ElementType> useableElements;
 
+
     /**
-     * WIRD NOCH BEARBEITET, WENN DAS MIT DEN JSON GEKLÄRT IST.
+     * Creates a new instance of this class and initialize it with the given data.s
+     * 
+     * @param ID The ID of this level
+     * @param start the start board constellation of this level
+     * @param goal the goal board constellation of this level
+     * @param hint the hint to solve this level
+     * @param tutorial the list of all associated Tutorial messages
+     * @param availableRedStrats the list of all available reduction strategies for this level
+     * @param useableElements the usuable elements of this level
+     * @param difficulty the level difficulty
+     * @param standardMode indicates whether the level has to be solved in standard mode or reversed
      */
-    public LevelModel() {
+    public LevelModel(int ID, LambdaRoot start,
+			LambdaRoot goal, LambdaRoot hint, 
+			List<TutorialMessage> tutorial, List<ReductionStrategy> availableRedStrats,
+			List<ElementType> useableElements, int difficulty, boolean standardMode) {
+    	this.ID = ID;
+    	this.start = start;
+    	this.goal = goal;
+    	this.hint = hint;
+    	this.tutorial = tutorial;
+    	this.availableRedStrats = availableRedStrats;
+    	this.useableElements = useableElements;
+    	this.difficulty = difficulty;
+    	this.standardMode = standardMode;
+	}
 
-    }
-
-    /**
+	/**
      * Returns the ID of the level
      *
      * @return ID
@@ -107,6 +129,5 @@ public class LevelModel {
     public List<ElementType> getUseableElements() {
         return useableElements;
     }
-
 
 }
