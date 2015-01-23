@@ -5,7 +5,16 @@ package lambda.model.levels;
  * @author Kay Schmitteckert
  */
 public enum ElementType {
+    /**
+     * Represents variable
+     */
     VARIABLE,
+    /**
+     * Represents abstraction
+     */
     ABSTRACTION,
+    /**
+     * Represents paranthesis
+     */
     PARANTHESIS
 }

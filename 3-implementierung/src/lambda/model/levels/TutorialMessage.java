@@ -5,9 +5,9 @@ package lambda.model.levels;
  */
 public class TutorialMessage {
 	
-	String ID;
+	String id;
 	
-	public TutorialMessage(String ID) {
-		this.ID = ID;
+	public TutorialMessage(String d) {
+		this.id = id;
 	}
 }

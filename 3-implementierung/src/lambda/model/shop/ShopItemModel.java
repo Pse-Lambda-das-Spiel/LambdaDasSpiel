@@ -28,6 +28,9 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
 
     }
 
+    public ShopItemModel() {
+    }
+
     /**
      * Changes the state of this item to purchased if there are enough coins
      */

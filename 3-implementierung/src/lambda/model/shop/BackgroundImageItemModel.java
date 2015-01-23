@@ -17,6 +17,7 @@ public class BackgroundImageItemModel extends ShopItemModel {
     }
 
     /**
+     * Returns the backgroundimage
      *
      * @return image
      */

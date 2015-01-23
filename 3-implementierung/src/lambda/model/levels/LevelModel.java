@@ -132,4 +132,11 @@ public class LevelModel {
         return useableElements;
     }
 
+    /**
+     * TODOOOOO
+     * @return
+     */
+    public ReductionStrategy getDefaultStrategy() {
+        return null;
+    }
 }

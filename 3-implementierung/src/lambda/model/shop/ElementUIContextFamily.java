@@ -19,6 +19,7 @@ public class ElementUIContextFamily extends ShopItemModel {
     }
 
     /**
+     * Returns the sprite of the paranthesis
      *
      * @return paranthesis
      */
@@ -27,6 +28,7 @@ public class ElementUIContextFamily extends ShopItemModel {
     }
 
     /**
+     * Returns the sprite of the variable
      *
      * @return variable
      */
@@ -35,6 +37,7 @@ public class ElementUIContextFamily extends ShopItemModel {
     }
 
     /**
+     * Returns the sprite of the front of the application
      *
      * @return applicationFront
      */
@@ -43,6 +46,7 @@ public class ElementUIContextFamily extends ShopItemModel {
     }
 
     /**
+     * Returns the sprite of the back of the application
      *
      * @return applicationBack
      */
@@ -51,13 +55,13 @@ public class ElementUIContextFamily extends ShopItemModel {
     }
 
     /**
+     * Returns the sprite of the centre of the application
      *
      * @return applicationCentre
      */
     public SpriteModel getApplicationCentre() {
         return applicationCentre;
     }
-
 
 
 }

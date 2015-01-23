@@ -6,14 +6,26 @@ package lambda.model.levels;
  */
 public class DifficultySetting {
 
+    private int difficulty;
     private String music;
     private String bgImage;
 
     /**
      *  JSON
      */
-    public DifficultySetting() {
+    public DifficultySetting(int difficulty, String music, String bgImage) {
+        this.difficulty = difficulty;
+        this.music = music;
+        this.bgImage = bgImage;
+    }
 
+    /**
+     * Returns the difficulty in terms of a number
+     *
+     * @return difficulty
+     */
+    public int getDifficulty() {
+        return difficulty;
     }
 
     /**
