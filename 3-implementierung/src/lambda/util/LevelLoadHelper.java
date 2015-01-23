@@ -52,7 +52,7 @@ public final class LevelLoadHelper {
 		JsonValue hint = constellations.get("hint");
 		LevelModel levelModel = new LevelModel(id, convertJsonToConstellation(start), convertJsonToConstellation(goal), 
 				convertJsonToConstellation(hint), convertJsonToTutorial(tutorial), convertJsonToAvailableRedStrats(availableRedStrats),
-				convertJsonToUseableElements(useableElements), level.getInt("difficulty"), level.getBoolean("standardMode"));
+				convertJsonToUseableElements(useableElements), level.getInt("coins"), level.getInt("difficulty"), level.getBoolean("standardMode"));
 		return levelModel;
 	}
 

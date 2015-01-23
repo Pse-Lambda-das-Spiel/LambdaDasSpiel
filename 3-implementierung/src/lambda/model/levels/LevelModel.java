@@ -14,6 +14,7 @@ public class LevelModel {
 
     private int id;
     private int difficulty;
+    private int coins;
     private boolean standardMode;
     private LambdaRoot start;
     private LambdaRoot goal;
@@ -33,12 +34,13 @@ public class LevelModel {
      * @param availableRedStrats the list of all available reduction strategies for this level
      * @param useableElements    the usuable elements of this level
      * @param difficulty         the level difficulty
+     * @param coins              the coins you will get if you complete the level
      * @param standardMode       indicates whether the level has to be solved in standard mode or reversed
      */
     public LevelModel(int id, LambdaRoot start,
                       LambdaRoot goal, LambdaRoot hint,
                       List<TutorialMessage> tutorial, List<ReductionStrategy> availableRedStrats,
-                      List<ElementType> useableElements, int difficulty, boolean standardMode) {
+                      List<ElementType> useableElements, int difficulty, int coins, boolean standardMode) {
         this.id = id;
         this.start = start;
         this.goal = goal;
@@ -131,6 +133,16 @@ public class LevelModel {
     public List<ElementType> getUseableElements() {
         return useableElements;
     }
+
+    /**
+     * Returns the quantity of numbers you will get if you complete the level
+     *
+     * @return coins
+     */
+    public int getCoins() {
+        return coins;
+    }
+
 
     /**
      * TODOOOOO
