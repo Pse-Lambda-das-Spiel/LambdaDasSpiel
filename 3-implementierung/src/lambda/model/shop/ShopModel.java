@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
  */
 public class ShopModel {
 
-    private ShopItemTypeModel<MusicItemModel> musics;
+    private ShopItemTypeModel<MusicItemModel> music;
     private ShopItemTypeModel<BackgroundImageItemModel> images;
     private ShopItemTypeModel<ElementUIContextFamily> elementUIContextFamilies;
 
@@ -19,6 +19,9 @@ public class ShopModel {
      *
      */
     public ShopModel() {
+        music = new ShopItemTypeModel<MusicItemModel>("music");
+        images = new ShopItemTypeModel<BackgroundImageItemModel>("images");
+        elementUIContextFamilies = new ShopItemTypeModel<ElementUIContextFamily>("sprites");
 
     }
 
@@ -26,8 +29,8 @@ public class ShopModel {
      *
      * @return
      */
-    public ShopItemTypeModel<MusicItemModel> getMusics() {
-        return musics;
+    public ShopItemTypeModel<MusicItemModel> getMusic() {
+        return music;
     }
 
     /**

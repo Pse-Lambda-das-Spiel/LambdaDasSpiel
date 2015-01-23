@@ -18,7 +18,9 @@ public class ShopItemTypeModel<T extends ShopItemModel> {
     /**
      *
      */
-    public ShopItemTypeModel() {
+    public ShopItemTypeModel(String typeName) {
+        this.typeName = typeName;
+
     }
 
     /**
@@ -43,5 +45,9 @@ public class ShopItemTypeModel<T extends ShopItemModel> {
      */
     public T getActivatedItem() {
         return activatedItem;
+    }
+
+    public void setActivatedItem(T activate) {
+        activatedItem = activate;
     }
 }

@@ -1,10 +1,12 @@
 package lambda;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import lambda.model.levels.DifficultySetting;
 import lambda.model.levels.TutorialMessage;
-import lambda.model.shop.*;
 import lambda.model.levels.LevelModel;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 import java.util.Map;
 /**

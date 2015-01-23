@@ -1,38 +1,49 @@
 package lambda.model.shop;
 
 import com.badlogic.gdx.audio.Music;
+import lambda.Observable;
+import lambda.model.profiles.ProfileModel;
 
 /**
  * Represents a item which is available in the shop
  *
  * @author Kay Schmitteckert
  */
-public class ShopItemModel implements ShopItemModelObserver {
+public class ShopItemModel extends Observable<ShopItemModelObserver> {
 
     private String id;
     private int price;
     private ShopModel shop;
     private ShopItemTypeModel shopItemType;
+    private boolean purchased;
+    private ProfileModel profile;
 
     /**
      *
      */
-    public ShopItemModel() {
-        //TODO
+    public ShopItemModel(String id, int price) {
+        this.id = id;
+        this.price = price;
+        purchased = false;
+
     }
 
     /**
      * Changes the state of this item to purchased if there are enough coins
      */
     public void buy() {
-        //TODO
+        if(profile.getCoins() >= getPrice()) {
+            purchased = true;
+        }
     }
 
     /**
      * Activates this item if its already purchased
      */
     public void acitvate() {
-        //TODO
+        if(purchased){
+            shopItemType.setActivatedItem(this);
+        }
     }
 
     /**
@@ -56,9 +67,9 @@ public class ShopItemModel implements ShopItemModelObserver {
     /**
      * Returns the price of this item
      *
-     * @return PRICE
+     * @return price
      */
-    public int getPRICE() {
+    public int getPrice() {
         return price;
     }
 
