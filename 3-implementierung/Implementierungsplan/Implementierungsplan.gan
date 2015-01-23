@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2015-01-15" view-index="0" gantt-divider-location="523" resource-divider-location="339" version="2.7" locale="de">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2015-01-15" view-index="1" gantt-divider-location="523" resource-divider-location="339" version="2.7" locale="de">
     <description/>
     <view zooming-state="default:1" id="gantt-chart">
         <field id="tpd3" name="Vorgang" width="64" order="0"/>
@@ -69,21 +69,18 @@
             <depend id="28" type="1" difference="0" hardness="Strong"/>
             <depend id="55" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="28" name="lambda.model.achievements" color="#8cb6ce" meeting="false" start="2015-01-17" duration="2" complete="0" thirdDate="2015-01-17" thirdDate-constraint="1" expand="true">
+        <task id="28" name="lambda.model.achievements" color="#8cb6ce" meeting="false" start="2015-01-16" duration="3" complete="0" thirdDate="2015-01-16" thirdDate-constraint="1" expand="true">
             <depend id="60" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="30" name="lambda.LambdaGame" color="#8cb6ce" meeting="false" start="2015-01-16" duration="1" complete="0" expand="true"/>
-        <task id="32" name="lambda.viewcontroller.Controller" color="#8cb6ce" meeting="false" start="2015-01-15" duration="1" complete="0" expand="true">
+        <task id="32" name="Main-Klasse" color="#8cb6ce" meeting="false" start="2015-01-15" duration="1" complete="0" expand="true">
             <depend id="30" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="35" name="lambda.util" color="#8cb6ce" meeting="false" start="2015-01-19" duration="3" complete="0" thirdDate="2015-01-19" thirdDate-constraint="1" expand="true"/>
         <task id="37" name="lambda.viewcontroller.profiles" color="#8cb6ce" meeting="false" start="2015-01-25" duration="4" complete="0" thirdDate="2015-01-25" thirdDate-constraint="1" expand="true"/>
         <task id="39" name="lambda.viewcontroller.settings" color="#8cb6ce" meeting="false" start="2015-01-22" duration="3" complete="0" thirdDate="2015-01-22" thirdDate-constraint="1" expand="true"/>
-        <task id="43" name="lambda.viewcontroller.AssetViewController" color="#8cb6ce" meeting="false" start="2015-01-26" duration="2" complete="0" thirdDate="2015-01-26" thirdDate-constraint="1" expand="true">
-            <depend id="82" type="2" difference="0" hardness="Strong"/>
-        </task>
-        <task id="45" name="lambda.viewcontroller.shop" color="#8cb6ce" meeting="false" start="2015-01-22" duration="7" complete="0" thirdDate="2015-01-22" thirdDate-constraint="1" expand="true"/>
-        <task id="47" name="Assets (Grafiken &amp; Musik &amp; Soundeffekte)" color="#8cb6ce" meeting="false" start="2015-01-22" duration="13" complete="0" thirdDate="2015-01-22" thirdDate-constraint="1" expand="true"/>
+        <task id="43" name="lambda.viewcontroller.AssetViewController" color="#8cb6ce" meeting="false" start="2015-01-26" duration="2" complete="0" thirdDate="2015-01-26" thirdDate-constraint="1" expand="true"/>
+        <task id="45" name="lambda.viewcontroller.shop" color="#8cb6ce" meeting="false" start="2015-01-22" duration="3" complete="0" thirdDate="2015-01-22" thirdDate-constraint="1" expand="true"/>
+        <task id="47" name="Assets (Grafiken &amp; Musik &amp; Soundeffekte)" color="#8cb6ce" meeting="false" start="2015-01-22" duration="14" complete="0" thirdDate="2015-01-22" thirdDate-constraint="1" expand="true"/>
         <task id="49" name="lambda.viewcontroller.lambdaterm" color="#8cb6ce" meeting="false" start="2015-01-24" duration="5" complete="0" thirdDate="2015-01-24" thirdDate-constraint="1" expand="true">
             <depend id="64" type="2" difference="0" hardness="Strong"/>
         </task>
@@ -100,19 +97,18 @@
         <task id="64" name="lambda.viewcontroller.lambdaterm.visitor" color="#8cb6ce" meeting="false" start="2015-01-29" duration="2" complete="0" thirdDate="2015-01-29" thirdDate-constraint="1" expand="true">
             <depend id="66" type="2" difference="0" hardness="Strong"/>
             <depend id="69" type="2" difference="0" hardness="Strong"/>
-            <depend id="82" type="1" difference="0" hardness="Strong"/>
+            <depend id="82" type="3" difference="0" hardness="Strong"/>
         </task>
         <task id="66" name="lambda.viewcontroller.reduction" color="#8cb6ce" meeting="false" start="2015-02-02" duration="3" complete="0" thirdDate="2015-02-02" thirdDate-constraint="1" expand="true"/>
         <task id="69" name="lambda.viewcontroller.editor" color="#8cb6ce" meeting="false" start="2015-01-31" duration="2" complete="0" expand="true"/>
-        <task id="71" name="lambda.TextInput" color="#8cb6ce" meeting="false" start="2015-01-29" duration="1" complete="0" expand="true"/>
         <task id="73" name="Level JSON-Dateien" color="#8cb6ce" meeting="false" start="2015-02-01" duration="2" complete="0" thirdDate="2015-02-01" thirdDate-constraint="1" expand="true"/>
         <task id="75" name="Assets (JSON-Ressourcen)" color="#8cb6ce" meeting="false" start="2015-02-03" duration="2" complete="0" expand="true"/>
         <task id="77" name="Sprachen-Bundles (Deutsch &amp; Englisch)" color="#8cb6ce" meeting="false" start="2015-01-30" duration="2" complete="0" expand="true">
             <depend id="79" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="79" name="Sprachen-Bundle (Französisch)" color="#8cb6ce" meeting="false" start="2015-02-01" duration="1" complete="0" expand="true"/>
-        <task id="82" name="Animationen" color="#8cb6ce" meeting="false" start="2015-01-29" duration="7" complete="0" expand="true"/>
-        <task id="91" name="Dialogs" color="#8cb6ce" meeting="false" start="2015-01-29" duration="7" complete="0" expand="true"/>
+        <task id="82" name="Animationen" color="#8cb6ce" meeting="false" start="2015-01-22" duration="14" complete="0" thirdDate="2015-01-22" thirdDate-constraint="1" expand="true"/>
+        <task id="91" name="Dialogs" color="#8cb6ce" meeting="false" start="2015-01-22" duration="14" complete="0" thirdDate="2015-01-22" thirdDate-constraint="1" expand="true"/>
     </tasks>
     <resources>
         <resource id="0" name="Kai Fieger" function="SoftwareDevelopment:2" contacts="" phone=""/>
@@ -124,9 +120,9 @@
     <allocations>
         <allocation task-id="0" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="6" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="37" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="39" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="91" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="37" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="50.0"/>
+        <allocation task-id="39" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="50.0"/>
+        <allocation task-id="91" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="50.0"/>
         <allocation task-id="9" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="11" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="15" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
@@ -145,20 +141,19 @@
         <allocation task-id="66" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="69" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="26" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="55" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="59" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="79" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="82" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="55" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="50.0"/>
+        <allocation task-id="59" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="50.0"/>
+        <allocation task-id="79" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="50.0"/>
+        <allocation task-id="82" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="50.0"/>
         <allocation task-id="28" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="30" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="32" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="35" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="60" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="62" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="71" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="73" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="75" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="77" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="60" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="50.0"/>
+        <allocation task-id="62" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="50.0"/>
+        <allocation task-id="73" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="50.0"/>
+        <allocation task-id="75" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="50.0"/>
+        <allocation task-id="77" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="50.0"/>
+        <allocation task-id="82" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="50.0"/>
     </allocations>
     <vacations/>
     <taskdisplaycolumns>
