@@ -1,5 +1,7 @@
 package lambda.model.levels;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import lambda.model.lambdaterm.LambdaRoot;
 
@@ -19,25 +21,25 @@ public class LevelModel {
     private List<TutorialMessage> tutorial;
     private List<ReductionStrategy> availableRedStrats;
     private List<ElementType> useableElements;
-    
+
     /**
      * Creates a new instance of this class and initialize it with the given data.s
      *
-     * @param ID The ID of this level
-     * @param start the start board constellation of this level
-     * @param goal the goal board constellation of this level
-     * @param hint the hint to solve this level
-     * @param tutorial the list of all associated Tutorial messages
+     * @param id                 The Id of this level
+     * @param start              the start board constellation of this level
+     * @param goal               the goal board constellation of this level
+     * @param hint               the hint to solve this level
+     * @param tutorial           the list of all associated Tutorial messages
      * @param availableRedStrats the list of all available reduction strategies for this level
-     * @param useableElements the usuable elements of this level
-     * @param difficulty the level difficulty
-     * @param standardMode indicates whether the level has to be solved in standard mode or reversed
+     * @param useableElements    the usuable elements of this level
+     * @param difficulty         the level difficulty
+     * @param standardMode       indicates whether the level has to be solved in standard mode or reversed
      */
-    public LevelModel(int ID, LambdaRoot start,
+    public LevelModel(int id, LambdaRoot start,
                       LambdaRoot goal, LambdaRoot hint,
                       List<TutorialMessage> tutorial, List<ReductionStrategy> availableRedStrats,
                       List<ElementType> useableElements, int difficulty, boolean standardMode) {
-        this.id = ID;
+        this.id = id;
         this.start = start;
         this.goal = goal;
         this.hint = hint;
@@ -49,14 +51,12 @@ public class LevelModel {
     }
 
     /**
-
-
-     /**
+     * /**
      * Returns the Id of the level
      *
      * @return id
-     * */
-    public int getID() {
+     */
+    public int getId() {
         return id;
     }
 
@@ -70,7 +70,7 @@ public class LevelModel {
     }
 
     /**
-     *  Returns if the level has to be solved in standardmode or reverse
+     * Returns if the level has to be solved in standardmode or reverse
      *
      * @return standardMode
      */
@@ -132,56 +132,4 @@ public class LevelModel {
         return useableElements;
     }
 
-    /**
-     *
-     * @param id
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
-     *
-     * @param difficulty
-     */
-    public void setDifficulty(int difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    /**
-     *
-     * @param standardMode
-     */
-    public void setStandardMode(boolean standardMode) {
-        this.standardMode = standardMode;
-    }
-
-    /**
-     *
-     * @param start
-     */
-    public void setStart(LambdaRoot start) {
-        this.start = start;
-    }
-
-    /**
-     *
-     * @param goal
-     */
-    public void setGoal(LambdaRoot goal) {
-        this.goal = goal;
-    }
-
-    /**
-     *
-     * @param hint
-     */
-    public void setHint(LambdaRoot hint) {
-        this.hint = hint;
-    }
-    
-    public ReductionStrategy getDefaultStrategy() {
-        // TODO
-        return null;
-    }
 }
