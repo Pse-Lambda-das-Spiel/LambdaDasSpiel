@@ -14,18 +14,15 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
 
     private final static int AVATAR_NUMBER = 10;
     private List<String> lang;
-    //private List<String> langPic;
     private int selectedLang;
     private List<String> avatar;
     private int selectedAvatar;
 
     /**
 	 * Creates a new ProfileEditModel-object.
-	 * 
 	 */
     public ProfileEditModel() {
         lang = new LinkedList<String>();
-        //langPic = new LinkedList<String>();
         selectedLang = 0;
         avatar = new LinkedList<String>();
         selectedAvatar = 0;
@@ -47,7 +44,7 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
      * {@link ProfileEditObserver#changedLanguage() changedLanguage()} method.
      * Is set to the standard if lang is an invalid ID.
      * 
-     * @param lang The language ID
+     * @param lang The language ID.
      */
     public void setLang(String lang) {
         if (lang == null) {
@@ -84,18 +81,18 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
     }
 
     /**
-     * Returns the current language ID
+     * Returns the current language ID.
      * 
-     * @return language ID
+     * @return The current language ID.
      */
     public String getLang() {
         return lang.get(selectedLang);
     }
 
     /**
-     * Returns the current flag ID
+     * Returns the current flag ID.
      * 
-     * @return flag ID
+     * @return The current flag ID.
      */
     public String getLangPic() {
         return lang.get(selectedLang) + "Flag";
@@ -107,14 +104,16 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
      * {@link ProfileEditObserver#changedAvatar() changedAvatar()} method.
      * Is set to the standard if avatar is an invalid ID.
      * 
-     * @param avatar The avatar picture ID
+     * @param avatar The avatar picture ID.
      */
     public void setAvatar(String avatar) {
         if (avatar == null) {
             throw new IllegalArgumentException("avatar cannot be null");
         }
+        /*
         this.avatar = this.avatar.subList(0, AVATAR_NUMBER - 1);
-        //TODO add bought avatar id's to selection
+            //add bought avatar id's to selection
+        */
         selectedAvatar = this.avatar.indexOf(avatar);
         if (selectedAvatar == -1) {
             selectedAvatar = 0;
@@ -146,9 +145,9 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
     }
 
     /**
-     * Returns the current flag ID
+     * Returns the current avatar ID.
      * 
-     * @return flag ID
+     * @return The current avatar ID.
      */
     public String getAvatar() {
         return avatar.get(selectedAvatar);

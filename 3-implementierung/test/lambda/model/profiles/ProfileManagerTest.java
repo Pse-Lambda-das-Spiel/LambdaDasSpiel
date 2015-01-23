@@ -2,12 +2,11 @@ package lambda.model.profiles;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertNotNull;
 
-import java.io.File;
 import java.util.List;
 
 import lambda.util.ProfileSaveHelper;
@@ -17,6 +16,10 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.backends.lwjgl.LwjglFiles;
+import com.badlogic.gdx.files.FileHandle;
 
 /**
  * Tests the functionality of the ProfileManager.
@@ -31,14 +34,16 @@ public class ProfileManagerTest implements ProfileManagerObserver {
 
     private static String[] testNames = {"testName0", "testName1", "testName2"};
     private static String unusedName = "unusedName";
-    private static File profileFolder = new File(ProfileManager.PROFILE_FOLDER);
+    private static FileHandle profileFolder;
     
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
+    	Gdx.files = new LwjglFiles();
+    	profileFolder = Gdx.files.local(ProfileManager.PROFILE_FOLDER);
         if (profileFolder.exists()) {
-            deleteFolder(profileFolder);
+        	profileFolder.deleteDirectory();
         }
-        profileFolder.mkdir();
+        profileFolder.mkdirs();
         for (int i = 0; i < testNames.length; i++) {
             ProfileSaveHelper.saveProfile(new ProfileModel(testNames[i]));
         }
@@ -46,7 +51,7 @@ public class ProfileManagerTest implements ProfileManagerObserver {
 
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
-        deleteFolder(profileFolder);
+        profileFolder.deleteDirectory();
     }
 
     @Before
@@ -91,25 +96,38 @@ public class ProfileManagerTest implements ProfileManagerObserver {
      */
     @Test
     public void testRenaming() {
-        File save = new File(ProfileManager.PROFILE_FOLDER + "/" + testNames[0]);
-        File saveTemp = new File(ProfileManager.PROFILE_FOLDER + "/" + unusedName);
+    	//Sets current profile to testNames[0]
+    	FileHandle save = Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + testNames[0]);
+    	FileHandle saveTemp = Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + unusedName);
         assertTrue(save.exists());
+        List<String> names = manager.getNames();
+        assertEquals(testNames.length, names.size());
+        int profilePosition = -1;
+        int j = 0;
+        for (String name: names) {
+        	if (name.equals(testNames[0])) { 
+        		profilePosition = j;
+        	}
+        	j++;
+        }
         assertTrue(manager.setCurrentProfile(testNames[0]));
+        assertNotEquals(-1, profilePosition);
+        //Changes name of current profile (testNames[0]) to unusedName
         assertTrue(manager.changeCurrentName(unusedName));
         assertEquals(unusedName, manager.getCurrentProfile().getName());
         assertTrue(calledChangedProfileList);
         calledChangedProfileList = false;
-        List<String> names = manager.getNames();
+        names = manager.getNames();
         assertEquals(testNames.length, names.size());
-        assertEquals(unusedName, names.get(names.size() - 1));
+        assertEquals(unusedName, names.get(profilePosition));
         assertFalse(save.exists());
         assertTrue(saveTemp.exists());
-        
+        //Changes name of current profile (unusedName) back to testNames[0]
         assertTrue(manager.changeCurrentName(testNames[0]));
         assertEquals(testNames[0], manager.getCurrentProfile().getName());
         names = manager.getNames();
         assertEquals(testNames.length, names.size());
-        assertEquals(testNames[0], names.get(names.size() - 1));
+        assertEquals(testNames[0], names.get(profilePosition));
         assertFalse(saveTemp.exists());
         assertTrue(save.exists());
     }
@@ -120,6 +138,7 @@ public class ProfileManagerTest implements ProfileManagerObserver {
      */
     @Test
     public void testDeleteCreateProfile() {
+    	//deletes currentProfile
         manager.setCurrentProfile(testNames[0]);
         manager.delete(testNames[0]);
         assertTrue(calledChangedProfileList);
@@ -130,8 +149,9 @@ public class ProfileManagerTest implements ProfileManagerObserver {
         for (int i = 0; i < names.size(); i++) {
             assertNotEquals(testNames[0], names.get(i));
         }
-        File save = new File(ProfileManager.PROFILE_FOLDER + "/" + testNames[0]);
+    	FileHandle save = Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + testNames[0]);
         assertFalse(save.exists());
+        //creates deleted profile again (same name)
         ProfileModel newProfile = manager.createProfile();
         assertTrue(calledChangedProfileList);
         calledChangedProfileList = false;
@@ -153,7 +173,7 @@ public class ProfileManagerTest implements ProfileManagerObserver {
      */
     @Test
     public void testDeleteSaveWrongProfile() {
-        File save = new File(ProfileManager.PROFILE_FOLDER + "/" + unusedName);
+    	FileHandle save = Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + unusedName);
         assertFalse(save.exists());
         manager.save(unusedName);
         assertFalse(save.exists());
@@ -171,13 +191,4 @@ public class ProfileManagerTest implements ProfileManagerObserver {
         calledChangedProfileList = true;
     }
     
-    private static void deleteFolder(File folder) {
-        for (File file : folder.listFiles()) {
-            if (file.isDirectory()) {
-                deleteFolder(file);
-            }
-            file.delete();
-        }
-        folder.delete();
-    }
 }

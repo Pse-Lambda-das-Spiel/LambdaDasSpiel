@@ -1,6 +1,7 @@
 package lambda.util;
 
-import java.io.File;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 
 import lambda.model.profiles.ProfileManager;
 import lambda.model.profiles.ProfileModel;
@@ -11,9 +12,9 @@ public final class ProfileSaveHelper {
 	}
 	
     public static void saveProfile(ProfileModel profile) {
-        File a = new File(ProfileManager.PROFILE_FOLDER + "/" + profile.getName());
+        FileHandle a = Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + profile.getName());
         if (!a.exists()) {
-            a.mkdir();
+            a.mkdirs();
         }
     }
 

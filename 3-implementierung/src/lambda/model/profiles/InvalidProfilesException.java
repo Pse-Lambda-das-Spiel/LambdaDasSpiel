@@ -11,7 +11,7 @@ public class InvalidProfilesException extends RuntimeException {
     /**
      * Creates a new InvalidProfilesException with an errormessage.
      * 
-     * @param message description of the error
+     * @param message The description of the error.
      */
     public InvalidProfilesException(String message) {
         super(message);

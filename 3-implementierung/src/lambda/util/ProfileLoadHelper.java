@@ -1,6 +1,6 @@
 package lambda.util;
 
-import java.io.File;
+import com.badlogic.gdx.Gdx;
 
 import lambda.model.profiles.ProfileManager;
 import lambda.model.profiles.ProfileModel;
@@ -11,8 +11,7 @@ public final class ProfileLoadHelper {
 	}
 	
     public static ProfileModel loadProfile(String name) {
-        File a = new File(ProfileManager.PROFILE_FOLDER + "/" + name);
-        if (a.exists()) {
+        if (Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + name).exists()) {
             return new ProfileModel(name);
         }
         // TODO Auto-generated method stub

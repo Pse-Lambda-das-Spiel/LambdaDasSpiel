@@ -70,7 +70,7 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
     /**
      * Returns the name of the player. It identifies the profile.
      * 
-     * @return name
+     * @return The name of the player.
      */
     public String getName() {
         return name;
@@ -79,7 +79,7 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
     /**
      * Returns the ID of the avatar-picture.
      * 
-     * @return avatar-ID
+     * @return The ID of the avatar-picture.
      */
     public String getAvatar() {
         return avatar;
@@ -88,7 +88,7 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
     /**
      * Sets the ID of the avatar-picture.
      * 
-     * @param avatar new ID
+     * @param avatar The new ID of the avatar-picture.
      */
     public void setAvatar(String avatar) {
         if (avatar == null) {
@@ -100,7 +100,7 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
     /**
      * Returns the ID of the language of the profile.
      * 
-     * @return language-ID
+     * @return The language-ID of the profile.
      */
     public String getLanguage() {
         return language;
@@ -109,7 +109,7 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
     /**
      * Sets the ID of the language of the profile.
      * 
-     * @param language new ID
+     * @param language The new language-ID.
      */
     public void setLanguage(String language) {
         if (language == null) {
@@ -122,7 +122,7 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
      * Returns the levelIndex, which represents the first, unbeaten level of the
      * player (for example: LevelIndex = 2 => Level1 is beaten).
      * 
-     * @return levelIndex always bigger than 0
+     * @return The levelIndex. It is always bigger than 0.
      */
     public int getLevelIndex() {
         return levelIndex;
@@ -169,9 +169,9 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
     }
 
     /**
-     * Returns the settings of the profile
+     * Returns the settings of the profile.
      * 
-     * @return settings
+     * @return The settings of the profile.
      */
     public SettingsModel getSettings() {
         return settings;
@@ -180,7 +180,7 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
     /**
      * Returns the shop of the profile.
      * 
-     * @return shop
+     * @return The shop of the profile.
      */
     public ShopModel getShop() {
         return shop;
@@ -189,7 +189,7 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
     /**
      * Returns the statistics of the profile.
      * 
-     * @return statistics
+     * @return The statistics of the profile.
      */
     public StatisticModel getStatistics() {
         return statistics;

@@ -25,7 +25,7 @@ public class SettingsModel extends Observable<SettingsModelObserver> {
     /**
      * Return if the game should play music or not.
      * 
-     * @return musicOn
+     * @return If the game should play music or not.
      */
     public boolean isMusicOn() {
         return musicOn;

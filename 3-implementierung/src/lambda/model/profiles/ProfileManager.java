@@ -1,9 +1,11 @@
 package lambda.model.profiles;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 
 import lambda.Observable;
 import lambda.util.ProfileLoadHelper;
@@ -22,7 +24,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
      * The maximum number of allowed profiles.
      */
     public static final int MAX_NUMBER_OF_PROFILES = 6;
-    public static final String PROFILE_FOLDER = "./profiles";
+    public static final String PROFILE_FOLDER = "profiles";
     private static ProfileManager manager;
     private final ProfileEditModel profileEdit;
     private ProfileModel currentProfile;
@@ -31,13 +33,13 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     private ProfileManager() {
         profileEdit = new ProfileEditModel();
         currentProfile = null;
-        profiles = loadProfiles(new File(PROFILE_FOLDER));
+        profiles = loadProfiles(Gdx.files.local(PROFILE_FOLDER));
     }
     
     /**
      * Returns an (/the only) instance of ProfileManager.
      * 
-     * @return manager
+     * @return The ProfileManager-instance.
      */
     public static ProfileManager getManager() {
         if (manager == null) {
@@ -49,7 +51,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     /**
      * Returns the currently selected profile.
      * 
-     * @return currentProfile
+     * @return The currently selected profile.
      */
     public ProfileModel getCurrentProfile() {
         return currentProfile;
@@ -60,7 +62,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
      * Afterwards it notifies its observers by calling their
      * {@link ProfileManagerObserver#changedProfile() changedProfile()} method.
      * 
-     * @param name of the new profile 
+     * @param name The name of the new profile.
      * @return false if profile with the given name doesn't exist.
      */
     public boolean setCurrentProfile(String name) {
@@ -83,8 +85,8 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
      * Afterwards it notifies its observers by calling their
      * {@link ProfileManagerObserver#changedProfileList() changedProfileList()} method.
      * 
-     * @param newName of the profile
-     * @return false if newName was already taken by a different profile
+     * @param newName The name of the new profile.
+     * @return false if newName was already taken by a different profile.
      */
     public boolean changeCurrentName(String newName) {
         if (newName == null) {
@@ -109,13 +111,12 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     }
 
     /**
-     * Returns an array of all currently taken profilenames.
+     * Returns a list of all currently taken profile names.
      * 
-     * @return name array
+     * @return name List of all profile names
      */
     public List<String> getNames() {
         List<String> names = new ArrayList<String>();
-        int i = 0;
         for (ProfileModel profile : profiles) {
             names.add(profile.getName());
         }
@@ -148,7 +149,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     /**
      * Saves the profile with the given name in the games profile folder.
      * 
-     * @param name of the profile
+     * @param name The name of the profile.
      */
     public void save(String name) {
         if (name == null) {
@@ -168,7 +169,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
      * Afterwards it notifies its observers by calling their
      * {@link ProfileManagerObserver#changedProfileList() changedProfileList()} method.
      * 
-     * @param name
+     * @param name The name of the profile that should be deleted.
      */
     public void delete(String name) {
         if (name == null) {
@@ -186,7 +187,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
             }
             profiles.remove(deadProfile);
             if (!deadProfile.getName().equals("")) {
-                deleteFolder(new File(PROFILE_FOLDER + "/" + deadProfile.getName()));
+            	Gdx.files.local(PROFILE_FOLDER + "/" + deadProfile.getName()).deleteDirectory();
             }
             notify(o -> o.changedProfileList());
         }
@@ -194,44 +195,31 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
 
     /**
      * Returns the ProfileEditModel-object that is used for the editing 
-     * (other things than name) of the managers profiles.
+     * language and avatars of the managers profiles.
      * 
-     * @return ProfileEditModel
+     * @return ProfileEditModel The model behind the language and avatar edit.
      */
     public ProfileEditModel getProfileEdit() {
         return profileEdit;
     }
 
-    private List<ProfileModel> loadProfiles(File profileFolder) {
+    private List<ProfileModel> loadProfiles(FileHandle profileFolder) {
         List<ProfileModel> profiles = new LinkedList<ProfileModel>();
         if (!profileFolder.exists()) {
-            profileFolder.mkdir();
+        	profileFolder.mkdirs();
         } else {
-            if (!profileFolder.canRead()) {
-                throw new InvalidProfilesException("can't read " + profileFolder.getPath());
-            }
             if (!profileFolder.isDirectory()) {
-                throw new InvalidProfilesException(profileFolder.getPath() + " isn't a directory");
+                throw new InvalidProfilesException(profileFolder.name() + " isn't a directory");
             }
-            for (File file : profileFolder.listFiles()) {
-                ProfileModel profile = ProfileLoadHelper.loadProfile(file.getName());
-                if (!file.getName().equals(profile.getName())) {
+            for (FileHandle file : profileFolder.list()) {
+                ProfileModel profile = ProfileLoadHelper.loadProfile(file.name());
+                if (!file.name().equals(profile.getName())) {
                     throw new InvalidProfilesException("a profile's name and it's save folder's name aren't the same");
                 }
-                profiles.add(ProfileLoadHelper.loadProfile(file.getName()));
+                profiles.add(profile);
             }
         }
         return profiles;
-    }
-
-    private void deleteFolder(File folder) {
-        for (File file : folder.listFiles()) {
-            if (file.isDirectory()) {
-                deleteFolder(file);
-            }
-            file.delete();
-        }
-        folder.delete();
     }
 
 }
