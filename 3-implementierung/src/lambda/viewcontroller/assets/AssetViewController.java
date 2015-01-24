@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import lambda.viewcontroller.ViewController;
-import lambda.viewcontroller.profiles.ProfileSelection;
+import lambda.viewcontroller.editor.EditorViewController;
 
 /**
  * Represents the loading screen at program start.
@@ -21,7 +21,7 @@ public class AssetViewController extends ViewController {
      */
     private final Stage stage;
     /**
-     * Libgdx class that manages asset loading.
+     * Libgdx class that manages asset loading. Asset model.
      */
     private final AssetManager manager;
     
@@ -53,10 +53,19 @@ public class AssetViewController extends ViewController {
     }
     
     /**
+     * Called when the view conroller is created.
+     */
+    @Override
+    public void create(AssetManager manager) {
+        // UI elements for loading screen are set up in the constructor
+    }
+    
+    /**
      * Called when the screen is shown.
      */
     @Override
     public void show() {
+        Gdx.input.setInputProcessor(stage);
     }
 
     /**
@@ -68,13 +77,14 @@ public class AssetViewController extends ViewController {
     public void render(float delta) {
         if (manager.update()) {
             // Loading finished => go to profile selection
-            getGame().setScreen(ProfileSelection.class);
+            getGame().createViewControllers();
+            getGame().setScreen(EditorViewController.class);
         }
 
         // TODO manager.getProgress();
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        //stage.act(delta);
+        stage.act(delta);
         stage.draw();
     }
 
@@ -122,10 +132,10 @@ public class AssetViewController extends ViewController {
     /**
      * Queues all assets needed by this viewController to be loaded by the given asset manager.
      * 
-     * @param assets the asset manager
+     * @param manager the asset manager
      */
     @Override
-    public void queueAssets(AssetManager assets) {
+    public void queueAssets(AssetManager manager) {
         // All assets needed by the loading screen are loaded separately in the constructor
     }
 }

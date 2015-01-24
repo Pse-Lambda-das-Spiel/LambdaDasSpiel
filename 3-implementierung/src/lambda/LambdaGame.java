@@ -1,23 +1,12 @@
 package lambda;
 
-import lambda.viewcontroller.achievements.AchievementMenuViewController;
 import lambda.viewcontroller.editor.EditorViewController;
-import lambda.viewcontroller.level.LevelSelectionViewController;
-import lambda.viewcontroller.mainmenu.MainMenuViewController;
-import lambda.viewcontroller.profiles.ProfileEditLang;
-import lambda.viewcontroller.profiles.ProfileSelection;
-import lambda.viewcontroller.reduction.ReductionViewController;
-import lambda.viewcontroller.settings.SettingsViewController;
-import lambda.viewcontroller.shop.ShopViewController;
-import lambda.viewcontroller.statistics.StatisticViewController;
 
 import com.badlogic.gdx.Game;
 import java.util.HashMap;
 import java.util.Map;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.assets.AssetViewController;
-import lambda.viewcontroller.profiles.ProfileEditAvatar;
-import lambda.viewcontroller.profiles.ProfileEditName;
 
 /**
  * The main class of this application.
@@ -66,6 +55,16 @@ public class LambdaGame extends Game {
         viewController.setGame(this);
         viewControllers.put(viewController.getClass(), viewController);
     }
+    
+    /**
+     * Calls the create() method of all view controllers. Called after assets are loaded before profile selection is shown.
+     */
+    public void createViewControllers() {
+        // Queue all assets for loading
+        for (ViewController viewController : viewControllers.values()) {
+            viewController.create(getController(AssetViewController.class).getManager());
+        }
+    }
 
     /**
      * Called when the Application is first created.
@@ -74,13 +73,14 @@ public class LambdaGame extends Game {
     public void create() {
         // TODO Use reflection?
         addViewController(new AssetViewController());
+        addViewController(new EditorViewController());
         /*addViewController(new ProfileSelection());
         addViewController(new ProfileEditLang());
         addViewController(new ProfileEditName());
         addViewController(new ProfileEditAvatar());
         addViewController(new MainMenuViewController());
         addViewController(new LevelSelectionViewController());
-        addViewController(new EditorViewController());
+        
         addViewController(new ReductionViewController());
         addViewController(new SettingsViewController());
         addViewController(new ShopViewController());
@@ -97,7 +97,7 @@ public class LambdaGame extends Game {
     }
 
     /**
-     * {@inheritDoc}
+     * Releases all resources used by this game.
      */
     @Override
     public void dispose() {
