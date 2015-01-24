@@ -1,6 +1,5 @@
 package lambda.model.achievements;
 
-import lambda.AssetModel;
 import lambda.model.statistics.StatisticModel;
 
 /**
@@ -28,8 +27,8 @@ public class LambsEnchantedPerLevelAchievementModel extends PerLevelAchievementM
 	public void initialize() {
 		setIconPathAchievementUnlocked("achievements/lambs_enchanted_per_Level/unlocked/aul" + Integer.toString(getId()));
 		setIconPathAchievementLocked("achievements/lambs_enchanted_per_level/locked/al" + Integer.toString(getId()));
-		setDescription(AssetModel.getAssets().getString("lambsEnchantedPerLevelAchievement_" + Integer.toString(getId())));
-		setRequirementsDescription(AssetModel.getAssets().getString("reqLambsEnchantedPerLevelAchievement_" + Integer.toString(getId())));		
+		//setDescription(AssetModel.getAssets().getString("lambsEnchantedPerLevelAchievement_" + Integer.toString(getId())));
+		//setRequirementsDescription(AssetModel.getAssets().getString("reqLambsEnchantedPerLevelAchievement_" + Integer.toString(getId())));		
 	}
 
 	/**

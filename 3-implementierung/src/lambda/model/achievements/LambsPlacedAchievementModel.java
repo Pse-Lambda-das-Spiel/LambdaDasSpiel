@@ -1,6 +1,5 @@
 package lambda.model.achievements;
 
-import lambda.AssetModel;
 import lambda.model.statistics.StatisticModel;
 
 /**
@@ -28,8 +27,8 @@ public class LambsPlacedAchievementModel extends AchievementModel {
 	public void initialize() {
 		setIconPathAchievementUnlocked("achievements/lambs_placed/unlocked/aul" + Integer.toString(getId()));
 		setIconPathAchievementLocked("achievements/lambs_placed/locked/al" + Integer.toString(getId()));
-		setDescription(AssetModel.getAssets().getString("lambsPlacedAchievement_" + Integer.toString(getId())));
-		setRequirementsDescription(AssetModel.getAssets().getString("reqLambsPlacedAchievement_" + Integer.toString(getId())));		
+		//setDescription(AssetModel.getAssets().getString("lambsPlacedAchievement_" + Integer.toString(getId())));
+		//setRequirementsDescription(AssetModel.getAssets().getString("reqLambsPlacedAchievement_" + Integer.toString(getId())));		
 	}
 
 	/**

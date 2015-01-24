@@ -1,6 +1,5 @@
 package lambda.model.achievements;
 
-import lambda.AssetModel;
 import lambda.model.statistics.StatisticModel;
 
 /**
@@ -28,8 +27,8 @@ public class LambsPlacedPerLevelAchievementModel extends PerLevelAchievementMode
 	public void initialize() {
 		setIconPathAchievementUnlocked("achievements/lambs_placed_per_Level/unlocked/aul" + Integer.toString(getId()));
 		setIconPathAchievementLocked("achievements/lambs_placed_per_level/locked/al" + Integer.toString(getId()));
-		setDescription(AssetModel.getAssets().getString("lambsPlacedPerLevelAchievement_" + Integer.toString(getId())));
-		setRequirementsDescription(AssetModel.getAssets().getString("reqLambsPlacedPerLevelAchievement_" + Integer.toString(getId())));		
+		//setDescription(AssetModel.getAssets().getString("lambsPlacedPerLevelAchievement_" + Integer.toString(getId())));
+		//setRequirementsDescription(AssetModel.getAssets().getString("reqLambsPlacedPerLevelAchievement_" + Integer.toString(getId())));		
 	}
 
 	/**

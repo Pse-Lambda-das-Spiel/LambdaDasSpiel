@@ -1,6 +1,5 @@
 package lambda.model.achievements;
 
-import lambda.AssetModel;
 import lambda.model.statistics.StatisticModel;
 
 /**
@@ -28,8 +27,8 @@ public class GemsPlacedAchievementModel extends AchievementModel {
 	public void initialize() {
 		setIconPathAchievementUnlocked("achievements/gems_placed/unlocked/aul" + Integer.toString(getId()));
 		setIconPathAchievementLocked("achievements/gems_placed/locked/al" + Integer.toString(getId()));
-		setDescription(AssetModel.getAssets().getString("gemsPlacedAchievement_" + Integer.toString(getId())));
-		setRequirementsDescription(AssetModel.getAssets().getString("reqGemsPlacedAchievement_" + Integer.toString(getId())));		
+		//setDescription(AssetModel.getAssets().getString("gemsPlacedAchievement_" + Integer.toString(getId())));
+		//setRequirementsDescription(AssetModel.getAssets().getString("reqGemsPlacedAchievement_" + Integer.toString(getId())));		
 	}
 
 	/**

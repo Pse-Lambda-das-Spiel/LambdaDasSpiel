@@ -15,7 +15,7 @@ public class MusicItemModel extends ShopItemModel {
      *
      */
     public MusicItemModel() {
-
+        super(null, 0); // TODO
     }
 
     /**

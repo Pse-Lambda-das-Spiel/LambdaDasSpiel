@@ -1,5 +1,4 @@
 package lambda.model.achievements;
-import lambda.AssetModel;
 import lambda.model.statistics.StatisticModel;
 
 /**
@@ -27,8 +26,8 @@ public class TimeAchievementModel extends AchievementModel {
 	public void initialize() {
 		setIconPathAchievementUnlocked("achievements/time/unlocked/aul" + Integer.toString(getId()));
 		setIconPathAchievementLocked("achievements/time/locked/al" + Integer.toString(getId()));
-		setDescription(AssetModel.getAssets().getString("timeAchievement_" + Integer.toString(getId())));
-		setRequirementsDescription(AssetModel.getAssets().getString("reqTimeAchievement_" + Integer.toString(getId())));		
+		//setDescription(AssetModel.getAssets().getString("timeAchievement_" + Integer.toString(getId())));
+		//setRequirementsDescription(AssetModel.getAssets().getString("reqTimeAchievement_" + Integer.toString(getId())));		
 	}
 
 	/**
