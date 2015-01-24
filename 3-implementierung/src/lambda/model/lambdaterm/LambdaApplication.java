@@ -111,6 +111,6 @@ public class LambdaApplication extends LambdaTerm {
      */
     @Override
     public int hashCode() {
-        return getClass().hashCode() + Objects.hashCode(left) + Objects.hashCode(right);
+        return getClass().hashCode() + 123 * Objects.hashCode(left) + 456 * Objects.hashCode(right);
     }
 }
