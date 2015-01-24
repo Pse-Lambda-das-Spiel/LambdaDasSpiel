@@ -17,11 +17,11 @@ import org.junit.Test;
  * @author Kai Fieger
  */
 public class ProfileEditModelTest implements ProfileEditObserver {
-    
+
     private boolean calledChangedLanguage;
     private boolean calledChangedAvatar;
-    private ProfileEditModel edit; 
-    
+    private ProfileEditModel edit;
+
     @Before
     public void setUp() throws Exception {
         calledChangedLanguage = false;
@@ -36,8 +36,9 @@ public class ProfileEditModelTest implements ProfileEditObserver {
     }
 
     /**
-     * Tests nextLang and previousLang with their getters (getLang and getLangPic),
-     * while making sure the correct ProfileEditObserver-methods are called.
+     * Tests nextLang and previousLang with their getters (getLang and
+     * getLangPic), while making sure the correct ProfileEditObserver-methods
+     * are called.
      */
     @Test
     public void testLanguageNextPrev() {
@@ -52,10 +53,11 @@ public class ProfileEditModelTest implements ProfileEditObserver {
         assertEquals(start + "Flag", edit.getLangPic());
         assertTrue(calledChangedLanguage);
     }
-    
+
     /**
      * Tests setLang and if nextLang and prevousLang can make a full circles.
-     * Afterwards it compares both aquired lists of IDs to make sure they contain the same IDs.
+     * Afterwards it compares both acquired lists of IDs to make sure they
+     * contain the same IDs.
      */
     @Test
     public void testLanguageCycle() {
@@ -69,7 +71,7 @@ public class ProfileEditModelTest implements ProfileEditObserver {
             idsRight.add(edit.getLang());
             edit.nextLang();
         }
-        
+
         List<String> idsLeft = new ArrayList<String>();
         edit.setLang("de");
         assertEquals("de", edit.getLang());
@@ -80,18 +82,18 @@ public class ProfileEditModelTest implements ProfileEditObserver {
             idsLeft.add(edit.getLang());
             edit.previousLang();
         }
-        
+
         assertEquals(idsRight.size(), idsLeft.size());
         assertEquals(idsRight.get(0), idsLeft.get(0));
-        
+
         for (int i = 1; i < idsRight.size(); i++) {
             assertEquals(idsRight.get(i), idsLeft.get(idsLeft.size() - i));
         }
     }
 
     /**
-     * Tests nextAvatar and previousAvatar and their getter getAvatar,
-     * while making sure the correct ProfileEditObserver-methods are called.
+     * Tests nextAvatar and previousAvatar and their getter getAvatar, while
+     * making sure the correct ProfileEditObserver-methods are called.
      */
     @Test
     public void testAvatarNextPrev() {
@@ -104,10 +106,11 @@ public class ProfileEditModelTest implements ProfileEditObserver {
         assertEquals(start, edit.getAvatar());
         assertTrue(calledChangedAvatar);
     }
-    
+
     /**
-     * Tests setAvatar and if nextAvatar and previousAvatar can make a full circles.
-     * Afterwards it compares both aquired lists of IDs to make sure they contain the same IDs.
+     * Tests setAvatar and if nextAvatar and previousAvatar can make a full
+     * circles. Afterwards it compares both aquired lists of IDs to make sure
+     * they contain the same IDs.
      */
     @Test
     public void testAvatarCycle() {
@@ -121,26 +124,26 @@ public class ProfileEditModelTest implements ProfileEditObserver {
             idsRight.add(edit.getAvatar());
             edit.nextAvatar();
         }
-        
+
         List<String> idsLeft = new ArrayList<String>();
         edit.setAvatar("a0");
         assertEquals("a0", edit.getAvatar());
         idsLeft.add(edit.getAvatar());
-        edit.previousAvatar();;
+        edit.previousAvatar();
         assertNotEquals("a0", edit.getAvatar());
         while (!idsLeft.contains(edit.getAvatar())) {
             idsLeft.add(edit.getAvatar());
             edit.previousAvatar();
         }
-        
+
         assertEquals(idsRight.size(), idsLeft.size());
         assertEquals(idsRight.get(0), idsLeft.get(0));
-        
+
         for (int i = 1; i < idsRight.size(); i++) {
             assertEquals(idsRight.get(i), idsLeft.get(idsLeft.size() - i));
         }
     }
-    
+
     @Override
     public void changedLanguage() {
         calledChangedLanguage = true;

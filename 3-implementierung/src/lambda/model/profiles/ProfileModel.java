@@ -24,7 +24,9 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
     /**
      * Creates a new profile with the given name and standard values.
      * 
-     * @param name The name of the player. It's unique to all profiles of the game.
+     * @param name
+     *            The name of the player. It's unique to all profiles of the
+     *            game.
      */
     public ProfileModel(String name) {
         if (name == null) {
@@ -42,10 +44,13 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
 
     /**
      * Creates a new profile with the given name and the values of the other.
-     * Called to rename a profile. The old profile should not be used afterwards.
+     * Called to rename a profile. The old profile should not be used
+     * afterwards.
      * 
-     * @param newName The new name of the player.
-     * @param oldProfile Profile which gets "renamed"
+     * @param newName
+     *            The new name of the player.
+     * @param oldProfile
+     *            Profile which gets "renamed"
      */
     public ProfileModel(String newName, ProfileModel oldProfile) {
         if (newName == null) {
@@ -88,7 +93,8 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
     /**
      * Sets the ID of the avatar-picture.
      * 
-     * @param avatar The new ID of the avatar-picture.
+     * @param avatar
+     *            The new ID of the avatar-picture.
      */
     public void setAvatar(String avatar) {
         if (avatar == null) {
@@ -109,7 +115,8 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
     /**
      * Sets the ID of the language of the profile.
      * 
-     * @param language The new language-ID.
+     * @param language
+     *            The new language-ID.
      */
     public void setLanguage(String language) {
         if (language == null) {
@@ -130,15 +137,18 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
 
     /**
      * Sets the levelIndex, which represents the first, unbeaten level of the
-     * player (for example: LevelIndex = 2 => Level1 is beaten).
-     * Afterwards it notifies its observers by calling their
-     * {@link ProfileModelObserver#changedLevelIndex() changedLevelIndex()} method.
+     * player (for example: LevelIndex = 2 => Level1 is beaten). Afterwards it
+     * notifies its observers by calling their
+     * {@link ProfileModelObserver#changedLevelIndex() changedLevelIndex()}
+     * method.
      * 
-     * @param levelIndex has to be bigger than 0
+     * @param levelIndex
+     *            has to be bigger than 0
      */
     public void setLevelIndex(int levelIndex) {
         if (levelIndex < 1) {
-            throw new IllegalArgumentException("levelIndex cannot be smaller than 1");
+            throw new IllegalArgumentException(
+                    "levelIndex cannot be smaller than 1");
         }
         this.levelIndex = levelIndex;
         notify(o -> o.changedLevelIndex());
@@ -154,11 +164,12 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
     }
 
     /**
-     * Sets the amount of coins the player owns.
-     * Afterwards it notifies its observers by calling their
-     * {@link ProfileModelObserver#changedCoins() changedCoins()} method.
+     * Sets the amount of coins the player owns. Afterwards it notifies its
+     * observers by calling their {@link ProfileModelObserver#changedCoins()
+     * changedCoins()} method.
      * 
-     * @param coins has to be 0 or higher
+     * @param coins
+     *            has to be 0 or higher
      */
     public void setCoins(int coins) {
         if (coins < 0) {

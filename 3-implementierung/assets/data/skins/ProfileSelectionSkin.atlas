@@ -1,0 +1,54 @@
+
+ProfileSelectionSkin.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+profileField
+  rotate: false
+  xy: 1, 150
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+delete
+  rotate: false
+  xy: 1, 67
+  size: 64, 81
+  orig: 64, 81
+  offset: 0, 0
+  index: -1
+accept
+  rotate: false
+  xy: 259, 342
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+config
+  rotate: false
+  xy: 1, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+no
+  rotate: false
+  xy: 67, 84
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+plus24
+  rotate: false
+  xy: 259, 276
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+edit
+  rotate: false
+  xy: 325, 343
+  size: 64, 63
+  orig: 64, 63
+  offset: 0, 0
+  index: -1

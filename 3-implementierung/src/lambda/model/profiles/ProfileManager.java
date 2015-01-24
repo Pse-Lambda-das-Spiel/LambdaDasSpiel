@@ -12,14 +12,14 @@ import lambda.util.ProfileLoadHelper;
 import lambda.util.ProfileSaveHelper;
 
 /**
- * The ProfileManager controls the games profiles. It contains a list of all user profiles
- * and can load and save them. It also creates, renames and deletes profiles and selects the games
- * current one.
+ * The ProfileManager controls the games profiles. It contains a list of all
+ * user profiles and can load and save them. It also creates, renames and
+ * deletes profiles and selects the games current one.
  * 
  * @author Kai Fieger
  */
 public class ProfileManager extends Observable<ProfileManagerObserver> {
-    
+
     /**
      * The maximum number of allowed profiles.
      */
@@ -35,7 +35,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
         currentProfile = null;
         profiles = loadProfiles(Gdx.files.local(PROFILE_FOLDER));
     }
-    
+
     /**
      * Returns an (/the only) instance of ProfileManager.
      * 
@@ -47,7 +47,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
         }
         return manager;
     }
-    
+
     /**
      * Returns the currently selected profile.
      * 
@@ -58,11 +58,12 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     }
 
     /**
-     * Sets the currently selected profile.
-     * Afterwards it notifies its observers by calling their
-     * {@link ProfileManagerObserver#changedProfile() changedProfile()} method.
+     * Sets the currently selected profile. Afterwards it notifies its observers
+     * by calling their {@link ProfileManagerObserver#changedProfile()
+     * changedProfile()} method.
      * 
-     * @param name The name of the new profile.
+     * @param name
+     *            The name of the new profile.
      * @return false if profile with the given name doesn't exist.
      */
     public boolean setCurrentProfile(String name) {
@@ -80,12 +81,14 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     }
 
     /**
-     * Changes the name of the current profile by replacing it with the same profile only with a different name. 
-     * References on the current profile should be updated.
-     * Afterwards it notifies its observers by calling their
-     * {@link ProfileManagerObserver#changedProfileList() changedProfileList()} method.
+     * Changes the name of the current profile by replacing it with the same
+     * profile only with a different name. References on the current profile
+     * should be updated. Afterwards it notifies its observers by calling their
+     * {@link ProfileManagerObserver#changedProfileList() changedProfileList()}
+     * method.
      * 
-     * @param newName The name of the new profile.
+     * @param newName
+     *            The name of the new profile.
      * @return false if newName was already taken by a different profile.
      */
     public boolean changeCurrentName(String newName) {
@@ -124,12 +127,13 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     }
 
     /**
-     * Creates a new profile with an empty string as name.
-     * Afterwards it notifies its observers by calling their
-     * {@link ProfileManagerObserver#changedProfileList() changedProfileList()} method.
+     * Creates a new profile with an empty string as name. Afterwards it
+     * notifies its observers by calling their
+     * {@link ProfileManagerObserver#changedProfileList() changedProfileList()}
+     * method.
      * 
-     * @return new profile or null if {@link #MAX_NUMBER_OF_PROFILES} was already reached 
-     *         or a profile with an empty name already exists.
+     * @return new profile or null if {@link #MAX_NUMBER_OF_PROFILES} was
+     *         already reached or a profile with an empty name already exists.
      */
     public ProfileModel createProfile() {
         if (profiles.size() < MAX_NUMBER_OF_PROFILES) {
@@ -149,7 +153,8 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     /**
      * Saves the profile with the given name in the games profile folder.
      * 
-     * @param name The name of the profile.
+     * @param name
+     *            The name of the profile.
      */
     public void save(String name) {
         if (name == null) {
@@ -165,11 +170,13 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     }
 
     /**
-     * Deletes the profile with the given name from the games profile folder and the ProfileManager.
-     * Afterwards it notifies its observers by calling their
-     * {@link ProfileManagerObserver#changedProfileList() changedProfileList()} method.
+     * Deletes the profile with the given name from the games profile folder and
+     * the ProfileManager. Afterwards it notifies its observers by calling their
+     * {@link ProfileManagerObserver#changedProfileList() changedProfileList()}
+     * method.
      * 
-     * @param name The name of the profile that should be deleted.
+     * @param name
+     *            The name of the profile that should be deleted.
      */
     public void delete(String name) {
         if (name == null) {
@@ -187,15 +194,16 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
             }
             profiles.remove(deadProfile);
             if (!deadProfile.getName().equals("")) {
-            	Gdx.files.local(PROFILE_FOLDER + "/" + deadProfile.getName()).deleteDirectory();
+                Gdx.files.local(PROFILE_FOLDER + "/" + deadProfile.getName())
+                        .deleteDirectory();
             }
             notify(o -> o.changedProfileList());
         }
     }
 
     /**
-     * Returns the ProfileEditModel-object that is used for the editing 
-     * language and avatars of the managers profiles.
+     * Returns the ProfileEditModel-object that is used for the editing language
+     * and avatars of the managers profiles.
      * 
      * @return ProfileEditModel The model behind the language and avatar edit.
      */
@@ -206,15 +214,18 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     private List<ProfileModel> loadProfiles(FileHandle profileFolder) {
         List<ProfileModel> profiles = new LinkedList<ProfileModel>();
         if (!profileFolder.exists()) {
-        	profileFolder.mkdirs();
+            profileFolder.mkdirs();
         } else {
             if (!profileFolder.isDirectory()) {
-                throw new InvalidProfilesException(profileFolder.name() + " isn't a directory");
+                throw new InvalidProfilesException(profileFolder.name()
+                        + " isn't a directory");
             }
             for (FileHandle file : profileFolder.list()) {
-                ProfileModel profile = ProfileLoadHelper.loadProfile(file.name());
+                ProfileModel profile = ProfileLoadHelper.loadProfile(file
+                        .name());
                 if (!file.name().equals(profile.getName())) {
-                    throw new InvalidProfilesException("a profile's name and it's save folder's name aren't the same");
+                    throw new InvalidProfilesException(
+                            "a profile's name and it's save folder's name aren't the same");
                 }
                 profiles.add(profile);
             }

@@ -6,7 +6,8 @@ import java.util.List;
 import lambda.Observable;
 
 /**
- * Represents the logic behind the editing-screen of a profile's avatar and language.
+ * Represents the logic behind the editing-screen of a profile's avatar and
+ * language.
  * 
  * @author Kai Fieger
  */
@@ -19,19 +20,19 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
     private int selectedAvatar;
 
     /**
-	 * Creates a new ProfileEditModel-object.
-	 */
+     * Creates a new ProfileEditModel-object.
+     */
     public ProfileEditModel() {
         lang = new LinkedList<String>();
         selectedLang = 0;
         avatar = new LinkedList<String>();
         selectedAvatar = 0;
 
-        //TODO get keys from filenames in lang folder
+        // TODO get keys from filenames in lang folder
         lang.add("de");
         lang.add("en");
-        lang.add("fr");   
-        
+        lang.add("fr");
+
         avatar = new LinkedList<String>();
         for (int i = 0; i < AVATAR_NUMBER; i++) {
             this.avatar.add("a" + i);
@@ -39,12 +40,13 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
     }
 
     /**
-     * Sets the language selection to the given ID.
-     * Afterwards it notifies its observers by calling their
-     * {@link ProfileEditObserver#changedLanguage() changedLanguage()} method.
-     * Is set to the standard if lang is an invalid ID.
+     * Sets the language selection to the given ID. Afterwards it notifies its
+     * observers by calling their {@link ProfileEditObserver#changedLanguage()
+     * changedLanguage()} method. Is set to the standard if lang is an invalid
+     * ID.
      * 
-     * @param lang The language ID.
+     * @param lang
+     *            The language ID.
      */
     public void setLang(String lang) {
         if (lang == null) {
@@ -57,10 +59,10 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
     }
 
     /**
-	 * Sets the language selection one step to the right. (cyclic)
-	 * Afterwards it notifies its observers by calling their
+     * Sets the language selection one step to the right. (cyclic) Afterwards it
+     * notifies its observers by calling their
      * {@link ProfileEditObserver#changedLanguage() changedLanguage()} method.
-	 */
+     */
     public void nextLang() {
         if (++selectedLang == lang.size()) {
             selectedLang = 0;
@@ -69,8 +71,8 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
     }
 
     /**
-     * Sets the language selection one step to the left. (cyclic)
-     * Afterwards it notifies its observers by calling their
+     * Sets the language selection one step to the left. (cyclic) Afterwards it
+     * notifies its observers by calling their
      * {@link ProfileEditObserver#changedLanguage() changedLanguage()} method.
      */
     public void previousLang() {
@@ -99,21 +101,22 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
     }
 
     /**
-     * Sets the avatar selection to the given ID.
-     * Afterwards it notifies its observers by calling their
-     * {@link ProfileEditObserver#changedAvatar() changedAvatar()} method.
-     * Is set to the standard if avatar is an invalid ID.
+     * Sets the avatar selection to the given ID. Afterwards it notifies its
+     * observers by calling their {@link ProfileEditObserver#changedAvatar()
+     * changedAvatar()} method. Is set to the standard if avatar is an invalid
+     * ID.
      * 
-     * @param avatar The avatar picture ID.
+     * @param avatar
+     *            The avatar picture ID.
      */
     public void setAvatar(String avatar) {
         if (avatar == null) {
             throw new IllegalArgumentException("avatar cannot be null");
         }
         /*
-        this.avatar = this.avatar.subList(0, AVATAR_NUMBER - 1);
-            //add bought avatar id's to selection
-        */
+         * this.avatar = this.avatar.subList(0, AVATAR_NUMBER - 1); //add bought
+         * avatar id's to selection
+         */
         selectedAvatar = this.avatar.indexOf(avatar);
         if (selectedAvatar == -1) {
             selectedAvatar = 0;
@@ -121,8 +124,8 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
     }
 
     /**
-     * Sets the avatar selection one step to the right. (cyclic)
-     * Afterwards it notifies its observers by calling their
+     * Sets the avatar selection one step to the right. (cyclic) Afterwards it
+     * notifies its observers by calling their
      * {@link ProfileEditObserver#changedAvatar() changedAvatar()} method.
      */
     public void nextAvatar() {
@@ -133,8 +136,8 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
     }
 
     /**
-     * Sets the avatar selection one step to the left. (cyclic)
-     * Afterwards it notifies its observers by calling their
+     * Sets the avatar selection one step to the left. (cyclic) Afterwards it
+     * notifies its observers by calling their
      * {@link ProfileEditObserver#changedAvatar() changedAvatar()} method.
      */
     public void previousAvatar() {

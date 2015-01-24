@@ -27,7 +27,7 @@ import com.badlogic.gdx.files.FileHandle;
  * @author Kai Fieger
  */
 public class ProfileManagerTest implements ProfileManagerObserver {
-    
+
     private boolean calledChangedProfile;
     private boolean calledChangedProfileList;
     private ProfileManager manager;
@@ -35,13 +35,13 @@ public class ProfileManagerTest implements ProfileManagerObserver {
     private static String[] testNames = {"testName0", "testName1", "testName2"};
     private static String unusedName = "unusedName";
     private static FileHandle profileFolder;
-    
+
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-    	Gdx.files = new LwjglFiles();
-    	profileFolder = Gdx.files.local(ProfileManager.PROFILE_FOLDER);
+        Gdx.files = new LwjglFiles();
+        profileFolder = Gdx.files.local(ProfileManager.PROFILE_FOLDER);
         if (profileFolder.exists()) {
-        	profileFolder.deleteDirectory();
+            profileFolder.deleteDirectory();
         }
         profileFolder.mkdirs();
         for (int i = 0; i < testNames.length; i++) {
@@ -78,7 +78,7 @@ public class ProfileManagerTest implements ProfileManagerObserver {
             assertTrue(names.contains(testNames[i]));
         }
     }
-    
+
     /**
      * Tests setting and getting the game's current profile
      */
@@ -90,29 +90,29 @@ public class ProfileManagerTest implements ProfileManagerObserver {
         assertTrue(calledChangedProfile);
         assertEquals(testNames[0], manager.getCurrentProfile().getName());
     }
-    
+
     /**
-     * Tests the renaming of profiles. 
+     * Tests the renaming of profiles.
      */
     @Test
     public void testRenaming() {
-    	//Sets current profile to testNames[0]
-    	FileHandle save = Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + testNames[0]);
-    	FileHandle saveTemp = Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + unusedName);
+        // Sets current profile to testNames[0]
+        FileHandle save = Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + testNames[0]);
+        FileHandle saveTemp = Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + unusedName);
         assertTrue(save.exists());
         List<String> names = manager.getNames();
         assertEquals(testNames.length, names.size());
         int profilePosition = -1;
         int j = 0;
-        for (String name: names) {
-        	if (name.equals(testNames[0])) { 
-        		profilePosition = j;
-        	}
-        	j++;
+        for (String name : names) {
+            if (name.equals(testNames[0])) {
+                profilePosition = j;
+            }
+            j++;
         }
         assertTrue(manager.setCurrentProfile(testNames[0]));
         assertNotEquals(-1, profilePosition);
-        //Changes name of current profile (testNames[0]) to unusedName
+        // Changes name of current profile (testNames[0]) to unusedName
         assertTrue(manager.changeCurrentName(unusedName));
         assertEquals(unusedName, manager.getCurrentProfile().getName());
         assertTrue(calledChangedProfileList);
@@ -122,7 +122,7 @@ public class ProfileManagerTest implements ProfileManagerObserver {
         assertEquals(unusedName, names.get(profilePosition));
         assertFalse(save.exists());
         assertTrue(saveTemp.exists());
-        //Changes name of current profile (unusedName) back to testNames[0]
+        // Changes name of current profile (unusedName) back to testNames[0]
         assertTrue(manager.changeCurrentName(testNames[0]));
         assertEquals(testNames[0], manager.getCurrentProfile().getName());
         names = manager.getNames();
@@ -131,14 +131,14 @@ public class ProfileManagerTest implements ProfileManagerObserver {
         assertFalse(saveTemp.exists());
         assertTrue(save.exists());
     }
-    
+
     /**
-     * Tests the scenario of deleting a current profile
-     * and than creating a new one (with the same name).
+     * Tests the scenario of deleting a current profile and than creating a new
+     * one (with the same name).
      */
     @Test
     public void testDeleteCreateProfile() {
-    	//deletes currentProfile
+        // deletes currentProfile
         manager.setCurrentProfile(testNames[0]);
         manager.delete(testNames[0]);
         assertTrue(calledChangedProfileList);
@@ -149,9 +149,9 @@ public class ProfileManagerTest implements ProfileManagerObserver {
         for (int i = 0; i < names.size(); i++) {
             assertNotEquals(testNames[0], names.get(i));
         }
-    	FileHandle save = Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + testNames[0]);
+        FileHandle save = Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + testNames[0]);
         assertFalse(save.exists());
-        //creates deleted profile again (same name)
+        // creates deleted profile again (same name)
         ProfileModel newProfile = manager.createProfile();
         assertTrue(calledChangedProfileList);
         calledChangedProfileList = false;
@@ -166,29 +166,29 @@ public class ProfileManagerTest implements ProfileManagerObserver {
         assertEquals(testNames.length, names.size());
         assertEquals(testNames[0], names.get(names.size() - 1));
     }
-    
+
     /**
-     * Checks if trying to save or delete a profile with an unused name
-     * (=> a nonexistent profile) has unwanted side effects.
+     * Checks if trying to save or delete a profile with an unused name (=> a
+     * nonexistent profile) has unwanted side effects.
      */
     @Test
     public void testDeleteSaveWrongProfile() {
-    	FileHandle save = Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + unusedName);
+        FileHandle save = Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + unusedName);
         assertFalse(save.exists());
         manager.save(unusedName);
         assertFalse(save.exists());
         manager.delete(unusedName);
         assertFalse(save.exists());
     }
-    
+
     @Override
     public void changedProfile() {
         calledChangedProfile = true;
     }
-    
+
     @Override
     public void changedProfileList() {
         calledChangedProfileList = true;
     }
-    
+
 }

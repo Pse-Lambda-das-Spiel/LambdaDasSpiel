@@ -18,7 +18,7 @@ public class ProfileModelTest implements ProfileModelObserver {
     private boolean calledChangedLevelIndex;
     private boolean calledChangedCoins;
     private ProfileModel profile;
-    
+
     @Before
     public void setUp() throws Exception {
         calledChangedLevelIndex = false;
@@ -46,9 +46,10 @@ public class ProfileModelTest implements ProfileModelObserver {
         assertNotNull(profile.getShop());
         assertNotNull(profile.getStatistics());
     }
-    
+
     /**
-     * Tests the ProfileModel(String, ProfileModel) constructor, which is used for renaming a profile;
+     * Tests the ProfileModel(String, ProfileModel) constructor, which is used
+     * for renaming a profile;
      */
     @Test
     public void testRenameProfile() {
@@ -64,12 +65,13 @@ public class ProfileModelTest implements ProfileModelObserver {
         assertEquals(100, newProfile.getCoins());
         assertEquals(profile.getSettings(), newProfile.getSettings());
         assertEquals(profile.getShop(), newProfile.getShop());
-        assertEquals(profile.getStatistics(), newProfile.getStatistics()); 
+        assertEquals(profile.getStatistics(), newProfile.getStatistics());
     }
-    
+
     /**
-     * Tests the getters and setters of a ProfileModel-object and makes
-     * sure that the correct ProfileModelOberver-methods from the obervers are called. 
+     * Tests the getters and setters of a ProfileModel-object and makes sure
+     * that the correct ProfileModelOberver-methods from the obervers are
+     * called.
      */
     @Test
     public void testSettersGetters() {
@@ -88,7 +90,7 @@ public class ProfileModelTest implements ProfileModelObserver {
         assertNotNull(profile.getShop());
         assertNotNull(profile.getStatistics());
     }
-    
+
     @Override
     public void changedLevelIndex() {
         calledChangedLevelIndex = true;

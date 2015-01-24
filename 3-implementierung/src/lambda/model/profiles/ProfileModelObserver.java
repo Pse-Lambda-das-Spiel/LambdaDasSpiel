@@ -9,11 +9,11 @@ package lambda.model.profiles;
  */
 public interface ProfileModelObserver {
 
-    /* not needed? 
-    default public void changedAvatar() {
-     
-    }
-    */
+    /*
+     * not needed? default public void changedAvatar() {
+     * 
+     * }
+     */
 
     /**
      * Gets called by an observed ProfileModel-object as the level-progress is
