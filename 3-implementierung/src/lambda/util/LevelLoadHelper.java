@@ -104,6 +104,10 @@ public final class LevelLoadHelper {
 	
 	private static List<TutorialMessage> convertJsonToTutorial(JsonValue value) {
 		List<TutorialMessage> tutorialMessageList = new ArrayList<>();
+		// It is not necessary for all level to have TutorialMessages
+		if (value.size == 0) {
+			return tutorialMessageList;
+		}
 		for (JsonValue entry = value.child(); entry != null; entry = entry.next) {
 			if (entry.getString("tutorialId").equals("")) {
 				throw new InvalidJsonException("A tutorial id must not be empty!");
