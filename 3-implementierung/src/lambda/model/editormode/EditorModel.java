@@ -5,8 +5,11 @@ import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.visitor.CopyVisitor;
 import lambda.model.lambdaterm.visitor.strategy.BetaReductionVisitor;
 import lambda.model.levels.LevelContext;
+import lambda.model.levels.LevelModel;
 import lambda.model.levels.ReductionStrategy;
 import lambda.model.reductionmode.ReductionModel;
+
+import java.util.Map;
 
 /**
  * Contains data and logics of the editor mode. Will be observed by the editor view controller.

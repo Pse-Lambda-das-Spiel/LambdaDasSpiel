@@ -53,7 +53,7 @@ public class AssetViewController extends ViewController {
     }
     
     /**
-     * Called when the view conroller is created.
+     * Called when the view controller is created.
      */
     @Override
     public void create(AssetManager manager) {

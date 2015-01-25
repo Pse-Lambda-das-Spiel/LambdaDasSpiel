@@ -1,6 +1,7 @@
 package lambda.model.levels;
 
-import java.util.List;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import lambda.model.shop.ElementUIContextFamily;
 import lambda.model.shop.ShopModel;
 
@@ -12,19 +13,31 @@ import lambda.model.shop.ShopModel;
 public class LevelContext {
 
     private LevelModel levelModel;
-    private String music;
-    private String image;
-    private List<String> tutorials;
+    private Music music;
+    private Image bgImage;
     private ElementUIContextFamily elementUIContextFamily;
-    private ShopModel shop;
+    private LevelManager manager;
+    private DifficultySetting difficultySetting;
 
     /**
      * Creates a new instance of this class
      */
-    public LevelContext(LevelModel levelModel, ShopModel shop, List<String> tutorials) {
+    public LevelContext(LevelModel levelModel, ShopModel shop) {
         elementUIContextFamily = shop.getElementUIContextFamilies().getActivatedItem();
         this.levelModel = levelModel;
-        // TODO (AssetModel?)
+
+        if(levelModel.getId() != 0) {
+            // for standard levels
+            manager = LevelManager.getLevelManager();
+            difficultySetting = manager.getDifficultySettings().get(levelModel.getDifficulty());
+            music = difficultySetting.getMusic();
+            bgImage = difficultySetting.getBgImage();
+        }
+        else {
+            // for sandbox
+            music = shop.getMusic().getActivatedItem().getMusic();
+            bgImage = shop.getImages().getActivatedItem().getImage();
+        }
     }
 
     /**
@@ -41,7 +54,7 @@ public class LevelContext {
      *
      * @return music
      */
-    public String getMusic() {
+    public Music getMusic() {
         return music;
     }
 
@@ -50,17 +63,8 @@ public class LevelContext {
      *
      * @return image
      */
-    public String getImage() {
-        return image;
-    }
-
-    /**
-     * Returns a list of tutorials which are played at the beginning of the level
-     *
-     * @return tutorials
-     */
-    public List<String> getTutorials() {
-        return tutorials;
+    public Image getBgImageImage() {
+        return bgImage;
     }
 
     /**

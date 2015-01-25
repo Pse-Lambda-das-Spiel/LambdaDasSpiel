@@ -1,8 +1,11 @@
 package lambda.util;
 
 import java.awt.Color;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -14,6 +17,7 @@ import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.LambdaVariable;
+import lambda.model.levels.DifficultySetting;
 import lambda.model.levels.ElementType;
 import lambda.model.levels.LevelModel;
 import lambda.model.levels.ReductionStrategy;
@@ -161,6 +165,65 @@ public final class LevelLoadHelper {
 			throw new InvalidJsonException("The LambdaTerm must be an application, an abstraction or a variable!");
 		}
 		return nextNode;
+	}
+
+
+	/**
+	 * Returns a list of all levels
+	 *
+	 * @return a list which contains all levels
+	 */
+	public static List<LevelModel> loadAllLevels() {
+		List<LevelModel> levels = new ArrayList<LevelModel>();
+		File f = new File("data/difficulties/");
+		File[] allFiles = f.listFiles();
+		int numberOfLevels = allFiles.length;
+		for(int i = 0; i < numberOfLevels; i++) {
+			levels.add(i, loadLevel(i));
+		}
+		return levels;
+	}
+
+	/**
+	 * Returns settings for a difficulty
+	 *
+	 * @param id id of the difficulty
+	 * @return settings for a difficulty
+	 */
+	public static DifficultySetting loadDifficulty(int id) {
+		FileHandle file = Gdx.files.internal("data/difficulties/" + String.format("%02d", id) + ".json");
+		JsonReader reader = new JsonReader();
+		JsonValue jsonFile = reader.parse(file);
+		JsonValue difficulty = jsonFile.child();
+		if (!(difficulty.getInt("difficultyId") == id)) {
+			throw new InvalidJsonException("The id of the json file does not match with its file name!");
+		}
+
+		JsonValue music = difficulty.get("music");
+		JsonValue bgImage = difficulty.get("bgImage");
+
+
+		DifficultySetting difficultySetting = new DifficultySetting(id, difficulty.getString("music"),
+				difficulty.getString("bgImage"));
+
+
+		return difficultySetting;
+	}
+
+	/**
+	 * Returns a list of all DifficultySettings
+	 *
+	 * @return a list which contains all DifficultySettings
+	 */
+	public static List<DifficultySetting> loadAllDifficulties() {
+		List<DifficultySetting> difficulties = new ArrayList<DifficultySetting>();
+		File f = new File("data/difficulties/");
+		File[] allFiles = f.listFiles();
+		int numberOfDifficulties = allFiles.length;
+		for(int i = 0; i < numberOfDifficulties; i++) {
+			difficulties.add(i, loadDifficulty(i));
+		}
+		return difficulties;
 	}
 	
 }

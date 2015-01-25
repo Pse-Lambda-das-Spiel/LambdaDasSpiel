@@ -42,7 +42,8 @@ public class LambdaTermViewControllerTest {
     public void testBetaReduction() throws ParseException {
         LambdaRoot term = LambdaUtils.fromString("(/a.a f g h) ((/b.b) (/z. (/c.c) z)) (/f.f f) r");
         
-        LambdaTermViewController vc = LambdaTermViewController.build(term, false, new LevelContext(null, null, null)); // TODO Level context
+        LambdaTermViewController vc = LambdaTermViewController.build(term, false,
+                new LevelContext(null, null)); // TODO Level context
         
         ReductionStrategyNormalOrder strategy = new ReductionStrategyNormalOrder();
         do {
@@ -50,6 +51,7 @@ public class LambdaTermViewControllerTest {
             term.accept(strategy);
         } while (strategy.hasReduced());
         
-        assertEquals("Updated ViewController and new ViewController for lambda term are different!", vc, LambdaTermViewController.build(term, false, new LevelContext(null, null, null)));
+        assertEquals("Updated ViewController and new ViewController for lambda term are different!", vc,
+                LambdaTermViewController.build(term, false, new LevelContext(null, null)));
     }
 }

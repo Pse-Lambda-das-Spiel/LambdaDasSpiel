@@ -1,6 +1,7 @@
 package lambda.model.shop;
 
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 /**
  *
@@ -8,9 +9,9 @@ package lambda.model.shop;
  */
 public class ElementUIContextFamily extends ShopItemModel {
 
-    private SpriteModel paranthesisUIContext;
-    private SpriteModel variableUIContext;
-    private SpriteModel abstractionUIContext;
+    private Sprite paranthesisUIContext;
+    private Sprite variableUIContext;
+    private Sprite abstractionUIContext;
 
     public ElementUIContextFamily() {
 
@@ -21,7 +22,7 @@ public class ElementUIContextFamily extends ShopItemModel {
      *
      * @return paranthesis
      */
-    public SpriteModel getParanthesis() {
+    public Sprite getParanthesis() {
         return paranthesisUIContext;
     }
 
@@ -30,7 +31,7 @@ public class ElementUIContextFamily extends ShopItemModel {
      *
      * @return variable
      */
-    public SpriteModel getVariable() {
+    public Sprite getVariable() {
         return variableUIContext;
     }
 
@@ -39,7 +40,7 @@ public class ElementUIContextFamily extends ShopItemModel {
      *
      * @return applicationFront
      */
-    public SpriteModel getApplication() {
+    public Sprite getApplication() {
         return abstractionUIContext;
     }
 
