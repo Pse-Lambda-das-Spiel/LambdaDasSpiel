@@ -1,9 +1,8 @@
 package lambda.model.levels;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import lambda.model.lambdaterm.LambdaRoot;
+import lambda.viewcontroller.level.TutorialMessage;
 
 /**
  * Represents a level

@@ -17,7 +17,7 @@ import lambda.model.lambdaterm.LambdaVariable;
 import lambda.model.levels.ElementType;
 import lambda.model.levels.LevelModel;
 import lambda.model.levels.ReductionStrategy;
-import lambda.model.levels.TutorialMessage;
+import lambda.viewcontroller.level.TutorialMessage;
 
 /**
  * This class helps with the loading process of level json-files.

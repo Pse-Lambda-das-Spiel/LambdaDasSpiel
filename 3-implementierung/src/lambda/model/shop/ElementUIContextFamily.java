@@ -8,11 +8,9 @@ package lambda.model.shop;
  */
 public class ElementUIContextFamily extends ShopItemModel {
 
-    private SpriteModel paranthesis;
-    private SpriteModel variable;
-    private SpriteModel applicationFront;
-    private SpriteModel applicationBack;
-    private SpriteModel applicationCentre;
+    private SpriteModel paranthesisUIContext;
+    private SpriteModel variableUIContext;
+    private SpriteModel abstractionUIContext;
 
     public ElementUIContextFamily() {
 
@@ -24,7 +22,7 @@ public class ElementUIContextFamily extends ShopItemModel {
      * @return paranthesis
      */
     public SpriteModel getParanthesis() {
-        return paranthesis;
+        return paranthesisUIContext;
     }
 
     /**
@@ -33,7 +31,7 @@ public class ElementUIContextFamily extends ShopItemModel {
      * @return variable
      */
     public SpriteModel getVariable() {
-        return variable;
+        return variableUIContext;
     }
 
     /**
@@ -41,27 +39,8 @@ public class ElementUIContextFamily extends ShopItemModel {
      *
      * @return applicationFront
      */
-    public SpriteModel getApplicationFront() {
-        return applicationFront;
+    public SpriteModel getApplication() {
+        return abstractionUIContext;
     }
-
-    /**
-     * Returns the sprite of the back of the application
-     *
-     * @return applicationBack
-     */
-    public SpriteModel getApplicationBack() {
-        return applicationBack;
-    }
-
-    /**
-     * Returns the sprite of the centre of the application
-     *
-     * @return applicationCentre
-     */
-    public SpriteModel getApplicationCentre() {
-        return applicationCentre;
-    }
-
 
 }

@@ -37,6 +37,7 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
     public void buy() {
         if(profile.getCoins() >= getPrice()) {
             purchased = true;
+            notify((observer) -> observer.purchasedChanged(true));
         }
     }
 

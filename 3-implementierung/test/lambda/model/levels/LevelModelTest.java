@@ -1,15 +1,11 @@
 package lambda.model.levels;
 
-import lambda.model.levels.ElementType;
-import lambda.model.levels.LevelModel;
-import lambda.model.levels.ReductionStrategy;
-import lambda.model.levels.TutorialMessage;
+import lambda.viewcontroller.level.TutorialMessage;
 import org.junit.After;
-import org.junit.AfterClass;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.LinkedList;

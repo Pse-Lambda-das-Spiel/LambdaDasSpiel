@@ -1,5 +1,6 @@
 package lambda.model.shop;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import com.badlogic.gdx.audio.Music;
@@ -20,33 +21,42 @@ public class ShopItemTypeModel<T extends ShopItemModel> {
      */
     public ShopItemTypeModel(String typeName) {
         this.typeName = typeName;
+        items = new LinkedList<T>();
 
     }
 
     /**
+     * Returns the name of the category, the type of all items inside this category.
      *
-     * @return
+     * @return the name of the category
      */
     public String getTypeName() {
         return typeName;
     }
 
     /**
+     * Returns the list with all items of this type
      *
-     * @return
+     * @return list with all items of this type
      */
     public List<T> getItems() {
         return items;
     }
 
     /**
+     * Returns the currently activated item
      *
-     * @return
+     * @return the currently activated item
      */
     public T getActivatedItem() {
         return activatedItem;
     }
 
+    /**
+     * Sets an item as activated
+     *
+     * @param activate the item which will be the activated item
+     */
     public void setActivatedItem(T activate) {
         activatedItem = activate;
     }

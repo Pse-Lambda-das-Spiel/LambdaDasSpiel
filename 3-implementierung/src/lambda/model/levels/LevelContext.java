@@ -2,6 +2,7 @@ package lambda.model.levels;
 
 import java.util.List;
 import lambda.model.shop.ElementUIContextFamily;
+import lambda.model.shop.ShopModel;
 
 /**
  * Represents the whole level context. Includes everything about the level and the difficulty
@@ -15,12 +16,15 @@ public class LevelContext {
     private String image;
     private List<String> tutorials;
     private ElementUIContextFamily elementUIContextFamily;
+    private ShopModel shop;
 
     /**
-     * Abhängig von den anderen zwei Models in diesem Paket
+     * Creates a new instance of this class
      */
-    public LevelContext() {
-
+    public LevelContext(LevelModel levelModel, ShopModel shop, List<String> tutorials) {
+        elementUIContextFamily = shop.getElementUIContextFamilies().getActivatedItem();
+        this.levelModel = levelModel;
+        // TODO (AssetModel?)
     }
 
     /**

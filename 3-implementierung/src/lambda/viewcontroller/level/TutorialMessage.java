@@ -1,4 +1,4 @@
-package lambda.model.levels;
+package lambda.viewcontroller.level;
 
 /**
  * Created by kay on 19.01.15.

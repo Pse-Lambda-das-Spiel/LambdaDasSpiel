@@ -10,8 +10,14 @@ public class DifficultySetting {
     private String music;
     private String bgImage;
 
+
     /**
-     *  JSON
+     *
+     * Creates a new instance of this class
+     *
+     * @param difficulty integer which shows the difficulty (ascending)
+     * @param music music which runs in the background
+     * @param bgImage image which is shown in the background
      */
     public DifficultySetting(int difficulty, String music, String bgImage) {
         this.difficulty = difficulty;
