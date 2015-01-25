@@ -2,13 +2,15 @@ package lambda.viewcontroller.lambdaterm;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
 import java.awt.Color;
-import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.Map;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.LambdaTermObserver;
 import lambda.model.lambdaterm.LambdaValue;
 import lambda.model.levels.LevelContext;
+import lambda.viewcontroller.lambdaterm.visitor.ViewInsertionVisitor;
+import lambda.viewcontroller.lambdaterm.visitor.ViewRemovalVisitor;
 
 /**
  * Represents a libgdx viewcontroller object that displays a single lambda term and handles input events that modify the term.
@@ -20,37 +22,65 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
      * Indicates whether this term can be modified by the user.
      */
     private final boolean editable;
-    
     /**
      * Maps model nodes to viewcontroller nodes. Not all model nodes must have a viewcontroller node.
      */
-    private final Map<LambdaTerm, LambdaNodeViewController> nodeViewMap;
-    
+    private final Map<LambdaTerm, LambdaNodeViewController> nodeMap;
     /**
      * Contains all data of the current level.
      */
     private final LevelContext context;
+    /**
+     * The root of the viewController tree.
+     */
+    private LambdaNodeViewController root;
     
-    public static LambdaTermViewController build(LambdaRoot term, boolean editable, LevelContext context) {
-        LambdaTermViewController result = new LambdaTermViewController(term, editable, context);
+    /**
+     * Creates a new instance of LambdaTermViewController.
+     * 
+     * @param root the term to be displayed by this viewcontroller
+     * @param editable true if this viewconroller can be edited by the user, false otherwise
+     * @param context contains all data of the current level
+     * @return the new LambdaTermViewController
+     * @throws IllegalArgumentException if root is null or context is null
+     */
+    public static LambdaTermViewController build(LambdaRoot root, boolean editable, LevelContext context) {
+        if (root == null) {
+            throw new IllegalArgumentException("Lambda term cannot be null!");
+        }
+        if (context == null) {
+            throw new IllegalArgumentException("Level context cannot be null!");
+        }
+        LambdaTermViewController result = new LambdaTermViewController(editable, context);
         
         // Observe lambda term model
-        term.addObserver(result);
+        root.addObserver(result);
         
-        // Root node view
-        result.addNodeView(new LambdaNodeViewController(term, null, result) {
+        // Root node viewcontroller
+        result.root = new LambdaNodeViewController(root, null, result) {
             @Override
             public float getMinWidth() {
                 return 0.0f;
             }
-        });
+        };
+        result.addNode(result.root);
+        
+        // Recursive insertion of children
+        root.accept(new ViewInsertionVisitor(root.getChild(), result));
+        
         return result;
     }
     
-    private LambdaTermViewController(LambdaRoot term, boolean editable, LevelContext context) {
+    /**
+     * Creates a new instance of LambdaTermViewController. Only used by build() since it is required to pass this as a reference to other functions.
+     * 
+     * @param editable true if this viewconroller can be edited by the user, false otherwise
+     * @param context contains all data of the current level
+     */
+    private LambdaTermViewController(boolean editable, LevelContext context) {
         this.editable = editable;
         this.context = context;
-        nodeViewMap = new HashMap<>();
+        nodeMap = new IdentityHashMap<>();
     }
     
     /**
@@ -61,7 +91,13 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
      */
     @Override
     public void replaceTerm(LambdaTerm oldTerm, LambdaTerm newTerm) {
-        
+        // TODO animation
+        if (oldTerm != null) {
+            oldTerm.accept(new ViewRemovalVisitor(this));
+        }
+        if (newTerm != null) {
+            newTerm.getParent().accept(new ViewInsertionVisitor(newTerm, this));
+        }
     }
     
     /**
@@ -72,7 +108,8 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
      */
     @Override
     public void setColor(LambdaValue term, Color color) {
-        
+        // TODO animation
+        ((LambdaValueViewController) getNode(term)).setLambdaColor(color);
     }
     
     /**
@@ -84,9 +121,74 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
         return editable;
     }
     
-    protected void addNodeView(LambdaNodeViewController node) {
-        nodeViewMap.put(node.getLinkedTerm(), node);
+    /**
+     * Adds the given node to this viewcontroller.
+     * 
+     * @param node the node to be added
+     * @throws IllegalArgumentException if node is null
+     */
+    public void addNode(LambdaNodeViewController node) {
+        if (node == null) {
+            throw new IllegalArgumentException("Viewcontroller node cannot be null!");
+        }
+        nodeMap.put(node.getLinkedTerm(), node);
         addActor(node);
-        // node.addListener TODO
+    }
+    
+    /**
+     * Removes the given node from this viewcontroller.
+     * 
+     * @param node the node to be removed
+     * @throws IllegalArgumentException if node is null
+     */
+    public void removeNode(LambdaNodeViewController node) {
+        if (node == null) {
+            throw new IllegalArgumentException("Viewcontroller node cannot be null!");
+        }
+        nodeMap.remove(node.getLinkedTerm());
+        removeActor(node);
+    }
+    
+    /**
+     * Returns the node that displays the given term or null if no node displays that term.
+     * 
+     * @param term the term that displays the returned node
+     * @return the node that displays the given term or null if no node displays that term
+     * @throws IllegalArgumentException if term is null
+     */
+    public LambdaNodeViewController getNode(LambdaTerm term) {
+        if (term == null) {
+            throw new IllegalArgumentException("Lambda term cannot be null!");
+        }
+        return nodeMap.get(term);
+    }
+    
+    /**
+     * Returns whether the given term is explicitly displayed by a viewcontroller node.
+     * 
+     * @param term the term that is/ is not displayed
+     * @return true if the given term is explicitly displayed by a viewcontroller node, false otherwise
+     * @throws IllegalArgumentException if term is null
+     */
+    public boolean hasNode(LambdaTerm term) {
+        if (term == null) {
+            throw new IllegalArgumentException("Lambda term cannot be null!");
+        }
+        return nodeMap.containsKey(term);
+    }
+    
+    /**
+     * Returns whether this and the other object are equal.
+     * 
+     * @param other the other object
+     * @return true if this and the other object are equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof LambdaTermViewController)) {
+            return false;
+        }
+        LambdaTermViewController vc = (LambdaTermViewController) other;
+        return this.editable == vc.editable && this.root.equals(vc.root);
     }
 }

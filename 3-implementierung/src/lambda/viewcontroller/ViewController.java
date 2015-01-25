@@ -7,7 +7,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import lambda.model.profiles.ProfileManagerObserver;
 
 /**
- * This class is a superclass for all ViewController who represent a screen. The order in which the view controllers are initialized is:
+ * This class is a superclass for all ViewController that represent a screen. The order in which the view controllers are initialized is:
  * 1. constructor: create class instance and model
  * 2. queueAssets: queue assets for loading
  * 3. create: create ui elements using loaded assets

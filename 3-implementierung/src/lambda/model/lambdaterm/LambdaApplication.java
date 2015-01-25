@@ -43,11 +43,12 @@ public class LambdaApplication extends LambdaTerm {
      * @param left the new left child node
      */
     public void setLeft(LambdaTerm left) {
-        notify((observer) -> observer.replaceTerm(this.left, left));
+        LambdaTerm oldLeft = this.left;
         this.left = left;
         if (left != null) {
             left.setParent(this);
         }
+        notify((observer) -> observer.replaceTerm(oldLeft, left));
     }
     
     /**
@@ -65,11 +66,12 @@ public class LambdaApplication extends LambdaTerm {
      * @param right the new right child node
      */
     public void setRight(LambdaTerm right) {
-        notify((observer) -> observer.replaceTerm(this.right, right));
+        LambdaTerm oldRight = this.right;
         this.right = right;
         if (right != null) {
             right.setParent(this);
         }
+        notify((observer) -> observer.replaceTerm(oldRight, right));
     }
 
     /**

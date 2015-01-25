@@ -42,11 +42,12 @@ public class LambdaAbstraction extends LambdaValue {
      * @param inside the new child node
      */
     public void setInside(LambdaTerm inside) {
-        notify((observer) -> observer.replaceTerm(this.inside, inside));
+        LambdaTerm oldInside = this.inside;
         this.inside = inside;
         if (inside != null) {
             inside.setParent(this);
         }
+        notify((observer) -> observer.replaceTerm(oldInside, inside));
     }
     
     /**

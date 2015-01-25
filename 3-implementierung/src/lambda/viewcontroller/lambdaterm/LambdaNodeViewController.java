@@ -15,17 +15,14 @@ public abstract class LambdaNodeViewController extends Actor {
      * The term that is displayed by this viewcontroller.
      */
     private final LambdaTerm linkedTerm;
-    
     /**
      * The viewcontroller on which this node is being displayed.
      */
     private final LambdaTermViewController viewController;
-    
     /**
      * The parent viewcontroller node. Can be null.
      */
     private final LambdaNodeViewController parent;
-    
     /**
      * The viewcontroller child nodes.
      */
@@ -51,7 +48,7 @@ public abstract class LambdaNodeViewController extends Actor {
         children = new LinkedList<>();
         
         if (viewController.isEditable()) {
-            
+            // TODO drag and drop
         }
     }
     
@@ -74,9 +71,94 @@ public abstract class LambdaNodeViewController extends Actor {
     }
     
     /**
+     * Returns the viewcontroller parent node if this node.
+     * 
+     * @return the viewcontroller parent node if this node
+     */
+    public LambdaNodeViewController getParentNode() {
+        return parent;
+    }
+    
+    /**
      * Returns the minimum width of this node view.
      * 
      * @return the minimum width of this node view
      */
     public abstract float getMinWidth();
+    
+    /**
+     * Inserts the given node as a child of this node left to the given right sibling. Will insert child at the end of the children list if right sibling is null.
+     * 
+     * @param child the child to be inserted
+     * @param rightSibling the right sibling
+     * @throws IllegalArgumentException if child is null or rightSibling is null
+     */
+    public void insertChild(LambdaNodeViewController child, LambdaTerm rightSibling) {
+        if (child == null) {
+            throw new IllegalArgumentException("Child node viewcontroller cannot be null!");
+        }
+        if (rightSibling == null) {
+            // Insert at the end of the children list
+            children.add(child);
+        } else {
+            // Insert before right sibling
+            for (int i = 0; i < children.size() + 1; i++) {
+                if (i == children.size() || children.get(i).getLinkedTerm() == rightSibling) {
+                    children.add(i, child);
+                    break;
+                }
+            }
+        }
+        
+        viewController.addNode(child);
+        // TODO updateWidth()
+    }
+    
+    /**
+     * Removes the given child node from this node.
+     * 
+     * @param child the child to be removed
+     * @throws IllegalArgumentException if child is null
+     */
+    public void removeChild(LambdaNodeViewController child) {
+        if (child == null) {
+            throw new IllegalArgumentException("Child node viewcontroller cannot be null!");
+        }
+        children.remove(child);
+        viewController.removeNode(child);
+        // TODO updateWidth()
+    }
+    
+    /**
+     * Returns a string representation of this object.
+     * 
+     * @return a string representation of this object
+     */
+    @Override
+    public String toString() {
+        return linkedTerm.toString();
+    }
+    
+    /**
+     * Returns whether this and the other object are equal.
+     * 
+     * @param other the other object
+     * @return true if this and the other object are equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof LambdaNodeViewController)) {
+            return false;
+        }
+        LambdaNodeViewController node = (LambdaNodeViewController) other;
+        if (node.children.size() != this.children.size()) {
+            return false;
+        }
+        for (int i = 0; i < children.size(); i++) {
+            if (!node.children.get(i).equals(this.children.get(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

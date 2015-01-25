@@ -38,11 +38,12 @@ public class LambdaRoot extends LambdaTerm {
      * @param child the new child node
      */
     public void setChild(LambdaTerm child) {
-        notify((observer) -> observer.replaceTerm(this.child, child));
+        LambdaTerm oldChild = this.child;
         this.child = child;
         if (child != null) {
             child.setParent(this);
         }
+        notify((observer) -> observer.replaceTerm(oldChild, child));
     }
 
     /**

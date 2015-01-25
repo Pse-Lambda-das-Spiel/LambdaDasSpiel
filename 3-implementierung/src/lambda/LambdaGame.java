@@ -60,7 +60,6 @@ public class LambdaGame extends Game {
      * Calls the create() method of all view controllers. Called after assets are loaded before profile selection is shown.
      */
     public void createViewControllers() {
-        // Queue all assets for loading
         for (ViewController viewController : viewControllers.values()) {
             viewController.create(getController(AssetViewController.class).getManager());
         }

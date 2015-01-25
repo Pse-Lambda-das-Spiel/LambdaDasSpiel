@@ -48,8 +48,8 @@ public abstract class LambdaValue extends LambdaTerm {
         if (color == null) {
             throw new IllegalArgumentException("Color cannot be null!");
         }
-        notify((observer) -> observer.setColor(this, color));
         this.color = color;
+        notify((observer) -> observer.setColor(this, color));
     }
     
     /**
