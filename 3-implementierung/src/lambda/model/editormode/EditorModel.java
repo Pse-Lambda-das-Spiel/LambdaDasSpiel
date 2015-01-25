@@ -5,11 +5,9 @@ import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.visitor.CopyVisitor;
 import lambda.model.lambdaterm.visitor.strategy.BetaReductionVisitor;
 import lambda.model.levels.LevelContext;
-import lambda.model.levels.LevelModel;
 import lambda.model.levels.ReductionStrategy;
 import lambda.model.reductionmode.ReductionModel;
 
-import java.util.Map;
 
 /**
  * Contains data and logics of the editor mode. Will be observed by the editor view controller.
@@ -20,7 +18,7 @@ public class EditorModel extends Observable<EditorModelObserver> {
     /**
      * Contains all data of the current level.
      */
-    private final LevelContext context;
+    private LevelContext context;
     /**
      * Stores the currently selected reduction strategy.
      */
@@ -28,15 +26,24 @@ public class EditorModel extends Observable<EditorModelObserver> {
     /**
      * Stores the current lambda term
      */
-    private final LambdaRoot term;
+    private LambdaRoot term;
     
     /**
      * Creates a new instance of EditorModel.
+     */
+    public EditorModel() {
+        context = null;
+        strategy = null;
+        term = null;
+    }
+    
+    /**
+     * Resets the model with the given values.
      * 
      * @param context contains all data of the current level
      * @throws IllegalArgumentException if context is null
      */
-    public EditorModel(LevelContext context) {
+    public void reset(LevelContext context) {
         if (context == null) {
             throw new IllegalArgumentException("Level context cannot be null!");
         }
@@ -71,11 +78,11 @@ public class EditorModel extends Observable<EditorModelObserver> {
     }
     
     /**
-     * Creates a reduction model for the current state of the editor model.
+     * Resets the reduction model with the current state of this editor model.
      * 
-     * @return a reduction model for the current state of the editor model
+     * @param model the reduction model to be reset
      */
-    public ReductionModel createReductionModel() {
-        return new ReductionModel((LambdaRoot) term.accept(new CopyVisitor()), BetaReductionVisitor.fromReductionStrategy(strategy), context);
+    public void update(ReductionModel model) {
+        model.reset((LambdaRoot) term.accept(new CopyVisitor()), BetaReductionVisitor.fromReductionStrategy(strategy), context);
     }
 }

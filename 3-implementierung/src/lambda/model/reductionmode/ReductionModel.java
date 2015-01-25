@@ -18,49 +18,70 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
      * Saves all previous lambda terms to be able to undo reduction steps.
      */
     private final Stack<LambdaRoot> history;
-    
     /**
      * Indicated whether the automatic reduction is paused. When paused is true the model will automatically perform reduction steps until either a pause is requested, a minimal term is reached or the maximum number of reduction steps has been performed.
      */
     private boolean paused;
-    
     /**
      * Indicates whether a pause of the automatic reduction has been requested.
      */
     private boolean pauseRequested;
-    
     /**
      * The reduction strategy used for beta reductions.
      */
-    private final BetaReductionVisitor strategy;
-    
+    private BetaReductionVisitor strategy;
     /**
      * Stores the current lambda term.
      */
-    private final LambdaRoot current;
-    
+    private LambdaRoot current;
     /**
      * Indicates whether the model is busy, i.e. whether a step is being performed at the moment.
      */
     private boolean busy;
-    
     /**
      * Contains all data of the current level.
      */
-    private final LevelContext context;
+    private LevelContext context;
     
     /**
      * Creates a new instance of ReductionModel.
-     * 
-     * @param term the initial term
-     * @param strategy the reduction strategy
-     * @param context the leve context
      */
-    public ReductionModel(LambdaRoot term, BetaReductionVisitor strategy, LevelContext context) {
+    public ReductionModel() {
+        current = null;
+        strategy = null;
+        context = null;
+        history = new Stack<>();
+        paused = true;
+        pauseRequested = false;
+        busy = false;
+    }
+    
+    /**
+     * Resets the model with the given values.
+     * 
+     * @param term the term to be reduced
+     * @param strategy the reduction strategy
+     * @param context the current level context
+     * @throws IllegalArgumentException if term is null, strategy is null or context is null
+     * @throws IllegalStateException if the model is currently busy or not paused
+     */
+    public void reset(LambdaRoot term, BetaReductionVisitor strategy, LevelContext context) {
+        if (term == null) {
+            throw new IllegalArgumentException("Lambda term cannot be null!");
+        }
+        if (strategy == null) {
+            throw new IllegalArgumentException("Strategy cannot be null!");
+        }
+        if (context == null) {
+            throw new IllegalArgumentException("Level context cannot be null!");
+        }
+        if (!paused || busy || pauseRequested) {
+            throw new IllegalStateException("Cannot start automatic reduction in the current model state!");
+        }
         current = term;
         this.strategy = strategy;
         this.context = context;
-        history = new Stack<>();
+        history.clear();
         paused = true;
         pauseRequested = false;
         busy = false;
