@@ -33,7 +33,15 @@ public class Observable<Observer> {
         if (observer == null) {
             throw new IllegalArgumentException("Observer cannot be null!");
         }
-        if (!observers.contains(observer)) {
+        // Add if not already present
+        boolean present = false;
+        for (Observer observer2 : observers) {
+            if (observer == observer2) {
+                present = true;
+                break;
+            }
+        }
+        if (!present) {
             observers.add(observer);
         }
     }
