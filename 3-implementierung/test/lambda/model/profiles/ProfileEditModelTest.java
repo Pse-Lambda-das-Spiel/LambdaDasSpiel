@@ -11,19 +11,23 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.backends.lwjgl.LwjglFiles;
+
 /**
  * Tests a ProfileEditModel
  * 
  * @author Kai Fieger
  */
 public class ProfileEditModelTest implements ProfileEditObserver {
-
+//TODO update lang path/keys
     private boolean calledChangedLanguage;
     private boolean calledChangedAvatar;
     private ProfileEditModel edit;
 
     @Before
     public void setUp() throws Exception {
+        Gdx.files = new LwjglFiles();
         calledChangedLanguage = false;
         calledChangedAvatar = false;
         edit = new ProfileEditModel();

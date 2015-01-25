@@ -29,10 +29,10 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         selectedAvatar = 0;
 
         // TODO get keys from filenames in lang folder
-        lang.add("de");
-        lang.add("en");
-        lang.add("fr");
-
+        lang.add("data/i18n/StringBundle_de");
+        lang.add("data/i18n/StringBundle_en");
+        lang.add("data/i18n/StringBundle_fr");
+        
         avatar = new LinkedList<String>();
         for (int i = 0; i < AVATAR_NUMBER; i++) {
             this.avatar.add("a" + i);
@@ -56,6 +56,7 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         if (selectedLang == -1) {
             selectedLang = 0;
         }
+        notify(o -> o.changedLanguage());
     }
 
     /**
@@ -97,7 +98,7 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
      * @return The current flag ID.
      */
     public String getLangPic() {
-        return lang.get(selectedLang) + "Flag";
+        return lang.get(selectedLang).replace("StringBundle_", "flag/").concat("Flag.jpg");
     }
 
     /**
@@ -121,6 +122,7 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         if (selectedAvatar == -1) {
             selectedAvatar = 0;
         }
+        notify(o -> o.changedAvatar());
     }
 
     /**

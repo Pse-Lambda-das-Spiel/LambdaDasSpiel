@@ -11,7 +11,6 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 },
 com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	editButton: { up: config },
-	addButton: { up: plus24 }
-
+	addButton: { up: plus }
 }
 }

@@ -25,7 +25,7 @@ import lambda.viewcontroller.ViewController;
 public class ProfileSelection extends ViewController {
 
     private final String skinJson = "data/skins/ProfileSelectionSkin.json";
-    private final String skinPack = "data/skins/ProfileSelectionSkin.atlas";
+    private final String skinAtlas = "data/skins/ProfileSelectionSkin.atlas";
     private final Stage stage;
     private List<TextButton> profileButtons;
     private List<ImageButton> editButtons;
@@ -38,15 +38,18 @@ public class ProfileSelection extends ViewController {
 
     @Override
     public void queueAssets(AssetManager assets) {
-        assets.load(skinPack, TextureAtlas.class);
+        assets.load(skinAtlas, TextureAtlas.class);
         assets.load(skinJson, Skin.class,
-                new SkinLoader.SkinParameter(skinPack));
+                new SkinLoader.SkinParameter(skinAtlas));
         //TODO?
     }
     
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
+        if (ProfileManager.getManager().getNames().size() == 0) {
+            new addProfileClickListener().clicked(null, 0, 0);
+        }
     }
 
     @Override
@@ -142,7 +145,8 @@ public class ProfileSelection extends ViewController {
         public void clicked(InputEvent event, float x, float y) {
             ImageButton clickedButton = (ImageButton) event.getListenerActor();
             String name = profileButtons.get(editButtons.indexOf(clickedButton)).getText().toString();
-            //TODO
+            ProfileManager.getManager().setCurrentProfile(name);
+            getGame().setScreen(ProfileEditLang.class);
         }
     }
     
@@ -152,7 +156,7 @@ public class ProfileSelection extends ViewController {
             ProfileManager manager = ProfileManager.getManager();
             manager.createProfile();
             manager.setCurrentProfile("");
-            //getGame().setScreen(ProfileEditLang.class);
+            getGame().setScreen(ProfileEditLang.class);
         }
     }
 
