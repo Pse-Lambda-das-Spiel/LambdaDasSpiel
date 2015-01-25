@@ -63,7 +63,7 @@ public class LevelContext {
      *
      * @return image
      */
-    public Image getBgImageImage() {
+    public Image getBgImage() {
         return bgImage;
     }
 
