@@ -34,7 +34,7 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
         }
         this.name = name;
         avatar = "a0";
-        language = "de";
+        language = "data/i18n/StringBundle_de";
         levelIndex = 1;
         coins = 0;
         settings = new SettingsModel();

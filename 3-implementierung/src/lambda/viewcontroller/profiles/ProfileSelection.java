@@ -21,6 +21,8 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import lambda.model.profiles.ProfileManager;
 import lambda.viewcontroller.ViewController;
+import lambda.viewcontroller.mainmenu.MainMenuViewController;
+import lambda.viewcontroller.settings.SettingsViewController;
 
 public class ProfileSelection extends ViewController {
 
@@ -41,7 +43,6 @@ public class ProfileSelection extends ViewController {
         assets.load(skinAtlas, TextureAtlas.class);
         assets.load(skinJson, Skin.class,
                 new SkinLoader.SkinParameter(skinAtlas));
-        //TODO?
     }
     
     @Override
@@ -135,7 +136,7 @@ public class ProfileSelection extends ViewController {
             String name = ((TextButton) event.getListenerActor()).getText().toString();
             if (name != null) {
                 ProfileManager.getManager().setCurrentProfile(name);
-                //getGame().setScreen(MainMenuViewController.class);
+                getGame().setScreen(MainMenuViewController.class);
             }
         }
     }
@@ -153,6 +154,7 @@ public class ProfileSelection extends ViewController {
     private class addProfileClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
+            //TODO Dialog edit/delete 
             ProfileManager manager = ProfileManager.getManager();
             manager.createProfile();
             manager.setCurrentProfile("");

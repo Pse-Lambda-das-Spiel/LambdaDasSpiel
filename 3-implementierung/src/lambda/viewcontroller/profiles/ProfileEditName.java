@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import lambda.model.profiles.ProfileEditModel;
 import lambda.model.profiles.ProfileEditObserver;
 import lambda.model.profiles.ProfileManager;
+import lambda.model.profiles.ProfileModel;
 import lambda.viewcontroller.ViewController;
 
 public class ProfileEditName extends ViewController implements ProfileEditObserver {
@@ -29,6 +30,7 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
     private AssetManager manager;
     private TextField nameField;
     private Label enterName;
+    private boolean newProfile;
     
 	public ProfileEditName() {
 	    stage = new Stage(new ScreenViewport());
@@ -114,7 +116,9 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
     
     @Override 
     public void changedProfile() {
-        nameField.setText(ProfileManager.getManager().getCurrentProfile().getName());
+        ProfileModel current = ProfileManager.getManager().getCurrentProfile();
+        newProfile = current.getName().equals("");
+        nameField.setText(current.getName());
     }
     
     @Override 
@@ -141,7 +145,9 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
         @Override
         public void clicked(InputEvent event, float x, float y) {
             String name = nameField.getText().trim();
-            if (!name.equals("")) {
+            if (newProfile) {
+                getGame().setScreen(ProfileEditLang.class);
+            } else if (!name.equals("")) {
                 if (ProfileManager.getManager().changeCurrentName(name)) {
                     changedLanguage();
                     getGame().setScreen(ProfileEditLang.class);

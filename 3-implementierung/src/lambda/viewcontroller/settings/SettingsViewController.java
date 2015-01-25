@@ -1,56 +1,165 @@
 package lambda.viewcontroller.settings;
 
+import java.util.ArrayList;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.SkinLoader;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Container;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.I18NBundle;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
+import lambda.model.profiles.ProfileManager;
+import lambda.model.profiles.ProfileModel;
+import lambda.model.settings.SettingsModel;
+import lambda.model.settings.SettingsModelObserver;
 import lambda.viewcontroller.ViewController;
+import lambda.viewcontroller.mainmenu.MainMenuViewController;
 
-public class SettingsViewController extends ViewController {
+public class SettingsViewController extends ViewController implements SettingsModelObserver {
 
+    private final String skinJson = "data/skins/SettingsSkin.json";
+    private final String skinAtlas = "data/skins/SettingsSkin.atlas";
+    private final Stage stage;
+    private SettingsModel settings;
+    private TextButton statistics;
+    private Slider musicSlider;
+    private Slider soundSlider;
+    private Label musicLabel;
+    private Label soundLabel;
+    private AssetManager manager;
+    
 	public SettingsViewController() {
+        stage = new Stage(new ScreenViewport());
+        ProfileManager.getManager().addObserver(this);
+        settings = new SettingsModel();
+        settings.addObserver(this);
 	}
 
     @Override
     public void queueAssets(AssetManager assets) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        assets.load(skinAtlas, TextureAtlas.class);
+        assets.load(skinJson, Skin.class,
+                new SkinLoader.SkinParameter(skinAtlas));
     }
 
     @Override
     public void show() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void render(float delta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        stage.act(delta);
+        stage.draw();    
     }
 
     @Override
     public void resize(int width, int height) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
     public void pause() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void resume() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void hide() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void dispose() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stage.dispose();
     }
 
     @Override
     public void create(AssetManager manager) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.manager = manager;
+        Table settings = new Table();
+        stage.addActor(settings);
+        settings.setFillParent(true);
+        settings.row().height(stage.getHeight() / 5);
+        musicLabel = new Label(null, manager.get(skinJson, Skin.class));
+        settings.add(musicLabel).width(stage.getWidth() * 0.4f).space(10);
+        musicSlider = new Slider(0, 100, 1, false,  manager.get(skinJson, Skin.class));
+        settings.add(musicSlider).width(stage.getWidth() * 0.4f).space(10);
+        settings.row().height(stage.getHeight() / 5);
+        soundLabel = new Label(null, manager.get(skinJson, Skin.class));
+        settings.add(soundLabel).width(stage.getWidth() * 0.4f).space(10);
+        soundSlider = new Slider(0, 100, 1, false,  manager.get(skinJson, Skin.class));
+        settings.add(soundSlider).width(stage.getWidth() * 0.4f).space(10);
+        statistics = new TextButton("", manager.get(skinJson, Skin.class));
+        settings.row().height(stage.getHeight() /5);
+        settings.add(statistics).width(stage.getWidth() * 0.4f).space(10);
+        //TODO add slider listener
+        //TODO sound music ???
+        
+        ImageButton addButton = new ImageButton(manager.get(skinJson, Skin.class));
+        addButton.setSize(stage.getWidth() * 0.1f, stage.getHeight() * 0.1f);
+        Container<ImageButton> buttonContainer = new Container<ImageButton>();
+        buttonContainer.pad(25);
+        buttonContainer.align(Align.bottomLeft);
+        buttonContainer.setActor(addButton);
+        addButton.addListener(new backClickListener());
+        stage.addActor(buttonContainer);
+        buttonContainer.setFillParent(true);
+        changedProfileList();
+    }
+    
+    @Override
+    public void changedProfile() {
+        ProfileModel current = ProfileManager.getManager().getCurrentProfile();
+        I18NBundle lang = manager.get(current.getLanguage(), I18NBundle.class);
+        settings.removeObserver(this);
+        settings = current.getSettings();
+        settings.addObserver(this);
+        musicLabel.setText(lang.get("musicLabel"));
+        soundLabel.setText(lang.get("soundLabel"));
+        statistics.setText(lang.get("statistics"));
+        musicSlider.setValue(settings.getMusicVolume());
+        soundSlider.setValue(settings.getSoundVolume());
+    }
+    
+    @Override
+    public void changedMusicOn() {
+        //TODO
     }
 
+    @Override
+    public void changedMusicVolume() {
+        //TODO
+    }
+
+    @Override
+    public void changedSoundVolume() {
+        //TODO
+    }
+
+    private class backClickListener extends ClickListener {
+        @Override
+        public void clicked(InputEvent event, float x, float y) {
+            getGame().setScreen(MainMenuViewController.class);
+        }
+    }
+    
 }
