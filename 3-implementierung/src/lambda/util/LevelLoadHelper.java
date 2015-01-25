@@ -2,6 +2,7 @@ package lambda.util;
 
 import java.awt.Color;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -175,8 +176,14 @@ public final class LevelLoadHelper {
 	 */
 	public static List<LevelModel> loadAllLevels() {
 		List<LevelModel> levels = new ArrayList<LevelModel>();
-		File f = new File("data/difficulties/");
-		File[] allFiles = f.listFiles();
+		File f = new File("data/levels/");
+		//filename filter lists only the json-files and ignore the folders
+		File[] allFiles = f.listFiles(new FilenameFilter() {
+			@Override
+			public boolean accept(File dir, String name) {
+				return name.toLowerCase().endsWith(".json");
+			}
+		});
 		int numberOfLevels = allFiles.length;
 		for(int i = 0; i < numberOfLevels; i++) {
 			levels.add(i, loadLevel(i));
@@ -218,7 +225,13 @@ public final class LevelLoadHelper {
 	public static List<DifficultySetting> loadAllDifficulties() {
 		List<DifficultySetting> difficulties = new ArrayList<DifficultySetting>();
 		File f = new File("data/difficulties/");
-		File[] allFiles = f.listFiles();
+		//filename filter lists only the json-files and ignore the folders
+		File[] allFiles = f.listFiles(new FilenameFilter() {
+			@Override
+			public boolean accept(File dir, String name) {
+				return name.toLowerCase().endsWith(".json");
+			}
+		});
 		int numberOfDifficulties = allFiles.length;
 		for(int i = 0; i < numberOfDifficulties; i++) {
 			difficulties.add(i, loadDifficulty(i));
