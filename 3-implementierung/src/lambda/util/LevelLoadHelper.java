@@ -20,8 +20,8 @@ import lambda.model.levels.ReductionStrategy;
 import lambda.viewcontroller.level.TutorialMessage;
 
 /**
- * This class helps with the loading process of level json-files.
- * It loads the level data from the json file and initialize the LevelModel with it.
+ * This class helps with the loading process of level json files.
+ * It encapsulates all functionality needed for accessing and loading level json files and initialising the levels.
  * 
  * @author Robert Hochweiss
  */
@@ -31,18 +31,20 @@ public final class LevelLoadHelper {
 	}
 	
 	/**
-	 * This method loads the specific level json file and fills a Levelmodel with it.
+	 * Loads the specific level json file and initialize a LevelModel with the loaded data.
 	 * 
 	 * @param id the id of the to be loaded level
 	 * @return the LevelModel initialized with the level data from the json file
+	 * @throws InvalidJsonException if the corresponding json file has invalid content
 	 */
 	public static LevelModel loadLevel(int id) {
-		
-		
-		FileHandle file = Gdx.files.internal("json/levels/" + String.format("%02d", id) + ".json");
+		FileHandle file = Gdx.files.internal("data/levels/" + String.format("%02d", id) + ".json");
 		JsonReader reader = new JsonReader();
 		JsonValue jsonFile = reader.parse(file);
 		JsonValue level = jsonFile.child();
+		if (!(level.getInt("levelId") == id)) {
+			throw new InvalidJsonException("The id of the json file does not match with its file name!");
+		}
 		JsonValue availableRedStrats = level.get("availableRedStrats");
 		JsonValue useableElements = level.get("useableElements");
 		JsonValue tutorial = level.get("tutorial");
@@ -51,40 +53,39 @@ public final class LevelLoadHelper {
 		JsonValue goal = constellations.get("goal");
 		JsonValue hint = constellations.get("hint");
 		LevelModel levelModel = new LevelModel(id, convertJsonToConstellation(start), convertJsonToConstellation(goal), 
-				convertJsonToConstellation(hint), convertJsonToTutorial(tutorial), convertJsonToAvailableRedStrats(availableRedStrats),
-				convertJsonToUseableElements(useableElements), level.getInt("coins"), level.getInt("difficulty"), level.getBoolean("standardMode"));
+				convertJsonToConstellation(hint), convertJsonToTutorial(tutorial), 
+				convertJsonToAvailableRedStrats(availableRedStrats), convertJsonToUseableElements(useableElements), 
+				level.getInt("difficulty"), level.getInt("coins"), level.getBoolean("standardMode"));
 		return levelModel;
 	}
 
 	private static List<ReductionStrategy> convertJsonToAvailableRedStrats(JsonValue value) {
-		List<ReductionStrategy> strategyList = new ArrayList<>();
-		String[] strategies = value.asStringArray();
-		for (int i = 0; i < strategies.length; i++) {
-			switch (strategies[i]) {
+		List<ReductionStrategy> reductionStrategyList = new ArrayList<>();
+		for (JsonValue entry = value.child(); entry != null; entry = entry.next) {
+			switch (entry.getString("reductionStrategy")) {
 			case "NORMAL_ORDER":
-				strategyList.add(ReductionStrategy.NORMAL_ORDER);
+				reductionStrategyList.add(ReductionStrategy.NORMAL_ORDER);
 				break;
 			case "APPLICATIVE_ORDER":
-				strategyList.add(ReductionStrategy.APPLICATIVE_ORDER);
+				reductionStrategyList.add(ReductionStrategy.APPLICATIVE_ORDER);
 				break;
 			case "CALL_BY_NAME":
-				strategyList.add(ReductionStrategy.CALL_BY_NAME);
+				reductionStrategyList.add(ReductionStrategy.CALL_BY_NAME);
 				break;
 			case "CALL_BY_VALUE":
-				strategyList.add(ReductionStrategy.CALL_BY_VALUE);
+				reductionStrategyList.add(ReductionStrategy.CALL_BY_VALUE);
 				break;
 			default:
-				break;
+				throw new InvalidJsonException("Invalid reduction strategy!");
 			}
 		}
-		return strategyList;
+		return reductionStrategyList;
 	}
 	
 	private static List<ElementType> convertJsonToUseableElements(JsonValue value) {
 		List<ElementType> elementTypeList = new ArrayList<>();
-		String[] elementTypes = value.asStringArray();
-		for (int i = 0; i < elementTypes.length; i++) {
-			switch (elementTypes[i]) {
+		for (JsonValue entry = value.child(); entry != null; entry = entry.next) {
+			switch (entry.getString("elementType")) {
 			case "VARIABLE":
 				elementTypeList.add(ElementType.VARIABLE);
 				break;
@@ -95,7 +96,7 @@ public final class LevelLoadHelper {
 				elementTypeList.add((ElementType.PARANTHESIS));
 				break;
 			default:
-				break;
+				throw new InvalidJsonException("Invalid useable element type!");
 			}
 		}
 		return elementTypeList;
@@ -103,9 +104,11 @@ public final class LevelLoadHelper {
 	
 	private static List<TutorialMessage> convertJsonToTutorial(JsonValue value) {
 		List<TutorialMessage> tutorialMessageList = new ArrayList<>();
-		String[] tutorialMessages  = value.asStringArray();
-		for (int i = 0; i < tutorialMessages.length; i++) {
-			tutorialMessageList.add(new TutorialMessage(tutorialMessages[i]));
+		for (JsonValue entry = value.child(); entry != null; entry = entry.next) {
+			if (entry.getString("tutorialId").equals("")) {
+				throw new InvalidJsonException("A tutorial id must not be empty!");
+			}
+			tutorialMessageList.add(new TutorialMessage(entry.getString("tutorialId")));
 		}
 		return tutorialMessageList;
 	}
@@ -151,7 +154,7 @@ public final class LevelLoadHelper {
 			nextNode = convertJsonToVariable(nextNodeValue, parent);
 			break;
 		default:
-			break;
+			throw new InvalidJsonException("The LambdaTerm must be an application, an abstraction or a variable!");
 		}
 		return nextNode;
 	}

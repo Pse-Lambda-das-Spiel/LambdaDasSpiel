@@ -8,7 +8,7 @@ import lambda.model.statistics.StatisticModel;
  * 
  * @author Robert Hochweiss
  */
-public abstract class AchievementModel extends Observable<AchievementModelObserver>{
+public abstract class AchievementModel extends Observable<AchievementModelObserver> {
 	
 	private int id;
 	private int index;

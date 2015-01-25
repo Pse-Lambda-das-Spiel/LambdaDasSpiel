@@ -22,7 +22,7 @@ public class LevelModelTest {
     public void setUp() throws Exception {
         level = new LevelModel(13, null, null, null,
                 new LinkedList<TutorialMessage>(), new LinkedList<ReductionStrategy>(),
-                new LinkedList<ElementType>(), 3, 13, true);
+                new LinkedList<ElementType>(), 13, 3, true);
 
 
     }

@@ -9,7 +9,7 @@
 			"reductionStrategy": "NORMAL_ORDER"
 			}
 		],
-		"usuableElements": [
+		"useableElements": [
 			{
 			"elementType": "VARIABLE"
 			},
@@ -25,12 +25,10 @@
 		"constellations": {
 			"_comment": "(lambdax.x)y , x is blue and y is red",
 			"start": {
-				"parent": null,
-				"locked": true,
 				"child": {
 					"type": "application",
 					"locked": true,
-					"first": {
+					"left": {
 						"type": "abstraction",
 						"locked": false,
 						"color": {
@@ -48,7 +46,7 @@
 							}
 						}
 					},
-					"second": {
+					"right": {
 						"type": "variable",
 						"locked": false,
 						"color": {
@@ -60,8 +58,6 @@
 				}
 			},
 			"goal": {
-				"parent": null,
-				"locked": true,
 				"child": {
 					"type": "variable",
 					"locked": false,
@@ -73,12 +69,10 @@
 				}
 			},
 			"hint": {
-				"parent": null,
-				"locked": true,
 				"child": {
 					"type": "application",
 					"locked": true,
-					"first": {
+					"left": {
 						"type": "abstraction",
 						"locked": false,
 						"color": {
@@ -96,7 +90,7 @@
 							}
 						}
 					},
-					"second": {
+					"right": {
 						"type": "variable",
 						"locked": false,
 						"color": {
