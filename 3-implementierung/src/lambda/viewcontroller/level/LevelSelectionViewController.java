@@ -30,17 +30,17 @@ public class LevelSelectionViewController extends ViewController {
         File[] allFiles = f.listFiles();
         int numberOfFiles = allFiles.length;
         for(int i = 0; i < numberOfFiles; i++) {
-            assetManager.load("data/levels/music" + i + ".mp3", Music.class);
+            assetManager.load("data/levels/music" + String.format("%02d", i) + ".mp3", Music.class);
             assetManager.finishLoading();
-            levelManager.getDifficultySettings().get(i).setMusic(assetManager.get("data/levels/music" + i + ".mp3"));
+            levelManager.getDifficultySettings().get(i).setMusic(assetManager.get("data/levels/music" + String.format("%02d", i) + ".mp3"));
         }
         f = new File("data/levels/images");
         allFiles = f.listFiles();
         numberOfFiles = allFiles.length;
         for(int i = 0; i < numberOfFiles; i++) {
-            assetManager.load("data/levels/images" + i + ".mp3", Image.class);
+            assetManager.load("data/levels/images" + String.format("%02d", i) + ".mp3", Image.class);
             assetManager.finishLoading();
-            levelManager.getDifficultySettings().get(i).setBgImage(assetManager.get("data/levels/images" + i + ".mp3"));
+            levelManager.getDifficultySettings().get(i).setBgImage(assetManager.get("data/levels/images" + String.format("%02d", i) + ".mp3"));
         }
     }
 
