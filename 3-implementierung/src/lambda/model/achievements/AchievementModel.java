@@ -2,13 +2,14 @@ package lambda.model.achievements;
 
 import lambda.Observable;
 import lambda.model.statistics.StatisticModel;
+import lambda.model.statistics.StatisticModelObserver;
 
 /**
  * This class represents an achievement.
  * 
  * @author Robert Hochweiss
  */
-public abstract class AchievementModel extends Observable<AchievementModelObserver> {
+public abstract class AchievementModel extends Observable<AchievementModelObserver> implements StatisticModelObserver {
 	
 	private int id;
 	private int index;
@@ -32,7 +33,7 @@ public abstract class AchievementModel extends Observable<AchievementModelObserv
 	}
 	
 	/**
-	 * Initialize the achievement.
+	 * Initialize the achievement and resets it to its start state.
 	 */
 	public abstract void initialize();
 	
@@ -40,7 +41,7 @@ public abstract class AchievementModel extends Observable<AchievementModelObserv
 	 * Checks with the given StatisticModel whether the requirements of this achievement are met or not.
 	 * Sets the locked-/unlocked-state of this achievement accordingly.
 	 * 
-	 * @param statistic the StatisticModel with which the check of the requirements is done
+	 * @param statistic the StatisticModel with whitch the check of the requirements is done
 	 * @throws IllegalArgumentException if statistic is null
 	 */
 	public abstract void checkRequirements(StatisticModel statistic);

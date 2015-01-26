@@ -1,5 +1,6 @@
 package lambda.model.achievements;
 
+import lambda.model.profiles.ProfileManager;
 import lambda.model.statistics.StatisticModel;
 
 /**
@@ -19,16 +20,28 @@ public class GemsEnchantedAchievementModel extends AchievementModel {
 	public GemsEnchantedAchievementModel(int reqGemsEnchanted) {
 		this.reqGemsEnchanted = reqGemsEnchanted;
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void changedGemsEnchanted() {
+		if (isLocked()) {
+			checkRequirements(ProfileManager.getManager().getCurrentProfile().getStatistics());
+		}
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void initialize() {
-		setIconPathAchievementUnlocked("achievements/gems_enchanted/unlocked/aul" + Integer.toString(getId()));
-		setIconPathAchievementLocked("achievements/gems_enchanted/locked/al" + Integer.toString(getId()));
-//		setDescription(AssetModel.getAssets().getString("gemsEnchantedAchievement_" + Integer.toString(getId())));
-//		setRequirementsDescription(AssetModel.getAssets().getString("reqGemsEnchantedAchievement_" + Integer.toString(getId())));		
+		ProfileManager.getManager().getCurrentProfile().getStatistics().addObserver(this);
+		setIconPathAchievementUnlocked("data/achievements/gems_enchanted/unlocked/aul" + Integer.toString(getId()));
+		setIconPathAchievementLocked("data/achievements/gems_enchanted/locked/al" + Integer.toString(getId()));
+//		setDescription(...I18N Bundle.format("gemsEnchantedAchievement", reqGemsEnchanted);
+//		setRequirementsDescription(.I18N Bundle.format("reqGemsEnchantedAchievement", reqGemsEnchanted)));	
+		setLocked(true);
 	}
 
 	/**
@@ -39,15 +52,8 @@ public class GemsEnchantedAchievementModel extends AchievementModel {
 		if (statistic == null) {
 			throw new IllegalArgumentException("statistic cannot be null!");
 		}
-		if (isLocked()) {
-			if (statistic.getGemsEnchanted() >= reqGemsEnchanted) {
-				setLocked(false);
-			}
-		} else {
-			// To resett the achievements automatically if needed for example after a profile change
-			if (statistic.getGemsEnchanted() < reqGemsEnchanted) {
-				setLocked(true);
-			}
+		if (statistic.getGemsEnchanted() >= reqGemsEnchanted) {
+			setLocked(false);
 		}
 	}
 

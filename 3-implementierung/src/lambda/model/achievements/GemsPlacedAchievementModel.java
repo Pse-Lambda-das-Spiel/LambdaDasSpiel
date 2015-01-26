@@ -1,5 +1,6 @@
 package lambda.model.achievements;
 
+import lambda.model.profiles.ProfileManager;
 import lambda.model.statistics.StatisticModel;
 
 /**
@@ -24,11 +25,23 @@ public class GemsPlacedAchievementModel extends AchievementModel {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void changedGemsPlaced() {
+		if (isLocked()) {
+			checkRequirements(ProfileManager.getManager().getCurrentProfile().getStatistics());
+		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void initialize() {
+		ProfileManager.getManager().getCurrentProfile().getStatistics().addObserver(this);
 		setIconPathAchievementUnlocked("achievements/gems_placed/unlocked/aul" + Integer.toString(getId()));
 		setIconPathAchievementLocked("achievements/gems_placed/locked/al" + Integer.toString(getId()));
 		//setDescription(AssetModel.getAssets().getString("gemsPlacedAchievement_" + Integer.toString(getId())));
-		//setRequirementsDescription(AssetModel.getAssets().getString("reqGemsPlacedAchievement_" + Integer.toString(getId())));		
+		//setRequirementsDescription(AssetModel.getAssets().getString("reqGemsPlacedAchievement_" + Integer.toString(getId())));	
+		setLocked(true);
 	}
 
 	/**
@@ -39,15 +52,8 @@ public class GemsPlacedAchievementModel extends AchievementModel {
 		if (statistic == null) {
 			throw new IllegalArgumentException("statistic cannot be null!");
 		}
-		if (isLocked()) {
-			if (statistic.getGemsPlaced() >= reqGemsPlaced) {
-				setLocked(false);
-			}
-		} else {
-			// To reset the achievements automatically if needed for example after a profile change
-			if (statistic.getGemsPlaced() < reqGemsPlaced) {
-				setLocked(true);
-			}
+		if (statistic.getGemsPlaced() >= reqGemsPlaced) {
+			setLocked(false);
 		}
 	}
 

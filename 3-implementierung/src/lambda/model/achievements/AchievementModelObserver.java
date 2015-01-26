@@ -13,6 +13,6 @@ public interface AchievementModelObserver {
 	 * Gets called by an observed AchievementModel-object if its locked-/unlocked-state has changed.
 	 * The default implementation is empty.
 	 */
-	default public void changedLockedState() {
+	default void changedLockedState() {
 	}
 }

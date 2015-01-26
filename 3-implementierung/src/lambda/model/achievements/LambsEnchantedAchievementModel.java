@@ -1,5 +1,6 @@
 package lambda.model.achievements;
 
+import lambda.model.profiles.ProfileManager;
 import lambda.model.statistics.StatisticModel;
 
 /**
@@ -24,11 +25,23 @@ public class LambsEnchantedAchievementModel extends AchievementModel {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void changedLambsEnchanted() {
+		if (isLocked()) {
+			checkRequirements(ProfileManager.getManager().getCurrentProfile().getStatistics());
+		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void initialize() {
+		ProfileManager.getManager().getCurrentProfile().getStatistics().addObserver(this);
 		setIconPathAchievementUnlocked("achievements/lambs_enchanted/unlocked/aul" + Integer.toString(getId()));
 		setIconPathAchievementLocked("achievements/lambs_enchanted/locked/al" + Integer.toString(getId()));
 		//setDescription(AssetModel.getAssets().getString("lambsEnchantedAchievement_" + Integer.toString(getId())));
-		//setRequirementsDescription(AssetModel.getAssets().getString("reqLambsEnchantedAchievement_" + Integer.toString(getId())));		
+		//setRequirementsDescription(AssetModel.getAssets().getString("reqLambsEnchantedAchievement_" + Integer.toString(getId())));
+		setLocked(true);
 	}
 
 	/**
@@ -39,15 +52,8 @@ public class LambsEnchantedAchievementModel extends AchievementModel {
 		if (statistic == null) {
 			throw new IllegalArgumentException("statistic cannot be null!");
 		}
-		if (isLocked()) {
-			if (statistic.getLambsEnchanted() >= reqLambsEnchanted) {
-				setLocked(false);
-			}
-		} else {
-			// To reset the achievements automatically if needed for example after a profile change
-			if (statistic.getLambsEnchanted() < reqLambsEnchanted) {
-				setLocked(true);
-			}
+		if (statistic.getLambsEnchanted() >= reqLambsEnchanted) {
+			setLocked(false);
 		}
 	}
 

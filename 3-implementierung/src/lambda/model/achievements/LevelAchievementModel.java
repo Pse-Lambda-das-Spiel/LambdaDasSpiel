@@ -1,5 +1,6 @@
 package lambda.model.achievements;
 
+import lambda.model.profiles.ProfileManager;
 import lambda.model.statistics.StatisticModel;
 
 /**
@@ -24,11 +25,23 @@ public class LevelAchievementModel extends AchievementModel {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void changedLevelCompleted() {
+		if (isLocked()) {
+			checkRequirements(ProfileManager.getManager().getCurrentProfile().getStatistics());
+		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void initialize() {
+		ProfileManager.getManager().getCurrentProfile().getStatistics().addObserver(this);
 		setIconPathAchievementUnlocked("achievements/level/unlocked/aul" + Integer.toString(getId()));
 		setIconPathAchievementLocked("achievements/level/locked/al" + Integer.toString(getId()));
 		//setDescription(AssetModel.getAssets().getString("levelAchievement_" + Integer.toString(getId())));
 		//setRequirementsDescription(AssetModel.getAssets().getString("reqLevelAchievement_" + Integer.toString(getId())));		
+		setLocked(false);
 	}
 
 	/**
@@ -39,15 +52,8 @@ public class LevelAchievementModel extends AchievementModel {
 		if (statistic == null) {
 			throw new IllegalArgumentException("statistic cannot be null!");
 		}
-		if (isLocked()) {
-			if (statistic.getLevelCompleted() >= reqLevelCompleted) {
-				setLocked(false);
-			}
-		} else {
-			// To reset the achievements automatically if needed for example after a profile change
-			if (statistic.getLevelCompleted() < reqLevelCompleted) {
-				setLocked(true);
-			}
+		if (statistic.getLevelCompleted() >= reqLevelCompleted) {
+			setLocked(false);
 		}
 	}
 

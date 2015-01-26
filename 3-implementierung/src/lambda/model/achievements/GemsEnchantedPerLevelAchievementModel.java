@@ -1,5 +1,6 @@
 package lambda.model.achievements;
 
+import lambda.model.profiles.ProfileManager;
 import lambda.model.statistics.StatisticModel;
 
 /**
@@ -24,11 +25,23 @@ public class GemsEnchantedPerLevelAchievementModel extends PerLevelAchievementMo
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void changedGemsEnchantedPerLevel() {
+		if (isLocked()) {
+			checkRequirements(ProfileManager.getManager().getCurrentProfile().getStatistics());
+		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void initialize() {
+		ProfileManager.getManager().getCurrentProfile().getStatistics().addObserver(this);
 		setIconPathAchievementUnlocked("achievements/gems_enchanted_per_Level/unlocked/aul" + Integer.toString(getId()));
 		setIconPathAchievementLocked("achievements/gems_enchanted_per_level/locked/al" + Integer.toString(getId()));
 		//setDescription(AssetModel.getAssets().getString("gemsEnchantedPerLevelAchievement_" + Integer.toString(getId())));
-		//setRequirementsDescription(AssetModel.getAssets().getString("reqGemsEnchantedPerLevelAchievement_" + Integer.toString(getId())));		
+		//setRequirementsDescription(AssetModel.getAssets().getString("reqGemsEnchantedPerLevelAchievement_" + Integer.toString(getId())));	
+		setLocked(true);
 	}
 
 	/**
@@ -39,15 +52,8 @@ public class GemsEnchantedPerLevelAchievementModel extends PerLevelAchievementMo
 		if (statistic == null) {
 			throw new IllegalArgumentException("statistic cannot be null!");
 		}
-		if (isLocked()) {
-			if (statistic.getGemsEnchantedPerLevel() >= reqGemsEnchantedPerLevel) {
-				setLocked(false);
-			}
-		} else {
-			// To reset the achievements automatically if needed for example after a profile change
-			if (statistic.getGemsEnchantedPerLevel() < reqGemsEnchantedPerLevel) {
-				setLocked(true);
-			}
+		if (statistic.getGemsEnchantedPerLevel() >= reqGemsEnchantedPerLevel) {
+			setLocked(false);
 		}
 	}
 

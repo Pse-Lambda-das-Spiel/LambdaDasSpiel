@@ -1,6 +1,8 @@
 package lambda.model.statistics;
 
-public class StatisticModel {
+import lambda.Observable;
+
+public class StatisticModel extends Observable<StatisticModelObserver> {
 
 	private int lambsEnchanted;
 	private int gemsEnchanted;

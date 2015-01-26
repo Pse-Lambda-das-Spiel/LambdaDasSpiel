@@ -1,5 +1,6 @@
 package lambda.model.achievements;
 
+import lambda.model.profiles.ProfileManager;
 import lambda.model.statistics.StatisticModel;
 
 /**
@@ -24,11 +25,23 @@ public class LambsPlacedPerLevelAchievementModel extends PerLevelAchievementMode
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void changedLambsPlacedPerLevel() {
+		if (isLocked()) {
+			checkRequirements(ProfileManager.getManager().getCurrentProfile().getStatistics());
+		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void initialize() {
+		ProfileManager.getManager().getCurrentProfile().getStatistics().addObserver(this);
 		setIconPathAchievementUnlocked("achievements/lambs_placed_per_Level/unlocked/aul" + Integer.toString(getId()));
 		setIconPathAchievementLocked("achievements/lambs_placed_per_level/locked/al" + Integer.toString(getId()));
 		//setDescription(AssetModel.getAssets().getString("lambsPlacedPerLevelAchievement_" + Integer.toString(getId())));
-		//setRequirementsDescription(AssetModel.getAssets().getString("reqLambsPlacedPerLevelAchievement_" + Integer.toString(getId())));		
+		//setRequirementsDescription(AssetModel.getAssets().getString("reqLambsPlacedPerLevelAchievement_" + Integer.toString(getId())));
+		setLocked(true);
 	}
 
 	/**
@@ -39,15 +52,8 @@ public class LambsPlacedPerLevelAchievementModel extends PerLevelAchievementMode
 		if (statistic == null) {
 			throw new IllegalArgumentException("statistic cannot be null!");
 		}
-		if (isLocked()) {
-			if (statistic.getLambsPlacedPerLevel() >= reqLambsPlacedPerLevel) {
-				setLocked(false);
-			}
-		} else {
-			// To reset the achievements automatically if needed for example after a profile change
-			if (statistic.getLambsPlacedPerLevel() < reqLambsPlacedPerLevel) {
-				setLocked(true);
-			}
+		if (statistic.getLambsPlacedPerLevel() >= reqLambsPlacedPerLevel) {
+			setLocked(false);
 		}
 	}
 

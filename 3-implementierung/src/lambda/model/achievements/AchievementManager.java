@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import lambda.model.profiles.ProfileManager;
 import lambda.model.statistics.StatisticModel;
 
 /**
@@ -56,13 +57,9 @@ public class AchievementManager {
 	 * Checks all achievements with the given StatisticModel. Checks whether their requirements are met or not.
 	 * Sets the locked-/unlocked-state of the achievements accordingly.
 	 * 
-	*  @param statistic the StatisticModel with which the check of all achievements is done
-	 * @throws IllegalArgumentException if statistic is null
 	 */
-	public void checkAllAchievements(StatisticModel statistic) {
-		if (statistic == null) {
-			throw new IllegalArgumentException("statistic cannot be null!");
-		}
+	public void checkAllAchievements() {
+		StatisticModel statistic = ProfileManager.getManager().getCurrentProfile().getStatistics();
 		Collection<AchievementModel> achievementCollection = achievements.values();
 		for (AchievementModel a : achievementCollection) {
 			a.checkRequirements(statistic);
