@@ -55,7 +55,7 @@ public final class ProfileSaveHelper {
 						json.writeValue("name", profileModel.getName());
 						json.writeValue("avatar", profileModel.getAvatar());
 						json.writeValue("language", profileModel.getLanguage());
-						json.writeValue("levelindex", profileModel.getLevelIndex());
+						json.writeValue("levelIndex", profileModel.getLevelIndex());
 						json.writeValue("coins", profileModel.getCoins());
 						json.writeObjectEnd();
 						json.writeObjectEnd();
@@ -119,7 +119,6 @@ public final class ProfileSaveHelper {
 						json.writeValue("gemsPlacedPerLevel", statisticModel.getGemsPlacedPerLevel());
 						json.writeValue("levelCompleted", statisticModel.getLevelCompleted());
 						json.writeValue("hintsNotUsed", statisticModel.getHintsNotUsed());
-						json.writeValue("levelCompleted", statisticModel.getLevelCompleted());
 						json.writeValue("levelTries", statisticModel.getLevelTries());
 						json.writeValue("successfulLevelTries", statisticModel.getSuccessfulLevelTries());
 						json.writeObjectEnd();
@@ -146,7 +145,7 @@ public final class ProfileSaveHelper {
 						// create json structure
 						json.writeObjectStart();
 						json.writeObjectStart("profile_shop_state");
-						json.writeValue("activatedElementUIContextFamilyId", shopModel.getElementUIContextFamilies().
+						json.writeValue("activatedSpriteId", shopModel.getElementUIContextFamilies().
 																				getActivatedItem().getId());
 						json.writeValue("activatedMusicId", shopModel.getMusic().getActivatedItem().getId());
 						json.writeValue("activatedBKImageId", shopModel.getImages().getActivatedItem().getId());

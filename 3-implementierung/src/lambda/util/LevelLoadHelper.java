@@ -4,9 +4,7 @@ import java.awt.Color;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -41,6 +39,7 @@ public final class LevelLoadHelper {
 	 * @param id the id of the to be loaded level
 	 * @return the LevelModel initialized with the level data from the json file
 	 * @throws InvalidJsonException if the corresponding json file has invalid content
+	 * @throws IOException if there is an error while reading the level json file
 	 */
 	public static LevelModel loadLevel(int id) {
 		FileHandle file = Gdx.files.internal("data/levels/" + String.format("%02d", id) + ".json");
@@ -168,14 +167,15 @@ public final class LevelLoadHelper {
 		return nextNode;
 	}
 
-
+	//Internal file listing does not work on the desktop
 	/**
 	 * Returns a list of all levels
 	 *
 	 * @return a list which contains all levels
+	 * @throws IOException 
 	 */
 	public static List<LevelModel> loadAllLevels() {
-		List<LevelModel> levels = new ArrayList<LevelModel>();
+		List<LevelModel> levels = new ArrayList<>();
 		File f = new File("data/levels/");
 		//filename filter lists only the json-files and ignore the folders
 		File[] allFiles = f.listFiles(new FilenameFilter() {
@@ -185,7 +185,7 @@ public final class LevelLoadHelper {
 			}
 		});
 		int numberOfLevels = allFiles.length;
-		for(int i = 0; i < numberOfLevels; i++) {
+		for (int i = 0; i < numberOfLevels; i++) {
 			levels.add(i, loadLevel(i));
 		}
 		return levels;
@@ -217,13 +217,14 @@ public final class LevelLoadHelper {
 		return difficultySetting;
 	}
 
+	//Internal file listing does not work on the desktop
 	/**
 	 * Returns a list of all DifficultySettings
 	 *
 	 * @return a list which contains all DifficultySettings
 	 */
 	public static List<DifficultySetting> loadAllDifficulties() {
-		List<DifficultySetting> difficulties = new ArrayList<DifficultySetting>();
+		List<DifficultySetting> difficulties = new ArrayList<>();
 		File f = new File("data/difficulties/");
 		//filename filter lists only the json-files and ignore the folders
 		File[] allFiles = f.listFiles(new FilenameFilter() {
@@ -233,7 +234,7 @@ public final class LevelLoadHelper {
 			}
 		});
 		int numberOfDifficulties = allFiles.length;
-		for(int i = 0; i < numberOfDifficulties; i++) {
+		for (int i = 0; i < numberOfDifficulties; i++) {
 			difficulties.add(i, loadDifficulty(i));
 		}
 		return difficulties;

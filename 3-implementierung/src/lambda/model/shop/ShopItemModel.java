@@ -13,6 +13,7 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
 
     private String id;
     private int price;
+    //how to initialize theses attributes at the moment ? setter ? constructor ?
     private ShopModel shop;
     private ShopItemTypeModel shopItemType;
     private boolean purchased;
