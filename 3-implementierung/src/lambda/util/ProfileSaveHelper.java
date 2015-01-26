@@ -145,10 +145,10 @@ public final class ProfileSaveHelper {
 						// create json structure
 						json.writeObjectStart();
 						json.writeObjectStart("profile_shop_state");
-						json.writeValue("activatedSpriteId", shopModel.getElementUIContextFamilies().
-																				getActivatedItem().getId());
-						json.writeValue("activatedMusicId", shopModel.getMusic().getActivatedItem().getId());
-						json.writeValue("activatedBKImageId", shopModel.getImages().getActivatedItem().getId());
+						json.writeValue("activatedSprite", shopModel.getElementUIContextFamilies().
+																						getActivatedItem());
+						json.writeValue("activatedMusic", shopModel.getMusic().getActivatedItem());
+						json.writeValue("activatedBKImage", shopModel.getImages().getActivatedItem());
 						json.writeArrayStart("musics");
 						for (MusicItemModel music : shopModel.getMusic().getItems()) {
 							json.writeObjectStart();
