@@ -87,7 +87,7 @@ public final class ProfileLoadHelper {
     	for (JsonValue entry = shopJson.get("musics").child(); entry != null; entry = entry.next) {
     		MusicItemModel music = new MusicItemModel(entry.getString("musicId"), entry.getInt("price"));
     		music.setPurchased(entry.getBoolean("purchased"));
-    		if (music.getId().equals(entry.getString("activatedMusicId"))) {
+    		if (music.getId().equals(shopJson.getString("activatedMusicId"))) {
     			// Todo: maybe activate MusicItemModel in another way, initializing of ShopItemModel is not so precise
     			shop.getMusic().setActivatedItem(music);
     		}
@@ -99,7 +99,7 @@ public final class ProfileLoadHelper {
     																		entry.getInt("price"));
     		image.setPurchased(entry.getBoolean("purchased"));
     		//Same as above
-    		if (image.getId().equals(entry.getString("activatedBKImageId"))) {
+    		if (image.getId().equals(shopJson.getString("activatedBKImageId"))) {
     			shop.getImages().setActivatedItem(image);
     		}
     		shop.getImages().getItems().add(image);
@@ -110,7 +110,7 @@ public final class ProfileLoadHelper {
     																	entry.getInt("price"));
     		sprite.setPurchased(entry.getBoolean("purchased"));
     		//Same as above
-    		if (sprite.getId().equals(entry.getString("activatedSpriteId"))) {
+    		if (sprite.getId().equals(shopJson.getString("activatedSpriteId"))) {
     			shop.getElementUIContextFamilies().setActivatedItem(sprite);
     		}
     		shop.getElementUIContextFamilies().getItems().add(sprite);
