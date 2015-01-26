@@ -111,7 +111,7 @@ public class LevelLoadHelperTest {
 	@Test
 	public void testLoadAllLevels() {
 		int number = LevelLoadHelper.loadAllLevels().size();
-		assertEquals(1, number);
+		assertEquals(5, number);
 	}
 
 }

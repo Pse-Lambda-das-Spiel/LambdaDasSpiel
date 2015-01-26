@@ -3,9 +3,7 @@ package lambda.viewcontroller.level;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.backends.gwt.preloader.Preloader;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.JsonReader;
@@ -14,7 +12,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import lambda.model.levels.LevelManager;
 import lambda.viewcontroller.ViewController;
 
-import java.io.File;
 
 public class LevelSelectionViewController extends ViewController {
 
@@ -44,8 +41,8 @@ public class LevelSelectionViewController extends ViewController {
         jsonFile = reader.parse(file);
         int numberOfImages = jsonFile.getInt("numberOfImages");
         for (int i = 0; i < numberOfImages; i++) {
-            assetManager.load("data/levels/images" + String.format("%02d", i) + ".mp3", Image.class);
-            levelManager.getDifficultySettings().get(i).setBgImage(assetManager.get("data/levels/images" + String.format("%02d", i) + ".mp3"));
+            assetManager.load("data/levels/images" + String.format("%02d", i) + ".jpg", Image.class);
+            levelManager.getDifficultySettings().get(i).setBgImage(assetManager.get("data/levels/images" + String.format("%02d", i) + ".jpg"));
         }
     }
 

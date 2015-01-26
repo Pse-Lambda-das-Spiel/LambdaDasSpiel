@@ -197,11 +197,8 @@ public final class LevelLoadHelper {
 		if (!(difficulty.getInt("difficultyId") == id)) {
 			throw new InvalidJsonException("The id of the json file does not match with its file name!");
 		}
-
 		JsonValue music = difficulty.get("music");
 		JsonValue bgImage = difficulty.get("bgImage");
-
-
 		DifficultySetting difficultySetting = new DifficultySetting(id, difficulty.getString("music"),
 				difficulty.getString("bgImage"));
 
