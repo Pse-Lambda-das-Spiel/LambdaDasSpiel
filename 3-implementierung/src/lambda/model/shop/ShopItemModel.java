@@ -25,9 +25,11 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
         this.id = id;
         this.price = price;
         purchased = false;
-
     }
 
+    /**
+     * 
+     */
     public ShopItemModel() {
     }
 
@@ -60,11 +62,11 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
     }
 
     /**
-     * Returns the ID of this item
+     * Returns the Id of this item
      *
-     * @return ID
+     * @return Id
      */
-    public String getID() {
+    public String getId() {
         return id;
     }
 
@@ -85,4 +87,20 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
     public ShopModel getShop() {
         return shop;
     }
+
+    // I need this method for the saving this ShopItemModel
+    /**
+	 * @return the purchased
+	 */
+	public boolean isPurchased() {
+		return purchased;
+	}
+
+	// I need this method for the initializing with the json file (load profile)
+	/**
+	 * @param purchased the purchased to set
+	 */
+	public void setPurchased(boolean purchased) {
+		this.purchased = purchased;
+	}
 }

@@ -13,10 +13,20 @@ public class ElementUIContextFamily extends ShopItemModel {
     private Sprite variableUIContext;
     private Sprite abstractionUIContext;
 
+    // Why not a constructor with 2 parameter ?
     public ElementUIContextFamily() {
 
     }
 
+    /**
+     * 
+     * @param id
+     * @param price
+     */
+    public ElementUIContextFamily(String id, int price) {
+    	super(id, price);
+    }
+    
     /**
      * Returns the sprite of the paranthesis
      *

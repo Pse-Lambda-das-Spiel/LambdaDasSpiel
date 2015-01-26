@@ -9,11 +9,21 @@ public class BackgroundImageItemModel extends ShopItemModel {
 
     private Image image;
 
+    // Why not a constructor with 2 parameter ?
     /**
      *
      */
     public BackgroundImageItemModel() {
 
+    }
+    
+    /**
+     * 
+     * @param id
+     * @param price
+     */
+    public BackgroundImageItemModel(String id, int price) {
+    	super(id, price);
     }
 
     /**

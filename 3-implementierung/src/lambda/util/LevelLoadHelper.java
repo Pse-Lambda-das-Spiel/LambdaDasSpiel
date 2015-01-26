@@ -109,7 +109,7 @@ public final class LevelLoadHelper {
 	
 	private static List<TutorialMessage> convertJsonToTutorial(JsonValue value) {
 		List<TutorialMessage> tutorialMessageList = new ArrayList<>();
-		// It is not necessary for all level to have TutorialMessages
+		// It is not necessary for all levels to have TutorialMessages
 		if (value.size == 0) {
 			return tutorialMessageList;
 		}
