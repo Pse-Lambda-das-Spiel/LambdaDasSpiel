@@ -108,4 +108,10 @@ public class LevelLoadHelperTest {
 		assertEquals(testLevel.getUseableElements(), jsonLevel.getUseableElements());
 	}
 
+	@Test
+	public void testLoadAllLevels() {
+		int number = LevelLoadHelper.loadAllLevels().size();
+		assertEquals(1, number);
+	}
+
 }

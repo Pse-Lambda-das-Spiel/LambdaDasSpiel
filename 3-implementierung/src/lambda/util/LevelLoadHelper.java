@@ -1,8 +1,6 @@
 package lambda.util;
 
 import java.awt.Color;
-import java.io.File;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +37,7 @@ public final class LevelLoadHelper {
 	 * @param id the id of the to be loaded level
 	 * @return the LevelModel initialized with the level data from the json file
 	 * @throws InvalidJsonException if the corresponding json file has invalid content
-	 * @throws IOException if there is an error while reading the level json file
+	 * @throws java.io.IOException if there is an error while reading the level json file
 	 */
 	public static LevelModel loadLevel(int id) {
 		FileHandle file = Gdx.files.internal("data/levels/" + String.format("%02d", id) + ".json");
@@ -172,19 +170,13 @@ public final class LevelLoadHelper {
 	 * Returns a list of all levels
 	 *
 	 * @return a list which contains all levels
-	 * @throws IOException 
 	 */
 	public static List<LevelModel> loadAllLevels() {
 		List<LevelModel> levels = new ArrayList<>();
-		File f = new File("data/levels/");
-		//filename filter lists only the json-files and ignore the folders
-		File[] allFiles = f.listFiles(new FilenameFilter() {
-			@Override
-			public boolean accept(File dir, String name) {
-				return name.toLowerCase().endsWith(".json");
-			}
-		});
-		int numberOfLevels = allFiles.length;
+		FileHandle file = Gdx.files.internal("data/levels/numberOfLevels.json");
+		JsonReader reader = new JsonReader();
+		JsonValue jsonFile = reader.parse(file);
+		int numberOfLevels = jsonFile.getInt("numberOfLevels");
 		for (int i = 0; i < numberOfLevels; i++) {
 			levels.add(i, loadLevel(i));
 		}
@@ -225,15 +217,10 @@ public final class LevelLoadHelper {
 	 */
 	public static List<DifficultySetting> loadAllDifficulties() {
 		List<DifficultySetting> difficulties = new ArrayList<>();
-		File f = new File("data/difficulties/");
-		//filename filter lists only the json-files and ignore the folders
-		File[] allFiles = f.listFiles(new FilenameFilter() {
-			@Override
-			public boolean accept(File dir, String name) {
-				return name.toLowerCase().endsWith(".json");
-			}
-		});
-		int numberOfDifficulties = allFiles.length;
+		FileHandle file = Gdx.files.internal("data/difficulties/numberOfDifficulties.json");
+		JsonReader reader = new JsonReader();
+		JsonValue jsonFile = reader.parse(file);
+		int numberOfDifficulties = jsonFile.getInt("numberOfDifficulties");
 		for (int i = 0; i < numberOfDifficulties; i++) {
 			difficulties.add(i, loadDifficulty(i));
 		}
