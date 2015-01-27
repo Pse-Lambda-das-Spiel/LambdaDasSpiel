@@ -62,7 +62,10 @@ com.badlogic.gdx.scenes.scene2d.ui.Tree$TreeStyle: {
 	default: { minus: tree-minus, plus: tree-plus, selection: default-select-selection }
 },
 com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
-	default: { up: textfield }
+	default: { up: textfield },
+	configButton: { up: tree-plus},
+	deleteButton: { up: tree-minus},
+	yesButton: { up: check-on},
+	noButton: { up: check-off}
 }
-
 }

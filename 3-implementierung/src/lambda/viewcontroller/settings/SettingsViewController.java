@@ -1,12 +1,8 @@
 package lambda.viewcontroller.settings;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -30,6 +26,11 @@ import lambda.model.settings.SettingsModelObserver;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
 
+/**
+ * Represents a screen that is used to depict and change profile-settings.
+ * 
+ * @author Kai Fieger
+ */
 public class SettingsViewController extends ViewController implements SettingsModelObserver {
 
     private final String skinJson = "data/skins/SettingsSkin.json";
@@ -43,6 +44,9 @@ public class SettingsViewController extends ViewController implements SettingsMo
     private Label soundLabel;
     private AssetManager manager;
     
+    /**
+     * Creates a object of the class without initializing the screen.
+     */
 	public SettingsViewController() {
         stage = new Stage(new ScreenViewport());
         ProfileManager.getManager().addObserver(this);
@@ -112,7 +116,6 @@ public class SettingsViewController extends ViewController implements SettingsMo
         settings.row().height(stage.getHeight() /5);
         settings.add(statistics).width(stage.getWidth() * 0.4f).space(10);
         //TODO add slider listener
-        //TODO sound music ???
         
         ImageButton addButton = new ImageButton(manager.get(skinJson, Skin.class));
         addButton.setSize(stage.getWidth() * 0.1f, stage.getHeight() * 0.1f);

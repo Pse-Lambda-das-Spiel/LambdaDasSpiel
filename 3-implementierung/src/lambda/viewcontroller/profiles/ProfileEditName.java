@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -22,6 +23,12 @@ import lambda.model.profiles.ProfileManager;
 import lambda.model.profiles.ProfileModel;
 import lambda.viewcontroller.ViewController;
 
+/**
+ * Represents a screen of the profile configuration/creation.
+ * It allows the user to change the profile's name.
+ * 
+ * @author Kai Fieger
+ */
 public class ProfileEditName extends ViewController implements ProfileEditObserver {
 
     private final String skinJson = "data/skins/ProfileEditSkin.json";
@@ -32,6 +39,9 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
     private Label enterName;
     private boolean newProfile;
     
+    /**
+     * Creates a object of the class without initializing the screen.
+     */
 	public ProfileEditName() {
 	    stage = new Stage(new ScreenViewport());
         ProfileManager.getManager().addObserver(this);
@@ -132,11 +142,12 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
             String name = nameField.getText().trim();
             if (!name.equals("")) {
                 if (ProfileManager.getManager().changeCurrentName(name)) {
-                    changedLanguage();
                     getGame().setScreen(ProfileEditAvatar.class);
                 } else {
-                    enterName.setText(manager.get(profileEdit.getLang(), I18NBundle.class).get("nameTaken"));
+                    new NameDialog("nameTaken").show(stage);
                 }
+            } else {
+                new NameDialog("nameEmpty").show(stage);
             }
         }
     }
@@ -149,12 +160,21 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
                 getGame().setScreen(ProfileEditLang.class);
             } else if (!name.equals("")) {
                 if (ProfileManager.getManager().changeCurrentName(name)) {
-                    changedLanguage();
                     getGame().setScreen(ProfileEditLang.class);
                 } else {
-                    enterName.setText(manager.get(profileEdit.getLang(), I18NBundle.class).get("nameTaken"));
+                    new NameDialog("nameTaken").show(stage);
                 }
+            } else {
+                new NameDialog("nameEmpty").show(stage);   
             }
+        }
+    }
+    
+    private class NameDialog extends Dialog {
+        public NameDialog(String key) {
+            super(manager.get(profileEdit.getLang(), I18NBundle.class).get(key),
+                    manager.get("data/skins/DialogTemp.json", Skin.class));
+            button(manager.get(profileEdit.getLang(), I18NBundle.class).get("ok"));
         }
     }
 

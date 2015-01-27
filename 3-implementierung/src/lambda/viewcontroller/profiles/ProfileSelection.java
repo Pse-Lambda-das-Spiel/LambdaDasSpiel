@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -22,8 +23,13 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import lambda.model.profiles.ProfileManager;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
-import lambda.viewcontroller.settings.SettingsViewController;
 
+/**
+ * Represents the screen of the profile-selection.
+ * It allows the user to choose, add, remove or edit profiles. 
+ * 
+ * @author Kai Fieger
+ */
 public class ProfileSelection extends ViewController {
 
     private final String skinJson = "data/skins/ProfileSelectionSkin.json";
@@ -32,7 +38,11 @@ public class ProfileSelection extends ViewController {
     private List<TextButton> profileButtons;
     private List<ImageButton> editButtons;
     private ImageButton addButton;
+    private AssetManager manager;
     
+    /**
+     * Creates a object of the class without initializing the screen.
+     */
 	public ProfileSelection() {
 	    stage = new Stage(new ScreenViewport());
 	    ProfileManager.getManager().addObserver(this);
@@ -43,6 +53,11 @@ public class ProfileSelection extends ViewController {
         assets.load(skinAtlas, TextureAtlas.class);
         assets.load(skinJson, Skin.class,
                 new SkinLoader.SkinParameter(skinAtlas));
+        
+        //temp vvv
+        assets.load("data/skins/DialogTemp.atlas", TextureAtlas.class);
+        assets.load("data/skins/DialogTemp.json", Skin.class,
+                new SkinLoader.SkinParameter("data/skins/DialogTemp.atlas"));
     }
     
     @Override
@@ -85,11 +100,13 @@ public class ProfileSelection extends ViewController {
 
     @Override
     public void create(AssetManager manager) {
+        this.manager = manager;
         profileButtons = new ArrayList<TextButton>();
         editButtons = new ArrayList<ImageButton>();
         Table profileView = new Table();
         stage.addActor(profileView);
         profileView.setFillParent(true);
+        //Profilebuttons + their edit buttons
         for (int i = 0; i < ProfileManager.MAX_NUMBER_OF_PROFILES; i++) {
             profileView.row().height(stage.getHeight() * 3 / 5 / ProfileManager.MAX_NUMBER_OF_PROFILES);
             TextButton pButton = new TextButton("", manager.get(skinJson, Skin.class));
@@ -101,6 +118,7 @@ public class ProfileSelection extends ViewController {
             editButtons.add(eButton);
             eButton.addListener(new editProfileClickListener());
         }
+        //addProfile-Button
         addButton = new ImageButton(manager.get(skinJson, Skin.class), "addButton");
         addButton.setSize(stage.getWidth() * 0.1f, stage.getHeight() * 0.1f);
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
@@ -146,18 +164,68 @@ public class ProfileSelection extends ViewController {
         public void clicked(InputEvent event, float x, float y) {
             ImageButton clickedButton = (ImageButton) event.getListenerActor();
             String name = profileButtons.get(editButtons.indexOf(clickedButton)).getText().toString();
-            ProfileManager.getManager().setCurrentProfile(name);
-            getGame().setScreen(ProfileEditLang.class);
+            Skin temp = manager.get("data/skins/DialogTemp.json", Skin.class);
+            //dialog to choose between editing the profile or deleting it. 
+            new Dialog("", temp) {
+                {
+                    //configuration/edit option
+                    ImageButton configButton = new ImageButton(temp, "configButton");
+                    configButton.addListener(new ClickListener() {
+                        @Override
+                        public void clicked(InputEvent event, float x, float y) {
+                            setVisible(false);
+                            hide();
+                            ProfileManager.getManager().setCurrentProfile(name);
+                            getGame().setScreen(ProfileEditLang.class);
+                        }
+                    });
+                    add(configButton).width(stage.getWidth()/4).height(stage.getHeight()/4).pad(10);
+                    //delete option. opens confirm dialog
+                    ImageButton deleteButton = new ImageButton(temp, "deleteButton");
+                    deleteButton.addListener(new ClickListener() {
+                        @Override
+                        public void clicked(InputEvent event, float x, float y) {
+                            confirm();
+                        }
+                    });
+                    add(deleteButton).width(stage.getWidth()/4).height(stage.getHeight()/4).pad(10);
+                }
+                
+                //asks for confirmation if the profile should be deleted
+                private void confirm() {
+                    clear();
+                    //yes
+                    ImageButton yesButton = new ImageButton(temp, "yesButton");
+                    yesButton.addListener(new ClickListener() {
+                        @Override
+                        public void clicked(InputEvent event, float x, float y) {
+                            setVisible(false);
+                            hide();
+                            ProfileManager.getManager().delete(name);
+                        }
+                    });
+                    add(yesButton).width(stage.getWidth()/4).height(stage.getHeight()/4).pad(10);
+                    //no
+                    ImageButton noButton = new ImageButton(temp, "noButton");
+                    noButton.addListener(new ClickListener() {
+                        @Override
+                        public void clicked(InputEvent event, float x, float y) {
+                            setVisible(false);
+                            hide();
+                        }
+                    });
+                    add(noButton).width(stage.getWidth()/4).height(stage.getHeight()/4).pad(10);
+                }
+            }.show(stage);
         }
     }
     
     private class addProfileClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
-            //TODO Dialog edit/delete 
-            ProfileManager manager = ProfileManager.getManager();
-            manager.createProfile();
-            manager.setCurrentProfile("");
+            ProfileManager m = ProfileManager.getManager();
+            m.createProfile();
+            m.setCurrentProfile("");
             getGame().setScreen(ProfileEditLang.class);
         }
     }

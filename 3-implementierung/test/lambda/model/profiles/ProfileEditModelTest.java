@@ -11,23 +11,21 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.backends.lwjgl.LwjglFiles;
-
 /**
  * Tests a ProfileEditModel
  * 
  * @author Kai Fieger
  */
 public class ProfileEditModelTest implements ProfileEditObserver {
-//TODO update lang path/keys
+
     private boolean calledChangedLanguage;
     private boolean calledChangedAvatar;
     private ProfileEditModel edit;
+    private String baseLang = "data/i18n/StringBundle_de";
+    private String baseAvatar = "a0";
 
     @Before
     public void setUp() throws Exception {
-        Gdx.files = new LwjglFiles();
         calledChangedLanguage = false;
         calledChangedAvatar = false;
         edit = new ProfileEditModel();
@@ -49,12 +47,12 @@ public class ProfileEditModelTest implements ProfileEditObserver {
         String start = edit.getLang();
         edit.nextLang();
         assertNotEquals(start, edit.getLang());
-        assertEquals(edit.getLang() + "Flag", edit.getLangPic());
+        assertEquals(edit.getLang().replace("StringBundle_", "flag/").concat("Flag.jpg"), edit.getLangPic());
         assertTrue(calledChangedLanguage);
         calledChangedLanguage = false;
         edit.previousLang();
         assertEquals(start, edit.getLang());
-        assertEquals(start + "Flag", edit.getLangPic());
+        assertEquals(start.replace("StringBundle_", "flag/").concat("Flag.jpg"), edit.getLangPic());
         assertTrue(calledChangedLanguage);
     }
 
@@ -66,22 +64,22 @@ public class ProfileEditModelTest implements ProfileEditObserver {
     @Test
     public void testLanguageCycle() {
         List<String> idsRight = new ArrayList<String>();
-        edit.setLang("de");
-        assertEquals("de", edit.getLang());
+        edit.setLang(baseLang);
+        assertEquals(baseLang, edit.getLang());
         idsRight.add(edit.getLang());
         edit.nextLang();
-        assertNotEquals("de", edit.getLang());
+        assertNotEquals(baseLang, edit.getLang());
         while (!idsRight.contains(edit.getLang())) {
             idsRight.add(edit.getLang());
             edit.nextLang();
         }
 
         List<String> idsLeft = new ArrayList<String>();
-        edit.setLang("de");
-        assertEquals("de", edit.getLang());
+        edit.setLang(baseLang);
+        assertEquals(baseLang, edit.getLang());
         idsLeft.add(edit.getLang());
         edit.previousLang();
-        assertNotEquals("de", edit.getLang());
+        assertNotEquals(baseLang, edit.getLang());
         while (!idsLeft.contains(edit.getLang())) {
             idsLeft.add(edit.getLang());
             edit.previousLang();
@@ -119,22 +117,22 @@ public class ProfileEditModelTest implements ProfileEditObserver {
     @Test
     public void testAvatarCycle() {
         List<String> idsRight = new ArrayList<String>();
-        edit.setAvatar("a0");
-        assertEquals("a0", edit.getAvatar());
+        edit.setAvatar(baseAvatar);
+        assertEquals(baseAvatar, edit.getAvatar());
         idsRight.add(edit.getAvatar());
         edit.nextAvatar();
-        assertNotEquals("a0", edit.getAvatar());
+        assertNotEquals(baseAvatar, edit.getAvatar());
         while (!idsRight.contains(edit.getAvatar())) {
             idsRight.add(edit.getAvatar());
             edit.nextAvatar();
         }
 
         List<String> idsLeft = new ArrayList<String>();
-        edit.setAvatar("a0");
-        assertEquals("a0", edit.getAvatar());
+        edit.setAvatar(baseAvatar);
+        assertEquals(baseAvatar, edit.getAvatar());
         idsLeft.add(edit.getAvatar());
         edit.previousAvatar();
-        assertNotEquals("a0", edit.getAvatar());
+        assertNotEquals(baseAvatar, edit.getAvatar());
         while (!idsLeft.contains(edit.getAvatar())) {
             idsLeft.add(edit.getAvatar());
             edit.previousAvatar();

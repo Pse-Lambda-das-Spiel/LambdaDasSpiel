@@ -24,6 +24,12 @@ import lambda.model.profiles.ProfileEditObserver;
 import lambda.model.profiles.ProfileManager;
 import lambda.viewcontroller.ViewController;
 
+/**
+ * Represents a screen of the profile configuration/creation.
+ * It allows the user to change the profile's avatar picture.
+ * 
+ * @author Kai Fieger
+ */
 public class ProfileEditAvatar extends ViewController implements ProfileEditObserver {
 
     private final String avatarPath = "data/avatar";
@@ -35,6 +41,9 @@ public class ProfileEditAvatar extends ViewController implements ProfileEditObse
     private Label chooseAvatar;
     private boolean newProfile;
     
+    /**
+     * Creates a object of the class without initializing the screen.
+     */
 	public ProfileEditAvatar() {
 	    stage = new Stage(new ScreenViewport());
         ProfileManager.getManager().addObserver(this);

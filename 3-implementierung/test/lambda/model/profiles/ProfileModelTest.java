@@ -39,7 +39,7 @@ public class ProfileModelTest implements ProfileModelObserver {
     public void testNewProfile() {
         assertEquals("testName", profile.getName());
         assertEquals("a0", profile.getAvatar());
-        assertEquals("de", profile.getLanguage());
+        assertEquals("data/i18n/StringBundle_de", profile.getLanguage());
         assertEquals(1, profile.getLevelIndex());
         assertEquals(0, profile.getCoins());
         assertNotNull(profile.getSettings());

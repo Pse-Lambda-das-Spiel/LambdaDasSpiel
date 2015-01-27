@@ -26,6 +26,12 @@ import lambda.model.profiles.ProfileEditObserver;
 import lambda.model.profiles.ProfileManager;
 import lambda.viewcontroller.ViewController;
 
+/**
+ * Represents a screen of the profile configuration/creation.
+ * It allows the user to change the profile's language.
+ * 
+ * @author Kai Fieger
+ */
 public class ProfileEditLang extends ViewController implements ProfileEditObserver {
 
     private final String skinJson = "data/skins/ProfileEditSkin.json";
@@ -38,6 +44,9 @@ public class ProfileEditLang extends ViewController implements ProfileEditObserv
     private AssetManager manager;
     private boolean deleteOnBack;
     
+    /**
+     * Creates a object of the class without initializing the screen.
+     */
 	public ProfileEditLang() {
 	    stage = new Stage(new ScreenViewport());
         ProfileManager.getManager().addObserver(this);
@@ -144,7 +153,7 @@ public class ProfileEditLang extends ViewController implements ProfileEditObserv
     public void changedProfile() {
         ProfileManager m = ProfileManager.getManager();
         deleteOnBack = m.getCurrentProfile().getName().equals("");
-        backButton.setVisible(m.getNames().size() != 1);
+        backButton.setVisible(m.getNames().size() != 1 || !deleteOnBack );
         profileEdit.setLang(m.getCurrentProfile().getLanguage());
     }
     
