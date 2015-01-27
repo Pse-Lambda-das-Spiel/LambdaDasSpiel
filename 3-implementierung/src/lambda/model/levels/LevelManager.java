@@ -20,7 +20,7 @@ import com.badlogic.gdx.utils.JsonValue;
  */
 public class LevelManager {
 
-	private AssetManager assets;
+	private AssetManager assetManager;
     private static LevelManager manager;
     String[] levelFilePaths;
 	String[] difficultySettingFilePaths;
@@ -52,7 +52,7 @@ public class LevelManager {
    	 * @return 
    	 */
    	public LevelModel getLevel(int id) {
-   		LevelModel level = assets.get(levelFilePaths[id], LevelModel.class);
+   		LevelModel level = assetManager.get(levelFilePaths[id], LevelModel.class);
    		return level;
    	}
 
@@ -60,7 +60,7 @@ public class LevelManager {
    	 * @return 
    	 */
    	public DifficultySetting getDifficultySetting(int id) {
-   		DifficultySetting difficultySetting = assets.get(difficultySettingFilePaths[id], DifficultySetting.class);
+   		DifficultySetting difficultySetting = assetManager.get(difficultySettingFilePaths[id], DifficultySetting.class);
    		return difficultySetting;
    	}
     
@@ -83,6 +83,7 @@ public class LevelManager {
 //    }
     
     public void queueAssets(AssetManager assets) {
+    	assetManager = assets;
     	assets.setLoader(LevelModel.class, new LevelModelLoader(new InternalFileHandleResolver()));
     	assets.setLoader(DifficultySetting.class, new DifficultySettingLoader(new InternalFileHandleResolver()));
     	for (String levelFilePath : levelFilePaths) {
