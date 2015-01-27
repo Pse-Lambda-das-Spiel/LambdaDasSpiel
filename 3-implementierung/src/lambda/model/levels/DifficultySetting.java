@@ -1,6 +1,7 @@
 package lambda.model.levels;
 
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 /**
@@ -14,7 +15,7 @@ public class DifficultySetting {
     private String musicString;
     private String bgImageString;
     private Music music;
-    private Image bgImage;
+    private Texture bgImage;
 
     /**
      * Creates a new instance of this class
@@ -70,7 +71,7 @@ public class DifficultySetting {
      *
      * @param bgImage image which is shown in the background
      */
-    public void setBgImage(Image bgImage) {
+    public void setBgImage(Texture bgImage) {
         this.bgImage = bgImage;
     }
 
@@ -79,7 +80,7 @@ public class DifficultySetting {
      *
      * @return the music which runs in the background
      */
-    public Image getBgImage() {
+    public Texture getBgImage() {
         return bgImage;
     }
 

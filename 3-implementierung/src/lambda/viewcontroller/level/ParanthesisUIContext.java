@@ -8,8 +8,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  */
 public class ParanthesisUIContext extends ElementUIContext {
 
-
-    private Sprite sprite;
     private Animation animation;
 
     public ParanthesisUIContext() {
@@ -23,15 +21,6 @@ public class ParanthesisUIContext extends ElementUIContext {
      */
     public Animation getAnimation() {
         return animation;
-    }
-
-    /**
-     * Returns the sprite
-     *
-     * @return the sprite
-     */
-    public Sprite getSprite() {
-        return sprite;
     }
 
 }

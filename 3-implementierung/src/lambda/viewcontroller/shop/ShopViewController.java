@@ -18,6 +18,7 @@ public class ShopViewController extends ViewController {
 
     @Override
     public void queueAssets(AssetManager assets) {
+        shop.setAssetManager(assetManager);
         shop.queueAssets(assetManager);
     }
 

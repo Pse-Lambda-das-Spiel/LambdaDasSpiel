@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  */
 public class VariableUIContext extends ElementUIContext {
 
-    private Sprite sprite;
     private Animation animation;
 
     public VariableUIContext() {
@@ -22,15 +21,6 @@ public class VariableUIContext extends ElementUIContext {
      */
     public Animation getAnimation() {
         return animation;
-    }
-
-    /**
-     * Returns the sprite
-     *
-     * @return the sprite
-     */
-    public Sprite getSprite() {
-        return sprite;
     }
 
 }

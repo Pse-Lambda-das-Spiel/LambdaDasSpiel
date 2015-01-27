@@ -2,14 +2,14 @@ package lambda.model.shop;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
-import lambda.model.levels.InvalidJsonException;
 import lambda.viewcontroller.level.AbstractionUIContext;
+import lambda.viewcontroller.level.ElementUIContext;
 import lambda.viewcontroller.level.ParanthesisUIContext;
 import lambda.viewcontroller.level.VariableUIContext;
 
@@ -23,9 +23,14 @@ import lambda.viewcontroller.level.VariableUIContext;
 public class ShopModel {
 
     private static ShopModel shop;
+    private AssetManager assetManager;
     private ShopItemTypeModel<MusicItemModel> music;
     private ShopItemTypeModel<BackgroundImageItemModel> images;
     private ShopItemTypeModel<ElementUIContextFamily> elementUIContextFamilies;
+
+    private String[] musicFilePaths;
+    private String[] imagesFilePaths;
+    private String[] elementUIContextFamilyPaths;
 
     /**
      * Private Constructor of this class. It will be call by "getShop()"
@@ -34,6 +39,10 @@ public class ShopModel {
         music = new ShopItemTypeModel<MusicItemModel>("music");
         images = new ShopItemTypeModel<BackgroundImageItemModel>("images");
         elementUIContextFamilies = new ShopItemTypeModel<ElementUIContextFamily>("sprites");
+
+        musicFilePaths = loadMusicPaths();
+        imagesFilePaths = loadImagePaths();
+        elementUIContextFamilyPaths = loadElementUIPaths();
     }
 
     /**
@@ -46,6 +55,11 @@ public class ShopModel {
             shop = new ShopModel();
         }
         return shop;
+    }
+
+
+    public void setAssetManager(AssetManager assetManager) {
+        this.assetManager = assetManager;
     }
 
     /**
@@ -75,94 +89,73 @@ public class ShopModel {
         return elementUIContextFamilies;
     }
 
-
-    /**
-     * Reads the items.json to know how much items to load and calls every method to complete the item-lists
-     */
-    public void loadAllItems() {
-        FileHandle file = Gdx.files.internal("data/itmes/items.json");
-        JsonReader reader = new JsonReader();
-        JsonValue jsonFile = reader.parse(file);
-        JsonValue items = jsonFile.child();
-
-        int numberOfMusicItems = items.getInt("musicItems");
-        int numberOfBackgroundImageItems = items.getInt("imageItems");
-        int numberOfElementUIContextFamilies = items.getInt("elementUIContextFamilies");
-
-        for (int i = 0; i < numberOfMusicItems; i++) {
-            music.getItems().add(i, loadMusicItem(Integer.toString(i)));
-        }
-
-        for (int i = 0; i < numberOfBackgroundImageItems; i++) {
-            images.getItems().add(i, loadBackgroundImageItem(Integer.toString(i)));
-        }
-
-        for (int i = 0; i < numberOfElementUIContextFamilies; i++) {
-            elementUIContextFamilies.getItems().add(i, loadElementUIContextFamily(Integer.toString(i)));
-        }
-
-    }
-
     /**
      * Reads the json and creates an "MusicItemModel"-item.
      *
-     * @param id the id to load the correct json
+     * @param file the json-file
      * @return new "MusicItemModel"-item with the dates from the json
      */
-    public MusicItemModel loadMusicItem(String id) {
-        FileHandle file = Gdx.files.internal("data/items/music" + String.format("%02d", id) + ".json");
+    public MusicItemModel loadMusicItem(FileHandle file) {
+        //FileHandle file = Gdx.files.internal("data/items/music" + String.format("%02d", id) + ".json");
         JsonReader reader = new JsonReader();
         JsonValue jsonFile = reader.parse(file);
         JsonValue music = jsonFile.child();
 
-        if (!(music.getString("musicId").equalsIgnoreCase(id))) {
-            throw new InvalidJsonException("The id of the json file does not match with its file name!");
-        }
+        String id = music.getString("id");
         int price = music.getInt("price");
         String filepath = music.getString("filepath");
-        return new MusicItemModel(id, price, filepath);
+        assetManager.load(filepath, Music.class);
+        MusicItemModel musicItem = new MusicItemModel(id, price, filepath);
+        musicItem.setMusic(assetManager.get(filepath));
+
+        return musicItem;
     }
+
 
     /**
      * Reads the json and creates an "BackgroundImageItemModel"-item.
      *
-     * @param id the id to load the correct json
+     * @param file the json-file
      * @return new "BackgroundImageItemModel"-item with the dates from the json
      */
-    public BackgroundImageItemModel loadBackgroundImageItem(String id) {
-        FileHandle file = Gdx.files.internal("data/items/backgroundimages" + String.format("%02d", id) + ".json");
+    public BackgroundImageItemModel loadBackgroundImageItem(FileHandle file) {
+        //FileHandle file = Gdx.files.internal("data/items/backgroundimages" + String.format("%02d", id) + ".json");
         JsonReader reader = new JsonReader();
         JsonValue jsonFile = reader.parse(file);
         JsonValue image = jsonFile.child();
 
-        if (!(image.getString("imageId").equalsIgnoreCase(id))) {
-            throw new InvalidJsonException("The id of the json file does not match with its file name!");
-        }
+        String id = image.getString("id");
         int price = image.getInt("price");
         String filepath = image.getString("filepath");
-        return new BackgroundImageItemModel(id, price, filepath);
+        assetManager.load(filepath, Texture.class);
+        BackgroundImageItemModel bgImage = new BackgroundImageItemModel(id, price, filepath);
+        bgImage.setImage(assetManager.get(filepath));
+
+        return bgImage;
     }
 
+    //TODO: ElementUIContextFamily wird über AssetLoader geladen, aber die Attribute innerhalb (noch) nicht.
     /**
      * Reads the json and creates an "ElementUIContextFamily"-item.
      *
-     * @param id the id to load the correct json
+     * @param file the id to load the correct json
      * @return new "ElementUIContextFamily"-item with the dates from the json
      */
-    public ElementUIContextFamily loadElementUIContextFamily(String id) {
-        FileHandle file = Gdx.files.internal("data/itmes/elementuis" + String.format("%02d", id) + ".json");
+    public ElementUIContextFamily loadElementUIContextFamily(FileHandle file) {
+        //FileHandle file = Gdx.files.internal("data/items/elementuis" + String.format("%02d", id) + ".json");
         JsonReader reader = new JsonReader();
         JsonValue jsonFile = reader.parse(file);
         JsonValue family = jsonFile.child();
 
-        if (!(family.getString("familyId").equalsIgnoreCase(id))) {
-            throw new InvalidJsonException("The id of the json file does not match with its file name!");
-        }
+        String id = family.getString("id");
         int price = family.getInt("price");
+
         String paranthesisPath = family.getString("paranthesisPath");
         String variablePath = family.getString("variablePath");
         String abstractionPath = family.getString("abstractionPath");
-        return new ElementUIContextFamily(id, price, paranthesisPath, variablePath, abstractionPath);
+        ElementUIContextFamily elementUIContextFamily = new ElementUIContextFamily(id, price, paranthesisPath,
+                variablePath, abstractionPath);
+        return elementUIContextFamily;
     }
 
     /**
@@ -171,6 +164,16 @@ public class ShopModel {
      * @param assets the AssetManager which loads the assets
      */
     public void queueAssets(AssetManager assets) {
+        assets.setLoader(MusicItemModel.class, new MusicItemModelLoader(new InternalFileHandleResolver()));
+        for (String musicFilePath : musicFilePaths) {
+            assets.load(musicFilePath, MusicItemModel.class);
+        }
+        assets.setLoader(BackgroundImageItemModel.class, new BackgroundImageItemModelLoader(new InternalFileHandleResolver()));
+        for (String imageFilePath : imagesFilePaths) {
+            assets.load(imageFilePath, BackgroundImageItemModel.class);
+        }
+
+        /*
         int numberOfMusic = shop.getMusic().getItems().size();
         for (int i = 0; i < numberOfMusic; i++) {
             String musicpath = shop.getMusic().getItems().get(i).getFilepath();
@@ -201,5 +204,55 @@ public class ShopModel {
 
             //assetManager.unload("data/levels/music" + String.format("%02d", i) + ".mp3");
         }
+        */
+    }
+
+
+    /**
+     *
+     * @return
+     */
+    public String[] loadMusicPaths() {
+        FileHandle file = Gdx.files.internal("data/itmes/items.json");
+        JsonReader reader = new JsonReader();
+        JsonValue jsonFile = reader.parse(file);
+        int numberOfMusic = jsonFile.getInt("musicItems");
+        String[] musicFilePaths = new String[numberOfMusic];
+        for (int i = 0; i < numberOfMusic; i++) {
+            musicFilePaths[i] = "data/items/music" + String.format("%02d", i) + ".json";
+        }
+        return musicFilePaths;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String[] loadImagePaths() {
+        FileHandle file = Gdx.files.internal("data/itmes/items.json");
+        JsonReader reader = new JsonReader();
+        JsonValue jsonFile = reader.parse(file);
+        int numberOfImages = jsonFile.getInt("backgroundImageItems");
+        String[] imageFilePaths = new String[numberOfImages];
+        for (int i = 0; i < numberOfImages; i++) {
+            imageFilePaths[i] = "data/items/images" + String.format("%02d", i) + ".json";
+        }
+        return imageFilePaths;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String[] loadElementUIPaths() {
+        FileHandle file = Gdx.files.internal("data/itmes/items.json");
+        JsonReader reader = new JsonReader();
+        JsonValue jsonFile = reader.parse(file);
+        int numberOfFamilies = jsonFile.getInt("elementUIContextFamilies");
+        String[] elementUIContextFamilyPaths = new String[numberOfFamilies];
+        for (int i = 0; i < numberOfFamilies; i++) {
+            elementUIContextFamilyPaths[i] = "data/items/elementuis" + String.format("%02d", i) + ".json";
+        }
+        return elementUIContextFamilyPaths;
     }
 }

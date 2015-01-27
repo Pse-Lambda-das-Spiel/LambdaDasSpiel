@@ -1,6 +1,7 @@
 package lambda.model.levels;
 
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import lambda.model.shop.ElementUIContextFamily;
 import lambda.model.shop.ShopModel;
@@ -14,7 +15,7 @@ public class LevelContext {
 
     private LevelModel levelModel;
     private Music music;
-    private Image bgImage;
+    private Texture bgImage;
     private ElementUIContextFamily elementUIContextFamily;
     private LevelManager manager;
     private DifficultySetting difficultySetting;
@@ -22,21 +23,21 @@ public class LevelContext {
     /**
      * Creates a new instance of this class
      */
-    public LevelContext(LevelModel levelModel, ShopModel shop) {
-        elementUIContextFamily = shop.getElementUIContextFamilies().getActivatedItem();
+    public LevelContext(LevelModel levelModel) {
+        elementUIContextFamily = ShopModel.getShop().getElementUIContextFamilies().getActivatedItem();
         this.levelModel = levelModel;
 
         if(levelModel.getId() != 0) {
             // for standard levels
             manager = LevelManager.getLevelManager();
-            difficultySetting = manager.getDifficultySettings().get(levelModel.getDifficulty());
+            difficultySetting = manager.getDifficultySetting(levelModel.getDifficulty());
             music = difficultySetting.getMusic();
             bgImage = difficultySetting.getBgImage();
         }
         else {
             // for sandbox
-            music = shop.getMusic().getActivatedItem().getMusic();
-            bgImage = shop.getImages().getActivatedItem().getImage();
+            music = ShopModel.getShop().getMusic().getActivatedItem().getMusic();
+            bgImage = ShopModel.getShop().getImages().getActivatedItem().getImage();
         }
     }
 
@@ -63,7 +64,7 @@ public class LevelContext {
      *
      * @return image
      */
-    public Image getBgImage() {
+    public Texture getBgImage() {
         return bgImage;
     }
 
@@ -72,7 +73,7 @@ public class LevelContext {
      *
      * @return elementUIContextFamily
      */
-    public lambda.model.shop.ElementUIContextFamily getElementUIContextFamily() {
+    public ElementUIContextFamily getElementUIContextFamily() {
         return elementUIContextFamily;
     }
 
