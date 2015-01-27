@@ -2,6 +2,9 @@ package lambda.model.shop;
 
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import lambda.viewcontroller.level.AbstractionUIContext;
+import lambda.viewcontroller.level.ParanthesisUIContext;
+import lambda.viewcontroller.level.VariableUIContext;
 
 /**
  *
@@ -9,22 +12,24 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  */
 public class ElementUIContextFamily extends ShopItemModel {
 
-    private Sprite paranthesisUIContext;
-    private Sprite variableUIContext;
-    private Sprite abstractionUIContext;
+    private ParanthesisUIContext paranthesisUIContext;
+    private VariableUIContext variableUIContext;
+    private AbstractionUIContext abstractionUIContext;
 
-    // Why not a constructor with 2 parameter ?
-    public ElementUIContextFamily() {
-
-    }
+    private String paranthesisPath;
+    private String variablePath;
+    private String abstractionPath;
 
     /**
      * 
      * @param id
      * @param price
      */
-    public ElementUIContextFamily(String id, int price) {
-    	super(id, price);
+    public ElementUIContextFamily(String id, int price, String filepath, String pPath, String vPath, String aPath) {
+        super(id, price, null);
+        paranthesisPath = pPath;
+        variablePath = vPath;
+        abstractionPath = aPath;
     }
     
     /**
@@ -32,7 +37,7 @@ public class ElementUIContextFamily extends ShopItemModel {
      *
      * @return paranthesis
      */
-    public Sprite getParanthesis() {
+    public ParanthesisUIContext getParanthesis() {
         return paranthesisUIContext;
     }
 
@@ -41,7 +46,7 @@ public class ElementUIContextFamily extends ShopItemModel {
      *
      * @return variable
      */
-    public Sprite getVariable() {
+    public VariableUIContext getVariable() {
         return variableUIContext;
     }
 
@@ -50,8 +55,32 @@ public class ElementUIContextFamily extends ShopItemModel {
      *
      * @return applicationFront
      */
-    public Sprite getApplication() {
+    public AbstractionUIContext getApplication() {
         return abstractionUIContext;
+    }
+
+    public void setParanthesisUIContext(ParanthesisUIContext paranthesisUIContext) {
+        this.paranthesisUIContext = paranthesisUIContext;
+    }
+
+    public void setVariableUIContext(VariableUIContext variableUIContext) {
+        this.variableUIContext = variableUIContext;
+    }
+
+    public void setAbstractionUIContext(AbstractionUIContext abstractionUIContext) {
+        this.abstractionUIContext = abstractionUIContext;
+    }
+
+    public String getParanthesisPath() {
+        return paranthesisPath;
+    }
+
+    public String getVariablePath() {
+        return variablePath;
+    }
+
+    public String getAbstractionPath() {
+        return abstractionPath;
     }
 
 }

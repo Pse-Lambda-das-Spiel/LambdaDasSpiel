@@ -1,0 +1,10 @@
+// Quantity of items inside the folders
+
+{
+	"items": {
+		"musicItems": 3,
+		"backgroundImageItems": 3,
+		"elementUIContextFamilies": 3
+	}
+}
+

@@ -13,6 +13,7 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
 
     private String id;
     private int price;
+    private String filepath;
     //how to initialize theses attributes at the moment ? setter ? constructor ?
     private ShopModel shop;
     private ShopItemTypeModel shopItemType;
@@ -22,16 +23,11 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
     /**
      *
      */
-    public ShopItemModel(String id, int price) {
+    public ShopItemModel(String id, int price, String filepath) {
         this.id = id;
         this.price = price;
+        this.filepath = filepath;
         purchased = false;
-    }
-
-    /**
-     * 
-     */
-    public ShopItemModel() {
     }
 
     /**
@@ -89,19 +85,27 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
         return shop;
     }
 
-    // I need this method for the saving this ShopItemModel
+
     /**
+     * Returns if the item is already purchased.
+     * true, if the item is purchased
+     *
 	 * @return the purchased
 	 */
 	public boolean isPurchased() {
 		return purchased;
 	}
 
-	// I need this method for the initializing with the json file (load profile)
 	/**
-	 * @param purchased the purchased to set
+     * Setter for purchased
+     *
+	 * @param purchased the boolean to set
 	 */
 	public void setPurchased(boolean purchased) {
 		this.purchased = purchased;
 	}
+
+    public String getFilepath() {
+        return filepath;
+    }
 }

@@ -19,6 +19,9 @@ public class LevelSelectionViewController extends ViewController {
     private AssetManager assetManager;
     private LevelManager levelManager;
 
+    /**
+     *
+     */
 	public LevelSelectionViewController() {
         stage = new Stage(new ScreenViewport());
         assetManager = new AssetManager();
@@ -34,6 +37,7 @@ public class LevelSelectionViewController extends ViewController {
         for (int i = 0; i < numberOfMusic; i++) {
             assetManager.load("data/levels/music" + String.format("%02d", i) + ".mp3", Music.class);
             levelManager.getDifficultySettings().get(i).setMusic(assetManager.get("data/levels/music" + String.format("%02d", i) + ".mp3"));
+            //assetManager.unload("data/levels/music" + String.format("%02d", i) + ".mp3");
         }
 
         file = Gdx.files.internal("data/difficulties/numberOfImages.json");

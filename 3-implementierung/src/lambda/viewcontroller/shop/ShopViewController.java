@@ -1,16 +1,23 @@
 package lambda.viewcontroller.shop;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import lambda.model.shop.ShopModel;
 import lambda.viewcontroller.ViewController;
 
 public class ShopViewController extends ViewController {
 
+    private ShopModel shop;
+    private AssetManager assetManager;
+
 	public ShopViewController() {
+        shop = ShopModel.getShop();
+        assetManager = new AssetManager();
+
 	}
 
     @Override
     public void queueAssets(AssetManager assets) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
