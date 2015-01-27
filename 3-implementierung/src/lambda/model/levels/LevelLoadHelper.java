@@ -1,4 +1,4 @@
-package lambda.util;
+package lambda.model.levels;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -14,10 +14,6 @@ import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.LambdaVariable;
-import lambda.model.levels.DifficultySetting;
-import lambda.model.levels.ElementType;
-import lambda.model.levels.LevelModel;
-import lambda.model.levels.ReductionStrategy;
 import lambda.viewcontroller.level.TutorialMessage;
 
 /**
@@ -34,18 +30,20 @@ public final class LevelLoadHelper {
 	/**
 	 * Loads the specific level json file and initialize a LevelModel with the loaded data.
 	 * 
-	 * @param id the id of the to be loaded level
+	 * @param file the {@link FileHandle} of the to be loaded level
 	 * @return the LevelModel initialized with the level data from the json file
 	 * @throws InvalidJsonException if the corresponding json file has invalid content
 	 * @throws java.io.IOException if there is an error while reading the level json file
 	 */
-	public static LevelModel loadLevel(int id) {
-		FileHandle file = Gdx.files.internal("data/levels/" + String.format("%02d", id) + ".json");
+	public static LevelModel loadLevel(FileHandle file) {
+//		FileHandle file = Gdx.files.internal("data/levels/" + String.format("%02d", id) + ".json");
 		JsonReader reader = new JsonReader();
 		JsonValue jsonFile = reader.parse(file);
 		JsonValue level = jsonFile.child();
-		if (!(level.getInt("levelId") == id)) {
-			throw new InvalidJsonException("The id of the json file does not match with its file name!");
+		String levelId = String.format("%02d", level.getInt("levelId"));
+		if (!(levelId.equals(file.nameWithoutExtension()))) {
+			throw new InvalidJsonException("The id of the json file " + file.name() 
+																		+  "does not match with its file name!");
 		}
 		JsonValue availableRedStrats = level.get("availableRedStrats");
 		JsonValue useableElements = level.get("useableElements");
@@ -54,8 +52,8 @@ public final class LevelLoadHelper {
 		JsonValue start = constellations.get("start");
 		JsonValue goal = constellations.get("goal");
 		JsonValue hint = constellations.get("hint");
-		LevelModel levelModel = new LevelModel(id, convertJsonToConstellation(start), convertJsonToConstellation(goal), 
-				convertJsonToConstellation(hint), convertJsonToTutorial(tutorial), 
+		LevelModel levelModel = new LevelModel(level.getInt("levelId"), convertJsonToConstellation(start), 
+				convertJsonToConstellation(goal), convertJsonToConstellation(hint), convertJsonToTutorial(tutorial), 
 				convertJsonToAvailableRedStrats(availableRedStrats), convertJsonToUseableElements(useableElements), 
 				level.getInt("difficulty"), level.getInt("coins"), level.getBoolean("standardMode"));
 		return levelModel;
@@ -167,40 +165,41 @@ public final class LevelLoadHelper {
 
 	//Internal file listing does not work on the desktop
 	/**
-	 * Returns a list of all levels
+	 * Returns an array which contains the path to all level files
 	 *
-	 * @return a list which contains all levels
+	 * @return a an which contains the path to all level files
 	 */
-	public static List<LevelModel> loadAllLevels() {
-		List<LevelModel> levels = new ArrayList<>();
+	public static String[] loadAllLevelPaths() {
 		FileHandle file = Gdx.files.internal("data/levels/numberOfLevels.json");
 		JsonReader reader = new JsonReader();
 		JsonValue jsonFile = reader.parse(file);
 		int numberOfLevels = jsonFile.getInt("numberOfLevels");
+		String[] levelFilePaths = new String[numberOfLevels];
 		for (int i = 0; i < numberOfLevels; i++) {
-			levels.add(i, loadLevel(i));
+			levelFilePaths[i] = "data/levels/" + String.format("%02d", i) + ".json";
 		}
-		return levels;
+		return levelFilePaths;
 	}
 
 	/**
 	 * Returns settings for a difficulty
 	 *
-	 * @param id id of the difficulty
+	 * @param file the {@link FileHandle}  of the to be loaded difficulty settings
 	 * @return settings for a difficulty
 	 */
-	public static DifficultySetting loadDifficulty(int id) {
-		FileHandle file = Gdx.files.internal("data/difficulties/" + String.format("%02d", id) + ".json");
+	public static DifficultySetting loadDifficulty(FileHandle file) {
 		JsonReader reader = new JsonReader();
 		JsonValue jsonFile = reader.parse(file);
 		JsonValue difficulty = jsonFile.child();
-		if (!(difficulty.getInt("difficultyId") == id)) {
-			throw new InvalidJsonException("The id of the json file does not match with its file name!");
+		String difficultyId = String.format("%02d", difficulty.getInt("difficultyId"));
+		if (!(difficultyId.equals(file.nameWithoutExtension()))) {
+			throw new InvalidJsonException("The id of the json file " + file.name() 
+					+ "does not match with its file name!");
 		}
 		JsonValue music = difficulty.get("music");
 		JsonValue bgImage = difficulty.get("bgImage");
-		DifficultySetting difficultySetting = new DifficultySetting(id, difficulty.getString("music"),
-				difficulty.getString("bgImage"));
+		DifficultySetting difficultySetting = new DifficultySetting(difficulty.getInt("difficultyId"), 
+				difficulty.getString("music"), difficulty.getString("bgImage"));
 
 
 		return difficultySetting;
@@ -208,20 +207,20 @@ public final class LevelLoadHelper {
 
 	//Internal file listing does not work on the desktop
 	/**
-	 * Returns a list of all DifficultySettings
+	 * Returns the paths to all DifficultySetting files
 	 *
-	 * @return a list which contains all DifficultySettings
+	 * @return an array which contains the paths for all DifficultySettings
 	 */
-	public static List<DifficultySetting> loadAllDifficulties() {
-		List<DifficultySetting> difficulties = new ArrayList<>();
+	public static String[] loadAllDifficultyPaths() {
 		FileHandle file = Gdx.files.internal("data/difficulties/numberOfDifficulties.json");
 		JsonReader reader = new JsonReader();
 		JsonValue jsonFile = reader.parse(file);
 		int numberOfDifficulties = jsonFile.getInt("numberOfDifficulties");
+		String[] difficultySettingFilePaths = new String[numberOfDifficulties];
 		for (int i = 0; i < numberOfDifficulties; i++) {
-			difficulties.add(i, loadDifficulty(i));
+			difficultySettingFilePaths[i] = "data/difficulties/" + String.format("%02d", i) + ".json";
 		}
-		return difficulties;
+		return difficultySettingFilePaths;
 	}
 	
 }

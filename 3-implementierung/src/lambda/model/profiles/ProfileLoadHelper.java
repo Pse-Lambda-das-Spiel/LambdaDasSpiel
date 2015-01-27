@@ -1,12 +1,10 @@
-package lambda.util;
+package lambda.model.profiles;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 
-import lambda.model.profiles.ProfileManager;
-import lambda.model.profiles.ProfileModel;
 import lambda.model.settings.SettingsModel;
 import lambda.model.shop.BackgroundImageItemModel;
 import lambda.model.shop.ElementUIContextFamily;

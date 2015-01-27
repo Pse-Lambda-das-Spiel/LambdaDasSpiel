@@ -8,8 +8,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 
 import lambda.Observable;
-import lambda.util.ProfileLoadHelper;
-import lambda.util.ProfileSaveHelper;
 
 /**
  * The ProfileManager controls the games profiles. It contains a list of all

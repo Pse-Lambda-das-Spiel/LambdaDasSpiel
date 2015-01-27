@@ -30,24 +30,25 @@ public class LevelSelectionViewController extends ViewController {
 
     @Override
     public void queueAssets(AssetManager assets) {
-        FileHandle file = Gdx.files.internal("data/levels/music/numberOfMusic.json");
-        JsonReader reader = new JsonReader();
-        JsonValue jsonFile = reader.parse(file);
-        int numberOfMusic = jsonFile.getInt("numberOfMusic");
-        for (int i = 0; i < numberOfMusic; i++) {
-            assetManager.load("data/levels/music" + String.format("%02d", i) + ".mp3", Music.class);
-            levelManager.getDifficultySettings().get(i).setMusic(assetManager.get("data/levels/music" + String.format("%02d", i) + ".mp3"));
-            //assetManager.unload("data/levels/music" + String.format("%02d", i) + ".mp3");
-        }
-
-        file = Gdx.files.internal("data/difficulties/numberOfImages.json");
-        reader = new JsonReader();
-        jsonFile = reader.parse(file);
-        int numberOfImages = jsonFile.getInt("numberOfImages");
-        for (int i = 0; i < numberOfImages; i++) {
-            assetManager.load("data/levels/images" + String.format("%02d", i) + ".jpg", Image.class);
-            levelManager.getDifficultySettings().get(i).setBgImage(assetManager.get("data/levels/images" + String.format("%02d", i) + ".jpg"));
-        }
+    	levelManager.queueAssets(assets);
+//        FileHandle file = Gdx.files.internal("data/levels/music/numberOfMusic.json");
+//        JsonReader reader = new JsonReader();
+//        JsonValue jsonFile = reader.parse(file);
+//        int numberOfMusic = jsonFile.getInt("numberOfMusic");
+//        for (int i = 0; i < numberOfMusic; i++) {
+//            assetManager.load("data/levels/music" + String.format("%02d", i) + ".mp3", Music.class);
+//            levelManager.getDifficultySettings().get(i).setMusic(assetManager.get("data/levels/music" + String.format("%02d", i) + ".mp3"));
+//            //assetManager.unload("data/levels/music" + String.format("%02d", i) + ".mp3");
+//        }
+//
+//        file = Gdx.files.internal("data/difficulties/numberOfImages.json");
+//        reader = new JsonReader();
+//        jsonFile = reader.parse(file);
+//        int numberOfImages = jsonFile.getInt("numberOfImages");
+//        for (int i = 0; i < numberOfImages; i++) {
+//            assetManager.load("data/levels/images" + String.format("%02d", i) + ".jpg", Image.class);
+//            levelManager.getDifficultySettings().get(i).setBgImage(assetManager.get("data/levels/images" + String.format("%02d", i) + ".jpg"));
+//        }
     }
 
     @Override
