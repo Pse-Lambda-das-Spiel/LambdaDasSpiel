@@ -83,6 +83,13 @@ public final class ProfileLoadHelper {
     	// Update this method if ShopItemModel gets an update and gets more precise regarding references and activation
     	
     	for (JsonValue entry = shopJson.get("musics").child(); entry != null; entry = entry.next) {
+			/*
+			Array von gekauften Artikeln aus json auslesen
+			shop.getMusic().getItems().get(IDgekauftesItem).setPurchased(true);
+			shop.getMusic().setActivatedItem(shop.getMusic().getItems().get(AKTIVIERTESITEMID));
+			*/
+
+
     		MusicItemModel music = new MusicItemModel(entry.getString("musicId"), entry.getInt("price"));
     		music.setPurchased(entry.getBoolean("purchased"));
     		if (music.getId().equals(shopJson.getString("activatedMusicId"))) {

@@ -25,7 +25,7 @@ public class ElementUIContextFamily extends ShopItemModel {
      * @param id
      * @param price
      */
-    public ElementUIContextFamily(String id, int price, String filepath, String pPath, String vPath, String aPath) {
+    public ElementUIContextFamily(String id, int price, String pPath, String vPath, String aPath) {
         super(id, price, null);
         paranthesisPath = pPath;
         variablePath = vPath;

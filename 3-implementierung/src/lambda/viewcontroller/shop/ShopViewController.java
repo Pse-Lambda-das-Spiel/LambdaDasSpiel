@@ -4,6 +4,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import lambda.model.shop.ShopModel;
 import lambda.viewcontroller.ViewController;
+import lambda.viewcontroller.assets.AssetViewController;
 
 public class ShopViewController extends ViewController {
 
@@ -12,12 +13,12 @@ public class ShopViewController extends ViewController {
 
 	public ShopViewController() {
         shop = ShopModel.getShop();
-        assetManager = new AssetManager();
-
+        assetManager = getGame().getController(AssetViewController.class).getManager();
 	}
 
     @Override
     public void queueAssets(AssetManager assets) {
+        shop.queueAssets(assetManager);
     }
 
     @Override

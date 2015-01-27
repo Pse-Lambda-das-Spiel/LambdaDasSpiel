@@ -38,7 +38,7 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
         levelIndex = 1;
         coins = 0;
         settings = new SettingsModel();
-        shop = new ShopModel();
+        shop = ShopModel.getShop();
         statistics = new StatisticModel();
     }
 
