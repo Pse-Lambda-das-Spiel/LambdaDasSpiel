@@ -1,20 +1,38 @@
 package lambda.viewcontroller.level;
 
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
  * @author: Kay Schmitteckert
  */
-public class ParanthesisUIContext extends ElementUIContext {
+public class ParanthesisUIContext extends ElementUIContext  implements ApplicationListener {
+
+    /**
+     * Number of columns in the animation-sheet
+     */
+    private static final int FRAME_COLS = 6;
+    /**
+     * Number of rows in the animation-sheet
+     */
+    private static final int FRAME_ROWS = 5;
+
 
     private Texture tFront;
     private Animation aFront;
+    private TextureRegion[] walkFrames;
+    private SpriteBatch spriteBatch;
+    private TextureRegion currentFrame;
+    private float stateTime;
+
     private Texture tCenter;
-    private Animation aCenter;
     private Texture tBack;
-    private Animation aBack;
 
     public ParanthesisUIContext(Texture front, Texture center, Texture back) {
         tFront = front;
@@ -31,4 +49,48 @@ public class ParanthesisUIContext extends ElementUIContext {
         return aFront;
     }
 
+    @Override
+    public void create() {
+        TextureRegion[][] tmp = TextureRegion.split(tFront, tFront.getWidth()/FRAME_COLS, tFront.getHeight()/FRAME_ROWS);              // #10
+        walkFrames = new TextureRegion[FRAME_COLS * FRAME_ROWS];
+        int index = 0;
+        for (int i = 0; i < FRAME_ROWS; i++) {
+            for (int j = 0; j < FRAME_COLS; j++) {
+                walkFrames[index++] = tmp[i][j];
+            }
+        }
+        aFront = new Animation(0.025f, walkFrames);
+        spriteBatch = new SpriteBatch();
+        stateTime = 0f;
+    }
+
+    @Override
+    public void resize(int i, int i1) {
+
+    }
+
+    @Override
+    public void render() {
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+        stateTime += Gdx.graphics.getDeltaTime();
+        currentFrame = aFront.getKeyFrame(stateTime, true);
+        spriteBatch.begin();
+        spriteBatch.draw(currentFrame, 50, 50);
+        spriteBatch.end();
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void dispose() {
+        spriteBatch.dispose();
+    }
 }
