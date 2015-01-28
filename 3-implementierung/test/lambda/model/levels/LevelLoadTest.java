@@ -1,9 +1,8 @@
-/**
- * 
- */
-package lambda.util;
 
-import static org.junit.Assert.*;
+package lambda.model.levels;
+
+
+import static org.junit.Assert.assertEquals;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -12,11 +11,7 @@ import java.util.List;
 import lambda.model.lambdaterm.LambdaAbstraction;
 import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.LambdaRoot;
-import lambda.model.lambdaterm.LambdaValue;
 import lambda.model.lambdaterm.LambdaVariable;
-import lambda.model.levels.ElementType;
-import lambda.model.levels.LevelModel;
-import lambda.model.levels.ReductionStrategy;
 import lambda.viewcontroller.level.TutorialMessage;
 
 import org.junit.After;
@@ -26,25 +21,26 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.backends.lwjgl.LwjglFiles;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.utils.JsonReader;
-import com.badlogic.gdx.utils.JsonValue;
 
 // This test is only for the desktop at the moment, so move it to the desktop sub project.
 
 /**
- * This is test for the LevelLoadHelper.
+ * This is test for the LevelLoadHelper and the LevelModelLoader.
  * 
  * @author Robert Hochweiss
  */
-public class LevelLoadHelperTest {
+public class LevelLoadTest {
 	
 	private static LevelModel testLevel;
+	private static AssetManager assets;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		Gdx.files = new LwjglFiles();
+		assets = new AssetManager();
 		LambdaRoot start = new LambdaRoot();
 		LambdaRoot goal = new LambdaRoot();
 		LambdaRoot hint = new LambdaRoot();
@@ -78,6 +74,7 @@ public class LevelLoadHelperTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		testLevel = null;
 	}
 
 	@Before
@@ -89,11 +86,11 @@ public class LevelLoadHelperTest {
 	}
 	
 	/**
-	 * Tests the loading of sample level json file(in this case 04.json).
+	 * Tests the loading of a sample level json file(in this case 04.json).
 	 */
 	@Test
-	public void testLevelFile() {
-		LevelModel jsonLevel = LevelLoadHelper.loadLevel(4);
+	public void testLoadLevel() {
+		LevelModel jsonLevel = LevelLoadHelper.loadLevel(Gdx.files.internal("data/levels/04.json"));
 		assertEquals(testLevel.getId(), jsonLevel.getId());
 		assertEquals(testLevel.getCoins(), jsonLevel.getCoins());
 		assertEquals(testLevel.getDifficulty(), jsonLevel.getDifficulty());
@@ -110,8 +107,33 @@ public class LevelLoadHelperTest {
 
 	@Test
 	public void testLoadAllLevels() {
-		int number = LevelLoadHelper.loadAllLevels().size();
+		int number = LevelLoadHelper.loadAllLevelPaths().length;
 		assertEquals(5, number);
+	}
+	
+	/**
+	 * Tests the loading of a sample level json file while using the {@link LevelModelLoader}.
+	 */
+	@Test
+	public void testLevelModelLoader() {
+		assets.setLoader(LevelModel.class, new LevelModelLoader(new InternalFileHandleResolver()));
+		assets.load("data/levels/04.json", LevelModel.class);
+		while (!(assets.update())) {
+			System.out.println("Wait until its loaded...");
+		}
+		LevelModel loadedLevel = assets.get("data/levels/04.json", LevelModel.class);
+		assertEquals(testLevel.getId(), loadedLevel.getId());
+		assertEquals(testLevel.getCoins(), loadedLevel.getCoins());
+		assertEquals(testLevel.getDifficulty(), loadedLevel.getDifficulty());
+		assertEquals(testLevel.isStandardMode(), loadedLevel.isStandardMode());
+		assertEquals(testLevel.getStart(), loadedLevel.getStart());
+		assertEquals(testLevel.getGoal(), loadedLevel.getGoal());
+		assertEquals(testLevel.getHint(), loadedLevel.getHint());
+		for (int i = 0; i < loadedLevel.getTutorial().size(); i++) {
+			assertEquals(testLevel.getTutorial().get(i).getId(), loadedLevel.getTutorial().get(i).getId());
+		}
+		assertEquals(testLevel.getAvailableRedStrats(), loadedLevel.getAvailableRedStrats());
+		assertEquals(testLevel.getUseableElements(), loadedLevel.getUseableElements());
 	}
 
 }

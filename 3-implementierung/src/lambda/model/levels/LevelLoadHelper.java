@@ -36,7 +36,6 @@ public final class LevelLoadHelper {
 	 * @throws java.io.IOException if there is an error while reading the level json file
 	 */
 	public static LevelModel loadLevel(FileHandle file) {
-//		FileHandle file = Gdx.files.internal("data/levels/" + String.format("%02d", id) + ".json");
 		JsonReader reader = new JsonReader();
 		JsonValue jsonFile = reader.parse(file);
 		JsonValue level = jsonFile.child();
