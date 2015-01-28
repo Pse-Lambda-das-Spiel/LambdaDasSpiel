@@ -22,58 +22,47 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	}
 	
 	public int getLambsEnchanted() {
-		// TODO Auto-generated method stub
-		return 0;
+		return lambsEnchanted;
 	}
 
 	public int getGemsEnchanted() {
-		// TODO Auto-generated method stub
-		return 0;
+		return gemsEnchanted;
 	}
 
 	public int getGemsPlaced() {
-		// TODO Auto-generated method stub
-		return 0;
+		return gemsPlaced;
 	}
 
 	public int getLambsPlaced() {
-		// TODO Auto-generated method stub
-		return 0;
+		return lambsPlaced;
 	}
 
 	public long getTimePlayed() {
-		// TODO Auto-generated method stub
-		return 0;
+		return timePlayed;
 	}
 
 	public int getHintsNotUsed() {
-		// TODO Auto-generated method stub
-		return 0;
+		return hintsNotUsed;
 	}
 
 	public int getLevelCompleted() {
-		// TODO Auto-generated method stub
-		return 0;
+		return levelCompleted;
 	}
 
 	public int getGemsEnchantedPerLevel() {
-		// TODO Auto-generated method stub
-		return 0;
+		return gemsEnchantedPerLevel;
 	}
 
 	public int getLambsEnchantedPerLevel() {
-		// TODO Auto-generated method stub
-		return 0;
+		return lambsEnchantedPerLevel;
 	}
 
 	public int getGemsPlacedPerLevel() {
-		// TODO Auto-generated method stub
-		return 0;
+		return gemsPlacedPerLevel;
 	}
 
 	public int getLambsPlacedPerLevel() {
-		// TODO Auto-generated method stub
-		return 0;
+		return lambsPlacedPerLevel;
 	}
 
 	/**
@@ -81,6 +70,7 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public void setLambsEnchanted(int lambsEnchanted) {
 		this.lambsEnchanted = lambsEnchanted;
+		notify(observer -> observer.changedLambsEnchanted());
 	}
 
 	/**
@@ -88,6 +78,7 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public void setGemsEnchanted(int gemsEnchanted) {
 		this.gemsEnchanted = gemsEnchanted;
+		notify(observer -> observer.changedGemsEnchanted());
 	}
 
 	/**
@@ -95,6 +86,7 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public void setGemsPlaced(int gemsPlaced) {
 		this.gemsPlaced = gemsPlaced;
+		notify(observer -> observer.changedGemsPlaced());
 	}
 
 	/**
@@ -102,6 +94,7 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public void setLambsPlaced(int lambsPlaced) {
 		this.lambsPlaced = lambsPlaced;
+		notify(observer -> observer.changedLambsPlaced());
 	}
 
 	/**
@@ -109,6 +102,7 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public void setLambsEnchantedPerLevel(int lambsEnchantedPerLevel) {
 		this.lambsEnchantedPerLevel = lambsEnchantedPerLevel;
+		notify(observer -> observer.changedLambsEnchantedPerLevel());
 	}
 
 	/**
@@ -116,6 +110,7 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public void setGemsEnchantedPerLevel(int gemsEnchantedPerLevel) {
 		this.gemsEnchantedPerLevel = gemsEnchantedPerLevel;
+		notify(observer -> observer.changedGemsEnchantedPerLevel());
 	}
 
 	/**
@@ -123,6 +118,7 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public void setGemsPlacedPerLevel(int gemsPlacedPerLevel) {
 		this.gemsPlacedPerLevel = gemsPlacedPerLevel;
+		notify(observer -> observer.changedGemsPlacedPerLevel());
 	}
 
 	/**
@@ -130,6 +126,7 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public void setLambsPlacedPerLevel(int lambsPlacedPerLevel) {
 		this.lambsPlacedPerLevel = lambsPlacedPerLevel;
+		notify(observer -> observer.changedLambsPlacedPerLevel());
 	}
 
 	/**
@@ -137,6 +134,7 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public void setLevelCompleted(int levelCompleted) {
 		this.levelCompleted = levelCompleted;
+		notify(observer -> observer.changedLevelCompleted());
 	}
 
 	/**
@@ -144,6 +142,7 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public void setHintsNotUsed(int hintsNotUsed) {
 		this.hintsNotUsed = hintsNotUsed;
+		notify(observer -> observer.changedHintsNotUsed());
 	}
 
 	/**
@@ -151,6 +150,7 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public void setTimePlayed(long timePlayed) {
 		this.timePlayed = timePlayed;
+		notify(observer -> observer.changedTimePlayed());
 	}
 
 	/**

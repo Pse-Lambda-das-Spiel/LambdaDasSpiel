@@ -75,6 +75,7 @@ public class LevelLoadTest {
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		testLevel = null;
+		assets.dispose();
 	}
 
 	@Before
