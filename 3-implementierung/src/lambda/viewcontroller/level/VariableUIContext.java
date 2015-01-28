@@ -1,5 +1,6 @@
 package lambda.viewcontroller.level;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -8,10 +9,11 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  */
 public class VariableUIContext extends ElementUIContext {
 
-    private Animation animation;
+    private Texture tVariable;
+    private Animation aVariable;
 
-    public VariableUIContext() {
-
+    public VariableUIContext(Texture variable) {
+        tVariable = variable;
     }
 
     /**
@@ -19,8 +21,8 @@ public class VariableUIContext extends ElementUIContext {
      *
      * @return animation relating to the sprite
      */
-    public Animation getAnimation() {
-        return animation;
+    public Animation getaVariable() {
+        return aVariable;
     }
 
 }

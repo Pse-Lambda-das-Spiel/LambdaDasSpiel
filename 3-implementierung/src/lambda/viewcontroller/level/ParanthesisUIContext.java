@@ -1,5 +1,6 @@
 package lambda.viewcontroller.level;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -8,10 +9,17 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  */
 public class ParanthesisUIContext extends ElementUIContext {
 
-    private Animation animation;
+    private Texture tFront;
+    private Animation aFront;
+    private Texture tCenter;
+    private Animation aCenter;
+    private Texture tBack;
+    private Animation aBack;
 
-    public ParanthesisUIContext() {
-
+    public ParanthesisUIContext(Texture front, Texture center, Texture back) {
+        tFront = front;
+        tCenter = center;
+        tBack = back;
     }
 
     /**
@@ -19,8 +27,8 @@ public class ParanthesisUIContext extends ElementUIContext {
      *
      * @return animation relating to the sprite
      */
-    public Animation getAnimation() {
-        return animation;
+    public Animation getAFront() {
+        return aFront;
     }
 
 }

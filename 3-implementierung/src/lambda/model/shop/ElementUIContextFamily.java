@@ -16,20 +16,17 @@ public class ElementUIContextFamily extends ShopItemModel {
     private VariableUIContext variableUIContext;
     private AbstractionUIContext abstractionUIContext;
 
-    private String paranthesisPath;
-    private String variablePath;
-    private String abstractionPath;
-
     /**
      * 
      * @param id
      * @param price
      */
-    public ElementUIContextFamily(String id, int price, String pPath, String vPath, String aPath) {
+    public ElementUIContextFamily(String id, int price, ParanthesisUIContext paranthesis, VariableUIContext variable,
+                                  AbstractionUIContext abstraction) {
         super(id, price, null);
-        paranthesisPath = pPath;
-        variablePath = vPath;
-        abstractionPath = aPath;
+        paranthesisUIContext = paranthesis;
+        variableUIContext = variable;
+        abstractionUIContext = abstraction;
     }
     
     /**
@@ -70,17 +67,4 @@ public class ElementUIContextFamily extends ShopItemModel {
     public void setAbstractionUIContext(AbstractionUIContext abstractionUIContext) {
         this.abstractionUIContext = abstractionUIContext;
     }
-
-    public String getParanthesisPath() {
-        return paranthesisPath;
-    }
-
-    public String getVariablePath() {
-        return variablePath;
-    }
-
-    public String getAbstractionPath() {
-        return abstractionPath;
-    }
-
 }

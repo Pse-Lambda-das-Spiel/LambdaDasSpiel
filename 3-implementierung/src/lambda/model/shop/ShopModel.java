@@ -2,12 +2,19 @@ package lambda.model.shop;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.FileHandleResolver;
+import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
+import lambda.viewcontroller.level.AbstractionUIContext;
+import lambda.viewcontroller.level.ElementUIContext;
+import lambda.viewcontroller.level.ParanthesisUIContext;
+import lambda.viewcontroller.level.VariableUIContext;
 
 
 /**
@@ -147,10 +154,21 @@ public class ShopModel {
         int price = family.getInt("price");
 
         String paranthesisPath = family.getString("paranthesisPath");
+        assetManager.setLoader(ParanthesisUIContext.class, new ParanthesisUIContextLoader((new InternalFileHandleResolver())));
+        assetManager.load(paranthesisPath, ParanthesisUIContext.class);
         String variablePath = family.getString("variablePath");
+        assetManager.setLoader(VariableUIContext.class, new VariableUIContextLoader(new InternalFileHandleResolver()));
+        assetManager.load(variablePath, VariableUIContext.class);
         String abstractionPath = family.getString("abstractionPath");
-        ElementUIContextFamily elementUIContextFamily = new ElementUIContextFamily(id, price, paranthesisPath,
-                variablePath, abstractionPath);
+        assetManager.setLoader(AbstractionUIContext.class, new AbstractionUIContextLoader(new InternalFileHandleResolver()));
+        assetManager.load(abstractionPath, AbstractionUIContext.class);
+
+        ParanthesisUIContext paranthesis = assetManager.get(paranthesisPath);
+        VariableUIContext variable = assetManager.get(variablePath);
+        AbstractionUIContext abstraction = assetManager.get(abstractionPath);
+
+        ElementUIContextFamily elementUIContextFamily = new ElementUIContextFamily(id, price, paranthesis,
+                variable, abstraction);
         return elementUIContextFamily;
     }
 
@@ -167,6 +185,10 @@ public class ShopModel {
         assets.setLoader(BackgroundImageItemModel.class, new BackgroundImageItemModelLoader(new InternalFileHandleResolver()));
         for (String imageFilePath : imagesFilePaths) {
             assets.load(imageFilePath, BackgroundImageItemModel.class);
+        }
+        assets.setLoader(ElementUIContextFamily.class, new ElementUIContextFamilyLoader(new InternalFileHandleResolver()));
+        for (String elementUIContextPath: elementUIContextFamilyPaths) {
+            assets.load(elementUIContextPath, ElementUIContextFamily.class);
         }
 
         /*
@@ -250,5 +272,57 @@ public class ShopModel {
             elementUIContextFamilyPaths[i] = "data/items/elementuis" + String.format("%02d", i) + ".json";
         }
         return elementUIContextFamilyPaths;
+    }
+
+    public ParanthesisUIContext loadParanthesisUIContext(FileHandle file) {
+
+        JsonReader reader = new JsonReader();
+        JsonValue jsonFile = reader.parse(file);
+        JsonValue paranthesis = jsonFile.child();
+
+        String front = paranthesis.getString("front");
+        String center = paranthesis.getString("center");
+        String back = paranthesis.getString("back");
+        assetManager.load(front, Texture.class);
+        assetManager.load(center, Texture.class);
+        assetManager.load(back, Texture.class);
+
+        ParanthesisUIContext paranthesisUIContext = new ParanthesisUIContext(assetManager.get(front),
+                assetManager.get(center), assetManager.get(back));
+
+        return paranthesisUIContext;
+    }
+
+    public AbstractionUIContext loadAbstractionUIContext(FileHandle file) {
+
+        JsonReader reader = new JsonReader();
+        JsonValue jsonFile = reader.parse(file);
+        JsonValue abstraction = jsonFile.child();
+
+        String front = abstraction.getString("front");
+        String center = abstraction.getString("center");
+        String back = abstraction.getString("back");
+        assetManager.load(front, Texture.class);
+        assetManager.load(center, Texture.class);
+        assetManager.load(back, Texture.class);
+
+        AbstractionUIContext abstractionUIContext = new AbstractionUIContext(assetManager.get(front),
+                assetManager.get(center), assetManager.get(back));
+
+        return abstractionUIContext;
+    }
+
+    public VariableUIContext loadVariableUIContext(FileHandle file) {
+
+        JsonReader reader = new JsonReader();
+        JsonValue jsonFile = reader.parse(file);
+        JsonValue variable = jsonFile.child();
+
+        String variableSheet = variable.getString("variable");
+        assetManager.load(variableSheet, Texture.class);
+
+        VariableUIContext variableUIContext = new VariableUIContext(assetManager.get(variableSheet));
+
+        return variableUIContext;
     }
 }

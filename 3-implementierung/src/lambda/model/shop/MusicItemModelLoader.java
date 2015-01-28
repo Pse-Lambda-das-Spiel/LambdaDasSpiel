@@ -17,7 +17,7 @@ import com.badlogic.gdx.utils.Array;
  */
 public class MusicItemModelLoader extends AsynchronousAssetLoader<MusicItemModel, MusicItemModelLoader.MusicItemModelParameter> {
 
-    MusicItemModel musicItem;
+    private MusicItemModel musicItem;
 
     /**
      * Creates an new LevelModelLoader.

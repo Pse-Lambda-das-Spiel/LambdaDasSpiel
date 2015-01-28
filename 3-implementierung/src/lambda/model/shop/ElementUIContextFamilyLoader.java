@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.Array;
  */
 public class ElementUIContextFamilyLoader extends AsynchronousAssetLoader<ElementUIContextFamily, ElementUIContextFamilyLoader.ElementUIContextFamilyParameter> {
 
-    ElementUIContextFamily elementFamily;
+    private ElementUIContextFamily elementFamily;
 
     public ElementUIContextFamilyLoader(FileHandleResolver resolver) {
         super(resolver);

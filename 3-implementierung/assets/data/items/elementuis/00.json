@@ -2,9 +2,9 @@
 	"family": {
 		"id": "0",
 		"price": 10 ,
-		"paranthesisPath": "data/items/music/00_1.png",
-		"variablePath": "data/items/elementuis/00_2.png",
-		"abstractionPath" "data/items/elementuis/00_3.png"
+		"paranthesisPath": "data/items/elementuis/paranthesis/00.json",
+		"variablePath": "data/items/elementuis/variables/00.json",
+		"abstractionPath" "data/items/elementuis/abstractions/00.json"
 	}
 }
 

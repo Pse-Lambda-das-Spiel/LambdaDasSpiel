@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.Array;
  */
 public class BackgroundImageItemModelLoader extends AsynchronousAssetLoader<BackgroundImageItemModel, BackgroundImageItemModelLoader.BackgroundImageItemModelParameter> {
 
-    BackgroundImageItemModel bgImage;
+    private BackgroundImageItemModel bgImage;
 
     public BackgroundImageItemModelLoader(FileHandleResolver resolver) {
         super(resolver);
