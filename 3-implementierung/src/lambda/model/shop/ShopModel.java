@@ -8,10 +8,6 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
-import lambda.viewcontroller.level.AbstractionUIContext;
-import lambda.viewcontroller.level.ElementUIContext;
-import lambda.viewcontroller.level.ParanthesisUIContext;
-import lambda.viewcontroller.level.VariableUIContext;
 
 
 /**

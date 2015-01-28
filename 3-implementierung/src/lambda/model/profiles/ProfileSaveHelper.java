@@ -145,10 +145,10 @@ public final class ProfileSaveHelper {
 						json.writeObjectStart("profile_shop_state");
 						// Since the activated item can be null
 						if (shopModel.getElementUIContextFamilies().getActivatedItem() != null) {
-							json.writeValue("activatedSpriteId", shopModel.getElementUIContextFamilies().
-																			getActivatedItem().getId());
+							json.writeValue("activatedElementUIContextFamilyId", shopModel.
+															getElementUIContextFamilies().getActivatedItem().getId());
 						} else {
-							json.writeValue("activatedSpriteId", "");
+							json.writeValue("ElementUIContextFamilyId", "");
 						}
 						if (shopModel.getMusic().getActivatedItem() != null) {
 							json.writeValue("activatedMusicId", shopModel.getMusic().getActivatedItem().getId());
@@ -164,26 +164,24 @@ public final class ProfileSaveHelper {
 						for (MusicItemModel music : shopModel.getMusic().getItems()) {
 							json.writeObjectStart();
 							json.writeValue("musicId", music.getId());
-							json.writeValue("price", music.getPrice());
 							json.writeValue("purchased", music.isPurchased());
 							json.writeObjectEnd();
 						}
 						json.writeArrayEnd();
-						json.writeArrayStart("images");
+						json.writeArrayStart("bkImages");
 						for (BackgroundImageItemModel image : shopModel.getImages().getItems()) {
 							json.writeObjectStart();
-							json.writeValue("imageId", image.getId());
-							json.writeValue("price", image.getPrice());
+							json.writeValue("bkImageId", image.getId());
 							json.writeValue("purchased", image.isPurchased());
 							json.writeObjectEnd();
 						}
 						json.writeArrayEnd();
-						json.writeArrayStart("sprites");
-						for (ElementUIContextFamily sprite : shopModel.getElementUIContextFamilies().getItems()) {
+						json.writeArrayStart("ElementUIContextFamilies");
+						for (ElementUIContextFamily elementUIContextFamily : shopModel.getElementUIContextFamilies().
+								getItems()) {
 							json.writeObjectStart();
-							json.writeValue("spriteId", sprite.getId());
-							json.writeValue("price", sprite.getPrice());
-							json.writeValue("purchased", sprite.isPurchased());
+							json.writeValue("ElementUIContextFamilyId", elementUIContextFamily.getId());
+							json.writeValue("purchased", elementUIContextFamily.isPurchased());
 							json.writeObjectEnd();
 						}
 						json.writeArrayEnd();

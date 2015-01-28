@@ -71,6 +71,8 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
         for (ProfileModel profile : profiles) {
             if (profile.getName().equals(name)) {
                 currentProfile = profile;
+                // Since ShopModel is a singleton, it has to be loaded separately
+                ProfileLoadHelper.loadIntoShop(currentProfile.getName());
                 notify(o -> o.changedProfile());
                 return true;
             }

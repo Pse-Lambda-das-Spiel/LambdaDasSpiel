@@ -15,7 +15,7 @@ import lambda.model.statistics.StatisticModel;
 /**
  * This class helps with loading and initialising a ProfileModel.
  * It loads the general information, the settings, the statistics 
- * and the shop state of a profile from the specific profile directory.
+ * and on explicit invocation the shop state of a profile from the specific profile directory.
  * 
  * @author Robert Hochweiss
  */
@@ -33,9 +33,8 @@ public final class ProfileLoadHelper {
 	 * @throws IOException if there is an error while reading the profile json files
 	 */
     public static ProfileModel loadProfile(String name) {
-    	// Before there was a ! missing (temporary solution?)
         if (!(Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + name).exists())) {
-            return new ProfileModel(name);
+            return null;
         }
         ProfileModel profile = new ProfileModel(name);
         FileHandle file = Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + name + "/general_information.json");
@@ -54,7 +53,6 @@ public final class ProfileLoadHelper {
         profile.setLevelIndex(value.child().getInt("levelIndex"));
         loadIntoSettings(settingsValue.child(), profile.getSettings());
         loadIntoStatistic(statisticValue.child(), profile.getStatistics());
-        loadIntoShop(shopValue.child(), profile.getShop());
         return profile;
     }
     
@@ -79,46 +77,50 @@ public final class ProfileLoadHelper {
     	statistic.setSuccessfulLevelTries(statisticJson.getInt("successfulLevelTries"));
     }
 
-    private static void loadIntoShop(JsonValue shopJson, ShopModel shop) {
-    	// Update this method if ShopItemModel gets an update and gets more precise regarding references and activation
-    	
-    	for (JsonValue entry = shopJson.get("musics").child(); entry != null; entry = entry.next) {
-			/*
-			Array von gekauften Artikeln aus json auslesen
-			shop.getMusic().getItems().get(IDgekauftesItem).setPurchased(true);
-			shop.getMusic().setActivatedItem(shop.getMusic().getItems().get(AKTIVIERTESITEMID));
-			*/
-
-
-    		MusicItemModel music = new MusicItemModel(entry.getString("musicId"), entry.getInt("price"));
+    /**
+     * 
+     * @param name the name of the profile whose shop state should be loaded
+     * throws IOException if there is an error while reading the shop state json files
+     */
+    public static void loadIntoShop(String name) {  
+    	if (!(Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + name).exists())) {
+             return;
+        }
+    	ShopModel shop = ShopModel.getShop();
+    	FileHandle shopFile = Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + name + "/shop_state.json");
+    	JsonReader reader = new JsonReader();
+        JsonValue shopValue = reader.parse(shopFile);
+        JsonValue shopJson = shopValue.child();
+    	for (JsonValue entry = shopJson.get("Musics").child(); entry != null; entry = entry.next) {
+    		MusicItemModel music = shop.getMusic().getItems().get(entry.getInt("MusicId"));
     		music.setPurchased(entry.getBoolean("purchased"));
     		if (music.getId().equals(shopJson.getString("activatedMusicId"))) {
-    			// Todo: maybe activate MusicItemModel in another way, initializing of ShopItemModel is not so precise
     			shop.getMusic().setActivatedItem(music);
     		}
-    		shop.getMusic().getItems().add(music);
-    	}
-    	
-    	for (JsonValue entry = shopJson.get("images").child(); entry != null; entry = entry.next) {
-    		BackgroundImageItemModel image = new BackgroundImageItemModel(entry.getString("imageId"), 
-    																		entry.getInt("price"));
-    		image.setPurchased(entry.getBoolean("purchased"));
-    		//Same as above
-    		if (image.getId().equals(shopJson.getString("activatedBKImageId"))) {
-    			shop.getImages().setActivatedItem(image);
+    		if (shopJson.getString("activatedMusicId").equals("")) {
+    			shop.getMusic().setActivatedItem(null);
     		}
-    		shop.getImages().getItems().add(image);
     	}
-    	
-    	for (JsonValue entry = shopJson.get("sprites").child(); entry != null; entry = entry.next) {
-    		ElementUIContextFamily sprite = new ElementUIContextFamily(entry.getString("spriteId"), 
-    																	entry.getInt("price"));
-    		sprite.setPurchased(entry.getBoolean("purchased"));
-    		//Same as above
-    		if (sprite.getId().equals(shopJson.getString("activatedSpriteId"))) {
-    			shop.getElementUIContextFamilies().setActivatedItem(sprite);
+    	for (JsonValue entry = shopJson.get("BKImages").child(); entry != null; entry = entry.next) {
+    		BackgroundImageItemModel bkImage = shop.getImages().getItems().get(entry.getInt("BKImageId"));
+    		bkImage.setPurchased(entry.getBoolean("purchased"));
+    		if (bkImage.getId().equals(shopJson.getString("activatedBKImageId"))) {
+    			shop.getImages().setActivatedItem(bkImage);
     		}
-    		shop.getElementUIContextFamilies().getItems().add(sprite);
+    		if (shopJson.getString("activatedBKImageId").equals("")) {
+    			shop.getImages().setActivatedItem(null);
+    		}
+    	}
+    	for (JsonValue entry = shopJson.get("ElementUIContextFamilies").child(); entry != null; entry = entry.next) {
+    		ElementUIContextFamily elementUIContextFamily = shop.getElementUIContextFamilies().getItems().
+    				get(entry.getInt("ElementUIContextFamilyId"));
+    		elementUIContextFamily.setPurchased(entry.getBoolean("purchased"));
+    		if (elementUIContextFamily.getId().equals(shopJson.getString("activatedElementUIContextFamilyId"))) {
+    			shop.getElementUIContextFamilies().setActivatedItem(elementUIContextFamily);
+    		}
+    		if (shopJson.getString("activatedElementUIContextFamilyId").equals("")) {
+    			shop.getElementUIContextFamilies().setActivatedItem(null);
+    		}
     	}
     }
 }
