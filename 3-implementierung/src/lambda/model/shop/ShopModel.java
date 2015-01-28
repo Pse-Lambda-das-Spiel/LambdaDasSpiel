@@ -22,7 +22,6 @@ import lambda.viewcontroller.level.VariableUIContext;
  */
 public class ShopModel {
 
-    private static ShopModel shop;
     private AssetManager assetManager;
     private ShopItemTypeModel<MusicItemModel> music;
     private ShopItemTypeModel<BackgroundImageItemModel> images;
@@ -35,7 +34,7 @@ public class ShopModel {
     /**
      * Private Constructor of this class. It will be call by "getShop()"
      */
-    private ShopModel() {
+    public ShopModel() {
         music = new ShopItemTypeModel<MusicItemModel>("music");
         images = new ShopItemTypeModel<BackgroundImageItemModel>("images");
         elementUIContextFamilies = new ShopItemTypeModel<ElementUIContextFamily>("sprites");
@@ -44,19 +43,6 @@ public class ShopModel {
         imagesFilePaths = loadImagePaths();
         elementUIContextFamilyPaths = loadElementUIPaths();
     }
-
-    /**
-     * Getter of the singleton "ShopModel".
-     *
-     * @return the global shop
-     */
-    public static ShopModel getShop() {
-        if (shop == null) {
-            shop = new ShopModel();
-        }
-        return shop;
-    }
-
 
     public void setAssetManager(AssetManager assetManager) {
         this.assetManager = assetManager;

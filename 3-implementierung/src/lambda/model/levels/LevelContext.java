@@ -14,6 +14,7 @@ import lambda.model.shop.ShopModel;
 public class LevelContext {
 
     private LevelModel levelModel;
+    private ShopModel shop;
     private Music music;
     private Texture bgImage;
     private ElementUIContextFamily elementUIContextFamily;
@@ -23,8 +24,8 @@ public class LevelContext {
     /**
      * Creates a new instance of this class
      */
-    public LevelContext(LevelModel levelModel) {
-        elementUIContextFamily = ShopModel.getShop().getElementUIContextFamilies().getActivatedItem();
+    public LevelContext(LevelModel levelModel, ShopModel shop) {
+        elementUIContextFamily = shop.getElementUIContextFamilies().getActivatedItem();
         this.levelModel = levelModel;
 
         if(levelModel.getId() != 0) {
@@ -36,8 +37,8 @@ public class LevelContext {
         }
         else {
             // for sandbox
-            music = ShopModel.getShop().getMusic().getActivatedItem().getMusic();
-            bgImage = ShopModel.getShop().getImages().getActivatedItem().getImage();
+            music = shop.getMusic().getActivatedItem().getMusic();
+            bgImage = shop.getImages().getActivatedItem().getImage();
         }
     }
 

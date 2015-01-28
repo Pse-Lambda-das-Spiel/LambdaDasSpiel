@@ -12,7 +12,7 @@ public class ShopViewController extends ViewController {
     private AssetManager assetManager;
 
 	public ShopViewController() {
-        shop = ShopModel.getShop();
+        shop = new ShopModel();
         assetManager = getGame().getController(AssetViewController.class).getManager();
 	}
 
