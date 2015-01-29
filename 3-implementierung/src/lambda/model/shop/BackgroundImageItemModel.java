@@ -1,13 +1,14 @@
 package lambda.model.shop;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 /**
  * Created by kay_meth on 22.01.15.
  */
 public class BackgroundImageItemModel extends ShopItemModel {
 
-    private Texture image;
+    private Image image;
 
     /**
      * 
@@ -23,11 +24,11 @@ public class BackgroundImageItemModel extends ShopItemModel {
      *
      * @return image
      */
-    public Texture getImage() {
+    public Image getImage() {
         return image;
     }
 
-    public void setImage(Texture image) {
+    public void setImage(Image image) {
         this.image = image;
     }
 }

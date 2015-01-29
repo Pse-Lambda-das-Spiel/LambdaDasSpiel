@@ -43,7 +43,7 @@ public class LambdaTermViewControllerTest {
         LambdaRoot term = LambdaUtils.fromString("(/a.a f g h) ((/b.b) (/z. (/c.c) z)) (/f.f f) r");
         
         LambdaTermViewController vc = LambdaTermViewController.build(term, false,
-                new LevelContext(null, null)); // TODO Level context
+                new LevelContext(null)); // TODO Level context
         
         ReductionStrategyNormalOrder strategy = new ReductionStrategyNormalOrder();
         do {
@@ -52,6 +52,6 @@ public class LambdaTermViewControllerTest {
         } while (strategy.hasReduced());
         
         assertEquals("Updated ViewController and new ViewController for lambda term are different!", vc,
-                LambdaTermViewController.build(term, false, new LevelContext(null, null)));
+                LambdaTermViewController.build(term, false, new LevelContext(null)));
     }
 }

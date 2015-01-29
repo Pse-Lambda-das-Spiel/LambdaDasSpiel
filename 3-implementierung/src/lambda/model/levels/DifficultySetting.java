@@ -15,7 +15,7 @@ public class DifficultySetting {
     private String musicString;
     private String bgImageString;
     private Music music;
-    private Texture bgImage;
+    private Image bgImage;
 
     /**
      * Creates a new instance of this class
@@ -71,7 +71,7 @@ public class DifficultySetting {
      *
      * @param bgImage image which is shown in the background
      */
-    public void setBgImage(Texture bgImage) {
+    public void setBgImage(Image bgImage) {
         this.bgImage = bgImage;
     }
 
@@ -80,7 +80,7 @@ public class DifficultySetting {
      *
      * @return the music which runs in the background
      */
-    public Texture getBgImage() {
+    public Image getBgImage() {
         return bgImage;
     }
 

@@ -15,7 +15,7 @@ public class LevelContext {
 
     private LevelModel levelModel;
     private Music music;
-    private Texture bgImage;
+    private Image bgImage;
     private ElementUIContextFamily elementUIContextFamily;
     private LevelManager manager;
     private DifficultySetting difficultySetting;
@@ -64,7 +64,7 @@ public class LevelContext {
      *
      * @return image
      */
-    public Texture getBgImage() {
+    public Image getBgImage() {
         return bgImage;
     }
 

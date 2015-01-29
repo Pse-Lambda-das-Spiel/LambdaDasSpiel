@@ -2,17 +2,13 @@ package lambda.model.shop;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.FileHandleResolver;
-import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import lambda.viewcontroller.level.AbstractionUIContext;
-import lambda.viewcontroller.level.ElementUIContext;
 import lambda.viewcontroller.level.ParanthesisUIContext;
 import lambda.viewcontroller.level.VariableUIContext;
 
@@ -231,10 +227,11 @@ public class ShopModel {
      * @return
      */
     public String[] loadMusicPaths() {
-        FileHandle file = Gdx.files.internal("data/itmes/items.json");
+        FileHandle file = Gdx.files.internal("data/items/items.json");
         JsonReader reader = new JsonReader();
         JsonValue jsonFile = reader.parse(file);
-        int numberOfMusic = jsonFile.getInt("musicItems");
+        JsonValue items = jsonFile.child();
+        int numberOfMusic = items.getInt("musicItems");
         String[] musicFilePaths = new String[numberOfMusic];
         for (int i = 0; i < numberOfMusic; i++) {
             musicFilePaths[i] = "data/items/music" + String.format("%02d", i) + ".json";
@@ -247,10 +244,11 @@ public class ShopModel {
      * @return
      */
     public String[] loadImagePaths() {
-        FileHandle file = Gdx.files.internal("data/itmes/items.json");
+        FileHandle file = Gdx.files.internal("data/items/items.json");
         JsonReader reader = new JsonReader();
         JsonValue jsonFile = reader.parse(file);
-        int numberOfImages = jsonFile.getInt("backgroundImageItems");
+        JsonValue items = jsonFile.child();
+        int numberOfImages = items.getInt("backgroundImageItems");
         String[] imageFilePaths = new String[numberOfImages];
         for (int i = 0; i < numberOfImages; i++) {
             imageFilePaths[i] = "data/items/images" + String.format("%02d", i) + ".json";
@@ -263,10 +261,11 @@ public class ShopModel {
      * @return
      */
     public String[] loadElementUIPaths() {
-        FileHandle file = Gdx.files.internal("data/itmes/items.json");
+        FileHandle file = Gdx.files.internal("data/items/items.json");
         JsonReader reader = new JsonReader();
         JsonValue jsonFile = reader.parse(file);
-        int numberOfFamilies = jsonFile.getInt("elementUIContextFamilies");
+        JsonValue items = jsonFile.child();
+        int numberOfFamilies = items.getInt("elementUIContextFamilies");
         String[] elementUIContextFamilyPaths = new String[numberOfFamilies];
         for (int i = 0; i < numberOfFamilies; i++) {
             elementUIContextFamilyPaths[i] = "data/items/elementuis" + String.format("%02d", i) + ".json";
