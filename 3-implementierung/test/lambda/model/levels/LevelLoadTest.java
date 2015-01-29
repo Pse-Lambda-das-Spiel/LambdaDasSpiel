@@ -2,28 +2,22 @@
 package lambda.model.levels;
 
 
-import static org.junit.Assert.assertEquals;
-
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.backends.lwjgl.LwjglFiles;
 import lambda.model.lambdaterm.LambdaAbstraction;
 import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaVariable;
 import lambda.viewcontroller.level.TutorialMessage;
+import org.junit.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
-import com.badlogic.gdx.backends.lwjgl.LwjglFiles;
+import static org.junit.Assert.assertEquals;
 
 // This test is only for the desktop at the moment, so move it to the desktop sub project.
 
@@ -91,7 +85,9 @@ public class LevelLoadTest {
 	 */
 	@Test
 	public void testLoadLevel() {
-		LevelModel jsonLevel = LevelLoadHelper.loadLevel(Gdx.files.internal("data/levels/04.json"));
+		assets.load("data/levels/04.json", LevelModel.class);
+		LevelModel jsonLevel = assets.get("data/levels/04.json", LevelModel.class);
+		//LevelModel jsonLevel = LevelLoadHelper.loadLevel(Gdx.files.internal("data/levels/04.json"));
 		assertEquals(testLevel.getId(), jsonLevel.getId());
 		assertEquals(testLevel.getCoins(), jsonLevel.getCoins());
 		assertEquals(testLevel.getDifficulty(), jsonLevel.getDifficulty());

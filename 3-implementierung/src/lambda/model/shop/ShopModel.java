@@ -2,6 +2,7 @@ package lambda.model.shop;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.MusicLoader;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
@@ -103,9 +104,11 @@ public class ShopModel {
         String id = music.getString("id");
         int price = music.getInt("price");
         String filepath = music.getString("filepath");
+        assetManager.setLoader(Music.class, new MusicLoader(new InternalFileHandleResolver()));
         assetManager.load(filepath, Music.class);
         MusicItemModel musicItem = new MusicItemModel(id, price, filepath);
         musicItem.setMusic(assetManager.get(filepath));
+
 
         return musicItem;
     }
@@ -168,6 +171,14 @@ public class ShopModel {
         return elementUIContextFamily;
     }
 
+    public void setAllItems(AssetManager assets) {
+        for(int i = 0; i < musicFilePaths.length; i++) {
+            MusicItemModel musicfile = assets.get(musicFilePaths[i], MusicItemModel.class);
+
+            music.getItems().add(i, musicfile);
+        }
+    }
+
     /**
      * Loads all items and adds them into the correct list
      *
@@ -175,9 +186,15 @@ public class ShopModel {
      */
     public void queueAssets(AssetManager assets) {
         assets.setLoader(MusicItemModel.class, new MusicItemModelLoader(new InternalFileHandleResolver()));
+        for(int i = 0; i < musicFilePaths.length; i++) {
+            assets.load(musicFilePaths[i], MusicItemModel.class);
+            //music.getItems().add(i, assets.get(musicFilePaths[i], MusicItemModel.class));
+        }
+        /*
         for (String musicFilePath : musicFilePaths) {
             assets.load(musicFilePath, MusicItemModel.class);
         }
+        */
         assets.setLoader(BackgroundImageItemModel.class, new BackgroundImageItemModelLoader(new InternalFileHandleResolver()));
         for (String imageFilePath : imagesFilePaths) {
             assets.load(imageFilePath, BackgroundImageItemModel.class);
@@ -234,7 +251,7 @@ public class ShopModel {
         int numberOfMusic = items.getInt("musicItems");
         String[] musicFilePaths = new String[numberOfMusic];
         for (int i = 0; i < numberOfMusic; i++) {
-            musicFilePaths[i] = "data/items/music" + String.format("%02d", i) + ".json";
+            musicFilePaths[i] = "data/items/music/" + String.format("%02d", i) + ".json";
         }
         return musicFilePaths;
     }
@@ -251,7 +268,7 @@ public class ShopModel {
         int numberOfImages = items.getInt("backgroundImageItems");
         String[] imageFilePaths = new String[numberOfImages];
         for (int i = 0; i < numberOfImages; i++) {
-            imageFilePaths[i] = "data/items/images" + String.format("%02d", i) + ".json";
+            imageFilePaths[i] = "data/items/images/" + String.format("%02d", i) + ".json";
         }
         return imageFilePaths;
     }
@@ -268,7 +285,7 @@ public class ShopModel {
         int numberOfFamilies = items.getInt("elementUIContextFamilies");
         String[] elementUIContextFamilyPaths = new String[numberOfFamilies];
         for (int i = 0; i < numberOfFamilies; i++) {
-            elementUIContextFamilyPaths[i] = "data/items/elementuis" + String.format("%02d", i) + ".json";
+            elementUIContextFamilyPaths[i] = "data/items/elementuis/" + String.format("%02d", i) + ".json";
         }
         return elementUIContextFamilyPaths;
     }
@@ -323,5 +340,18 @@ public class ShopModel {
         VariableUIContext variableUIContext = new VariableUIContext(assetManager.get(variableSheet));
 
         return variableUIContext;
+    }
+
+
+    public String[] getMusicFilePaths() {
+        return musicFilePaths;
+    }
+
+    public String[] getImagesFilePaths() {
+        return imagesFilePaths;
+    }
+
+    public String[] getElementUIContextFamilyPaths() {
+        return elementUIContextFamilyPaths;
     }
 }

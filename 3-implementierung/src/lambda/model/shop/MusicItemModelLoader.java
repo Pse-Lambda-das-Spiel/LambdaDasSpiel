@@ -1,12 +1,10 @@
 package lambda.model.shop;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.AsynchronousAssetLoader;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 
@@ -27,17 +25,26 @@ public class MusicItemModelLoader extends AsynchronousAssetLoader<MusicItemModel
         super(resolver);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Array<AssetDescriptor> getDependencies(String s, FileHandle fileHandle, MusicItemModelParameter musicItemModelParameter) {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void loadAsync(AssetManager assetManager, String s, FileHandle fileHandle, MusicItemModelParameter musicItemModelParameter) {
         musicItem = null;
         musicItem = ShopModel.getShop().loadMusicItem(fileHandle);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public MusicItemModel loadSync(AssetManager assetManager, String s, FileHandle fileHandle, MusicItemModelParameter musicItemModelParameter) {
         MusicItemModel musicItem = this.musicItem;
