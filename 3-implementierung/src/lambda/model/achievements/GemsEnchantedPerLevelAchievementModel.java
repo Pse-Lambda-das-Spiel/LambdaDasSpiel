@@ -1,5 +1,8 @@
 package lambda.model.achievements;
 
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.utils.I18NBundle;
+
 import lambda.model.profiles.ProfileManager;
 import lambda.model.statistics.StatisticModel;
 
@@ -8,14 +11,14 @@ import lambda.model.statistics.StatisticModel;
  * 
  * @author Robert Hochweiss
  */
-public class GemsEnchantedPerLevelAchievementModel extends PerLevelAchievementModel{
+public class GemsEnchantedPerLevelAchievementModel extends PerLevelAchievementModel {
 
 	private int reqGemsEnchantedPerLevel;
 	
 	/**
 	 * Creates a new instance of this class.
 	 * 
-	 * @param reqGemsEnchantedPerlevel the number of enchanted gems in a level needed for unlocking the achievement
+	 * @param reqGemsEnchantedPerLevel the number of enchanted gems in a level needed for unlocking the achievement
 	 */
 	public GemsEnchantedPerLevelAchievementModel(int reqGemsEnchantedPerLevel) {
 		this.reqGemsEnchantedPerLevel = reqGemsEnchantedPerLevel;
@@ -35,12 +38,16 @@ public class GemsEnchantedPerLevelAchievementModel extends PerLevelAchievementMo
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void initialize() {
+	public void initialize(AssetManager assets) {
+		if (assets == null) {
+			throw new IllegalArgumentException("assets cannot be null!");
+		}
+		I18NBundle bundle = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
 		ProfileManager.getManager().getCurrentProfile().getStatistics().addObserver(this);
-		setIconPathAchievementUnlocked("achievements/gems_enchanted_per_Level/unlocked/aul" + Integer.toString(getId()));
+		setIconPathAchievementUnlocked("achievements/gems_enchanted_per_level/unlocked/aul" + Integer.toString(getId()));
 		setIconPathAchievementLocked("achievements/gems_enchanted_per_level/locked/al" + Integer.toString(getId()));
-		//setDescription(AssetModel.getAssets().getString("gemsEnchantedPerLevelAchievement_" + Integer.toString(getId())));
-		//setRequirementsDescription(AssetModel.getAssets().getString("reqGemsEnchantedPerLevelAchievement_" + Integer.toString(getId())));	
+		setDescription(bundle.format("gemsEnchantedPerLevelAchievement", reqGemsEnchantedPerLevel));
+		setRequirementsDescription(bundle.format("reqGemsEnchantedPerLevelAchievement", reqGemsEnchantedPerLevel));
 		setLocked(true);
 	}
 

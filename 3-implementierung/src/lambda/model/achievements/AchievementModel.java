@@ -1,5 +1,7 @@
 package lambda.model.achievements;
 
+import com.badlogic.gdx.assets.AssetManager;
+
 import lambda.Observable;
 import lambda.model.statistics.StatisticModel;
 import lambda.model.statistics.StatisticModelObserver;
@@ -34,8 +36,11 @@ public abstract class AchievementModel extends Observable<AchievementModelObserv
 	
 	/**
 	 * Initialize the achievement and resets it to its start state.
+	 * 
+	 * @param assets the AssetManager needed for loading the resources needed for initializing the achievement.
+	 * @throws IllegalArgumentException if assets is null
 	 */
-	public abstract void initialize();
+	public abstract void initialize(AssetManager assets);
 	
 	/**
 	 * Checks with the given StatisticModel whether the requirements of this achievement are met or not.

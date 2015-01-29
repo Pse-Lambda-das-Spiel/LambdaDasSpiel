@@ -1,5 +1,8 @@
 package lambda.model.achievements;
 
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.utils.I18NBundle;
+
 import lambda.model.profiles.ProfileManager;
 import lambda.model.statistics.StatisticModel;
 
@@ -8,14 +11,14 @@ import lambda.model.statistics.StatisticModel;
  * 
  * @author Robert Hochweiss
  */
-public class GemsPlacedPerLevelAchievementModel extends PerLevelAchievementModel{
+public class GemsPlacedPerLevelAchievementModel extends PerLevelAchievementModel {
 
 	private int reqGemsPlacedPerLevel;
 	
 	/**
 	 * Creates a new instance of this class.
 	 * 
-	 * @param reqGemsPlacedPerlevel the number of placed gems in a level needed for unlocking the achievement
+	 * @param reqGemsPlacedPerLevel the number of placed gems in a level needed for unlocking the achievement
 	 */
 	public GemsPlacedPerLevelAchievementModel(int reqGemsPlacedPerLevel) {
 		this.reqGemsPlacedPerLevel = reqGemsPlacedPerLevel;
@@ -35,12 +38,16 @@ public class GemsPlacedPerLevelAchievementModel extends PerLevelAchievementModel
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void initialize() {
+	public void initialize(AssetManager assets) {
+		if (assets == null) {
+			throw new IllegalArgumentException("assets cannot be null!");
+		}
+		I18NBundle bundle = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
 		ProfileManager.getManager().getCurrentProfile().getStatistics().addObserver(this);
-		setIconPathAchievementUnlocked("achievements/gems_placed_per_Level/unlocked/aul" + Integer.toString(getId()));
+		setIconPathAchievementUnlocked("achievements/gems_placed_per_level/unlocked/aul" + Integer.toString(getId()));
 		setIconPathAchievementLocked("achievements/gems_placed_per_level/locked/al" + Integer.toString(getId()));
-		//setDescription(AssetModel.getAssets().getString("gemsPlacedPerLevelAchievement_" + Integer.toString(getId())));
-		//setRequirementsDescription(AssetModel.getAssets().getString("reqGemPlacedPerLevelAchievement_" + Integer.toString(getId())));
+		setDescription(bundle.format("gemsPlacedPerLevelAchievement", reqGemsPlacedPerLevel));
+		setRequirementsDescription(bundle.format("reqGemsPlacedPerLevelAchievement", reqGemsPlacedPerLevel));
 		setLocked(true);
 	}
 

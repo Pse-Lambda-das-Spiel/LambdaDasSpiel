@@ -1,5 +1,8 @@
 package lambda.model.achievements;
 
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.utils.I18NBundle;
+
 import lambda.model.profiles.ProfileManager;
 import lambda.model.statistics.StatisticModel;
 
@@ -8,14 +11,14 @@ import lambda.model.statistics.StatisticModel;
  * 
  * @author Robert Hochweiss
  */
-public class LambsPlacedPerLevelAchievementModel extends PerLevelAchievementModel{
+public class LambsPlacedPerLevelAchievementModel extends PerLevelAchievementModel {
 
 	private int reqLambsPlacedPerLevel;
 	
 	/**
 	 * Creates a new instance of this class.
 	 * 
-	 * @param reqLambsPlacedPerlevel the number of placed lambs in a level needed for unlocking the achievement
+	 * @param reqLambsPlacedPerLevel the number of placed lambs in a level needed for unlocking the achievement
 	 */
 	public LambsPlacedPerLevelAchievementModel(int reqLambsPlacedPerLevel) {
 		this.reqLambsPlacedPerLevel = reqLambsPlacedPerLevel;
@@ -35,12 +38,16 @@ public class LambsPlacedPerLevelAchievementModel extends PerLevelAchievementMode
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void initialize() {
+	public void initialize(AssetManager assets) {
+		if (assets == null) {
+			throw new IllegalArgumentException("assets cannot be null!");
+		}
+		I18NBundle bundle = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
 		ProfileManager.getManager().getCurrentProfile().getStatistics().addObserver(this);
 		setIconPathAchievementUnlocked("achievements/lambs_placed_per_Level/unlocked/aul" + Integer.toString(getId()));
 		setIconPathAchievementLocked("achievements/lambs_placed_per_level/locked/al" + Integer.toString(getId()));
-		//setDescription(AssetModel.getAssets().getString("lambsPlacedPerLevelAchievement_" + Integer.toString(getId())));
-		//setRequirementsDescription(AssetModel.getAssets().getString("reqLambsPlacedPerLevelAchievement_" + Integer.toString(getId())));
+		setDescription(bundle.format("lambsPlacedPerLevelAchievement", reqLambsPlacedPerLevel));
+		setRequirementsDescription("reqLambsPlacedPerLevelAchievement");
 		setLocked(true);
 	}
 

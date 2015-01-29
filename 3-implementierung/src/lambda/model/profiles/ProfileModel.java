@@ -1,5 +1,7 @@
 package lambda.model.profiles;
 
+import com.badlogic.gdx.utils.I18NBundle;
+
 import lambda.Observable;
 import lambda.model.settings.SettingsModel;
 import lambda.model.shop.ShopModel;
@@ -20,6 +22,7 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
     private SettingsModel settings;
     private ShopModel shop;
     private StatisticModel statistics;
+    I18NBundle stringBundle;
 
     /**
      * Creates a new profile with the given name and standard values.

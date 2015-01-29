@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.badlogic.gdx.assets.AssetManager;
+
 import lambda.model.profiles.ProfileManager;
 import lambda.model.statistics.StatisticModel;
 
@@ -19,7 +21,7 @@ public class AchievementManager {
 	private Map<Integer, AchievementModel> achievements;
 	
 	private AchievementManager() {
-		achievements = new HashMap<Integer, AchievementModel>();
+		achievements = new HashMap<>();
 	}
 	
 	/**
@@ -45,11 +47,17 @@ public class AchievementManager {
 	
 	/**
 	 * Initialize all achievements.
+	 * 
+	 * @param assets the AssetManager needed for loading the resources needed for initializing the achievements.
+	 * @throws IllegalArgumentException if assets is null
 	 */
-	public void initializeAchievements() {
+	public void initializeAchievements(AssetManager assets) {
+		if (assets == null) {
+			throw new IllegalArgumentException("assets cannot be null!");
+		}
 		Collection<AchievementModel> achievementCollection = achievements.values();
-		for (AchievementModel a : achievementCollection) {
-			a.initialize();
+		for (AchievementModel achievement : achievementCollection) {
+			achievement.initialize(assets);
 		}
 	}
 	
@@ -61,17 +69,21 @@ public class AchievementManager {
 	public void checkAllAchievements() {
 		StatisticModel statistic = ProfileManager.getManager().getCurrentProfile().getStatistics();
 		Collection<AchievementModel> achievementCollection = achievements.values();
-		for (AchievementModel a : achievementCollection) {
-			a.checkRequirements(statistic);
+		for (AchievementModel achievement : achievementCollection) {
+			achievement.checkRequirements(statistic);
 		}
 	}
 	
 	/**
-	 * Adds a new achievement to the collection of all achievements.
+	 * Adds a new achievement to the collection of all achievements, if it is not already there.
 	 * 
 	 * @param achievement the to be added achievement
+	 * @throws IllegalArgumentException if achievement is null
 	 */
 	public void addAchievement(AchievementModel achievement) {
+		if (achievement == null) {
+			throw new IllegalArgumentException("achievement cannot be null!");
+		}
 		if (!achievements.containsKey(achievement.getId())) {
 			achievements.put(achievement.getId(), achievement);
 		}	
