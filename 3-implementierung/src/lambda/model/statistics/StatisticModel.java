@@ -1,7 +1,11 @@
 package lambda.model.statistics;
 
 import lambda.Observable;
-
+/**
+ * 
+ * @author Farid el-haddad
+ *
+ */
 public class StatisticModel extends Observable<StatisticModelObserver> {
 
 	private int lambsEnchanted;
@@ -16,6 +20,7 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	private int hintsNotUsed;
 	private int levelTries;
 	private int successfulLevelTries;
+	private long beginTime ;
 	private long timePlayed;
 	
 	public StatisticModel() {
@@ -171,7 +176,7 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 * @param levelTries the levelTries to set
 	 */
 	public void setLevelTries(int levelTries) {
-		this.levelTries = levelTries;
+		this.levelTries = levelTries;     
 	}
 
 	/**
