@@ -22,7 +22,6 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
     private SettingsModel settings;
     private ShopModel shop;
     private StatisticModel statistics;
-    I18NBundle stringBundle;
 
     /**
      * Creates a new profile with the given name and standard values.

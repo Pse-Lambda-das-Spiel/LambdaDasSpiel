@@ -38,7 +38,7 @@ public class ProfileSelection extends ViewController {
     private List<TextButton> profileButtons;
     private List<ImageButton> editButtons;
     private ImageButton addButton;
-    private AssetManager manager;
+    private AssetManager manager; 
     
     /**
      * Creates a object of the class without initializing the screen.
@@ -73,12 +73,12 @@ public class ProfileSelection extends ViewController {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(delta);
-        stage.draw();    
+        stage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
+        stage.getViewport().setScreenSize(width, height);
     }
 
     @Override
@@ -95,6 +95,10 @@ public class ProfileSelection extends ViewController {
 
     @Override
     public void dispose() {
+        ProfileManager m = ProfileManager.getManager();
+        if (m.getCurrentProfile() != null) {
+            m.save(m.getCurrentProfile().getName());
+        }
         stage.dispose();
     }
 
@@ -108,19 +112,20 @@ public class ProfileSelection extends ViewController {
         profileView.setFillParent(true);
         //Profilebuttons + their edit buttons
         for (int i = 0; i < ProfileManager.MAX_NUMBER_OF_PROFILES; i++) {
-            profileView.row().height(stage.getHeight() * 3 / 5 / ProfileManager.MAX_NUMBER_OF_PROFILES);
+            float height = stage.getHeight() * 3 / 5 / ProfileManager.MAX_NUMBER_OF_PROFILES;
+            profileView.row().height(height);
             TextButton pButton = new TextButton("", manager.get(skinJson, Skin.class));
-            profileView.add(pButton).width(stage.getWidth() * 3 / 5 * 0.9f).space(10);
+            pButton.getLabel().setFontScale(0.5f);
+            profileView.add(pButton).width(stage.getWidth() * 0.55f).space(10);
             profileButtons.add(pButton);
             pButton.addListener(new selectProfileClickListener());
             ImageButton eButton = new ImageButton(manager.get(skinJson, Skin.class), "editButton");
-            profileView.add(eButton).width(stage.getWidth() * 3 / 5 * 0.1f).space(10);
+            profileView.add(eButton).width(height).align(Align.top);
             editButtons.add(eButton);
             eButton.addListener(new editProfileClickListener());
         }
         //addProfile-Button
         addButton = new ImageButton(manager.get(skinJson, Skin.class), "addButton");
-        addButton.setSize(stage.getWidth() * 0.1f, stage.getHeight() * 0.1f);
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
         buttonContainer.pad(25);
         buttonContainer.align(Align.bottomRight);
@@ -154,6 +159,7 @@ public class ProfileSelection extends ViewController {
             String name = ((TextButton) event.getListenerActor()).getText().toString();
             if (name != null) {
                 ProfileManager.getManager().setCurrentProfile(name);
+                //getGame().setScreen(SettingsViewController.class);
                 getGame().setScreen(MainMenuViewController.class);
             }
         }

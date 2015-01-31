@@ -5,29 +5,29 @@ filter: Nearest,Nearest
 repeat: none
 textField
   rotate: false
-  xy: 1, 133
+  xy: 1, 147
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 accept
   rotate: false
-  xy: 1, 67
-  size: 64, 64
-  orig: 64, 64
+  xy: 1, 74
+  size: 69, 71
+  orig: 69, 71
   offset: 0, 0
   index: -1
 left
   rotate: false
-  xy: 259, 325
-  size: 64, 64
-  orig: 64, 64
+  xy: 259, 332
+  size: 69, 71
+  orig: 69, 71
   offset: 0, 0
   index: -1
 right
   rotate: false
   xy: 1, 1
-  size: 64, 64
-  orig: 64, 64
+  size: 69, 71
+  orig: 69, 71
   offset: 0, 0
   index: -1

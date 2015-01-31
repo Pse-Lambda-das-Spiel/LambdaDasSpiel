@@ -98,7 +98,7 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
      * @return The current flag ID.
      */
     public String getLangPic() {
-        return lang.get(selectedLang).replace("StringBundle_", "flag/").concat("Flag.jpg");
+        return lang.get(selectedLang).replace("StringBundle_", "flags/").concat("Flag.jpg");
     }
 
     /**

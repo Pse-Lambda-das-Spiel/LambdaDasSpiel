@@ -67,7 +67,7 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
     
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
+        stage.getViewport().setScreenSize(width, height);
     }
 
     @Override
@@ -92,19 +92,23 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
         profileEdit.addObserver(this);
         this.manager = manager;
         Table nameSelection = new Table();
+        nameSelection.align(Align.top);
         stage.addActor(nameSelection);
         nameSelection.setFillParent(true);
+        
+        nameSelection.row().height(stage.getHeight() / 20);
+        nameSelection.add();
+        nameSelection.row().height(stage.getHeight() / 5);        
+        enterName = new Label(null, manager.get(skinJson, Skin.class));
+        enterName.setFontScale(0.7f);
+        nameSelection.add(enterName).width(stage.getHeight() * 0.8f).space(10);
+        enterName.setAlignment(Align.center);
         nameSelection.row().height(stage.getHeight() / 3);
         nameField = new TextField("", manager.get(skinJson, Skin.class));
-        nameSelection.add(nameField).width(stage.getHeight() / 2).space(10);
-        enterName = new Label(null, manager.get(skinJson, Skin.class));
-        nameSelection.row().height(stage.getHeight() / 3);
-        nameSelection.add(enterName).width(stage.getHeight() / 2).space(10);
-        enterName.setAlignment(Align.center);
-        enterName.setFontScale(3);
+        nameField.setMaxLength(16);
+        nameSelection.add(nameField).width(stage.getWidth() * 0.8f).space(10);
         
         ImageButton backButton = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
-        backButton.setSize(stage.getWidth() * 0.1f, stage.getHeight() * 0.1f);
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
         buttonContainer.pad(25);
         buttonContainer.align(Align.bottomLeft);
@@ -114,7 +118,6 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
         buttonContainer.setFillParent(true);
         
         ImageButton continueButton = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
-        continueButton.setSize(stage.getWidth() * 0.1f, stage.getHeight() * 0.1f);
         buttonContainer = new Container<ImageButton>();
         buttonContainer.pad(25);
         buttonContainer.align(Align.bottomRight);
@@ -147,7 +150,7 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
                     new NameDialog("nameTaken").show(stage);
                 }
             } else {
-                new NameDialog("nameEmpty").show(stage);
+                new NameDialog("nameEmpty").show(stage).center();
             }
         }
     }
@@ -172,8 +175,11 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
     
     private class NameDialog extends Dialog {
         public NameDialog(String key) {
-            super(manager.get(profileEdit.getLang(), I18NBundle.class).get(key),
+            super("", manager.get("data/skins/DialogTemp.json", Skin.class));
+            Label enterName = new Label(manager.get(profileEdit.getLang(), I18NBundle.class).get(key),
                     manager.get("data/skins/DialogTemp.json", Skin.class));
+            enterName.setFontScale(0.5f);
+            text(enterName);
             button(manager.get(profileEdit.getLang(), I18NBundle.class).get("ok"));
         }
     }

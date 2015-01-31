@@ -83,7 +83,7 @@ public class ProfileEditLang extends ViewController implements ProfileEditObserv
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
+        stage.getViewport().setScreenSize(width, height);
     }
 
     @Override
@@ -112,24 +112,22 @@ public class ProfileEditLang extends ViewController implements ProfileEditObserv
         langSelection.setFillParent(true);
         langSelection.row().height(stage.getHeight() / 2);
         ImageButton selectLeft = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
-        langSelection.add(selectLeft).width(stage.getWidth() * 3 / 5 * 0.1f).height(
-                stage.getHeight() * 3 / 5 * 0.1f).space(10);
+        float buttonWidth = selectLeft.getWidth();
+        float buttonHeight = selectLeft.getHeight();
+        langSelection.add(selectLeft).width(buttonWidth).height(buttonHeight).space(10);
         selectLeft.addListener(new selectLeftClickListener());
         langPic = new Image();
         langSelection.add(langPic).width(stage.getWidth() / 2).space(10);
         ImageButton selectRight = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
-        langSelection.add(selectRight).width(stage.getWidth() * 3 / 5 * 0.1f).height(
-                stage.getHeight() * 3 / 5 * 0.1f).space(10);
+        langSelection.add(selectRight).width(buttonWidth).height(buttonHeight).space(10);
         selectRight.addListener(new selectRightClickListener());
         lang = new Label(null ,manager.get(skinJson, Skin.class));
-        lang.setFontScale(3);
         lang.setAlignment(Align.center);
         langSelection.row().height(stage.getHeight() / 5);
         langSelection.add();
         langSelection.add(lang).width(stage.getWidth() / 2);
         
         backButton = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
-        backButton.setSize(stage.getWidth() * 0.1f, stage.getHeight() * 0.1f);
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
         buttonContainer.pad(25);
         buttonContainer.align(Align.bottomLeft);
@@ -139,7 +137,6 @@ public class ProfileEditLang extends ViewController implements ProfileEditObserv
         buttonContainer.setFillParent(true);
         
         ImageButton continueButton = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
-        continueButton.setSize(stage.getWidth() * 0.1f, stage.getHeight() * 0.1f);
         buttonContainer = new Container<ImageButton>();
         buttonContainer.pad(25);
         buttonContainer.align(Align.bottomRight);

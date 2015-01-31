@@ -1,7 +1,6 @@
 package lambda.model.profiles;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.backends.lwjgl.LwjglFiles;
 import org.junit.After;
 import org.junit.Before;
@@ -19,12 +18,10 @@ public class ProfileModelTest implements ProfileModelObserver {
     private boolean calledChangedLevelIndex;
     private boolean calledChangedCoins;
     private ProfileModel profile;
-    private static AssetManager assets;
 
     @Before
     public void setUp() throws Exception {
         Gdx.files = new LwjglFiles();
-        assets = new AssetManager();
         calledChangedLevelIndex = false;
         calledChangedCoins = false;
         profile = new ProfileModel("testName");

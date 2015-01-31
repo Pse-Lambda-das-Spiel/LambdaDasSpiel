@@ -47,12 +47,12 @@ public class ProfileEditModelTest implements ProfileEditObserver {
         String start = edit.getLang();
         edit.nextLang();
         assertNotEquals(start, edit.getLang());
-        assertEquals(edit.getLang().replace("StringBundle_", "flag/").concat("Flag.jpg"), edit.getLangPic());
+        assertEquals(edit.getLang().replace("StringBundle_", "flags/").concat("Flag.jpg"), edit.getLangPic());
         assertTrue(calledChangedLanguage);
         calledChangedLanguage = false;
         edit.previousLang();
         assertEquals(start, edit.getLang());
-        assertEquals(start.replace("StringBundle_", "flag/").concat("Flag.jpg"), edit.getLangPic());
+        assertEquals(start.replace("StringBundle_", "flags/").concat("Flag.jpg"), edit.getLangPic());
         assertTrue(calledChangedLanguage);
     }
 

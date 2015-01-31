@@ -76,7 +76,7 @@ public class ProfileEditAvatar extends ViewController implements ProfileEditObse
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
+        stage.getViewport().setScreenSize(width, height);
     }
 
     @Override
@@ -100,29 +100,34 @@ public class ProfileEditAvatar extends ViewController implements ProfileEditObse
     public void create(AssetManager manager) {
         profileEdit.addObserver(this);
         this.manager = manager;
+        
         Table avatarSelection = new Table();
+        avatarSelection.align(Align.top);
         stage.addActor(avatarSelection);
         avatarSelection.setFillParent(true);
-        avatarSelection.row().height(stage.getHeight() / 2);
-        ImageButton selectLeft = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
-        avatarSelection.add(selectLeft).width(stage.getWidth() * 3 / 5 * 0.1f).height(
-                stage.getHeight() * 3 / 5 * 0.1f).space(10);
-        selectLeft.addListener(new selectLeftClickListener());
-        avatarPic = new Image();
-        avatarSelection.add(avatarPic).width(stage.getWidth() / 2).space(10);
-        ImageButton selectRight = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
-        avatarSelection.add(selectRight).width(stage.getWidth() * 3 / 5 * 0.1f).height(
-                stage.getHeight() * 3 / 5 * 0.1f).space(10);
-        selectRight.addListener(new selectRightClickListener());
+
         chooseAvatar = new Label(null ,manager.get(skinJson, Skin.class));
-        chooseAvatar.setFontScale(3);
+        chooseAvatar.setFontScale(0.7f);
         chooseAvatar.setAlignment(Align.center);
+        avatarSelection.row().height(stage.getHeight() / 20);
+        avatarSelection.add();
         avatarSelection.row().height(stage.getHeight() / 5);
         avatarSelection.add();
         avatarSelection.add(chooseAvatar).width(stage.getWidth() / 2);
         
+        avatarSelection.row().height(stage.getHeight() / 2);
+        ImageButton selectLeft = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
+        float buttonWidth = selectLeft.getWidth();
+        float buttonHeight = selectLeft.getHeight();
+        avatarSelection.add(selectLeft).width(buttonWidth).height(buttonHeight).space(10);
+        selectLeft.addListener(new selectLeftClickListener());
+        avatarPic = new Image();
+        avatarSelection.add(avatarPic).width(stage.getWidth() / 2).space(10);
+        ImageButton selectRight = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
+        avatarSelection.add(selectRight).width(buttonWidth).height(buttonHeight).space(10);
+        selectRight.addListener(new selectRightClickListener());
+        
         ImageButton backButton = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
-        backButton.setSize(stage.getWidth() * 0.1f, stage.getHeight() * 0.1f);
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
         buttonContainer.pad(25);
         buttonContainer.align(Align.bottomLeft);
@@ -132,7 +137,6 @@ public class ProfileEditAvatar extends ViewController implements ProfileEditObse
         buttonContainer.setFillParent(true);
         
         ImageButton continueButton = new ImageButton(manager.get(skinJson, Skin.class), "acceptButton");
-        continueButton.setSize(stage.getWidth() * 0.1f, stage.getHeight() * 0.1f);
         buttonContainer = new Container<ImageButton>();
         buttonContainer.pad(25);
         buttonContainer.align(Align.bottomRight);

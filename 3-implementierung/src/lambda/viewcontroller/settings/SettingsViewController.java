@@ -76,7 +76,7 @@ public class SettingsViewController extends ViewController implements SettingsMo
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
+        stage.getViewport().setScreenSize(width, height);
     }
 
     @Override
@@ -100,25 +100,31 @@ public class SettingsViewController extends ViewController implements SettingsMo
     public void create(AssetManager manager) {
         this.manager = manager;
         Table settings = new Table();
+        settings.align(Align.top);
         stage.addActor(settings);
         settings.setFillParent(true);
-        settings.row().height(stage.getHeight() / 5);
+        float height = stage.getHeight() / 10;
+        float width = stage.getWidth() * 0.8f;
+        settings.row().height(height);
+        settings.add();
+        settings.row().height(height);
         musicLabel = new Label(null, manager.get(skinJson, Skin.class));
-        settings.add(musicLabel).width(stage.getWidth() * 0.4f).space(10);
+        settings.add(musicLabel).width(width);
+        settings.row().height(height);
         musicSlider = new Slider(0, 100, 1, false,  manager.get(skinJson, Skin.class));
-        settings.add(musicSlider).width(stage.getWidth() * 0.4f).space(10);
-        settings.row().height(stage.getHeight() / 5);
+        settings.add(musicSlider).width(width).space(10);
+        settings.row().height(height);
         soundLabel = new Label(null, manager.get(skinJson, Skin.class));
-        settings.add(soundLabel).width(stage.getWidth() * 0.4f).space(10);
+        settings.add(soundLabel).width(width).space(20);
+        settings.row().height(height);
         soundSlider = new Slider(0, 100, 1, false,  manager.get(skinJson, Skin.class));
-        settings.add(soundSlider).width(stage.getWidth() * 0.4f).space(10);
+        settings.add(soundSlider).width(width).space(10);
+        settings.row().height(height);
         statistics = new TextButton("", manager.get(skinJson, Skin.class));
-        settings.row().height(stage.getHeight() /5);
-        settings.add(statistics).width(stage.getWidth() * 0.4f).space(10);
+        settings.add(statistics).width(width).space(40);
         //TODO add slider listener
         
         ImageButton addButton = new ImageButton(manager.get(skinJson, Skin.class));
-        addButton.setSize(stage.getWidth() * 0.1f, stage.getHeight() * 0.1f);
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
         buttonContainer.pad(25);
         buttonContainer.align(Align.bottomLeft);
@@ -136,8 +142,8 @@ public class SettingsViewController extends ViewController implements SettingsMo
         settings.removeObserver(this);
         settings = current.getSettings();
         settings.addObserver(this);
-        musicLabel.setText(lang.get("musicLabel"));
-        soundLabel.setText(lang.get("soundLabel"));
+        musicLabel.setText(lang.get("musicLabel") + ":");
+        soundLabel.setText(lang.get("soundLabel") + ":");
         statistics.setText(lang.get("statistics"));
         musicSlider.setValue(settings.getMusicVolume());
         soundSlider.setValue(settings.getSoundVolume());
