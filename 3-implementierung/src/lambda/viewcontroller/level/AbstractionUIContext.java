@@ -5,9 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import java.awt.Color;
 
 /**
  * @author: Kay Schmitteckert
@@ -45,8 +45,16 @@ public class AbstractionUIContext extends ElementUIContext implements Applicatio
      *
      * @return animation relating to the sprite
      */
-    public Animation getAFront() {
+    public Animation getAFront(Color color) { // TODO
         return aFront;
+    }
+    
+    public Texture getCenter(Color color) { // TODO
+        return tCenter;
+    }
+    
+    public Texture getBack(Color color) { // TODO
+        return tBack;
     }
 
     @Override

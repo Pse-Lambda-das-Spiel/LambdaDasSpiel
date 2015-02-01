@@ -36,14 +36,18 @@ public class LambdaRoot extends LambdaTerm {
      * Sets the child node and notifies all observers of the change.
      * 
      * @param child the new child node
+     * @return true if the child term has changed, false otherwise
      */
-    public void setChild(LambdaTerm child) {
+    public boolean setChild(LambdaTerm child) {
         LambdaTerm oldChild = this.child;
         this.child = child;
         if (child != null) {
             child.setParent(this);
         }
-        notify((observer) -> observer.replaceTerm(oldChild, child));
+        if (oldChild != child) {
+            notify((observer) -> observer.replaceTerm(oldChild, child));
+        }
+        return oldChild != child;
     }
 
     /**

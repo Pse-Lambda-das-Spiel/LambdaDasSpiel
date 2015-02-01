@@ -2,17 +2,12 @@ package lambda.viewcontroller.level;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Color;
 
 /**
  * @author: Kay Schmitteckert
@@ -40,12 +35,16 @@ public class VariableUIContext extends ElementUIContext implements ApplicationLi
     }
 
     /**
-     * Returns an animation relating to the sprite
+     * Returns an animation relating to the sprite. TODO: smoke animation.
      *
      * @return animation relating to the sprite
      */
     public Animation getAVariable() {
         return aVariable;
+    }
+    
+    public Texture getTexture(Color color) { // TODO
+        return tVariable;
     }
 
     @Override

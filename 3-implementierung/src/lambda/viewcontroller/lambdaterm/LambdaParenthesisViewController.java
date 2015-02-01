@@ -1,5 +1,6 @@
 package lambda.viewcontroller.lambdaterm;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import lambda.model.lambdaterm.LambdaApplication;
 
@@ -10,6 +11,19 @@ import lambda.model.lambdaterm.LambdaApplication;
  */
 public class LambdaParenthesisViewController extends LambdaNodeViewController {
     /**
+     * The front texture of the lamb.
+     */
+    private final Texture front;
+    /**
+     * The center texture of the lamb. Will be used multiple times.
+     */
+    private final Texture center;
+    /**
+     * The back texture of the lamb.
+     */
+    private final Texture back;
+    
+    /**
      * Creates a new instance of LambdaParenthesisViewController.
      * 
      * @param linkedTerm the first application under the parenthesis displayed by this node
@@ -18,6 +32,10 @@ public class LambdaParenthesisViewController extends LambdaNodeViewController {
      */
     public LambdaParenthesisViewController(LambdaApplication linkedTerm, LambdaNodeViewController parent, LambdaTermViewController viewController) {
         super(linkedTerm, parent, viewController);
+        
+        front = viewController.getContext().getElementUIContextFamily().getParenthesis().getFront();
+        center = viewController.getContext().getElementUIContextFamily().getParenthesis().getCenter();
+        back = viewController.getContext().getElementUIContextFamily().getParenthesis().getBack();
     }
 
     /**
@@ -27,8 +45,7 @@ public class LambdaParenthesisViewController extends LambdaNodeViewController {
      */
     @Override
     public float getMinWidth() {
-        // TODO
-        return 100.0f;
+        return 3 * BLOCK_WIDTH;
     }
     
     /**
@@ -39,7 +56,15 @@ public class LambdaParenthesisViewController extends LambdaNodeViewController {
      */
     @Override
     public void draw(Batch batch, float alpha) {
-        // TODO
+        // Back
+        batch.draw(back, getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+        // Center
+        float x;
+        for (x = getX() + BLOCK_WIDTH; x <= getWidth() - BLOCK_WIDTH + EPSILON; x += BLOCK_WIDTH) {
+            batch.draw(center, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+        }
+        // Front
+        batch.draw(front, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
     }
     
     /**

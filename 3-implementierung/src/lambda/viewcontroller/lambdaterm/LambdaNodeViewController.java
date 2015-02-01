@@ -12,13 +12,25 @@ import lambda.model.lambdaterm.LambdaTerm;
  */
 public abstract class LambdaNodeViewController extends Actor {
     /**
+     * Max distance of two floats to be still considered equal.
+     */
+    public static final float EPSILON = 1e-6f;
+    /**
+     * The width of one displayed block. Variables consist of one block, parenthesis and abstractions of at least three.
+     */
+    public static final float BLOCK_WIDTH = 100.0f;
+    /**
+     * The height of one displayed block.
+     */
+    public static final float BLOCK_HEIGHT = 100.0f;
+    /**
      * The term that is displayed by this viewcontroller.
      */
     private final LambdaTerm linkedTerm;
     /**
      * The viewcontroller on which this node is being displayed.
      */
-    private final LambdaTermViewController viewController;
+    protected final LambdaTermViewController viewController;
     /**
      * The parent viewcontroller node. Can be null.
      */

@@ -1,8 +1,14 @@
 package lambda.viewcontroller.lambdaterm;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import java.awt.Color;
 import lambda.model.lambdaterm.LambdaVariable;
+import static lambda.viewcontroller.lambdaterm.LambdaNodeViewController.BLOCK_HEIGHT;
+import static lambda.viewcontroller.lambdaterm.LambdaNodeViewController.BLOCK_WIDTH;
+import static lambda.viewcontroller.lambdaterm.LambdaNodeViewController.EPSILON;
 
 /**
  * Represents a viewcontroller variable node in a LambdaTermViewController.
@@ -14,6 +20,22 @@ public class LambdaVariableViewController extends LambdaValueViewController {
      * The color of this variable.
      */
     private Color color;
+    /**
+     * Indicates whether the animation for replacing this variable is currently being or has been run. Is set to true when the animation starts.
+     */
+    private boolean animate;
+    /**
+     * The time since the start of the animation or zero if the animation hasn't started yet.
+     */
+    private float stateTime;
+    /**
+     * The variable's texture.
+     */
+    private final Texture texture;
+    /**
+     * The smoke animation.
+     */
+    private final Animation animation;
 
     /**
      * Creates a new instance of LambdaVariableViewController.
@@ -24,6 +46,11 @@ public class LambdaVariableViewController extends LambdaValueViewController {
      */
     public LambdaVariableViewController(LambdaVariable linkedTerm, LambdaNodeViewController parent, LambdaTermViewController viewController) {
         super(linkedTerm, parent, viewController);
+        texture = viewController.getContext().getElementUIContextFamily().getVariable().getTexture(color);
+        animation = viewController.getContext().getElementUIContextFamily().getVariable().getAVariable();
+        
+        animate = false;
+        stateTime = 0.0f;
     }
 
     /**
@@ -33,8 +60,7 @@ public class LambdaVariableViewController extends LambdaValueViewController {
      */
     @Override
     public float getMinWidth() {
-        // TODO
-        return 100.0f;
+        return BLOCK_WIDTH;
     }
     
     /**
@@ -45,7 +71,36 @@ public class LambdaVariableViewController extends LambdaValueViewController {
      */
     @Override
     public void draw(Batch batch, float alpha) {
-        // TODO
+        // Texture
+        batch.draw(texture, getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+        
+        // Smoke animation TODO: scale over applicant
+        synchronized (viewController) {
+            if (animate) {
+                batch.draw(animation.getKeyFrame(stateTime), getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+                stateTime += Gdx.graphics.getDeltaTime();
+                if (isAnimationFinished()) {
+                    animate = false;
+                    viewController.notifyAll();
+                }
+            }
+        }
+    }
+    
+    /**
+     * Starts the smoke animation.
+     */
+    public void animate() {
+        animate = true;
+    }
+    
+    /**
+     * Returns whether the smoke animation is fininshed.
+     * 
+     * @return true if the smoke animation is finished, false otherwise
+     */
+    public boolean isAnimationFinished() {
+        return stateTime > animation.getAnimationDuration();
     }
     
     /**

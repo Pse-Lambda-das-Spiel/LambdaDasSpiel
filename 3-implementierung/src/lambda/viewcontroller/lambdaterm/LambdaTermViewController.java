@@ -4,10 +4,12 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import java.awt.Color;
 import java.util.IdentityHashMap;
 import java.util.Map;
+import lambda.model.lambdaterm.LambdaAbstraction;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.LambdaTermObserver;
 import lambda.model.lambdaterm.LambdaValue;
+import lambda.model.lambdaterm.LambdaVariable;
 import lambda.model.levels.LevelContext;
 import lambda.viewcontroller.lambdaterm.visitor.ViewInsertionVisitor;
 import lambda.viewcontroller.lambdaterm.visitor.ViewRemovalVisitor;
@@ -91,12 +93,57 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
      */
     @Override
     public void replaceTerm(LambdaTerm oldTerm, LambdaTerm newTerm) {
-        // TODO animation
         if (oldTerm != null) {
             oldTerm.accept(new ViewRemovalVisitor(this));
         }
         if (newTerm != null) {
             newTerm.getParent().accept(new ViewInsertionVisitor(newTerm, this));
+        }
+    }
+    
+    /**
+     * Called when an application is started.
+     * 
+     * @param abstraction the applied abstraction
+     * @param applicant the applicant
+     */
+    @Override
+    public void applicationStarted(LambdaAbstraction abstraction, LambdaTerm applicant) {
+        LambdaAbstractionViewController vc = ((LambdaAbstractionViewController) getNode(abstraction));
+        
+        // Start animation and block until it is complete
+        synchronized (this) {
+            vc.animate();
+            while (!vc.isAnimationFinished()) {
+                try {
+                    wait();
+                } catch (InterruptedException ex) {
+                    // TODO 
+                }
+            }
+        }
+    }
+    
+    /**
+     * Called when the given variable is replaced by the given term during a beta reduction.
+     * 
+     * @param variable the removed applicant
+     * @param replacing the replacing term
+     */
+    @Override
+    public void variableReplaced(LambdaVariable variable, LambdaTerm replacing) {
+        LambdaVariableViewController vc = ((LambdaVariableViewController) getNode(variable));
+        
+        // Start smoke animation and block until it is complete
+        synchronized (this) {
+            vc.animate();
+            while (!vc.isAnimationFinished()) {
+                try {
+                    wait();
+                } catch (InterruptedException ex) {
+                    // TODO 
+                }
+            }
         }
     }
     
@@ -108,7 +155,7 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
      */
     @Override
     public void setColor(LambdaValue term, Color color) {
-        // TODO animation
+        // TODO animation color change
         ((LambdaValueViewController) getNode(term)).setLambdaColor(color);
     }
     
@@ -119,6 +166,16 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
      */
     public boolean isEditable() {
         return editable;
+    }
+    
+    /**
+     * Returns the current level context.
+     * 
+     * @return the current level context
+     */
+    public LevelContext getContext()
+    {
+        return context;
     }
     
     /**

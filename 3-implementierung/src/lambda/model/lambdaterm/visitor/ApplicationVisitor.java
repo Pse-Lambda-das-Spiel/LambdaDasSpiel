@@ -100,6 +100,7 @@ public class ApplicationVisitor extends ValidLambdaTermVisitor<LambdaTerm> {
     public void visitValid(LambdaVariable node) {
         checkAlphaConversion(node);
         result = node.getColor().equals(color) ? applicant.accept(new CopyVisitor()) : node;
+        node.notify(observer -> observer.variableReplaced(node, result));
     }
     
     /**

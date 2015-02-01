@@ -40,14 +40,18 @@ public class LambdaAbstraction extends LambdaValue {
      * Sets the child node and notifies all observers of the change.
      * 
      * @param inside the new child node
+     * @return true if the inside term has changed, false otherwise
      */
-    public void setInside(LambdaTerm inside) {
+    public boolean setInside(LambdaTerm inside) {
         LambdaTerm oldInside = this.inside;
         this.inside = inside;
         if (inside != null) {
             inside.setParent(this);
         }
-        notify((observer) -> observer.replaceTerm(oldInside, inside));
+        if (oldInside != inside) {
+            notify((observer) -> observer.replaceTerm(oldInside, inside));
+        }
+        return oldInside != inside;
     }
     
     /**

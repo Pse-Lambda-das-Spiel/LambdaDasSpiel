@@ -72,6 +72,7 @@ public class ReductionStrategyApplicativeOrder extends BetaReductionVisitor {
             
             if (!hasReduced && myApplicant != null) {
                 // No reduction performed in inner term and applicant is given => perform application
+                node.notify(observer -> observer.applicationStarted(node, applicant));
                 result = node.getInside().accept(new ApplicationVisitor(node.getColor(), myApplicant));
                 hasReduced = true;
             } else {

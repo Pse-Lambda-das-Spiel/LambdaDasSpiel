@@ -78,7 +78,9 @@ public class AlphaConversionVisitor extends ValidLambdaTermVisitor {
         if (bindsOldColor) {
             assert(!colorBound); // Checked in validity test
             colorBound = true;
-            node.setColor(newColor);
+            if (node.setColor(newColor)) {
+                node.notify(observer -> observer.alphaConverted(node, newColor));
+            }
         }
         node.getInside().accept(this);
         if (bindsOldColor) {
@@ -95,7 +97,9 @@ public class AlphaConversionVisitor extends ValidLambdaTermVisitor {
     @Override
     public void visitValid(LambdaVariable node) {
         if (node.getColor().equals(oldColor) && colorBound) {
-            node.setColor(newColor);
+            if (node.setColor(newColor)) {
+                node.notify(observer -> observer.alphaConverted(node, newColor));
+            }
         }
     }
 }

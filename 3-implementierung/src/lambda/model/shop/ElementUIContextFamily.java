@@ -34,7 +34,7 @@ public class ElementUIContextFamily extends ShopItemModel {
      *
      * @return paranthesis
      */
-    public ParanthesisUIContext getParanthesis() {
+    public ParanthesisUIContext getParenthesis() {
         return paranthesisUIContext;
     }
 
@@ -52,7 +52,7 @@ public class ElementUIContextFamily extends ShopItemModel {
      *
      * @return applicationFront
      */
-    public AbstractionUIContext getApplication() {
+    public AbstractionUIContext getAbstraction() {
         return abstractionUIContext;
     }
 

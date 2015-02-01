@@ -157,6 +157,8 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                 setBusy(false);
             }
         }.start();
+        
+        // TODO wait till animation is finished?
     }
     
     /**

@@ -41,14 +41,18 @@ public class LambdaApplication extends LambdaTerm {
      * Sets the left child node and notifies all observers of the change.
      * 
      * @param left the new left child node
+     * @return true if the left term has changed, false otherwise
      */
-    public void setLeft(LambdaTerm left) {
+    public boolean setLeft(LambdaTerm left) {
         LambdaTerm oldLeft = this.left;
         this.left = left;
         if (left != null) {
             left.setParent(this);
         }
-        notify((observer) -> observer.replaceTerm(oldLeft, left));
+        if (oldLeft != left) {
+            notify((observer) -> observer.replaceTerm(oldLeft, left));
+        }
+        return oldLeft != left;
     }
     
     /**
@@ -64,14 +68,18 @@ public class LambdaApplication extends LambdaTerm {
      * Sets the right child node and notifies all observers of the change.
      * 
      * @param right the new right child node
+     * @return true if the right term has changed, false otherwise
      */
-    public void setRight(LambdaTerm right) {
+    public boolean setRight(LambdaTerm right) {
         LambdaTerm oldRight = this.right;
         this.right = right;
         if (right != null) {
             right.setParent(this);
         }
-        notify((observer) -> observer.replaceTerm(oldRight, right));
+        if (oldRight != right) {
+            notify((observer) -> observer.replaceTerm(oldRight, right));
+        }
+        return oldRight != right;
     }
 
     /**

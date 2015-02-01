@@ -63,6 +63,7 @@ public class ReductionStrategyNormalOrder extends BetaReductionVisitor {
         if (!hasReduced) {
             if (applicant != null) {
                 // Perform application
+                node.notify(observer -> observer.applicationStarted(node, applicant));
                 result = node.getInside().accept(new ApplicationVisitor(node.getColor(), applicant));
                 applicant = null;
                 hasReduced = true;

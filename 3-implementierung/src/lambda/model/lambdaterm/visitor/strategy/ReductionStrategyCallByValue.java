@@ -64,7 +64,8 @@ public class ReductionStrategyCallByValue extends BetaReductionVisitor {
     @Override
     public void visitValid(LambdaAbstraction node) {
         if (!hasReduced && applicant != null && applicant.isValue()) {
-            // Perform application if argument is a value (abstraction or variable)
+            // Perform application since argument is a value (abstraction or variable)
+            node.notify(observer -> observer.applicationStarted(node, applicant));
             result = node.getInside().accept(new ApplicationVisitor(node.getColor(), applicant));
             applicant = null;
             hasReduced = true;

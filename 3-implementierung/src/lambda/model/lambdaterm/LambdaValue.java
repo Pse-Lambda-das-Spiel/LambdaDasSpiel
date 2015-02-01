@@ -42,14 +42,19 @@ public abstract class LambdaValue extends LambdaTerm {
      * Sets the color of this value and notifies all observers of the change.
      * 
      * @param color the new color
+     * @return true if the color has changed, false otherwise
      * @throws IllegalArgumentException if color is null
      */
-    public void setColor(Color color) {
+    public boolean setColor(Color color) {
         if (color == null) {
             throw new IllegalArgumentException("Color cannot be null!");
         }
+        Color oldColor = this.color;
         this.color = color;
-        notify((observer) -> observer.setColor(this, color));
+        if (oldColor != color) {
+            notify((observer) -> observer.setColor(this, color));
+        }
+        return oldColor != color;
     }
     
     /**

@@ -111,7 +111,7 @@ public final class LevelLoadHelper {
 			if (entry.getString("tutorialId").equals("")) {
 				throw new InvalidJsonException("A tutorial id must not be empty!");
 			}
-			tutorialMessageList.add(new TutorialMessage(entry.getString("tutorialId")));
+			tutorialMessageList.add(new TutorialMessage(entry.getString("tutorialId"), null, null, null, null)); // TODO
 		}
 		return tutorialMessageList;
 	}

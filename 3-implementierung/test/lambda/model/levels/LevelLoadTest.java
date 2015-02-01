@@ -41,7 +41,7 @@ public class LevelLoadTest {
 		List<TutorialMessage> tutorial = new ArrayList<>();
 		List<ReductionStrategy> availableRedStrats = new ArrayList<>();
 		List<ElementType> useableElements = new ArrayList<>();
-		tutorial.add(new TutorialMessage("8"));
+		tutorial.add(new TutorialMessage("8", null, null, null, null)); // TODO
 		availableRedStrats.add(ReductionStrategy.NORMAL_ORDER);
 		useableElements.add(ElementType.VARIABLE);
 		useableElements.add(ElementType.ABSTRACTION);

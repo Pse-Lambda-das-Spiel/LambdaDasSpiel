@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 /**
  * @author: Kay Schmitteckert
  */
-public class ParanthesisUIContext extends ElementUIContext  implements ApplicationListener {
+public class ParanthesisUIContext extends ElementUIContext  implements ApplicationListener { // TODO: ParEnthesis name
 
     /**
      * Number of columns in the animation-sheet
@@ -41,12 +41,24 @@ public class ParanthesisUIContext extends ElementUIContext  implements Applicati
     }
 
     /**
-     * Returns an animation relating to the sprite
+     * Returns an animation relating to the sprite // TODO: Parenthesis doesn't need animations
      *
      * @return animation relating to the sprite
      */
     public Animation getAFront() {
         return aFront;
+    }
+    
+    public Texture getFront() { // TODO
+        return tFront;
+    }
+    
+    public Texture getCenter() { // TODO
+        return tCenter;
+    }
+    
+    public Texture getBack() { // TODO
+        return tBack;
     }
 
     @Override
