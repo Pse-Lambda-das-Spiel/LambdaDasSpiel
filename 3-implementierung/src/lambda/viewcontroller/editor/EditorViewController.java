@@ -19,6 +19,10 @@ import lambda.model.levels.LevelContext;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.lambdaterm.LambdaTermViewController;
 
+/**
+ * 
+ * @author Florian Fervers
+ */
 public class EditorViewController extends ViewController {
     private final Stage stage;
     private LambdaTermViewController term;

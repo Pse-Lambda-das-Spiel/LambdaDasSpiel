@@ -1,11 +1,14 @@
 package lambda.viewcontroller.shop;
 
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.audio.Music;
 import lambda.model.shop.ShopModel;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.assets.AssetViewController;
 
+
+/**
+ * @author Kay Schmitteckert
+ */
 public class ShopViewController extends ViewController {
 
     private ShopModel shop;

@@ -1,14 +1,13 @@
 package lambda.model.shop;
 
-
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import lambda.viewcontroller.level.AbstractionUIContext;
 import lambda.viewcontroller.level.ParanthesisUIContext;
 import lambda.viewcontroller.level.VariableUIContext;
 
 /**
- *
  * Created by kay on 19.01.15.
+ * 
+ * @author Kay Schmitteckert
  */
 public class ElementUIContextFamily extends ShopItemModel {
 

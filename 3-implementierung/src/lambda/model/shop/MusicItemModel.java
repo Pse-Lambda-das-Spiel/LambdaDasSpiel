@@ -3,9 +3,9 @@ package lambda.model.shop;
 import com.badlogic.gdx.audio.Music;
 
 /**
- *
- *
  * Created by kay on 19.01.15.
+ * 
+ * @author Kay Schmitteckert
  */
 public class MusicItemModel extends ShopItemModel {
 
