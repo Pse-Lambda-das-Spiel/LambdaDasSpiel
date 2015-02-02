@@ -7,12 +7,15 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import java.awt.Color;
 import lambda.model.editormode.EditorModel;
@@ -25,9 +28,11 @@ import lambda.model.lambdaterm.LambdaTermObserver;
 import lambda.model.lambdaterm.LambdaVariable;
 import lambda.model.levels.LevelContext;
 import lambda.model.levels.ReductionStrategy;
+import lambda.model.profiles.ProfileManager;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.lambdaterm.LambdaTermViewController;
 import lambda.viewcontroller.lambdaterm.draganddrop.LambdaTermDragSource;
+import lambda.viewcontroller.mainmenu.MainMenuViewController;
 
 /**
  * The viewconroller for the editor stage of a level.
@@ -115,28 +120,31 @@ public final class EditorViewController extends ViewController implements Editor
         toolbarElements[2] = LambdaTermViewController.build(variable, false, model.getLevelContext());
         // TODO toolbar background
         
+        Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
+        I18NBundle language = manager.get(
+                ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
         pauseButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                // TODO Pause dialog
+                new PauseDialog(dialogSkin, language).show(stage);
             }
         });
         hintButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                // TODO Hint dialog
+                new HintDialog(dialogSkin, /*get levelcontext hint, +?*/ stage.getWidth(), stage.getHeight()).show(stage);
             }
         });
         helpButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                // TODO Help dialog
+                new HelpDialog(dialogSkin, language, stage.getWidth(), stage.getHeight()).show(stage);
             }
         });
         targetButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                // TODO Target dialog
+                new TargetDialog(dialogSkin, /*get levelcontext hint, +?*/ stage.getWidth(), stage.getHeight()).show(stage);
             }
         });
     }
@@ -230,4 +238,48 @@ public final class EditorViewController extends ViewController implements Editor
     public void strategyChanged(ReductionStrategy strategy) {
         // TODO change strategy image
     }
+    
+    private class PauseDialog extends Dialog {
+        public PauseDialog(Skin dialogSkin, I18NBundle language) {
+            super("", dialogSkin);
+            float width = stage.getWidth()*0.7f;
+            float height = stage.getHeight()/5;
+            row();
+            TextButton continueButton = new TextButton(language.get("continue"), dialogSkin);
+            continueButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    setVisible(false);
+                    hide();
+                }
+            });
+            add(continueButton).width(width).height(height).pad(10);
+            
+            row();
+            TextButton resetButton = new TextButton(language.get("reset"), dialogSkin);
+            resetButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    //TODO reset Level
+                    setVisible(false);
+                    hide();
+                }
+            });
+            add(resetButton).width(width).height(height).pad(10);
+            
+            row();
+            TextButton menuButton = new TextButton(language.get("mainMenu"), dialogSkin);
+            menuButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    //TODO ?
+                    getGame().setScreen(MainMenuViewController.class);
+                    setVisible(false);
+                    hide();
+                }
+            });
+            add(menuButton).width(width).height(height).pad(10);
+        }
+    }
+    
 }
