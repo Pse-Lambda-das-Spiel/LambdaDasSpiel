@@ -2,25 +2,19 @@ package lambda.viewcontroller.level;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import lambda.viewcontroller.ViewController;
 
 /**
  * @author: Kay Schmitteckert
  */
-public class CloudAnimation implements ApplicationListener {
-
-    /**
-     * Number of columns in the animation-sheet
-     */
-    private static final int FRAME_COLS = 6;
-    /**
-     * Number of rows in the animation-sheet
-     */
-    private static final int FRAME_ROWS = 5;
+public class CloudAnimation extends ViewController implements ApplicationListener {
 
     private Texture texture;
     private Animation animation;
@@ -28,6 +22,9 @@ public class CloudAnimation implements ApplicationListener {
     private SpriteBatch spriteBatch;
     private TextureRegion currentFrame;
     private float stateTime;
+
+    private AssetManager assets;
+    private final String cloudAtlas = "data/animation/cloud/cloud.atlas";
 
     public CloudAnimation(Texture texture) {
         this.texture = texture;
@@ -44,17 +41,16 @@ public class CloudAnimation implements ApplicationListener {
 
     @Override
     public void create() {
-        TextureRegion[][] tmp = TextureRegion.split(texture, texture.getWidth()/FRAME_COLS, texture.getHeight()/FRAME_ROWS);              // #10
-        walkFrames = new TextureRegion[FRAME_COLS * FRAME_ROWS];
-        int index = 0;
-        for (int i = 0; i < FRAME_ROWS; i++) {
-            for (int j = 0; j < FRAME_COLS; j++) {
-                walkFrames[index++] = tmp[i][j];
-            }
-        }
-        animation = new Animation(0.025f, walkFrames);
-        spriteBatch = new SpriteBatch();
-        stateTime = 0f;
+    }
+
+    @Override
+    public void show() {
+
+    }
+
+    @Override
+    public void render(float v) {
+
     }
 
     @Override
@@ -83,7 +79,29 @@ public class CloudAnimation implements ApplicationListener {
     }
 
     @Override
+    public void hide() {
+
+    }
+
+    @Override
     public void dispose() {
         spriteBatch.dispose();
+    }
+
+    @Override
+    public void queueAssets(AssetManager manager) {
+        assets.load(cloudAtlas, TextureAtlas.class);
+    }
+
+    @Override
+    public void create(AssetManager manager) {
+        int i = 1;
+        while (assets.containsAsset("cloud" + i)) {
+            walkFrames[i++] = assets.get("cloud" + i, TextureRegion.class);
+        }
+        animation = new Animation(0.025f, walkFrames);
+        spriteBatch = new SpriteBatch();
+        stateTime = 0f;
+
     }
 }

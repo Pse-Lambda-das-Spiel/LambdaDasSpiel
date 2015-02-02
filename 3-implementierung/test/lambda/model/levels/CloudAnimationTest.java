@@ -22,16 +22,15 @@ public class CloudAnimationTest {
     public void setUp() throws Exception {
         Gdx.files = new LwjglFiles();
         assets = new AssetManager();
-        assets.load("data/sheets/cloud.png", Texture.class);
-        while(!(assets.update())) {
-            System.out.print(".");
-        }
-            cloud = new CloudAnimation(assets.get("data/sheets/cloud.png"));
     }
 
     @Test
     public void testVariableUIContext() {
-
+        assets.load("data/sheets/cloud.png", Texture.class);
+        while(!(assets.update())) {
+            System.out.print(".");
+        }
+        cloud = new CloudAnimation(assets.get("data/sheets/cloud.png"));
 
     }
 

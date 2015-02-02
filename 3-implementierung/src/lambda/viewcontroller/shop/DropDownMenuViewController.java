@@ -5,17 +5,27 @@ import lambda.model.shop.ShopItemModel;
 import lambda.model.shop.ShopItemTypeModel;
 import lambda.viewcontroller.ViewController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * @author: Kay Schmitteckert
  */
-public class DropDownMenuViewController extends ViewController {
+public class DropDownMenuViewController<T extends ShopItemModel> extends ViewController {
 
-    private ShopItemTypeModel<ShopItemModel> shopItemTypeModel;
+    private ShopItemTypeModel<T> shopItemTypeModel;
+    private List<ShopItemViewController<T>> itemVCList;
     private boolean open;
 
-    public DropDownMenuViewController(ShopItemTypeModel<ShopItemModel> shopItemTypeModel) {
+    public DropDownMenuViewController(ShopItemTypeModel<T> shopItemTypeModel) {
         this.shopItemTypeModel = shopItemTypeModel;
+        itemVCList = new ArrayList<ShopItemViewController<T>>();
+        //Creates a view-controller for each item in this category and puts them into the list "itemVCList"
+        for (int i = 0; i < shopItemTypeModel.getItems().size(); i++) {
+            ShopItemViewController<T> itemVC = new ShopItemViewController(shopItemTypeModel.getItems().get(i));
+            itemVCList.add(i, itemVC);
+        }
         open = false;
     }
 
@@ -25,7 +35,7 @@ public class DropDownMenuViewController extends ViewController {
      *
      * @return the category
      */
-    public ShopItemTypeModel<ShopItemModel> getShopItemTypeModel() {
+    public ShopItemTypeModel<T> getShopItemTypeModel() {
         return shopItemTypeModel;
     }
 
@@ -36,6 +46,15 @@ public class DropDownMenuViewController extends ViewController {
      */
     public boolean isOpen() {
         return open;
+    }
+
+    /**
+     * Sets true if the menu is openend
+     *
+     * @param open true if the menu is opened; false if the menu is closed
+     */
+    public void setOpen(boolean open) {
+        this.open = open;
     }
 
     @Override
