@@ -121,12 +121,11 @@ public final class EditorViewController extends ViewController implements Editor
         // TODO toolbar background
         
         Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
-        I18NBundle language = manager.get(
-                ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
         pauseButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                new PauseDialog(dialogSkin, language).show(stage);
+                new PauseDialog(dialogSkin, manager.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
+                        I18NBundle.class)).show(stage);
             }
         });
         hintButton.addListener(new ClickListener(){
@@ -138,7 +137,8 @@ public final class EditorViewController extends ViewController implements Editor
         helpButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                new HelpDialog(dialogSkin, language, stage.getWidth(), stage.getHeight()).show(stage);
+                new HelpDialog(dialogSkin, manager.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
+                        I18NBundle.class), stage.getWidth(), stage.getHeight()).show(stage);
             }
         });
         targetButton.addListener(new ClickListener(){
