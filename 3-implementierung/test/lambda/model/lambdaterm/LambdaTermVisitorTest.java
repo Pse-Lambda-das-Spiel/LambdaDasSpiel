@@ -2,7 +2,9 @@ package lambda.model.lambdaterm;
 
 import java.text.ParseException;
 import lambda.model.lambdaterm.visitor.CopyVisitor;
+import lambda.model.lambdaterm.visitor.FrontInserter;
 import lambda.model.lambdaterm.visitor.IsAlphaEquivalentVisitor;
+import lambda.model.lambdaterm.visitor.SiblingInserter;
 import lambda.model.lambdaterm.visitor.ToStringVisitor;
 import lambda.model.lambdaterm.visitor.strategy.ReductionStrategyApplicativeOrder;
 import lambda.model.lambdaterm.visitor.strategy.ReductionStrategyCallByName;
@@ -176,5 +178,35 @@ public class LambdaTermVisitorTest {
         assertTrue("Call-by-name beta reduction not correct!", term.accept(new IsAlphaEquivalentVisitor(LambdaUtils.fromString("(/z. (/c.c) z)"))));
         term.accept(new ReductionStrategyCallByName());
         assertTrue("Call-by-name beta reduction not correct!", term.accept(new IsAlphaEquivalentVisitor(LambdaUtils.fromString("(/z. (/c.c) z)"))));
+    }
+    
+    /**
+     * Tests the sibling inserter.
+     * 
+     * @throws ParseException if the string could not be parsed
+     */
+    @Test
+    public void testSiblingInserter() throws ParseException {
+        LambdaRoot root = LambdaUtils.fromString("x");
+        root.getChild().accept(new SiblingInserter(LambdaUtils.fromString("y").getChild(), true));
+        assertEquals("Sibling was inserted incorrectly!", root, LambdaUtils.fromString("y x"));
+        root.getChild().accept(new SiblingInserter(LambdaUtils.fromString("z").getChild(), false));
+        assertEquals("Sibling was inserted incorrectly!", root, LambdaUtils.fromString("y x z"));
+    }
+    
+    /**
+     * Tests the front inserter.
+     * 
+     * @throws ParseException if the string could not be parsed
+     */
+    @Test
+    public void testFrontInserter() throws ParseException {
+        LambdaRoot root = LambdaUtils.fromString("x");
+        root.accept(new FrontInserter(LambdaUtils.fromString("y").getChild()));
+        assertEquals("Term was inserted incorrectly at front!", root, LambdaUtils.fromString("y"));
+        
+        root = LambdaUtils.fromString("x y");
+        root.getChild().accept(new FrontInserter(LambdaUtils.fromString("z").getChild()));
+        assertEquals("Term was inserted incorrectly at front!", root, LambdaUtils.fromString("z y"));
     }
 }

@@ -1,9 +1,15 @@
 package lambda.viewcontroller.lambdaterm;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import java.util.LinkedList;
 import java.util.List;
 import lambda.model.lambdaterm.LambdaTerm;
+import lambda.model.lambdaterm.visitor.FrontInserter;
+import lambda.model.lambdaterm.visitor.SiblingInserter;
+import lambda.viewcontroller.lambdaterm.draganddrop.LambdaTermDragSource;
+import lambda.viewcontroller.lambdaterm.draganddrop.LambdaTermDropTarget;
 
 /**
  * Represents a single viewcontroller node in a LambdaTermViewController.
@@ -24,13 +30,17 @@ public abstract class LambdaNodeViewController extends Actor {
      */
     public static final float BLOCK_HEIGHT = 100.0f;
     /**
+     * The size of the gap between two nodes.
+     */
+    public static final float GAP_SIZE = 10.0f;
+    /**
      * The term that is displayed by this viewcontroller.
      */
     private final LambdaTerm linkedTerm;
     /**
      * The viewcontroller on which this node is being displayed.
      */
-    protected final LambdaTermViewController viewController;
+    private final LambdaTermViewController viewController;
     /**
      * The parent viewcontroller node. Can be null.
      */
@@ -58,10 +68,6 @@ public abstract class LambdaNodeViewController extends Actor {
         this.parent = parent;
         this.viewController = viewController;
         children = new LinkedList<>();
-        
-        if (viewController.isEditable()) {
-            // TODO drag and drop
-        }
     }
     
     /**
@@ -89,6 +95,25 @@ public abstract class LambdaNodeViewController extends Actor {
      */
     public LambdaNodeViewController getParentNode() {
         return parent;
+    }
+    
+    /**
+     * Returns the viewcontroller that displays this node.
+     * 
+     * @return the viewcontroller that displays this node
+     */
+    public LambdaTermViewController getViewController() {
+        return viewController;
+    }
+    
+    /**
+     * Returns the child at the given index.
+     * 
+     * @param index the child's index
+     * @return the child at the given index
+     */
+    public LambdaNodeViewController getChild(int index) {
+        return children.get(index);
     }
     
     /**
@@ -123,7 +148,7 @@ public abstract class LambdaNodeViewController extends Actor {
         }
         
         viewController.addNode(child);
-        // TODO updateWidth()
+        updateWidth();
     }
     
     /**
@@ -138,7 +163,76 @@ public abstract class LambdaNodeViewController extends Actor {
         }
         children.remove(child);
         viewController.removeNode(child);
-        // TODO updateWidth()
+        updateWidth();
+    }
+    
+    /**
+     * Calculates the width of the current node. Then traverses up the tree. If the node is reached, updates positions and then drag&drop sources sand targets.
+     */
+    private void updateWidth() {
+        // Calculate own width
+        float width = 0.0f;
+        for (LambdaNodeViewController child : children) {
+            width += child.getWidth();
+        }
+        width = Math.max(width, getMinWidth());
+        setWidth(width);
+        
+        // Recurse
+        if (!isRoot()) {
+            parent.updateWidth();
+        } else {
+            // Update position downwards if root is reached, then update drag&drop sources and targets
+            updatePosition(0.0f, 0.0f);
+            viewController.getDragAndDrop().clear();
+            updateDragAndDrop();
+        }
+    }
+    
+    /**
+     * Sets the position for the current node. Then traverses down the tree.
+     * 
+     * @param x the new x-coordinate of this node
+     * @param y the new y-coordinate of this node
+     */
+    private void updatePosition(float x, float y) {
+        setPosition(x, y);
+        
+        // Recurse
+        y += BLOCK_HEIGHT;
+        for (LambdaNodeViewController child : children) {
+            child.updatePosition(x, y);
+            x += child.getWidth();
+        }
+    }
+    
+    /**
+     * Updates the drag&drop source for this node and the drag&drop targets for all spaces next to its children. Then traverses down the tree.
+     */
+    private void updateDragAndDrop() {
+        if (getViewController().isEditable()) {
+            // Add drag&drop source and targets
+            if (!this.isRoot()) {
+                DragAndDrop dragAndDrop = viewController.getDragAndDrop();
+                dragAndDrop.addSource(new LambdaTermDragSource(this, true));
+
+                // First target left of all children
+                Rectangle target = new Rectangle(this.getX() - GAP_SIZE / 2, this.getY(), GAP_SIZE, BLOCK_HEIGHT);
+                dragAndDrop.addTarget(new LambdaTermDropTarget(target, term -> getLinkedTerm().accept(new FrontInserter(term))));
+
+                // Targets right of each child
+                for (LambdaNodeViewController childVC : children) {
+                    final LambdaTerm childTerm = childVC.getLinkedTerm();
+                    target = new Rectangle(childVC.getX() + BLOCK_WIDTH - GAP_SIZE / 2, childVC.getY(), GAP_SIZE, BLOCK_HEIGHT);
+                    dragAndDrop.addTarget(new LambdaTermDropTarget(target, term -> childTerm.accept(new SiblingInserter(term, false))));
+                }
+            }
+
+            // Recurse
+            for (LambdaNodeViewController child : children) {
+                child.updateDragAndDrop();
+            }
+        }
     }
     
     /**

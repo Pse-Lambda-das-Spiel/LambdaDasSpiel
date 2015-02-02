@@ -45,15 +45,15 @@ public class AbstractionUIContext extends ElementUIContext implements Applicatio
      *
      * @return animation relating to the sprite
      */
-    public Animation getAFront(Color color) { // TODO
+    public Animation getAFront() { // TODO
         return aFront;
     }
     
-    public Texture getCenter(Color color) { // TODO
+    public Texture getCenter() { // TODO
         return tCenter;
     }
     
-    public Texture getBack(Color color) { // TODO
+    public Texture getBack() { // TODO
         return tBack;
     }
 

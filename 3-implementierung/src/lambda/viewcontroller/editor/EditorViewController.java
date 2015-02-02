@@ -14,29 +14,57 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import java.awt.Color;
 import lambda.model.editormode.EditorModel;
+import lambda.model.editormode.EditorModelObserver;
+import lambda.model.lambdaterm.LambdaAbstraction;
+import lambda.model.lambdaterm.LambdaApplication;
+import lambda.model.lambdaterm.LambdaRoot;
+import lambda.model.lambdaterm.LambdaTerm;
+import lambda.model.lambdaterm.LambdaTermObserver;
+import lambda.model.lambdaterm.LambdaVariable;
 import lambda.model.levels.LevelContext;
+import lambda.model.levels.ReductionStrategy;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.lambdaterm.LambdaTermViewController;
+import lambda.viewcontroller.lambdaterm.draganddrop.LambdaTermDragSource;
 
 /**
+ * The viewconroller for the editor stage of a level.
  * 
  * @author Florian Fervers
  */
-public class EditorViewController extends ViewController {
+public final class EditorViewController extends ViewController implements EditorModelObserver, LambdaTermObserver {
+    /**
+     * Contains all actors that are displayed in this viewcontroller.
+     */
     private final Stage stage;
+    /**
+     * The viewcontroller of the term that is being edited.
+     */
     private LambdaTermViewController term;
+    /**
+     * The model of the editor.
+     */
     private final EditorModel model;
     /**
      * Background image of the editor.
      */
     private Image background;
+    /**
+     * The toolbar elements: Abstraction, parenthesis, variable
+     */
+    private final LambdaTermViewController[] toolbarElements;
     
+    /**
+     * Creates a new instance of EditorViewController.
+     */
     public EditorViewController() {
         stage = new Stage(new ScreenViewport());
         term = null;
         model = new EditorModel();
         background = null;
+        toolbarElements = new LambdaTermViewController[3];
     }
     
     @Override
@@ -47,6 +75,8 @@ public class EditorViewController extends ViewController {
     
     @Override
     public void create(AssetManager manager) {
+        model.addObserver(this);
+        
         // Set up ui elements
         Table main = new Table();
         stage.addActor(main);
@@ -73,9 +103,40 @@ public class EditorViewController extends ViewController {
         main.row();
         main.add(bottomToolBar).height(0.15f * stage.getHeight()).expandX().bottom();
         
+        // Tool bar
+        LambdaRoot abstraction = new LambdaRoot();
+        abstraction.setChild(new LambdaAbstraction(abstraction, Color.WHITE, true));
+        toolbarElements[0] = LambdaTermViewController.build(abstraction, false, model.getLevelContext());
+        LambdaRoot application = new LambdaRoot();
+        application.setChild(new LambdaApplication(application, true));
+        toolbarElements[1] = LambdaTermViewController.build(application, false, model.getLevelContext());
+        LambdaRoot variable = new LambdaRoot();
+        variable.setChild(new LambdaVariable(variable, Color.WHITE, true));
+        toolbarElements[2] = LambdaTermViewController.build(variable, false, model.getLevelContext());
+        // TODO toolbar background
+        
         pauseButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
+                // TODO Pause dialog
+            }
+        });
+        hintButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                // TODO Hint dialog
+            }
+        });
+        helpButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                // TODO Help dialog
+            }
+        });
+        targetButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                // TODO Target dialog
             }
         });
     }
@@ -109,6 +170,22 @@ public class EditorViewController extends ViewController {
         background = context.getBgImage();
         stage.addActor(background);
         background.toBack();
+        
+        model.getTerm().addObserver(this);
+    }
+    
+    /**
+     * Is called when the lambdaterm is changed. Updates drag&drop sources for toolbar elements.
+     * 
+     * @param oldTerm the old term to be replaced
+     * @param newTerm the new replacing term
+     */
+    @Override
+    public void replaceTerm(LambdaTerm oldTerm, LambdaTerm newTerm) {
+        // Add drag&drop sources for toolbar elements
+        for (LambdaTermViewController toolbarElement : toolbarElements) {
+            term.getDragAndDrop().addSource(new LambdaTermDragSource(toolbarElement.getRoot().getChild(0), false));
+        }
     }
     
     @Override
@@ -147,5 +224,10 @@ public class EditorViewController extends ViewController {
     @Override
     public void dispose() {
         stage.dispose();
+    }
+
+    @Override
+    public void strategyChanged(ReductionStrategy strategy) {
+        // TODO change strategy image
     }
 }

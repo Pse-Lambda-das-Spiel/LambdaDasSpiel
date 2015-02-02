@@ -69,6 +69,15 @@ public class EditorModel extends Observable<EditorModelObserver> {
     }
     
     /**
+     * Returns the current term.
+     * 
+     * @return the current term
+     */
+    public LambdaRoot getTerm() {
+        return term;
+    }
+    
+    /**
      * Returns the level context.
      * 
      * @return the level context

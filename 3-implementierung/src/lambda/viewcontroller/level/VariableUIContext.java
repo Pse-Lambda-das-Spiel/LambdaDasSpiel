@@ -43,7 +43,7 @@ public class VariableUIContext extends ElementUIContext implements ApplicationLi
         return aVariable;
     }
     
-    public Texture getTexture(Color color) { // TODO
+    public Texture getTexture() { // TODO
         return tVariable;
     }
 

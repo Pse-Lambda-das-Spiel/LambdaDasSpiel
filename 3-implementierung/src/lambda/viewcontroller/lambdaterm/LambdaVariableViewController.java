@@ -4,11 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import java.awt.Color;
 import lambda.model.lambdaterm.LambdaVariable;
 import static lambda.viewcontroller.lambdaterm.LambdaNodeViewController.BLOCK_HEIGHT;
 import static lambda.viewcontroller.lambdaterm.LambdaNodeViewController.BLOCK_WIDTH;
-import static lambda.viewcontroller.lambdaterm.LambdaNodeViewController.EPSILON;
 
 /**
  * Represents a viewcontroller variable node in a LambdaTermViewController.
@@ -16,10 +14,6 @@ import static lambda.viewcontroller.lambdaterm.LambdaNodeViewController.EPSILON;
  * @author Florian Fervers
  */
 public class LambdaVariableViewController extends LambdaValueViewController {
-    /**
-     * The color of this variable.
-     */
-    private Color color;
     /**
      * Indicates whether the animation for replacing this variable is currently being or has been run. Is set to true when the animation starts.
      */
@@ -46,7 +40,7 @@ public class LambdaVariableViewController extends LambdaValueViewController {
      */
     public LambdaVariableViewController(LambdaVariable linkedTerm, LambdaNodeViewController parent, LambdaTermViewController viewController) {
         super(linkedTerm, parent, viewController);
-        texture = viewController.getContext().getElementUIContextFamily().getVariable().getTexture(color);
+        texture = viewController.getContext().getElementUIContextFamily().getVariable().getTexture();
         animation = viewController.getContext().getElementUIContextFamily().getVariable().getAVariable();
         
         animate = false;
@@ -75,13 +69,13 @@ public class LambdaVariableViewController extends LambdaValueViewController {
         batch.draw(texture, getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
         
         // Smoke animation TODO: scale over applicant
-        synchronized (viewController) {
+        synchronized (getViewController()) {
             if (animate) {
                 batch.draw(animation.getKeyFrame(stateTime), getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
                 stateTime += Gdx.graphics.getDeltaTime();
                 if (isAnimationFinished()) {
                     animate = false;
-                    viewController.notifyAll();
+                    getViewController().notifyAll();
                 }
             }
         }

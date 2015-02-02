@@ -1,6 +1,7 @@
 package lambda.viewcontroller.lambdaterm;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import java.awt.Color;
 import java.util.IdentityHashMap;
 import java.util.Map;
@@ -36,6 +37,10 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
      * The root of the viewController tree.
      */
     private LambdaNodeViewController root;
+    /**
+     * Handles the dragging and dropping of nodes.
+     */
+    private final DragAndDrop dragAndDrop;
     
     /**
      * Creates a new instance of LambdaTermViewController.
@@ -83,6 +88,12 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
         this.editable = editable;
         this.context = context;
         nodeMap = new IdentityHashMap<>();
+        if (editable) {
+            dragAndDrop = new DragAndDrop();
+            dragAndDrop.setButton(0);
+        } else {
+            dragAndDrop = null;
+        }
     }
     
     /**
@@ -176,6 +187,24 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
     public LevelContext getContext()
     {
         return context;
+    }
+    
+    /**
+     * Returns the drag&drop manager.
+     * 
+     * @return the drag&drop manager
+     */
+    public DragAndDrop getDragAndDrop() {
+        return dragAndDrop;
+    }
+    
+    /**
+     * Returns the root of the viewcontroller tree.
+     * 
+     * @return the root of the viewcontroller tree
+     */
+    public LambdaNodeViewController getRoot() {
+        return root;
     }
     
     /**

@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import java.awt.Color;
 import lambda.model.lambdaterm.LambdaAbstraction;
 
 /**
@@ -13,10 +12,6 @@ import lambda.model.lambdaterm.LambdaAbstraction;
  * @author Florian Fervers
  */
 public class LambdaAbstractionViewController extends LambdaValueViewController {
-    /**
-     * The color of the variable bound by this abstraction.
-     */
-    private Color color;
     /**
      * The animation of the first block of the lamb.
      */
@@ -47,9 +42,9 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
      */
     public LambdaAbstractionViewController(LambdaAbstraction linkedTerm, LambdaNodeViewController parent, LambdaTermViewController viewController) {
         super(linkedTerm, parent, viewController);
-        front = viewController.getContext().getElementUIContextFamily().getAbstraction().getAFront(color);
-        center = viewController.getContext().getElementUIContextFamily().getAbstraction().getCenter(color);
-        back = viewController.getContext().getElementUIContextFamily().getAbstraction().getBack(color);
+        front = viewController.getContext().getElementUIContextFamily().getAbstraction().getAFront();
+        center = viewController.getContext().getElementUIContextFamily().getAbstraction().getCenter();
+        back = viewController.getContext().getElementUIContextFamily().getAbstraction().getBack();
         animate = false;
         stateTime = 0.0f;
     }
@@ -82,12 +77,12 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
         // Front
         batch.draw(front.getKeyFrame(stateTime), x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
         
-        synchronized (viewController) {
+        synchronized (getViewController()) {
             if (animate) {
                 stateTime += Gdx.graphics.getDeltaTime();
                 if (isAnimationFinished()) {
                     animate = false;
-                    viewController.notifyAll();
+                    getViewController().notifyAll();
                 }
             }
         }
