@@ -53,6 +53,15 @@ public class EditorModel extends Observable<EditorModelObserver> {
     }
     
     /**
+     * Returns a new visitor for the current reduction strategy.
+     * 
+     * @return a new visitor for the current reduction strategy
+     */
+    public BetaReductionVisitor getReductionStrategy() {
+        return strategy.toVisitor();
+    }
+    
+    /**
      * Sets the currently selected reduction strategy.
      * 
      * @param strategy the new selected reduction strategy

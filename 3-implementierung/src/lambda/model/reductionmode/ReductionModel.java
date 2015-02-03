@@ -3,6 +3,7 @@ package lambda.model.reductionmode;
 import java.util.Stack;
 import lambda.Observable;
 import lambda.model.lambdaterm.LambdaRoot;
+import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.visitor.CopyVisitor;
 import lambda.model.lambdaterm.visitor.IsAlphaEquivalentVisitor;
 import lambda.model.lambdaterm.visitor.strategy.BetaReductionVisitor;
@@ -57,6 +58,15 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
     }
     
     /**
+     * The lambda term that is being reduced.
+     * 
+     * @return the lambda term that is being reduced
+     */
+    public LambdaRoot getTerm() {
+        return current;
+    }
+    
+    /**
      * Resets the model with the given values.
      * 
      * @param term the term to be reduced
@@ -88,16 +98,32 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
     }
     
     /**
-     * Starts the automatic reduction.
+     * Returns the number of terms that are stored in the history.
      * 
-     * @throws IllegalStateException if the automatic reduction isn't paused, a step is currently being performed or a pause is requested
+     * @return the number of terms that are stored in the history
      */
-    public void play() {
-        if (!paused || busy || pauseRequested) {
+    public int getHistorySize() {
+        return history.size();
+    }
+    
+    /**
+     * Toggles the automatic reduction.
+     * 
+     * @throws IllegalStateException if a step is currently being performed or a pause is requested
+     */
+    public void togglePlay() {
+        if (busy || pauseRequested) {
             throw new IllegalStateException("Cannot start automatic reduction in the current model state!");
         }
-        setPaused(false);
-        step();
+        
+        if (paused) {
+            // Play
+            setPaused(false);
+            step();
+        } else {
+            // Pause
+            pauseRequested = true;
+        }
     }
     
     /**
@@ -190,7 +216,7 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
      * 
      * @return the level context
      */
-    public LevelContext getLevelContext() {
+    public LevelContext getContext() {
         return context;
     }
 }

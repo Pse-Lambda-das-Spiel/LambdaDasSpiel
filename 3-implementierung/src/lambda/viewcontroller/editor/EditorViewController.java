@@ -26,6 +26,7 @@ import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.LambdaTermObserver;
 import lambda.model.lambdaterm.LambdaVariable;
+import lambda.model.lambdaterm.visitor.IsValidVisitor;
 import lambda.model.levels.LevelContext;
 import lambda.model.levels.ReductionStrategy;
 import lambda.model.profiles.ProfileManager;
@@ -33,6 +34,7 @@ import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.lambdaterm.LambdaTermViewController;
 import lambda.viewcontroller.lambdaterm.draganddrop.LambdaTermDragSource;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
+import lambda.viewcontroller.reduction.ReductionViewController;
 
 /**
  * The viewconroller for the editor stage of a level.
@@ -74,6 +76,7 @@ public final class EditorViewController extends ViewController implements Editor
     
     @Override
     public void queueAssets(AssetManager manager) {
+        // TODO master skin
         manager.load("data/skins/levelSkin.pack", TextureAtlas.class);
         manager.load("data/skins/levelSkin.json", Skin.class, new SkinLoader.SkinParameter("data/skins/levelSkin.pack"));
     }
@@ -88,10 +91,13 @@ public final class EditorViewController extends ViewController implements Editor
         main.setFillParent(true);
         main.setDebug(true); // TODO remove
         
+        // TODO master_skin
         ImageButton pauseButton = new ImageButton(manager.get("data/skins/levelSkin.json", Skin.class), "pauseButton");
         ImageButton hintButton = new ImageButton(manager.get("data/skins/levelSkin.json", Skin.class), "hintButton");
         ImageButton helpButton = new ImageButton(manager.get("data/skins/levelSkin.json", Skin.class), "questionButton");
         ImageButton targetButton = new ImageButton(manager.get("data/skins/levelSkin.json", Skin.class), "targetButton");
+        ImageButton reductionStrategyButton = new ImageButton(manager.get("data/skins/levelSkin.json", Skin.class), "....");
+        ImageButton finishedButton = new ImageButton(manager.get("data/skins/levelSkin.json", Skin.class), "......");
         
         Table leftToolBar = new Table();
         leftToolBar.add(pauseButton).size(0.10f * stage.getWidth(), 0.10f * stage.getWidth()).top();
@@ -147,6 +153,21 @@ public final class EditorViewController extends ViewController implements Editor
                 new TargetDialog(dialogSkin, /*get levelcontext hint, +?*/ stage.getWidth(), stage.getHeight()).show(stage);
             }
         });
+        reductionStrategyButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                // TODO dialog to change strategy using model.setStrategy
+            }
+        });
+        finishedButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                if (model.getTerm().accept(new IsValidVisitor())) {
+                    getGame().getController(ReductionViewController.class).reset(model);
+                    getGame().setScreen(ReductionViewController.class);
+                }
+            }
+        });
     }
     
     /**
@@ -196,6 +217,9 @@ public final class EditorViewController extends ViewController implements Editor
         }
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show() {
         if (term == null) {
@@ -204,6 +228,9 @@ public final class EditorViewController extends ViewController implements Editor
         Gdx.input.setInputProcessor(stage);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -212,28 +239,48 @@ public final class EditorViewController extends ViewController implements Editor
         stage.draw();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void pause() {		
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void resume() {		
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void hide() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void dispose() {
         stage.dispose();
     }
 
+    /**
+     * Called when the a new reduction strategy is selected. Updates the strategy button image.
+     * 
+     * @param strategy the new strategy
+     */
     @Override
     public void strategyChanged(ReductionStrategy strategy) {
         // TODO change strategy image
@@ -281,5 +328,4 @@ public final class EditorViewController extends ViewController implements Editor
             add(menuButton).width(width).height(height).pad(10);
         }
     }
-    
 }

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.assets.AssetViewController;
+import lambda.viewcontroller.reduction.ReductionViewController;
 
 /**
  * The main class of this application.
@@ -73,6 +74,8 @@ public class LambdaGame extends Game {
         // TODO Use reflection?
         addViewController(new AssetViewController());
         addViewController(new EditorViewController());
+        addViewController(new ReductionViewController());
+        
         /*addViewController(new ProfileSelection());
         addViewController(new ProfileEditLang());
         addViewController(new ProfileEditName());
