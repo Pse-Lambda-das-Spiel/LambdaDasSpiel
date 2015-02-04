@@ -1,0 +1,25 @@
+Lambs.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+back
+  rotate: true
+  xy: 2, 96
+  size: 74, 122
+  orig: 150, 150
+  offset: 76, 0
+  index: -1
+center
+  rotate: false
+  xy: 2, 2
+  size: 150, 92
+  orig: 150, 150
+  offset: 0, 30
+  index: -1
+front
+  rotate: false
+  xy: 154, 2
+  size: 96, 142
+  orig: 150, 150
+  offset: 0, 1
+  index: -1
