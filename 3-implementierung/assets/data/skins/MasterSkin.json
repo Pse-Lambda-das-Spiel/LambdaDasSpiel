@@ -6,6 +6,10 @@ com.badlogic.gdx.graphics.Color: {
 	red: { a: 1, b: 0, g: 0, r: 1 },
 	black: { a: 1, b: 0, g: 0, r: 0 }
 },
+com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {
+	default: { up: text_button }
+}
+
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	default: { up: profileField, font: default-font, fontColor: black }
 },
@@ -40,8 +44,10 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	purchaseButton: { up : purchase },
 	reloadButton: { up : reload },
 	settingsButton: { up : settings },
-	soundButton: { up : sound_unmuted, down : sound_muted },
 	startButton: { up : start }
+	purchasedGround: { up : purchased },
+	buyableGround: { up : buyable },
+	notBuyableGround: { up : not_buyable }
 
 },
 com.badlogic.gdx.graphics.g2d.BitmapFont: { default-font: { file: default.fnt } },
@@ -90,7 +96,8 @@ com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 	default: { selection: selection, background: textfield, font: default-font, fontColor: black, cursor: cursor }
 },
 com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
-	default: { checkboxOn: check-on, checkboxOff: check-off, font: default-font, fontColor: black }
+	default: { checkboxOn: checkbox_on, checkboxOff: checkbox_off, font: default-font, fontColor: black }
+	soundBox: { checkboxOn : sound_unmuted, checkboxOff : sound_muted },
 },
 com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
 	default: { fontColorUnselected: white, selection: selection, fontColorSelected: white, font: default-font }
@@ -104,8 +111,4 @@ com.badlogic.gdx.scenes.scene2d.ui.Tree$TreeStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
 	dialogDim: { name: white, color: { r: 0, g: 0, b: 0, a: 0.45 } }
 },
-com.badlogic.gdx.scenes.scene2d.ui.Image: {
-	coinBar: { name: coin_bar },
-	coins: { name: coin }
-	}
 }
