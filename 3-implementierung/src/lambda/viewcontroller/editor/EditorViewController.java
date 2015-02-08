@@ -137,7 +137,7 @@ public final class EditorViewController extends ViewController implements Editor
         hintButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                new HintDialog(dialogSkin, /*get levelcontext hint, +?*/ stage.getWidth(), stage.getHeight()).show(stage);
+                new HintDialog(dialogSkin, /*get levelcontext*/null, stage.getWidth(), stage.getHeight()).show(stage);
             }
         });
         helpButton.addListener(new ClickListener(){
@@ -150,7 +150,7 @@ public final class EditorViewController extends ViewController implements Editor
         targetButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                new TargetDialog(dialogSkin, /*get levelcontext hint, +?*/ stage.getWidth(), stage.getHeight()).show(stage);
+                new TargetDialog(dialogSkin, /*get levelcontext*/null, stage.getWidth(), stage.getHeight()).show(stage);
             }
         });
         reductionStrategyButton.addListener(new ClickListener(){
