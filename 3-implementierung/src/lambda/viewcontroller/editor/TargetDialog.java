@@ -11,7 +11,6 @@ public class TargetDialog extends Dialog {
 
     public TargetDialog(Skin skin, LevelContext context, float stageWidth, float stageHeight) {
         super("", skin);
-        //addActor(LambdaTermViewController.build(context.getLevelModel().getHint(), false, context));
         addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
