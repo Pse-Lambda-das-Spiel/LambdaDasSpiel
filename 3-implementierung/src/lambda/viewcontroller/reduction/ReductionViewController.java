@@ -5,17 +5,23 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
 import lambda.model.editormode.EditorModel;
+import lambda.model.profiles.ProfileManager;
 import lambda.model.reductionmode.ReductionModel;
 import lambda.model.reductionmode.ReductionModelObserver;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.lambdaterm.LambdaTermViewController;
+import lambda.viewcontroller.mainmenu.MainMenuViewController;
 
 /**
  * The viewconroller for the reduction stage of a level.
@@ -86,16 +92,19 @@ public class ReductionViewController extends ViewController implements Reduction
         
         // TODO add ui elements to stage
         
+        Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
         pauseButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                // TODO
+                new PauseDialog(dialogSkin, manager.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
+                        I18NBundle.class)).show(stage);
             }
         });
         helpButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                // TODO
+                new HelpDialog(dialogSkin, manager.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
+                        I18NBundle.class), stage.getWidth(), stage.getHeight()).show(stage);
             }
         });
         stepRevertButton.addListener(new ClickListener(){
@@ -250,5 +259,48 @@ public class ReductionViewController extends ViewController implements Reduction
     @Override
     public void reductionFinished(boolean levelComplete) {
         // TODO dialog
+    }
+    
+    private class PauseDialog extends Dialog {
+        public PauseDialog(Skin dialogSkin, I18NBundle language) {
+            super("", dialogSkin);
+            float width = stage.getWidth()*0.7f;
+            float height = stage.getHeight()/5;
+            row();
+            TextButton continueButton = new TextButton(language.get("continue"), dialogSkin);
+            continueButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    setVisible(false);
+                    hide();
+                }
+            });
+            add(continueButton).width(width).height(height).pad(10);
+            
+            row();
+            TextButton resetButton = new TextButton(language.get("reset"), dialogSkin);
+            resetButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    //TODO
+                    setVisible(false);
+                    hide();
+                }
+            });
+            add(resetButton).width(width).height(height).pad(10);
+            
+            row();
+            TextButton menuButton = new TextButton(language.get("mainMenu"), dialogSkin);
+            menuButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    //TODO
+                    getGame().setScreen(MainMenuViewController.class);
+                    setVisible(false);
+                    hide();
+                }
+            });
+            add(menuButton).width(width).height(height).pad(10);
+        }
     }
 }

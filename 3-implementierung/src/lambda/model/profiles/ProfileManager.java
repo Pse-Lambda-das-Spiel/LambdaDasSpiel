@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.utils.Json;
 
 import lambda.Observable;
 
@@ -32,6 +33,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
         profileEdit = new ProfileEditModel();
         currentProfile = null;
         profiles = loadProfiles(Gdx.files.local(PROFILE_FOLDER));
+        saveNames();
     }
 
     /**
@@ -110,6 +112,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
         save(name);
         delete(currentProfile.getName());
         currentProfile = newProfile;
+        saveNames();
         notify(o -> o.changedProfileList());
         return true;
     }
@@ -198,6 +201,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
                 Gdx.files.local(PROFILE_FOLDER + "/" + deadProfile.getName())
                         .deleteDirectory();
             }
+            saveNames();
             notify(o -> o.changedProfileList());
         }
     }
@@ -213,7 +217,11 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     }
 
     private List<ProfileModel> loadProfiles(FileHandle profileFolder) {
-        List<ProfileModel> profiles = new LinkedList<ProfileModel>();
+        FileHandle save = Gdx.files.local(PROFILE_FOLDER + ".json");
+        String[] names = {};
+        if (save.exists()) {
+            names = new Json().fromJson(String[].class, save);
+        }
         if (!profileFolder.exists()) {
             profileFolder.mkdirs();
         } else {
@@ -221,17 +229,40 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
                 throw new InvalidProfilesException(profileFolder.name()
                         + " isn't a directory");
             }
-            for (FileHandle file : profileFolder.list()) {
-                ProfileModel profile = ProfileLoadHelper.loadProfile(file
-                        .name());
-                if (!file.name().equals(profile.getName())) {
-                    throw new InvalidProfilesException(
-                            "a profile's name and it's save folder's name aren't the same");
+            if (profileFolder.list().length == names.length) {
+                List<ProfileModel> profiles = new LinkedList<ProfileModel>();
+                for (String name : names) {
+                    ProfileModel profile = ProfileLoadHelper.loadProfile(name);
+                    if (profile == null) {
+                        return loadAllSavedProfiles(profileFolder);
+                    }
+                    if (!name.equals(profile.getName())) {
+                        throw new InvalidProfilesException(
+                                "a profile's name and it's save folder's name aren't the same");
+                    }
+                    profiles.add(profile);
                 }
-                profiles.add(profile);
+                return profiles;
             }
         }
+        return loadAllSavedProfiles(profileFolder);
+    }
+    
+    private List<ProfileModel> loadAllSavedProfiles(FileHandle profileFolder) {
+        List<ProfileModel> profiles = new LinkedList<ProfileModel>();
+        for (FileHandle file : profileFolder.list()) {
+            ProfileModel profile = ProfileLoadHelper.loadProfile(file.name());
+            if (!file.name().equals(profile.getName())) {
+                throw new InvalidProfilesException(
+                        "a profile's name and it's save folder's name aren't the same");
+            }
+            profiles.add(profile);
+        }
         return profiles;
+    }
+    
+    private void saveNames() {
+        Gdx.files.local(PROFILE_FOLDER + ".json").writeString(new Json().prettyPrint(getNames()), false);
     }
 
 }
