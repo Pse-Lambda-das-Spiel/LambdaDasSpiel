@@ -1,22 +1,22 @@
-Lamb_Front_Animation.png
+Masks.png
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-back
+back_mask
   rotate: false
   xy: 2, 2
   size: 150, 150
   orig: 150, 150
   offset: 0, 0
   index: -1
-center
+center_mask
   rotate: false
   xy: 2, 154
   size: 150, 150
   orig: 150, 150
   offset: 0, 0
   index: -1
-front
+front_mask
   rotate: false
   xy: 2, 306
   size: 150, 150

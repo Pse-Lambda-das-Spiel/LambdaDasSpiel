@@ -47,7 +47,8 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	startButton: { up : start }
 	purchasedGround: { up : purchased },
 	buyableGround: { up : buyable },
-	notBuyableGround: { up : not_buyable }
+	notBuyableGround: { up : not_buyable },
+	activatedGround: { up : activated }
 
 },
 com.badlogic.gdx.graphics.g2d.BitmapFont: { default-font: { file: default.fnt } },
