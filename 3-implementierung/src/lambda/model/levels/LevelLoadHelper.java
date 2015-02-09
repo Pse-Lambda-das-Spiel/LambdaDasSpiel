@@ -146,6 +146,9 @@ public final class LevelLoadHelper {
 	
 	private static LambdaTerm selectNextNode(JsonValue nextNodeValue, LambdaTerm parent) {
 		LambdaTerm nextNode = null;
+		if (nextNodeValue.isNull()) {
+			return nextNode;
+		}
 		switch (nextNodeValue.getString("type")) {
 		case "application":
 			nextNode =  convertJsonToApplication(nextNodeValue, parent);
@@ -204,7 +207,6 @@ public final class LevelLoadHelper {
 		return difficultySetting;
 	}
 
-	//Internal file listing does not work on the desktop
 	/**
 	 * Returns the paths to all DifficultySetting files
 	 *
