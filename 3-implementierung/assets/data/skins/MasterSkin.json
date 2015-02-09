@@ -11,7 +11,7 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {
 }
 
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-	default: { up: profileField, font: default-font, fontColor: black }
+	default: { up: text_button, font: default-font, fontColor: black }
 },
 com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	default: { up: textfield },
@@ -20,7 +20,7 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	yesButton: { up: check-on},
 	noButton: { up: check-off},
 	editButton: { up: config },
-	addButton: { up: plus },
+	addButton: { up: add },
 	leftButton: { up: left },
 	rightButton: { up: right },
 	acceptButton: { up: accept }
