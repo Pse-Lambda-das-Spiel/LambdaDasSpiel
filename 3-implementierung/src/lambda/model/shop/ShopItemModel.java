@@ -1,6 +1,5 @@
 package lambda.model.shop;
 
-import com.badlogic.gdx.audio.Music;
 import lambda.Observable;
 import lambda.model.profiles.ProfileModel;
 
@@ -18,6 +17,7 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
     private ShopModel shop;
     private ShopItemTypeModel shopItemType;
     private boolean purchased;
+    private boolean activated;
     private ProfileModel profile;
 
     /**
@@ -28,6 +28,7 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
         this.price = price;
         this.filepath = filepath;
         purchased = false;
+        activated = false;
     }
 
     /**
@@ -43,9 +44,10 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
     /**
      * Activates this item if its already purchased
      */
-    public void acitvate() {
+    public void activate() {
         if(purchased){
             shopItemType.setActivatedItem(this);
+            activated = true;
         }
     }
 
@@ -107,5 +109,9 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
 
     public String getFilepath() {
         return filepath;
+    }
+
+    public boolean isActivated() {
+        return activated;
     }
 }

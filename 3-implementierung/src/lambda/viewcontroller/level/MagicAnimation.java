@@ -14,7 +14,7 @@ import lambda.viewcontroller.ViewController;
 /**
  * @author: Kay Schmitteckert
  */
-public class CloudAnimation extends ViewController implements ApplicationListener {
+public class MagicAnimation extends ViewController implements ApplicationListener {
 
     private Texture texture;
     private Animation animation;
@@ -24,9 +24,9 @@ public class CloudAnimation extends ViewController implements ApplicationListene
     private float stateTime;
 
     private AssetManager assets;
-    private final String cloudAtlas = "data/animation/cloud/cloud.atlas";
+    private final String magicAtlas = "data/animation/magic/Magic_Animation.atlas";
 
-    public CloudAnimation(Texture texture) {
+    public MagicAnimation(Texture texture) {
         this.texture = texture;
     }
 
@@ -90,15 +90,15 @@ public class CloudAnimation extends ViewController implements ApplicationListene
 
     @Override
     public void queueAssets(AssetManager manager) {
-        assets.load(cloudAtlas, TextureAtlas.class);
+        assets.load(magicAtlas, TextureAtlas.class);
     }
 
     @Override
     public void create(AssetManager manager) {
         assets = manager;
         int i = 1;
-        while (assets.containsAsset("cloud" + i)) {
-            walkFrames[i++] = assets.get("cloud" + i, TextureRegion.class);
+        while (assets.containsAsset("magic" + i)) {
+            walkFrames[i++] = assets.get("magic" + i, TextureRegion.class);
         }
         animation = new Animation(0.025f, walkFrames);
         spriteBatch = new SpriteBatch();

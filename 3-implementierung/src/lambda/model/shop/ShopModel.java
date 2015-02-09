@@ -3,9 +3,7 @@ package lambda.model.shop;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import lambda.viewcontroller.level.AbstractionUIContext;
@@ -109,7 +107,6 @@ public class ShopModel {
         String id = music.getString("id");
         int price = music.getInt("price");
         String filepath = music.getString("filepath");
-        assetManager.load(filepath, Music.class);
         MusicItemModel musicItem = new MusicItemModel(id, price, filepath);
         musicItem.setMusic(assetManager.get(filepath));
 
@@ -132,7 +129,6 @@ public class ShopModel {
         String id = image.getString("id");
         int price = image.getInt("price");
         String filepath = image.getString("filepath");
-        assetManager.load(filepath, Texture.class);
         BackgroundImageItemModel bgImage = new BackgroundImageItemModel(id, price, filepath);
         bgImage.setImage(assetManager.get(filepath));
 
@@ -290,9 +286,6 @@ public class ShopModel {
         String front = paranthesis.getString("front");
         String center = paranthesis.getString("center");
         String back = paranthesis.getString("back");
-        assetManager.load(front, Texture.class);
-        assetManager.load(center, Texture.class);
-        assetManager.load(back, Texture.class);
         ParanthesisUIContext paranthesisUIContext = new ParanthesisUIContext(assetManager.get(front),
                 assetManager.get(center), assetManager.get(back));
 
@@ -313,9 +306,6 @@ public class ShopModel {
         String front = abstraction.getString("front");
         String center = abstraction.getString("center");
         String back = abstraction.getString("back");
-        assetManager.load(front, Texture.class);
-        assetManager.load(center, Texture.class);
-        assetManager.load(back, Texture.class);
         AbstractionUIContext abstractionUIContext = new AbstractionUIContext(assetManager.get(front),
                 assetManager.get(center), assetManager.get(back));
 
@@ -334,7 +324,6 @@ public class ShopModel {
         JsonValue variable = jsonFile.child();
         //Read the json file and set the attributes
         String variableSheet = variable.getString("variable");
-        assetManager.load(variableSheet, Texture.class);
         VariableUIContext variableUIContext = new VariableUIContext(assetManager.get(variableSheet));
 
         return variableUIContext;
