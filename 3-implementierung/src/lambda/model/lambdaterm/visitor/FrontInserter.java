@@ -32,7 +32,11 @@ public class FrontInserter implements LambdaTermVisitor {
      */
     @Override
     public void visit(LambdaRoot node) {
-        node.setChild(inserted);
+        if (node.getChild() == null) {
+            node.setChild(inserted);
+        } else {
+            node.setChild(buildApplication(node, node.getChild()));
+        }
     }
     
     /**
@@ -42,7 +46,17 @@ public class FrontInserter implements LambdaTermVisitor {
      */
     @Override
     public void visit(LambdaApplication node) {
-        node.setLeft(inserted);
+        if (node.getLeft() == null) {
+            // Insert left
+            node.setLeft(inserted);
+        } else if (node.getRight() == null) {
+            // Push left to right, then insert left
+            node.setRight(node.getLeft());
+            node.setLeft(inserted);
+        } else {
+            // Insert left with new application
+            node.setLeft(buildApplication(node, node.getLeft()));
+        }
     }
     
     /**
@@ -52,7 +66,11 @@ public class FrontInserter implements LambdaTermVisitor {
      */
     @Override
     public void visit(LambdaAbstraction node) {
-        node.setInside(inserted);
+        if (node.getInside() == null) {
+            node.setInside(inserted);
+        } else {
+            node.setInside(buildApplication(node, node.getInside()));
+        }
     }
     
     /**
@@ -63,5 +81,19 @@ public class FrontInserter implements LambdaTermVisitor {
     @Override
     public void visit(LambdaVariable node) {
         assert(false);
+    }
+    
+    /**
+     * Builds the inserted application for the given parent and sibling.
+     * 
+     * @param parent the inserted application's parent
+     * @param sibling the inserted element's new sibling
+     * @return the built application
+     */
+    private LambdaApplication buildApplication(LambdaTerm parent, LambdaTerm sibling) {
+        LambdaApplication application = new LambdaApplication(parent, sibling.isLocked());
+        application.setLeft(inserted);
+        application.setRight(sibling);
+        return application;
     }
 }
