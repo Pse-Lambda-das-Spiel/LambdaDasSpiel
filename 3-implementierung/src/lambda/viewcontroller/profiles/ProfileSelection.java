@@ -18,11 +18,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import lambda.model.profiles.ProfileManager;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
+import lambda.viewcontroller.settings.SettingsViewController;
 
 /**
  * Represents the screen of the profile-selection.
@@ -33,7 +35,6 @@ import lambda.viewcontroller.mainmenu.MainMenuViewController;
 public class ProfileSelection extends ViewController {
 
     private final String skinJson = "data/skins/ProfileSelectionSkin.json";
-    private final String skinAtlas = "data/skins/ProfileSelectionSkin.atlas";
     private final Stage stage;
     private List<TextButton> profileButtons;
     private List<ImageButton> editButtons;
@@ -50,14 +51,13 @@ public class ProfileSelection extends ViewController {
 
     @Override
     public void queueAssets(AssetManager assets) {
-        assets.load(skinAtlas, TextureAtlas.class);
+        assets.load("data/skins/MasterSkin.atlas", TextureAtlas.class);
         assets.load(skinJson, Skin.class,
-                new SkinLoader.SkinParameter(skinAtlas));
+                new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
         
         //temp vvv
-        assets.load("data/skins/DialogTemp.atlas", TextureAtlas.class);
         assets.load("data/skins/DialogTemp.json", Skin.class,
-                new SkinLoader.SkinParameter("data/skins/DialogTemp.atlas"));
+                new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
     }
     
     @Override
@@ -104,6 +104,12 @@ public class ProfileSelection extends ViewController {
 
     @Override
     public void create(AssetManager manager) {
+        new Dialog("", manager.get("data/skins/DialogTemp.json", Skin.class)) {
+            {
+                this.getBackground().setMinWidth(0.0f);
+                this.getBackground().setMinHeight(0.0f);
+            }
+        };
         this.manager = manager;
         profileButtons = new ArrayList<TextButton>();
         editButtons = new ArrayList<ImageButton>();
@@ -174,6 +180,7 @@ public class ProfileSelection extends ViewController {
             //dialog to choose between editing the profile or deleting it. 
             new Dialog("", temp) {
                 {
+                    clear();
                     //configuration/edit option
                     ImageButton configButton = new ImageButton(temp, "configButton");
                     configButton.addListener(new ClickListener() {
@@ -185,7 +192,8 @@ public class ProfileSelection extends ViewController {
                             getGame().setScreen(ProfileEditLang.class);
                         }
                     });
-                    add(configButton).width(stage.getWidth()/4).height(stage.getHeight()/4).pad(10);
+                    add(configButton).pad(10);
+                    
                     //delete option. opens confirm dialog
                     ImageButton deleteButton = new ImageButton(temp, "deleteButton");
                     deleteButton.addListener(new ClickListener() {
@@ -194,7 +202,7 @@ public class ProfileSelection extends ViewController {
                             confirm();
                         }
                     });
-                    add(deleteButton).width(stage.getWidth()/4).height(stage.getHeight()/4).pad(10);
+                    add(deleteButton).pad(10);
                 }
                 
                 //asks for confirmation if the profile should be deleted
@@ -210,7 +218,7 @@ public class ProfileSelection extends ViewController {
                             ProfileManager.getManager().delete(name);
                         }
                     });
-                    add(yesButton).width(stage.getWidth()/4).height(stage.getHeight()/4).pad(10);
+                    add(yesButton).pad(10);
                     //no
                     ImageButton noButton = new ImageButton(temp, "noButton");
                     noButton.addListener(new ClickListener() {
@@ -220,7 +228,7 @@ public class ProfileSelection extends ViewController {
                             hide();
                         }
                     });
-                    add(noButton).width(stage.getWidth()/4).height(stage.getHeight()/4).pad(10);
+                    add(noButton).pad(10);
                 }
             }.show(stage);
         }

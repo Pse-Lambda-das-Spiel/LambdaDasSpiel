@@ -7,15 +7,15 @@ com.badlogic.gdx.graphics.Color: {
 	black: { a: 1, b: 0, g: 0, r: 0 }
 },
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-	default: { up: textField, font: default-font, fontColor: black }
+	default: { up: text_button, font: default-font, fontColor: black }
 },
 com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
-	leftButton: { up: left },
-	rightButton: { up: right },
-	acceptButton: { up: accept }
+	leftButton: { up: back },
+	rightButton: { up: next },
+	acceptButton: { up: okay }
 }
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
-	default: { selection: textField, background: textField, font: default-font, fontColor: black}
+	default: { selection: text_button, background: text_button, font: default-font, fontColor: black}
 },
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	default: { font: default-font, fontColor: black}

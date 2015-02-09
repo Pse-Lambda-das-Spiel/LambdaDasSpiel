@@ -17,7 +17,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
 import java.awt.Color;
+
 import lambda.model.editormode.EditorModel;
 import lambda.model.editormode.EditorModelObserver;
 import lambda.model.lambdaterm.LambdaAbstraction;
@@ -300,7 +302,7 @@ public final class EditorViewController extends ViewController implements Editor
                     hide();
                 }
             });
-            add(continueButton).width(width).height(height).pad(10);
+            add(continueButton).width(width).height(height).padTop(25).padLeft(25).padRight(25);
             
             row();
             TextButton resetButton = new TextButton(language.get("reset"), dialogSkin);
@@ -325,7 +327,7 @@ public final class EditorViewController extends ViewController implements Editor
                     hide();
                 }
             });
-            add(menuButton).width(width).height(height).pad(10);
+            add(menuButton).width(width).height(height).padBottom(35).padLeft(25).padRight(25);
         }
     }
 }

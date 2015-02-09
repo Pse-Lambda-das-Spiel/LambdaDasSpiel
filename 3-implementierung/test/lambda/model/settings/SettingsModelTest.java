@@ -15,7 +15,7 @@ import org.junit.Test;
  */
 public class SettingsModelTest implements SettingsModelObserver {
 
-    private static final float EPSILON = 0.0001f;
+    private static final float EPSILON = 0.001f;
     private boolean calledChangedMusicOn;
     private boolean calledChangedMusicVolume;
     private boolean calledChangedSoundVolume;
@@ -56,7 +56,7 @@ public class SettingsModelTest implements SettingsModelObserver {
      */
     @Test
     public void testSetMusicVolume() {
-        float testValue = 12.12f;
+        float testValue = 0.12f;
         settings.setMusicVolume(testValue);
         assertEquals(testValue, settings.getMusicVolume(), EPSILON);
         assertTrue(calledChangedMusicVolume);
@@ -68,24 +68,24 @@ public class SettingsModelTest implements SettingsModelObserver {
      */
     @Test
     public void testSetSoundVolume() {
-        float testValue = 12.12f;
+        float testValue = 0.12f;
         settings.setSoundVolume(testValue);
         assertEquals(testValue, settings.getSoundVolume(), EPSILON);
         assertTrue(calledChangedSoundVolume);
     }
     
     /**
-     * Tests if setMusicVolume and setSoundVolume set the volumes to 0 or 100
-     * depending on negative values or values bigger than 100.
+     * Tests if setMusicVolume and setSoundVolume set the volumes to 0 or 1
+     * depending on negative values or values bigger than 1.
      */
     @Test
     public void testForInvalidValues() {
         settings.setMusicVolume(120.12f);
-        assertEquals(100.0f, settings.getMusicVolume(), 0.0f);
+        assertEquals(1.0f, settings.getMusicVolume(), 0.0f);
         settings.setMusicVolume(-12.3f);
         assertEquals(0.0f, settings.getMusicVolume(), 0.0f);
         settings.setSoundVolume(120.12f);
-        assertEquals(100.0f, settings.getSoundVolume(), 0.0f);
+        assertEquals(1.0f, settings.getSoundVolume(), 0.0f);
         settings.setSoundVolume(-12.3f);
         assertEquals(0.0f, settings.getSoundVolume(), 0.0f);
     }
