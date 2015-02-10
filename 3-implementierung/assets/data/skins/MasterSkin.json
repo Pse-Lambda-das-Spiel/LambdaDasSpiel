@@ -48,7 +48,8 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	purchasedGround: { up : purchased },
 	buyableGround: { up : buyable },
 	notBuyableGround: { up : not_buyable },
-	activatedGround: { up : activated }
+	activatedGround: { up : activated },
+	bin: { up : bin}
 
 },
 com.badlogic.gdx.graphics.g2d.BitmapFont: { default-font: { file: default.fnt } },
@@ -87,8 +88,8 @@ com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {
 	default-vertical: { background: default-slider, knob: default-round-large }
 },
 com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
-	default-horizontal: { background: default-slider, knob: default-slider-knob },
-	default-vertical: { background: default-slider, knob: default-round-large }
+	default-horizontal: { background: slide_bar, knob: slider },
+	default-vertical: { background: slide_bar_v, knob: slider_v }
 },
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	default: { font: default-font, fontColor: black }
