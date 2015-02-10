@@ -18,8 +18,8 @@ public class SettingsModel extends Observable<SettingsModelObserver> {
      */
     public SettingsModel() {
         musicOn = true;
-        musicVolume = 100;
-        soundVolume = 100;
+        musicVolume = 1;
+        soundVolume = 1;
     }
 
     /**
@@ -44,29 +44,29 @@ public class SettingsModel extends Observable<SettingsModelObserver> {
     }
 
     /**
-     * Return the volume of the music in percent.
+     * Return the volume of the music.
      * 
-     * @return musicVolume lies in the interval [0,100].
+     * @return musicVolume lies in the interval [0,1].
      */
     public float getMusicVolume() {
         return musicVolume;
     }
 
     /**
-     * Sets the volume of the music in percent. Afterwards it notifies its
+     * Sets the volume of the music. Afterwards it notifies its
      * observers by calling their
      * {@link SettingsModelObserver#changedMusicVolume() changedMusicVolume()}
      * method.
      * 
      * @param musicVolume
-     *            should lie in the interval [0,100]. If not it gets set to 0 or
-     *            100 (depending on which is closer).
+     *            should lie in the interval [0,1]. If not it gets set to 0 or
+     *            1 (depending on which is closer).
      */
     public void setMusicVolume(float musicVolume) {
         if (musicVolume < 0) {
             this.musicVolume = 0;
-        } else if (musicVolume > 100) {
-            this.musicVolume = 100;
+        } else if (musicVolume > 1) {
+            this.musicVolume = 1;
         } else {
             this.musicVolume = musicVolume;
         }
@@ -74,29 +74,29 @@ public class SettingsModel extends Observable<SettingsModelObserver> {
     }
 
     /**
-     * Return the volume of the sound in percent.
+     * Return the volume of the sound.
      * 
-     * @return soundVolume lies in the interval [0,100].
+     * @return soundVolume lies in the interval [0,1].
      */
     public float getSoundVolume() {
         return soundVolume;
     }
 
     /**
-     * Sets the volume of the sound in percent. Afterwards it notifies its
+     * Sets the volume of the sound. Afterwards it notifies its
      * Observers by calling their
      * {@link SettingsModelObserver#changedSoundVolume() changedSoundVolume()}
      * method.
      * 
      * @param soundVolume
-     *            should lie in the interval [0,100]. If not it gets set to 0 or
-     *            100 (depending on which is closer).
+     *            should lie in the interval [0,1]. If not it gets set to 0 or
+     *            1 (depending on which is closer).
      */
     public void setSoundVolume(float soundVolume) {
         if (soundVolume < 0) {
             this.soundVolume = 0;
-        } else if (soundVolume > 100) {
-            this.soundVolume = 100;
+        } else if (soundVolume > 1) {
+            this.soundVolume = 1;
         } else {
             this.soundVolume = soundVolume;
         }

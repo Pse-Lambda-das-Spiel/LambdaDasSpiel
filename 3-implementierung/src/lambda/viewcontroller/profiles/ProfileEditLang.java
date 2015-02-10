@@ -35,7 +35,6 @@ import lambda.viewcontroller.ViewController;
 public class ProfileEditLang extends ViewController implements ProfileEditObserver {
 
     private final String skinJson = "data/skins/ProfileEditSkin.json";
-    private final String skinAtlas = "data/skins/ProfileEditSkin.atlas";
     private final Stage stage;
     private final ProfileEditModel profileEdit;
     private Image langPic;
@@ -63,9 +62,8 @@ public class ProfileEditLang extends ViewController implements ProfileEditObserv
             profileEdit.nextLang();
             current = profileEdit.getLang();
         } while (!current.equals(start));
-        assets.load(skinAtlas, TextureAtlas.class);
         assets.load(skinJson, Skin.class,
-                new SkinLoader.SkinParameter(skinAtlas));
+                new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
     }
 
     @Override

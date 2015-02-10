@@ -106,6 +106,8 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
         nameSelection.row().height(stage.getHeight() / 3);
         nameField = new TextField("", manager.get(skinJson, Skin.class));
         nameField.setMaxLength(16);
+        nameField.getStyle().background.setLeftWidth(15);
+        nameField.getStyle().background.setRightWidth(15);
         nameSelection.add(nameField).width(stage.getWidth() * 0.8f).space(10);
         
         ImageButton backButton = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
@@ -150,7 +152,7 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
                     new NameDialog("nameTaken").show(stage);
                 }
             } else {
-                new NameDialog("nameEmpty").show(stage).center();
+                new NameDialog("nameEmpty").show(stage);
             }
         }
     }
@@ -179,8 +181,8 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
             Label enterName = new Label(manager.get(profileEdit.getLang(), I18NBundle.class).get(key),
                     manager.get("data/skins/DialogTemp.json", Skin.class));
             enterName.setFontScale(0.5f);
-            text(enterName);
-            button(manager.get(profileEdit.getLang(), I18NBundle.class).get("ok"));
+            text(enterName).pad(15);
+            button(manager.get(profileEdit.getLang(), I18NBundle.class).get("ok")).pad(30);
         }
     }
 

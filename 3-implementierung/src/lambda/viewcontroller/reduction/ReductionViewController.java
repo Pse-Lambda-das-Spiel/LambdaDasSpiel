@@ -275,7 +275,7 @@ public class ReductionViewController extends ViewController implements Reduction
                     hide();
                 }
             });
-            add(continueButton).width(width).height(height).pad(10);
+            add(continueButton).width(width).height(height).padTop(25).padLeft(25).padRight(25);
             
             row();
             TextButton resetButton = new TextButton(language.get("reset"), dialogSkin);
@@ -300,7 +300,7 @@ public class ReductionViewController extends ViewController implements Reduction
                     hide();
                 }
             });
-            add(menuButton).width(width).height(height).pad(10);
+            add(menuButton).width(width).height(height).padBottom(35).padLeft(25).padRight(25);
         }
     }
 }
