@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -58,6 +59,9 @@ public class ReductionViewController extends ViewController implements Reduction
      */
     private ImageButton playPauseButton;
     
+    //needed in reductionFinished(...)
+    private AssetManager assets;
+    
     /**
      * Creates a new instance of ReductionViewController.
      */
@@ -75,6 +79,9 @@ public class ReductionViewController extends ViewController implements Reduction
     
     @Override
     public void create(AssetManager manager) {
+        //needed in reductionFinished(...)
+        this.assets = manager;
+        
         model.addObserver(this);
         
         // Set up ui elements
@@ -258,7 +265,9 @@ public class ReductionViewController extends ViewController implements Reduction
      */
     @Override
     public void reductionFinished(boolean levelComplete) {
-        // TODO dialog
+        //add coins to player etc.
+        new FinishDialog(levelComplete, /*getCoins*/0, assets.get("data/skins/DialogTemp.json", Skin.class), assets.get(ProfileManager
+                .getManager().getCurrentProfile().getLanguage(), I18NBundle.class)).show(stage);
     }
     
     private class PauseDialog extends Dialog {
@@ -303,4 +312,71 @@ public class ReductionViewController extends ViewController implements Reduction
             add(menuButton).width(width).height(height).padBottom(35).padLeft(25).padRight(25);
         }
     }
+    
+    private class FinishDialog extends Dialog {
+        public FinishDialog(boolean levelComplete, int coins, Skin dialogSkin, I18NBundle language) {
+            super("", dialogSkin);
+            float width = stage.getWidth()/2;
+            float height = stage.getHeight()/8;
+            clear();
+            
+            Label levelLabel;
+            if (levelComplete) {
+                levelLabel = new Label(language.get("levelCompleted"), dialogSkin);
+            } else {
+                levelLabel = new Label(language.get("levelFailed"), dialogSkin);
+            }
+            levelLabel.setFontScale(0.6f);
+            add(levelLabel).pad(25).padBottom(0);
+            
+            row();
+            TextButton restartButton = new TextButton(language.get("restart"), dialogSkin);
+            restartButton.getLabel().setFontScale(0.6f);
+            restartButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    //TODO reset
+                    setVisible(false);
+                    hide();
+                }
+            });
+            add(restartButton).width(width).height(height).padLeft(25).padRight(25);
+            
+            row();
+            TextButton menuButton = new TextButton(language.get("mainMenu"), dialogSkin);
+            menuButton.getLabel().setFontScale(0.6f);
+            menuButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    //TODO
+                    getGame().setScreen(MainMenuViewController.class);
+                    setVisible(false);
+                    hide();
+                }
+            });
+            if (levelComplete) {
+                add(menuButton).width(width).height(height).pad(10);
+                row();
+                TextButton nextButton = new TextButton(language.get("nextLevel"), dialogSkin);
+                nextButton.getLabel().setFontScale(0.6f);
+                nextButton.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        // TODO nextlevel
+                        setVisible(false);
+                        hide();
+                    }
+                });
+                add(nextButton).width(width).height(height).pad(10);
+                
+                row();
+                Label coinsLabel = new Label(language.format("coinsGained", coins), dialogSkin);
+                coinsLabel.setFontScale(0.6f);
+                add(coinsLabel).pad(25).padTop(0);
+            } else {
+                add(menuButton).width(width).height(height).pad(25).padTop(0);
+            }
+        }
+    }
+    
 }

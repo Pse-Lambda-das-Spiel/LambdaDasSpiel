@@ -20,7 +20,7 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 }
 com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	configButton: { up: settings},
-	deleteButton: { up: checkbox_off},
+	deleteButton: { up: bin},
 	yesButton: { up: accept},
 	noButton: { up: abort}
 }

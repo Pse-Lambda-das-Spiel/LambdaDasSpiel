@@ -13,12 +13,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import lambda.model.profiles.ProfileManager;
@@ -104,6 +104,7 @@ public class ProfileSelection extends ViewController {
 
     @Override
     public void create(AssetManager manager) {
+        //without this the background of all dialogs/the window's size is never smaller than 600,400
         new Dialog("", manager.get("data/skins/DialogTemp.json", Skin.class)) {
             {
                 this.getBackground().setMinWidth(0.0f);
@@ -181,6 +182,9 @@ public class ProfileSelection extends ViewController {
             new Dialog("", temp) {
                 {
                     clear();
+                    Label nameLabel = new Label(name, temp);
+                    add(nameLabel).pad(15).padBottom(0).colspan(2);
+                    row();
                     //configuration/edit option
                     ImageButton configButton = new ImageButton(temp, "configButton");
                     configButton.addListener(new ClickListener() {
@@ -192,8 +196,7 @@ public class ProfileSelection extends ViewController {
                             getGame().setScreen(ProfileEditLang.class);
                         }
                     });
-                    add(configButton).pad(10);
-                    
+                    add(configButton).pad(10).padBottom(15).align(Align.bottomRight);
                     //delete option. opens confirm dialog
                     ImageButton deleteButton = new ImageButton(temp, "deleteButton");
                     deleteButton.addListener(new ClickListener() {
@@ -202,12 +205,15 @@ public class ProfileSelection extends ViewController {
                             confirm();
                         }
                     });
-                    add(deleteButton).pad(10);
+                    add(deleteButton).pad(10).padBottom(15).align(Align.bottomLeft);
                 }
                 
                 //asks for confirmation if the profile should be deleted
                 private void confirm() {
                     clear();
+                    Label nameLabel = new Label(name, temp);
+                    add(nameLabel).pad(15).padBottom(0).colspan(2);
+                    row();
                     //yes
                     ImageButton yesButton = new ImageButton(temp, "yesButton");
                     yesButton.addListener(new ClickListener() {
@@ -218,7 +224,7 @@ public class ProfileSelection extends ViewController {
                             ProfileManager.getManager().delete(name);
                         }
                     });
-                    add(yesButton).pad(10);
+                    add(yesButton).pad(10).padBottom(15).align(Align.bottomRight);
                     //no
                     ImageButton noButton = new ImageButton(temp, "noButton");
                     noButton.addListener(new ClickListener() {
@@ -228,7 +234,7 @@ public class ProfileSelection extends ViewController {
                             hide();
                         }
                     });
-                    add(noButton).pad(10);
+                    add(noButton).pad(10).padBottom(15).align(Align.bottomLeft);
                 }
             }.show(stage);
         }

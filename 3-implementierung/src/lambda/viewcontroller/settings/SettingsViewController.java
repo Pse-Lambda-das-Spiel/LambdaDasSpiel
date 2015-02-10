@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -34,7 +35,6 @@ import lambda.viewcontroller.mainmenu.MainMenuViewController;
 public class SettingsViewController extends ViewController implements SettingsModelObserver {
 
     private final String skinJson = "data/skins/SettingsSkin.json";
-    private final String skinAtlas = "data/skins/SettingsSkin.atlas";
     private final Stage stage;
     private SettingsModel settings;
     private TextButton statistics;
@@ -56,9 +56,8 @@ public class SettingsViewController extends ViewController implements SettingsMo
 
     @Override
     public void queueAssets(AssetManager assets) {
-        assets.load(skinAtlas, TextureAtlas.class);
         assets.load(skinJson, Skin.class,
-                new SkinLoader.SkinParameter(skinAtlas));
+                new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
     }
 
     @Override
@@ -99,37 +98,48 @@ public class SettingsViewController extends ViewController implements SettingsMo
     @Override
     public void create(AssetManager manager) {
         this.manager = manager;
-        Table settings = new Table();
-        settings.align(Align.top);
-        stage.addActor(settings);
-        settings.setFillParent(true);
+        Table settingsView = new Table();
+        settingsView.align(Align.top);
+        stage.addActor(settingsView);
+        settingsView.setFillParent(true);
         float height = stage.getHeight() / 10;
         float width = stage.getWidth() * 0.8f;
-        settings.row().height(height);
-        settings.add();
-        settings.row().height(height);
+        settingsView.row().height(height);
+        settingsView.add();
+        settingsView.row().height(height);
         musicLabel = new Label(null, manager.get(skinJson, Skin.class));
-        settings.add(musicLabel).width(width);
-        settings.row().height(height);
-        musicSlider = new Slider(0, 100, 1, false,  manager.get(skinJson, Skin.class));
-        settings.add(musicSlider).width(width).space(10);
-        settings.row().height(height);
+        settingsView.add(musicLabel).width(width);
+        settingsView.row().height(height);
+        musicSlider = new Slider(0, 1, 0.01f, false,  manager.get(skinJson, Skin.class));
+        musicSlider.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                settings.setMusicVolume(musicSlider.getValue());
+            }
+        });
+        settingsView.add(musicSlider).width(width).space(10);
+        settingsView.row().height(height);
         soundLabel = new Label(null, manager.get(skinJson, Skin.class));
-        settings.add(soundLabel).width(width).space(20);
-        settings.row().height(height);
-        soundSlider = new Slider(0, 100, 1, false,  manager.get(skinJson, Skin.class));
-        settings.add(soundSlider).width(width).space(10);
-        settings.row().height(height);
+        settingsView.add(soundLabel).width(width).space(20);
+        settingsView.row().height(height);
+        soundSlider = new Slider(0, 1, 0.01f, false,  manager.get(skinJson, Skin.class));
+        soundSlider.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                settings.setSoundVolume(soundSlider.getValue());
+            }
+        });
+        settingsView.add(soundSlider).width(width).space(10);
+        settingsView.row().height(height);
         statistics = new TextButton("", manager.get(skinJson, Skin.class));
-        settings.add(statistics).width(width).space(40);
-        //TODO add slider listener
+        settingsView.add(statistics).width(width).space(40);
         
-        ImageButton addButton = new ImageButton(manager.get(skinJson, Skin.class));
+        ImageButton backButton = new ImageButton(manager.get(skinJson, Skin.class), "backButton");
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
         buttonContainer.pad(25);
         buttonContainer.align(Align.bottomLeft);
-        buttonContainer.setActor(addButton);
-        addButton.addListener(new backClickListener());
+        buttonContainer.setActor(backButton);
+        backButton.addListener(new backClickListener());
         stage.addActor(buttonContainer);
         buttonContainer.setFillParent(true);
         changedProfileList();
@@ -151,17 +161,17 @@ public class SettingsViewController extends ViewController implements SettingsMo
     
     @Override
     public void changedMusicOn() {
-        //TODO
+        //TODO ?
     }
 
     @Override
     public void changedMusicVolume() {
-        //TODO
+        //TODO ?
     }
 
     @Override
     public void changedSoundVolume() {
-        //TODO
+        //TODO ?
     }
 
     private class backClickListener extends ClickListener {
