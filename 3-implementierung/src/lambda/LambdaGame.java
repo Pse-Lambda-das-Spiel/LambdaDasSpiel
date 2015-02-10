@@ -3,8 +3,10 @@ package lambda;
 import lambda.viewcontroller.editor.EditorViewController;
 
 import com.badlogic.gdx.Game;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.assets.AssetViewController;
 import lambda.viewcontroller.reduction.ReductionViewController;
@@ -12,7 +14,7 @@ import lambda.viewcontroller.reduction.ReductionViewController;
 /**
  * The main class of this application.
  * 
- * @author Florian Fervers
+ * @author Florian Fervers, Robert Hochweiss
  */
 public class LambdaGame extends Game {
     /**
@@ -108,4 +110,27 @@ public class LambdaGame extends Game {
             viewController.dispose();
         }
     }
+    
+    // Bot methods are necessary for rendering and resizing the screens correctly.
+    
+    /**
+     * Called when the Application should render itself.
+     */
+    @Override
+	public void render() {
+		super.render();
+	}
+    
+    /**
+     * Called when the Application is resized. 
+     * This can happen at any point during a non-paused state 
+     * but will never happen before a call to create().
+     * 
+     * @param width the new width in pixels
+     * @param height the new height in pixels
+     */
+	@Override
+	public void resize(int width, int height) {
+		super.resize(width, height);
+	}
 }
