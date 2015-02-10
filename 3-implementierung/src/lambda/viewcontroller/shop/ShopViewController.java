@@ -42,13 +42,12 @@ public class ShopViewController extends ViewController implements ProfileModelOb
 
     private final String shopSkin = "data/skins/ShopViewControllerSkin.json";
     private final String shopAtlas = "data/skins/ShopViewControllerSkin.atlas";
+    private final String dropDownMenuSkin = "data/skins/dropDownMenuSkin.json";
+    private final String dropDownMenuAtlas = "data/skins/dropDownMenuAtlas.atlas";
 
     public ShopViewController() {
         shop = ShopModel.getShop();
         stage = new Stage(new ScreenViewport());
-        music = new DropDownMenuViewController(shop.getMusic());
-        bgImages = new DropDownMenuViewController(shop.getImages());
-        elementUIContextFamilies = new DropDownMenuViewController(shop.getElementUIContextFamilies());
     }
 
     @Override
@@ -61,6 +60,9 @@ public class ShopViewController extends ViewController implements ProfileModelOb
         assets.load(shopAtlas, TextureAtlas.class);
         assets.load(shopSkin, Skin.class,
                 new SkinLoader.SkinParameter(shopSkin));
+
+        assets.load(dropDownMenuSkin, Skin.class);
+        assets.load(dropDownMenuAtlas, TextureAtlas.class);
     }
 
     @Override
@@ -140,16 +142,32 @@ public class ShopViewController extends ViewController implements ProfileModelOb
         buttonContainer.setActor(musicTypeButton);
         buttonContainer.setActor(bgImageTypeButton);
         buttonContainer.setActor(elementUITypeButton);
+        stage.addActor(buttonContainer);
 
         coins = new Label(String.valueOf(ProfileManager.getManager().getCurrentProfile().getCoins()),
                 manager.get(shopSkin, Skin.class));
         Container<Label> labelContainer = new Container();
         labelContainer.align(Align.topRight);
         labelContainer.setActor(coins);
+        stage.addActor(labelContainer);
 
         coinBar = new Image(manager.get(shopSkin, Skin.class), "coin_bar");
         Container<Image> imageContainer = new Container();
         imageContainer.align(Align.topRight);
         imageContainer.setActor(coinBar);
+        stage.addActor(imageContainer);
+
+
+        music = new DropDownMenuViewController(shop.getMusic(), manager.get(dropDownMenuAtlas, TextureAtlas.class),
+                manager.get(dropDownMenuSkin, Skin.class), manager);
+        bgImages = new DropDownMenuViewController(shop.getImages(), manager.get(dropDownMenuAtlas, TextureAtlas.class),
+                manager.get(dropDownMenuSkin, Skin.class), manager);
+        elementUIContextFamilies = new DropDownMenuViewController(shop.getElementUIContextFamilies(),
+                manager.get(dropDownMenuAtlas, TextureAtlas.class), manager.get(dropDownMenuSkin, Skin.class), manager);
+
+        music.draw(stage.getWidth(), stage.getHeight());
+        bgImages.draw(stage.getWidth(), stage.getHeight());
+        elementUIContextFamilies.draw(stage.getWidth(), stage.getHeight());
+
     }
 }
