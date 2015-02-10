@@ -38,19 +38,25 @@ public class LambsEnchantedAchievementModel extends AchievementModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void initialize(AssetManager assets) {
+	public void initialize() {
+		setIconPathAchievementUnlocked("achievements/lambs_enchanted/ul_" + getId());
+		setIconPathAchievementLocked("achievements/lambs_enchanted/l_" + getId());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void reset(AssetManager assets) {
 		if (assets == null) {
 			throw new IllegalArgumentException("assets cannot be null!");
 		}
 		I18NBundle bundle = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
-		ProfileManager.getManager().getCurrentProfile().getStatistics().addObserver(this);
-		setIconPathAchievementUnlocked("achievements/lambs_enchanted/unlocked/aul" + Integer.toString(getId()));
-		setIconPathAchievementLocked("achievements/lambs_enchanted/locked/al" + Integer.toString(getId()));
 		setDescription(bundle.format("lambsEnchantedAchievement", reqLambsEnchanted));
 		setRequirementsDescription(bundle.format("reqLambsEnchantedAchievement", reqLambsEnchanted));
 		setLocked(true);
 	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */

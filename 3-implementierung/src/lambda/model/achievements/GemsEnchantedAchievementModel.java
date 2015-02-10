@@ -38,19 +38,25 @@ public class GemsEnchantedAchievementModel extends AchievementModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void initialize(AssetManager assets) {
+	public void initialize() {
+		setIconPathAchievementUnlocked("achievements/gems_enchanted/ul_" + getId());
+		setIconPathAchievementLocked("achievements/gems_enchanted/l_" + getId());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void reset(AssetManager assets) {
 		if (assets == null) {
 			throw new IllegalArgumentException("assets cannot be null!");
 		}
 		I18NBundle bundle = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
-		ProfileManager.getManager().getCurrentProfile().getStatistics().addObserver(this);
-		setIconPathAchievementUnlocked("data/achievements/gems_enchanted/unlocked/aul" + Integer.toString(getId()));
-		setIconPathAchievementLocked("data/achievements/gems_enchanted/locked/al" + Integer.toString(getId()));
 		setDescription(bundle.format("gemsEnchantedAchievement", reqGemsEnchanted));
 		setRequirementsDescription(bundle.format("reqGemsEnchantedAchievement", reqGemsEnchanted));
 		setLocked(true);
 	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */

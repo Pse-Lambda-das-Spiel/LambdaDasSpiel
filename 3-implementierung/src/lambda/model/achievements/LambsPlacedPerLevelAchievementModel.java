@@ -38,14 +38,20 @@ public class LambsPlacedPerLevelAchievementModel extends PerLevelAchievementMode
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void initialize(AssetManager assets) {
+	public void initialize() {
+		setIconPathAchievementUnlocked("achievements/lambs_placed_per_level/ul_" + getId());
+		setIconPathAchievementLocked("achievements/lambs_placed_per_level/l_" + getId());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void reset(AssetManager assets) {
 		if (assets == null) {
 			throw new IllegalArgumentException("assets cannot be null!");
 		}
 		I18NBundle bundle = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
-		ProfileManager.getManager().getCurrentProfile().getStatistics().addObserver(this);
-		setIconPathAchievementUnlocked("achievements/lambs_placed_per_Level/unlocked/aul" + Integer.toString(getId()));
-		setIconPathAchievementLocked("achievements/lambs_placed_per_level/locked/al" + Integer.toString(getId()));
 		setDescription(bundle.format("lambsPlacedPerLevelAchievement", reqLambsPlacedPerLevel));
 		setRequirementsDescription("reqLambsPlacedPerLevelAchievement");
 		setLocked(true);
@@ -63,5 +69,5 @@ public class LambsPlacedPerLevelAchievementModel extends PerLevelAchievementMode
 			setLocked(false);
 		}
 	}
-
+	
 }

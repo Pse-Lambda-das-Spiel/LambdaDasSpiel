@@ -13,7 +13,7 @@ import lambda.model.statistics.StatisticModelObserver;
  */
 public abstract class AchievementModel extends Observable<AchievementModelObserver> implements StatisticModelObserver {
 	
-	private int id;
+	private String id;
 	private int index;
 	private String description;
 	private String requirementsDescription;
@@ -25,7 +25,7 @@ public abstract class AchievementModel extends Observable<AchievementModelObserv
 	 * Creates a new instance of this class.
 	 */
 	public AchievementModel() {
-		id = 0;
+		id = "";
 		index = 0;
 		description = "";
 		requirementsDescription = "";
@@ -35,12 +35,18 @@ public abstract class AchievementModel extends Observable<AchievementModelObserv
 	}
 	
 	/**
-	 * Initialize the achievement and resets it to its start state.
+	 * Initialize the achievement.
+	 * 
+	 */
+	public abstract void initialize();
+	
+	/**
+	 * Resets the achievement to its start state.
 	 * 
 	 * @param assets the AssetManager needed for loading the resources needed for initializing the achievement.
 	 * @throws IllegalArgumentException if assets is null
 	 */
-	public abstract void initialize(AssetManager assets);
+	public abstract void reset(AssetManager assets);
 	
 	/**
 	 * Checks with the given StatisticModel whether the requirements of this achievement are met or not.
@@ -56,7 +62,7 @@ public abstract class AchievementModel extends Observable<AchievementModelObserv
 	 * 
 	 * @return the id
 	 */
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
@@ -119,7 +125,7 @@ public abstract class AchievementModel extends Observable<AchievementModelObserv
 	 * 
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

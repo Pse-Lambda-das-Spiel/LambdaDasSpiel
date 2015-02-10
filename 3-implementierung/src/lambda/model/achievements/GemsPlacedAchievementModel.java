@@ -38,19 +38,26 @@ public class GemsPlacedAchievementModel extends AchievementModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void initialize(AssetManager assets) {
+	public void initialize() {
+		setIconPathAchievementUnlocked("achievements/gems_placed/ul_" + getId());
+		setIconPathAchievementLocked("achievements/gems_placed/l_" + getId());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void reset(AssetManager assets) {
 		if (assets == null) {
 			throw new IllegalArgumentException("assets cannot be null!");
 		}
 		I18NBundle bundle = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
-		ProfileManager.getManager().getCurrentProfile().getStatistics().addObserver(this);
-		setIconPathAchievementUnlocked("achievements/gems_placed/unlocked/aul" + Integer.toString(getId()));
-		setIconPathAchievementLocked("achievements/gems_placed/locked/al" + Integer.toString(getId()));
 		setDescription(bundle.format("gemsPlacedAchievement", reqGemsPlaced));
 		setRequirementsDescription(bundle.format("reqGemsPlacedAchievement", reqGemsPlaced));
-		setLocked(true);
+		setLocked(true);	
 	}
 
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -63,5 +70,5 @@ public class GemsPlacedAchievementModel extends AchievementModel {
 			setLocked(false);
 		}
 	}
-
+	
 }

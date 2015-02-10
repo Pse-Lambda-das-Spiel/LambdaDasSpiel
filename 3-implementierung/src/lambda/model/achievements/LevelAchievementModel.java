@@ -38,16 +38,22 @@ public class LevelAchievementModel extends AchievementModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void initialize(AssetManager assets) {
+	public void initialize() {
+		setIconPathAchievementUnlocked("achievements/level/ul_" + getId());
+		setIconPathAchievementLocked("achievements/level/l_" + getId());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void reset(AssetManager assets) {
 		if (assets == null) {
 			throw new IllegalArgumentException("assets cannot be null!");
 		}
 		I18NBundle bundle = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
-		ProfileManager.getManager().getCurrentProfile().getStatistics().addObserver(this);
-		setIconPathAchievementUnlocked("achievements/level/unlocked/aul" + Integer.toString(getId()));
-		setIconPathAchievementLocked("achievements/level/locked/al" + Integer.toString(getId()));
 		setDescription(bundle.format("levelAchievement", reqLevelCompleted));
-		setRequirementsDescription(bundle.format("reqLevelAchievements", reqLevelCompleted));
+		setRequirementsDescription(bundle.format("reqLevelAchievement", reqLevelCompleted));
 		setLocked(false);
 	}
 
@@ -63,5 +69,5 @@ public class LevelAchievementModel extends AchievementModel {
 			setLocked(false);
 		}
 	}
-
+	
 }
