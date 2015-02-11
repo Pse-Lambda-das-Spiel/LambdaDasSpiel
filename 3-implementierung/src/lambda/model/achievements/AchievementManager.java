@@ -93,7 +93,7 @@ public class AchievementManager {
 	}
 	
 	/**
-	 * Checks all achievements with the given StatisticModel. Checks whether their requirements are met or not.
+	 * Checks all achievements with the current {@link StatisticModel}. Checks whether their requirements are met or not.
 	 * Sets the locked-/unlocked-state of the achievements accordingly.
 	 * 
 	 */

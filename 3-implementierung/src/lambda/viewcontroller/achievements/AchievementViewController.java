@@ -1,10 +1,11 @@
 package lambda.viewcontroller.achievements;
 
-import lambda.LambdaGame;
 import lambda.model.achievements.AchievementModel;
 import lambda.model.achievements.AchievementModelObserver;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 
 /**
@@ -55,15 +56,15 @@ public class AchievementViewController extends Stack implements AchievementModel
 	}
 	
 	/**
-	 * Returns the currently shown image button.
+	 * Returns {@link ImageButtonStyle} of the currently shown {@link ImageButton}.
 	 * 
-	 * @return the currently shown image button.
+	 * @return the {@link ImageButtonStyle} of the currently shown {@link ImageButton}.
 	 */
-	public ImageButton getShownButton() {
+	public ImageButtonStyle getShownImageButtonStyle() {
 		if (achievementLockedButton.isVisible()) {
-			return achievementLockedButton;
+			return achievementLockedButton.getStyle();
 		}
-		return achievementUnlockedButton;
+		return achievementUnlockedButton.getStyle();
 	}
 	
 	/**

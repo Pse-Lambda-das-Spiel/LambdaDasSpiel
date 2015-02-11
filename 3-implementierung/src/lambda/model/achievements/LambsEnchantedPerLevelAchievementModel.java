@@ -52,8 +52,8 @@ public class LambsEnchantedPerLevelAchievementModel extends PerLevelAchievementM
 			throw new IllegalArgumentException("assets cannot be null!");
 		}
 		I18NBundle bundle = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
-		setDescription(bundle.format("lambsEnchantedPerLevel", reqLambsEnchantedPerLevel));
-		setRequirementsDescription(bundle.format("reqLambsEnchantedPerLevel", reqLambsEnchantedPerLevel));
+		setDescription(bundle.format("lambsEnchantedPerLevelAchievement", reqLambsEnchantedPerLevel));
+		setRequirementsDescription(bundle.format("reqLambsEnchantedPerLevelAchievement", reqLambsEnchantedPerLevel));
 		setLocked(true);
 	}
 	
