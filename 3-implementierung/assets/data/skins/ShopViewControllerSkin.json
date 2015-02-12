@@ -13,8 +13,5 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	musicType: { up: musicType},
 	imageType: { up: imageType},
 	elementType: { up: elementType}
-	},
-com.badlogic.gdx.scenes.scene2d.ui.Image: {
-	coinBar: { name: coin_bar }
 	}
 }

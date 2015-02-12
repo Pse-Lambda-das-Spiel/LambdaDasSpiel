@@ -17,7 +17,7 @@ com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
 },
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	default: { font: default-font, fontColor: black }
-}
+},
 com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	configButton: { up: settings},
 	deleteButton: { up: bin},

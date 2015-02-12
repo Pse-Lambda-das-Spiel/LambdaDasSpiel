@@ -6,15 +6,13 @@ com.badlogic.gdx.graphics.Color: {
 	red: { a: 1, b: 0, g: 0, r: 1 },
 	black: { a: 1, b: 0, g: 0, r: 0 }
 },
+
 com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {
 	default: { up: text_button }
-}
-
-com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-	default: { up: text_button, font: default-font, fontColor: black }
 },
 com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
-	default: { up: textfield },
+	default: { up: facebook},
+	/*
 	configButton: { up: tree-plus},
 	deleteButton: { up: tree-minus},
 	yesButton: { up: check-on},
@@ -23,34 +21,34 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	addButton: { up: add },
 	leftButton: { up: left },
 	rightButton: { up: right },
-	acceptButton: { up: accept }
-	backButton: { up: back },
-	musicType: { up: musicType },
-	imageType: { up: imageType },
-	elementType: { up: elementType },
-
-	abortButton: { up: abort },
-	achievementsButton: { up : achievements },
-	facebookButton: { up : facebook },
-	forwardButton: { up : forward },
-	helpButton: { up : help },
-	infoButton: { up : info },
-	mainMenuButton: { up : menu },
-	nextButton: { up : next },
-	okayButton: { up : okay },
-	pauseButton: { up : pause },
-	playButton: { up : play },
-	prevButton: { up : previous },
-	purchaseButton: { up : purchase },
-	reloadButton: { up : reload },
-	settingsButton: { up : settings },
-	startButton: { up : start }
-	purchasedGround: { up : purchased },
-	buyableGround: { up : buyable },
-	notBuyableGround: { up : not_buyable },
-	activatedGround: { up : activated },
-	bin: { up : bin}
-
+	
+	acceptButton: 		{ up: accept},
+	backButton: 		{ up: back},
+	musicType: 			{ up: musicType},
+	imageType: 			{ up: imageType},
+	elementType: 		{ up: elementType},
+	abortButton: 		{ up: abort},
+	achievementsButton: { up: achievements},
+	facebookButton: 	{ up: facebook},
+	forwardButton: 		{ up: forward},
+	helpButton: 		{ up: help},
+	infoButton: 		{ up: info},
+	mainMenuButton: 	{ up: menu},
+	nextButton: 		{ up: next},
+	okayButton: 		{ up: okay},
+	pauseButton: 		{ up: pause},
+	playButton: 		{ up: play},
+	prevButton: 		{ up: previous},
+	purchaseButton: 	{ up: purchase},
+	reloadButton: 		{ up: reload},
+	settingsButton: 	{ up: settings},
+	startButton: 		{ up: start},
+	purchasedGround: 	{ up: purchased},
+	buyableGround: 		{ up: buyable},
+	notBuyableGround: 	{ up: not_buyable},
+	activatedGround: 	{ up: activated},
+	bin: 				{ up: bin}
+	*/
 },
 com.badlogic.gdx.graphics.g2d.BitmapFont: { default-font: { file: default.fnt } },
 
@@ -98,7 +96,7 @@ com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 	default: { selection: selection, background: textfield, font: default-font, fontColor: black, cursor: cursor }
 },
 com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
-	default: { checkboxOn: checkbox_on, checkboxOff: checkbox_off, font: default-font, fontColor: black }
+	default: { checkboxOn: checkbox_on, checkboxOff: checkbox_off, font: default-font, fontColor: black },
 	soundBox: { checkboxOn : sound_unmuted, checkboxOff : sound_muted },
 },
 com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {

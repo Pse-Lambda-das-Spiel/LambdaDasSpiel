@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import lambda.model.profiles.ProfileManager;
+import lambda.model.profiles.ProfileModel;
 import lambda.model.profiles.ProfileModelObserver;
 import lambda.model.shop.BackgroundImageItemModel;
 import lambda.model.shop.ElementUIContextFamily;
@@ -28,6 +29,7 @@ public class ShopViewController extends ViewController implements ProfileModelOb
 
     private ShopModel shop;
     private AssetManager manager;
+    private ProfileModel profile;
     private DropDownMenuViewController<MusicItemModel> music;
     private DropDownMenuViewController<BackgroundImageItemModel> bgImages;
     private DropDownMenuViewController<ElementUIContextFamily> elementUIContextFamilies;
@@ -44,24 +46,37 @@ public class ShopViewController extends ViewController implements ProfileModelOb
     private final String shopAtlas = "data/skins/ShopViewControllerSkin.atlas";
     private final String dropDownMenuSkin = "data/skins/dropDownMenuSkin.json";
     private final String dropDownMenuAtlas = "data/skins/dropDownMenuAtlas.atlas";
+    
+    private final String masterAtlas = "data/skins/MasterSkin.atlas";
+    private final String masterSkin = "data/skins/MasterSkin.json";
 
     public ShopViewController() {
         shop = ShopModel.getShop();
         stage = new Stage(new ScreenViewport());
+        profile = new ProfileModel("");
+        profile.addObserver(this);
+        ProfileManager.getManager().addObserver(this);
     }
 
     @Override
     public void queueAssets(AssetManager assets) {
 
         // assets for the ShopModel (ShopItems etc.)
-        shop.setAssetManager(manager);
+        //shop.setAssetManager(manager);
         shop.queueAssets(manager);
 
+        
         assets.load(shopAtlas, TextureAtlas.class);
         assets.load(shopSkin, Skin.class,
-                new SkinLoader.SkinParameter(shopSkin));
-
-        assets.load(dropDownMenuSkin, Skin.class);
+                new SkinLoader.SkinParameter(shopSkin)); 
+               
+        /*
+        assets.load(masterAtlas, TextureAtlas.class);
+        assets.load(masterSkin, Skin.class,
+                new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
+        */
+        assets.load(dropDownMenuSkin, Skin.class, 
+                new SkinLoader.SkinParameter(dropDownMenuAtlas));
         assets.load(dropDownMenuAtlas, TextureAtlas.class);
     }
 
@@ -105,7 +120,7 @@ public class ShopViewController extends ViewController implements ProfileModelOb
         ProfileManager.getManager().getCurrentProfile().addObserver(this);
         this.manager = manager;
 
-        backButton = new ImageButton(manager.get(shopSkin, Skin.class), "back");
+        backButton = new ImageButton(manager.get(shopSkin, Skin.class), "backButton");
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -144,19 +159,21 @@ public class ShopViewController extends ViewController implements ProfileModelOb
         buttonContainer.setActor(elementUITypeButton);
         stage.addActor(buttonContainer);
 
+        /*
         coins = new Label(String.valueOf(ProfileManager.getManager().getCurrentProfile().getCoins()),
                 manager.get(shopSkin, Skin.class));
         Container<Label> labelContainer = new Container();
         labelContainer.align(Align.topRight);
         labelContainer.setActor(coins);
         stage.addActor(labelContainer);
-
+        */
+        /*
         coinBar = new Image(manager.get(shopSkin, Skin.class), "coin_bar");
         Container<Image> imageContainer = new Container();
         imageContainer.align(Align.topRight);
         imageContainer.setActor(coinBar);
         stage.addActor(imageContainer);
-
+*/
 
         music = new DropDownMenuViewController(shop.getMusic(), manager.get(dropDownMenuAtlas, TextureAtlas.class),
                 manager.get(dropDownMenuSkin, Skin.class), manager);
@@ -169,5 +186,11 @@ public class ShopViewController extends ViewController implements ProfileModelOb
         bgImages.draw(stage.getWidth(), stage.getHeight());
         elementUIContextFamilies.draw(stage.getWidth(), stage.getHeight());
 
+    }
+
+    public void changedProfile() {
+        profile.removeObserver(this);
+        profile = ProfileManager.getManager().getCurrentProfile();
+        profile.addObserver(this);
     }
 }
