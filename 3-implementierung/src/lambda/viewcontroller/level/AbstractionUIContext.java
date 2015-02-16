@@ -13,24 +13,15 @@ import java.awt.Color;
  * @author: Kay Schmitteckert
  */
 public class AbstractionUIContext extends ElementUIContext implements ApplicationListener {
-
-    /**
-     * Number of columns in the animation-sheet
-     */
-    private static final int FRAME_COLS = 6;
-    /**
-     * Number of rows in the animation-sheet
-     */
-    private static final int FRAME_ROWS = 5;
-
-
+    
     private Texture tFront;
+    /*
     private Animation aFront;
     private TextureRegion[] walkFrames;
     private SpriteBatch spriteBatch;
     private TextureRegion currentFrame;
     private float stateTime;
-
+     */
     private Texture tCenter;
     private Texture tBack;
 
@@ -46,7 +37,8 @@ public class AbstractionUIContext extends ElementUIContext implements Applicatio
      * @return animation relating to the sprite
      */
     public Animation getAFront() { // TODO
-        return aFront;
+        return null;
+        //return aFront;
     }
     
     public Texture getCenter() { // TODO
@@ -59,6 +51,7 @@ public class AbstractionUIContext extends ElementUIContext implements Applicatio
 
     @Override
     public void create() {
+        /*
         TextureRegion[][] tmp = TextureRegion.split(tFront, tFront.getWidth()/FRAME_COLS, tFront.getHeight()/FRAME_ROWS);              // #10
         walkFrames = new TextureRegion[FRAME_COLS * FRAME_ROWS];
         int index = 0;
@@ -70,6 +63,7 @@ public class AbstractionUIContext extends ElementUIContext implements Applicatio
         aFront = new Animation(0.025f, walkFrames);
         spriteBatch = new SpriteBatch();
         stateTime = 0f;
+        */
     }
 
     @Override
@@ -80,11 +74,13 @@ public class AbstractionUIContext extends ElementUIContext implements Applicatio
     @Override
     public void render() {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+        /*
         stateTime += Gdx.graphics.getDeltaTime();
         currentFrame = aFront.getKeyFrame(stateTime, true);
         spriteBatch.begin();
         spriteBatch.draw(currentFrame, 50, 50);
         spriteBatch.end();
+        */
     }
 
     @Override
@@ -99,6 +95,6 @@ public class AbstractionUIContext extends ElementUIContext implements Applicatio
 
     @Override
     public void dispose() {
-        spriteBatch.dispose();
+        //spriteBatch.dispose();
     }
 }

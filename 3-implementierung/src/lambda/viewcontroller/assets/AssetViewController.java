@@ -2,13 +2,27 @@ package lambda.viewcontroller.assets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
+import lambda.model.levels.LevelContext;
+import lambda.model.levels.LevelLoadHelper;
+import lambda.model.levels.LevelManager;
+import lambda.model.levels.LevelModel;
+import lambda.model.shop.ElementUIContextFamily;
+import lambda.model.shop.ShopModel;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.editor.EditorViewController;
+import lambda.viewcontroller.level.AbstractionUIContext;
+import lambda.viewcontroller.level.ParanthesisUIContext;
+import lambda.viewcontroller.level.VariableUIContext;
+import lambda.viewcontroller.profiles.ProfileSelection;
 
 /**
  * Represents the loading screen at program start.
@@ -41,6 +55,26 @@ public class AssetViewController extends ViewController {
         image.setWidth(stage.getWidth());
         image.setHeight(stage.getHeight());
         stage.addActor(image);
+        
+        
+        // level context example
+        String defaultAtlas = "data/items/elementuis/default.atlas";
+        manager.load(defaultAtlas, TextureAtlas.class);
+       
+        TextureAtlas atlas = manager.get(defaultAtlas);
+        VariableUIContext variable = new VariableUIContext(atlas.findRegion("gem").getTexture());
+        AbstractionUIContext abstraction = new AbstractionUIContext(atlas.findRegion("front_magicstick").getTexture(), 
+                atlas.findRegion("center").getTexture(), atlas.findRegion("back").getTexture());
+        ParanthesisUIContext parenthesis = new ParanthesisUIContext(atlas.findRegion("front").getTexture(), 
+                atlas.findRegion("center").getTexture(), atlas.findRegion("back").getTexture());
+        
+        ElementUIContextFamily family = new ElementUIContextFamily("default", 0, parenthesis, variable, abstraction);
+        ShopModel.getShop().getElementUIContextFamilies().setDefaultItem(family);
+        
+        LevelManager.getLevelManager().queueAssets(manager);
+        LevelModel model = LevelManager.getLevelManager().getLevel(3);
+        LevelContext context = new LevelContext(model);
+        
     }
     
     /**

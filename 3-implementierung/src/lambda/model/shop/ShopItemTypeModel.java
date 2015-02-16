@@ -13,6 +13,7 @@ public class ShopItemTypeModel<T extends ShopItemModel> {
     private String typeName;
     private List<T> items;
     private T activatedItem;
+    private T defaultItem;
 
     /**
      *
@@ -47,8 +48,24 @@ public class ShopItemTypeModel<T extends ShopItemModel> {
      * @return the currently activated item
      */
     public T getActivatedItem() {
+        if (activatedItem == null) {
+            return defaultItem;
+        }
+        else {
         return activatedItem;
+        }
     }
+    
+    /**
+     * Sets the default item
+     * 
+     * @param item which is the default one
+     * 
+     */
+    public void setDefaultItem(T defaultItem) {
+        this.defaultItem = defaultItem;
+    }
+    
 
     /**
      * Sets an item as activated

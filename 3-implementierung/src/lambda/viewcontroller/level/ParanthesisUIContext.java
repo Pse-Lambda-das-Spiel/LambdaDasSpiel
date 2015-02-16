@@ -6,18 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 /**
  * @author: Kay Schmitteckert
  */
-public class ParanthesisUIContext extends ElementUIContext  implements ApplicationListener { // TODO: ParEnthesis name
-
-    /**
-     * Number of columns in the animation-sheet
-     */
-    private static final int FRAME_COLS = 6;
-    /**
-     * Number of rows in the animation-sheet
-     */
-    private static final int FRAME_ROWS = 5;
-
-
+public class ParanthesisUIContext extends ElementUIContext  implements ApplicationListener {
+    
     private Texture tFront;
     private Texture tCenter;
     private Texture tBack;

@@ -9,6 +9,10 @@ import java.util.Map;
 
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.assets.AssetViewController;
+import lambda.viewcontroller.profiles.ProfileEditAvatar;
+import lambda.viewcontroller.profiles.ProfileEditLang;
+import lambda.viewcontroller.profiles.ProfileEditName;
+import lambda.viewcontroller.profiles.ProfileSelection;
 import lambda.viewcontroller.reduction.ReductionViewController;
 
 /**
@@ -75,13 +79,14 @@ public class LambdaGame extends Game {
     public void create() {
         // TODO Use reflection?
         addViewController(new AssetViewController());
-        addViewController(new EditorViewController());
-        addViewController(new ReductionViewController());
+        //addViewController(new EditorViewController());
+        //addViewController(new ReductionViewController());
         
-        /*addViewController(new ProfileSelection());
+        addViewController(new ProfileSelection());
         addViewController(new ProfileEditLang());
         addViewController(new ProfileEditName());
         addViewController(new ProfileEditAvatar());
+        /*
         addViewController(new MainMenuViewController());
         addViewController(new LevelSelectionViewController());
         

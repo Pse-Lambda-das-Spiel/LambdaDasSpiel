@@ -14,21 +14,14 @@ import java.awt.Color;
  */
 public class VariableUIContext extends ElementUIContext implements ApplicationListener {
 
-    /**
-     * Number of columns in the animation-sheet
-     */
-    private static final int FRAME_COLS = 6;
-    /**
-     * Number of rows in the animation-sheet
-     */
-    private static final int FRAME_ROWS = 5;
-
     private Texture tVariable;
+    /*
     private Animation aVariable;
     private TextureRegion[] walkFrames;
     private SpriteBatch spriteBatch;
     private TextureRegion currentFrame;
     private float stateTime;
+    */
 
     public VariableUIContext(Texture variable) {
         tVariable = variable;
@@ -40,7 +33,8 @@ public class VariableUIContext extends ElementUIContext implements ApplicationLi
      * @return animation relating to the sprite
      */
     public Animation getAVariable() {
-        return aVariable;
+        return null;
+        //return aVariable;
     }
     
     public Texture getTexture() { // TODO
@@ -49,6 +43,7 @@ public class VariableUIContext extends ElementUIContext implements ApplicationLi
 
     @Override
     public void create() {
+        /*
         TextureRegion[][] tmp = TextureRegion.split(tVariable, tVariable.getWidth()/FRAME_COLS, tVariable.getHeight()/FRAME_ROWS);              // #10
         walkFrames = new TextureRegion[FRAME_COLS * FRAME_ROWS];
         int index = 0;
@@ -60,6 +55,7 @@ public class VariableUIContext extends ElementUIContext implements ApplicationLi
         aVariable = new Animation(0.025f, walkFrames);
         spriteBatch = new SpriteBatch();
         stateTime = 0f;
+        */
     }
 
     @Override
@@ -70,11 +66,13 @@ public class VariableUIContext extends ElementUIContext implements ApplicationLi
     @Override
     public void render() {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+        /*
         stateTime += Gdx.graphics.getDeltaTime();
         currentFrame = aVariable.getKeyFrame(stateTime, true);
         spriteBatch.begin();
         spriteBatch.draw(currentFrame, 50, 50);
         spriteBatch.end();
+        */
     }
 
     @Override
@@ -89,6 +87,6 @@ public class VariableUIContext extends ElementUIContext implements ApplicationLi
 
     @Override
     public void dispose() {
-        spriteBatch.dispose();
+        //spriteBatch.dispose();
     }
 }
