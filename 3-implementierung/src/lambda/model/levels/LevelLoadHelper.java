@@ -219,7 +219,7 @@ public final class LevelLoadHelper {
 		int numberOfDifficulties = jsonFile.getInt("numberOfDifficulties");
 		String[] difficultySettingFilePaths = new String[numberOfDifficulties];
 		for (int i = 0; i < numberOfDifficulties; i++) {
-			difficultySettingFilePaths[i] = "data/difficulties/" + String.format("%02d", i) + ".json";
+			difficultySettingFilePaths[i] = "data/difficulties/" + String.format("%02d", i + 1) + ".json";
 		}
 		return difficultySettingFilePaths;
 	}

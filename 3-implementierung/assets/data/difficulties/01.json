@@ -1,7 +1,7 @@
 {
 	"difficulty": {
-		"difficulty": 1 ,
-		"musicString": "01.mp3" ,
-		"bgImageString": "01.png"
+		"difficultyId": 1 ,
+		"music": "01.mp3" ,
+		"bgImage": "01.png"
 		}
 }

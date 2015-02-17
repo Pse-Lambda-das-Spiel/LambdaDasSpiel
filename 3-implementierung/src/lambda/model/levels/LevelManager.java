@@ -31,7 +31,6 @@ public class LevelManager {
      * Creates an instance of this class and loads the two required lists
      */
     private LevelManager() {
-        manager = new LevelManager();
         levelFilePaths = LevelLoadHelper.loadAllLevelPaths();
         difficultySettingFilePaths = LevelLoadHelper.loadAllDifficultyPaths();
     }
@@ -60,7 +59,7 @@ public class LevelManager {
    	 * @return 
    	 */
    	public DifficultySetting getDifficultySetting(int id) {
-   		DifficultySetting difficultySetting = assetManager.get(difficultySettingFilePaths[id], DifficultySetting.class);
+   		DifficultySetting difficultySetting = assetManager.get(difficultySettingFilePaths[id - 1], DifficultySetting.class);
    		return difficultySetting;
    	}
     
@@ -92,6 +91,9 @@ public class LevelManager {
     	for (String difficultySettingFilePath : difficultySettingFilePaths) {
     		assets.load(difficultySettingFilePath, DifficultySetting.class);
     	}
+    	
+    	
+    	assets.finishLoading();
     	// I am not sure about the rest of your resources here, either use normal AssetLoaders or write your own for them
     	
 //        FileHandle file = Gdx.files.internal("data/levels/music/numberOfMusic.json");
