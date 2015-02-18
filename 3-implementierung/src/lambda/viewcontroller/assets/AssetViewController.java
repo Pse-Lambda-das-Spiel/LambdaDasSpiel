@@ -60,8 +60,8 @@ public class AssetViewController extends ViewController {
         // level context example
         String defaultAtlas = "data/items/elementuis/default.atlas";
         manager.load(defaultAtlas, TextureAtlas.class);
-       
-        TextureAtlas atlas = manager.get(defaultAtlas);
+        manager.finishLoading();
+        TextureAtlas atlas = manager.get(defaultAtlas, TextureAtlas.class);
         VariableUIContext variable = new VariableUIContext(atlas.findRegion("gem").getTexture());
         AbstractionUIContext abstraction = new AbstractionUIContext(atlas.findRegion("front_magicstick").getTexture(), 
                 atlas.findRegion("center").getTexture(), atlas.findRegion("back").getTexture());
