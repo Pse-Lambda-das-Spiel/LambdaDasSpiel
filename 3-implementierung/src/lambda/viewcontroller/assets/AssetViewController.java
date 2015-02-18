@@ -38,6 +38,7 @@ public class AssetViewController extends ViewController {
      * Libgdx class that manages asset loading. Asset model.
      */
     private final AssetManager manager;
+    private LevelContext context;
     
     /**
      * Creates a new instance of AssetViewController and loads all assets required for it. Blocks until loading is complete.
@@ -73,7 +74,7 @@ public class AssetViewController extends ViewController {
         
         LevelManager.getLevelManager().queueAssets(manager);
         LevelModel model = LevelManager.getLevelManager().getLevel(3);
-        LevelContext context = new LevelContext(model);
+        context = new LevelContext(model);
         
     }
     
@@ -112,7 +113,14 @@ public class AssetViewController extends ViewController {
         if (manager.update()) {
             // Loading finished => go to profile selection
             getGame().createViewControllers();
+            /* 
+            LevelSkin is missing so I can not test it properly
+      
+            getGame().getController(EditorViewController.class).reset(context);
             getGame().setScreen(EditorViewController.class);
+             */
+           
+            getGame().setScreen(ProfileSelection.class);
         }
 
         // TODO manager.getProgress();

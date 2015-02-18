@@ -79,8 +79,6 @@ public class LambdaGame extends Game {
     public void create() {
         // TODO Use reflection?
         addViewController(new AssetViewController());
-        //addViewController(new EditorViewController());
-        //addViewController(new ReductionViewController());
         
         addViewController(new ProfileSelection());
         addViewController(new ProfileEditLang());
@@ -89,8 +87,9 @@ public class LambdaGame extends Game {
         /*
         addViewController(new MainMenuViewController());
         addViewController(new LevelSelectionViewController());
-        
+        addViewController(new EditorViewController());
         addViewController(new ReductionViewController());
+        
         addViewController(new SettingsViewController());
         addViewController(new ShopViewController());
         addViewController(new StatisticViewController());
