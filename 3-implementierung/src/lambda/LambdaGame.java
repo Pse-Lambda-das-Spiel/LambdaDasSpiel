@@ -8,12 +8,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import lambda.viewcontroller.ViewController;
+import lambda.viewcontroller.achievements.AchievementMenuViewController;
 import lambda.viewcontroller.assets.AssetViewController;
 import lambda.viewcontroller.profiles.ProfileEditAvatar;
 import lambda.viewcontroller.profiles.ProfileEditLang;
 import lambda.viewcontroller.profiles.ProfileEditName;
 import lambda.viewcontroller.profiles.ProfileSelection;
 import lambda.viewcontroller.reduction.ReductionViewController;
+import lambda.viewcontroller.shop.ShopViewController;
 
 /**
  * The main class of this application.
@@ -79,8 +81,6 @@ public class LambdaGame extends Game {
     public void create() {
         // TODO Use reflection?
         addViewController(new AssetViewController());
-        //addViewController(new EditorViewController());
-        //addViewController(new ReductionViewController());
         
         addViewController(new ProfileSelection());
         addViewController(new ProfileEditLang());
@@ -89,8 +89,9 @@ public class LambdaGame extends Game {
         /*
         addViewController(new MainMenuViewController());
         addViewController(new LevelSelectionViewController());
-        
+        addViewController(new EditorViewController());
         addViewController(new ReductionViewController());
+        
         addViewController(new SettingsViewController());
         addViewController(new ShopViewController());
         addViewController(new StatisticViewController());
@@ -122,9 +123,9 @@ public class LambdaGame extends Game {
      * Called when the Application should render itself.
      */
     @Override
-	public void render() {
-		super.render();
-	}
+    public void render() {
+        super.render();
+    }
     
     /**
      * Called when the Application is resized. 
@@ -134,8 +135,8 @@ public class LambdaGame extends Game {
      * @param width the new width in pixels
      * @param height the new height in pixels
      */
-	@Override
-	public void resize(int width, int height) {
-		super.resize(width, height);
-	}
+    @Override
+    public void resize(int width, int height) {
+        super.resize(width, height);
+    }
 }

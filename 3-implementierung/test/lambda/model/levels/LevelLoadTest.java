@@ -99,7 +99,7 @@ public class LevelLoadTest {
 	}
 	
 	/**
-	 * Tests the loading of a sample level json file(in this case 04.json).
+	 * Tests the loading of a sample level json file(in this case 03.json).
 	 */
 	@Test
 	public void testLoadLevel() {

@@ -18,11 +18,13 @@ import lambda.model.levels.LevelModel;
 import lambda.model.shop.ElementUIContextFamily;
 import lambda.model.shop.ShopModel;
 import lambda.viewcontroller.ViewController;
+import lambda.viewcontroller.achievements.AchievementMenuViewController;
 import lambda.viewcontroller.editor.EditorViewController;
 import lambda.viewcontroller.level.AbstractionUIContext;
 import lambda.viewcontroller.level.ParanthesisUIContext;
 import lambda.viewcontroller.level.VariableUIContext;
 import lambda.viewcontroller.profiles.ProfileSelection;
+import lambda.viewcontroller.shop.ShopViewController;
 
 /**
  * Represents the loading screen at program start.
@@ -38,6 +40,7 @@ public class AssetViewController extends ViewController {
      * Libgdx class that manages asset loading. Asset model.
      */
     private final AssetManager manager;
+    private LevelContext context;
     
     /**
      * Creates a new instance of AssetViewController and loads all assets required for it. Blocks until loading is complete.
@@ -58,10 +61,18 @@ public class AssetViewController extends ViewController {
         
         
         // level context example
+        
         String defaultAtlas = "data/items/elementuis/default.atlas";
         manager.load(defaultAtlas, TextureAtlas.class);
-       
-        TextureAtlas atlas = manager.get(defaultAtlas);
+        manager.finishLoading();
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/master
+=======
+>>>>>>> origin/master
+        TextureAtlas atlas = manager.get(defaultAtlas, TextureAtlas.class);
         VariableUIContext variable = new VariableUIContext(atlas.findRegion("gem").getTexture());
         AbstractionUIContext abstraction = new AbstractionUIContext(atlas.findRegion("front_magicstick").getTexture(), 
                 atlas.findRegion("center").getTexture(), atlas.findRegion("back").getTexture());
@@ -73,7 +84,7 @@ public class AssetViewController extends ViewController {
         
         LevelManager.getLevelManager().queueAssets(manager);
         LevelModel model = LevelManager.getLevelManager().getLevel(3);
-        LevelContext context = new LevelContext(model);
+        context = new LevelContext(model);
         
     }
     
@@ -112,7 +123,14 @@ public class AssetViewController extends ViewController {
         if (manager.update()) {
             // Loading finished => go to profile selection
             getGame().createViewControllers();
+            /* 
+            LevelSkin is missing so I can not test it properly
+      
+            getGame().getController(EditorViewController.class).reset(context);
             getGame().setScreen(EditorViewController.class);
+             */
+           
+            getGame().setScreen(ProfileSelection.class);
         }
 
         // TODO manager.getProgress();
