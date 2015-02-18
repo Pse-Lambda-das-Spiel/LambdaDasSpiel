@@ -67,7 +67,10 @@ public class AssetViewController extends ViewController {
         manager.finishLoading();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 =======
 >>>>>>> origin/master
 =======
