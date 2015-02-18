@@ -65,16 +65,7 @@ public class AssetViewController extends ViewController {
         String defaultAtlas = "data/items/elementuis/default.atlas";
         manager.load(defaultAtlas, TextureAtlas.class);
         manager.finishLoading();
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
-=======
->>>>>>> origin/master
-=======
->>>>>>> origin/master
         TextureAtlas atlas = manager.get(defaultAtlas, TextureAtlas.class);
         VariableUIContext variable = new VariableUIContext(atlas.findRegion("gem").getTexture());
         AbstractionUIContext abstraction = new AbstractionUIContext(atlas.findRegion("front_magicstick").getTexture(), 
