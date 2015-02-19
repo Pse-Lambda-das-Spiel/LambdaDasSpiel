@@ -38,6 +38,7 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
     private TextField nameField;
     private Label enterName;
     private boolean newProfile;
+    private final float space;
     
     /**
      * Creates a object of the class without initializing the screen.
@@ -46,6 +47,7 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
 	    stage = new Stage(new ScreenViewport());
         ProfileManager.getManager().addObserver(this);
         profileEdit = ProfileManager.getManager().getProfileEdit();
+        space = stage.getWidth() / 64;
 	}
     
     @Override
@@ -101,18 +103,18 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
         nameSelection.row().height(stage.getHeight() / 5);        
         enterName = new Label(null, manager.get(skinJson, Skin.class));
         enterName.setFontScale(0.7f);
-        nameSelection.add(enterName).width(stage.getHeight() * 0.8f).space(10);
+        nameSelection.add(enterName).width(stage.getHeight() * 0.8f).space(space);
         enterName.setAlignment(Align.center);
         nameSelection.row().height(stage.getHeight() / 3);
         nameField = new TextField("", manager.get(skinJson, Skin.class));
-        nameField.setMaxLength(16);
-        nameField.getStyle().background.setLeftWidth(15);
-        nameField.getStyle().background.setRightWidth(15);
-        nameSelection.add(nameField).width(stage.getWidth() * 0.8f).space(10);
+        nameField.setMaxLength(20);
+        nameField.getStyle().background.setLeftWidth(space * 3 / 2);
+        nameField.getStyle().background.setRightWidth(space * 3 / 2);
+        nameSelection.add(nameField).width(stage.getWidth() * 2 / 3).space(space);
         
         ImageButton backButton = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
-        buttonContainer.pad(25);
+        buttonContainer.pad(space * 5 / 2);
         buttonContainer.align(Align.bottomLeft);
         buttonContainer.setActor(backButton);
         backButton.addListener(new backClickListener());
@@ -121,7 +123,7 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
         
         ImageButton continueButton = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
         buttonContainer = new Container<ImageButton>();
-        buttonContainer.pad(25);
+        buttonContainer.pad(space * 5 / 2);
         buttonContainer.align(Align.bottomRight);
         buttonContainer.setActor(continueButton);
         continueButton.addListener(new continueClickListener());

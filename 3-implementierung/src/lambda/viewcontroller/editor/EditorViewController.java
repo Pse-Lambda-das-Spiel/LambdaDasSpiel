@@ -19,6 +19,8 @@ import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 import lambda.model.editormode.EditorModel;
 import lambda.model.editormode.EditorModelObserver;
@@ -158,7 +160,33 @@ public final class EditorViewController extends ViewController implements Editor
         reductionStrategyButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                // TODO dialog to change strategy using model.setStrategy
+                new Dialog("", dialogSkin) {
+                    {
+                        clear();
+                        List<ReductionStrategy> strategies = new ArrayList<ReductionStrategy>(); //replace with getlevelcontext .getLevelModel().getAvailableRedStrats();
+                        strategies.add(ReductionStrategy.APPLICATIVE_ORDER);//test/delete
+                        strategies.add(ReductionStrategy.CALL_BY_NAME);//test/delete
+                        strategies.add(ReductionStrategy.CALL_BY_VALUE);//test/delete
+                        strategies.add(ReductionStrategy.NORMAL_ORDER);//test/delete*/
+                        int size = (int) Math.ceil(Math.sqrt(strategies.size()));
+                        pad(size * 6);
+                        int i = 0;
+                        for (ReductionStrategy strategy: strategies) {
+                            if (i++ % size == 0) {
+                                row().space(10);
+                            }
+                            ImageButton stratButton = new ImageButton(dialogSkin, strategy.name() + "_Button");
+                            stratButton.addListener(new ClickListener() {
+                                @Override
+                                public void clicked(InputEvent event, float x, float y) {
+                                    model.setStrategy(strategy);
+                                    remove();
+                                }
+                            });
+                            add(stratButton);
+                        }
+                    }
+                }.show(stage);
             }
         });
         finishedButton.addListener(new ClickListener(){
@@ -298,8 +326,7 @@ public final class EditorViewController extends ViewController implements Editor
             continueButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    setVisible(false);
-                    hide();
+                    remove();
                 }
             });
             add(continueButton).width(width).height(height).padTop(25).padLeft(25).padRight(25);
@@ -310,8 +337,7 @@ public final class EditorViewController extends ViewController implements Editor
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     //TODO reset Level
-                    setVisible(false);
-                    hide();
+                    remove();
                 }
             });
             add(resetButton).width(width).height(height).pad(10);
@@ -323,8 +349,7 @@ public final class EditorViewController extends ViewController implements Editor
                 public void clicked(InputEvent event, float x, float y) {
                     //TODO ?
                     getGame().setScreen(MainMenuViewController.class);
-                    setVisible(false);
-                    hide();
+                    remove();
                 }
             });
             add(menuButton).width(width).height(height).padBottom(35).padLeft(25).padRight(25);

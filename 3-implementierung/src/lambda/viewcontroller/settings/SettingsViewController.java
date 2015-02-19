@@ -43,6 +43,7 @@ public class SettingsViewController extends ViewController implements SettingsMo
     private Label musicLabel;
     private Label soundLabel;
     private AssetManager manager;
+    private final float space;
     
     /**
      * Creates a object of the class without initializing the screen.
@@ -52,6 +53,7 @@ public class SettingsViewController extends ViewController implements SettingsMo
         ProfileManager.getManager().addObserver(this);
         settings = new SettingsModel();
         settings.addObserver(this);
+        space = stage.getWidth() / 64;
 	}
 
     @Override
@@ -117,10 +119,10 @@ public class SettingsViewController extends ViewController implements SettingsMo
                 settings.setMusicVolume(musicSlider.getValue());
             }
         });
-        settingsView.add(musicSlider).width(width).space(10);
+        settingsView.add(musicSlider).width(width).space(space);
         settingsView.row().height(height);
         soundLabel = new Label(null, manager.get(skinJson, Skin.class));
-        settingsView.add(soundLabel).width(width).space(20);
+        settingsView.add(soundLabel).width(width).space(space * 2);
         settingsView.row().height(height);
         soundSlider = new Slider(0, 1, 0.01f, false,  manager.get(skinJson, Skin.class));
         soundSlider.addListener(new ChangeListener() {
@@ -129,14 +131,14 @@ public class SettingsViewController extends ViewController implements SettingsMo
                 settings.setSoundVolume(soundSlider.getValue());
             }
         });
-        settingsView.add(soundSlider).width(width).space(10);
+        settingsView.add(soundSlider).width(width).space(space);
         settingsView.row().height(height);
         statistics = new TextButton("", manager.get(skinJson, Skin.class));
-        settingsView.add(statistics).width(width).space(40);
+        settingsView.add(statistics).width(width * 2 / 3).space(space * 4);
         
         ImageButton backButton = new ImageButton(manager.get(skinJson, Skin.class), "backButton");
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
-        buttonContainer.pad(25);
+        buttonContainer.pad(space * 5 / 2);
         buttonContainer.align(Align.bottomLeft);
         buttonContainer.setActor(backButton);
         backButton.addListener(new backClickListener());

@@ -39,7 +39,8 @@ public class ProfileSelection extends ViewController {
     private List<TextButton> profileButtons;
     private List<ImageButton> editButtons;
     private ImageButton addButton;
-    private AssetManager manager; 
+    private AssetManager manager;
+    private final float space;
     
     /**
      * Creates a object of the class without initializing the screen.
@@ -47,6 +48,7 @@ public class ProfileSelection extends ViewController {
 	public ProfileSelection() {
 	    stage = new Stage(new ScreenViewport());
 	    ProfileManager.getManager().addObserver(this);
+	    space = stage.getWidth() / 64;
 	}
 
     @Override
@@ -123,7 +125,7 @@ public class ProfileSelection extends ViewController {
             profileView.row().height(height);
             TextButton pButton = new TextButton("", manager.get(skinJson, Skin.class));
             pButton.getLabel().setFontScale(0.5f);
-            profileView.add(pButton).width(stage.getWidth() * 0.55f).space(10);
+            profileView.add(pButton).width(stage.getWidth() * 0.55f).space(space);
             profileButtons.add(pButton);
             pButton.addListener(new selectProfileClickListener());
             ImageButton eButton = new ImageButton(manager.get(skinJson, Skin.class), "editButton");
@@ -134,7 +136,7 @@ public class ProfileSelection extends ViewController {
         //addProfile-Button
         addButton = new ImageButton(manager.get(skinJson, Skin.class), "addButton");
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
-        buttonContainer.pad(25);
+        buttonContainer.pad(space * 5 / 2);
         buttonContainer.align(Align.bottomRight);
         buttonContainer.setActor(addButton);
         addButton.addListener(new addProfileClickListener());
@@ -183,20 +185,19 @@ public class ProfileSelection extends ViewController {
                 {
                     clear();
                     Label nameLabel = new Label(name, temp);
-                    add(nameLabel).pad(15).padBottom(0).colspan(2);
+                    add(nameLabel).pad(space * 3 / 2).padBottom(0).colspan(2);
                     row();
                     //configuration/edit option
                     ImageButton configButton = new ImageButton(temp, "configButton");
                     configButton.addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
-                            setVisible(false);
-                            hide();
+                            remove();
                             ProfileManager.getManager().setCurrentProfile(name);
                             getGame().setScreen(ProfileEditLang.class);
                         }
                     });
-                    add(configButton).pad(10).padBottom(15).align(Align.bottomRight);
+                    add(configButton).pad(space).padBottom(space * 3 / 2).align(Align.bottomRight);
                     //delete option. opens confirm dialog
                     ImageButton deleteButton = new ImageButton(temp, "deleteButton");
                     deleteButton.addListener(new ClickListener() {
@@ -205,36 +206,34 @@ public class ProfileSelection extends ViewController {
                             confirm();
                         }
                     });
-                    add(deleteButton).pad(10).padBottom(15).align(Align.bottomLeft);
+                    add(deleteButton).pad(space).padBottom(space * 3 / 2).align(Align.bottomLeft);
                 }
                 
                 //asks for confirmation if the profile should be deleted
                 private void confirm() {
                     clear();
                     Label nameLabel = new Label(name, temp);
-                    add(nameLabel).pad(15).padBottom(0).colspan(2);
+                    add(nameLabel).pad(space * 3 / 2).padBottom(0).colspan(2);
                     row();
                     //yes
                     ImageButton yesButton = new ImageButton(temp, "yesButton");
                     yesButton.addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
-                            setVisible(false);
-                            hide();
+                            remove();
                             ProfileManager.getManager().delete(name);
                         }
                     });
-                    add(yesButton).pad(10).padBottom(15).align(Align.bottomRight);
+                    add(yesButton).pad(space).padBottom(space * 3 / 2).align(Align.bottomRight);
                     //no
                     ImageButton noButton = new ImageButton(temp, "noButton");
                     noButton.addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
-                            setVisible(false);
-                            hide();
+                            remove();
                         }
                     });
-                    add(noButton).pad(10).padBottom(15).align(Align.bottomLeft);
+                    add(noButton).pad(space).padBottom(space * 3 / 2).align(Align.bottomLeft);
                 }
             }.show(stage);
         }

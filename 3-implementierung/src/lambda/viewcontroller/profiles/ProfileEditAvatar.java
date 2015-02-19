@@ -40,6 +40,7 @@ public class ProfileEditAvatar extends ViewController implements ProfileEditObse
     private Image avatarPic;
     private Label chooseAvatar;
     private boolean newProfile;
+    private final float space;
     
     /**
      * Creates a object of the class without initializing the screen.
@@ -48,6 +49,7 @@ public class ProfileEditAvatar extends ViewController implements ProfileEditObse
 	    stage = new Stage(new ScreenViewport());
         ProfileManager.getManager().addObserver(this);
         profileEdit = ProfileManager.getManager().getProfileEdit();
+        space = stage.getWidth() / 64;
 	}
 
     @Override
@@ -119,17 +121,17 @@ public class ProfileEditAvatar extends ViewController implements ProfileEditObse
         ImageButton selectLeft = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
         float buttonWidth = selectLeft.getWidth();
         float buttonHeight = selectLeft.getHeight();
-        avatarSelection.add(selectLeft).width(buttonWidth).height(buttonHeight).space(10);
+        avatarSelection.add(selectLeft).width(buttonWidth).height(buttonHeight).space(space);
         selectLeft.addListener(new selectLeftClickListener());
         avatarPic = new Image();
-        avatarSelection.add(avatarPic).width(stage.getWidth() / 2).space(10);
+        avatarSelection.add(avatarPic).width(stage.getWidth() / 2).space(space);
         ImageButton selectRight = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
-        avatarSelection.add(selectRight).width(buttonWidth).height(buttonHeight).space(10);
+        avatarSelection.add(selectRight).width(buttonWidth).height(buttonHeight).space(space);
         selectRight.addListener(new selectRightClickListener());
         
         ImageButton backButton = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
-        buttonContainer.pad(25);
+        buttonContainer.pad(space * 5 / 2);
         buttonContainer.align(Align.bottomLeft);
         buttonContainer.setActor(backButton);
         backButton.addListener(new backClickListener());
@@ -138,7 +140,7 @@ public class ProfileEditAvatar extends ViewController implements ProfileEditObse
         
         ImageButton continueButton = new ImageButton(manager.get(skinJson, Skin.class), "acceptButton");
         buttonContainer = new Container<ImageButton>();
-        buttonContainer.pad(25);
+        buttonContainer.pad(space * 5 / 2);
         buttonContainer.align(Align.bottomRight);
         buttonContainer.setActor(continueButton);
         continueButton.addListener(new acceptClickListener());

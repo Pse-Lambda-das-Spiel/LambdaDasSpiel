@@ -22,6 +22,10 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	configButton: { up: settings},
 	deleteButton: { up: bin},
 	yesButton: { up: accept},
-	noButton: { up: abort}
+	noButton: { up: abort},
+	NORMAL_ORDER_Button: { up: settings},
+	APPLICATIVE_ORDER_Button: { up: bin},
+	CALL_BY_NAME_Button: { up: accept},
+	CALL_BY_VALUE_Button: { up: abort}
 }
 }

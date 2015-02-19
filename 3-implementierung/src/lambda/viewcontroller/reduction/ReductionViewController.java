@@ -280,8 +280,7 @@ public class ReductionViewController extends ViewController implements Reduction
             continueButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    setVisible(false);
-                    hide();
+                    remove();
                 }
             });
             add(continueButton).width(width).height(height).padTop(25).padLeft(25).padRight(25);
@@ -292,8 +291,7 @@ public class ReductionViewController extends ViewController implements Reduction
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     //TODO
-                    setVisible(false);
-                    hide();
+                    remove();
                 }
             });
             add(resetButton).width(width).height(height).pad(10);
@@ -305,8 +303,7 @@ public class ReductionViewController extends ViewController implements Reduction
                 public void clicked(InputEvent event, float x, float y) {
                     //TODO
                     getGame().setScreen(MainMenuViewController.class);
-                    setVisible(false);
-                    hide();
+                    remove();
                 }
             });
             add(menuButton).width(width).height(height).padBottom(35).padLeft(25).padRight(25);
@@ -336,8 +333,7 @@ public class ReductionViewController extends ViewController implements Reduction
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     //TODO reset
-                    setVisible(false);
-                    hide();
+                    remove();
                 }
             });
             add(restartButton).width(width).height(height).padLeft(25).padRight(25);
@@ -350,8 +346,7 @@ public class ReductionViewController extends ViewController implements Reduction
                 public void clicked(InputEvent event, float x, float y) {
                     //TODO
                     getGame().setScreen(MainMenuViewController.class);
-                    setVisible(false);
-                    hide();
+                    remove();
                 }
             });
             if (levelComplete) {
@@ -363,8 +358,7 @@ public class ReductionViewController extends ViewController implements Reduction
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         // TODO nextlevel
-                        setVisible(false);
-                        hide();
+                        remove();
                     }
                 });
                 add(nextButton).width(width).height(height).pad(10);

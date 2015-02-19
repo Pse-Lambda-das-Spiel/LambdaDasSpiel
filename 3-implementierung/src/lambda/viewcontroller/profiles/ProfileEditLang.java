@@ -42,6 +42,7 @@ public class ProfileEditLang extends ViewController implements ProfileEditObserv
     private ImageButton backButton;
     private AssetManager manager;
     private boolean deleteOnBack;
+    private final float space;
     
     /**
      * Creates a object of the class without initializing the screen.
@@ -50,6 +51,7 @@ public class ProfileEditLang extends ViewController implements ProfileEditObserv
 	    stage = new Stage(new ScreenViewport());
         ProfileManager.getManager().addObserver(this);
         profileEdit = ProfileManager.getManager().getProfileEdit();
+        space = stage.getWidth() / 64;
 	}
 
     @Override
@@ -112,12 +114,12 @@ public class ProfileEditLang extends ViewController implements ProfileEditObserv
         ImageButton selectLeft = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
         float buttonWidth = selectLeft.getWidth();
         float buttonHeight = selectLeft.getHeight();
-        langSelection.add(selectLeft).width(buttonWidth).height(buttonHeight).space(10);
+        langSelection.add(selectLeft).width(buttonWidth).height(buttonHeight).space(space);
         selectLeft.addListener(new selectLeftClickListener());
         langPic = new Image();
-        langSelection.add(langPic).width(stage.getWidth() / 2).space(10);
+        langSelection.add(langPic).width(stage.getWidth() / 2).space(space);
         ImageButton selectRight = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
-        langSelection.add(selectRight).width(buttonWidth).height(buttonHeight).space(10);
+        langSelection.add(selectRight).width(buttonWidth).height(buttonHeight).space(space);
         selectRight.addListener(new selectRightClickListener());
         lang = new Label(null ,manager.get(skinJson, Skin.class));
         lang.setAlignment(Align.center);
@@ -127,7 +129,7 @@ public class ProfileEditLang extends ViewController implements ProfileEditObserv
         
         backButton = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
-        buttonContainer.pad(25);
+        buttonContainer.pad(space * 5 / 2);
         buttonContainer.align(Align.bottomLeft);
         buttonContainer.setActor(backButton);
         backButton.addListener(new backClickListener());
@@ -136,7 +138,7 @@ public class ProfileEditLang extends ViewController implements ProfileEditObserv
         
         ImageButton continueButton = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
         buttonContainer = new Container<ImageButton>();
-        buttonContainer.pad(25);
+        buttonContainer.pad(space * 5 / 2);
         buttonContainer.align(Align.bottomRight);
         buttonContainer.setActor(continueButton);
         continueButton.addListener(new continueClickListener());
@@ -189,6 +191,7 @@ public class ProfileEditLang extends ViewController implements ProfileEditObserv
                 m.delete(m.getCurrentProfile().getName());
             } else {
                 m.getCurrentProfile().setLanguage(profileEdit.getLang());
+                m.save(m.getCurrentProfile().getName());
             }
             getGame().setScreen(ProfileSelection.class);
         }
