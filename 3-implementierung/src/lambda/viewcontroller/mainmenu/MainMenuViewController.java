@@ -1,42 +1,64 @@
 package lambda.viewcontroller.mainmenu;
 
-import lambda.LambdaGame;
 import lambda.model.profiles.ProfileManager;
 import lambda.viewcontroller.ViewController;
+import lambda.viewcontroller.achievements.AchievementMenuViewController;
+import lambda.viewcontroller.level.LevelSelectionViewController;
+import lambda.viewcontroller.profiles.ProfileSelection;
 import lambda.viewcontroller.settings.SettingsViewController;
+import lambda.viewcontroller.shop.ShopViewController;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class MainMenuViewController extends ViewController implements Screen {
+/**
+ * Represents the main menu.
+ * 
+ * @author Farid, Robert Hochweiss
+ */
+public class MainMenuViewController extends ViewController {
+
 	private final Stage stage;
-	private final String skinJson = "data/skins/MainMenu.json";
-	
-
+	private final String skinJson = "data/skins/MainMenuSkin.json";
 	private Skin skin;
-
-	private ImageButton backButton, settingsButton ,sound_unmuted ,sound_muted ;
 	private Label coins;
-	private Image coinBar;
-	
+	private Label profileName;
+	private Image profileImg;
+	private AssetManager manager;
+
 	/**
-     * Creates a object of the class without initializing the screen.
-     */
+	 * Creates a object of the class without initializing the screen.
+	 */
 	public MainMenuViewController() {
 		stage = new Stage(new ScreenViewport());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void changedProfile() {
+		ProfileManager pManager = ProfileManager.getManager();
+		profileImg.setDrawable(new SpriteDrawable(new Sprite(
+				manager.get("data/avatar/" + pManager.getCurrentProfile().getAvatar() + ".jpg", Texture.class))));
+		profileName.setText(pManager.getCurrentProfile().getName());
 	}
 
 	@Override
@@ -53,13 +75,13 @@ public class MainMenuViewController extends ViewController implements Screen {
 
 	@Override
 	public void show() {
-
 		Gdx.input.setInputProcessor(stage);
+		// Update coin label
+		coins.setText(Integer.toString(ProfileManager.getManager().getCurrentProfile().getCoins()));
 	}
 
 	@Override
 	public void hide() {
-		dispose();
 	}
 
 	@Override
@@ -73,90 +95,119 @@ public class MainMenuViewController extends ViewController implements Screen {
 	@Override
 	public void dispose() {
 		stage.dispose();
-		skin.dispose();
 	}
 
 	@Override
 	public void queueAssets(AssetManager manager) {
-		manager.load(skinJson, Skin.class, new SkinLoader.SkinParameter(
-				"data/skins/MasterSkin.atlas"));
-
+		manager.load(skinJson, Skin.class, new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
 	}
 
 	@Override
 	public void create(AssetManager manager) {
+		this.manager = manager;
+		ProfileManager.getManager().addObserver(this);
 		skin = manager.get(skinJson, Skin.class);
-		backButton = new ImageButton(skin, "backButton");
-		settingsButton = new ImageButton(skin, "settings");
-		sound_unmuted = new ImageButton(skin, "sound_unmuted");
-		sound_muted = new ImageButton(skin, "sound_muted");
-
-		Container<ImageButton> settingsButtonContainer = new Container<ImageButton>();
-		settingsButtonContainer.pad(15);
-		settingsButtonContainer.align(Align.bottomLeft);
+		// TODO: Replace with logoutButton when its finished
+		ImageButton logoutButton = new ImageButton(skin, "backButton");
+		ImageButton settingsButton = new ImageButton(skin, "settingsButton");
+		ImageButton sound_unmuted = new ImageButton(skin, "sound_unmuted");
+		ImageButton sound_muted = new ImageButton(skin, "sound_muted");
+		ImageButton startButton = new ImageButton(skin, "startButton");
+		// Only tmp until the levelButton for the main menu is finished
+		ImageButton levelButton = new ImageButton(skin, "startButton");
+		ImageButton achievementsButton = new ImageButton(skin, "achievementsButton");
+		coins = new Label("Initial string", skin);
+		ImageTextButton coinButton = new ImageTextButton("",skin);
+		coinButton.add(new Image(skin, "coin"));
+		coinButton.add(coins);
+		profileName = new Label("Initial string", skin, "roboto");
+		profileImg = new Image();
+		
+		Container<ImageButton> settingsButtonContainer = new Container<>();
+		settingsButtonContainer.pad(15).align(Align.bottomLeft);
 		settingsButtonContainer.setActor(settingsButton);
-
 		stage.addActor(settingsButtonContainer);
 		settingsButtonContainer.setFillParent(true);
 
-		Container<ImageButton> soundButtonContainer = new Container<ImageButton>();
-		soundButtonContainer.pad(15);
-		soundButtonContainer.align(Align.bottomRight);
+		Container<ImageButton> soundButtonContainer = new Container<>();
+		soundButtonContainer.pad(15).align(Align.bottomRight);
 		soundButtonContainer.setActor(sound_unmuted);
-
 		stage.addActor(soundButtonContainer);
 		soundButtonContainer.setFillParent(true);
 
-		coins = new Label(String.valueOf(ProfileManager.getManager()
-				.getCurrentProfile().getCoins()), skin);
-		Container<Label> labelContainer = new Container<Label>();
-		labelContainer.align(Align.topRight);
-		labelContainer.setActor(coins);
+		Container<ImageTextButton> coinButtonContainer = new Container<>();
+		coinButtonContainer.pad(15).align(Align.topRight);
+		coinButtonContainer.setActor(coinButton);
+		stage.addActor(coinButtonContainer);
+		coinButtonContainer.setFillParent(true);
+		
+		Table profileTable = new Table();
+		profileTable.pad(25).align(Align.topLeft);
+		profileTable.add(logoutButton).align(Align.left).spaceBottom(stage.getHeight() / 8).row();
+		profileTable.add(profileImg).row();
+		profileTable.add(profileName);
+		stage.addActor(profileTable);
+		profileTable.setFillParent(true);
 
-		coinBar = new Image(skin, "coin_bar");
-		Container<Image> imageContainer = new Container<Image>();
-		imageContainer.align(Align.topRight);
-		imageContainer.setActor(coinBar);
-		stage.addActor(imageContainer);
-		imageContainer.setFillParent(true);
-		Container<ImageButton> backButtonContainer = new Container<ImageButton>();
-		backButtonContainer.pad(25);
-		backButtonContainer.align(Align.topLeft);
-		backButtonContainer.setActor(backButton);
-
-		stage.addActor(backButtonContainer);
-		backButtonContainer.setFillParent(true);
-
-		backButton.addListener(new ClickListener() {
+		Table centerTable = new Table();
+		centerTable.align(Align.center);
+		centerTable.add(startButton).colspan(2).align(Align.center).spaceBottom(stage.getHeight() / 20).row();
+		centerTable.add(levelButton).align(Align.left).spaceRight(stage.getWidth() / 20);
+		centerTable.add(achievementsButton).align(Align.right);
+		stage.addActor(centerTable);
+		centerTable.setFillParent(true);
+		
+		logoutButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				Gdx.app.exit();
-
+				ProfileManager pManager = ProfileManager.getManager();
+				pManager.save(pManager.getCurrentProfile().getName());
+				getGame().setScreen(ProfileSelection.class);
+			}
+		});
+		// tmp until LevelSelectionVC is finished
+		startButton.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				getGame().setScreen(LevelSelectionViewController.class);
+			}
+		});
+		levelButton.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				getGame().setScreen(LevelSelectionViewController.class);
+			}
+		});
+		achievementsButton.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				getGame().setScreen(AchievementMenuViewController.class);
+			}
+		});
+		coinButton.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				getGame().setScreen(ShopViewController.class);
 			}
 		});
 		settingsButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				getGame().setScreen(SettingsViewController.class);
-				
-
 			}
 		});
 		sound_unmuted.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				soundButtonContainer.setActor(sound_muted);
-
 			}
 		});
 		sound_muted.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				soundButtonContainer.setActor(sound_unmuted);
-
 			}
 		});
-
 	}
-
+	
 }

@@ -10,11 +10,13 @@ import java.util.Map;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.achievements.AchievementMenuViewController;
 import lambda.viewcontroller.assets.AssetViewController;
+import lambda.viewcontroller.mainmenu.MainMenuViewController;
 import lambda.viewcontroller.profiles.ProfileEditAvatar;
 import lambda.viewcontroller.profiles.ProfileEditLang;
 import lambda.viewcontroller.profiles.ProfileEditName;
 import lambda.viewcontroller.profiles.ProfileSelection;
 import lambda.viewcontroller.reduction.ReductionViewController;
+import lambda.viewcontroller.settings.SettingsViewController;
 import lambda.viewcontroller.shop.ShopViewController;
 
 /**
@@ -86,6 +88,9 @@ public class LambdaGame extends Game {
         addViewController(new ProfileEditLang());
         addViewController(new ProfileEditName());
         addViewController(new ProfileEditAvatar());
+        addViewController(new MainMenuViewController());
+        addViewController(new AchievementMenuViewController());
+        addViewController(new SettingsViewController());
         /*
         addViewController(new MainMenuViewController());
         addViewController(new LevelSelectionViewController());

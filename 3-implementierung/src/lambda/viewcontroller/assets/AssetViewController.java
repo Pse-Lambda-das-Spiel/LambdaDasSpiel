@@ -183,5 +183,6 @@ public class AssetViewController extends ViewController {
     @Override
     public void queueAssets(AssetManager manager) {
         // All assets needed by the loading screen are loaded separately in the constructor
+    	manager.load("data/skins/MasterSkin.atlas", TextureAtlas.class);
     }
 }

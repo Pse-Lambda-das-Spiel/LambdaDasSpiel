@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -93,7 +94,7 @@ public class AchievementMenuViewController extends ViewController {
 	public static ImageButtonStyle getImageButtonStyle(String icon) {
 		Skin skin = manager.get(achievementMenuSkinJson, Skin.class);
 		ImageButtonStyle style = new ImageButtonStyle(skin.get(ImageButtonStyle.class));
-		style.imageUp = skin.getDrawable(icon);
+		style.up = skin.getDrawable(icon);
 		return style;
 	}
 
@@ -182,8 +183,7 @@ public class AchievementMenuViewController extends ViewController {
 			// the labels have to be stored to change their text at a later time
 			Label label = new Label("Initial string", manager.get(achievementMenuSkinJson, Skin.class), "normal");
 			// only tmp, does not look so nice with scaling
-			labelMap.put(achievementTypeList.get(i), 
-					label);
+			labelMap.put(achievementTypeList.get(i), label);
 			achievementTable.add(label).center().colspan(ACHIEVEMENTS_PER_ROW);
 			int n =  achievementManager.getAchievementNumberPerType().get(achievementTypeList.get(i));
 			for (int j = 0 ; j < n; j++) {
@@ -199,10 +199,6 @@ public class AchievementMenuViewController extends ViewController {
 			tmpIndex += n;
 		}
 		ScrollPane scrollPane = new ScrollPane(achievementTable);
-		mainTable.add(titleLabel).center();
-		mainTable.row();
-		mainTable.add(scrollPane).expand().fill().colspan(1).center();
-		mainTable.row();
 		ImageButton back = new ImageButton(getImageButtonStyle("back"));
 		back.addListener(new ClickListener() {
 		        @Override
@@ -210,7 +206,9 @@ public class AchievementMenuViewController extends ViewController {
 		            getGame().setScreen(MainMenuViewController.class);
 		        }
 		});
-		mainTable.add(back).bottom().left().pad(10);
+		mainTable.add(titleLabel).colspan(2).center().row();
+		mainTable.add(back).align(Align.bottomLeft).pad(15);
+		mainTable.add(scrollPane).expand().fill().colspan(1).center();
     }
     
     
