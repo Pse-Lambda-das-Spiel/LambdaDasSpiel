@@ -47,6 +47,7 @@ public class AchievementMenuViewController extends ViewController {
 	private List<AchievementViewController> achievementVCList;
 	private Map<String, Label> labelMap;
 	private Label titleLabel;
+	private Table achievementTable;
 	
 	/**
 	 * Creates a new instance of this class.
@@ -94,7 +95,7 @@ public class AchievementMenuViewController extends ViewController {
 	public static ImageButtonStyle getImageButtonStyle(String icon) {
 		Skin skin = manager.get(achievementMenuSkinJson, Skin.class);
 		ImageButtonStyle style = new ImageButtonStyle(skin.get(ImageButtonStyle.class));
-		style.up = skin.getDrawable(icon);
+		style.imageUp = skin.getDrawable(icon);
 		return style;
 	}
 
@@ -174,7 +175,7 @@ public class AchievementMenuViewController extends ViewController {
 		mainTable.setFillParent(true);
 		stage.addActor(mainTable);
 		titleLabel = new Label("Initial string", manager.get(achievementMenuSkinJson, Skin.class), "title");
-		Table achievementTable = new Table();
+		achievementTable = new Table();
 		achievementTable.pad(20);
 		achievementTable.defaults().space(30, 30, 50, 30);
 		int tmpIndex = 0;
@@ -208,7 +209,7 @@ public class AchievementMenuViewController extends ViewController {
 		});
 		mainTable.add(titleLabel).colspan(2).center().row();
 		mainTable.add(back).align(Align.bottomLeft).pad(15);
-		mainTable.add(scrollPane).expand().fill().colspan(1).center();
+		mainTable.add(scrollPane).expand().fill().center();
     }
     
     
@@ -218,8 +219,8 @@ public class AchievementMenuViewController extends ViewController {
             AchievementViewController clickedActor = (AchievementViewController) event.getListenerActor();
             new Dialog("", manager.get(achievementMenuSkinJson, Skin.class)) {
             	{
-            		setWidth(stage.getWidth() - 300);
-            		setHeight(stage.getHeight() - 300);
+            		setWidth(stage.getWidth() / 2);
+            		setHeight(stage.getHeight() / 2);
             		addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
