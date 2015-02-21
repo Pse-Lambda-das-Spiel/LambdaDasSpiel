@@ -24,7 +24,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import lambda.model.profiles.ProfileManager;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
-import lambda.viewcontroller.settings.SettingsViewController;
 
 /**
  * Represents the screen of the profile-selection.
@@ -166,9 +165,8 @@ public class ProfileSelection extends ViewController {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             String name = ((TextButton) event.getListenerActor()).getText().toString();
-            if (name != null) {
+            if (!name.equals("")) {
                 ProfileManager.getManager().setCurrentProfile(name);
-                //getGame().setScreen(SettingsViewController.class);
                 getGame().setScreen(MainMenuViewController.class);
             }
         }

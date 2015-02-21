@@ -23,6 +23,7 @@ import lambda.model.profiles.ProfileEditModel;
 import lambda.model.profiles.ProfileEditObserver;
 import lambda.model.profiles.ProfileManager;
 import lambda.viewcontroller.ViewController;
+import lambda.viewcontroller.mainmenu.MainMenuViewController;
 
 /**
  * Represents a screen of the profile configuration/creation.
@@ -187,8 +188,8 @@ public class ProfileEditAvatar extends ViewController implements ProfileEditObse
             m.getCurrentProfile().setAvatar(profileEdit.getAvatar());
             m.save(m.getCurrentProfile().getName());
             if (newProfile) {
-                //TODO getGame().setScreen(MainMenuViewController.class);
-                getGame().setScreen(ProfileSelection.class);
+                m.setCurrentProfile(m.getCurrentProfile().getName());
+                getGame().setScreen(MainMenuViewController.class);
             } else {
                 getGame().setScreen(ProfileSelection.class);
             }
