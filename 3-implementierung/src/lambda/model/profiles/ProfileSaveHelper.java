@@ -60,8 +60,7 @@ public final class ProfileSaveHelper {
 					} 
 					// not necessary for writing
 					@Override
-					public ProfileModel read(Json json, JsonValue jsonData,
-							Class type) {
+					public ProfileModel read(Json json, JsonValue jsonData, Class type) {
 						return null;
 					}
 				});

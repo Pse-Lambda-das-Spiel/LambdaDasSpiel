@@ -26,7 +26,7 @@ public final class ProfileLoadHelper {
 	
 	/**
 	 * Loads and initialize the ProfileModel and its specific parts with the given profile name.
-	 * If no profile directory with the given name exists, it returns a default ProfileModel without initialized data.
+	 * If no profile directory with the given name exists, it returns null.
 	 * 
 	 * @param name the name of the to be loaded ProfileModel
 	 * @return the loaded and initialized ProfileModel
@@ -78,6 +78,7 @@ public final class ProfileLoadHelper {
     }
 
     /**
+     * Loads the shop state of the profile associated with the given name into the shop singleton.
      * 
      * @param name the name of the profile whose shop state should be loaded
      * throws IOException if there is an error while reading the shop state json files

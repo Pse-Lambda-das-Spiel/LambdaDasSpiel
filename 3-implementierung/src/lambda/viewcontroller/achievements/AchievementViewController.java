@@ -3,7 +3,6 @@ package lambda.viewcontroller.achievements;
 import lambda.model.achievements.AchievementModel;
 import lambda.model.achievements.AchievementModelObserver;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
