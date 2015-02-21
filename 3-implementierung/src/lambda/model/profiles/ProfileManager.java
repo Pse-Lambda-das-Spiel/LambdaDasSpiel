@@ -217,17 +217,17 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     }
 
     private List<ProfileModel> loadProfiles(FileHandle profileFolder) {
-        FileHandle save = Gdx.files.local(PROFILE_FOLDER + ".json");
-        String[] names = {};
-        if (save.exists()) {
-            names = new Json().fromJson(String[].class, save);
-        }
         if (!profileFolder.exists()) {
             profileFolder.mkdirs();
         } else {
             if (!profileFolder.isDirectory()) {
                 throw new InvalidProfilesException(profileFolder.name()
                         + " isn't a directory");
+            }
+            FileHandle save = Gdx.files.local(PROFILE_FOLDER + ".json");
+            String[] names = {};
+            if (save.exists()) {
+                names = new Json().fromJson(String[].class, save);
             }
             if (profileFolder.list().length == names.length) {
                 List<ProfileModel> profiles = new LinkedList<ProfileModel>();

@@ -185,6 +185,12 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
             enterName.setFontScale(0.5f);
             text(enterName).pad(15);
             button(manager.get(profileEdit.getLang(), I18NBundle.class).get("ok")).pad(30);
+            addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    remove();
+                }
+            });
         }
     }
 

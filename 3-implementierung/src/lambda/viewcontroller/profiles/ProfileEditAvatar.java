@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -17,6 +18,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import lambda.model.profiles.ProfileEditModel;
@@ -189,7 +192,39 @@ public class ProfileEditAvatar extends ViewController implements ProfileEditObse
             m.save(m.getCurrentProfile().getName());
             if (newProfile) {
                 m.setCurrentProfile(m.getCurrentProfile().getName());
-                getGame().setScreen(MainMenuViewController.class);
+                Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
+                new Dialog("", dialogSkin) {
+                    private boolean changedToMainMenu = false;
+                    {
+                        clear();
+                        Label greeting = new Label(manager.get(profileEdit.getLang(), I18NBundle.class).get("hello")
+                                + " " + m.getCurrentProfile().getName() + " !", dialogSkin);
+                        greeting.setFontScale(1.5f);
+                        add(greeting);
+                        row().space(stage.getHeight() / 8);
+                        add(new Image(avatarPic.getDrawable())).width(
+                                stage.getWidth() / 3).height(stage.getHeight() / 3);
+                        Timer.schedule(new Task() {
+                            @Override
+                            public void run() {
+                                toMainMenu();
+                            }
+                        }, 3);
+                        addListener(new ClickListener() {
+                            @Override
+                            public void clicked(InputEvent event, float x, float y) {
+                                toMainMenu();
+                            }
+                        });
+                    }
+                    private void toMainMenu() {
+                        if (!changedToMainMenu) {
+                            changedToMainMenu = true;
+                            remove();
+                            getGame().setScreen(MainMenuViewController.class);
+                        }
+                    }
+                }.show(stage).setFillParent(true);
             } else {
                 getGame().setScreen(ProfileSelection.class);
             }
