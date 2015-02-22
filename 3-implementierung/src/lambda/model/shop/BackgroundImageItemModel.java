@@ -18,6 +18,7 @@ public class BackgroundImageItemModel extends ShopItemModel {
      */
     public BackgroundImageItemModel(String id, int price, String filepath) {
     	super(id, price, filepath);
+    	shopItemType = ShopModel.getShop().getImages();
     }
 
     /**

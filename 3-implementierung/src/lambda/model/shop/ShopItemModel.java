@@ -15,10 +15,11 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
     private String filepath;
     //how to initialize theses attributes at the moment ? setter ? constructor ?
     private ShopModel shop;
-    private ShopItemTypeModel shopItemType;
-    private boolean purchased;
-    private boolean activated;
-    private ProfileModel profile;
+    @SuppressWarnings("rawtypes")
+    protected ShopItemTypeModel shopItemType;
+    protected boolean purchased;
+    protected boolean activated;
+    protected ProfileModel profile;
 
     /**
      *
@@ -44,20 +45,12 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
     /**
      * Activates this item if its already purchased
      */
+    @SuppressWarnings("unchecked")
     public void activate() {
         if(purchased){
             shopItemType.setActivatedItem(this);
             activated = true;
         }
-    }
-
-    /**
-     * Returns the category of this item
-     *
-     * @return shopItemType
-     */
-    public ShopItemTypeModel getShopItemType() {
-        return shopItemType;
     }
 
     /**
@@ -110,6 +103,10 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
 
     public String getFilepath() {
         return filepath;
+    }
+    
+    public ShopItemTypeModel<?> getShopItemType() {
+        return shopItemType;
     }
 
     public boolean isActivated() {

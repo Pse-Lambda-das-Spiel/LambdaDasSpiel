@@ -22,10 +22,10 @@ com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	default: { down: default-round-down, up: default-round, font: default-font, fontColor: black },
 	toggle: { down: default-round-down, up: default-round, checked: default-round-down, font: default-font, fontColor: black, downFontColor: red },
-	buyable: { up: buyable, font: default-font, fontColor: black},
-	purchased: 	{ up: purchased, font: default-font, fontColor: black},
-	notBuyable: 	{ up: not_buyable, font: default-font, fontColor: black},
-	activated: 	{ up: activated, font: default-font, fontColor: black}
+	buyable: { down: buyable, up: buyable, font: default-font, fontColor: black},
+	purchased: 	{ down: purchased, up: purchased, font: default-font, fontColor: black},
+	not_buyable: 	{ down: not_buyable, up: not_buyable, font: default-font, fontColor: black},
+	activated: 	{ down: activated, up: activated, font: default-font, fontColor: black}
 },
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
 	default: { vScroll: default-scroll, hScrollKnob: default-round-large, background: default-rect, hScroll: default-scroll, vScrollKnob: default-round-large }
@@ -99,10 +99,10 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	reloadButton: 		{ up: reload},
 	settingsButton: 	{ up: settings},
 	startButton: 		{ up: start},
-	purchasedGround: 	{ up: purchased},
-	buyableGround: 		{ up: buyable},
-	notBuyableGround: 	{ up: not_buyable},
-	activatedGround: 	{ up: activated},
+	purchased: 	{ up: purchased},
+	buyable: 		{ up: buyable},
+	notBuyable: 	{ up: not_buyable},
+	activated: 	{ up: activated},
 	bin: 				{ up: bin },
 },
 }

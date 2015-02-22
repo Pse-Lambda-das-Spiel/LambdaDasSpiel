@@ -9,7 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton.ImageTextButtonStyle;
+
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -128,11 +130,10 @@ public class ShopViewController extends ViewController implements ProfileModelOb
          */
         ImageButton backButton = new ImageButton(getImageButtonStyle("back"));
         backButton.addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    getGame().setScreen(MainMenuViewController.class);
-                }
-          
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                getGame().setScreen(MainMenuViewController.class);
+            }
         });
         
         
@@ -200,18 +201,9 @@ public class ShopViewController extends ViewController implements ProfileModelOb
         table = new VerticalGroup().align(Align.top).pad(15);
         stage.addActor(table);
         table.addActor(musicTypeButton);
-        //MUSIC
-        int n = shop.getMusic().getItems().size();
-        for (int i = 0; i < n; i++) {
-            
-        }
-        
+        //MUSIC        
         musicTable = new VerticalGroup().align(Align.center);
-        
-        
-        
         musicTable = music.getGroup();
-        
         //IMAGES
         table.addActor(bgImageTypeButton);
         imagesTable = bgImages.getGroup();
@@ -227,6 +219,13 @@ public class ShopViewController extends ViewController implements ProfileModelOb
         mainTable.add(coinBar).pad(15).align(Align.topRight);
         
     }
+    public static TextButtonStyle getTextButtonStyle(String icon) {
+        TextButtonStyle style = new TextButtonStyle(skin.get(TextButtonStyle.class));
+        style.up = skin.getDrawable(icon);
+        style.down = skin.getDrawable(icon);
+        return style;
+    }
+    
     public static ImageButtonStyle getImageButtonStyle(String icon) {
         ImageButtonStyle style = new ImageButtonStyle(skin.get(ImageButtonStyle.class));
         style.imageUp = skin.getDrawable(icon);

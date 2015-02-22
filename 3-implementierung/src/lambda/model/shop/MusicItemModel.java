@@ -18,6 +18,7 @@ public class MusicItemModel extends ShopItemModel {
      */
     public MusicItemModel(String id, int price, String filepath) {
     	super(id, price, filepath);
+    	shopItemType = ShopModel.getShop().getMusic();
     }
 
     /**
@@ -31,4 +32,5 @@ public class MusicItemModel extends ShopItemModel {
     public void setMusic(Music music) {
         this.music = music;
     }
+
 }
