@@ -21,7 +21,11 @@ com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 },
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	default: { down: default-round-down, up: default-round, font: default-font, fontColor: black },
-	toggle: { down: default-round-down, up: default-round, checked: default-round-down, font: default-font, fontColor: black, downFontColor: red }
+	toggle: { down: default-round-down, up: default-round, checked: default-round-down, font: default-font, fontColor: black, downFontColor: red },
+	buyable: { up: buyable, font: default-font, fontColor: black},
+	purchased: 	{ up: purchased, font: default-font, fontColor: black},
+	notBuyable: 	{ up: not_buyable, font: default-font, fontColor: black},
+	activated: 	{ up: activated, font: default-font, fontColor: black}
 },
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
 	default: { vScroll: default-scroll, hScrollKnob: default-round-large, background: default-rect, hScroll: default-scroll, vScrollKnob: default-round-large }

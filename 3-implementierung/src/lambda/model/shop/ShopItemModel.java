@@ -105,6 +105,7 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
 	 */
 	public void setPurchased(boolean purchased) {
 		this.purchased = purchased;
+		notify((observer) -> observer.purchasedChanged(purchased));
 	}
 
     public String getFilepath() {
@@ -113,5 +114,9 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
 
     public boolean isActivated() {
         return activated;
+    }
+    public void setActivated(boolean activated) {
+        this.activated = activated;
+        notify((observer) -> observer.activatedChanged(activated));
     }
 }
