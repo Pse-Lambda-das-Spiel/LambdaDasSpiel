@@ -177,6 +177,9 @@ public class AchievementManager {
 			case "hintsAchievement":
 				achievementTypeList.add("hintsAchievement");
 				break;
+			case "difficultyAchievement":
+				achievementTypeList.add("difficultyAchievement");
+				break;
 			case "timeAchievement":
 				achievementTypeList.add("timeAchievement");
 				break;
@@ -233,6 +236,10 @@ public class AchievementManager {
 			case "ha":
 				achievement = new HintsAchievementModel(entry.getInt("req"));
 				str = "ha";
+				break;
+			case "da":
+				achievement = new DifficultyAchievementModel(entry.getInt("req"));
+				str = "da";
 				break;
 			case "ta":
 				achievement = new TimeAchievementModel(entry.getInt("req"));

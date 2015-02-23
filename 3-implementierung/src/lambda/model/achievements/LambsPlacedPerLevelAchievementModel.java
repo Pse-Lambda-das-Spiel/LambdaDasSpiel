@@ -54,7 +54,6 @@ public class LambsPlacedPerLevelAchievementModel extends PerLevelAchievementMode
 		I18NBundle bundle = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
 		setDescription(bundle.format("lambsPlacedPerLevelAchievement", reqLambsPlacedPerLevel));
 		setRequirementsDescription(bundle.format("reqLambsPlacedPerLevelAchievement", reqLambsPlacedPerLevel));
-		setLocked(true);
 	}
 
 	/**
@@ -67,6 +66,8 @@ public class LambsPlacedPerLevelAchievementModel extends PerLevelAchievementMode
 		}
 		if (statistic.getLambsPlacedPerLevel() >= reqLambsPlacedPerLevel) {
 			setLocked(false);
+		} else {
+			setLocked(true);
 		}
 	}
 	

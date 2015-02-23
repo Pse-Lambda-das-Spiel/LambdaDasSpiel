@@ -41,9 +41,9 @@ public abstract class AchievementModel extends Observable<AchievementModelObserv
 	public abstract void initialize();
 	
 	/**
-	 * Resets the achievement to its start state.
+	 * Resets the description and requirement description of the achievement.
 	 * 
-	 * @param assets the AssetManager needed for loading the resources needed for initializing the achievement.
+	 * @param assets the AssetManager needed for loading the resources needed for resetting the achievement.
 	 * @throws IllegalArgumentException if assets is null
 	 */
 	public abstract void reset(AssetManager assets);

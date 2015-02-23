@@ -54,7 +54,6 @@ public class GemsPlacedPerLevelAchievementModel extends PerLevelAchievementModel
 		I18NBundle bundle = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
 		setDescription(bundle.format("gemsPlacedPerLevelAchievement", reqGemsPlacedPerLevel));
 		setRequirementsDescription(bundle.format("reqGemsPlacedPerLevelAchievement", reqGemsPlacedPerLevel));
-		setLocked(true);
 	}
 
 	/**
@@ -67,6 +66,8 @@ public class GemsPlacedPerLevelAchievementModel extends PerLevelAchievementModel
 		}
 		if (statistic.getGemsPlaced() >= reqGemsPlacedPerLevel) {
 			setLocked(false);
+		} else {
+			setLocked(true);
 		}
 	}
 

@@ -54,7 +54,6 @@ public class LambsEnchantedPerLevelAchievementModel extends PerLevelAchievementM
 		I18NBundle bundle = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
 		setDescription(bundle.format("lambsEnchantedPerLevelAchievement", reqLambsEnchantedPerLevel));
 		setRequirementsDescription(bundle.format("reqLambsEnchantedPerLevelAchievement", reqLambsEnchantedPerLevel));
-		setLocked(true);
 	}
 	
 	/**
@@ -67,6 +66,8 @@ public class LambsEnchantedPerLevelAchievementModel extends PerLevelAchievementM
 		}
 		if (statistic.getLambsEnchantedPerLevel() >= reqLambsEnchantedPerLevel) {
 			setLocked(false);
+		} else {
+			setLocked(true);
 		}
 	}
 	

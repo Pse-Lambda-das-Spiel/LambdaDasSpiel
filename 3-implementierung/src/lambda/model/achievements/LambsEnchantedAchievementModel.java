@@ -54,7 +54,6 @@ public class LambsEnchantedAchievementModel extends AchievementModel {
 		I18NBundle bundle = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
 		setDescription(bundle.format("lambsEnchantedAchievement", reqLambsEnchanted));
 		setRequirementsDescription(bundle.format("reqLambsEnchantedAchievement", reqLambsEnchanted));
-		setLocked(true);
 	}
 	
 	/**
@@ -67,6 +66,8 @@ public class LambsEnchantedAchievementModel extends AchievementModel {
 		}
 		if (statistic.getLambsEnchanted() >= reqLambsEnchanted) {
 			setLocked(false);
+		} else {
+			setLocked(true);
 		}
 	}
 

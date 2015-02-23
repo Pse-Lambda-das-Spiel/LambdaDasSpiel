@@ -53,9 +53,7 @@ public class LambsPlacedAchievementModel extends AchievementModel {
 		}
 		I18NBundle bundle = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
 		setDescription(bundle.format("lambsPlacedAchievement", reqLambsPlaced));
-		setRequirementsDescription(bundle.format("reqLambsPlacedAchievement", reqLambsPlaced));
-		setLocked(true);
-		
+		setRequirementsDescription(bundle.format("reqLambsPlacedAchievement", reqLambsPlaced));		
 	}
 
 	/**
@@ -68,6 +66,8 @@ public class LambsPlacedAchievementModel extends AchievementModel {
 		}
 		if (statistic.getLambsPlaced() >= reqLambsPlaced) {
 			setLocked(false);
+		} else {
+			setLocked(true);
 		}
 	}
 	

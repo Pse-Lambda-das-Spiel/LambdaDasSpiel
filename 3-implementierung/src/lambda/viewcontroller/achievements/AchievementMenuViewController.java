@@ -192,7 +192,7 @@ public class AchievementMenuViewController extends ViewController {
 					achievementTable.row();
 				}
 				AchievementViewController achievementVC = achievementVCList.get(tmpIndex + j);
-				achievementVC.fillStack();
+				achievementVC.initializeButton();
 				achievementVC.addListener(new AchievementClickListener());
 				achievementTable.add(achievementVC).size(80);
 			}
@@ -228,9 +228,10 @@ public class AchievementMenuViewController extends ViewController {
                             hide();
                         }
                     });
-            		Image image= (new ImageButton(clickedActor.getShownImageButtonStyle()).getImage());
+            		// getImage() removes the image from its button so the button has to be copied before that
+            		Image image= (new ImageButton(clickedActor.getStyle()).getImage());
                 	add(image).pad(30,10,30,30).size(100);
-                	Label label = new Label(clickedActor.getShownText(), 
+                	Label label = new Label(clickedActor.getText(), 
                 			manager.get(achievementMenuSkinJson, Skin.class), "normal");
                 	label.setWrap(true);
                 	add(label).width(getWidth());

@@ -53,7 +53,6 @@ public class TimeAchievementModel extends AchievementModel {
 		I18NBundle bundle = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
 		setDescription(bundle.format("timeAchievement", reqTimePlayed));
 		setRequirementsDescription(bundle.format("reqTimeAchievement", reqTimePlayed));
-		setLocked(true);
 	}
 
 	/**
@@ -66,6 +65,8 @@ public class TimeAchievementModel extends AchievementModel {
 		}
 		if (statistic.getTimePlayed() >= reqTimePlayed) {
 			setLocked(false);
+		} else {
+			setLocked(true);
 		}
 	}
 	

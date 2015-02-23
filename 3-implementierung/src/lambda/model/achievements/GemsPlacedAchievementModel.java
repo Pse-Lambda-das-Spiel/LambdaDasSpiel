@@ -54,7 +54,6 @@ public class GemsPlacedAchievementModel extends AchievementModel {
 		I18NBundle bundle = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
 		setDescription(bundle.format("gemsPlacedAchievement", reqGemsPlaced));
 		setRequirementsDescription(bundle.format("reqGemsPlacedAchievement", reqGemsPlaced));
-		setLocked(true);	
 	}
 
 	
@@ -68,6 +67,8 @@ public class GemsPlacedAchievementModel extends AchievementModel {
 		}
 		if (statistic.getGemsPlaced() >= reqGemsPlaced) {
 			setLocked(false);
+		} else {
+			setLocked(true);
 		}
 	}
 	

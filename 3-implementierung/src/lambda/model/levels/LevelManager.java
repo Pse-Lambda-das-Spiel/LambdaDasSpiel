@@ -20,6 +20,10 @@ import com.badlogic.gdx.utils.JsonValue;
  */
 public class LevelManager {
 
+	/**
+	 * The number of level per difficulty.
+	 */
+	public static final int LEVELPERDIFFICULTY = 6;
 	private AssetManager assetManager;
     private static LevelManager manager;
     String[] levelFilePaths;

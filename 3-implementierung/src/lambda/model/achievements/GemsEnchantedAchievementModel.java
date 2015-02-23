@@ -54,7 +54,6 @@ public class GemsEnchantedAchievementModel extends AchievementModel {
 		I18NBundle bundle = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
 		setDescription(bundle.format("gemsEnchantedAchievement", reqGemsEnchanted));
 		setRequirementsDescription(bundle.format("reqGemsEnchantedAchievement", reqGemsEnchanted));
-		setLocked(true);
 	}
 	
 	/**
@@ -67,6 +66,8 @@ public class GemsEnchantedAchievementModel extends AchievementModel {
 		}
 		if (statistic.getGemsEnchanted() >= reqGemsEnchanted) {
 			setLocked(false);
+		} else {
+			setLocked(true);
 		}
 	}
 

@@ -345,6 +345,81 @@ AchievementMenuSkin3.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+achievements/difficulty/ul_da03
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/difficulty/ul_da05
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/difficulty/ul_da02
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/difficulty/ul_da01
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/difficulty/ul_da04
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/difficulty/l_da05
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/difficulty/l_da01
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/difficulty/l_da04
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/difficulty/l_da02
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/difficulty/l_da03
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+
+AchievementMenuSkin4.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
 achievements/gems_placed/l_gpa02
   rotate: false
   xy: 1, 1
@@ -416,7 +491,7 @@ achievements/gems_placed/ul_gpa05
   offset: 0, 0
   index: -1
 
-AchievementMenuSkin4.png
+AchievementMenuSkin5.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -491,7 +566,7 @@ achievements/gems_enchanted/ul_gea04
   offset: 0, 0
   index: -1
 
-AchievementMenuSkin5.png
+AchievementMenuSkin6.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -566,7 +641,7 @@ achievements/lambs_placed_per_level/ul_lppla01
   offset: 0, 0
   index: -1
 
-AchievementMenuSkin6.png
+AchievementMenuSkin7.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -641,7 +716,7 @@ achievements/gems_placed_per_level/ul_gppla01
   offset: 0, 0
   index: -1
 
-AchievementMenuSkin7.png
+AchievementMenuSkin8.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -716,7 +791,7 @@ achievements/gems_enchanted_per_level/ul_gepla03
   offset: 0, 0
   index: -1
 
-AchievementMenuSkin8.png
+AchievementMenuSkin9.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -791,7 +866,7 @@ achievements/time/ul_ta01
   offset: 0, 0
   index: -1
 
-AchievementMenuSkin9.png
+AchievementMenuSkin10.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -866,7 +941,7 @@ achievements/level/l_la01
   offset: 0, 0
   index: -1
 
-AchievementMenuSkin10.png
+AchievementMenuSkin11.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -941,7 +1016,7 @@ achievements/lambs_enchanted_per_level/l_lepla05
   offset: 0, 0
   index: -1
 
-AchievementMenuSkin11.png
+AchievementMenuSkin12.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -1016,7 +1091,7 @@ achievements/lambs_enchanted/l_lea01
   offset: 0, 0
   index: -1
 
-AchievementMenuSkin12.png
+AchievementMenuSkin13.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none

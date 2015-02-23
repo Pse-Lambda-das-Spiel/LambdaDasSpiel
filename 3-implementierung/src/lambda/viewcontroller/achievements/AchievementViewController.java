@@ -4,22 +4,15 @@ import lambda.model.achievements.AchievementModel;
 import lambda.model.achievements.AchievementModelObserver;
 
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 
 /**
  * This class is responsible for displaying a single achievement.
- * The class is a stack which contains all possible image buttons for an achievement:
- * the on for the locked and the one for the unlocked state.
- * It is also responsible for updating the visibility of an image button according to the state of the achievement.
  * 
  * @author Robert Hochweiss
  */
-public class AchievementViewController extends Stack implements AchievementModelObserver {
+public class AchievementViewController extends ImageButton implements AchievementModelObserver {
 
 	private AchievementModel achievement;
-	private ImageButton achievementLockedButton;
-	private ImageButton achievementUnlockedButton;
 	
 	/**
 	 * Creates a new AchievementViewController with the given {@link AchievementModel}.
@@ -27,6 +20,8 @@ public class AchievementViewController extends Stack implements AchievementModel
 	 * @param achievement the to be displayed {@link AchievementModel}
 	 */
 	public AchievementViewController(AchievementModel achievement) {
+		// Since there is no default constructor in ImageButton
+		super(null, null, null);
 		this.achievement = achievement;
 		achievement.addObserver(this);
 	}
@@ -36,45 +31,28 @@ public class AchievementViewController extends Stack implements AchievementModel
 	 */
 	@Override
 	public void changedLockedState() {
-		achievementLockedButton.setVisible(achievement.isLocked());
-		achievementUnlockedButton.setVisible(!(achievement.isLocked()));
-	}
-	
-	/**
-	 * Fills the stack with the image buttons and set their initial state.
-	 */
-	public void fillStack() {
-		achievementLockedButton = new ImageButton(AchievementMenuViewController.
-				getImageButtonStyle(achievement.getIconPathAchievementLocked()));
-		achievementUnlockedButton = new ImageButton(AchievementMenuViewController.
-				getImageButtonStyle(achievement.getIconPathAchievementUnlocked()));
-		add(achievementLockedButton);
-		add(achievementUnlockedButton);
-		achievementLockedButton.setVisible(true);
-		achievementUnlockedButton.setVisible(false);
-	}
-	
-	/**
-	 * Returns {@link ImageButtonStyle} of the currently shown {@link ImageButton}.
-	 * 
-	 * @return the {@link ImageButtonStyle} of the currently shown {@link ImageButton}.
-	 */
-	public ImageButtonStyle getShownImageButtonStyle() {
-		if (achievementLockedButton.isVisible()) {
-			return achievementLockedButton.getStyle();
+		if (achievement.isLocked()) {
+			setStyle(AchievementMenuViewController.getImageButtonStyle(achievement.getIconPathAchievementLocked()));
+		} else {
+			setStyle(AchievementMenuViewController.getImageButtonStyle(achievement.getIconPathAchievementUnlocked()));
 		}
-		return achievementUnlockedButton.getStyle();
 	}
 	
 	/**
-	 * Returns the currently shown text.
-	 * Returns the description of the achievement if achievement is unlocked
-	 * and the requirements if achievement is locked.
+	 * Initialize the image button.
+	 */
+	public void initializeButton() {
+		setStyle(AchievementMenuViewController.getImageButtonStyle(achievement.getIconPathAchievementLocked()));
+	}
+	
+	/**
+	 * Returns the description of the achievement if the achievement is unlocked
+	 * and the requirements if the achievement is locked.
 	 * 
 	 * @return the currently shown text.
 	 */
-	public String getShownText() {
-		if (achievementLockedButton.isVisible()) {
+	public String getText() {
+		if (achievement.isLocked()) {
 			return achievement.getRequirementsDescription();
 		}
 		return achievement.getDescription();

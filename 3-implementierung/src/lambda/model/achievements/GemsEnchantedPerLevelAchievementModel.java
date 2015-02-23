@@ -54,7 +54,6 @@ public class GemsEnchantedPerLevelAchievementModel extends PerLevelAchievementMo
 		I18NBundle bundle = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
 		setDescription(bundle.format("gemsEnchantedPerLevelAchievement", reqGemsEnchantedPerLevel));
 		setRequirementsDescription(bundle.format("reqGemsEnchantedPerLevelAchievement", reqGemsEnchantedPerLevel));
-		setLocked(true);
 	}
 	
 	/**
@@ -67,6 +66,8 @@ public class GemsEnchantedPerLevelAchievementModel extends PerLevelAchievementMo
 		}
 		if (statistic.getGemsEnchantedPerLevel() >= reqGemsEnchantedPerLevel) {
 			setLocked(false);
+		} else {
+			setLocked(true);
 		}
 	}
 

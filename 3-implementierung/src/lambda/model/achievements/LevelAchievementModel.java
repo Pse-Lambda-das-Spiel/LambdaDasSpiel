@@ -54,7 +54,6 @@ public class LevelAchievementModel extends AchievementModel {
 		I18NBundle bundle = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
 		setDescription(bundle.format("levelAchievement", reqLevelCompleted));
 		setRequirementsDescription(bundle.format("reqLevelAchievement", reqLevelCompleted));
-		setLocked(true);
 	}
 
 	/**
@@ -67,6 +66,8 @@ public class LevelAchievementModel extends AchievementModel {
 		}
 		if (statistic.getLevelCompleted() >= reqLevelCompleted) {
 			setLocked(false);
+		} else {
+			setLocked(true);
 		}
 	}
 	
