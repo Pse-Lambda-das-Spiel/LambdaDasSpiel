@@ -37,7 +37,7 @@ public class LevelContext {
         else {
             // for sandbox
             music = ShopModel.getShop().getMusic().getActivatedItem().getMusic();
-            bgImage = ShopModel.getShop().getImages().getActivatedItem().getImage();
+            bgImage = new Image(ShopModel.getShop().getImages().getActivatedItem().getImage());
         }
     }
 

@@ -20,13 +20,9 @@ public class ElementUIContextFamily extends ShopItemModel {
      * @param id
      * @param price
      */
-    public ElementUIContextFamily(String id, int price, ParanthesisUIContext paranthesis, VariableUIContext variable,
-                                  AbstractionUIContext abstraction) {
-        super(id, price, null);
+    public ElementUIContextFamily(String id, int price, String filepath) {
+        super(id, price, filepath);
         shopItemType = ShopModel.getShop().getElementUIContextFamilies();
-        paranthesisUIContext = paranthesis;
-        variableUIContext = variable;
-        abstractionUIContext = abstraction;
     }
     
     /**

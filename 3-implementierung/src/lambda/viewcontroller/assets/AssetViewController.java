@@ -73,7 +73,7 @@ public class AssetViewController extends ViewController {
         ParanthesisUIContext parenthesis = new ParanthesisUIContext(atlas.findRegion("front").getTexture(), 
                 atlas.findRegion("center").getTexture(), atlas.findRegion("back").getTexture());
         
-        ElementUIContextFamily family = new ElementUIContextFamily("default", 0, parenthesis, variable, abstraction);
+        ElementUIContextFamily family = new ElementUIContextFamily("default", 0, null);
         ShopModel.getShop().getElementUIContextFamilies().setDefaultItem(family);
         
         LevelManager.getLevelManager().queueAssets(manager);

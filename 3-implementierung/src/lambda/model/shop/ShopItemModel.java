@@ -1,6 +1,7 @@
 package lambda.model.shop;
 
 import lambda.Observable;
+import lambda.model.profiles.ProfileManager;
 import lambda.model.profiles.ProfileModel;
 
 /**
@@ -13,13 +14,11 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
     private String id;
     private int price;
     private String filepath;
-    //how to initialize theses attributes at the moment ? setter ? constructor ?
     private ShopModel shop;
     @SuppressWarnings("rawtypes")
     protected ShopItemTypeModel shopItemType;
     protected boolean purchased;
     protected boolean activated;
-    protected ProfileModel profile;
 
     /**
      *
@@ -36,8 +35,10 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
      * Changes the state of this item to purchased if there are enough coins
      */
     public void buy() {
-        if(profile.getCoins() >= getPrice()) {
+        if(ProfileManager.getManager().getCurrentProfile().getCoins() >= getPrice()) {
             purchased = true;
+            ProfileManager.getManager().getCurrentProfile().setCoins(
+                    ProfileManager.getManager().getCurrentProfile().getCoins() - getPrice());
             notify((observer) -> observer.purchasedChanged(true));
         }
     }
@@ -49,7 +50,17 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
     public void activate() {
         if(purchased){
             shopItemType.setActivatedItem(this);
-            activated = true;
+            setActivated(true);
+        }
+    }
+    /**
+     * Deactivates this item if its activated and sets the activated item on the category to "null"
+     */
+    @SuppressWarnings("unchecked")
+    public void deactivate() {
+        if(purchased){
+            shopItemType.setActivatedItem(null);
+            setActivated(false);
         }
     }
 

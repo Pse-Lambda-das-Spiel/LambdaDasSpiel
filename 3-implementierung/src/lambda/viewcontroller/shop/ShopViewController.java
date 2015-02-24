@@ -4,25 +4,21 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton.ImageTextButtonStyle;
-
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
 import lambda.model.profiles.ProfileManager;
 import lambda.model.profiles.ProfileModel;
 import lambda.model.profiles.ProfileModelObserver;
 import lambda.model.shop.BackgroundImageItemModel;
 import lambda.model.shop.ElementUIContextFamily;
 import lambda.model.shop.MusicItemModel;
-import lambda.model.shop.ShopItemTypeModel;
 import lambda.model.shop.ShopModel;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
@@ -70,8 +66,10 @@ public class ShopViewController extends ViewController implements ProfileModelOb
     public void queueAssets(AssetManager assets) {
 
         // assets for the ShopModel (ShopItems etc.)
-        //shop.setAssetManager(manager);
-        //shop.queueAssets(manager);
+        //shop.setAssetManager(assets);
+        shop.queueAssets(assets);
+        
+        
 
         assets.load(masterSkin, Skin.class,
                 new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
@@ -116,14 +114,13 @@ public class ShopViewController extends ViewController implements ProfileModelOb
     @Override
     public void create(AssetManager manager) {
        
-        music = new DropDownMenuViewController<MusicItemModel>(shop.getMusic());
-        bgImages = new DropDownMenuViewController<BackgroundImageItemModel>(shop.getImages());
-        elementUIs = new DropDownMenuViewController<ElementUIContextFamily>(shop.getElementUIContextFamilies());
-        
         skin = manager.get(masterSkin, Skin.class);   
         Table mainTable = new Table();
         mainTable.setFillParent(true);
         stage.addActor(mainTable);
+        music = new DropDownMenuViewController<MusicItemModel>(shop.getMusic());
+        bgImages = new DropDownMenuViewController<BackgroundImageItemModel>(shop.getImages());
+        elementUIs = new DropDownMenuViewController<ElementUIContextFamily>(shop.getElementUIContextFamilies());
         
         /*
          * BACK-BUTTON
@@ -132,6 +129,9 @@ public class ShopViewController extends ViewController implements ProfileModelOb
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                table.removeActor(musicTable);
+                table.removeActor(imagesTable);
+                table.removeActor(elementsTable);
                 getGame().setScreen(MainMenuViewController.class);
             }
         });
@@ -207,17 +207,16 @@ public class ShopViewController extends ViewController implements ProfileModelOb
         //IMAGES
         table.addActor(bgImageTypeButton);
         imagesTable = bgImages.getGroup();
-        table.addActor(imagesTable);
         //ELEMENTS
         table.addActor(elementUITypeButton);
         elementsTable = elementUIs.getGroup();
-        table.addActor(elementsTable);
         //scroll pane and other buttons
         mainTable.add(backButton).pad(15).align(Align.bottomLeft);
         ScrollPane scrollpane = new ScrollPane(table);
         mainTable.add(scrollpane).expand().center();
         mainTable.add(coinBar).pad(15).align(Align.topRight);
         
+       
     }
     public static TextButtonStyle getTextButtonStyle(String icon) {
         TextButtonStyle style = new TextButtonStyle(skin.get(TextButtonStyle.class));
@@ -241,5 +240,12 @@ public class ShopViewController extends ViewController implements ProfileModelOb
         profile.removeObserver(this);
         profile = ProfileManager.getManager().getCurrentProfile();
         profile.addObserver(this);
+        musicTable = music.updateButtons();
+        imagesTable = bgImages.updateButtons();
+        elementsTable = elementUIs.updateButtons();
+    }
+    
+    public void changedCoins() {
+        coins.setText(String.valueOf(ProfileManager.getManager().getCurrentProfile().getCoins()));
     }
 }
