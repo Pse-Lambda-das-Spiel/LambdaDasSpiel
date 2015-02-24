@@ -11,11 +11,18 @@ public class ParanthesisUIContext extends ElementUIContext  implements Applicati
     private Texture tFront;
     private Texture tCenter;
     private Texture tBack;
+    private Texture mFront;
+    private Texture mCenter;
+    private Texture mBack;
 
-    public ParanthesisUIContext(Texture front, Texture center, Texture back) {
+    public ParanthesisUIContext(Texture front, Texture center, Texture back, 
+            Texture mFront, Texture mCenter, Texture mBack) {
         tFront = front;
         tCenter = center;
         tBack = back;
+        this.setmFront(mFront);
+        this.setmCenter(mCenter);
+        this.setmBack(mBack);
     }
 
     
@@ -30,6 +37,36 @@ public class ParanthesisUIContext extends ElementUIContext  implements Applicati
     public Texture getBack() { // TODO
         return tBack;
     }
+
+    public Texture getmFront() {
+        return mFront;
+    }
+
+
+    public void setmFront(Texture mFront) {
+        this.mFront = mFront;
+    }
+
+
+    public Texture getmCenter() {
+        return mCenter;
+    }
+
+
+    public void setmCenter(Texture mCenter) {
+        this.mCenter = mCenter;
+    }
+
+
+    public Texture getmBack() {
+        return mBack;
+    }
+
+
+    public void setmBack(Texture mBack) {
+        this.mBack = mBack;
+    }
+
 
     @Override
     public void create() {

@@ -15,16 +15,11 @@ import java.awt.Color;
 public class VariableUIContext extends ElementUIContext implements ApplicationListener {
 
     private Texture tVariable;
-    /*
-    private Animation aVariable;
-    private TextureRegion[] walkFrames;
-    private SpriteBatch spriteBatch;
-    private TextureRegion currentFrame;
-    private float stateTime;
-    */
+    private Texture mVariable;
 
-    public VariableUIContext(Texture variable) {
+    public VariableUIContext(Texture variable, Texture mask) {
         tVariable = variable;
+        mVariable = mask;
     }
     
     public Texture getTexture() { // TODO

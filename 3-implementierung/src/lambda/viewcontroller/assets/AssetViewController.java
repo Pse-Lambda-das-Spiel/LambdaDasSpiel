@@ -67,13 +67,24 @@ public class AssetViewController extends ViewController {
         manager.finishLoading();
 
         TextureAtlas atlas = manager.get(defaultAtlas, TextureAtlas.class);
-        VariableUIContext variable = new VariableUIContext(atlas.findRegion("gem").getTexture());
+        VariableUIContext variable = new VariableUIContext(atlas.findRegion("gem").getTexture(), atlas.findRegion("gem_mask").getTexture());
         AbstractionUIContext abstraction = new AbstractionUIContext(atlas.findRegion("front_magicstick").getTexture(), 
-                atlas.findRegion("center").getTexture(), atlas.findRegion("back").getTexture());
+                atlas.findRegion("center").getTexture(), 
+                atlas.findRegion("back").getTexture(),
+                atlas.findRegion("front_mask").getTexture(),
+                atlas.findRegion("center_mask").getTexture(),
+                atlas.findRegion("back_mask").getTexture());
         ParanthesisUIContext parenthesis = new ParanthesisUIContext(atlas.findRegion("front").getTexture(), 
-                atlas.findRegion("center").getTexture(), atlas.findRegion("back").getTexture());
+                atlas.findRegion("center").getTexture(), 
+                atlas.findRegion("back").getTexture(),
+                atlas.findRegion("front_mask").getTexture(),
+                atlas.findRegion("center_mask").getTexture(),
+                atlas.findRegion("back_mask").getTexture());
         
         ElementUIContextFamily family = new ElementUIContextFamily("default", 0, null);
+        family.setAbstractionUIContext(abstraction);
+        family.setParanthesisUIContext(parenthesis);
+        family.setVariableUIContext(variable);
         ShopModel.getShop().getElementUIContextFamilies().setDefaultItem(family);
         
         LevelManager.getLevelManager().queueAssets(manager);

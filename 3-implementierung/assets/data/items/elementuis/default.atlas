@@ -19,8 +19,8 @@ back_mask
 center
   rotate: false
   xy: 306, 2
-  size: 59, 92
-  orig: 59, 92
+  size: 150, 150
+  orig: 150, 150
   offset: 0, 0
   index: -1
 center_mask
@@ -54,6 +54,13 @@ front_mask
 gem
   rotate: false
   xy: 154, 306
+  size: 72, 120
+  orig: 72, 120
+  offset: 0, 0
+  index: -1
+gem_mask
+  rotate: false
+  xy: 228, 306
   size: 72, 120
   orig: 72, 120
   offset: 0, 0

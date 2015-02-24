@@ -41,7 +41,7 @@ public class ShopViewController extends ViewController implements ProfileModelOb
     private DropDownMenuViewController<BackgroundImageItemModel> bgImages;
     private DropDownMenuViewController<ElementUIContextFamily> elementUIs;
 
-    private final Stage stage;
+    private static Stage stage;
     private final String masterSkin = "data/skins/MasterSkin.json";
     
     private static Skin skin;
@@ -242,5 +242,12 @@ public class ShopViewController extends ViewController implements ProfileModelOb
     
     public void changedCoins() {
         coins.setText(String.valueOf(ProfileManager.getManager().getCurrentProfile().getCoins()));
+    }
+    
+    public static Skin getSkin() {
+        return skin;
+    }
+    public static Stage getStage() {
+        return stage;
     }
 }
