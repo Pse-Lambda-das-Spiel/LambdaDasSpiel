@@ -1,7 +1,6 @@
 package lambda.model.levels;
 
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import lambda.model.shop.ElementUIContextFamily;
 import lambda.model.shop.ShopModel;

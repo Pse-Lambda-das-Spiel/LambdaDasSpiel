@@ -26,16 +26,6 @@ public class VariableUIContext extends ElementUIContext implements ApplicationLi
     public VariableUIContext(Texture variable) {
         tVariable = variable;
     }
-
-    /**
-     * Returns an animation relating to the sprite. TODO: smoke animation.
-     *
-     * @return animation relating to the sprite
-     */
-    public Animation getAVariable() {
-        return null;
-        //return aVariable;
-    }
     
     public Texture getTexture() { // TODO
         return tVariable;
@@ -43,19 +33,7 @@ public class VariableUIContext extends ElementUIContext implements ApplicationLi
 
     @Override
     public void create() {
-        /*
-        TextureRegion[][] tmp = TextureRegion.split(tVariable, tVariable.getWidth()/FRAME_COLS, tVariable.getHeight()/FRAME_ROWS);              // #10
-        walkFrames = new TextureRegion[FRAME_COLS * FRAME_ROWS];
-        int index = 0;
-        for (int i = 0; i < FRAME_ROWS; i++) {
-            for (int j = 0; j < FRAME_COLS; j++) {
-                walkFrames[index++] = tmp[i][j];
-            }
-        }
-        aVariable = new Animation(0.025f, walkFrames);
-        spriteBatch = new SpriteBatch();
-        stateTime = 0f;
-        */
+
     }
 
     @Override
@@ -66,13 +44,7 @@ public class VariableUIContext extends ElementUIContext implements ApplicationLi
     @Override
     public void render() {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-        /*
-        stateTime += Gdx.graphics.getDeltaTime();
-        currentFrame = aVariable.getKeyFrame(stateTime, true);
-        spriteBatch.begin();
-        spriteBatch.draw(currentFrame, 50, 50);
-        spriteBatch.end();
-        */
+
     }
 
     @Override

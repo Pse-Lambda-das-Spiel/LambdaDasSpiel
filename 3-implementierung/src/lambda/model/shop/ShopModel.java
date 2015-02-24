@@ -2,14 +2,10 @@ package lambda.model.shop;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.SkinLoader;
-import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 
@@ -114,10 +110,6 @@ public class ShopModel {
             i++;
         }
         assets.finishLoading();
-        // sets every asset to the item
-        for (MusicItemModel musicItem : this.music.getItems()) {
-            musicItem.setMusic(assets.get(musicItem.getFilepath(), Music.class));
-        }
     }
     
     /**
@@ -143,10 +135,6 @@ public class ShopModel {
             i++;
         }
         assets.finishLoading();
-        // sets every asset to the item
-        for (BackgroundImageItemModel imageItem : this.images.getItems()) {
-            imageItem.setImage(assets.get(imageItem.getFilepath(), Texture.class));
-        }
     }
     
     /**
@@ -172,7 +160,20 @@ public class ShopModel {
             i++;
         }
         assets.finishLoading();
+    }
+    
+    public void setAllAssets(AssetManager assets) {
         // sets every asset to the item
+        for (MusicItemModel musicItem : this.music.getItems()) {
+            musicItem.setMusic(assets.get(musicItem.getFilepath(), Music.class));
+        }
+        
+        // sets every asset to the image items
+        for (BackgroundImageItemModel imageItem : this.images.getItems()) {
+            imageItem.setImage(assets.get(imageItem.getFilepath(), Texture.class));
+        }
+        
+        // sets every asset to the element items
         for (ElementUIContextFamily familyItem : this.elementUIContextFamilies.getItems()) {
             TextureAtlas atlas = assets.get(familyItem.getFilepath());
             VariableUIContext variable = new VariableUIContext(atlas.findRegion("gem").getTexture());

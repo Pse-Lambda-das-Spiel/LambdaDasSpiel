@@ -53,7 +53,8 @@ public class DifficultySettingLoader extends AsynchronousAssetLoader<DifficultyS
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
+	@SuppressWarnings("rawtypes")
+    @Override
 	public Array<AssetDescriptor> getDependencies(String fileName, FileHandle file, 
 			DifficultySettingParameter parameter) {
 		return null;

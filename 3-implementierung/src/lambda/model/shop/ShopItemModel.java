@@ -2,7 +2,6 @@ package lambda.model.shop;
 
 import lambda.Observable;
 import lambda.model.profiles.ProfileManager;
-import lambda.model.profiles.ProfileModel;
 
 /**
  * Represents a item which is available in the shop

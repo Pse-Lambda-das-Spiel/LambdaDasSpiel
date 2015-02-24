@@ -49,7 +49,8 @@ public class LevelModelLoader extends AsynchronousAssetLoader<LevelModel, LevelM
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
+	@SuppressWarnings("rawtypes")
+    @Override
 	public Array<AssetDescriptor> getDependencies(String fileName, FileHandle file, LevelModelParameter parameter) {
 		return null;
 	}

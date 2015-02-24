@@ -64,13 +64,8 @@ public class ShopViewController extends ViewController implements ProfileModelOb
 
     @Override
     public void queueAssets(AssetManager assets) {
-
-        // assets for the ShopModel (ShopItems etc.)
-        //shop.setAssetManager(assets);
         shop.queueAssets(assets);
-        
-        
-
+        shop.setAllAssets(assets);
         assets.load(masterSkin, Skin.class,
                 new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
     }
