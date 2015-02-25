@@ -65,7 +65,6 @@ public class ShopViewController extends ViewController implements ProfileModelOb
     @Override
     public void queueAssets(AssetManager assets) {
         shop.queueAssets(assets);
-        shop.setAllAssets(assets);
         assets.load(masterSkin, Skin.class,
                 new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
     }
@@ -109,7 +108,8 @@ public class ShopViewController extends ViewController implements ProfileModelOb
     @Override
     public void create(AssetManager manager) {
        
-        skin = manager.get(masterSkin, Skin.class);   
+        skin = manager.get(masterSkin, Skin.class); 
+        shop.setAllAssets(manager);
         Table mainTable = new Table();
         mainTable.setFillParent(true);
         stage.addActor(mainTable);

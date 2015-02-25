@@ -89,7 +89,7 @@ public class LambdaGame extends Game {
         addViewController(new ProfileEditName());
         addViewController(new ProfileEditAvatar());
         addViewController(new MainMenuViewController());
-        addViewController(new AchievementMenuViewController());
+        //addViewController(new AchievementMenuViewController());
         addViewController(new SettingsViewController());
         addViewController(new ShopViewController());
         /*
