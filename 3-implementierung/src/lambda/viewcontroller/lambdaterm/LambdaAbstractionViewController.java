@@ -13,9 +13,9 @@ import lambda.model.lambdaterm.LambdaAbstraction;
  */
 public class LambdaAbstractionViewController extends LambdaValueViewController {
     /**
-     * The animation of the first block of the lamb.
+     * The texture of the first block of the lamb.
      */
-    private final Animation front;
+    private final Texture front;
     /**
      * The center texture of the lamb. Will be used multiple times.
      */
@@ -42,7 +42,7 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
      */
     public LambdaAbstractionViewController(LambdaAbstraction linkedTerm, LambdaNodeViewController parent, LambdaTermViewController viewController) {
         super(linkedTerm, parent, viewController);
-        front = viewController.getContext().getElementUIContextFamily().getAbstraction().getAFront();
+        front = viewController.getContext().getElementUIContextFamily().getAbstraction().getFront();
         center = viewController.getContext().getElementUIContextFamily().getAbstraction().getCenter();
         back = viewController.getContext().getElementUIContextFamily().getAbstraction().getBack();
         animate = false;
@@ -75,8 +75,8 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
             batch.draw(center, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
         }
         // Front
-        batch.draw(front.getKeyFrame(stateTime), x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
-        
+        batch.draw(front, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+        //.getKeyFrame(stateTime) TODO
         synchronized (getViewController()) {
             if (animate) {
                 stateTime += Gdx.graphics.getDeltaTime();
@@ -101,7 +101,8 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
      * @return true if the spell animation is finished, false otherwise
      */
     public boolean isAnimationFinished() {
-        return stateTime > front.getAnimationDuration();
+        return true;
+        //return stateTime > front.getAnimationDuration(); TODO
     }
     
     /**

@@ -26,10 +26,6 @@ public class LambdaVariableViewController extends LambdaValueViewController {
      * The variable's texture.
      */
     private final Texture texture;
-    /**
-     * The smoke animation.
-     */
-    private final Animation animation;
 
     /**
      * Creates a new instance of LambdaVariableViewController.
@@ -41,7 +37,6 @@ public class LambdaVariableViewController extends LambdaValueViewController {
     public LambdaVariableViewController(LambdaVariable linkedTerm, LambdaNodeViewController parent, LambdaTermViewController viewController) {
         super(linkedTerm, parent, viewController);
         texture = viewController.getContext().getElementUIContextFamily().getVariable().getTexture();
-        animation = viewController.getContext().getElementUIContextFamily().getVariable().getAVariable();
         
         animate = false;
         stateTime = 0.0f;
@@ -71,7 +66,7 @@ public class LambdaVariableViewController extends LambdaValueViewController {
         // Smoke animation TODO: scale over applicant
         synchronized (getViewController()) {
             if (animate) {
-                batch.draw(animation.getKeyFrame(stateTime), getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+                //batch.draw(animation.getKeyFrame(stateTime), getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT); TODO
                 stateTime += Gdx.graphics.getDeltaTime();
                 if (isAnimationFinished()) {
                     animate = false;
@@ -94,7 +89,8 @@ public class LambdaVariableViewController extends LambdaValueViewController {
      * @return true if the smoke animation is finished, false otherwise
      */
     public boolean isAnimationFinished() {
-        return stateTime > animation.getAnimationDuration();
+        return true;
+        // return stateTime > animation.getAnimationDuration(); TODO
     }
     
     /**
