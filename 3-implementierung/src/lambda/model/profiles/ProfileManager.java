@@ -215,7 +215,8 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     public ProfileEditModel getProfileEdit() {
         return profileEdit;
     }
-
+    
+    //loads profiles from profiles.json or calls loadAllSavedProfiles (if profiles.json is invalid) instead
     private List<ProfileModel> loadProfiles(FileHandle profileFolder) {
         if (!profileFolder.exists()) {
             profileFolder.mkdirs();
@@ -248,6 +249,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
         return loadAllSavedProfiles(profileFolder);
     }
     
+    //tries all profiles currently in the profileFolder (ignoring profiles.json)
     private List<ProfileModel> loadAllSavedProfiles(FileHandle profileFolder) {
         List<ProfileModel> profiles = new LinkedList<ProfileModel>();
         for (FileHandle file : profileFolder.list()) {

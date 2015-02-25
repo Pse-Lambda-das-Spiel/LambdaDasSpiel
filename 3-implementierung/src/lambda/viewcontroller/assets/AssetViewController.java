@@ -17,6 +17,7 @@ import lambda.model.levels.LevelManager;
 import lambda.model.levels.LevelModel;
 import lambda.model.shop.ElementUIContextFamily;
 import lambda.model.shop.ShopModel;
+import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.achievements.AchievementMenuViewController;
 import lambda.viewcontroller.editor.EditorViewController;
@@ -128,6 +129,7 @@ public class AssetViewController extends ViewController {
         if (manager.update()) {
             // Loading finished => go to profile selection
             getGame().createViewControllers();
+            AudioManager.init();
             /* 
             LevelSkin is missing so I can not test it properly
       

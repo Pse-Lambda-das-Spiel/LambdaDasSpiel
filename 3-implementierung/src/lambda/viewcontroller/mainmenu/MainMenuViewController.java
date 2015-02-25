@@ -1,6 +1,7 @@
 package lambda.viewcontroller.mainmenu;
 
 import lambda.model.profiles.ProfileManager;
+import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.achievements.AchievementMenuViewController;
 import lambda.viewcontroller.level.LevelSelectionViewController;
@@ -42,6 +43,9 @@ public class MainMenuViewController extends ViewController {
 	private Label profileName;
 	private Image profileImg;
 	private AssetManager manager;
+    private Container<ImageButton> soundButtonContainer;
+    private ImageButton sound_muted;
+	private ImageButton sound_unmuted;
 
 	/**
 	 * Creates a object of the class without initializing the screen.
@@ -59,6 +63,7 @@ public class MainMenuViewController extends ViewController {
 		profileImg.setDrawable(new SpriteDrawable(new Sprite(
 				manager.get("data/avatar/" + pManager.getCurrentProfile().getAvatar() + ".jpg", Texture.class))));
 		profileName.setText(pManager.getCurrentProfile().getName());
+		soundButtonContainer.setActor((pManager.getCurrentProfile().getSettings().isMusicOn() ? sound_unmuted : sound_muted));
 	}
 
 	@Override
@@ -110,8 +115,8 @@ public class MainMenuViewController extends ViewController {
 		// TODO: Replace with logoutButton when its finished
 		ImageButton logoutButton = new ImageButton(skin, "backButton");
 		ImageButton settingsButton = new ImageButton(skin, "settingsButton");
-		ImageButton sound_unmuted = new ImageButton(skin, "sound_unmuted");
-		ImageButton sound_muted = new ImageButton(skin, "sound_muted");
+		sound_unmuted = new ImageButton(skin, "sound_unmuted");
+		sound_muted = new ImageButton(skin, "sound_muted");
 		ImageButton startButton = new ImageButton(skin, "startButton");
 		// Only tmp until the levelButton for the main menu is finished
 		ImageButton levelButton = new ImageButton(skin, "startButton");
@@ -129,7 +134,7 @@ public class MainMenuViewController extends ViewController {
 		stage.addActor(settingsButtonContainer);
 		settingsButtonContainer.setFillParent(true);
 
-		Container<ImageButton> soundButtonContainer = new Container<>();
+		soundButtonContainer = new Container<>();
 		soundButtonContainer.pad(15).align(Align.bottomRight);
 		soundButtonContainer.setActor(sound_unmuted);
 		stage.addActor(soundButtonContainer);
@@ -162,6 +167,7 @@ public class MainMenuViewController extends ViewController {
 			public void clicked(InputEvent event, float x, float y) {
 				ProfileManager pManager = ProfileManager.getManager();
 				pManager.save(pManager.getCurrentProfile().getName());
+				AudioManager.setLoggedIn(false);
 				getGame().setScreen(ProfileSelection.class);
 			}
 		});
@@ -199,12 +205,14 @@ public class MainMenuViewController extends ViewController {
 		sound_unmuted.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
+			    ProfileManager.getManager().getCurrentProfile().getSettings().setMusicOn(false);
 				soundButtonContainer.setActor(sound_muted);
 			}
 		});
 		sound_muted.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
+                ProfileManager.getManager().getCurrentProfile().getSettings().setMusicOn(true);
 				soundButtonContainer.setActor(sound_unmuted);
 			}
 		});

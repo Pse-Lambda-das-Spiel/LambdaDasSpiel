@@ -25,6 +25,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import lambda.model.profiles.ProfileEditModel;
 import lambda.model.profiles.ProfileEditObserver;
 import lambda.model.profiles.ProfileManager;
+import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
 
@@ -196,6 +197,7 @@ public class ProfileEditAvatar extends ViewController implements ProfileEditObse
                 new Dialog("", dialogSkin) {
                     private boolean changedToMainMenu = false;
                     {
+                        AudioManager.setLoggedIn(true);
                         clear();
                         Label greeting = new Label(manager.get(profileEdit.getLang(), I18NBundle.class).get("hello")
                                 + " " + m.getCurrentProfile().getName() + " !", dialogSkin);

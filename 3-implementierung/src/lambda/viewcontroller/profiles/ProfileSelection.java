@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import lambda.model.profiles.ProfileManager;
+import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
 
@@ -167,6 +168,7 @@ public class ProfileSelection extends ViewController {
             String name = ((TextButton) event.getListenerActor()).getText().toString();
             if (!name.equals("")) {
                 ProfileManager.getManager().setCurrentProfile(name);
+                AudioManager.setLoggedIn(true);
                 getGame().setScreen(MainMenuViewController.class);
             }
         }

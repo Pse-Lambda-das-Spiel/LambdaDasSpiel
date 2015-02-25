@@ -23,16 +23,18 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import lambda.model.profiles.ProfileManager;
 import lambda.model.profiles.ProfileModel;
 import lambda.model.settings.SettingsModel;
-import lambda.model.settings.SettingsModelObserver;
+import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
+import lambda.viewcontroller.profiles.ProfileEditLang;
+import lambda.viewcontroller.statistics.StatisticViewController;
 
 /**
  * Represents a screen that is used to depict and change profile-settings.
  * 
  * @author Kai Fieger
  */
-public class SettingsViewController extends ViewController implements SettingsModelObserver {
+public class SettingsViewController extends ViewController {
 
     private final String skinJson = "data/skins/SettingsSkin.json";
     private final Stage stage;
@@ -52,7 +54,6 @@ public class SettingsViewController extends ViewController implements SettingsMo
         stage = new Stage(new ScreenViewport());
         ProfileManager.getManager().addObserver(this);
         settings = new SettingsModel();
-        settings.addObserver(this);
         space = stage.getWidth() / 64;
 	}
 
@@ -134,6 +135,12 @@ public class SettingsViewController extends ViewController implements SettingsMo
         settingsView.add(soundSlider).width(width).space(space);
         settingsView.row().height(height);
         statistics = new TextButton("", manager.get(skinJson, Skin.class));
+        statistics.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                getGame().setScreen(StatisticViewController.class);
+            }
+        });
         settingsView.add(statistics).width(width * 2 / 3).space(space * 4);
         
         ImageButton backButton = new ImageButton(manager.get(skinJson, Skin.class), "backButton");
@@ -151,29 +158,12 @@ public class SettingsViewController extends ViewController implements SettingsMo
     public void changedProfile() {
         ProfileModel current = ProfileManager.getManager().getCurrentProfile();
         I18NBundle lang = manager.get(current.getLanguage(), I18NBundle.class);
-        settings.removeObserver(this);
         settings = current.getSettings();
-        settings.addObserver(this);
         musicLabel.setText(lang.get("musicLabel") + ":");
         soundLabel.setText(lang.get("soundLabel") + ":");
         statistics.setText(lang.get("statistics"));
         musicSlider.setValue(settings.getMusicVolume());
         soundSlider.setValue(settings.getSoundVolume());
-    }
-    
-    @Override
-    public void changedMusicOn() {
-        //TODO ?
-    }
-
-    @Override
-    public void changedMusicVolume() {
-        //TODO ?
-    }
-
-    @Override
-    public void changedSoundVolume() {
-        //TODO ?
     }
 
     private class backClickListener extends ClickListener {

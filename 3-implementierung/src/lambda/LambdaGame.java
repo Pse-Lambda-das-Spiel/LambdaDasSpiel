@@ -7,6 +7,7 @@ import com.badlogic.gdx.Game;
 import java.util.HashMap;
 import java.util.Map;
 
+import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.achievements.AchievementMenuViewController;
 import lambda.viewcontroller.assets.AssetViewController;
@@ -102,6 +103,8 @@ public class LambdaGame extends Game {
         addViewController(new ShopViewController());
         addViewController(new StatisticViewController());
         addViewController(new AchievementMenuViewController());*/
+        
+        AudioManager.queueAssets(getController(AssetViewController.class).getManager());
         
         // Queue all assets for loading
         for (ViewController viewController : viewControllers.values()) {
