@@ -1,7 +1,10 @@
 package lambda.model.levels;
 
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+
 import lambda.model.shop.ElementUIContextFamily;
 import lambda.model.shop.ShopModel;
 
@@ -18,6 +21,8 @@ public class LevelContext {
     private ElementUIContextFamily elementUIContextFamily;
     private LevelManager manager;
     private DifficultySetting difficultySetting;
+    private Animation cloudAnimation;
+    private Animation magicAnimation;
 
     /**
      * Creates a new instance of this class
@@ -25,7 +30,12 @@ public class LevelContext {
     public LevelContext(LevelModel levelModel) {
         elementUIContextFamily = ShopModel.getShop().getElementUIContextFamilies().getActivatedItem();
         this.levelModel = levelModel;
-
+        this.manager = LevelManager.getLevelManager();
+        String magicPath = "/data/animation/magic/Magic_Animation.atlas";
+        String cloudPath = "/data/animation/cloud/cloud.atlas";
+        this.magicAnimation = new Animation(1/15f, manager.getAssetManager().get(magicPath, TextureAtlas.class).getRegions());
+        this.cloudAnimation = new Animation(1/15f, manager.getAssetManager().get(cloudPath, TextureAtlas.class).getRegions());
+        
         if(levelModel.getId() != 0) {
             // for standard levels
             manager = LevelManager.getLevelManager();
@@ -74,6 +84,24 @@ public class LevelContext {
      */
     public ElementUIContextFamily getElementUIContextFamily() {
         return elementUIContextFamily;
+    }
+    
+    /**
+     * Returns the animation for the magic effect
+     * 
+     * @return magicAnimation which is the effect of the magic stick
+     */
+    public Animation getMagicAnimation() {
+        return magicAnimation;
+    }
+    
+    /**
+     * Returns the animation for the cloud effect
+     * 
+     * @return cloudAnimation which is the effect of a magic
+     */
+    public Animation getCloudAnimation() {
+        return cloudAnimation;
     }
 
 }

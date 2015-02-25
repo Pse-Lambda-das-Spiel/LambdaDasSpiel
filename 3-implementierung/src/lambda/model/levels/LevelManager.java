@@ -88,8 +88,6 @@ public class LevelManager {
     		assets.load(difficultySettingFilePath, DifficultySetting.class);
     	}
     	
-    	
-    	assets.finishLoading();
     	// I am not sure about the rest of your resources here, either use normal AssetLoaders or write your own for them
     	
 //        FileHandle file = Gdx.files.internal("data/levels/music/numberOfMusic.json");
@@ -111,5 +109,9 @@ public class LevelManager {
 //            levelManager.getDifficultySettings().get(i).setBgImage(assetManager.get("data/levels/images" + String.format("%02d", i) + ".jpg"));
 //        }
     }
+    public AssetManager getAssetManager() {
+        return assetManager;
+    }
+    
 
 }
