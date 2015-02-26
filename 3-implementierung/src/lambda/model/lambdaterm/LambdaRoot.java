@@ -1,6 +1,7 @@
 package lambda.model.lambdaterm;
 
 import java.util.Objects;
+import lambda.NotifyAction;
 import lambda.model.lambdaterm.visitor.IsValidVisitor;
 import lambda.model.lambdaterm.visitor.LambdaTermVisitor;
 import lambda.model.lambdaterm.visitor.ToStringVisitor;
@@ -45,7 +46,12 @@ public class LambdaRoot extends LambdaTerm {
             child.setParent(this);
         }
         if (oldChild != child) {
-            notify((observer) -> observer.replaceTerm(oldChild, child));
+            notify(new NotifyAction<LambdaTermObserver>(){
+                @Override
+                public void notify(LambdaTermObserver observer) {
+                    observer.replaceTerm(oldChild, child);
+                }
+            });
         }
         return oldChild != child;
     }
