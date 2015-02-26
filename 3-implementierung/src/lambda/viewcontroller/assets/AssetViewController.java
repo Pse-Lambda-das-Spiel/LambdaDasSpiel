@@ -12,9 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import lambda.model.levels.LevelContext;
-import lambda.model.levels.LevelLoadHelper;
 import lambda.model.levels.LevelManager;
-import lambda.model.levels.LevelModel;
 import lambda.model.shop.ElementUIContextFamily;
 import lambda.model.shop.ShopModel;
 import lambda.viewcontroller.AudioManager;
@@ -89,9 +87,12 @@ public class AssetViewController extends ViewController {
         ShopModel.getShop().getElementUIContextFamilies().setDefaultItem(family);
         
         LevelManager.getLevelManager().queueAssets(manager);
-        LevelModel model = LevelManager.getLevelManager().getLevel(3);
-        context = new LevelContext(model);
-        
+        // tmp, should be loaded centrally
+        String magicPath = "data/animation/magic/Magic_Animation.atlas";
+        String cloudPath = "data/animation/cloud/cloud.atlas";
+        manager.load(magicPath, TextureAtlas.class);
+        manager.load(cloudPath, TextureAtlas.class);
+        // rest of example context was moved to create() 
     }
     
     /**
@@ -109,6 +110,9 @@ public class AssetViewController extends ViewController {
     @Override
     public void create(AssetManager manager) {
         // UI elements for loading screen are set up in the constructor
+    	
+    	// only tmp moved until levelvc is finished
+        context = new LevelContext(LevelManager.getLevelManager().getLevel(3));
     }
     
     /**

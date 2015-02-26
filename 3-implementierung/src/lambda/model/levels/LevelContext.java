@@ -31,14 +31,15 @@ public class LevelContext {
         elementUIContextFamily = ShopModel.getShop().getElementUIContextFamilies().getActivatedItem();
         this.levelModel = levelModel;
         this.manager = LevelManager.getLevelManager();
-        String magicPath = "/data/animation/magic/Magic_Animation.atlas";
-        String cloudPath = "/data/animation/cloud/cloud.atlas";
+        // Should be loaded centrally
+        String magicPath = "data/animation/magic/Magic_Animation.atlas";
+        String cloudPath = "data/animation/cloud/cloud.atlas";
+        
         this.magicAnimation = new Animation(1/15f, manager.getAssetManager().get(magicPath, TextureAtlas.class).getRegions());
         this.cloudAnimation = new Animation(1/15f, manager.getAssetManager().get(cloudPath, TextureAtlas.class).getRegions());
         
         if(levelModel.getId() != 0) {
             // for standard levels
-            manager = LevelManager.getLevelManager();
             difficultySetting = manager.getDifficultySetting(levelModel.getDifficulty());
             music = difficultySetting.getMusic();
             bgImage = difficultySetting.getBgImage();
