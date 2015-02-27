@@ -99,7 +99,7 @@ public class SettingsViewController extends ViewController {
     }
 
     @Override
-    public void create(AssetManager manager) {
+    public void create(final AssetManager manager) {
         this.manager = manager;
         Table settingsView = new Table();
         settingsView.align(Align.top);

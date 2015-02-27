@@ -1,5 +1,6 @@
 package lambda.model.profiles;
 
+import lambda.Consumer;
 import lambda.Observable;
 import lambda.model.settings.SettingsModel;
 import lambda.model.shop.ShopModel;
@@ -151,7 +152,12 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
                     "levelIndex cannot be smaller than 1");
         }
         this.levelIndex = levelIndex;
-        notify(o -> o.changedLevelIndex());
+        notify(new Consumer<ProfileModelObserver>(){
+            @Override
+            public void accept(ProfileModelObserver observer) {
+                observer.changedLevelIndex();
+            }
+        });
     }
 
     /**
@@ -176,7 +182,12 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
             throw new IllegalArgumentException("coins cannot be smaller than 0");
         }
         this.coins = coins;
-        notify(o -> o.changedCoins());
+        notify(new Consumer<ProfileModelObserver>(){
+            @Override
+            public void accept(ProfileModelObserver observer) {
+                observer.changedCoins();
+            }
+        });
     }
 
     /**

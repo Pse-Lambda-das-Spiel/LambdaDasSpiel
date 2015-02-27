@@ -3,7 +3,9 @@ package lambda.model.profiles;
 import java.util.LinkedList;
 import java.util.List;
 
+import lambda.Consumer;
 import lambda.Observable;
+import lambda.model.lambdaterm.LambdaTermObserver;
 
 /**
  * Represents the logic behind the editing-screen of a profile's avatar and
@@ -56,7 +58,12 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         if (selectedLang == -1) {
             selectedLang = 0;
         }
-        notify(o -> o.changedLanguage());
+        notify(new Consumer<ProfileEditObserver>(){
+            @Override
+            public void accept(ProfileEditObserver observer) {
+                observer.changedLanguage();;
+            }
+        });
     }
 
     /**
@@ -68,7 +75,12 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         if (++selectedLang == lang.size()) {
             selectedLang = 0;
         }
-        notify(o -> o.changedLanguage());
+        notify(new Consumer<ProfileEditObserver>(){
+            @Override
+            public void accept(ProfileEditObserver observer) {
+                observer.changedLanguage();;
+            }
+        });
     }
 
     /**
@@ -80,7 +92,12 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         if (--selectedLang < 0) {
             selectedLang = lang.size() - 1;
         }
-        notify(o -> o.changedLanguage());
+        notify(new Consumer<ProfileEditObserver>(){
+            @Override
+            public void accept(ProfileEditObserver observer) {
+                observer.changedLanguage();;
+            }
+        });
     }
 
     /**
@@ -122,7 +139,12 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         if (selectedAvatar == -1) {
             selectedAvatar = 0;
         }
-        notify(o -> o.changedAvatar());
+        notify(new Consumer<ProfileEditObserver>(){
+            @Override
+            public void accept(ProfileEditObserver observer) {
+                observer.changedAvatar();
+            }
+        });
     }
 
     /**
@@ -134,7 +156,12 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         if (++selectedAvatar == avatar.size()) {
             selectedAvatar = 0;
         }
-        notify(o -> o.changedAvatar());
+        notify(new Consumer<ProfileEditObserver>(){
+            @Override
+            public void accept(ProfileEditObserver observer) {
+                observer.changedAvatar();
+            }
+        });
     }
 
     /**
@@ -146,7 +173,12 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         if (--selectedAvatar < 0) {
             selectedAvatar = avatar.size() - 1;
         }
-        notify(o -> o.changedAvatar());
+        notify(new Consumer<ProfileEditObserver>(){
+            @Override
+            public void accept(ProfileEditObserver observer) {
+                observer.changedAvatar();
+            }
+        });
     }
 
     /**

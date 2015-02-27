@@ -2,11 +2,14 @@ package lambda.model.lambdaterm.visitor;
 
 import java.awt.Color;
 import java.util.Set;
+
+import lambda.Consumer;
 import lambda.model.lambdaterm.InvalidLambdaTermException;
 import lambda.model.lambdaterm.LambdaAbstraction;
 import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
+import lambda.model.lambdaterm.LambdaTermObserver;
 import lambda.model.lambdaterm.LambdaVariable;
 
 /**
@@ -97,10 +100,16 @@ public class ApplicationVisitor extends ValidLambdaTermVisitor<LambdaTerm> {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visitValid(LambdaVariable node) {
+    public void visitValid(final LambdaVariable node) {
         checkAlphaConversion(node);
         result = node.getColor().equals(color) ? applicant.accept(new CopyVisitor()) : node;
-        node.notify(observer -> observer.variableReplaced(node, result));
+        node.notify(new Consumer<LambdaTermObserver>(){
+            @Override
+            public void accept(LambdaTermObserver observer) {
+                observer.variableReplaced(node, result);
+            }
+        });
+        
     }
     
     /**

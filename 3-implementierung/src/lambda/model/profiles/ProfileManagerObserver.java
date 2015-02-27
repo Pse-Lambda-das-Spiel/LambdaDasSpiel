@@ -14,9 +14,7 @@ public interface ProfileManagerObserver {
      * (the current user profile) is changed. The default implementation is
      * empty.
      */
-    default public void changedProfile() {
-
-    }
+    public void changedProfile();
 
     /**
      * Gets called by an observed ProfileManager-object if there is a change in
@@ -24,8 +22,6 @@ public interface ProfileManagerObserver {
      * example after creating/renaming/deleting a profile). The default
      * implementation is empty.
      */
-    default public void changedProfileList() {
-
-    }
+    public void changedProfileList();
 
 }

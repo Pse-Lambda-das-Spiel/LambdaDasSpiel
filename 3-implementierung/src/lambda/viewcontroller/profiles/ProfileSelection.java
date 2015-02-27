@@ -105,7 +105,7 @@ public class ProfileSelection extends ViewController {
     }
 
     @Override
-    public void create(AssetManager manager) {
+    public void create(final AssetManager manager) {
         //without this the background of all dialogs/the window's size is never smaller than 600,400
         new Dialog("", manager.get("data/skins/DialogTemp.json", Skin.class)) {
             {
@@ -178,8 +178,8 @@ public class ProfileSelection extends ViewController {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             ImageButton clickedButton = (ImageButton) event.getListenerActor();
-            String name = profileButtons.get(editButtons.indexOf(clickedButton)).getText().toString();
-            Skin temp = manager.get("data/skins/DialogTemp.json", Skin.class);
+            final String name = profileButtons.get(editButtons.indexOf(clickedButton)).getText().toString();
+            final Skin temp = manager.get("data/skins/DialogTemp.json", Skin.class);
             //dialog to choose between editing the profile or deleting it. 
             new Dialog("", temp) {
                 {

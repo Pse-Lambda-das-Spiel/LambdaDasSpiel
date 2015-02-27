@@ -3,9 +3,14 @@ package lambda.viewcontroller.lambdaterm;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
+
 import java.util.LinkedList;
 import java.util.List;
+
+import lambda.Consumer;
+import lambda.model.editormode.EditorModelObserver;
 import lambda.model.lambdaterm.LambdaTerm;
+import lambda.model.lambdaterm.LambdaTermObserver;
 import lambda.model.lambdaterm.visitor.FrontInserter;
 import lambda.model.lambdaterm.visitor.SiblingInserter;
 import lambda.viewcontroller.lambdaterm.draganddrop.LambdaTermDragSource;
@@ -218,13 +223,27 @@ public abstract class LambdaNodeViewController extends Actor {
 
                 // First target left of all children
                 Rectangle target = new Rectangle(this.getX() - GAP_SIZE / 2, this.getY(), GAP_SIZE, BLOCK_HEIGHT);
-                dragAndDrop.addTarget(new LambdaTermDropTarget(target, term -> getLinkedTerm().accept(new FrontInserter(term))));
+                //dragAndDrop.addTarget(new LambdaTermDropTarget(target, term -> getLinkedTerm().accept(new FrontInserter(term))));
+                dragAndDrop.addTarget(new LambdaTermDropTarget(target, 
+            		new Consumer<LambdaTerm>(){
+                         @Override
+                         public void accept(LambdaTerm term) {
+                        	 LambdaNodeViewController.this.getLinkedTerm().accept(new FrontInserter(term));
+                         }
+                     }));
 
                 // Targets right of each child
                 for (LambdaNodeViewController childVC : children) {
                     final LambdaTerm childTerm = childVC.getLinkedTerm();
                     target = new Rectangle(childVC.getX() + BLOCK_WIDTH - GAP_SIZE / 2, childVC.getY(), GAP_SIZE, BLOCK_HEIGHT);
-                    dragAndDrop.addTarget(new LambdaTermDropTarget(target, term -> childTerm.accept(new SiblingInserter(term, false))));
+                    //dragAndDrop.addTarget(new LambdaTermDropTarget(target, term -> childTerm.accept(new SiblingInserter(term, false))));
+                    dragAndDrop.addTarget(new LambdaTermDropTarget(target,
+                		new Consumer<LambdaTerm>(){
+                    		@Override
+                    		public void accept(LambdaTerm term) {
+                    			childTerm.accept(new SiblingInserter(term, false));
+                        }
+                    }));
                 }
             }
 

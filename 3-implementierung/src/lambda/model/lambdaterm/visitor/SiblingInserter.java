@@ -117,4 +117,9 @@ public class SiblingInserter implements LambdaTermVisitor {
         }
         return application;
     }
+
+	@Override
+	public Object getResult() {
+		return null;
+	}
 }

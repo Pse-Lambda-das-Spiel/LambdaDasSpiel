@@ -108,7 +108,7 @@ public class MainMenuViewController extends ViewController {
 	}
 
 	@Override
-	public void create(AssetManager manager) {
+	public void create(final AssetManager manager) {
 		this.manager = manager;
 		ProfileManager.getManager().addObserver(this);
 		skin = manager.get(skinJson, Skin.class);

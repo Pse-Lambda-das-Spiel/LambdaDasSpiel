@@ -1,6 +1,8 @@
 package lambda.model.settings;
 
+import lambda.Consumer;
 import lambda.Observable;
+import lambda.model.profiles.ProfileManagerObserver;
 
 /**
  * Represents the settings of a profile.
@@ -40,7 +42,12 @@ public class SettingsModel extends Observable<SettingsModelObserver> {
      */
     public void setMusicOn(boolean musicOn) {
         this.musicOn = musicOn;
-        notify(o -> o.changedMusicOn());
+        notify(new Consumer<SettingsModelObserver>(){
+            @Override
+            public void accept(SettingsModelObserver observer) {
+                observer.changedMusicOn();
+            }
+        });
     }
 
     /**
@@ -70,7 +77,12 @@ public class SettingsModel extends Observable<SettingsModelObserver> {
         } else {
             this.musicVolume = musicVolume;
         }
-        notify(o -> o.changedMusicVolume());
+        notify(new Consumer<SettingsModelObserver>(){
+            @Override
+            public void accept(SettingsModelObserver observer) {
+                observer.changedMusicVolume();;
+            }
+        });
     }
 
     /**
@@ -100,7 +112,12 @@ public class SettingsModel extends Observable<SettingsModelObserver> {
         } else {
             this.soundVolume = soundVolume;
         }
-        notify(o -> o.changedSoundVolume());
+        notify(new Consumer<SettingsModelObserver>(){
+            @Override
+            public void accept(SettingsModelObserver observer) {
+                observer.changedSoundVolume();
+            }
+        });
     }
 
 }

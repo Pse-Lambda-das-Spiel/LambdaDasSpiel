@@ -45,7 +45,5 @@ public interface LambdaTermVisitor<T> {
      * 
      * @return the result of the visit
      */
-    public default T getResult() {
-        return null;
-    }
+    public T getResult();
 }

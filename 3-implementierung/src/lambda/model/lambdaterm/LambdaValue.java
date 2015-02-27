@@ -2,6 +2,8 @@ package lambda.model.lambdaterm;
 
 import java.awt.Color;
 
+import lambda.Consumer;
+
 /**
  * Represents a value (abstraction or variable) with a color in a lambda term tree.
  * 
@@ -45,14 +47,19 @@ public abstract class LambdaValue extends LambdaTerm {
      * @return true if the color has changed, false otherwise
      * @throws IllegalArgumentException if color is null
      */
-    public boolean setColor(Color color) {
+    public boolean setColor(final Color color) {
         if (color == null) {
             throw new IllegalArgumentException("Color cannot be null!");
         }
         Color oldColor = this.color;
         this.color = color;
         if (oldColor != color) {
-            notify((observer) -> observer.setColor(this, color));
+            notify(new Consumer<LambdaTermObserver>(){
+                @Override
+                public void accept(LambdaTermObserver observer) {
+                    observer.setColor(LambdaValue.this, color);
+                }
+            });
         }
         return oldColor != color;
     }

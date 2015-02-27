@@ -3,6 +3,7 @@ package lambda.model.achievements;
 import com.badlogic.gdx.assets.AssetManager;
 
 import lambda.Observable;
+import lambda.Consumer;
 import lambda.model.statistics.StatisticModel;
 import lambda.model.statistics.StatisticModelObserver;
 
@@ -181,7 +182,56 @@ public abstract class AchievementModel extends Observable<AchievementModelObserv
 	 */
 	public void setLocked(boolean locked) {
 		this.locked = locked;
-		notify((observer) -> observer.changedLockedState());
+		notify(new Consumer<AchievementModelObserver>(){
+             @Override
+             public void accept(AchievementModelObserver observer) {
+                 observer.changedLockedState();
+             }
+         });
+	}
+
+	@Override
+	public void changedLambsEnchanted() {		
+	}
+
+	@Override
+	public void changedGemsEnchanted() {		
+	}
+
+	@Override
+	public void changedLambsPlaced() {		
+	}
+
+	@Override
+	public void changedGemsPlaced() {		
+	}
+
+	@Override
+	public void changedLambsEnchantedPerLevel() {		
+	}
+
+	@Override
+	public void changedGemsEnchantedPerLevel() {		
+	}
+
+	@Override
+	public void changedLambsPlacedPerLevel() {		
+	}
+
+	@Override
+	public void changedGemsPlacedPerLevel() {		
+	}
+
+	@Override
+	public void changedLevelCompleted() {		
+	}
+
+	@Override
+	public void changedHintsNotUsed() {		
+	}
+
+	@Override
+	public void changedTimePlayed() {		
 	}
 	
 }

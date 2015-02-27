@@ -78,7 +78,7 @@ public class ReductionViewController extends ViewController implements Reduction
     }
     
     @Override
-    public void create(AssetManager manager) {
+    public void create(final AssetManager manager) {
         //needed in reductionFinished(...)
         this.assets = manager;
         
@@ -99,7 +99,7 @@ public class ReductionViewController extends ViewController implements Reduction
         
         // TODO add ui elements to stage
         
-        Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
+        final Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
         pauseButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){

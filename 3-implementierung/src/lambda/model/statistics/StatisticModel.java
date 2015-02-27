@@ -1,6 +1,8 @@
 package lambda.model.statistics;
 
+import lambda.Consumer;
 import lambda.Observable;
+
 /**
  * 
  * @author Farid el-haddad
@@ -26,56 +28,127 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	public StatisticModel() {
 	}
 	
+	
+
+	/**
+	 * @return the lambsEnchanted
+	 */
 	public int getLambsEnchanted() {
 		return lambsEnchanted;
 	}
 
+
+
+	/**
+	 * @return the gemsEnchanted
+	 */
 	public int getGemsEnchanted() {
 		return gemsEnchanted;
 	}
 
+
+
+	/**
+	 * @return the gemsPlaced
+	 */
 	public int getGemsPlaced() {
 		return gemsPlaced;
 	}
 
+
+
+	/**
+	 * @return the lambsPlaced
+	 */
 	public int getLambsPlaced() {
 		return lambsPlaced;
 	}
 
-	public long getTimePlayed() {
-		return timePlayed;
-	}
 
-	public int getHintsNotUsed() {
-		return hintsNotUsed;
-	}
 
-	public int getLevelCompleted() {
-		return levelCompleted;
-	}
-
-	public int getGemsEnchantedPerLevel() {
-		return gemsEnchantedPerLevel;
-	}
-
+	/**
+	 * @return the lambsEnchantedPerLevel
+	 */
 	public int getLambsEnchantedPerLevel() {
 		return lambsEnchantedPerLevel;
 	}
 
+
+
+	/**
+	 * @return the gemsEnchantedPerLevel
+	 */
+	public int getGemsEnchantedPerLevel() {
+		return gemsEnchantedPerLevel;
+	}
+
+
+
+	/**
+	 * @return the gemsPlacedPerLevel
+	 */
 	public int getGemsPlacedPerLevel() {
 		return gemsPlacedPerLevel;
 	}
 
+
+
+	/**
+	 * @return the lambsPlacedPerLevel
+	 */
 	public int getLambsPlacedPerLevel() {
 		return lambsPlacedPerLevel;
 	}
+
+
+
+	/**
+	 * @return the levelCompleted
+	 */
+	public int getLevelCompleted() {
+		return levelCompleted;
+	}
+
+
+
+	/**
+	 * @return the hintsNotUsed
+	 */
+	public int getHintsNotUsed() {
+		return hintsNotUsed;
+	}
+
+
+
+	/**
+	 * @return the beginTime
+	 */
+	public long getBeginTime() {
+		return beginTime;
+	}
+
+
+
+	/**
+	 * @return the timePlayed
+	 */
+	public long getTimePlayed() {
+		return timePlayed;
+	}
+
+
 
 	/**
 	 * @param lambsEnchanted the lambsEnchanted to set
 	 */
 	public void setLambsEnchanted(int lambsEnchanted) {
 		this.lambsEnchanted = lambsEnchanted;
-		notify(observer -> observer.changedLambsEnchanted());
+		 notify(new Consumer<StatisticModelObserver>(){
+             @Override
+             public void accept(StatisticModelObserver observer) {
+                 observer.changedLambsEnchanted();
+             }
+         });
 	}
 
 	/**
@@ -83,7 +156,12 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public void setGemsEnchanted(int gemsEnchanted) {
 		this.gemsEnchanted = gemsEnchanted;
-		notify(observer -> observer.changedGemsEnchanted());
+		 notify(new Consumer<StatisticModelObserver>(){
+             @Override
+             public void accept(StatisticModelObserver observer) {
+                 observer.changedGemsEnchanted();
+             }
+         });
 	}
 
 	/**
@@ -91,7 +169,12 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public void setGemsPlaced(int gemsPlaced) {
 		this.gemsPlaced = gemsPlaced;
-		notify(observer -> observer.changedGemsPlaced());
+		 notify(new Consumer<StatisticModelObserver>(){
+             @Override
+             public void accept(StatisticModelObserver observer) {
+                 observer.changedGemsPlaced();
+             }
+         });
 	}
 
 	/**
@@ -99,7 +182,12 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public void setLambsPlaced(int lambsPlaced) {
 		this.lambsPlaced = lambsPlaced;
-		notify(observer -> observer.changedLambsPlaced());
+		 notify(new Consumer<StatisticModelObserver>(){
+             @Override
+             public void accept(StatisticModelObserver observer) {
+                 observer.changedLambsPlaced();
+             }
+         });
 	}
 
 	/**
@@ -107,7 +195,12 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public void setLambsEnchantedPerLevel(int lambsEnchantedPerLevel) {
 		this.lambsEnchantedPerLevel = lambsEnchantedPerLevel;
-		notify(observer -> observer.changedLambsEnchantedPerLevel());
+		 notify(new Consumer<StatisticModelObserver>(){
+             @Override
+             public void accept(StatisticModelObserver observer) {
+                 observer.changedLambsEnchantedPerLevel();
+             }
+         });
 	}
 
 	/**
@@ -115,7 +208,12 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public void setGemsEnchantedPerLevel(int gemsEnchantedPerLevel) {
 		this.gemsEnchantedPerLevel = gemsEnchantedPerLevel;
-		notify(observer -> observer.changedGemsEnchantedPerLevel());
+		 notify(new Consumer<StatisticModelObserver>(){
+             @Override
+             public void accept(StatisticModelObserver observer) {
+                 observer.changedGemsEnchantedPerLevel();
+             }
+         });
 	}
 
 	/**
@@ -123,7 +221,12 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public void setGemsPlacedPerLevel(int gemsPlacedPerLevel) {
 		this.gemsPlacedPerLevel = gemsPlacedPerLevel;
-		notify(observer -> observer.changedGemsPlacedPerLevel());
+		 notify(new Consumer<StatisticModelObserver>(){
+             @Override
+             public void accept(StatisticModelObserver observer) {
+                 observer.changedGemsPlacedPerLevel();
+             }
+         });
 	}
 
 	/**
@@ -131,7 +234,12 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public void setLambsPlacedPerLevel(int lambsPlacedPerLevel) {
 		this.lambsPlacedPerLevel = lambsPlacedPerLevel;
-		notify(observer -> observer.changedLambsPlacedPerLevel());
+		 notify(new Consumer<StatisticModelObserver>(){
+             @Override
+             public void accept(StatisticModelObserver observer) {
+                 observer.changedLambsPlacedPerLevel();
+             }
+         });
 	}
 
 	/**
@@ -139,7 +247,12 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public void setLevelCompleted(int levelCompleted) {
 		this.levelCompleted = levelCompleted;
-		notify(observer -> observer.changedLevelCompleted());
+		 notify(new Consumer<StatisticModelObserver>(){
+             @Override
+             public void accept(StatisticModelObserver observer) {
+                 observer.changedLevelCompleted();
+             }
+         });
 	}
 
 	/**
@@ -147,7 +260,12 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public void setHintsNotUsed(int hintsNotUsed) {
 		this.hintsNotUsed = hintsNotUsed;
-		notify(observer -> observer.changedHintsNotUsed());
+		 notify(new Consumer<StatisticModelObserver>(){
+             @Override
+             public void accept(StatisticModelObserver observer) {
+                 observer.changedHintsNotUsed();
+             }
+         });
 	}
 
 	/**
@@ -155,7 +273,12 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public void setTimePlayed(long timePlayed) {
 		this.timePlayed = timePlayed;
-		notify(observer -> observer.changedTimePlayed());
+		 notify(new Consumer<StatisticModelObserver>(){
+             @Override
+             public void accept(StatisticModelObserver observer) {
+                 observer.changedTimePlayed();
+             }
+         });
 	}
 
 	/**

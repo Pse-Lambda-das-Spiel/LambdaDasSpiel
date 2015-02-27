@@ -102,4 +102,12 @@ public class AudioManager implements ProfileManagerObserver, SettingsModelObserv
         changedMusicOn();
     }
 
+	@Override
+	public void changedSoundVolume() {
+	}
+
+	@Override
+	public void changedProfileList() {		
+	}
+
 }

@@ -168,7 +168,7 @@ public class AchievementMenuViewController extends ViewController {
      * {@inheritDoc}
      */
     @Override
-    public void create(AssetManager manager) {
+    public void create(final AssetManager manager) {
     	AchievementMenuViewController.manager = manager;
     	ProfileManager.getManager().addObserver(this);
     	Table mainTable = new Table();
@@ -216,7 +216,7 @@ public class AchievementMenuViewController extends ViewController {
     private class AchievementClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
-            AchievementViewController clickedActor = (AchievementViewController) event.getListenerActor();
+            final AchievementViewController clickedActor = (AchievementViewController) event.getListenerActor();
             new Dialog("", manager.get(achievementMenuSkinJson, Skin.class)) {
             	{
             		setWidth(stage.getWidth() / 2);

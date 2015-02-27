@@ -103,7 +103,7 @@ public class ProfileEditLang extends ViewController implements ProfileEditObserv
     }
 
     @Override
-    public void create(AssetManager manager) {
+    public void create(final AssetManager manager) {
         profileEdit.addObserver(this);
         this.manager = manager;
         Table langSelection = new Table();
@@ -195,5 +195,9 @@ public class ProfileEditLang extends ViewController implements ProfileEditObserv
             getGame().setScreen(ProfileSelection.class);
         }
     }
+
+	@Override
+	public void changedAvatar() {		
+	}
     
 }

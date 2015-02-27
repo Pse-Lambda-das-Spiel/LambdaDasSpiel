@@ -1,5 +1,6 @@
 package lambda.model.shop;
 
+import lambda.Consumer;
 import lambda.Observable;
 import lambda.model.profiles.ProfileManager;
 
@@ -38,7 +39,12 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
             purchased = true;
             ProfileManager.getManager().getCurrentProfile().setCoins(
                     ProfileManager.getManager().getCurrentProfile().getCoins() - getPrice());
-            notify((observer) -> observer.purchasedChanged(true));
+            notify(new Consumer<ShopItemModelObserver>(){
+                @Override
+                public void accept(ShopItemModelObserver observer) {
+                    observer.purchasedChanged(true);
+                }
+            });
         }
     }
 
@@ -106,9 +112,14 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
      *
 	 * @param purchased the boolean to set
 	 */
-	public void setPurchased(boolean purchased) {
+	public void setPurchased(final boolean purchased) {
 		this.purchased = purchased;
-		notify((observer) -> observer.purchasedChanged(purchased));
+		 notify(new Consumer<ShopItemModelObserver>(){
+             @Override
+             public void accept(ShopItemModelObserver observer) {
+                 observer.purchasedChanged(purchased);
+             }
+         });
 	}
 
     public String getFilepath() {
@@ -122,8 +133,13 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
     public boolean isActivated() {
         return activated;
     }
-    public void setActivated(boolean activated) {
+    public void setActivated(final boolean activated) {
         this.activated = activated;
-        notify((observer) -> observer.activatedChanged(activated));
+        notify(new Consumer<ShopItemModelObserver>(){
+            @Override
+            public void accept(ShopItemModelObserver observer) {
+                observer.activatedChanged(activated);
+            }
+        });
     }
 }

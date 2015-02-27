@@ -113,4 +113,9 @@ public class NodeViewControllerCreator implements LambdaTermVisitor {
     public void visit(LambdaVariable node) {
         parent.insertChild(new LambdaVariableViewController(node, parent, viewController), rightSibling);
     }
+
+	@Override
+	public Object getResult() {
+		return null;
+	}
 }

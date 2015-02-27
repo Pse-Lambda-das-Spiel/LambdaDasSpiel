@@ -1,9 +1,10 @@
 package lambda.model.reductionmode;
 
 import java.util.Stack;
+
+import lambda.Consumer;
 import lambda.Observable;
 import lambda.model.lambdaterm.LambdaRoot;
-import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.visitor.CopyVisitor;
 import lambda.model.lambdaterm.visitor.IsAlphaEquivalentVisitor;
 import lambda.model.lambdaterm.visitor.strategy.BetaReductionVisitor;
@@ -153,8 +154,13 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                 
                 // Minimal term reached
                 if (!strategy.hasReduced()) {
-                    ReductionModel.this.notify((observer) -> observer.reductionFinished(
-                            current.accept(new IsAlphaEquivalentVisitor(ReductionModel.this.context.getLevelModel().getGoal()))));
+                    ReductionModel.this.notify(new Consumer<ReductionModelObserver>(){
+                        @Override
+                        public void accept(ReductionModelObserver observer) {
+                            observer.reductionFinished(current.accept(
+                            		new IsAlphaEquivalentVisitor(ReductionModel.this.context.getLevelModel().getGoal())));
+                        }
+                    });
                 }
                 
                 // Steps finished
@@ -192,10 +198,15 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
      * 
      * @param paused true if the automatic reduction is paused, false otherwise
      */
-    private void setPaused(boolean paused) {
+    private void setPaused(final boolean paused) {
         if (paused != this.paused) {
             this.paused = paused;
-            notify((observer) -> observer.pauseChanged(paused));
+            notify(new Consumer<ReductionModelObserver>(){
+                @Override
+                public void accept(ReductionModelObserver observer) {
+                    observer.pauseChanged(paused);
+                }
+            });
         }
     }
     
@@ -204,10 +215,15 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
      * 
      * @param busy true if the reduction model is currently performing a step, false otherwise
      */
-    private void setBusy(boolean busy) {
+    private void setBusy(final boolean busy) {
         if (busy != this.busy) {
             this.busy = busy;
-            notify((observer) -> observer.busyChanged(busy));
+            notify(new Consumer<ReductionModelObserver>(){
+                @Override
+                public void accept(ReductionModelObserver observer) {
+                    observer.busyChanged(busy);
+                }
+            });
         }
     }
     

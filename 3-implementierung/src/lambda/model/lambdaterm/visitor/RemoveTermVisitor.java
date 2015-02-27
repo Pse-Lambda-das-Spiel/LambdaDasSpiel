@@ -87,4 +87,9 @@ public class RemoveTermVisitor implements LambdaTermVisitor {
             node.getParent().accept(this);
         }
     }
+
+	@Override
+	public Object getResult() {
+		return null;
+	}
 }

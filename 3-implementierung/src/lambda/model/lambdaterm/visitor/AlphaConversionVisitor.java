@@ -1,10 +1,13 @@
 package lambda.model.lambdaterm.visitor;
 
 import java.awt.Color;
+
+import lambda.Consumer;
 import lambda.model.lambdaterm.InvalidLambdaTermException;
 import lambda.model.lambdaterm.LambdaAbstraction;
 import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.LambdaRoot;
+import lambda.model.lambdaterm.LambdaTermObserver;
 import lambda.model.lambdaterm.LambdaVariable;
 
 /**
@@ -73,13 +76,18 @@ public class AlphaConversionVisitor extends ValidLambdaTermVisitor {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visitValid(LambdaAbstraction node) {
+    public void visitValid(final LambdaAbstraction node) {
         boolean bindsOldColor = node.getColor().equals(oldColor);
         if (bindsOldColor) {
             assert(!colorBound); // Checked in validity test
             colorBound = true;
             if (node.setColor(newColor)) {
-                node.notify(observer -> observer.alphaConverted(node, newColor));
+                node.notify(new Consumer<LambdaTermObserver>(){
+                    @Override
+                    public void accept(LambdaTermObserver observer) {
+                        observer.alphaConverted(node, newColor);
+                    }
+                });
             }
         }
         node.getInside().accept(this);
@@ -95,11 +103,21 @@ public class AlphaConversionVisitor extends ValidLambdaTermVisitor {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visitValid(LambdaVariable node) {
+    public void visitValid(final LambdaVariable node) {
         if (node.getColor().equals(oldColor) && colorBound) {
             if (node.setColor(newColor)) {
-                node.notify(observer -> observer.alphaConverted(node, newColor));
+                node.notify(new Consumer<LambdaTermObserver>(){
+                    @Override
+                    public void accept(LambdaTermObserver observer) {
+                        observer.alphaConverted(node, newColor);
+                    }
+                });
             }
         }
     }
+    
+	@Override
+	public Object getResult() {
+		return null;
+	}
 }

@@ -1,5 +1,6 @@
 package lambda.model.editormode;
 
+import lambda.Consumer;
 import lambda.Observable;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.visitor.CopyVisitor;
@@ -67,13 +68,18 @@ public class EditorModel extends Observable<EditorModelObserver> {
      * @param strategy the new selected reduction strategy
      * @throws IllegalArgumentException if strategy is null
      */
-    public void setStrategy(ReductionStrategy strategy) {
+    public void setStrategy(final ReductionStrategy strategy) {
         if (strategy == null) {
             throw new IllegalArgumentException("Reduction strategy cannot be null!");
         }
         if (strategy != this.strategy) {
             this.strategy = strategy;
-            notify((observer) -> observer.strategyChanged(strategy));
+            notify(new Consumer<EditorModelObserver>(){
+                @Override
+                public void accept(EditorModelObserver observer) {
+                    observer.strategyChanged(strategy);
+                }
+            });
         }
     }
     

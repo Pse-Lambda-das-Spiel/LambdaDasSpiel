@@ -57,5 +57,41 @@ public abstract class ViewController implements Screen, ProfileManagerObserver {
      * 
      * @param manager the asset manager with loaded assets
      */
-    public abstract void create(AssetManager manager);
+    public abstract void create(final AssetManager manager);
+
+	@Override
+	public void changedProfile() {		
+	}
+
+	@Override
+	public void changedProfileList() {		
+	}
+
+	@Override
+	public void show() {		
+	}
+
+	@Override
+	public void render(float delta) {		
+	}
+
+	@Override
+	public void resize(int width, int height) {		
+	}
+
+	@Override
+	public void pause() {		
+	}
+
+	@Override
+	public void resume() {		
+	}
+
+	@Override
+	public void hide() {		
+	}
+
+	@Override
+	public void dispose() {		
+	}
 }

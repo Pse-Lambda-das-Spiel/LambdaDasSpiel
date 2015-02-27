@@ -90,7 +90,7 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
     }
 
     @Override
-    public void create(AssetManager manager) {
+    public void create(final AssetManager manager) {
         profileEdit.addObserver(this);
         this.manager = manager;
         Table nameSelection = new Table();
@@ -193,5 +193,9 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
             });
         }
     }
+
+	@Override
+	public void changedAvatar() {		
+	}
 
 }

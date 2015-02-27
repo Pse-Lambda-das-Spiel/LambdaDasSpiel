@@ -122,4 +122,9 @@ public class ViewInsertionVisitor implements LambdaTermVisitor {
         assert(parent != null);
         inserted.accept(new NodeViewControllerCreator(parent, isRightApplicationChild, viewController, rightSibling));
     }
+
+	@Override
+	public Object getResult() {
+		return null;
+	}
 }

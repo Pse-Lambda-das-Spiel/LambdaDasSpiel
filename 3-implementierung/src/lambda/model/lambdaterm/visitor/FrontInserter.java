@@ -96,4 +96,9 @@ public class FrontInserter implements LambdaTermVisitor {
         application.setRight(sibling);
         return application;
     }
+
+	@Override
+	public Object getResult() {
+		return null;
+	}
 }

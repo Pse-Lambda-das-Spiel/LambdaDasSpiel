@@ -1,6 +1,7 @@
 package lambda.model.levels;
 
-import java.util.function.Supplier;
+import lambda.Supplier;
+import lambda.model.lambdaterm.LambdaTermObserver;
 import lambda.model.lambdaterm.visitor.strategy.BetaReductionVisitor;
 import lambda.model.lambdaterm.visitor.strategy.ReductionStrategyApplicativeOrder;
 import lambda.model.lambdaterm.visitor.strategy.ReductionStrategyCallByName;
@@ -16,19 +17,42 @@ public enum ReductionStrategy {
     /**
      * Represents the reduction strategy "normal order".
      */
-    NORMAL_ORDER(() -> new ReductionStrategyNormalOrder()),
+    NORMAL_ORDER(new Supplier<BetaReductionVisitor>() {
+    	@Override
+    	public BetaReductionVisitor get() {
+    		return new ReductionStrategyNormalOrder();
+        }
+    }),
+    
     /**
      * Represents the reduction strategy "applicative order".
      */
-    APPLICATIVE_ORDER(() -> new ReductionStrategyApplicativeOrder()),
+    APPLICATIVE_ORDER(new Supplier<BetaReductionVisitor>() {
+    	@Override
+    	public BetaReductionVisitor get() {
+    		return new ReductionStrategyApplicativeOrder();
+        }
+    }),
+    
     /**
      * Represents the reduction strategy "call by name".
      */
-    CALL_BY_NAME(() -> new ReductionStrategyCallByName()),
+    CALL_BY_NAME(new Supplier<BetaReductionVisitor>() {
+    	@Override
+    	public BetaReductionVisitor get() {
+    		return new ReductionStrategyCallByName();
+        }
+    }),
+    
     /**
      * Represents the reduction strategy "call by value".
      */
-    CALL_BY_VALUE(() -> new ReductionStrategyCallByValue());
+    CALL_BY_VALUE(new Supplier<BetaReductionVisitor>() {
+    	@Override
+    	public BetaReductionVisitor get() {
+    		return new ReductionStrategyCallByValue();
+        }
+    });
     
     /**
      * Creates new instances of the reduction visitor for this strategy.

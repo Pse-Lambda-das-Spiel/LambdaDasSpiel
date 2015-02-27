@@ -32,10 +32,9 @@ public class LambdaVariable extends LambdaValue {
     public <T> T accept(LambdaTermVisitor<T> visitor) {
         if (visitor != null) {
             visitor.visit(this);
-            return visitor.getResult();
-        } else {
-            return null;
-        }
+            return (T) visitor.getResult();
+        } 
+        return null;
     }
     
     /**

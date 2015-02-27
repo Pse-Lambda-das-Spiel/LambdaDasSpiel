@@ -29,6 +29,7 @@ import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.LambdaTermObserver;
+import lambda.model.lambdaterm.LambdaValue;
 import lambda.model.lambdaterm.LambdaVariable;
 import lambda.model.lambdaterm.visitor.IsValidVisitor;
 import lambda.model.levels.LevelContext;
@@ -86,7 +87,7 @@ public final class EditorViewController extends ViewController implements Editor
     }
     
     @Override
-    public void create(AssetManager manager) {
+    public void create(final AssetManager manager) {
         model.addObserver(this);
         
         // Set up ui elements
@@ -130,7 +131,7 @@ public final class EditorViewController extends ViewController implements Editor
         toolbarElements[2] = LambdaTermViewController.build(variable, false, model.getLevelContext());
         // TODO toolbar background
         
-        Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
+        final Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
         pauseButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
@@ -171,7 +172,7 @@ public final class EditorViewController extends ViewController implements Editor
                         int size = (int) Math.ceil(Math.sqrt(strategies.size()));
                         pad(size * 6);
                         int i = 0;
-                        for (ReductionStrategy strategy: strategies) {
+                        for (final ReductionStrategy strategy: strategies) {
                             if (i++ % size == 0) {
                                 row().space(10);
                             }
@@ -355,4 +356,21 @@ public final class EditorViewController extends ViewController implements Editor
             add(menuButton).width(width).height(height).padBottom(35).padLeft(25).padRight(25);
         }
     }
+
+	@Override
+	public void setColor(LambdaValue term, Color color) {		
+	}
+
+	@Override
+	public void alphaConverted(LambdaValue term, Color color) {		
+	}
+
+	@Override
+	public void applicationStarted(LambdaAbstraction abstraction,
+			LambdaTerm applicant) {		
+	}
+
+	@Override
+	public void variableReplaced(LambdaVariable variable, LambdaTerm replacing) {		
+	}
 }

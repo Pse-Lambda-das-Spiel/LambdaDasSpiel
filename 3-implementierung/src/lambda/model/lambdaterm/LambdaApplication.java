@@ -1,6 +1,8 @@
 package lambda.model.lambdaterm;
 
 import java.util.Objects;
+
+import lambda.Consumer;
 import lambda.model.lambdaterm.visitor.LambdaTermVisitor;
 
 /**
@@ -43,14 +45,19 @@ public class LambdaApplication extends LambdaTerm {
      * @param left the new left child node
      * @return true if the left term has changed, false otherwise
      */
-    public boolean setLeft(LambdaTerm left) {
-        LambdaTerm oldLeft = this.left;
+    public boolean setLeft(final LambdaTerm left) {
+        final LambdaTerm oldLeft = this.left;
         this.left = left;
         if (left != null) {
             left.setParent(this);
         }
         if (oldLeft != left) {
-            notify((observer) -> observer.replaceTerm(oldLeft, left));
+            notify(new Consumer<LambdaTermObserver>(){
+                @Override
+                public void accept(LambdaTermObserver observer) {
+                    observer.replaceTerm(oldLeft, left);
+                }
+            });
         }
         return oldLeft != left;
     }
@@ -70,14 +77,19 @@ public class LambdaApplication extends LambdaTerm {
      * @param right the new right child node
      * @return true if the right term has changed, false otherwise
      */
-    public boolean setRight(LambdaTerm right) {
-        LambdaTerm oldRight = this.right;
+    public boolean setRight(final LambdaTerm right) {
+        final LambdaTerm oldRight = this.right;
         this.right = right;
         if (right != null) {
             right.setParent(this);
         }
         if (oldRight != right) {
-            notify((observer) -> observer.replaceTerm(oldRight, right));
+            notify(new Consumer<LambdaTermObserver>(){
+                @Override
+                public void accept(LambdaTermObserver observer) {
+                    observer.replaceTerm(oldRight, right);
+                }
+            });
         }
         return oldRight != right;
     }
@@ -93,10 +105,9 @@ public class LambdaApplication extends LambdaTerm {
     public <T> T accept(LambdaTermVisitor<T> visitor) {
         if (visitor != null) {
             visitor.visit(this);
-            return visitor.getResult();
-        } else {
-            return null;
+            return (T) visitor.getResult();
         }
+            return null;
     }
     
     /**

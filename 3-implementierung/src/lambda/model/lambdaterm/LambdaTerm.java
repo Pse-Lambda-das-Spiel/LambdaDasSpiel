@@ -1,6 +1,6 @@
 package lambda.model.lambdaterm;
 
-import java.util.function.Consumer;
+import lambda.Consumer;
 import lambda.Observable;
 import lambda.model.lambdaterm.visitor.CopyVisitor;
 import lambda.model.lambdaterm.visitor.IsValidVisitor;
@@ -130,8 +130,7 @@ public abstract class LambdaTerm extends Observable<LambdaTermObserver> {
         temp.setChild(this.accept(new CopyVisitor()));
         if (temp.accept(new IsValidVisitor())) {
             return temp.accept(new ToStringVisitor());
-        } else {
-            return "Invalid";
         }
+            return "Invalid";
     }
 }

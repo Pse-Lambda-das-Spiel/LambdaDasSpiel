@@ -108,7 +108,7 @@ public class AssetViewController extends ViewController {
      * Called when the view controller is created.
      */
     @Override
-    public void create(AssetManager manager) {
+    public void create(final AssetManager manager) {
         // UI elements for loading screen are set up in the constructor
     	
     	// only tmp moved until levelvc is finished

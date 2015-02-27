@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 
+import lambda.Consumer;
 import lambda.Observable;
 
 /**
@@ -76,7 +77,12 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
                 if (!currentProfile.getName().equals("")) {
                     ProfileLoadHelper.loadIntoShop(currentProfile.getName());
                 }
-                notify(o -> o.changedProfile());
+                notify(new Consumer<ProfileManagerObserver>(){
+                    @Override
+                    public void accept(ProfileManagerObserver observer) {
+                        observer.changedProfile();;
+                    }
+                });
                 return true;
             }
         }
@@ -113,7 +119,12 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
         delete(currentProfile.getName());
         currentProfile = newProfile;
         saveNames();
-        notify(o -> o.changedProfileList());
+        notify(new Consumer<ProfileManagerObserver>(){
+            @Override
+            public void accept(ProfileManagerObserver observer) {
+                observer.changedProfileList();;
+            }
+        });
         return true;
     }
 
@@ -148,7 +159,12 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
             }
             ProfileModel newProfile = new ProfileModel("");
             profiles.add(newProfile);
-            notify(o -> o.changedProfileList());
+            notify(new Consumer<ProfileManagerObserver>(){
+                @Override
+                public void accept(ProfileManagerObserver observer) {
+                    observer.changedProfileList();
+                }
+            });
             return newProfile;
         }
         return null;
@@ -202,7 +218,12 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
                         .deleteDirectory();
             }
             saveNames();
-            notify(o -> o.changedProfileList());
+            notify(new Consumer<ProfileManagerObserver>(){
+                @Override
+                public void accept(ProfileManagerObserver observer) {
+                    observer.changedProfileList();
+                }
+            });
         }
     }
 

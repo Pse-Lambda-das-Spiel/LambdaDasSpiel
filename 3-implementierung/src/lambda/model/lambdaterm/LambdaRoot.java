@@ -1,7 +1,7 @@
 package lambda.model.lambdaterm;
 
 import java.util.Objects;
-import lambda.NotifyAction;
+import lambda.Consumer;
 import lambda.model.lambdaterm.visitor.IsValidVisitor;
 import lambda.model.lambdaterm.visitor.LambdaTermVisitor;
 import lambda.model.lambdaterm.visitor.ToStringVisitor;
@@ -39,16 +39,16 @@ public class LambdaRoot extends LambdaTerm {
      * @param child the new child node
      * @return true if the child term has changed, false otherwise
      */
-    public boolean setChild(LambdaTerm child) {
-        LambdaTerm oldChild = this.child;
+    public boolean setChild(final LambdaTerm child) {
+        final LambdaTerm oldChild = this.child;
         this.child = child;
         if (child != null) {
             child.setParent(this);
         }
         if (oldChild != child) {
-            notify(new NotifyAction<LambdaTermObserver>(){
+            notify(new Consumer<LambdaTermObserver>(){
                 @Override
-                public void notify(LambdaTermObserver observer) {
+                public void accept(LambdaTermObserver observer) {
                     observer.replaceTerm(oldChild, child);
                 }
             });
@@ -65,12 +65,11 @@ public class LambdaRoot extends LambdaTerm {
      */
     @Override
     public <T> T accept(LambdaTermVisitor<T> visitor) {
-        if (visitor != null) {
-            visitor.visit(this);
-            return visitor.getResult();
-        } else {
-            return null;
-        }
+    	 if (visitor != null) {
+             visitor.visit(this);
+             return (T) visitor.getResult();
+         }
+    	return null;
     }
     
     /**
@@ -107,8 +106,7 @@ public class LambdaRoot extends LambdaTerm {
     public String toString() {
         if (this.accept(new IsValidVisitor())) {
             return this.accept(new ToStringVisitor());
-        } else {
-            return "Invalid";
-        }
+        } 
+        return "Invalid";
     }
 }

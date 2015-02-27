@@ -106,7 +106,7 @@ public class ShopViewController extends ViewController implements ProfileModelOb
     }
 
     @Override
-    public void create(AssetManager manager) {
+    public void create(final AssetManager manager) {
        
         skin = manager.get(masterSkin, Skin.class); 
         shop.setAllAssets(manager);
@@ -135,7 +135,7 @@ public class ShopViewController extends ViewController implements ProfileModelOb
         /*
          *  CATEGORY: MUSIC
          */
-        ImageButton musicTypeButton = new ImageButton(getImageButtonStyle("musicType"));
+        final ImageButton musicTypeButton = new ImageButton(getImageButtonStyle("musicType"));
         musicTypeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -152,7 +152,7 @@ public class ShopViewController extends ViewController implements ProfileModelOb
         /*
          * CATEGORY: IMAGES
          */
-        ImageButton bgImageTypeButton = new ImageButton(manager.get(masterSkin, Skin.class), "imageType");
+        final ImageButton bgImageTypeButton = new ImageButton(manager.get(masterSkin, Skin.class), "imageType");
         bgImageTypeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -170,7 +170,7 @@ public class ShopViewController extends ViewController implements ProfileModelOb
         /*
          * CATEGORY: ELEMENTS
          */
-        ImageButton elementUITypeButton = new ImageButton(manager.get(masterSkin, Skin.class), "elementType");
+        final ImageButton elementUITypeButton = new ImageButton(manager.get(masterSkin, Skin.class), "elementType");
         elementUITypeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -250,4 +250,8 @@ public class ShopViewController extends ViewController implements ProfileModelOb
     public static Stage getStage() {
         return stage;
     }
+
+	@Override
+	public void changedLevelIndex() {		
+	}
 }

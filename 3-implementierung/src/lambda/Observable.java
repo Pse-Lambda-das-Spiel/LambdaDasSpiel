@@ -2,7 +2,6 @@ package lambda;
 
 import java.util.LinkedList;
 import java.util.List;
-import lambda.NotifyAction;
 
 /**
  * Represents an object in the observer pattern that can be observed by multiple observers.
@@ -65,12 +64,12 @@ public class Observable<Observer> {
      * @param message the function to call on all consumers
      * @throws IllegalArgumentException if message is null
      */
-    public void notify(NotifyAction<Observer> message) {
+    public void notify(Consumer<Observer> message) {
         if (message == null) {
             throw new IllegalArgumentException("Message cannot be null!");
         }
         for (Observer observer : observers) {
-            message.notify(observer);
+            message.accept(observer);
         }
     }
 }

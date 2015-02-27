@@ -14,8 +14,7 @@ public interface LambdaTermObserver {
      * @param oldTerm the old term to be replaced
      * @param newTerm the new replacing term
      */
-    default public void replaceTerm(LambdaTerm oldTerm, LambdaTerm newTerm) {
-    }
+    public void replaceTerm(LambdaTerm oldTerm, LambdaTerm newTerm);
     
     /**
      * Is called when the given term's color is changed.
@@ -23,8 +22,7 @@ public interface LambdaTermObserver {
      * @param term the modified term
      * @param color the new color
      */
-    default public void setColor(LambdaValue term, Color color) {
-    }
+    public void setColor(LambdaValue term, Color color);
     
     /**
      * Called when the given values color is changed during an alpha conversion.
@@ -32,8 +30,7 @@ public interface LambdaTermObserver {
      * @param term the modified term
      * @param color the new color
      */
-    default public void alphaConverted(LambdaValue term, Color color) {
-    }
+    public void alphaConverted(LambdaValue term, Color color);
     
     /**
      * Called when an application is started.
@@ -41,8 +38,7 @@ public interface LambdaTermObserver {
      * @param abstraction the applied abstraction
      * @param applicant the applicant
      */
-    default public void applicationStarted(LambdaAbstraction abstraction, LambdaTerm applicant) {
-    }
+    public void applicationStarted(LambdaAbstraction abstraction, LambdaTerm applicant);
     
     /**
      * Called when the given variable is replaced by the given term during a beta reduction.
@@ -50,6 +46,5 @@ public interface LambdaTermObserver {
      * @param variable the removed applicant
      * @param replacing the replacing term
      */
-    default public void variableReplaced(LambdaVariable variable, LambdaTerm replacing) {
-    }
+    public void variableReplaced(LambdaVariable variable, LambdaTerm replacing);
 }

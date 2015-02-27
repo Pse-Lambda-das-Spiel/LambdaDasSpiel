@@ -4,7 +4,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
-import java.util.function.Consumer;
+
+import lambda.Consumer;
 import lambda.model.lambdaterm.LambdaTerm;
 
 /**

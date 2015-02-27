@@ -2,6 +2,8 @@ package lambda.model.lambdaterm;
 
 import java.awt.Color;
 import java.util.Objects;
+
+import lambda.Consumer;
 import lambda.model.lambdaterm.visitor.LambdaTermVisitor;
 
 /**
@@ -42,14 +44,19 @@ public class LambdaAbstraction extends LambdaValue {
      * @param inside the new child node
      * @return true if the inside term has changed, false otherwise
      */
-    public boolean setInside(LambdaTerm inside) {
-        LambdaTerm oldInside = this.inside;
+    public boolean setInside(final LambdaTerm inside) {
+        final LambdaTerm oldInside = this.inside;
         this.inside = inside;
         if (inside != null) {
             inside.setParent(this);
         }
         if (oldInside != inside) {
-            notify((observer) -> observer.replaceTerm(oldInside, inside));
+            notify(new Consumer<LambdaTermObserver>(){
+                @Override
+                public void accept(LambdaTermObserver observer) {
+                    observer.replaceTerm(oldInside, inside);
+                }
+            });
         }
         return oldInside != inside;
     }
@@ -65,10 +72,9 @@ public class LambdaAbstraction extends LambdaValue {
     public <T> T accept(LambdaTermVisitor<T> visitor) {
         if (visitor != null) {
             visitor.visit(this);
-            return visitor.getResult();
-        } else {
-            return null;
-        }
+            return (T) visitor.getResult();
+        } 
+        return null;
     }
     
     /**

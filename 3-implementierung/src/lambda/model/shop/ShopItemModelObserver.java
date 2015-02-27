@@ -8,16 +8,12 @@ public interface ShopItemModelObserver {
     /**
      * @param purchased
      */
-    default void purchasedChanged(boolean purchased) {
-
-    }
+    public void purchasedChanged(boolean purchased);
 
 
     /**
      *
      * @param activated
      */
-     default void activatedChanged(boolean activated) {
-
-     }
+     public void activatedChanged(boolean activated);
 }

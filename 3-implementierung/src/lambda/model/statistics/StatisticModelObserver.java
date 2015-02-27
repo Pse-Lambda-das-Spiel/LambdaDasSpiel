@@ -15,98 +15,76 @@ public interface StatisticModelObserver {
      * as the total number of enchanted lambs in all levels is changed. 
      * The default implementation is empty.
      */
-	default void changedLambsEnchanted() {
-		
-	}
+	public void changedLambsEnchanted();
 	
 	/**
      * Gets called by an observed StatisticModel object 
      * as the total number of enchanted gems in all level is changed. 
      * The default implementation is empty.
      */
-	default void changedGemsEnchanted() {
-		
-	}
+	public void changedGemsEnchanted();
 	
 	/**
      * Gets called by an observed StatisticModel object 
      * as the total number of placed lambs in all level is changed. 
      * The default implementation is empty.
      */
-	default void changedLambsPlaced() {
-		
-	}
+	public void changedLambsPlaced();
 	
 	/**
      * Gets called by an observed StatisticModel object 
      * as the total number of placed gems in all level is changed. 
      * The default implementation is empty.
      */
-	default void changedGemsPlaced() {
-		
-	}
+	public void changedGemsPlaced();
 	
 	/**
      * Gets called by an observed StatisticModel object 
      * as the highest number of enchanted lambs in a single level is changed. 
      * The default implementation is empty.
      */
-	default void changedLambsEnchantedPerLevel() {
-		
-	}
+	public void changedLambsEnchantedPerLevel();
 	
 	/**
      * Gets called by an observed StatisticModel object 
      * as the highest number of enchanted gems in a single level is changed. 
      * The default implementation is empty.
      */
-	default void changedGemsEnchantedPerLevel() {
-		
-	}
+	public void changedGemsEnchantedPerLevel();
 	
 	/**
      * Gets called by an observed StatisticModel object 
      * as the highest number of placed lambs in a single level is changed. 
      * The default implementation is empty.
      */
-	default void changedLambsPlacedPerLevel() {
-		
-	}
+	public void changedLambsPlacedPerLevel();
 	
 	/**
      * Gets called by an observed StatisticModel object 
      * as the highest number of placed gems in a single level is changed. 
      * The default implementation is empty.
      */
-	default void changedGemsPlacedPerLevel() {
-		
-	}
+	public void changedGemsPlacedPerLevel();
 	
 	/**
      * Gets called by an observed StatisticModel object 
      * as the number of completed level (one completed level counts only once) is changed. 
      * The default implementation is empty.
      */
-	default void changedLevelCompleted() {
-		
-	}
+	public void changedLevelCompleted();
 	
 	/**
      * Gets called by an observed StatisticModel object 
      * as the  number of not used hints (hint not used to solve level, counts only once) is changed. 
      * The default implementation is empty.
      */
-	default void changedHintsNotUsed() {
-		
-	}
+	public void changedHintsNotUsed();
 	
 	/**
      * Gets called by an observed StatisticModel object 
      * as the played game time is changed. 
      * The default implementation is empty.
      */
-	default void changedTimePlayed() {
-		
-	}
+	public void changedTimePlayed();
 	
 }

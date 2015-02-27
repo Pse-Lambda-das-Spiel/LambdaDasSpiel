@@ -87,4 +87,9 @@ public class ViewRemovalVisitor implements LambdaTermVisitor {
         LambdaNodeViewController actor = viewController.getNode(node);
         actor.getParentNode().removeChild(actor);
     }
+
+	@Override
+	public Object getResult() {
+		return null;
+	}
 }

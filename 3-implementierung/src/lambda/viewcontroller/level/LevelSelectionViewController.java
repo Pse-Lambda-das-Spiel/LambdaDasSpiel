@@ -88,7 +88,7 @@ public class LevelSelectionViewController extends ViewController {
     }
 
     @Override
-    public void create(AssetManager manager) {
+    public void create(final AssetManager manager) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

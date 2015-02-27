@@ -1,9 +1,11 @@
 package lambda.model.lambdaterm.visitor.strategy;
 
+import lambda.Consumer;
 import lambda.model.lambdaterm.LambdaAbstraction;
 import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.InvalidLambdaTermException;
 import lambda.model.lambdaterm.LambdaTerm;
+import lambda.model.lambdaterm.LambdaTermObserver;
 import lambda.model.lambdaterm.visitor.ApplicationVisitor;
 
 /**
@@ -63,7 +65,7 @@ public class ReductionStrategyApplicativeOrder extends BetaReductionVisitor {
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
     @Override
-    public void visitValid(LambdaAbstraction node) {
+    public void visitValid(final LambdaAbstraction node) {
         if (!hasReduced) {
             // Traverse down the tree
             LambdaTerm myApplicant = applicant; // Save applicant since it can be changed down the tree
@@ -72,7 +74,12 @@ public class ReductionStrategyApplicativeOrder extends BetaReductionVisitor {
             
             if (!hasReduced && myApplicant != null) {
                 // No reduction performed in inner term and applicant is given => perform application
-                node.notify(observer -> observer.applicationStarted(node, applicant));
+                node.notify(new Consumer<LambdaTermObserver>(){
+                    @Override
+                    public void accept(LambdaTermObserver observer) {
+                    	observer.applicationStarted(node, applicant);
+                    }
+                });
                 result = node.getInside().accept(new ApplicationVisitor(node.getColor(), myApplicant));
                 hasReduced = true;
             } else {

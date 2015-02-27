@@ -277,4 +277,8 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
         LambdaTermViewController vc = (LambdaTermViewController) other;
         return this.editable == vc.editable && this.root.equals(vc.root);
     }
+
+	@Override
+	public void alphaConverted(LambdaValue term, Color color) {		
+	}
 }

@@ -104,7 +104,7 @@ public class ProfileEditAvatar extends ViewController implements ProfileEditObse
     }
 
     @Override
-    public void create(AssetManager manager) {
+    public void create(final AssetManager manager) {
         profileEdit.addObserver(this);
         this.manager = manager;
         
@@ -188,12 +188,12 @@ public class ProfileEditAvatar extends ViewController implements ProfileEditObse
     private class acceptClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
-            ProfileManager m = ProfileManager.getManager();
+            final ProfileManager m = ProfileManager.getManager();
             m.getCurrentProfile().setAvatar(profileEdit.getAvatar());
             m.save(m.getCurrentProfile().getName());
             if (newProfile) {
                 m.setCurrentProfile(m.getCurrentProfile().getName());
-                Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
+                final Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
                 new Dialog("", dialogSkin) {
                     private boolean changedToMainMenu = false;
                     {
