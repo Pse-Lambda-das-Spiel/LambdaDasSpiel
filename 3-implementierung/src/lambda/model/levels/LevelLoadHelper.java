@@ -42,7 +42,7 @@ public final class LevelLoadHelper {
 		String levelId = String.format("%02d", level.getInt("levelId"));
 		if (!(levelId.equals(file.nameWithoutExtension()))) {
 			throw new InvalidJsonException("The id of the json file " + file.name() 
-																		+  "does not match with its file name!");
+																		+  " does not match with its file name!");
 		}
 		JsonValue availableRedStrats = level.get("availableRedStrats");
 		JsonValue useableElements = level.get("useableElements");
@@ -130,17 +130,15 @@ public final class LevelLoadHelper {
 	}
 	
 	private static LambdaAbstraction convertJsonToAbstraction(JsonValue value, LambdaTerm parent) {
-		JsonValue color = value.get("color");
-		Color rgbColor = new Color(color.getInt("r"), color.getInt("g"), color.getInt("b"), 0);
-		LambdaAbstraction abstraction = new LambdaAbstraction(parent, rgbColor, value.getBoolean("locked"));
+		LambdaAbstraction abstraction = new LambdaAbstraction(parent, setColor(value.getString("color")),
+				value.getBoolean("locked"));
 		abstraction.setInside(selectNextNode(value.get("inside"), abstraction));
 		return abstraction;
 	}
 	
 	private static LambdaVariable convertJsonToVariable(JsonValue value, LambdaTerm parent) {
-		JsonValue color = value.get("color");
-		Color rgbColor = new Color(color.getInt("r"), color.getInt("g"), color.getInt("b"), 0);
-		LambdaVariable variable = new LambdaVariable(parent, rgbColor, value.getBoolean("locked"));
+		LambdaVariable variable = new LambdaVariable(parent, setColor(value.getString("color")), 
+				value.getBoolean("locked"));
 		return variable;
 	}
 	
@@ -164,8 +162,33 @@ public final class LevelLoadHelper {
 		}
 		return nextNode;
 	}
+	
+	
+	private static Color setColor(String color) {
+		/* 
+		 * other colors needed ? not all colors usable in the mask in a level ?(it should be only six colors for the mask),
+		 * if you want to add specific colors than add them in the rgba format where each component
+		 */
+		switch(color) {
+		case "blue":
+			return Color.BLUE;
+		case "red":
+			return Color.RED;
+		case "yellow":
+			return Color.YELLOW;
+		case "green":
+			return Color.GREEN;
+		case "orange":
+			return Color.ORANGE;
+		case "cyan":
+			return Color.CYAN;
+		case "white":
+			return Color.WHITE;
+		default:
+			throw new InvalidJsonException("Invalid color!");
+		}
+	}
 
-	//Internal file listing does not work on the desktop
 	/**
 	 * Returns an array which contains the path to all level files
 	 *
@@ -175,9 +198,10 @@ public final class LevelLoadHelper {
 		FileHandle file = Gdx.files.internal("data/levels/numberOfLevels.json");
 		JsonReader reader = new JsonReader();
 		JsonValue jsonFile = reader.parse(file);
+		// numberOfLevel is only the number of the regular levels, the sandbox (level 0) is special
 		int numberOfLevels = jsonFile.getInt("numberOfLevels");
-		String[] levelFilePaths = new String[numberOfLevels];
-		for (int i = 0; i < numberOfLevels; i++) {
+		String[] levelFilePaths = new String[numberOfLevels + 1];
+		for (int i = 0; i <= numberOfLevels; i++) {
 			levelFilePaths[i] = "data/levels/" + String.format("%02d", i) + ".json";
 		}
 		return levelFilePaths;

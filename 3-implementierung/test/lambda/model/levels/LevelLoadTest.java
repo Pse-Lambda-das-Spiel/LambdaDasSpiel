@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import lambda.GdxTestRunner;
@@ -19,7 +20,6 @@ import lambda.viewcontroller.level.TutorialMessage;
 import org.junit.*;
 import org.junit.runner.RunWith;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -57,20 +57,20 @@ public class LevelLoadTest {
 		// Do you know any better way to initialize the lambdaterm constellations?
 		
 		// Initialize the test start constellation: (lx.x)y, lx is blue, x is white, y is white
-		LambdaApplication startApplication = new LambdaApplication(null, true);
-		LambdaAbstraction startAbstraction = new LambdaAbstraction(null, new Color(0, 0, 255), false);
-		startAbstraction.setInside(new LambdaVariable(null, new Color(255, 255, 255), false));
+		LambdaApplication startApplication = new LambdaApplication(start, true);
+		LambdaAbstraction startAbstraction = new LambdaAbstraction(startApplication, new Color(Color.BLUE), false);
+		startAbstraction.setInside(new LambdaVariable(startAbstraction, new Color(Color.WHITE), false));
 		startApplication.setLeft(startAbstraction);
-		startApplication.setRight(new LambdaVariable(null, new Color(255, 255, 255), false));
+		startApplication.setRight(new LambdaVariable(startApplication, new Color(Color.WHITE), false));
 		start.setChild(startApplication);
 		// Initialize the test goal constellation: y, y is red
-		goal.setChild(new LambdaVariable(null, new Color(255, 0, 0), false));
+		goal.setChild(new LambdaVariable(goal, new Color(Color.RED), false));
 		// Initialize the hint start constellation: (lx.x)y, lx is blue, x is blue, y is white
-		LambdaApplication hintApplication = new LambdaApplication(null, true);
-		LambdaAbstraction hintAbstraction = new LambdaAbstraction(null, new Color(0, 0, 255), false);
-		hintAbstraction.setInside(new LambdaVariable(null, new Color(0, 0, 255), false));
+		LambdaApplication hintApplication = new LambdaApplication(hint, true);
+		LambdaAbstraction hintAbstraction = new LambdaAbstraction(null, new Color(Color.BLUE), false);
+		hintAbstraction.setInside(new LambdaVariable(hintAbstraction, new Color(Color.BLUE), false));
 		hintApplication.setLeft(hintAbstraction);
-		hintApplication.setRight(new LambdaVariable(null, new Color(255, 255, 255), false));
+		hintApplication.setRight(new LambdaVariable(hintApplication, new Color(Color.WHITE), false));
 		hint.setChild(hintApplication);
 		testLevel = new LevelModel(3, start, goal, hint, tutorial, availableRedStrats, useableElements, 1, 10, true);
 	}
