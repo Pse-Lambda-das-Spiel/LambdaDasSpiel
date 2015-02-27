@@ -3,16 +3,14 @@ package lambda.viewcontroller.shop;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton.ImageTextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
 import lambda.model.profiles.ProfileManager;
 import lambda.model.profiles.ProfileModel;
 import lambda.model.profiles.ProfileModelObserver;
@@ -20,14 +18,14 @@ import lambda.model.shop.BackgroundImageItemModel;
 import lambda.model.shop.ElementUIContextFamily;
 import lambda.model.shop.MusicItemModel;
 import lambda.model.shop.ShopModel;
-import lambda.viewcontroller.ViewController;
+import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
 
 
 /**
  * @author Kay Schmitteckert
  */
-public class ShopViewController extends ViewController implements ProfileModelObserver {
+public class ShopViewController extends StageViewController implements ProfileModelObserver {
 
     private ShopModel shop;
     private ProfileModel profile;
@@ -41,7 +39,6 @@ public class ShopViewController extends ViewController implements ProfileModelOb
     private DropDownMenuViewController<BackgroundImageItemModel> bgImages;
     private DropDownMenuViewController<ElementUIContextFamily> elementUIs;
 
-    private static Stage stage;
     private final String masterSkin = "data/skins/MasterSkin.json";
     
     private static Skin skin;
@@ -52,7 +49,6 @@ public class ShopViewController extends ViewController implements ProfileModelOb
 
     public ShopViewController() {
         shop = ShopModel.getShop();
-        stage = new Stage(new ScreenViewport());
         profile = new ProfileModel("");
         profile.addObserver(this);
         ProfileManager.getManager().addObserver(this);
@@ -71,38 +67,8 @@ public class ShopViewController extends ViewController implements ProfileModelOb
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(stage);
+       super.show();
         coins.setText(Integer.toString(ProfileManager.getManager().getCurrentProfile().getCoins()));
-    }
-
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act(delta);
-        stage.draw();
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        stage.getViewport().setScreenSize(width, height);
-    }
-
-    @Override
-    public void pause() {
-    }
-
-    @Override
-    public void resume() {
-    }
-
-    @Override
-    public void hide() {
-    }
-
-    @Override
-    public void dispose() {
-        stage.dispose();
     }
 
     @Override
@@ -112,10 +78,10 @@ public class ShopViewController extends ViewController implements ProfileModelOb
         shop.setAllAssets(manager);
         Table mainTable = new Table();
         mainTable.setFillParent(true);
-        stage.addActor(mainTable);
-        music = new DropDownMenuViewController<MusicItemModel>(shop.getMusic());
-        bgImages = new DropDownMenuViewController<BackgroundImageItemModel>(shop.getImages());
-        elementUIs = new DropDownMenuViewController<ElementUIContextFamily>(shop.getElementUIContextFamilies());
+        getStage().addActor(mainTable);
+        music = new DropDownMenuViewController<MusicItemModel>(shop.getMusic(), getStage());
+        bgImages = new DropDownMenuViewController<BackgroundImageItemModel>(shop.getImages(), getStage());
+        elementUIs = new DropDownMenuViewController<ElementUIContextFamily>(shop.getElementUIContextFamilies(), getStage());
         
         /*
          * BACK-BUTTON
@@ -194,7 +160,7 @@ public class ShopViewController extends ViewController implements ProfileModelOb
         
         // VerticalGroup which includes the different categories
         table = new VerticalGroup().align(Align.top).pad(15);
-        stage.addActor(table);
+        getStage().addActor(table);
         table.addActor(musicTypeButton);
         //MUSIC        
         musicTable = new VerticalGroup().align(Align.center);
@@ -246,9 +212,6 @@ public class ShopViewController extends ViewController implements ProfileModelOb
     
     public static Skin getSkin() {
         return skin;
-    }
-    public static Stage getStage() {
-        return stage;
     }
 
 	@Override

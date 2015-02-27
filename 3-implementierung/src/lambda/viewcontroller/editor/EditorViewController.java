@@ -1,13 +1,10 @@
 package lambda.viewcontroller.editor;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -17,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,22 +31,19 @@ import lambda.model.lambdaterm.visitor.IsValidVisitor;
 import lambda.model.levels.LevelContext;
 import lambda.model.levels.ReductionStrategy;
 import lambda.model.profiles.ProfileManager;
-import lambda.viewcontroller.ViewController;
+import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.lambdaterm.LambdaTermViewController;
 import lambda.viewcontroller.lambdaterm.draganddrop.LambdaTermDragSource;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
 import lambda.viewcontroller.reduction.ReductionViewController;
 
 /**
- * The viewconroller for the editor stage of a level.
+ * The viewconroller for the editor getStage() of a level.
  * 
  * @author Florian Fervers
  */
-public final class EditorViewController extends ViewController implements EditorModelObserver, LambdaTermObserver {
-    /**
-     * Contains all actors that are displayed in this viewcontroller.
-     */
-    private final Stage stage;
+public final class EditorViewController extends StageViewController implements EditorModelObserver, LambdaTermObserver {
+	
     /**
      * The viewcontroller of the term that is being edited.
      */
@@ -72,7 +65,6 @@ public final class EditorViewController extends ViewController implements Editor
      * Creates a new instance of EditorViewController.
      */
     public EditorViewController() {
-        stage = new Stage(new ScreenViewport());
         term = null;
         model = new EditorModel();
         background = null;
@@ -92,7 +84,7 @@ public final class EditorViewController extends ViewController implements Editor
         
         // Set up ui elements
         Table main = new Table();
-        stage.addActor(main);
+        getStage().addActor(main);
         main.setFillParent(true);
         main.setDebug(true); // TODO remove
         
@@ -105,11 +97,11 @@ public final class EditorViewController extends ViewController implements Editor
         ImageButton finishedButton = new ImageButton(manager.get("data/skins/levelSkin.json", Skin.class), "......");
         
         Table leftToolBar = new Table();
-        leftToolBar.add(pauseButton).size(0.10f * stage.getWidth(), 0.10f * stage.getWidth()).top();
+        leftToolBar.add(pauseButton).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
         leftToolBar.row();
-        leftToolBar.add(hintButton).size(0.10f * stage.getWidth(), 0.10f * stage.getWidth()).top();
+        leftToolBar.add(hintButton).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
         leftToolBar.row();
-        leftToolBar.add(helpButton).size(0.10f * stage.getWidth(), 0.10f * stage.getWidth()).top();
+        leftToolBar.add(helpButton).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
         
         Table bottomToolBar = new Table();
         bottomToolBar.setBackground(new TextureRegionDrawable(manager.get("data/skins/levelSkin.pack", TextureAtlas.class).findRegion("bar")));
@@ -117,7 +109,7 @@ public final class EditorViewController extends ViewController implements Editor
         main.add(leftToolBar).expandY().left().top();
         main.add(targetButton).right().top();
         main.row();
-        main.add(bottomToolBar).height(0.15f * stage.getHeight()).expandX().bottom();
+        main.add(bottomToolBar).height(0.15f * getStage().getHeight()).expandX().bottom();
         
         // Tool bar
         LambdaRoot abstraction = new LambdaRoot();
@@ -136,26 +128,26 @@ public final class EditorViewController extends ViewController implements Editor
             @Override
             public void clicked(InputEvent event, float x, float y){
                 new PauseDialog(dialogSkin, manager.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
-                        I18NBundle.class)).show(stage);
+                        I18NBundle.class)).show(getStage());
             }
         });
         hintButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                new HintDialog(dialogSkin, /*get levelcontext*/null, stage.getWidth(), stage.getHeight()).show(stage);
+                new HintDialog(dialogSkin, /*get levelcontext*/null, getStage().getWidth(), getStage().getHeight()).show(getStage());
             }
         });
         helpButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
                 new HelpDialog(dialogSkin, manager.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
-                        I18NBundle.class), stage.getWidth(), stage.getHeight()).show(stage);
+                        I18NBundle.class), getStage().getWidth(), getStage().getHeight()).show(getStage());
             }
         });
         targetButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                new TargetDialog(dialogSkin, /*get levelcontext*/null, stage.getWidth(), stage.getHeight()).show(stage);
+                new TargetDialog(dialogSkin, /*get levelcontext*/null, getStage().getWidth(), getStage().getHeight()).show(getStage());
             }
         });
         reductionStrategyButton.addListener(new ClickListener(){
@@ -187,7 +179,7 @@ public final class EditorViewController extends ViewController implements Editor
                             add(stratButton);
                         }
                     }
-                }.show(stage);
+                }.show(getStage());
             }
         });
         finishedButton.addListener(new ClickListener(){
@@ -220,7 +212,7 @@ public final class EditorViewController extends ViewController implements Editor
             term.remove();
         }
         term = LambdaTermViewController.build(context.getLevelModel().getStart(), true, context);
-        stage.addActor(term);
+        getStage().addActor(term);
         term.toBack();
         
         // Reset background image
@@ -228,7 +220,7 @@ public final class EditorViewController extends ViewController implements Editor
             background.remove();
         }
         background = context.getBgImage();
-        stage.addActor(background);
+        getStage().addActor(background);
         background.toBack();
         
         model.getTerm().addObserver(this);
@@ -253,58 +245,10 @@ public final class EditorViewController extends ViewController implements Editor
      */
     @Override
     public void show() {
+    	super.show();
         if (term == null) {
             throw new IllegalStateException("Cannot show the editor viewController without calling reset before!");
         }
-        Gdx.input.setInputProcessor(stage);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act(delta);
-        stage.draw();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void pause() {		
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void resume() {		
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void hide() {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void dispose() {
-        stage.dispose();
     }
 
     /**
@@ -320,8 +264,8 @@ public final class EditorViewController extends ViewController implements Editor
     private class PauseDialog extends Dialog {
         public PauseDialog(Skin dialogSkin, I18NBundle language) {
             super("", dialogSkin);
-            float width = stage.getWidth()*0.7f;
-            float height = stage.getHeight()/5;
+            float width = getStage().getWidth()*0.7f;
+            float height = getStage().getHeight()/5;
             row();
             TextButton continueButton = new TextButton(language.get("continue"), dialogSkin);
             continueButton.addListener(new ClickListener() {

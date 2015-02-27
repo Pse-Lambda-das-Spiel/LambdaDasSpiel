@@ -1,9 +1,10 @@
 package lambda.viewcontroller.statistics;
 
 import com.badlogic.gdx.assets.AssetManager;
-import lambda.viewcontroller.ViewController;
 
-public class StatisticViewController extends ViewController {
+import lambda.viewcontroller.StageViewController;
+
+public class StatisticViewController extends StageViewController {
 
 	public StatisticViewController() {
 	}

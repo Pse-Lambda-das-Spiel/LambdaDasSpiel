@@ -1,12 +1,9 @@
 package lambda.viewcontroller.settings;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -18,15 +15,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.I18NBundle;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import lambda.model.profiles.ProfileManager;
 import lambda.model.profiles.ProfileModel;
 import lambda.model.settings.SettingsModel;
-import lambda.viewcontroller.AudioManager;
-import lambda.viewcontroller.ViewController;
+import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
-import lambda.viewcontroller.profiles.ProfileEditLang;
 import lambda.viewcontroller.statistics.StatisticViewController;
 
 /**
@@ -34,10 +28,9 @@ import lambda.viewcontroller.statistics.StatisticViewController;
  * 
  * @author Kai Fieger
  */
-public class SettingsViewController extends ViewController {
+public class SettingsViewController extends StageViewController {
 
     private final String skinJson = "data/skins/SettingsSkin.json";
-    private final Stage stage;
     private SettingsModel settings;
     private TextButton statistics;
     private Slider musicSlider;
@@ -51,10 +44,9 @@ public class SettingsViewController extends ViewController {
      * Creates a object of the class without initializing the screen.
      */
 	public SettingsViewController() {
-        stage = new Stage(new ScreenViewport());
         ProfileManager.getManager().addObserver(this);
         settings = new SettingsModel();
-        space = stage.getWidth() / 64;
+        space = getStage().getWidth() / 64;
 	}
 
     @Override
@@ -64,49 +56,14 @@ public class SettingsViewController extends ViewController {
     }
 
     @Override
-    public void show() {
-        Gdx.input.setInputProcessor(stage);
-    }
-
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act(delta);
-        stage.draw();    
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        stage.getViewport().setScreenSize(width, height);
-    }
-
-    @Override
-    public void pause() {
-    }
-
-    @Override
-    public void resume() {
-    }
-
-    @Override
-    public void hide() {
-    }
-
-    @Override
-    public void dispose() {
-        stage.dispose();
-    }
-
-    @Override
     public void create(final AssetManager manager) {
         this.manager = manager;
         Table settingsView = new Table();
         settingsView.align(Align.top);
-        stage.addActor(settingsView);
+        getStage().addActor(settingsView);
         settingsView.setFillParent(true);
-        float height = stage.getHeight() / 10;
-        float width = stage.getWidth() * 0.8f;
+        float height = getStage().getHeight() / 10;
+        float width = getStage().getWidth() * 0.8f;
         settingsView.row().height(height);
         settingsView.add();
         settingsView.row().height(height);
@@ -149,7 +106,7 @@ public class SettingsViewController extends ViewController {
         buttonContainer.align(Align.bottomLeft);
         buttonContainer.setActor(backButton);
         backButton.addListener(new backClickListener());
-        stage.addActor(buttonContainer);
+        getStage().addActor(buttonContainer);
         buttonContainer.setFillParent(true);
         changedProfileList();
     }

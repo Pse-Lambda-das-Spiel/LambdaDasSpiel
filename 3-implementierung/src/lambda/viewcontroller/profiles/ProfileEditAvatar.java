@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -26,6 +25,7 @@ import lambda.model.profiles.ProfileEditModel;
 import lambda.model.profiles.ProfileEditObserver;
 import lambda.model.profiles.ProfileManager;
 import lambda.viewcontroller.AudioManager;
+import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
 
@@ -35,11 +35,10 @@ import lambda.viewcontroller.mainmenu.MainMenuViewController;
  * 
  * @author Kai Fieger
  */
-public class ProfileEditAvatar extends ViewController implements ProfileEditObserver {
+public class ProfileEditAvatar extends StageViewController implements ProfileEditObserver {
 
     private final String avatarPath = "data/avatar";
     private final String skinJson = "data/skins/ProfileEditSkin.json";
-    private final Stage stage;
     private final ProfileEditModel profileEdit;
     private AssetManager manager;
     private Image avatarPic;
@@ -51,10 +50,9 @@ public class ProfileEditAvatar extends ViewController implements ProfileEditObse
      * Creates a object of the class without initializing the screen.
      */
 	public ProfileEditAvatar() {
-	    stage = new Stage(new ScreenViewport());
         ProfileManager.getManager().addObserver(this);
         profileEdit = ProfileManager.getManager().getProfileEdit();
-        space = stage.getWidth() / 64;
+        space = getStage().getWidth() / 64;
 	}
 
     @Override
@@ -69,67 +67,32 @@ public class ProfileEditAvatar extends ViewController implements ProfileEditObse
     }
 
     @Override
-    public void show() {
-        Gdx.input.setInputProcessor(stage);
-    }
-
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act(delta);
-        stage.draw();
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        stage.getViewport().setScreenSize(width, height);
-    }
-
-    @Override
-    public void pause() {
-    }
-
-    @Override
-    public void resume() {
-    }
-
-    @Override
-    public void hide() {
-    }
-
-    @Override
-    public void dispose() {
-        stage.dispose();
-    }
-
-    @Override
     public void create(final AssetManager manager) {
         profileEdit.addObserver(this);
         this.manager = manager;
         
         Table avatarSelection = new Table();
         avatarSelection.align(Align.top);
-        stage.addActor(avatarSelection);
+        getStage().addActor(avatarSelection);
         avatarSelection.setFillParent(true);
 
         chooseAvatar = new Label(null ,manager.get(skinJson, Skin.class));
         chooseAvatar.setFontScale(0.7f);
         chooseAvatar.setAlignment(Align.center);
-        avatarSelection.row().height(stage.getHeight() / 20);
+        avatarSelection.row().height(getStage().getHeight() / 20);
         avatarSelection.add();
-        avatarSelection.row().height(stage.getHeight() / 5);
+        avatarSelection.row().height(getStage().getHeight() / 5);
         avatarSelection.add();
-        avatarSelection.add(chooseAvatar).width(stage.getWidth() / 2);
+        avatarSelection.add(chooseAvatar).width(getStage().getWidth() / 2);
         
-        avatarSelection.row().height(stage.getHeight() / 2);
+        avatarSelection.row().height(getStage().getHeight() / 2);
         ImageButton selectLeft = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
         float buttonWidth = selectLeft.getWidth();
         float buttonHeight = selectLeft.getHeight();
         avatarSelection.add(selectLeft).width(buttonWidth).height(buttonHeight).space(space);
         selectLeft.addListener(new selectLeftClickListener());
         avatarPic = new Image();
-        avatarSelection.add(avatarPic).width(stage.getWidth() / 2).space(space);
+        avatarSelection.add(avatarPic).width(getStage().getWidth() / 2).space(space);
         ImageButton selectRight = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
         avatarSelection.add(selectRight).width(buttonWidth).height(buttonHeight).space(space);
         selectRight.addListener(new selectRightClickListener());
@@ -140,7 +103,7 @@ public class ProfileEditAvatar extends ViewController implements ProfileEditObse
         buttonContainer.align(Align.bottomLeft);
         buttonContainer.setActor(backButton);
         backButton.addListener(new backClickListener());
-        stage.addActor(buttonContainer);
+        getStage().addActor(buttonContainer);
         buttonContainer.setFillParent(true);
         
         ImageButton continueButton = new ImageButton(manager.get(skinJson, Skin.class), "acceptButton");
@@ -149,7 +112,7 @@ public class ProfileEditAvatar extends ViewController implements ProfileEditObse
         buttonContainer.align(Align.bottomRight);
         buttonContainer.setActor(continueButton);
         continueButton.addListener(new acceptClickListener());
-        stage.addActor(buttonContainer);
+        getStage().addActor(buttonContainer);
         buttonContainer.setFillParent(true);
     }
     
@@ -203,9 +166,9 @@ public class ProfileEditAvatar extends ViewController implements ProfileEditObse
                                 + " " + m.getCurrentProfile().getName() + " !", dialogSkin);
                         greeting.setFontScale(1.5f);
                         add(greeting);
-                        row().space(stage.getHeight() / 8);
+                        row().space(getStage().getHeight() / 8);
                         add(new Image(avatarPic.getDrawable())).width(
-                                stage.getWidth() / 3).height(stage.getHeight() / 3);
+                                getStage().getWidth() / 3).height(getStage().getHeight() / 3);
                         Timer.schedule(new Task() {
                             @Override
                             public void run() {
@@ -226,7 +189,7 @@ public class ProfileEditAvatar extends ViewController implements ProfileEditObse
                             getGame().setScreen(MainMenuViewController.class);
                         }
                     }
-                }.show(stage).setFillParent(true);
+                }.show(getStage()).setFillParent(true);
             } else {
                 getGame().setScreen(ProfileSelection.class);
             }

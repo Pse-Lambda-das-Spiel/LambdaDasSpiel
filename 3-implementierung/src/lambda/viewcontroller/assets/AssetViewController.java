@@ -2,39 +2,30 @@ package lambda.viewcontroller.assets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
 
 import lambda.model.levels.LevelContext;
 import lambda.model.levels.LevelManager;
 import lambda.model.shop.ElementUIContextFamily;
 import lambda.model.shop.ShopModel;
 import lambda.viewcontroller.AudioManager;
-import lambda.viewcontroller.ViewController;
-import lambda.viewcontroller.achievements.AchievementMenuViewController;
-import lambda.viewcontroller.editor.EditorViewController;
+import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.level.AbstractionUIContext;
 import lambda.viewcontroller.level.ParanthesisUIContext;
 import lambda.viewcontroller.level.VariableUIContext;
 import lambda.viewcontroller.profiles.ProfileSelection;
-import lambda.viewcontroller.shop.ShopViewController;
 
 /**
  * Represents the loading screen at program start.
  * 
  * @author Florian Fervers
  */
-public class AssetViewController extends ViewController {
-    /**
-     * Holds all actors that are displayed in this screen.
-     */
-    private final Stage stage;
+public class AssetViewController extends StageViewController {
+    
     /**
      * Libgdx class that manages asset loading. Asset model.
      */
@@ -45,7 +36,6 @@ public class AssetViewController extends ViewController {
      * Creates a new instance of AssetViewController and loads all assets required for it. Blocks until loading is complete.
      */
     public AssetViewController() {
-        stage = new Stage(new ScreenViewport());
         manager = new AssetManager();
         
         // Load assets only for loading screen and block until finished
@@ -54,9 +44,9 @@ public class AssetViewController extends ViewController {
         
         // TODO progress bar etc
         Image image = new Image(manager.get("data/loading.jpg", Texture.class));
-        image.setWidth(stage.getWidth());
-        image.setHeight(stage.getHeight());
-        stage.addActor(image);
+        image.setWidth(getStage().getWidth());
+        image.setHeight(getStage().getHeight());
+        getStage().addActor(image);
         
         
         // level context example
@@ -114,14 +104,6 @@ public class AssetViewController extends ViewController {
     	// only tmp moved until levelvc is finished
         context = new LevelContext(LevelManager.getLevelManager().getLevel(3));
     }
-    
-    /**
-     * Called when the screen is shown.
-     */
-    @Override
-    public void show() {
-        Gdx.input.setInputProcessor(stage);
-    }
 
     /**
      * Renders this screen.
@@ -147,40 +129,8 @@ public class AssetViewController extends ViewController {
         // TODO manager.getProgress();
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act(delta);
-        stage.draw();
-    }
-
-    /**
-     * Called when the viewport changes.
-     * 
-     * @param width the new width
-     * @param height the new height
-     */
-    @Override
-    public void resize(int width, int height) {
-        stage.getViewport().update(width, height);
-    }
-
-    /**
-     * Called when the application is paused.
-     */
-    @Override
-    public void pause() {
-    }
-
-    /**
-     * Called when the application resumes from a paused state.
-     */
-    @Override
-    public void resume() {
-    }
-
-    /**
-     * Called when another screen is shown, i.e. when this screen is hidden.
-     */
-    @Override
-    public void hide() {
+        getStage().act(delta);
+        getStage().draw();
     }
 
     /**
@@ -188,7 +138,7 @@ public class AssetViewController extends ViewController {
      */
     @Override
     public void dispose() {
-        stage.dispose();
+        super.dispose();
         manager.dispose();
     }
 

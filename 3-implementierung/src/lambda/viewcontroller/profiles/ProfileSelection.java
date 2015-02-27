@@ -3,13 +3,10 @@ package lambda.viewcontroller.profiles;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -19,11 +16,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import lambda.model.profiles.ProfileManager;
 import lambda.viewcontroller.AudioManager;
-import lambda.viewcontroller.ViewController;
+import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
 
 /**
@@ -32,10 +28,9 @@ import lambda.viewcontroller.mainmenu.MainMenuViewController;
  * 
  * @author Kai Fieger
  */
-public class ProfileSelection extends ViewController {
+public class ProfileSelection extends StageViewController {
 
     private final String skinJson = "data/skins/ProfileSelectionSkin.json";
-    private final Stage stage;
     private List<TextButton> profileButtons;
     private List<ImageButton> editButtons;
     private ImageButton addButton;
@@ -46,9 +41,8 @@ public class ProfileSelection extends ViewController {
      * Creates a object of the class without initializing the screen.
      */
 	public ProfileSelection() {
-	    stage = new Stage(new ScreenViewport());
 	    ProfileManager.getManager().addObserver(this);
-	    space = stage.getWidth() / 64;
+	    space = getStage().getWidth() / 64;
 	}
 
     @Override
@@ -64,44 +58,20 @@ public class ProfileSelection extends ViewController {
     
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(stage);
+        super.show();
         if (ProfileManager.getManager().getNames().size() == 0) {
             new addProfileClickListener().clicked(null, 0, 0);
         }
     }
 
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act(delta);
-        stage.draw();
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        stage.getViewport().setScreenSize(width, height);
-    }
-
-    @Override
-    public void pause() {
-    }
-
-    @Override
-    public void resume() {
-    }
-
-    @Override
-    public void hide() {
-    }
 
     @Override
     public void dispose() {
+    	super.dispose();
         ProfileManager m = ProfileManager.getManager();
         if (m.getCurrentProfile() != null) {
             m.save(m.getCurrentProfile().getName());
         }
-        stage.dispose();
     }
 
     @Override
@@ -117,15 +87,15 @@ public class ProfileSelection extends ViewController {
         profileButtons = new ArrayList<TextButton>();
         editButtons = new ArrayList<ImageButton>();
         Table profileView = new Table();
-        stage.addActor(profileView);
+        getStage().addActor(profileView);
         profileView.setFillParent(true);
         //Profilebuttons + their edit buttons
         for (int i = 0; i < ProfileManager.MAX_NUMBER_OF_PROFILES; i++) {
-            float height = stage.getHeight() * 3 / 5 / ProfileManager.MAX_NUMBER_OF_PROFILES;
+            float height = getStage().getHeight() * 3 / 5 / ProfileManager.MAX_NUMBER_OF_PROFILES;
             profileView.row().height(height);
             TextButton pButton = new TextButton("", manager.get(skinJson, Skin.class));
             pButton.getLabel().setFontScale(0.5f);
-            profileView.add(pButton).width(stage.getWidth() * 0.55f).space(space);
+            profileView.add(pButton).width(getStage().getWidth() * 0.55f).space(space);
             profileButtons.add(pButton);
             pButton.addListener(new selectProfileClickListener());
             ImageButton eButton = new ImageButton(manager.get(skinJson, Skin.class), "editButton");
@@ -140,7 +110,7 @@ public class ProfileSelection extends ViewController {
         buttonContainer.align(Align.bottomRight);
         buttonContainer.setActor(addButton);
         addButton.addListener(new addProfileClickListener());
-        stage.addActor(buttonContainer);
+        getStage().addActor(buttonContainer);
         buttonContainer.setFillParent(true);
         changedProfileList();
     }
@@ -235,7 +205,7 @@ public class ProfileSelection extends ViewController {
                     });
                     add(noButton).pad(space).padBottom(space * 3 / 2).align(Align.bottomLeft);
                 }
-            }.show(stage);
+            }.show(getStage());
         }
     }
     

@@ -1,13 +1,10 @@
 package lambda.viewcontroller.profiles;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -18,12 +15,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import lambda.model.profiles.ProfileEditModel;
 import lambda.model.profiles.ProfileEditObserver;
 import lambda.model.profiles.ProfileManager;
-import lambda.viewcontroller.ViewController;
+import lambda.viewcontroller.StageViewController;
 
 /**
  * Represents a screen of the profile configuration/creation.
@@ -31,10 +27,9 @@ import lambda.viewcontroller.ViewController;
  * 
  * @author Kai Fieger
  */
-public class ProfileEditLang extends ViewController implements ProfileEditObserver {
+public class ProfileEditLang extends StageViewController implements ProfileEditObserver {
 
     private final String skinJson = "data/skins/ProfileEditSkin.json";
-    private final Stage stage;
     private final ProfileEditModel profileEdit;
     private Image langPic;
     private Label lang;
@@ -47,10 +42,9 @@ public class ProfileEditLang extends ViewController implements ProfileEditObserv
      * Creates a object of the class without initializing the screen.
      */
 	public ProfileEditLang() {
-	    stage = new Stage(new ScreenViewport());
         ProfileManager.getManager().addObserver(this);
         profileEdit = ProfileManager.getManager().getProfileEdit();
-        space = stage.getWidth() / 64;
+        space = getStage().getWidth() / 64;
 	}
 
     @Override
@@ -68,63 +62,28 @@ public class ProfileEditLang extends ViewController implements ProfileEditObserv
     }
 
     @Override
-    public void show() {
-        Gdx.input.setInputProcessor(stage);
-    }
-
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act(delta);
-        stage.draw();
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        stage.getViewport().setScreenSize(width, height);
-    }
-
-    @Override
-    public void pause() {
-    }
-
-    @Override
-    public void resume() {
-    }
-
-    @Override
-    public void hide() {
-    }
-
-    @Override
-    public void dispose() {
-        stage.dispose();
-    }
-
-    @Override
     public void create(final AssetManager manager) {
         profileEdit.addObserver(this);
         this.manager = manager;
         Table langSelection = new Table();
-        stage.addActor(langSelection);
+        getStage().addActor(langSelection);
         langSelection.setFillParent(true);
-        langSelection.row().height(stage.getHeight() / 2);
+        langSelection.row().height(getStage().getHeight() / 2);
         ImageButton selectLeft = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
         float buttonWidth = selectLeft.getWidth();
         float buttonHeight = selectLeft.getHeight();
         langSelection.add(selectLeft).width(buttonWidth).height(buttonHeight).space(space);
         selectLeft.addListener(new selectLeftClickListener());
         langPic = new Image();
-        langSelection.add(langPic).width(stage.getWidth() / 2).space(space);
+        langSelection.add(langPic).width(getStage().getWidth() / 2).space(space);
         ImageButton selectRight = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
         langSelection.add(selectRight).width(buttonWidth).height(buttonHeight).space(space);
         selectRight.addListener(new selectRightClickListener());
         lang = new Label(null ,manager.get(skinJson, Skin.class));
         lang.setAlignment(Align.center);
-        langSelection.row().height(stage.getHeight() / 5);
+        langSelection.row().height(getStage().getHeight() / 5);
         langSelection.add();
-        langSelection.add(lang).width(stage.getWidth() / 2);
+        langSelection.add(lang).width(getStage().getWidth() / 2);
         
         backButton = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
@@ -132,7 +91,7 @@ public class ProfileEditLang extends ViewController implements ProfileEditObserv
         buttonContainer.align(Align.bottomLeft);
         buttonContainer.setActor(backButton);
         backButton.addListener(new backClickListener());
-        stage.addActor(buttonContainer);
+        getStage().addActor(buttonContainer);
         buttonContainer.setFillParent(true);
         
         ImageButton continueButton = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
@@ -141,7 +100,7 @@ public class ProfileEditLang extends ViewController implements ProfileEditObserv
         buttonContainer.align(Align.bottomRight);
         buttonContainer.setActor(continueButton);
         continueButton.addListener(new continueClickListener());
-        stage.addActor(buttonContainer);
+        getStage().addActor(buttonContainer);
         buttonContainer.setFillParent(true);
     }
 

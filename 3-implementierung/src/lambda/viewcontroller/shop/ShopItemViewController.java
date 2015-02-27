@@ -2,6 +2,7 @@ package lambda.viewcontroller.shop;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -23,9 +24,11 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor imple
 
     private T model;
     private TextButton currentState;
+    private Stage stage;
 
-    public ShopItemViewController(T model) {
+    public ShopItemViewController(T model, Stage stage) {
         this.model = model;
+        this.stage = stage;
         model.addObserver(this);
         currentState = new TextButton(model.getShopItemType().getTypeName() + " " + model.getId(), 
                 ShopViewController.getTextButtonStyle("not_buyable"));
@@ -92,9 +95,9 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor imple
                        {
                            clear();
                            // getImage() removes the image from its button so the button has to be copied before that
-                           float space = ShopViewController.getStage().getWidth() / 64;
+                           float space = stage.getWidth() / 64;
                            Label label = new Label("Willst du Item " + model.getId() + "\n aktivieren?", ShopViewController.getSkin());
-                           add(label).pad(ShopViewController.getStage().getWidth() / 64).padBottom(0).padRight(400);
+                           add(label).pad(stage.getWidth() / 64).padBottom(0).padRight(400);
                            row();
                            
                            label.setWrap(true);
@@ -120,7 +123,7 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor imple
                            add(abort).pad(space).padBottom(space * 3 / 2).align(Align.bottomLeft);
                        }
                           
-                   }.show(ShopViewController.getStage());
+                   }.show(stage);
                }
             }
             else if (model.getPrice() <= ProfileManager.getManager().getCurrentProfile().getCoins()) {
@@ -128,9 +131,9 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor imple
                     {
                         clear();
                         // getImage() removes the image from its button so the button has to be copied before that
-                        float space = ShopViewController.getStage().getWidth() / 64;
+                        float space = stage.getWidth() / 64;
                         Label label = new Label("Willst du " + model.getPrice() + " Münzen \n gegen dieses Item \n eintauschen?", ShopViewController.getSkin());
-                        add(label).pad(ShopViewController.getStage().getWidth() / 64).padBottom(0).padRight(400);
+                        add(label).pad(stage.getWidth() / 64).padBottom(0).padRight(400);
                         row();
                         
                         label.setWrap(true);
@@ -155,7 +158,7 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor imple
                         add(noButton).pad(space).padBottom(space * 3 / 2).align(Align.bottomLeft);
                     }
                        
-                }.show(ShopViewController.getStage());
+                }.show(stage);
             }
         }
     }

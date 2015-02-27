@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -21,6 +20,7 @@ import lambda.model.profiles.ProfileEditModel;
 import lambda.model.profiles.ProfileEditObserver;
 import lambda.model.profiles.ProfileManager;
 import lambda.model.profiles.ProfileModel;
+import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.ViewController;
 
 /**
@@ -29,10 +29,9 @@ import lambda.viewcontroller.ViewController;
  * 
  * @author Kai Fieger
  */
-public class ProfileEditName extends ViewController implements ProfileEditObserver {
+public class ProfileEditName extends StageViewController implements ProfileEditObserver {
 
     private final String skinJson = "data/skins/ProfileEditSkin.json";
-    private final Stage stage;
     private final ProfileEditModel profileEdit;
     private AssetManager manager;
     private TextField nameField;
@@ -44,49 +43,13 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
      * Creates a object of the class without initializing the screen.
      */
 	public ProfileEditName() {
-	    stage = new Stage(new ScreenViewport());
         ProfileManager.getManager().addObserver(this);
         profileEdit = ProfileManager.getManager().getProfileEdit();
-        space = stage.getWidth() / 64;
+        space = getStage().getWidth() / 64;
 	}
     
     @Override
     public void queueAssets(AssetManager assets) {
-    }
-
-    @Override
-    public void show() {
-        Gdx.input.setInputProcessor(stage);
-    }
-
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act(delta);
-        stage.draw();
-    }
-    
-    @Override
-    public void resize(int width, int height) {
-        stage.getViewport().setScreenSize(width, height);
-    }
-
-    @Override
-    public void pause() {
-    }
-
-    @Override
-    public void resume() {
-    }
-
-    @Override
-    public void hide() {
-    }
-
-    @Override
-    public void dispose() {
-        stage.dispose();
     }
 
     @Override
@@ -95,22 +58,22 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
         this.manager = manager;
         Table nameSelection = new Table();
         nameSelection.align(Align.top);
-        stage.addActor(nameSelection);
+        getStage().addActor(nameSelection);
         nameSelection.setFillParent(true);
         
-        nameSelection.row().height(stage.getHeight() / 20);
+        nameSelection.row().height(getStage().getHeight() / 20);
         nameSelection.add();
-        nameSelection.row().height(stage.getHeight() / 5);        
+        nameSelection.row().height(getStage().getHeight() / 5);        
         enterName = new Label(null, manager.get(skinJson, Skin.class));
         enterName.setFontScale(0.7f);
-        nameSelection.add(enterName).width(stage.getHeight() * 0.8f).space(space);
+        nameSelection.add(enterName).width(getStage().getHeight() * 0.8f).space(space);
         enterName.setAlignment(Align.center);
-        nameSelection.row().height(stage.getHeight() / 3);
+        nameSelection.row().height(getStage().getHeight() / 3);
         nameField = new TextField("", manager.get(skinJson, Skin.class));
         nameField.setMaxLength(20);
         nameField.getStyle().background.setLeftWidth(space * 3 / 2);
         nameField.getStyle().background.setRightWidth(space * 3 / 2);
-        nameSelection.add(nameField).width(stage.getWidth() * 2 / 3).space(space);
+        nameSelection.add(nameField).width(getStage().getWidth() * 2 / 3).space(space);
         
         ImageButton backButton = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
@@ -118,7 +81,7 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
         buttonContainer.align(Align.bottomLeft);
         buttonContainer.setActor(backButton);
         backButton.addListener(new backClickListener());
-        stage.addActor(buttonContainer);
+        getStage().addActor(buttonContainer);
         buttonContainer.setFillParent(true);
         
         ImageButton continueButton = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
@@ -127,7 +90,7 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
         buttonContainer.align(Align.bottomRight);
         buttonContainer.setActor(continueButton);
         continueButton.addListener(new continueClickListener());
-        stage.addActor(buttonContainer);
+        getStage().addActor(buttonContainer);
         buttonContainer.setFillParent(true);
     }
     
@@ -151,10 +114,10 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
                 if (ProfileManager.getManager().changeCurrentName(name)) {
                     getGame().setScreen(ProfileEditAvatar.class);
                 } else {
-                    new NameDialog("nameTaken").show(stage);
+                    new NameDialog("nameTaken").show(getStage());
                 }
             } else {
-                new NameDialog("nameEmpty").show(stage);
+                new NameDialog("nameEmpty").show(getStage());
             }
         }
     }
@@ -169,10 +132,10 @@ public class ProfileEditName extends ViewController implements ProfileEditObserv
                 if (ProfileManager.getManager().changeCurrentName(name)) {
                     getGame().setScreen(ProfileEditLang.class);
                 } else {
-                    new NameDialog("nameTaken").show(stage);
+                    new NameDialog("nameTaken").show(getStage());
                 }
             } else {
-                new NameDialog("nameEmpty").show(stage);   
+                new NameDialog("nameEmpty").show(getStage());   
             }
         }
     }

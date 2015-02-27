@@ -2,21 +2,18 @@ package lambda.viewcontroller.mainmenu;
 
 import lambda.model.profiles.ProfileManager;
 import lambda.viewcontroller.AudioManager;
-import lambda.viewcontroller.ViewController;
+import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.achievements.AchievementMenuViewController;
 import lambda.viewcontroller.level.LevelSelectionViewController;
 import lambda.viewcontroller.profiles.ProfileSelection;
 import lambda.viewcontroller.settings.SettingsViewController;
 import lambda.viewcontroller.shop.ShopViewController;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -27,16 +24,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 /**
  * Represents the main menu.
  * 
  * @author Farid, Robert Hochweiss
  */
-public class MainMenuViewController extends ViewController {
+public class MainMenuViewController extends StageViewController {
 
-	private final Stage stage;
 	private final String skinJson = "data/skins/MainMenuSkin.json";
 	private Skin skin;
 	private Label coins;
@@ -51,7 +46,6 @@ public class MainMenuViewController extends ViewController {
 	 * Creates a object of the class without initializing the screen.
 	 */
 	public MainMenuViewController() {
-		stage = new Stage(new ScreenViewport());
 	}
 
 	/**
@@ -67,39 +61,14 @@ public class MainMenuViewController extends ViewController {
 	}
 
 	@Override
-	public void render(float delta) {
-		Gdx.gl.glClearColor(0, 1, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		stage.act();
-		stage.draw();
-	}
-
-	@Override
 	public void resize(int width, int height) {
 	}
 
 	@Override
 	public void show() {
-		Gdx.input.setInputProcessor(stage);
+		super.show();
 		// Update coin label
 		coins.setText(Integer.toString(ProfileManager.getManager().getCurrentProfile().getCoins()));
-	}
-
-	@Override
-	public void hide() {
-	}
-
-	@Override
-	public void pause() {
-	}
-
-	@Override
-	public void resume() {
-	}
-
-	@Override
-	public void dispose() {
-		stage.dispose();
 	}
 
 	@Override
@@ -131,35 +100,35 @@ public class MainMenuViewController extends ViewController {
 		Container<ImageButton> settingsButtonContainer = new Container<>();
 		settingsButtonContainer.pad(15).align(Align.bottomLeft);
 		settingsButtonContainer.setActor(settingsButton);
-		stage.addActor(settingsButtonContainer);
+		getStage().addActor(settingsButtonContainer);
 		settingsButtonContainer.setFillParent(true);
 
 		soundButtonContainer = new Container<>();
 		soundButtonContainer.pad(15).align(Align.bottomRight);
 		soundButtonContainer.setActor(sound_unmuted);
-		stage.addActor(soundButtonContainer);
+		getStage().addActor(soundButtonContainer);
 		soundButtonContainer.setFillParent(true);
 
 		Container<ImageTextButton> coinButtonContainer = new Container<>();
 		coinButtonContainer.pad(15).align(Align.topRight);
 		coinButtonContainer.setActor(coinButton);
-		stage.addActor(coinButtonContainer);
+		getStage().addActor(coinButtonContainer);
 		coinButtonContainer.setFillParent(true);
 		
 		Table profileTable = new Table();
 		profileTable.pad(25).align(Align.topLeft);
-		profileTable.add(logoutButton).align(Align.left).spaceBottom(stage.getHeight() / 8).row();
+		profileTable.add(logoutButton).align(Align.left).spaceBottom(getStage().getHeight() / 8).row();
 		profileTable.add(profileImg).row();
 		profileTable.add(profileName);
-		stage.addActor(profileTable);
+		getStage().addActor(profileTable);
 		profileTable.setFillParent(true);
 
 		Table centerTable = new Table();
 		centerTable.align(Align.center);
-		centerTable.add(startButton).colspan(2).align(Align.center).spaceBottom(stage.getHeight() / 20).row();
-		centerTable.add(levelButton).align(Align.left).spaceRight(stage.getWidth() / 20);
+		centerTable.add(startButton).colspan(2).align(Align.center).spaceBottom(getStage().getHeight() / 20).row();
+		centerTable.add(levelButton).align(Align.left).spaceRight(getStage().getWidth() / 20);
 		centerTable.add(achievementsButton).align(Align.right);
-		stage.addActor(centerTable);
+		getStage().addActor(centerTable);
 		centerTable.setFillParent(true);
 		
 		logoutButton.addListener(new ClickListener() {

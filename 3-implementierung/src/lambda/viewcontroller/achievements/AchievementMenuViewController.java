@@ -5,13 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -23,11 +20,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.I18NBundle;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import lambda.model.achievements.AchievementManager;
 import lambda.model.profiles.ProfileManager;
-import lambda.viewcontroller.ViewController;
+import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
 
 /**
@@ -36,9 +32,8 @@ import lambda.viewcontroller.mainmenu.MainMenuViewController;
  * @author Robert Hochweiss
  *
  */
-public class AchievementMenuViewController extends ViewController {
+public class AchievementMenuViewController extends StageViewController {
 
-	private final Stage stage;
 	private static AssetManager manager;
 	private final static String achievementMenuSkinJson = "data/skins/AchievementMenuSkin.json";
 	private final String achievementMenuSkinAtlas = "data/skins/AchievementMenuSkin.atlas";
@@ -53,7 +48,6 @@ public class AchievementMenuViewController extends ViewController {
 	 * Creates a new instance of this class.
 	 */
 	public AchievementMenuViewController() {
-		stage = new Stage(new ScreenViewport());
 		achievementVCList = new ArrayList<>();
 		labelMap = new HashMap<>();
 		achievementManager = AchievementManager.getManager();
@@ -100,62 +94,6 @@ public class AchievementMenuViewController extends ViewController {
 	}
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void show() {
-		Gdx.input.setInputProcessor(stage);
-    }
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void render(float delta) {
-		Gdx.gl.glClearColor(1, 1, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		stage.act(delta);
-		stage.draw();
-	}
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void resize(int width, int height) {
-        stage.getViewport().setScreenSize(width, height);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void pause() {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void resume() {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void hide() {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void dispose() {
-    	stage.dispose();
-    }
-
-    /**
 	 * {@inheritDoc}
 	 */
     @Override
@@ -173,7 +111,7 @@ public class AchievementMenuViewController extends ViewController {
     	ProfileManager.getManager().addObserver(this);
     	Table mainTable = new Table();
 		mainTable.setFillParent(true);
-		stage.addActor(mainTable);
+		getStage().addActor(mainTable);
 		titleLabel = new Label("Initial string", manager.get(achievementMenuSkinJson, Skin.class), "title");
 		achievementTable = new Table();
 		achievementTable.pad(20);
@@ -219,8 +157,8 @@ public class AchievementMenuViewController extends ViewController {
             final AchievementViewController clickedActor = (AchievementViewController) event.getListenerActor();
             new Dialog("", manager.get(achievementMenuSkinJson, Skin.class)) {
             	{
-            		setWidth(stage.getWidth() / 2);
-            		setHeight(stage.getHeight() / 2);
+            		setWidth(getStage().getWidth() / 2);
+            		setHeight(getStage().getHeight() / 2);
             		addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
@@ -236,7 +174,7 @@ public class AchievementMenuViewController extends ViewController {
                 	label.setWrap(true);
                 	add(label).width(getWidth());
             	}
-            }.show(stage);
+            }.show(getStage());
         }
     }
     
