@@ -1,11 +1,11 @@
 package lambda.model.lambdaterm.visitor;
 
-import java.awt.Color;
+import com.badlogic.gdx.graphics.Color;
+
 import lambda.model.lambdaterm.InvalidLambdaTermException;
 import lambda.model.lambdaterm.LambdaAbstraction;
 import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.LambdaRoot;
-import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.LambdaVariable;
 
 /**

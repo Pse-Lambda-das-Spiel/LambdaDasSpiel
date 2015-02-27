@@ -1,7 +1,9 @@
 package lambda.model.lambdaterm;
 
-import java.awt.Color;
 import lambda.model.lambdaterm.visitor.LambdaTermVisitor;
+
+import com.badlogic.gdx.graphics.Color;
+
 
 /**
  * Represents a variable in a lambda term tree.
@@ -13,12 +15,12 @@ public class LambdaVariable extends LambdaValue {
      * Creates a new lambda variable.
      * 
      * @param parent the parent node
-     * @param color the color of this variable
+     * @param rgbColor the color of this variable
      * @param locked true if this node can be modified by the user, false otherwise
      * @throws IllegalArgumentException if color is null
      */
-    public LambdaVariable(LambdaTerm parent, Color color, boolean locked) {
-        super(parent, color, locked);
+    public LambdaVariable(LambdaTerm parent, Color rgbColor, boolean locked) {
+        super(parent, rgbColor, locked);
     }
 
     /**
@@ -61,4 +63,5 @@ public class LambdaVariable extends LambdaValue {
     public int hashCode() {
         return getClass().hashCode() + getColor().hashCode();
     }
+
 }

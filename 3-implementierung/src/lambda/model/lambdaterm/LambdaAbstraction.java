@@ -1,7 +1,8 @@
 package lambda.model.lambdaterm;
 
-import java.awt.Color;
 import java.util.Objects;
+
+import com.badlogic.gdx.graphics.Color;
 
 import lambda.Consumer;
 import lambda.model.lambdaterm.visitor.LambdaTermVisitor;
@@ -21,12 +22,12 @@ public class LambdaAbstraction extends LambdaValue {
      * Creates a new lambda abstraction.
      * 
      * @param parent the parent node
-     * @param color the color of the variable bound by this abstraction
+     * @param rgbColor the color of the variable bound by this abstraction
      * @param locked true if this node can be modified by the user, false otherwise
      * @throws IllegalArgumentException if color is null
      */
-    public LambdaAbstraction(LambdaTerm parent, Color color, boolean locked) {
-        super(parent, color, locked);
+    public LambdaAbstraction(LambdaTerm parent, Color rgbColor, boolean locked) {
+        super(parent, rgbColor, locked);
     }
 
     /**

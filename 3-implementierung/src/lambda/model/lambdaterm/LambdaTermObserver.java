@@ -1,6 +1,7 @@
 package lambda.model.lambdaterm;
 
-import java.awt.Color;
+import com.badlogic.gdx.graphics.Color;
+
 
 /**
  * Represents an observer that can observe a lambda term and be notified by changes.

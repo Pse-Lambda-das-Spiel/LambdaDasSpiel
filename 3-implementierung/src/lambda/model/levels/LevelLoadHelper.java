@@ -1,11 +1,11 @@
 package lambda.model.levels;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 
@@ -131,7 +131,7 @@ public final class LevelLoadHelper {
 	
 	private static LambdaAbstraction convertJsonToAbstraction(JsonValue value, LambdaTerm parent) {
 		JsonValue color = value.get("color");
-		Color rgbColor = new Color(color.getInt("r"), color.getInt("g"), color.getInt("b"));
+		Color rgbColor = new Color(color.getInt("r"), color.getInt("g"), color.getInt("b"), 0);
 		LambdaAbstraction abstraction = new LambdaAbstraction(parent, rgbColor, value.getBoolean("locked"));
 		abstraction.setInside(selectNextNode(value.get("inside"), abstraction));
 		return abstraction;
@@ -139,7 +139,7 @@ public final class LevelLoadHelper {
 	
 	private static LambdaVariable convertJsonToVariable(JsonValue value, LambdaTerm parent) {
 		JsonValue color = value.get("color");
-		Color rgbColor = new Color(color.getInt("r"), color.getInt("g"), color.getInt("b"));
+		Color rgbColor = new Color(color.getInt("r"), color.getInt("g"), color.getInt("b"), 0);
 		LambdaVariable variable = new LambdaVariable(parent, rgbColor, value.getBoolean("locked"));
 		return variable;
 	}

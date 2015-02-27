@@ -76,7 +76,8 @@ public class ToStringVisitor extends ValidLambdaTermVisitor<String> {
         boolean paranthesis = isLeftApplicationChild || isRightApplicationChild;
         isLeftApplicationChild = false;
         isRightApplicationChild = false;
-        result = (paranthesis ? "(" : "") + "/" + Character.toString((char) node.getColor().getRed()) + "." + node.getInside().accept(this) + (paranthesis ? ")" : "");
+        // TODO: adjust to rgba
+        result = (paranthesis ? "(" : "") + "/" + Character.toString((char) node.getColor().r) + "." + node.getInside().accept(this) + (paranthesis ? ")" : "");
     }
     
     /**
@@ -87,7 +88,8 @@ public class ToStringVisitor extends ValidLambdaTermVisitor<String> {
      */
     @Override
     public void visitValid(LambdaVariable node) {
-        result = Character.toString((char) node.getColor().getRed());
+    	// adjust to rgba
+        result = Character.toString((char) node.getColor().r);
     }
     
     /**

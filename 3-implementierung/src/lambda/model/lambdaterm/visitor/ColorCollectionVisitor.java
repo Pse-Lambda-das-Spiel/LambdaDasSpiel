@@ -1,8 +1,10 @@
 package lambda.model.lambdaterm.visitor;
 
-import java.awt.Color;
 import java.util.HashSet;
 import java.util.Set;
+
+import com.badlogic.gdx.graphics.Color;
+
 import lambda.model.lambdaterm.InvalidLambdaTermException;
 import lambda.model.lambdaterm.LambdaAbstraction;
 import lambda.model.lambdaterm.LambdaApplication;

@@ -1,6 +1,7 @@
 package lambda.model.lambdaterm;
 
-import java.awt.Color;
+
+import com.badlogic.gdx.graphics.Color;
 
 import lambda.Consumer;
 
@@ -19,16 +20,16 @@ public abstract class LambdaValue extends LambdaTerm {
      * Creates a new lambda value. Used for setting parameters by subclasses.
      * 
      * @param parent the parent node
-     * @param color the color of this value
+     * @param rgbColor the color of this value
      * @param locked true if this node can be modified by the user, false otherwise
      * @throws IllegalArgumentException if color is null
      */
-    public LambdaValue(LambdaTerm parent, Color color, boolean locked) {
+    public LambdaValue(LambdaTerm parent, Color rgbColor, boolean locked) {
         super(parent, locked);
-        if (color == null) {
+        if (rgbColor == null) {
             throw new IllegalArgumentException("Color cannot be null!");
         }
-        this.color = color;
+        this.color = rgbColor;
     }
     
     /**

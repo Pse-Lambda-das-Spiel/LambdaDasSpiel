@@ -1,6 +1,6 @@
 package lambda.model.lambdaterm.visitor;
 
-import java.awt.Color;
+import com.badlogic.gdx.graphics.Color;
 
 import lambda.Consumer;
 import lambda.model.lambdaterm.InvalidLambdaTermException;

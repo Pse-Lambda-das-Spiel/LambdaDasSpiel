@@ -1,7 +1,8 @@
 package lambda.model.lambdaterm.visitor;
 
-import java.awt.Color;
 import java.util.Set;
+
+import com.badlogic.gdx.graphics.Color;
 
 import lambda.Consumer;
 import lambda.model.lambdaterm.InvalidLambdaTermException;
@@ -128,9 +129,10 @@ public class ApplicationVisitor extends ValidLambdaTermVisitor<LambdaTerm> {
             collidingColors.remove(this.color);
             for (Color collision : collidingColors) {
                 // TODO: generate new color
-                Color replacingColor = new Color(0, 0, 0);
+            	// TODO: adjust colors for (r,g,b,a)
+                Color replacingColor = new Color(0, 0, 0, 0);
                 for (char v = 'a'; v <= 'z'; v++) {
-                    replacingColor = new Color(v, v, v);
+                    replacingColor = new Color(v, v, v, 1);
                     if (!applicant.getParent().accept(new IsColorBoundVisitor(color)) && !term.accept(new ColorCollectionVisitor(ColorCollectionVisitor.Type.ALL)).contains(replacingColor)  && !applicant.accept(new ColorCollectionVisitor(ColorCollectionVisitor.Type.ALL)).contains(replacingColor)) {
                         break;
                     }

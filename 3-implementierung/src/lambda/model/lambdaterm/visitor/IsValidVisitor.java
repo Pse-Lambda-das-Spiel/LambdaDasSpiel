@@ -1,7 +1,9 @@
 package lambda.model.lambdaterm.visitor;
 
-import java.awt.Color;
 import java.util.Stack;
+
+import com.badlogic.gdx.graphics.Color;
+
 import lambda.model.lambdaterm.LambdaAbstraction;
 import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.LambdaRoot;

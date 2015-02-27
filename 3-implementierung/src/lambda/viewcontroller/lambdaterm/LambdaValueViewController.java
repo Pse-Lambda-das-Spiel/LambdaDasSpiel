@@ -1,6 +1,7 @@
 package lambda.viewcontroller.lambdaterm;
 
-import java.awt.Color;
+import com.badlogic.gdx.graphics.Color;
+
 import lambda.model.lambdaterm.LambdaValue;
 
 /**
@@ -43,4 +44,5 @@ public abstract class LambdaValueViewController extends LambdaNodeViewController
     public void setLambdaColor(Color color) {
         this.color = color;
     }
+   
 }

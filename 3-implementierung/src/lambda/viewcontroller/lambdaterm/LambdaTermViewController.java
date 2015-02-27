@@ -1,10 +1,12 @@
 package lambda.viewcontroller.lambdaterm;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
-import java.awt.Color;
+
 import java.util.IdentityHashMap;
 import java.util.Map;
+
 import lambda.model.lambdaterm.LambdaAbstraction;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;

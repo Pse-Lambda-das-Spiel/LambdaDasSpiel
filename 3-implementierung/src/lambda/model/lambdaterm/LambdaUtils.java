@@ -1,11 +1,14 @@
 package lambda.model.lambdaterm;
 
-import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
+
 import lambda.model.lambdaterm.visitor.IsValidVisitor;
 import lambda.model.lambdaterm.visitor.RemoveTermVisitor;
+
 import java.text.ParseException;
+
+import com.badlogic.gdx.graphics.Color;
 
 /**
  * A utility class with helper methods for lambda terms.
@@ -66,7 +69,7 @@ public final class LambdaUtils {
                     
                     // Inside term
                     ++index[0];
-                    LambdaAbstraction abstraction = new LambdaAbstraction(null, new Color(variableName, variableName, variableName), false); // TODO: Generate color from variable name?
+                    LambdaAbstraction abstraction = new LambdaAbstraction(null, new Color(variableName, variableName, variableName, 1), false); // TODO: Generate color from variable name?
                     abstraction.setInside(fromString(string, index, depth + 1, lastParenthesisOpenDepth, closingParanthesis));
                     terms.add(abstraction);
                     break;
@@ -87,7 +90,7 @@ public final class LambdaUtils {
                 }
                 default: { // New variable
                     char variableName = string.charAt(index[0]++);
-                    terms.add(new LambdaVariable(null, new Color(variableName, variableName, variableName), false));// TODO: Generate color from variable name?
+                    terms.add(new LambdaVariable(null, new Color(variableName, variableName, variableName, 1), false));// TODO: Generate color from variable name?
                     break;
                 }
             }
