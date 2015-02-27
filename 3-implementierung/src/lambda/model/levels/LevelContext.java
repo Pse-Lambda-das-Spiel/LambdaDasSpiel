@@ -1,6 +1,7 @@
 package lambda.model.levels;
 
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -40,9 +41,16 @@ public class LevelContext {
         
         if(levelModel.getId() != 0) {
             // for standard levels
+        	
+        	//tmp
+        	
             difficultySetting = manager.getDifficultySetting(levelModel.getDifficulty());
+            music = manager.getAssetManager().get(difficultySetting.getMusicString(), Music.class);
+        	bgImage = new Image(manager.getAssetManager().get(difficultySetting.getBgImageString(), Texture.class));
+            /*
             music = difficultySetting.getMusic();
             bgImage = difficultySetting.getBgImage();
+            */
         }
         else {
             // for sandbox

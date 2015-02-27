@@ -2,11 +2,11 @@ package lambda.viewcontroller.assets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-
 
 import lambda.model.levels.LevelContext;
 import lambda.model.levels.LevelManager;
@@ -82,6 +82,8 @@ public class AssetViewController extends StageViewController {
         String cloudPath = "data/animation/cloud/cloud.atlas";
         manager.load(magicPath, TextureAtlas.class);
         manager.load(cloudPath, TextureAtlas.class);
+        manager.load("data/levels/music/01.mp3", Music.class);
+        manager.load("data/levels/images/01.png", Texture.class);
         // rest of example context was moved to create() 
     }
     
