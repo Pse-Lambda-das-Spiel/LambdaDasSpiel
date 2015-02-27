@@ -143,11 +143,15 @@ public class LevelModel {
     }
 
 
-    /**
-     * TODOOOOO
-     * @return
-     */
+  
+     /**
+      *  Returns the default strategy for the level.
+      *  
+      * @return the default strategy
+      */
     public ReductionStrategy getDefaultStrategy() {
-        return null;
+    	// is that not the same reduction strategy for every level ?
+        return ReductionStrategy.NORMAL_ORDER;
     }
+    
 }
