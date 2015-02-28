@@ -110,7 +110,7 @@ public class ShopModel {
             i++;
         }
         //default
-        assets.load("data/items/levels/music/default.mp3", Music.class);
+        assets.load("data/levels/music/default.mp3", Music.class);
     }
     
     /**
@@ -136,7 +136,7 @@ public class ShopModel {
             i++;
         }
         //default
-        assets.load("data/items/levels/images/default.png", Texture.class);
+        assets.load("data/levels/images/default.png", Texture.class);
     }
     
     /**
@@ -162,7 +162,7 @@ public class ShopModel {
             i++;
         }
         //default
-        assets.load("data/items/levels/elementuis/default.atlas", TextureAtlas.class);
+        assets.load("data/items/elementuis/default.atlas", TextureAtlas.class);
     }
     
     public void setAllAssets(AssetManager assets) {
@@ -171,7 +171,7 @@ public class ShopModel {
             musicItem.setMusic(assets.get(musicItem.getFilepath(), Music.class));
         }
         // set the default music
-        MusicItemModel musicItem = new MusicItemModel("default", 0, "data/items/levels/music/default.mp3");
+        MusicItemModel musicItem = new MusicItemModel("default", 0, "data/levels/music/default.mp3");
         musicItem.setMusic(assets.get(musicItem.getFilepath(), Music.class));
         music.setDefaultItem(musicItem);
         
@@ -180,7 +180,7 @@ public class ShopModel {
             imageItem.setImage(assets.get(imageItem.getFilepath(), Texture.class));
         }
         // set the default image
-        BackgroundImageItemModel imageItem = new BackgroundImageItemModel("default", 0, "data/items/levels/music/default.mp3");
+        BackgroundImageItemModel imageItem = new BackgroundImageItemModel("default", 0, "data/levels/images/default.png");
         imageItem.setImage(assets.get(imageItem.getFilepath(), Texture.class));
         images.setDefaultItem(imageItem);
         
@@ -205,7 +205,7 @@ public class ShopModel {
             familyItem.setVariableUIContext(variable);  
         }
         // set the default elements
-        TextureAtlas atlas = assets.get("data/items/levels/elementuis/default.atlas");
+        TextureAtlas atlas = assets.get("data/items/elementuis/default.atlas");
         VariableUIContext variable = new VariableUIContext(atlas.findRegion("gem").getTexture(), atlas.findRegion("gem_mask").getTexture());
         AbstractionUIContext abstraction = new AbstractionUIContext(atlas.findRegion("front_magicstick").getTexture(), 
                 atlas.findRegion("center").getTexture(), 
@@ -219,7 +219,7 @@ public class ShopModel {
                 atlas.findRegion("front_mask").getTexture(),
                 atlas.findRegion("center_mask").getTexture(),
                 atlas.findRegion("back_mask").getTexture());
-        ElementUIContextFamily familyItem = new ElementUIContextFamily("default", 0, "data/items/levels/elementuis/default.atlas");
+        ElementUIContextFamily familyItem = new ElementUIContextFamily("default", 0, "data/items/elementuis/default.atlas");
         familyItem.setAbstractionUIContext(abstraction);
         familyItem.setParanthesisUIContext(parenthesis);
         familyItem.setVariableUIContext(variable);  

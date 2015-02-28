@@ -252,6 +252,20 @@ activated
   orig: 481, 100
   offset: 0, 0
   index: -1
+checkbox_off
+  rotate: false
+  xy: 484, 426
+  size: 82, 93
+  orig: 82, 93
+  offset: 0, 0
+  index: -1
+checkbox_on
+  rotate: false
+  xy: 568, 426
+  size: 82, 93
+  orig: 82, 93
+  offset: 0, 0
+  index: -1
 accept
   rotate: false
   xy: 805, 204

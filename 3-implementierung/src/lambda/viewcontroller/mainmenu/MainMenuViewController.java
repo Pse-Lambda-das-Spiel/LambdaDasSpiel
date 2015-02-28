@@ -89,8 +89,8 @@ public class MainMenuViewController extends StageViewController {
 		// TODO: Replace with logoutButton when its finished
 		ImageButton logoutButton = new ImageButton(skin, "backButton");
 		ImageButton settingsButton = new ImageButton(skin, "settingsButton");
-		sound_unmuted = new ImageButton(skin, "sound_unmuted");
-		sound_muted = new ImageButton(skin, "sound_muted");
+		sound_unmuted = new ImageButton(skin, "unmuted");
+		sound_muted = new ImageButton(skin, "muted");
 		ImageButton startButton = new ImageButton(skin, "startButton");
 		// Only tmp until the levelButton for the main menu is finished
 		ImageButton levelButton = new ImageButton(skin, "startButton");

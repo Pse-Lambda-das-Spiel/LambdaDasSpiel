@@ -30,7 +30,7 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	purchased: 	{ down: purchased, up: purchased, font: default-font, fontColor: black},
 	not_buyable: 	{ down: not_buyable, up: not_buyable, font: default-font, fontColor: black},
 	activated: 	{ down: activated, up: activated, font: default-font, fontColor: black},
-	level: { up: level_unlocked, font: roboto-font, fontColor: black}
+	level: { up: level, font: roboto-font, fontColor: black}
 },
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
 	default: { vScroll: default-scroll, hScrollKnob: default-round-large, background: default-rect, hScroll: default-scroll, vScrollKnob: default-round-large }
@@ -56,7 +56,6 @@ com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {
 },
 com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
 	default-horizontal: { background: slide_bar, knob: slider },
-	default-vertical: { background: slide_bar_v, knob: slider_v }
 },
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	default: { font: default-font, fontColor: black }
@@ -66,7 +65,7 @@ com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 },
 com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
 	default: { checkboxOn: checkbox_on, checkboxOff: checkbox_off, font: default-font, fontColor: black },
-	soundBox: { checkboxOn : sound_unmuted, checkboxOff : sound_muted },
+	soundBox: { checkboxOn : unmuted, checkboxOff : muted },
 },
 com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
 	default: { fontColorUnselected: white, selection: selection, fontColorSelected: white, font: default-font }
@@ -89,7 +88,6 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	elementType: 		{ up: elementType},
 	abortButton: 		{ up: abort},
 	achievementsButton: { up: achievements},
-	facebookButton: 	{ up: facebook},
 	forwardButton: 		{ up: forward},
 	helpButton: 		{ up: help},
 	infoButton: 		{ up: info},
@@ -98,9 +96,8 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	okayButton: 		{ up: okay},
 	pauseButton: 		{ up: pause},
 	playButton: 		{ up: play},
-	prevButton: 		{ up: previous},
+	prevButton: 		{ up: prev},
 
-	purchaseButton: 	{ up: purchase},
 	reloadButton: 		{ up: reload},
 	settingsButton: 	{ up: settings},
 	startButton: 		{ up: start},

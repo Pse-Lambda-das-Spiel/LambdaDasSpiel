@@ -94,7 +94,7 @@ public class LambdaGame extends Game {
         addViewController(new AchievementMenuViewController());
         addViewController(new SettingsViewController());
         addViewController(new ShopViewController());
-        addViewController(new LevelSelectionViewController());
+        //addViewController(new LevelSelectionViewController());
         /*
         addViewController(new MainMenuViewController());
         addViewController(new LevelSelectionViewController());

@@ -22,7 +22,7 @@ public class DifficultyAchievementModel extends AchievementModel {
 	 * @param difficultyId the identifier of the specific difficulty 
 	 */
 	public DifficultyAchievementModel(int difficultyId) {
-		this.reqLevelPerDifficultySolved = difficultyId * LevelManager.LEVELPERDIFFICULTY;
+		this.reqLevelPerDifficultySolved = difficultyId * LevelManager.LEVEL_PER_DIFFICULTY;
 	}
 	
 	/**
@@ -54,9 +54,9 @@ public class DifficultyAchievementModel extends AchievementModel {
 		}
 		I18NBundle bundle = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
 		setDescription(bundle.format("difficultyAchievement",  
-				reqLevelPerDifficultySolved / LevelManager.LEVELPERDIFFICULTY));
+				reqLevelPerDifficultySolved / LevelManager.LEVEL_PER_DIFFICULTY));
 		setRequirementsDescription(bundle.format("reqDifficultyAchievement",  
-				reqLevelPerDifficultySolved / LevelManager.LEVELPERDIFFICULTY));
+				reqLevelPerDifficultySolved / LevelManager.LEVEL_PER_DIFFICULTY));
 	}
 	
 	/**

@@ -14,9 +14,9 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	achievementsButton: {up : achievements},
 	settingsButton: {up : settings},
 	coin: {up : coin},
-	coin_bar:{up:coin_bar},
-	sound_muted : {up : sound_muted },
-	sound_unmuted : {up :  sound_unmuted},
+
+	muted : {up : muted },
+	unmuted : {up :  unmuted},
 	musicType: { up: musicType},
 	startButton: { up: start}
 },
