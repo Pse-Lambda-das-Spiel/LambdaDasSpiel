@@ -109,6 +109,8 @@ public class ShopModel {
             this.music.getItems().add(musicItem);
             i++;
         }
+        //default
+        assets.load("data/items/levels/music/default.mp3", Music.class);
     }
     
     /**
@@ -133,6 +135,8 @@ public class ShopModel {
             this.images.getItems().add(imageItem);
             i++;
         }
+        //default
+        assets.load("data/items/levels/images/default.png", Texture.class);
     }
     
     /**
@@ -157,6 +161,8 @@ public class ShopModel {
             elementUIContextFamilies.getItems().add(i, familyItem);
             i++;
         }
+        //default
+        assets.load("data/items/levels/elementuis/default.atlas", TextureAtlas.class);
     }
     
     public void setAllAssets(AssetManager assets) {
@@ -164,11 +170,19 @@ public class ShopModel {
         for (MusicItemModel musicItem : this.music.getItems()) {
             musicItem.setMusic(assets.get(musicItem.getFilepath(), Music.class));
         }
+        // set the default music
+        MusicItemModel musicItem = new MusicItemModel("default", 0, "data/items/levels/music/default.mp3");
+        musicItem.setMusic(assets.get(musicItem.getFilepath(), Music.class));
+        music.setDefaultItem(musicItem);
         
         // sets every asset to the image items
         for (BackgroundImageItemModel imageItem : this.images.getItems()) {
             imageItem.setImage(assets.get(imageItem.getFilepath(), Texture.class));
         }
+        // set the default image
+        BackgroundImageItemModel imageItem = new BackgroundImageItemModel("default", 0, "data/items/levels/music/default.mp3");
+        imageItem.setImage(assets.get(imageItem.getFilepath(), Texture.class));
+        images.setDefaultItem(imageItem);
         
         // sets every asset to the element items
         for (ElementUIContextFamily familyItem : this.elementUIContextFamilies.getItems()) {
@@ -190,5 +204,25 @@ public class ShopModel {
             familyItem.setParanthesisUIContext(parenthesis);
             familyItem.setVariableUIContext(variable);  
         }
+        // set the default elements
+        TextureAtlas atlas = assets.get("data/items/levels/elementuis/default.atlas");
+        VariableUIContext variable = new VariableUIContext(atlas.findRegion("gem").getTexture(), atlas.findRegion("gem_mask").getTexture());
+        AbstractionUIContext abstraction = new AbstractionUIContext(atlas.findRegion("front_magicstick").getTexture(), 
+                atlas.findRegion("center").getTexture(), 
+                atlas.findRegion("back").getTexture(),
+                atlas.findRegion("front_mask").getTexture(),
+                atlas.findRegion("center_mask").getTexture(),
+                atlas.findRegion("back_mask").getTexture());
+        ParanthesisUIContext parenthesis = new ParanthesisUIContext(atlas.findRegion("front").getTexture(), 
+                atlas.findRegion("center").getTexture(), 
+                atlas.findRegion("back").getTexture(),
+                atlas.findRegion("front_mask").getTexture(),
+                atlas.findRegion("center_mask").getTexture(),
+                atlas.findRegion("back_mask").getTexture());
+        ElementUIContextFamily familyItem = new ElementUIContextFamily("default", 0, "data/items/levels/elementuis/default.atlas");
+        familyItem.setAbstractionUIContext(abstraction);
+        familyItem.setParanthesisUIContext(parenthesis);
+        familyItem.setVariableUIContext(variable);  
+        elementUIContextFamilies.setDefaultItem(familyItem);
     }
 }
