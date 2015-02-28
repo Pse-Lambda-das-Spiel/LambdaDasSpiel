@@ -1,8 +1,5 @@
 package lambda.model.levels;
 
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-
 /**
  * Represents the settings of levels with the same difficulty
  *
@@ -13,10 +10,8 @@ public class DifficultySetting {
     private int difficulty;
     private String musicString;
     private String bgImageString;
-    private Music music;
-    private Image bgImage;
 
-    /**
+	/**
      * Creates a new instance of this class
      *
      * @param difficulty integer which shows the difficulty (ascending)
@@ -55,40 +50,5 @@ public class DifficultySetting {
     public String getBgImageString() {
         return bgImageString;
     }
-
-    /**
-     * Sets the music which runs in the background
-     *
-     * @param music the music which runs in the background
-     */
-    public void setMusic(Music music) {
-        this.music = music;
-    }
-
-    /**
-     * Sets the image which is shown in the background
-     *
-     * @param bgImage image which is shown in the background
-     */
-    public void setBgImage(Image bgImage) {
-        this.bgImage = bgImage;
-    }
-
-    /**
-     * Returns the music which runs in the background
-     *
-     * @return the music which runs in the background
-     */
-    public Image getBgImage() {
-        return bgImage;
-    }
-
-    /**
-     * Returns the image which is shown in the background
-     *
-     * @return the image which is shown in the background
-     */
-    public Music getMusic() {
-        return music;
-    }
+    
 }

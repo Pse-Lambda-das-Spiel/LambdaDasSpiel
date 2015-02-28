@@ -5,7 +5,6 @@ import java.util.List;
 
 import lambda.Consumer;
 import lambda.Observable;
-import lambda.model.lambdaterm.LambdaTermObserver;
 
 /**
  * Represents the logic behind the editing-screen of a profile's avatar and
@@ -61,7 +60,7 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         notify(new Consumer<ProfileEditObserver>(){
             @Override
             public void accept(ProfileEditObserver observer) {
-                observer.changedLanguage();;
+                observer.changedLanguage();
             }
         });
     }
@@ -78,7 +77,7 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         notify(new Consumer<ProfileEditObserver>(){
             @Override
             public void accept(ProfileEditObserver observer) {
-                observer.changedLanguage();;
+                observer.changedLanguage();
             }
         });
     }
@@ -95,7 +94,7 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         notify(new Consumer<ProfileEditObserver>(){
             @Override
             public void accept(ProfileEditObserver observer) {
-                observer.changedLanguage();;
+                observer.changedLanguage();
             }
         });
     }

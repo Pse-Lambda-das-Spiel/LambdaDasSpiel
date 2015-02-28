@@ -11,6 +11,7 @@ import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.ViewController;
 import lambda.viewcontroller.achievements.AchievementMenuViewController;
 import lambda.viewcontroller.assets.AssetViewController;
+import lambda.viewcontroller.level.LevelSelectionViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
 import lambda.viewcontroller.profiles.ProfileEditAvatar;
 import lambda.viewcontroller.profiles.ProfileEditLang;
@@ -93,6 +94,7 @@ public class LambdaGame extends Game {
         addViewController(new AchievementMenuViewController());
         addViewController(new SettingsViewController());
         addViewController(new ShopViewController());
+        addViewController(new LevelSelectionViewController());
         /*
         addViewController(new MainMenuViewController());
         addViewController(new LevelSelectionViewController());

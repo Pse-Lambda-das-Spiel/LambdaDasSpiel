@@ -19,6 +19,8 @@ import lambda.viewcontroller.level.TutorialMessage;
 /**
  * This class helps with the loading process of level json files.
  * It encapsulates all functionality needed for accessing and loading level json files and initialising the levels.
+ * It also encapsulates all functionality needed for accessing and loading difficulty setting files of the levels
+ * and their components, the background image files and music files.
  * 
  * @author Robert Hochweiss
  */
@@ -33,7 +35,7 @@ public final class LevelLoadHelper {
 	 * @param file the {@link FileHandle} of the to be loaded level
 	 * @return the LevelModel initialized with the level data from the json file
 	 * @throws InvalidJsonException if the corresponding json file has invalid content
-	 * @throws java.io.IOException if there is an error while reading the level json file
+	 * @throws IOException if there is an error while reading the level json file
 	 */
 	public static LevelModel loadLevel(FileHandle file) {
 		JsonReader reader = new JsonReader();
@@ -212,6 +214,8 @@ public final class LevelLoadHelper {
 	 *
 	 * @param file the {@link FileHandle}  of the to be loaded difficulty settings
 	 * @return settings for a difficulty
+	 * @throws InvalidJsonException if the corresponding json file has invalid content
+	 * @throws IOException if there is an error while reading the level json file
 	 */
 	public static DifficultySetting loadDifficulty(FileHandle file) {
 		JsonReader reader = new JsonReader();
@@ -232,6 +236,7 @@ public final class LevelLoadHelper {
 	 * Returns the paths to all DifficultySetting files
 	 *
 	 * @return an array which contains the paths for all DifficultySettings
+	 * @throws IOException if there is an error while reading the level json file
 	 */
 	public static String[] loadAllDifficultyPaths() {
 		FileHandle file = Gdx.files.internal("data/difficulties/numberOfDifficulties.json");
@@ -243,6 +248,42 @@ public final class LevelLoadHelper {
 			difficultySettingFilePaths[i] = "data/difficulties/" + String.format("%02d", i + 1) + ".json";
 		}
 		return difficultySettingFilePaths;
+	}
+	
+	/**
+	 * Returns the paths to all difficulty background image files.
+	 *
+	 * @return an array which contains the paths for all difficulty background image files;
+	 * @throws IOException if there is an error while reading the level json file
+	 */
+	public static String[] loadAllDifficultyBGImageFilePaths() {
+		FileHandle file = Gdx.files.internal("data/levels/images/numberOfImages.json");
+		JsonReader reader = new JsonReader();
+		JsonValue jsonFile = reader.parse(file);
+		int numberOfImages = jsonFile.getInt("numberOfImages");
+		String[] difficultyBGImageFilePaths = new String[numberOfImages];
+		for (int i = 0; i < numberOfImages; i++) {
+			difficultyBGImageFilePaths[i] = "data/levels/images/" + String.format("%02d", i + 1) + ".png";
+		}
+		return difficultyBGImageFilePaths;
+	}
+	
+	/**
+	 * Returns the paths to all difficulty music files.
+	 *
+	 * @return an array which contains the paths for all difficulty music files;
+	 * @throws IOException if there is an error while reading the level json file
+	 */
+	public static String[] loadAllDifficultyMusicFilePaths() {
+		FileHandle file = Gdx.files.internal("data/levels/music/numberOfMusic.json");
+		JsonReader reader = new JsonReader();
+		JsonValue jsonFile = reader.parse(file);
+		int numberOfMusic = jsonFile.getInt("numberOfMusic");
+		String[] difficultyMusicFilePaths = new String[numberOfMusic];
+		for (int i = 0; i < numberOfMusic; i++) {
+			difficultyMusicFilePaths[i] = "data/levels/music/" + String.format("%02d", i + 1) + ".mp3";
+		}
+		return difficultyMusicFilePaths;
 	}
 	
 }

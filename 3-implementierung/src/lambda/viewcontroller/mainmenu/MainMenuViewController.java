@@ -32,7 +32,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
  */
 public class MainMenuViewController extends StageViewController {
 
-	private final String skinJson = "data/skins/MainMenuSkin.json";
+	private final String SKINJSON = "data/skins/MainMenuSkin.json";
 	private Skin skin;
 	private Label coins;
 	private Label profileName;
@@ -55,15 +55,14 @@ public class MainMenuViewController extends StageViewController {
 	public void changedProfile() {
 		ProfileManager pManager = ProfileManager.getManager();
 		profileImg.setDrawable(new SpriteDrawable(new Sprite(
-				manager.get("data/avatar/" + pManager.getCurrentProfile().getAvatar() + ".jpg", Texture.class))));
+		manager.get("data/avatar/" + pManager.getCurrentProfile().getAvatar() + ".jpg", Texture.class))));
 		profileName.setText(pManager.getCurrentProfile().getName());
 		soundButtonContainer.setActor((pManager.getCurrentProfile().getSettings().isMusicOn() ? sound_unmuted : sound_muted));
 	}
 
-	@Override
-	public void resize(int width, int height) {
-	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void show() {
 		super.show();
@@ -71,16 +70,22 @@ public class MainMenuViewController extends StageViewController {
 		coins.setText(Integer.toString(ProfileManager.getManager().getCurrentProfile().getCoins()));
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void queueAssets(AssetManager manager) {
-		manager.load(skinJson, Skin.class, new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
+		manager.load(SKINJSON, Skin.class, new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void create(final AssetManager manager) {
 		this.manager = manager;
 		ProfileManager.getManager().addObserver(this);
-		skin = manager.get(skinJson, Skin.class);
+		skin = manager.get(SKINJSON, Skin.class);
 		// TODO: Replace with logoutButton when its finished
 		ImageButton logoutButton = new ImageButton(skin, "backButton");
 		ImageButton settingsButton = new ImageButton(skin, "settingsButton");

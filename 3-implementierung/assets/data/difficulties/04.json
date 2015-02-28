@@ -1,7 +1,6 @@
 {
 	"difficulty": {
 		"difficultyId": 4 ,
-		"levelButtonColor": "brown",
 		"music": "04.mp3" ,
 		"bgImage": "04.png"
 		}

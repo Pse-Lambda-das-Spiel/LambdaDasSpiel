@@ -190,268 +190,80 @@ white
   orig: 3, 3
   offset: 0, 0
   index: -1
-  
+
+
 MasterSkin.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-elements_bar
-  rotate: false
-  xy: 1, 864
-  size: 800, 147
-  orig: 800, 147
-  offset: 0, 0
-  index: -1
-level
-  rotate: false
-  xy: 803, 819
-  size: 192, 192
-  orig: 192, 192
-  offset: 0, 0
-  index: -1
-slide_bar_v
-  rotate: false
-  xy: 997, 359
-  size: 21, 652
-  orig: 21, 652
-  offset: 0, 0
-  index: -1
-elementType
-  rotate: false
-  xy: 1, 180
-  size: 391, 177
-  orig: 391, 177
-  offset: 0, 0
-  index: -1
 dialog
   rotate: false
-  xy: 1, 462
-  size: 600, 400
-  orig: 600, 400
+  xy: 1, 521
+  size: 800, 487
+  orig: 800, 487
   offset: 0, 0
   index: -1
-slide_bar
+sandbox
   rotate: false
-  xy: 1, 439
-  size: 652, 21
-  orig: 652, 21
-  offset: 0, 0
-  index: -1
-imageType
-  rotate: false
-  xy: 603, 640
-  size: 391, 177
-  orig: 391, 177
-  offset: 0, 0
-  index: -1
-sound_unmuted
-  rotate: false
-  xy: 603, 821
-  size: 33, 41
-  orig: 33, 41
-  offset: 0, 0
-  index: -1
-slider_v
-  rotate: false
-  xy: 638, 840
-  size: 14, 22
-  orig: 14, 22
-  offset: 0, 0
-  index: -1
-slider
-  rotate: false
-  xy: 654, 848
-  size: 22, 14
-  orig: 22, 14
-  offset: 0, 0
-  index: -1
-text_button
-  rotate: false
-  xy: 603, 508
-  size: 350, 130
-  orig: 350, 130
-  offset: 0, 0
-  index: -1
-activated
-  rotate: false
-  xy: 394, 257
-  size: 481, 100
-  orig: 481, 100
-  offset: 0, 0
-  index: -1
-start
-  rotate: false
-  xy: 655, 397
-  size: 108, 109
-  orig: 108, 109
-  offset: 0, 0
-  index: -1
-coin_bar
-  rotate: false
-  xy: 765, 438
-  size: 176, 68
-  orig: 176, 68
-  offset: 0, 0
-  index: -1
-info
-  rotate: false
-  xy: 765, 365
-  size: 69, 71
-  orig: 69, 71
-  offset: 0, 0
-  index: -1
-abort
-  rotate: false
-  xy: 836, 365
-  size: 69, 71
-  orig: 69, 71
-  offset: 0, 0
-  index: -1
-checkbox_off
-  rotate: false
-  xy: 877, 264
-  size: 82, 93
-  orig: 82, 93
-  offset: 0, 0
-  index: -1
-accept
-  rotate: false
-  xy: 907, 365
-  size: 69, 71
-  orig: 69, 71
-  offset: 0, 0
-  index: -1
-sound_muted
-  rotate: false
-  xy: 943, 458
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: -1
-checkbox_on
-  rotate: false
-  xy: 877, 169
-  size: 82, 93
-  orig: 82, 93
-  offset: 0, 0
-  index: -1
-buyable
-  rotate: false
-  xy: 394, 155
-  size: 481, 100
-  orig: 481, 100
-  offset: 0, 0
-  index: -1
-musicType
-  rotate: false
-  xy: 1, 1
-  size: 391, 177
-  orig: 391, 177
-  offset: 0, 0
-  index: -1
-not_buyable
-  rotate: false
-  xy: 394, 53
-  size: 481, 100
-  orig: 481, 100
-  offset: 0, 0
-  index: -1
-achievements
-  rotate: false
-  xy: 877, 96
-  size: 69, 71
-  orig: 69, 71
-  offset: 0, 0
-  index: -1
-add
-  rotate: false
-  xy: 877, 23
-  size: 69, 71
-  orig: 69, 71
-  offset: 0, 0
-  index: -1
-back
-  rotate: false
-  xy: 948, 96
-  size: 69, 71
-  orig: 69, 71
-  offset: 0, 0
-  index: -1
-bin
-  rotate: false
-  xy: 948, 23
-  size: 69, 71
-  orig: 69, 71
+  xy: 803, 808
+  size: 200, 200
+  orig: 200, 200
   offset: 0, 0
   index: -1
 coin
   rotate: false
-  xy: 961, 289
-  size: 62, 68
-  orig: 62, 68
+  xy: 803, 602
+  size: 192, 204
+  orig: 192, 204
   offset: 0, 0
   index: -1
-facebook
+slider
   rotate: false
-  xy: 1, 366
-  size: 69, 71
-  orig: 69, 71
+  xy: 997, 786
+  size: 20, 20
+  orig: 20, 20
   offset: 0, 0
   index: -1
-forward
+abort
   rotate: false
-  xy: 72, 366
-  size: 69, 71
-  orig: 69, 71
+  xy: 803, 403
+  size: 192, 197
+  orig: 192, 197
   offset: 0, 0
   index: -1
-help
+level
   rotate: false
-  xy: 143, 366
-  size: 69, 71
-  orig: 69, 71
+  xy: 1, 1
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: 2
+level
+  rotate: false
+  xy: 403, 1
+  size: 400, 400
+  orig: 400, 400
   offset: 0, 0
   index: -1
-menu
+activated
   rotate: false
-  xy: 214, 366
-  size: 69, 71
-  orig: 69, 71
+  xy: 1, 419
+  size: 481, 100
+  orig: 481, 100
   offset: 0, 0
   index: -1
-next
+accept
   rotate: false
-  xy: 285, 366
-  size: 69, 71
-  orig: 69, 71
+  xy: 805, 204
+  size: 192, 197
+  orig: 192, 197
   offset: 0, 0
   index: -1
-okay
+achievements
   rotate: false
-  xy: 356, 366
-  size: 69, 71
-  orig: 69, 71
-  offset: 0, 0
-  index: -1
-pause
-  rotate: false
-  xy: 427, 366
-  size: 69, 71
-  orig: 69, 71
-  offset: 0, 0
-  index: -1
-play
-  rotate: false
-  xy: 498, 366
-  size: 69, 71
-  orig: 69, 71
-  offset: 0, 0
-  index: -1
-previous
-  rotate: false
-  xy: 569, 366
-  size: 69, 71
-  orig: 69, 71
+  xy: 805, 5
+  size: 192, 197
+  orig: 192, 197
   offset: 0, 0
   index: -1
 
@@ -459,45 +271,284 @@ MasterSkin2.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-purchased
+elementType
   rotate: false
-  xy: 1, 147
+  xy: 1, 688
+  size: 700, 317
+  orig: 700, 317
+  offset: 0, 0
+  index: -1
+add
+  rotate: false
+  xy: 703, 808
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+back
+  rotate: false
+  xy: 703, 609
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+level
+  rotate: false
+  xy: 1, 286
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: 1
+text_button
+  rotate: false
+  xy: 403, 368
+  size: 600, 239
+  orig: 600, 239
+  offset: 0, 0
+  index: -1
+elements_bar
+  rotate: false
+  xy: 403, 267
+  size: 595, 99
+  orig: 595, 99
+  offset: 0, 0
+  index: -1
+text_field
+  rotate: false
+  xy: 403, 267
+  size: 595, 99
+  orig: 595, 99
+  offset: 0, 0
+  index: -1
+musicType
+  rotate: false
+  xy: 1, 1
+  size: 699, 264
+  orig: 699, 264
+  offset: 0, 0
+  index: -1
+bin
+  rotate: false
+  xy: 702, 68
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+
+MasterSkin3.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+imageType
+  rotate: false
+  xy: 1, 700
+  size: 700, 317
+  orig: 700, 317
+  offset: 0, 0
+  index: -1
+forward
+  rotate: false
+  xy: 703, 820
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+help
+  rotate: false
+  xy: 703, 621
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+level
+  rotate: false
+  xy: 1, 298
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: 3
+info
+  rotate: false
+  xy: 403, 501
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+level
+  rotate: false
+  xy: 597, 219
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: 4
+levelmenu
+  rotate: false
+  xy: 403, 302
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+menu
+  rotate: false
+  xy: 403, 103
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+next
+  rotate: false
+  xy: 597, 20
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+okay
+  rotate: false
+  xy: 791, 20
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+buyable
+  rotate: false
+  xy: 1, 1
   size: 481, 100
   orig: 481, 100
   offset: 0, 0
   index: -1
-level_complete
+muted
   rotate: false
-  xy: 484, 55
+  xy: 1, 104
   size: 192, 192
   orig: 192, 192
   offset: 0, 0
   index: -1
-level_locked
+start
   rotate: false
-  xy: 678, 55
+  xy: 195, 104
   size: 192, 192
   orig: 192, 192
   offset: 0, 0
   index: -1
-purchase
+
+MasterSkin4.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+level
   rotate: false
-  xy: 1, 74
-  size: 69, 71
-  orig: 69, 71
+  xy: 1, 607
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: 5
+level_completed
+  rotate: false
+  xy: 1, 205
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: 1
+not_buyable
+  rotate: false
+  xy: 1, 103
+  size: 481, 100
+  orig: 481, 100
+  offset: 0, 0
+  index: -1
+purchased
+  rotate: false
+  xy: 1, 1
+  size: 481, 100
+  orig: 481, 100
+  offset: 0, 0
+  index: -1
+level_completed
+  rotate: false
+  xy: 403, 607
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: 2
+level_completed
+  rotate: false
+  xy: 403, 205
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: 3
+pause
+  rotate: false
+  xy: 484, 6
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+play
+  rotate: false
+  xy: 678, 6
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+prev
+  rotate: false
+  xy: 805, 810
+  size: 192, 197
+  orig: 192, 197
   offset: 0, 0
   index: -1
 reload
   rotate: false
-  xy: 872, 176
-  size: 69, 71
-  orig: 69, 71
+  xy: 805, 611
+  size: 192, 197
+  orig: 192, 197
   offset: 0, 0
   index: -1
 settings
   rotate: false
+  xy: 805, 412
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+unmuted
+  rotate: false
+  xy: 805, 218
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: -1
+
+MasterSkin5.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+level_completed
+  rotate: false
+  xy: 1, 430
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: 4
+level_completed
+  rotate: false
+  xy: 1, 28
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: 5
+level_locked
+  rotate: false
+  xy: 403, 430
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+slide_bar
+  rotate: false
   xy: 1, 1
-  size: 69, 71
-  orig: 69, 71
+  size: 656, 25
+  orig: 656, 25
   offset: 0, 0
   index: -1

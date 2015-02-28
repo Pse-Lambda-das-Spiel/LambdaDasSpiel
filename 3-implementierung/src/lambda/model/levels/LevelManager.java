@@ -2,9 +2,10 @@ package lambda.model.levels;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Texture;
 
 /**
- *
  * LevelManager holds two lists: One list which contains all LevelModels
  * and another one which contains all DifficultySettings.
  *
@@ -15,13 +16,13 @@ public class LevelManager {
 	/**
 	 * The number of level per difficulty.
 	 */
-	public static final int LEVELPERDIFFICULTY = 6;
+	public static final int LEVEL_PER_DIFFICULTY = 6;
 	private AssetManager assetManager;
     private static LevelManager manager;
-    String[] levelFilePaths;
-	String[] difficultySettingFilePaths;
-//    private List<LevelModel> levels;
-//    private List<DifficultySetting> difficultySettings;
+    private String[] levelFilePaths;
+	private String[] difficultySettingFilePaths;
+	private String[] difficultyBGImageFilePaths;
+	private String[] difficultyMusicFilePaths;
 
     /**
      * Creates an instance of this class and loads the two required lists
@@ -29,6 +30,8 @@ public class LevelManager {
     private LevelManager() {
         levelFilePaths = LevelLoadHelper.loadAllLevelPaths();
         difficultySettingFilePaths = LevelLoadHelper.loadAllDifficultyPaths();
+        difficultyMusicFilePaths = LevelLoadHelper.loadAllDifficultyMusicFilePaths();
+        difficultyBGImageFilePaths = LevelLoadHelper.loadAllDifficultyBGImageFilePaths();
     }
 
     /**
@@ -41,6 +44,15 @@ public class LevelManager {
             manager = new LevelManager();
         }
         return manager;
+    }
+    
+    /**
+     * Returns the number of levels (sandbox excluded).
+     * 
+     * @return the number of levels
+     */
+    public int getNumberOfLevels() {
+    	return (levelFilePaths.length - 1);
     }
 
     /**
@@ -59,24 +71,6 @@ public class LevelManager {
    		return difficultySetting;
    	}
     
-//    /**
-//     * Returns a list which contains all LevelModels
-//     *
-//     * @return a list which contains all LevelModels
-//     */
-//    public List<LevelModel> getLevels() {
-//        return levels;
-//    }
-
-//    /**
-//     * Returns a list which contains all DifficultySettings
-//     *
-//     * @return a list which contains all DifficultySettings
-//     */
-//    public List<DifficultySetting> getDifficultySettings() {
-//        return difficultySettings;
-//    }
-    
     public void queueAssets(AssetManager assets) {
     	assetManager = assets;
     	assets.setLoader(LevelModel.class, new LevelModelLoader(new InternalFileHandleResolver()));
@@ -87,31 +81,22 @@ public class LevelManager {
     	for (String difficultySettingFilePath : difficultySettingFilePaths) {
     		assets.load(difficultySettingFilePath, DifficultySetting.class);
     	}
-    	
-    	// I am not sure about the rest of your resources here, either use normal AssetLoaders or write your own for them
-    	
-//        FileHandle file = Gdx.files.internal("data/levels/music/numberOfMusic.json");
-//        JsonReader reader = new JsonReader();
-//        JsonValue jsonFile = reader.parse(file);
-//        int numberOfMusic = jsonFile.getInt("numberOfMusic");
-//        for (int i = 0; i < numberOfMusic; i++) {
-//            assetManager.load("data/levels/music" + String.format("%02d", i) + ".mp3", Music.class);
-//            levelManager.getDifficultySettings().get(i).setMusic(assetManager.get("data/levels/music" + String.format("%02d", i) + ".mp3"));
-//            //assetManager.unload("data/levels/music" + String.format("%02d", i) + ".mp3");
-//        }
-//
-//        file = Gdx.files.internal("data/difficulties/numberOfImages.json");
-//        reader = new JsonReader();
-//        jsonFile = reader.parse(file);
-//        int numberOfImages = jsonFile.getInt("numberOfImages");
-//        for (int i = 0; i < numberOfImages; i++) {
-//            assetManager.load("data/levels/images" + String.format("%02d", i) + ".jpg", Image.class);
-//            levelManager.getDifficultySettings().get(i).setBgImage(assetManager.get("data/levels/images" + String.format("%02d", i) + ".jpg"));
-//        }
+    	for (String difficultyMusicFilePath : difficultyMusicFilePaths) {
+    		assets.load(difficultyMusicFilePath, Music.class);
+    	}
+    	for (String difficultyBGImageFilePath : difficultyBGImageFilePaths) {
+    		assets.load(difficultyBGImageFilePath, Texture.class);
+    	}
     }
+    	
+   
+    /**
+     * Returns the {@link AssetManager} who holds all resources.
+     * 
+     * @return the {@link AssetManager}
+     */
     public AssetManager getAssetManager() {
         return assetManager;
     }
     
-
 }
