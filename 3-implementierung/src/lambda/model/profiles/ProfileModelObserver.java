@@ -17,13 +17,13 @@ public interface ProfileModelObserver {
 
     /**
      * Gets called by an observed ProfileModel-object as the level-progress is
-     * changed. The default implementation is empty.
+     * changed.
      */
     public void changedLevelIndex();
 
     /**
      * Gets called by an observed ProfileModel-object as the number of owned
-     * coins is changed. The default implementation is empty.
+     * coins is changed.
      */
     public void changedCoins();
 

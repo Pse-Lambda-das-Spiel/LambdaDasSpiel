@@ -12,13 +12,13 @@ public interface ProfileEditObserver {
 
     /**
      * Gets called by an observed ProfileEditModel-object as the selected
-     * language is changed. The default implementation is empty.
+     * language is changed.
      */
     public void changedLanguage();
 
     /**
      * Gets called by an observed ProfileEditModel-object as the selected avatar
-     * is changed. The default implementation is empty.
+     * is changed.
      */
     public void changedAvatar();
 

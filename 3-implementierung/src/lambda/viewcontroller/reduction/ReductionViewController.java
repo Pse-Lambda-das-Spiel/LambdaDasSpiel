@@ -2,6 +2,7 @@ package lambda.viewcontroller.reduction;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -96,7 +97,7 @@ public class ReductionViewController extends StageViewController implements Redu
             @Override
             public void clicked(InputEvent event, float x, float y){
                 new PauseDialog(dialogSkin, manager.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
-                        I18NBundle.class)).show(getStage());
+                        I18NBundle.class), getStage().getWidth(), getStage().getHeight()).show(getStage());
             }
         });
         helpButton.addListener(new ClickListener(){
@@ -211,14 +212,14 @@ public class ReductionViewController extends StageViewController implements Redu
     public void reductionFinished(boolean levelComplete) {
         //add coins to player etc.
         new FinishDialog(levelComplete, /*getCoins*/0, assets.get("data/skins/DialogTemp.json", Skin.class), assets.get(ProfileManager
-                .getManager().getCurrentProfile().getLanguage(), I18NBundle.class)).show(getStage());
+                .getManager().getCurrentProfile().getLanguage(), I18NBundle.class), getStage().getWidth(), getStage().getHeight()).show(getStage());
     }
     
     private class PauseDialog extends Dialog {
-        public PauseDialog(Skin dialogSkin, I18NBundle language) {
+        public PauseDialog(Skin dialogSkin, I18NBundle language, float stageWidth, float stageHeight) {
             super("", dialogSkin);
-            float width = getStage().getWidth()*0.7f;
-            float height = getStage().getHeight()/5;
+            float width = stageWidth * 0.7f;
+            float height = stageHeight / 5;
             row();
             TextButton continueButton = new TextButton(language.get("continue"), dialogSkin);
             continueButton.addListener(new ClickListener() {
@@ -255,10 +256,10 @@ public class ReductionViewController extends StageViewController implements Redu
     }
     
     private class FinishDialog extends Dialog {
-        public FinishDialog(boolean levelComplete, int coins, Skin dialogSkin, I18NBundle language) {
+        public FinishDialog(boolean levelComplete, int coins, Skin dialogSkin, I18NBundle language, float stageWidth, float stageHeight) {
             super("", dialogSkin);
-            float width = getStage().getWidth()/2;
-            float height = getStage().getHeight()/8;
+            float width = stageWidth / 2;
+            float height = stageHeight / 8;
             clear();
             
             Label levelLabel;

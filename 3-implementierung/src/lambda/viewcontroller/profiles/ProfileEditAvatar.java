@@ -157,6 +157,8 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
             if (newProfile) {
                 m.setCurrentProfile(m.getCurrentProfile().getName());
                 final Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
+                float height = getStage().getHeight();
+                float width = getStage().getWidth();
                 new Dialog("", dialogSkin) {
                     private boolean changedToMainMenu = false;
                     {
@@ -166,9 +168,8 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
                                 + " " + m.getCurrentProfile().getName() + " !", dialogSkin);
                         greeting.setFontScale(1.5f);
                         add(greeting);
-                        row().space(getStage().getHeight() / 8);
-                        add(new Image(avatarPic.getDrawable())).width(
-                                getStage().getWidth() / 3).height(getStage().getHeight() / 3);
+                        row().space(height / 8);
+                        add(new Image(avatarPic.getDrawable())).width(width / 3).height(height / 3);
                         Timer.schedule(new Task() {
                             @Override
                             public void run() {

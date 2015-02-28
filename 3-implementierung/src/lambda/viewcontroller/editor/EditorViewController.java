@@ -128,7 +128,7 @@ public final class EditorViewController extends StageViewController implements E
             @Override
             public void clicked(InputEvent event, float x, float y){
                 new PauseDialog(dialogSkin, manager.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
-                        I18NBundle.class)).show(getStage());
+                        I18NBundle.class), getStage().getWidth(), getStage().getHeight()).show(getStage());
             }
         });
         hintButton.addListener(new ClickListener(){
@@ -262,10 +262,10 @@ public final class EditorViewController extends StageViewController implements E
     }
     
     private class PauseDialog extends Dialog {
-        public PauseDialog(Skin dialogSkin, I18NBundle language) {
+        public PauseDialog(Skin dialogSkin, I18NBundle language, float stageWidth, float stageHeight) {
             super("", dialogSkin);
-            float width = getStage().getWidth()*0.7f;
-            float height = getStage().getHeight()/5;
+            float width = stageWidth * 0.7f;
+            float height = stageHeight / 5;
             row();
             TextButton continueButton = new TextButton(language.get("continue"), dialogSkin);
             continueButton.addListener(new ClickListener() {
