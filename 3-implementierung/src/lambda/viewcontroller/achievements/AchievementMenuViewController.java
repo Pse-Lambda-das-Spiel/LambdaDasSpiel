@@ -35,14 +35,13 @@ import lambda.viewcontroller.mainmenu.MainMenuViewController;
 public class AchievementMenuViewController extends StageViewController {
 
 	private static AssetManager manager;
-	private final static String achievementMenuSkinJson = "data/skins/AchievementMenuSkin.json";
-	private final String achievementMenuSkinAtlas = "data/skins/AchievementMenuSkin.atlas";
 	private final int ACHIEVEMENTS_PER_ROW = 5;
 	private AchievementManager achievementManager;
 	private List<AchievementViewController> achievementVCList;
 	private Map<String, Label> labelMap;
 	private Label titleLabel;
 	private Table achievementTable;
+	private static Skin skin;
 	
 	/**
 	 * Creates a new instance of this class.
@@ -87,7 +86,6 @@ public class AchievementMenuViewController extends StageViewController {
 	 * @return the image button style
 	 */
 	public static ImageButtonStyle getImageButtonStyle(String icon) {
-		Skin skin = manager.get(achievementMenuSkinJson, Skin.class);
 		ImageButtonStyle style = new ImageButtonStyle(skin.get(ImageButtonStyle.class));
 		style.imageUp = skin.getDrawable(icon);
 		return style;
@@ -98,8 +96,6 @@ public class AchievementMenuViewController extends StageViewController {
 	 */
     @Override
     public void queueAssets(AssetManager assets) {
-    	assets.load(achievementMenuSkinAtlas, TextureAtlas.class);
-		assets.load(achievementMenuSkinJson, Skin.class, new SkinLoader.SkinParameter(achievementMenuSkinAtlas));        
     }
     
     /**
@@ -109,10 +105,11 @@ public class AchievementMenuViewController extends StageViewController {
     public void create(final AssetManager manager) {
     	AchievementMenuViewController.manager = manager;
     	ProfileManager.getManager().addObserver(this);
+    	skin = manager.get("data/skins/MasterSkin.json", Skin.class);
     	Table mainTable = new Table();
 		mainTable.setFillParent(true);
 		getStage().addActor(mainTable);
-		titleLabel = new Label("Initial string", manager.get(achievementMenuSkinJson, Skin.class), "title");
+		titleLabel = new Label("Initial string", skin, "roboto");
 		achievementTable = new Table();
 		achievementTable.pad(20);
 		achievementTable.defaults().space(30, 30, 50, 30);
@@ -120,7 +117,7 @@ public class AchievementMenuViewController extends StageViewController {
 		List<String> achievementTypeList = achievementManager.getAchievementTypeList();
 		for (int i = 0; i < achievementTypeList.size(); i++) {
 			// the labels have to be stored to change their text at a later time
-			Label label = new Label("Initial string", manager.get(achievementMenuSkinJson, Skin.class), "normal");
+			Label label = new Label("Initial string", skin, "robotoLight");
 			// only tmp, does not look so nice with scaling
 			labelMap.put(achievementTypeList.get(i), label);
 			achievementTable.add(label).center().colspan(ACHIEVEMENTS_PER_ROW);
@@ -155,10 +152,12 @@ public class AchievementMenuViewController extends StageViewController {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             final AchievementViewController clickedActor = (AchievementViewController) event.getListenerActor();
-            new Dialog("", manager.get(achievementMenuSkinJson, Skin.class)) {
+            final float height = getStage().getHeight();
+            final float width = getStage().getWidth();
+            new Dialog("", skin) {
             	{
-            		setWidth(getStage().getWidth() / 2);
-            		setHeight(getStage().getHeight() / 2);
+            		setWidth(width / 2);
+            		setHeight(height / 2);
             		addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
@@ -169,8 +168,7 @@ public class AchievementMenuViewController extends StageViewController {
             		// getImage() removes the image from its button so the button has to be copied before that
             		Image image= (new ImageButton(clickedActor.getStyle()).getImage());
                 	add(image).pad(30,10,30,30).size(100);
-                	Label label = new Label(clickedActor.getText(), 
-                			manager.get(achievementMenuSkinJson, Skin.class), "normal");
+                	Label label = new Label(clickedActor.getText(), skin, "robotoLight");
                 	label.setWrap(true);
                 	add(label).width(getWidth());
             	}

@@ -1,6 +1,6 @@
 {
 com.badlogic.gdx.graphics.g2d.BitmapFont: { 
-	default-font: { file: default.fnt } 
+	default-font: { file: default.fnt }, 
 	roboto-font: { file: roboto.fnt } ,
 	robotoLight-font: { file: roboto-light.fnt }
 },
@@ -58,7 +58,9 @@ com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
 	default-horizontal: { background: slide_bar, knob: slider },
 },
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
-	default: { font: default-font, fontColor: black }
+	default: { font: default-font, fontColor: black },
+	robotoLight: { font: robotoLight-font, fontColor: black },
+	roboto: { font: roboto-font, fontColor: black }
 },
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 	default: { selection: selection, background: textfield, font: default-font, fontColor: black, cursor: cursor }
@@ -97,6 +99,8 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	pauseButton: 		{ up: pause},
 	playButton: 		{ up: play},
 	prevButton: 		{ up: prev},
+	unmutedButton: 		{ up: unmuted},
+	mutedButton: 		{ up: muted},
 
 	reloadButton: 		{ up: reload},
 	settingsButton: 	{ up: settings},

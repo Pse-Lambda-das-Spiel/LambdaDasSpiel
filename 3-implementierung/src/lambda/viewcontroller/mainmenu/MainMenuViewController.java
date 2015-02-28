@@ -10,7 +10,6 @@ import lambda.viewcontroller.settings.SettingsViewController;
 import lambda.viewcontroller.shop.ShopViewController;
 
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -32,7 +31,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
  */
 public class MainMenuViewController extends StageViewController {
 
-	private final String SKINJSON = "data/skins/MainMenuSkin.json";
 	private Skin skin;
 	private Label coins;
 	private Label profileName;
@@ -75,7 +73,6 @@ public class MainMenuViewController extends StageViewController {
 	 */
 	@Override
 	public void queueAssets(AssetManager manager) {
-		manager.load(SKINJSON, Skin.class, new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
 	}
 
 	/**
@@ -85,12 +82,13 @@ public class MainMenuViewController extends StageViewController {
 	public void create(final AssetManager manager) {
 		this.manager = manager;
 		ProfileManager.getManager().addObserver(this);
-		skin = manager.get(SKINJSON, Skin.class);
+		skin = manager.get("data/skins/MasterSkin.json", Skin.class);
 		// TODO: Replace with logoutButton when its finished
 		ImageButton logoutButton = new ImageButton(skin, "backButton");
 		ImageButton settingsButton = new ImageButton(skin, "settingsButton");
-		sound_unmuted = new ImageButton(skin, "unmuted");
-		sound_muted = new ImageButton(skin, "muted");
+		sound_unmuted = new ImageButton(skin, "unmutedButton");
+		sound_muted = new ImageButton(skin, "mutedButton");
+		
 		ImageButton startButton = new ImageButton(skin, "startButton");
 		// Only tmp until the levelButton for the main menu is finished
 		ImageButton levelButton = new ImageButton(skin, "startButton");

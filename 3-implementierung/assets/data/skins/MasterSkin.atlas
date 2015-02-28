@@ -231,13 +231,13 @@ abort
   orig: 192, 197
   offset: 0, 0
   index: -1
-level
+level_completed
   rotate: false
   xy: 1, 1
   size: 400, 400
   orig: 400, 400
   offset: 0, 0
-  index: 2
+  index: 1
 level
   rotate: false
   xy: 403, 1
@@ -306,13 +306,13 @@ back
   orig: 192, 197
   offset: 0, 0
   index: -1
-level
+level_completed
   rotate: false
   xy: 1, 286
   size: 400, 400
   orig: 400, 400
   offset: 0, 0
-  index: 1
+  index: 2
 text_button
   rotate: false
   xy: 403, 368
@@ -374,7 +374,7 @@ help
   orig: 192, 197
   offset: 0, 0
   index: -1
-level
+level_completed
   rotate: false
   xy: 1, 298
   size: 400, 400
@@ -388,7 +388,7 @@ info
   orig: 192, 197
   offset: 0, 0
   index: -1
-level
+level_completed
   rotate: false
   xy: 597, 219
   size: 400, 400
@@ -449,20 +449,20 @@ MasterSkin4.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-level
+level_completed
   rotate: false
   xy: 1, 607
   size: 400, 400
   orig: 400, 400
   offset: 0, 0
   index: 5
-level_completed
+level_locked
   rotate: false
   xy: 1, 205
   size: 400, 400
   orig: 400, 400
   offset: 0, 0
-  index: 1
+  index: -1
 not_buyable
   rotate: false
   xy: 1, 103
@@ -477,20 +477,20 @@ purchased
   orig: 481, 100
   offset: 0, 0
   index: -1
-level_completed
+level_unlocked
   rotate: false
   xy: 403, 607
   size: 400, 400
   orig: 400, 400
   offset: 0, 0
-  index: 2
-level_completed
+  index: 1
+level_unlocked
   rotate: false
   xy: 403, 205
   size: 400, 400
   orig: 400, 400
   offset: 0, 0
-  index: 3
+  index: 2
 pause
   rotate: false
   xy: 484, 6
@@ -538,31 +538,931 @@ MasterSkin5.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-level_completed
+level_unlocked
   rotate: false
   xy: 1, 430
   size: 400, 400
   orig: 400, 400
   offset: 0, 0
-  index: 4
-level_completed
+  index: 3
+level_unlocked
   rotate: false
   xy: 1, 28
   size: 400, 400
   orig: 400, 400
   offset: 0, 0
-  index: 5
-level_locked
+  index: 4
+level_unlocked
   rotate: false
   xy: 403, 430
   size: 400, 400
   orig: 400, 400
   offset: 0, 0
-  index: -1
+  index: 5
 slide_bar
   rotate: false
   xy: 1, 1
   size: 656, 25
   orig: 656, 25
+  offset: 0, 0
+  index: -1
+
+MasterSkin6.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+achievements/difficulty/l_da01
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/difficulty/l_da02
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/difficulty/l_da03
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/difficulty/l_da04
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/difficulty/l_da05
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/difficulty/ul_da01
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/difficulty/ul_da02
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/difficulty/ul_da03
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/difficulty/ul_da04
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/difficulty/ul_da05
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+
+MasterSkin7.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+achievements/gems_enchanted/l_gea01
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_enchanted/l_gea02
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_enchanted/l_gea03
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_enchanted/l_gea04
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_enchanted/l_gea05
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_enchanted/ul_gea01
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_enchanted/ul_gea02
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_enchanted/ul_gea03
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_enchanted/ul_gea04
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_enchanted/ul_gea05
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+
+MasterSkin8.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+achievements/gems_enchanted_per_level/l_gepla01
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_enchanted_per_level/l_gepla02
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_enchanted_per_level/l_gepla03
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_enchanted_per_level/l_gepla04
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_enchanted_per_level/l_gepla05
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_enchanted_per_level/ul_gepla01
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_enchanted_per_level/ul_gepla02
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_enchanted_per_level/ul_gepla03
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_enchanted_per_level/ul_gepla04
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_enchanted_per_level/ul_gepla05
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+
+MasterSkin9.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+achievements/gems_placed/l_gpa01
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_placed/l_gpa02
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_placed/l_gpa03
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_placed/l_gpa04
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_placed/l_gpa05
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_placed/ul_gpa01
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_placed/ul_gpa02
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_placed/ul_gpa03
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_placed/ul_gpa04
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_placed/ul_gpa05
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+
+MasterSkin10.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+achievements/gems_placed_per_level/l_gppla01
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_placed_per_level/l_gppla02
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_placed_per_level/l_gppla03
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_placed_per_level/l_gppla04
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_placed_per_level/l_gppla05
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_placed_per_level/ul_gppla01
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_placed_per_level/ul_gppla02
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_placed_per_level/ul_gppla03
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_placed_per_level/ul_gppla04
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/gems_placed_per_level/ul_gppla05
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+
+MasterSkin11.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+achievements/hints/l_ha01
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/hints/l_ha02
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/hints/l_ha03
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/hints/l_ha04
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/hints/l_ha05
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/hints/ul_ha01
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/hints/ul_ha02
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/hints/ul_ha03
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/hints/ul_ha04
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/hints/ul_ha05
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+
+MasterSkin12.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+achievements/lambs_enchanted/l_lea01
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_enchanted/l_lea02
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_enchanted/l_lea03
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_enchanted/l_lea04
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_enchanted/l_lea05
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_enchanted/ul_lea01
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_enchanted/ul_lea02
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_enchanted/ul_lea03
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_enchanted/ul_lea04
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_enchanted/ul_lea05
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+
+MasterSkin13.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+achievements/lambs_enchanted_per_level/l_lepla01
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_enchanted_per_level/l_lepla02
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_enchanted_per_level/l_lepla03
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_enchanted_per_level/l_lepla04
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_enchanted_per_level/l_lepla05
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_enchanted_per_level/ul_lepla01
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_enchanted_per_level/ul_lepla02
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_enchanted_per_level/ul_lepla03
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_enchanted_per_level/ul_lepla04
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_enchanted_per_level/ul_lepla05
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+
+MasterSkin14.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+achievements/lambs_placed/l_lpa01
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_placed/l_lpa02
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_placed/l_lpa03
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_placed/l_lpa04
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_placed/l_lpa05
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_placed/ul_lpa01
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_placed/ul_lpa02
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_placed/ul_lpa03
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_placed/ul_lpa04
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_placed/ul_lpa05
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+
+MasterSkin15.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+achievements/lambs_placed_per_level/l_lppla01
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_placed_per_level/l_lppla02
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_placed_per_level/l_lppla03
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_placed_per_level/l_lppla04
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_placed_per_level/l_lppla05
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_placed_per_level/ul_lppla01
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_placed_per_level/ul_lppla02
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_placed_per_level/ul_lppla03
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_placed_per_level/ul_lppla04
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/lambs_placed_per_level/ul_lppla05
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+
+MasterSkin16.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+achievements/level/l_la01
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/level/l_la02
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/level/l_la03
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/level/l_la04
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/level/l_la05
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/level/ul_la01
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/level/ul_la02
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/level/ul_la03
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/level/ul_la04
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/level/ul_la05
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+
+MasterSkin17.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+achievements/time/l_ta01
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/time/l_ta02
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/time/l_ta03
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/time/l_ta04
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/time/l_ta05
+  rotate: false
+  xy: 1, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/time/ul_ta01
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/time/ul_ta02
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/time/ul_ta03
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/time/ul_ta04
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+achievements/time/ul_ta05
+  rotate: false
+  xy: 87, 1
+  size: 84, 84
+  orig: 84, 84
   offset: 0, 0
   index: -1
