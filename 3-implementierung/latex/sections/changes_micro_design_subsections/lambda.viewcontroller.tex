@@ -1,0 +1,23 @@
+\subsection{\texttt{package lambda.viewcontroller}}
+
+\subsubsection{\normalfont \texttt{public class \textbf{AudioManager} implements ProfileManagerObserver, SettingsModelObserver}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Neue Klasse zum Verwalten bzw. Abspielen der Geräusche und Musik im Spiel. Wurde eingeführt, um die Tonausgabe zu vereinfachen.
+	
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{\textbf{queueAssets}()}$ \\ Wird aufgerufen, um die Sound-Assets und die Standardmusik im Spiel zu laden.
+		
+		\item $\texttt{\textbf{init}()}$ \\ Initialisiert den AudioManager nachdem \textbf{queueAssets}() aufgerufen wurde und die Assets fertig geladen sind.
+				
+		\item $\texttt{\textbf{setLoggedIn}()}$ \\ Wechselt den AudioManager in eingeloggten bzw. ausgeloggten Zustand. (Unterschiedliche Tonausgabe in beiden Bereichen)
+		
+		\item $\texttt{\textbf{playSound}()}$ \\ Wird benutzt um ein Geräusch (z.B. Button-Klick) abzuspielen.
+	
+		\item $\texttt{\textbf{playDefaultMusic}()}$ \\ Spielt die Standardmusik des Spiels in einer Schleife ab.
+	
+		\item $\texttt{\textbf{playMusic}()}$ \\ Spielt gegebene Musik in einer Schleife ab.
+	\end{itemize}
+\end{description}

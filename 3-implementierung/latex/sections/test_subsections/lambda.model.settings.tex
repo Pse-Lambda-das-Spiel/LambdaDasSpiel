@@ -1,0 +1,16 @@
+\subsection{\texttt{package lambda.model.settings}}
+
+\subsubsection{\normalfont \texttt{public class \textbf{SettingsModelTest} implements SettingsModelObserver}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Testklasse für das SettingsModel.
+
+\item[Tests] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{\textbf{testSetMusicOn}()}$ \\ Testet, ob die Musik an und aus gestellt werden kann und ob dabei entsprechend \textbf{changedMusicOn}() der Observer aufgerufen wird.
+		\item $\texttt{\textbf{testSetMusicVolume}()}$ \\ Testet, ob die Lautstärke der Musik geändert werden kann und ob dabei entsprechend \textbf{changedMusicVolume}() der Observer aufgerufen wird.
+		\item $\texttt{\textbf{testSetSoundVolume}()}$ \\ Testet, ob die Lautstärke der Sounds/Geräusche geändert werden kann und ob dabei entsprechend \textbf{changedSoundVolume}() der Observer aufgerufen wird.
+		\item $\texttt{\textbf{testForInvalidValues}()}$ \\ Stellt sicher, dass \textbf{setMusicVolume}() und  \textbf{setSoundVolume}() trotz Übergabe nicht erlaubter Werte immer nur Werte im legalen Bereich [0,1] annimmt.
+	\end{itemize}
+\end{description}

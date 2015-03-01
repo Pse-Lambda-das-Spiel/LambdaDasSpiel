@@ -1,0 +1,46 @@
+\subsection{\texttt{package lambda.model.profiles}}
+
+\subsubsection{\normalfont \texttt{public class \textbf{ProfileEditModelTest} implements ProfileEditObserver}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Testklasse für das ProfileEditModel 
+
+\item[Tests] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{\textbf{testLanguageNextPrev}()}$ \\ Testet, ob die Auswahl der nächsten/vorherigen Sprache funktioniert und entsprechend \textbf{changedLanguage}() der Observer aufgerufen wurde.
+		\item $\texttt{\textbf{testAvatarNextPrev}()}$ \\ Testet, ob die Auswahl des nächsten/vorherigen Avatars funktioniert und entsprechend \textbf{changedAvatar}() der Observer aufgerufen wurde.
+		\item $\texttt{\textbf{testLanguageCycle}()}$ \\ Testet, ob die Auswahl der Sprache zyklisch ist. D.h. ob man falls man lang genug die nächste/vorherige Sprache wählt, wieder am Anfang ankommt. 
+		\item $\texttt{\textbf{testAvatarCycle}()}$ \\ Testet, ob die Auswahl der Avatare zyklisch ist. D.h. ob man falls man lang genug den nächsten/vorherigen Avatar wählt, wieder am Anfang ankommt. 
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{ProfileManagerTest} implements ProfileManagerObserver}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Testklasse für den ProfileManager. Testet anhand Testprofilen Grundfunktionen des ProfileManagers und das Aufrufen der entsprechenden Benachrichtigungsmethoden auf seinen Observern.
+
+\item[Tests] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{\textbf{testProfileLoad}()}$ \\ Überprüft, ob der ProfileManager die Testprofile lädt und \textbf{getNames}() deren Namen korrekt zurückgibt.
+		\item $\texttt{\textbf{testCurrentProfile}()}$ \\ Versucht ein Profil auszuwählen und testet, ob dies korrekt geschehen ist.
+		\item $\texttt{\textbf{testRenaming}()}$ \\ Überprüft, ob das Umbenennen eines Profils.
+		\item $\texttt{\textbf{testDeleteCreateProfile}()}$ \\ Testet ein Szenario, bei dem ein Profil gelöscht wird und danach ein neues mit gleichem Namen generiert wird.
+		\item $\texttt{\textbf{testDeleteSaveWrongProfile}()}$ \\ Versucht Profile, die nicht existieren zu speichern und zu löschen und schlägt fehl falls dies geschieht oder zu einem Fehler führt.
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{ProfileModelTest} implements ProfileModelObserver}}
+
+\begin{description}
+\item[Beschreibung] \hfill \\ Testklasse für das ProfileModel.
+
+\item[Tests] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{\textbf{testNewProfile}()}$ \\ Erstellt eine neue ProfileModel-Instanz/ein neues Profil und testet, ob es mit den richtigen Standard-Werten initialisiert wurde.
+		\item $\texttt{\textbf{testRenameProfile}()}$ \\ Testet das Umbenennen eines Profils durch den entsprechenden Konstruktor. Überprüft dabei, ob das neue Profil den richtigen Namen hat und die sonstigen Werte des Alten korrekt übernommen hat. 
+		\item $\texttt{\textbf{testSettersGetters}()}$ \\ Testet alle Getter und Setter des ProfileModels und stellt sicher, dass dabei die entsprechenden Benachrichtigungsmethoden der Observer aufgerufen wurden.
+	\end{itemize}
+\end{description}
