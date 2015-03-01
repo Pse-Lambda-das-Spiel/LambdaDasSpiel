@@ -4,6 +4,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 /**
  * LevelManager holds two lists: One list which contains all LevelModels
@@ -17,6 +18,15 @@ public class LevelManager {
 	 * The number of level per difficulty.
 	 */
 	public static final int LEVEL_PER_DIFFICULTY = 6;
+	  /**
+     * The path to the atlas file of the magic animation
+     */
+	public static final String MAGIC_ANIMATIONPATH = "data/animation/magic/Magic_Animation.atlas";
+	
+	/**
+	 * The path to the atlas file of the cloud animation
+	 */
+	public static final String CLOUD_ANIMATIONPATH = "data/animation/cloud/cloud.atlas";
 	private AssetManager assetManager;
     private static LevelManager manager;
     private String[] levelFilePaths;
@@ -87,6 +97,8 @@ public class LevelManager {
     	for (String difficultyBGImageFilePath : difficultyBGImageFilePaths) {
     		assets.load(difficultyBGImageFilePath, Texture.class);
     	}
+    	assets.load(MAGIC_ANIMATIONPATH, TextureAtlas.class);
+    	assets.load(CLOUD_ANIMATIONPATH, TextureAtlas.class);
     }
     	
    

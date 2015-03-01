@@ -1,7 +1,7 @@
 {
 	"level": {
 		"levelId": 23 ,
-		"difficulty": 1 ,
+		"difficulty": 4 ,
 		"coins": 23,
 		"standardMode": true,
 		"availableRedStrats": [

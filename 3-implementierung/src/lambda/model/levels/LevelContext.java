@@ -29,28 +29,27 @@ public class LevelContext {
      * Creates a new instance of this class
      */
     public LevelContext(LevelModel levelModel) {
-        elementUIContextFamily = ShopModel.getShop().getElementUIContextFamilies().getActivatedItem();
         this.levelModel = levelModel;
         this.manager = LevelManager.getLevelManager();
+        this.magicAnimation = new Animation(1/15f, manager.getAssetManager().get(LevelManager.MAGIC_ANIMATIONPATH, TextureAtlas.class).getRegions());
+        this.cloudAnimation = new Animation(1/15f, manager.getAssetManager().get(LevelManager.CLOUD_ANIMATIONPATH, TextureAtlas.class).getRegions());
+        elementUIContextFamily = ShopModel.getShop().getElementUIContextFamilies().getActivatedItem();
+        
+        /*not needed anymore
         // Should be loaded centrally
         String magicPath = "data/animation/magic/Magic_Animation.atlas";
         String cloudPath = "data/animation/cloud/cloud.atlas";
         
         this.magicAnimation = new Animation(1/15f, manager.getAssetManager().get(magicPath, TextureAtlas.class).getRegions());
         this.cloudAnimation = new Animation(1/15f, manager.getAssetManager().get(cloudPath, TextureAtlas.class).getRegions());
-        
+        */
+     
         if(levelModel.getId() != 0) {
             // for standard levels
-        	
-        	//tmp
         	
             difficultySetting = manager.getDifficultySetting(levelModel.getDifficulty());
             music = manager.getAssetManager().get(difficultySetting.getMusicString(), Music.class);
         	bgImage = new Image(manager.getAssetManager().get(difficultySetting.getBgImageString(), Texture.class));
-            /*
-            music = difficultySetting.getMusic();
-            bgImage = difficultySetting.getBgImage();
-            */
         }
         else {
             // for sandbox

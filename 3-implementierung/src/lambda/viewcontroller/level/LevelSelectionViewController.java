@@ -33,15 +33,7 @@ import lambda.viewcontroller.mainmenu.MainMenuViewController;
  */
 public class LevelSelectionViewController extends StageViewController implements ProfileModelObserver {
 
-     /**
-      * The path to the atlas file of the magic animation
-      */
-	public static final String MAGIC_ANIMATIONPATH = "data/animation/magic/Magic_Animation.atlas";
-	
-	/**
-	 * The path to the atlas file of the cloud animation
-	 */
-	public static final String CLOUD_ANIMATIONPATH = "data/animation/cloud/cloud.atlas";
+   
 	private final int LEVEL_BUTTONS_PER_ROW = 3;
 	private int currentPage;
     private LevelManager levelManager;
@@ -66,8 +58,6 @@ public class LevelSelectionViewController extends StageViewController implements
     @Override
     public void queueAssets(AssetManager assets) {
     	levelManager.queueAssets(assets);
-    	assets.load(MAGIC_ANIMATIONPATH, TextureAtlas.class);
-    	assets.load(CLOUD_ANIMATIONPATH, TextureAtlas.class);
     }
 
     /**

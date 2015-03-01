@@ -2,11 +2,13 @@ package lambda.viewcontroller.assets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import lambda.model.levels.LevelContext;
 import lambda.model.levels.LevelManager;
@@ -49,7 +51,7 @@ public class AssetViewController extends StageViewController {
         getStage().addActor(image);
         
         
-        // level context example
+        /* level context exampln not needed anymore, just for safety here
         
         String defaultAtlas = "data/items/elementuis/default.atlas";
         manager.load(defaultAtlas, TextureAtlas.class);
@@ -84,7 +86,8 @@ public class AssetViewController extends StageViewController {
         manager.load(cloudPath, TextureAtlas.class);
         manager.load("data/levels/music/01.mp3", Music.class);
         manager.load("data/levels/images/01.png", Texture.class);
-        // rest of example context was moved to create() 
+        
+        */
     }
     
     /**
@@ -103,8 +106,6 @@ public class AssetViewController extends StageViewController {
     public void create(final AssetManager manager) {
         // UI elements for loading screen are set up in the constructor
     	
-    	// only tmp moved until levelvc is finished
-        context = new LevelContext(LevelManager.getLevelManager().getLevel(3));
     }
 
     /**
@@ -153,5 +154,7 @@ public class AssetViewController extends StageViewController {
     public void queueAssets(AssetManager manager) {
         // All assets needed by the loading screen are loaded separately in the constructor
     	manager.load("data/skins/MasterSkin.atlas", TextureAtlas.class);
+    	manager.load("data/skins/MasterSkin.json", Skin.class,
+                 new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
     }
 }

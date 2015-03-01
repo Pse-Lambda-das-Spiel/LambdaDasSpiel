@@ -61,8 +61,6 @@ public class ShopViewController extends StageViewController implements ProfileMo
     @Override
     public void queueAssets(AssetManager assets) {
         shop.queueAssets(assets);
-        assets.load(masterSkin, Skin.class,
-                new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
     }
 
     @Override

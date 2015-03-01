@@ -30,7 +30,7 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	purchased: 	{ down: purchased, up: purchased, font: default-font, fontColor: black},
 	not_buyable: 	{ down: not_buyable, up: not_buyable, font: default-font, fontColor: black},
 	activated: 	{ down: activated, up: activated, font: default-font, fontColor: black},
-	level: { up: level, font: roboto-font, fontColor: black}
+	level: { up: level, font: default-font, fontColor: black}
 },
 com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
 	default: { vScroll: default-scroll, hScrollKnob: default-round-large, background: default-rect, hScroll: default-scroll, vScrollKnob: default-round-large }
@@ -101,6 +101,7 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	prevButton: 		{ up: prev},
 	unmutedButton: 		{ up: unmuted},
 	mutedButton: 		{ up: muted},
+	levelmenuButton:	{ up: levelmenu}
 
 	reloadButton: 		{ up: reload},
 	settingsButton: 	{ up: settings},
