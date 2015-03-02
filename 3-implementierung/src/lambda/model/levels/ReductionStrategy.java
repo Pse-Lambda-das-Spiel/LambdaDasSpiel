@@ -1,7 +1,6 @@
 package lambda.model.levels;
 
 import lambda.Supplier;
-import lambda.model.lambdaterm.LambdaTermObserver;
 import lambda.model.lambdaterm.visitor.strategy.BetaReductionVisitor;
 import lambda.model.lambdaterm.visitor.strategy.ReductionStrategyApplicativeOrder;
 import lambda.model.lambdaterm.visitor.strategy.ReductionStrategyCallByName;

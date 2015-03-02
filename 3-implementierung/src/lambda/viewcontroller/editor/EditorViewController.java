@@ -1,9 +1,13 @@
 package lambda.viewcontroller.editor;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -21,8 +25,6 @@ import java.util.List;
 import lambda.model.editormode.EditorModel;
 import lambda.model.editormode.EditorModelObserver;
 import lambda.model.lambdaterm.LambdaAbstraction;
-import lambda.model.lambdaterm.LambdaApplication;
-import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.LambdaTermObserver;
 import lambda.model.lambdaterm.LambdaValue;
@@ -42,7 +44,11 @@ import lambda.viewcontroller.reduction.ReductionViewController;
  *
  * @author Florian Fervers
  */
-public final class EditorViewController extends StageViewController implements EditorModelObserver, LambdaTermObserver {
+public final class EditorViewController extends StageViewController implements EditorModelObserver, LambdaTermObserver, InputProcessor {
+    /**
+     * The initial offset of the term from the top left corner in percentages of screen size.
+     */
+    public static final Vector2 INITIAL_TERM_OFFSET = new Vector2(0.2f, 0.2f);
     /**
      * The viewcontroller of the term that is being edited.
      */
@@ -63,6 +69,14 @@ public final class EditorViewController extends StageViewController implements E
      * The toolbar ui element containing placable elements.
      */
     private Table bottomToolBar;
+    /**
+     * Last down cursor x position.
+     */
+    private int lastX = 0;
+    /**
+     * Last down cursor y position.
+     */
+    private int lastY = 0;
 
     /**
      * Creates a new instance of EditorViewController.
@@ -183,6 +197,21 @@ public final class EditorViewController extends StageViewController implements E
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void show() {
+        if (term == null) {
+            throw new IllegalStateException("Cannot show the editor viewController without calling reset before!");
+        }
+        
+        InputMultiplexer multiplexer = new InputMultiplexer();
+        multiplexer.addProcessor(getStage());
+        multiplexer.addProcessor(this);
+        Gdx.input.setInputProcessor(multiplexer);
+    }
+
+    /**
      * Resets this view controller with the given values.
      *
      * @param context the current level context
@@ -203,6 +232,7 @@ public final class EditorViewController extends StageViewController implements E
         term = LambdaTermViewController.build(context.getLevelModel().getStart(), true, context);
         getStage().addActor(term);
         term.toBack();
+        term.setPosition(getStage().getWidth() * INITIAL_TERM_OFFSET.x, getStage().getHeight() * (1 - INITIAL_TERM_OFFSET.y));
 
         // Reset background image
         if (background != null) {
@@ -214,19 +244,18 @@ public final class EditorViewController extends StageViewController implements E
 
         // Reset toolbar elements
         /*LambdaRoot abstraction = new LambdaRoot();
-        abstraction.setChild(new LambdaAbstraction(abstraction, Color.WHITE, true));
-        toolbarElements[0] = LambdaTermViewController.build(abstraction, false, model.getLevelContext());
-        LambdaRoot application = new LambdaRoot();
-        application.setChild(new LambdaApplication(application, true));
-        toolbarElements[1] = LambdaTermViewController.build(application, false, model.getLevelContext());
-        LambdaRoot variable = new LambdaRoot();
-        variable.setChild(new LambdaVariable(variable, Color.WHITE, true));
-        toolbarElements[2] = LambdaTermViewController.build(variable, false, model.getLevelContext());
-        bottomToolBar.clear();
-        bottomToolBar.add(toolbarElements[0]).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
-        bottomToolBar.add(toolbarElements[1]).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
-        bottomToolBar.add(toolbarElements[2]).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();*/
-
+         abstraction.setChild(new LambdaAbstraction(abstraction, Color.WHITE, true));
+         toolbarElements[0] = LambdaTermViewController.build(abstraction, false, model.getLevelContext());
+         LambdaRoot application = new LambdaRoot();
+         application.setChild(new LambdaApplication(application, true));
+         toolbarElements[1] = LambdaTermViewController.build(application, false, model.getLevelContext());
+         LambdaRoot variable = new LambdaRoot();
+         variable.setChild(new LambdaVariable(variable, Color.WHITE, true));
+         toolbarElements[2] = LambdaTermViewController.build(variable, false, model.getLevelContext());
+         bottomToolBar.clear();
+         bottomToolBar.add(toolbarElements[0]).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
+         bottomToolBar.add(toolbarElements[1]).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
+         bottomToolBar.add(toolbarElements[2]).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();*/
         model.getTerm().addObserver(this);
     }
 
@@ -246,17 +275,6 @@ public final class EditorViewController extends StageViewController implements E
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void show() {
-        super.show();
-        if (term == null) {
-            throw new IllegalStateException("Cannot show the editor viewController without calling reset before!");
-        }
-    }
-
-    /**
      * Called when the a new reduction strategy is selected. Updates the
      * strategy button image.
      *
@@ -265,6 +283,72 @@ public final class EditorViewController extends StageViewController implements E
     @Override
     public void strategyChanged(ReductionStrategy strategy) {
         // TODO change strategy image
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean keyUp(int keycode) {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        lastX = screenX;
+        lastY = screenY;
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        term.moveBy((screenX - lastX) / 2.0f, (lastY - screenY) / 2.0f);
+        lastX = screenX;
+        lastY = screenY;
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean scrolled(int amount) {
+        return false;
     }
 
     private class PauseDialog extends Dialog {

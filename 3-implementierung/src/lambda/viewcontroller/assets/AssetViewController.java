@@ -3,22 +3,14 @@ package lambda.viewcontroller.assets;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
-import lambda.model.levels.LevelContext;
-import lambda.model.levels.LevelManager;
-import lambda.model.shop.ElementUIContextFamily;
-import lambda.model.shop.ShopModel;
 import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.StageViewController;
-import lambda.viewcontroller.level.AbstractionUIContext;
-import lambda.viewcontroller.level.ParanthesisUIContext;
-import lambda.viewcontroller.level.VariableUIContext;
 import lambda.viewcontroller.profiles.ProfileSelection;
 
 /**
@@ -32,7 +24,6 @@ public class AssetViewController extends StageViewController {
      * Libgdx class that manages asset loading. Asset model.
      */
     private final AssetManager manager;
-    private LevelContext context;
     
     /**
      * Creates a new instance of AssetViewController and loads all assets required for it. Blocks until loading is complete.
@@ -49,45 +40,6 @@ public class AssetViewController extends StageViewController {
         image.setWidth(getStage().getWidth());
         image.setHeight(getStage().getHeight());
         getStage().addActor(image);
-        
-        
-        /* level context exampln not needed anymore, just for safety here
-        
-        String defaultAtlas = "data/items/elementuis/default.atlas";
-        manager.load(defaultAtlas, TextureAtlas.class);
-        manager.finishLoading();
-
-        TextureAtlas atlas = manager.get(defaultAtlas, TextureAtlas.class);
-        VariableUIContext variable = new VariableUIContext(atlas.findRegion("gem").getTexture(), atlas.findRegion("gem_mask").getTexture());
-        AbstractionUIContext abstraction = new AbstractionUIContext(atlas.findRegion("front_magicstick").getTexture(), 
-                atlas.findRegion("center").getTexture(), 
-                atlas.findRegion("back").getTexture(),
-                atlas.findRegion("front_mask").getTexture(),
-                atlas.findRegion("center_mask").getTexture(),
-                atlas.findRegion("back_mask").getTexture());
-        ParanthesisUIContext parenthesis = new ParanthesisUIContext(atlas.findRegion("front").getTexture(), 
-                atlas.findRegion("center").getTexture(), 
-                atlas.findRegion("back").getTexture(),
-                atlas.findRegion("front_mask").getTexture(),
-                atlas.findRegion("center_mask").getTexture(),
-                atlas.findRegion("back_mask").getTexture());
-        
-        ElementUIContextFamily family = new ElementUIContextFamily("default", 0, null);
-        family.setAbstractionUIContext(abstraction);
-        family.setParanthesisUIContext(parenthesis);
-        family.setVariableUIContext(variable);
-        ShopModel.getShop().getElementUIContextFamilies().setDefaultItem(family);
-        
-        LevelManager.getLevelManager().queueAssets(manager);
-        // tmp, should be loaded centrally
-        String magicPath = "data/animation/magic/Magic_Animation.atlas";
-        String cloudPath = "data/animation/cloud/cloud.atlas";
-        manager.load(magicPath, TextureAtlas.class);
-        manager.load(cloudPath, TextureAtlas.class);
-        manager.load("data/levels/music/01.mp3", Music.class);
-        manager.load("data/levels/images/01.png", Texture.class);
-        
-        */
     }
     
     /**
