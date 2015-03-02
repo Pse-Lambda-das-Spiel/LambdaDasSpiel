@@ -61,7 +61,7 @@ public class LambdaParenthesisViewController extends LambdaNodeViewController {
         batch.draw(back, getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
         // Center
         float x;
-        for (x = getX() + BLOCK_WIDTH; x <= getWidth() - BLOCK_WIDTH + EPSILON; x += BLOCK_WIDTH) {
+        for (x = getX() + BLOCK_WIDTH; x < getWidth() - 1 * BLOCK_WIDTH - EPSILON; x += BLOCK_WIDTH) {
             batch.draw(center, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
         }
         // Front

@@ -219,7 +219,7 @@ public abstract class LambdaNodeViewController extends Actor {
         }
 
         // Recurse
-        y += BLOCK_HEIGHT;
+        y -= BLOCK_HEIGHT;
         for (LambdaNodeViewController child : children) {
             child.updatePosition(x, y);
             x += child.getWidth();
