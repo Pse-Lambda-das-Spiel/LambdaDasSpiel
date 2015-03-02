@@ -1,6 +1,9 @@
 package lambda.model.levels;
 
 import java.util.List;
+
+import com.badlogic.gdx.graphics.Color;
+
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.viewcontroller.level.TutorialMessage;
 
@@ -15,12 +18,18 @@ public class LevelModel {
     private int difficulty;
     private int coins;
     private boolean standardMode;
+
+
+	private boolean colorEquivalence; 
+    private List<Color> lockedColors;
     private LambdaRoot start;
     private LambdaRoot goal;
     private LambdaRoot hint;
     private List<TutorialMessage> tutorial;
     private List<ReductionStrategy> availableRedStrats;
     private List<ElementType> useableElements;
+    private ReductionStrategy defaultStrategy;
+    
 
     /**
      * Creates a new instance of this class and initialize it with the given data.s
@@ -35,11 +44,13 @@ public class LevelModel {
      * @param difficulty         the level difficulty
      * @param coins              the coins you will get if you complete the level
      * @param standardMode       indicates whether the level has to be solved in standard mode or reversed
+     * @param colorEquivalence	 indicates whether color equivalenz or alpha equivalenz is checked
      */
     public LevelModel(int id, LambdaRoot start,
                       LambdaRoot goal, LambdaRoot hint,
                       List<TutorialMessage> tutorial, List<ReductionStrategy> availableRedStrats,
-                      List<ElementType> useableElements, int difficulty, int coins, boolean standardMode) {
+                      List<ElementType> useableElements, int difficulty, int coins, boolean standardMode, 
+                      boolean colorEquivalence, List<Color> lockedColors, ReductionStrategy defaultStrategy) {
         this.id = id;
         this.start = start;
         this.goal = goal;
@@ -49,6 +60,9 @@ public class LevelModel {
         this.useableElements = useableElements;
         this.difficulty = difficulty;
         this.standardMode = standardMode;
+        this.colorEquivalence =colorEquivalence;
+        this.lockedColors = lockedColors;
+        this.defaultStrategy = defaultStrategy; 
     }
 
     /**
@@ -150,8 +164,21 @@ public class LevelModel {
       * @return the default strategy
       */
     public ReductionStrategy getDefaultStrategy() {
-    	// is that not the same reduction strategy for every level ?
-        return ReductionStrategy.NORMAL_ORDER;
+        return defaultStrategy;
     }
     
+    /**
+	 * @return the colorEquivalence
+	 */
+	public boolean isColorEquivalence() {
+		return colorEquivalence;
+	}
+
+	/**
+	 * @return the lockedColors
+	 */
+	public List<Color> getLockedColors() {
+		return lockedColors;
+	}
+
 }

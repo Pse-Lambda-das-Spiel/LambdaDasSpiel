@@ -41,7 +41,8 @@ public class LevelSelectionViewController extends StageViewController implements
     private List<TextButton> levelButtons;
     private LevelStack levelStack;
     private Table mainTable;
-    private float buttonSize;
+    private final float buttonSize;
+    
     
     /**
      * Creates a new LevelSelectionViewController.
@@ -50,6 +51,7 @@ public class LevelSelectionViewController extends StageViewController implements
         levelManager = LevelManager.getLevelManager();
         levelButtons = new ArrayList<>();
         currentPage = 1;
+        buttonSize =  (getStage().getWidth() / 8);
 	}
 
 	/**
@@ -178,8 +180,6 @@ public class LevelSelectionViewController extends StageViewController implements
     public void create(final AssetManager manager) {
     	skin = manager.get("data/skins/MasterSkin.json", Skin.class);
     	ProfileManager.getManager().addObserver(this);
-    	
-    	buttonSize =  (getStage().getWidth() / 8);
     	ImageButton leftButton = new ImageButton(skin, "backButton"); 
     	ImageButton rightButton = new ImageButton(skin, "nextButton"); 
     	ImageButton backButton = new ImageButton(skin, "backButton"); 

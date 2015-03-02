@@ -11,6 +11,8 @@ import lambda.viewcontroller.shop.ShopViewController;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
@@ -39,11 +41,13 @@ public class MainMenuViewController extends StageViewController {
     private Container<ImageButton> soundButtonContainer;
     private ImageButton sound_muted;
 	private ImageButton sound_unmuted;
+	private final float buttonSize;
 
 	/**
 	 * Creates a object of the class without initializing the screen.
 	 */
 	public MainMenuViewController() {
+		buttonSize =  (getStage().getWidth() / 8);
 	}
 
 	/**
@@ -73,6 +77,10 @@ public class MainMenuViewController extends StageViewController {
 	 */
 	@Override
 	public void queueAssets(AssetManager manager) {
+		TextureParameter param = new TextureParameter();
+		param.magFilter = TextureFilter.Linear;
+		param.minFilter = TextureFilter.Linear;
+		manager.load("data/mainmenu.png", Texture.class, param);
 	}
 
 	/**
@@ -83,6 +91,11 @@ public class MainMenuViewController extends StageViewController {
 		this.manager = manager;
 		ProfileManager.getManager().addObserver(this);
 		skin = manager.get("data/skins/MasterSkin.json", Skin.class);
+		Image background = new Image(manager.get("data/mainmenu.png", Texture.class));
+		background.setWidth(getStage().getWidth());
+		background.setHeight(getStage().getHeight());
+		getStage().addActor(background);
+		
 		// TODO: Replace with logoutButton when its finished
 		ImageButton logoutButton = new ImageButton(skin, "backButton");
 		ImageButton settingsButton = new ImageButton(skin, "settingsButton");
@@ -90,8 +103,7 @@ public class MainMenuViewController extends StageViewController {
 		sound_muted = new ImageButton(skin, "mutedButton");
 		
 		ImageButton startButton = new ImageButton(skin, "startButton");
-		// Only tmp until the levelButton for the main menu is finished
-		ImageButton levelButton = new ImageButton(skin, "startButton");
+		ImageButton levelMenuButton = new ImageButton(skin, "levelMenuButton");
 		ImageButton achievementsButton = new ImageButton(skin, "achievementsButton");
 		coins = new Label("Initial string", skin);
 		ImageTextButton coinButton = new ImageTextButton("",skin);
@@ -105,21 +117,28 @@ public class MainMenuViewController extends StageViewController {
 		settingsButtonContainer.setActor(settingsButton);
 		getStage().addActor(settingsButtonContainer);
 		settingsButtonContainer.setFillParent(true);
+		settingsButton.setSize(buttonSize, buttonSize);
+		settingsButton.scaleBy(buttonSize);
+		settingsButtonContainer.size(buttonSize);
 
 		soundButtonContainer = new Container<>();
 		soundButtonContainer.pad(15).align(Align.bottomRight);
+		sound_unmuted.setSize(buttonSize, buttonSize);
+		sound_muted.setSize(buttonSize, buttonSize);
 		soundButtonContainer.setActor(sound_unmuted);
 		getStage().addActor(soundButtonContainer);
 		soundButtonContainer.setFillParent(true);
 
 		Container<ImageTextButton> coinButtonContainer = new Container<>();
-		coinButtonContainer.pad(15).align(Align.topRight);
+		coinButtonContainer.pad(15).align(Align.topRight).setSize(buttonSize, buttonSize);
+		coinButton.setSize(buttonSize, buttonSize);
 		coinButtonContainer.setActor(coinButton);
 		getStage().addActor(coinButtonContainer);
 		coinButtonContainer.setFillParent(true);
 		
 		Table profileTable = new Table();
 		profileTable.pad(25).align(Align.topLeft);
+		logoutButton.setSize(buttonSize, buttonSize);
 		profileTable.add(logoutButton).align(Align.left).spaceBottom(getStage().getHeight() / 8).row();
 		profileTable.add(profileImg).row();
 		profileTable.add(profileName);
@@ -128,9 +147,10 @@ public class MainMenuViewController extends StageViewController {
 
 		Table centerTable = new Table();
 		centerTable.align(Align.center);
+		centerTable.add().row();
 		centerTable.add(startButton).colspan(2).align(Align.center).spaceBottom(getStage().getHeight() / 20).row();
-		centerTable.add(levelButton).align(Align.left).spaceRight(getStage().getWidth() / 20);
-		centerTable.add(achievementsButton).align(Align.right);
+		centerTable.add(levelMenuButton).size(buttonSize).align(Align.left).spaceRight(getStage().getWidth() / 20);
+		centerTable.add(achievementsButton).size(buttonSize).align(Align.right);
 		getStage().addActor(centerTable);
 		centerTable.setFillParent(true);
 		
@@ -150,7 +170,7 @@ public class MainMenuViewController extends StageViewController {
 				getGame().setScreen(LevelSelectionViewController.class);
 			}
 		});
-		levelButton.addListener(new ClickListener() {
+		levelMenuButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				getGame().setScreen(LevelSelectionViewController.class);

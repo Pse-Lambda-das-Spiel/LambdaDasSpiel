@@ -101,7 +101,7 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	prevButton: 		{ up: prev},
 	unmutedButton: 		{ up: unmuted},
 	mutedButton: 		{ up: muted},
-	levelmenuButton:	{ up: levelmenu}
+	levelMenuButton:	{ up: levelmenu},
 
 	reloadButton: 		{ up: reload},
 	settingsButton: 	{ up: settings},

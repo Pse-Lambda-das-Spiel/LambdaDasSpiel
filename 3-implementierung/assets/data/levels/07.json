@@ -1,9 +1,16 @@
 {
 	"level": {
 		"levelId": 7 ,
-		"difficulty": 2 ,
+		"difficulty": 1 ,
 		"coins": 10,
 		"standardMode": true,
+		"colorEquivalence": true,
+		"lockedColors": [
+			{
+			"color": "blue",
+			}
+		],
+		"defaultStrategy": "NORMAL_ORDER",
 		"availableRedStrats": [
 			{
 			"reductionStrategy": "NORMAL_ORDER"
@@ -27,12 +34,12 @@
 					"locked": true,
 					"left": {
 						"type": "abstraction",
-						"locked": false,
+						"locked": true,
 						"color": "blue",
 						"inside": {
 							"type": "variable",
-							"locked": false,
-							"color": "white"
+							"locked": true,
+							"color": "blue"
 						}
 					},
 					"right": {
@@ -45,7 +52,7 @@
 			"goal": {
 				"child": {
 					"type": "variable",
-					"locked": false,
+					"locked": true,
 					"color": "red"
 				}
 			},
@@ -55,11 +62,11 @@
 					"locked": true,
 					"left": {
 						"type": "abstraction",
-						"locked": false,
+						"locked": true,
 						"color": "blue",
 						"inside": {
 							"type": "variable",
-							"locked": false,
+							"locked": true,
 							"color": "blue"
 						}
 					},

@@ -192,7 +192,7 @@ public class LambdaTermVisitorTest {
         assertEquals("Sibling was inserted incorrectly!", root, LambdaUtils.fromString("y x"));
         root.getChild().accept(new SiblingInserter(LambdaUtils.fromString("z").getChild(), false));
         assertEquals("Sibling was inserted incorrectly!", root, LambdaUtils.fromString("y x z"));
-    }
+     }
     
     /**
      * Tests the front inserter.

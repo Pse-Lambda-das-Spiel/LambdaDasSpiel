@@ -49,38 +49,41 @@ public final class LevelLoadHelper {
 		JsonValue availableRedStrats = level.get("availableRedStrats");
 		JsonValue useableElements = level.get("useableElements");
 		JsonValue tutorial = level.get("tutorial");
+		ReductionStrategy defaultStrategy = convertJsonToReductionStrategy(level.getString("defaultStrategy"));
+		List<ReductionStrategy> redStratsList = new ArrayList<>();
+		for (JsonValue entry = availableRedStrats.child(); entry != null; entry = entry.next) {
+			redStratsList.add(convertJsonToReductionStrategy(entry.getString("reductionStrategy")));
+		}
+		List<Color> lockedColors = new ArrayList<>();
+		JsonValue lockedColorsValue = level.get("lockedColors");
+		for (JsonValue entry = lockedColorsValue.child(); entry != null; entry = entry.next) {
+			lockedColors.add(setColor(entry.getString("color")));
+		}
 		JsonValue constellations = level.get("constellations");
 		JsonValue start = constellations.get("start");
 		JsonValue goal = constellations.get("goal");
 		JsonValue hint = constellations.get("hint");
 		LevelModel levelModel = new LevelModel(level.getInt("levelId"), convertJsonToConstellation(start), 
 				convertJsonToConstellation(goal), convertJsonToConstellation(hint), convertJsonToTutorial(tutorial), 
-				convertJsonToAvailableRedStrats(availableRedStrats), convertJsonToUseableElements(useableElements), 
-				level.getInt("difficulty"), level.getInt("coins"), level.getBoolean("standardMode"));
+				redStratsList, convertJsonToUseableElements(useableElements), 
+				level.getInt("difficulty"), level.getInt("coins"), level.getBoolean("standardMode"),
+				level.getBoolean("colorEquivalence"), lockedColors, defaultStrategy);
 		return levelModel;
 	}
 
-	private static List<ReductionStrategy> convertJsonToAvailableRedStrats(JsonValue value) {
-		List<ReductionStrategy> reductionStrategyList = new ArrayList<>();
-		for (JsonValue entry = value.child(); entry != null; entry = entry.next) {
-			switch (entry.getString("reductionStrategy")) {
-			case "NORMAL_ORDER":
-				reductionStrategyList.add(ReductionStrategy.NORMAL_ORDER);
-				break;
-			case "APPLICATIVE_ORDER":
-				reductionStrategyList.add(ReductionStrategy.APPLICATIVE_ORDER);
-				break;
-			case "CALL_BY_NAME":
-				reductionStrategyList.add(ReductionStrategy.CALL_BY_NAME);
-				break;
-			case "CALL_BY_VALUE":
-				reductionStrategyList.add(ReductionStrategy.CALL_BY_VALUE);
-				break;
-			default:
-				throw new InvalidJsonException("Invalid reduction strategy!");
-			}
+	private static ReductionStrategy convertJsonToReductionStrategy(String reductionStrategy) {
+		switch (reductionStrategy) {
+		case "NORMAL_ORDER":
+			return(ReductionStrategy.NORMAL_ORDER);
+		case "APPLICATIVE_ORDER":
+			return(ReductionStrategy.APPLICATIVE_ORDER);
+		case "CALL_BY_NAME":
+			return(ReductionStrategy.CALL_BY_NAME);
+		case "CALL_BY_VALUE":
+			return(ReductionStrategy.CALL_BY_VALUE);
+		default:
+			throw new InvalidJsonException("Invalid reduction strategy!");
 		}
-		return reductionStrategyList;
 	}
 	
 	private static List<ElementType> convertJsonToUseableElements(JsonValue value) {
@@ -184,6 +187,12 @@ public final class LevelLoadHelper {
 			return Color.ORANGE;
 		case "cyan":
 			return Color.CYAN;
+		case "pink":
+			return Color.PINK;
+		case "purple": 
+			return Color.PURPLE;
+		case "olive":
+			return Color.OLIVE;
 		case "white":
 			return Color.WHITE;
 		default:
