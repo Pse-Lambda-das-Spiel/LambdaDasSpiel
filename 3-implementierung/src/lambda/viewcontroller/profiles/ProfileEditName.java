@@ -1,8 +1,6 @@
 package lambda.viewcontroller.profiles;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
@@ -14,14 +12,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.I18NBundle;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import lambda.model.profiles.ProfileEditModel;
 import lambda.model.profiles.ProfileEditObserver;
 import lambda.model.profiles.ProfileManager;
 import lambda.model.profiles.ProfileModel;
+import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.StageViewController;
-import lambda.viewcontroller.ViewController;
 
 /**
  * Represents a screen of the profile configuration/creation.
@@ -77,7 +74,7 @@ public class ProfileEditName extends StageViewController implements ProfileEditO
         
         ImageButton backButton = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
-        buttonContainer.pad(space * 5 / 2);
+        buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
         buttonContainer.align(Align.bottomLeft);
         buttonContainer.setActor(backButton);
         backButton.addListener(new backClickListener());
@@ -86,7 +83,7 @@ public class ProfileEditName extends StageViewController implements ProfileEditO
         
         ImageButton continueButton = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
         buttonContainer = new Container<ImageButton>();
-        buttonContainer.pad(space * 5 / 2);
+        buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
         buttonContainer.align(Align.bottomRight);
         buttonContainer.setActor(continueButton);
         continueButton.addListener(new continueClickListener());
@@ -109,6 +106,7 @@ public class ProfileEditName extends StageViewController implements ProfileEditO
     private class continueClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
+            AudioManager.playSound("buttonClick");
             String name = nameField.getText().trim();
             if (!name.equals("")) {
                 if (ProfileManager.getManager().changeCurrentName(name)) {
@@ -125,6 +123,7 @@ public class ProfileEditName extends StageViewController implements ProfileEditO
     private class backClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
+            AudioManager.playSound("buttonClick");
             String name = nameField.getText().trim();
             if (newProfile) {
                 getGame().setScreen(ProfileEditLang.class);

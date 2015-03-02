@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 import lambda.model.profiles.ProfileEditModel;
 import lambda.model.profiles.ProfileEditObserver;
 import lambda.model.profiles.ProfileManager;
+import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.StageViewController;
 
 /**
@@ -70,14 +71,12 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
         langSelection.setFillParent(true);
         langSelection.row().height(getStage().getHeight() / 2);
         ImageButton selectLeft = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
-        float buttonWidth = selectLeft.getWidth();
-        float buttonHeight = selectLeft.getHeight();
-        langSelection.add(selectLeft).width(buttonWidth).height(buttonHeight).space(space);
+        langSelection.add(selectLeft).size(getStage().getHeight() / 5).space(space);
         selectLeft.addListener(new selectLeftClickListener());
         langPic = new Image();
         langSelection.add(langPic).width(getStage().getWidth() / 2).space(space);
         ImageButton selectRight = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
-        langSelection.add(selectRight).width(buttonWidth).height(buttonHeight).space(space);
+        langSelection.add(selectRight).size(getStage().getHeight() / 5).space(space);
         selectRight.addListener(new selectRightClickListener());
         lang = new Label(null ,manager.get(skinJson, Skin.class));
         lang.setAlignment(Align.center);
@@ -87,7 +86,7 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
         
         backButton = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
-        buttonContainer.pad(space * 5 / 2);
+        buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
         buttonContainer.align(Align.bottomLeft);
         buttonContainer.setActor(backButton);
         backButton.addListener(new backClickListener());
@@ -96,7 +95,7 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
         
         ImageButton continueButton = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
         buttonContainer = new Container<ImageButton>();
-        buttonContainer.pad(space * 5 / 2);
+        buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
         buttonContainer.align(Align.bottomRight);
         buttonContainer.setActor(continueButton);
         continueButton.addListener(new continueClickListener());
@@ -122,6 +121,7 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
     private class selectLeftClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
+            AudioManager.playSound("buttonClick");
             profileEdit.previousLang();
         }
     }
@@ -129,6 +129,7 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
     private class selectRightClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
+            AudioManager.playSound("buttonClick");
             profileEdit.nextLang();
         }
     }
@@ -136,6 +137,7 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
     private class continueClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
+            AudioManager.playSound("buttonClick");
             ProfileManager.getManager().getCurrentProfile().setLanguage(profileEdit.getLang());
             getGame().setScreen(ProfileEditName.class);
         }
@@ -144,6 +146,7 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
     private class backClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
+            AudioManager.playSound("buttonClick");
             ProfileManager m = ProfileManager.getManager();
             if (deleteOnBack) {
                 m.delete(m.getCurrentProfile().getName());

@@ -53,8 +53,6 @@ public class ProfileSelection extends StageViewController {
         assets.load("data/skins/MasterSkin.atlas", TextureAtlas.class);
         assets.load(skinJson, Skin.class,
                 new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
-        
-        //temp vvv
         assets.load("data/skins/DialogTemp.json", Skin.class,
                 new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
         assets.load("data/backgrounds/default.png", Texture.class, new TextureParameter());
@@ -115,7 +113,7 @@ public class ProfileSelection extends StageViewController {
         //addProfile-Button
         addButton = new ImageButton(manager.get(skinJson, Skin.class), "addButton");
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
-        buttonContainer.pad(space * 5 / 2);
+        buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 6);
         buttonContainer.align(Align.bottomRight);
         buttonContainer.setActor(addButton);
         addButton.addListener(new addProfileClickListener());
@@ -144,6 +142,7 @@ public class ProfileSelection extends StageViewController {
     private class selectProfileClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
+            AudioManager.playSound("buttonClick");
             String name = ((TextButton) event.getListenerActor()).getText().toString();
             if (!name.equals("")) {
                 ProfileManager.getManager().setCurrentProfile(name);
@@ -156,6 +155,7 @@ public class ProfileSelection extends StageViewController {
     private class editProfileClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
+            AudioManager.playSound("buttonClick");
             ImageButton clickedButton = (ImageButton) event.getListenerActor();
             final String name = profileButtons.get(editButtons.indexOf(clickedButton)).getText().toString();
             final Skin temp = manager.get("data/skins/DialogTemp.json", Skin.class);
@@ -171,6 +171,7 @@ public class ProfileSelection extends StageViewController {
                     configButton.addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
+                            AudioManager.playSound("buttonClick");
                             remove();
                             ProfileManager.getManager().setCurrentProfile(name);
                             getGame().setScreen(ProfileEditLang.class);
@@ -182,6 +183,7 @@ public class ProfileSelection extends StageViewController {
                     deleteButton.addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
+                            AudioManager.playSound("buttonClick");
                             confirm();
                         }
                     });
@@ -199,6 +201,7 @@ public class ProfileSelection extends StageViewController {
                     yesButton.addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
+                            AudioManager.playSound("buttonClick");
                             remove();
                             ProfileManager.getManager().delete(name);
                         }
@@ -209,6 +212,7 @@ public class ProfileSelection extends StageViewController {
                     noButton.addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
+                            AudioManager.playSound("buttonClick");
                             remove();
                         }
                     });
@@ -221,6 +225,7 @@ public class ProfileSelection extends StageViewController {
     private class addProfileClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
+            AudioManager.playSound("buttonClick");
             ProfileManager m = ProfileManager.getManager();
             m.createProfile();
             m.setCurrentProfile("");

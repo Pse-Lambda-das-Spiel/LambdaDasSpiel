@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 import lambda.model.profiles.ProfileManager;
 import lambda.model.profiles.ProfileModel;
 import lambda.model.settings.SettingsModel;
+import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
 import lambda.viewcontroller.statistics.StatisticViewController;
@@ -96,6 +97,7 @@ public class SettingsViewController extends StageViewController {
         soundSlider.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                AudioManager.playSound("testSound");
                 settings.setSoundVolume(soundSlider.getValue());
             }
         });
@@ -105,6 +107,7 @@ public class SettingsViewController extends StageViewController {
         statistics.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 getGame().setScreen(StatisticViewController.class);
             }
         });
@@ -112,7 +115,7 @@ public class SettingsViewController extends StageViewController {
         
         ImageButton backButton = new ImageButton(manager.get(skinJson, Skin.class), "backButton");
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
-        buttonContainer.pad(space * 5 / 2);
+        buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
         buttonContainer.align(Align.bottomLeft);
         buttonContainer.setActor(backButton);
         backButton.addListener(new backClickListener());
@@ -136,6 +139,7 @@ public class SettingsViewController extends StageViewController {
     private class backClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
+            AudioManager.playSound("buttonClick");
             getGame().setScreen(MainMenuViewController.class);
         }
     }

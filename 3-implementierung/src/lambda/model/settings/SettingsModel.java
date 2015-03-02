@@ -2,7 +2,6 @@ package lambda.model.settings;
 
 import lambda.Consumer;
 import lambda.Observable;
-import lambda.model.profiles.ProfileManagerObserver;
 
 /**
  * Represents the settings of a profile.
@@ -21,7 +20,7 @@ public class SettingsModel extends Observable<SettingsModelObserver> {
     public SettingsModel() {
         musicOn = true;
         musicVolume = 0.1f;
-        soundVolume = 0.1f;
+        soundVolume = 0.2f;
     }
 
     /**
