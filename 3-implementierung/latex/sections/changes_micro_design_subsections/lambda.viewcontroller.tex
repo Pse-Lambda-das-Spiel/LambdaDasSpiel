@@ -1,9 +1,17 @@
 \subsection{\texttt{package lambda.viewcontroller}}
 
+\begin{description}
+	\item[Notizen] \hfill
+	\begin{itemize}
+		\item Controller in AssetViewController umbenannt.
+		\item AssetViewController jetzt in lambda.viewcontroller.assets zu finden.
+	\end{itemize}
+\end{description}
+
 \subsubsection{\normalfont \texttt{public class \textbf{AudioManager} implements ProfileManagerObserver, SettingsModelObserver}}
 
 \begin{description}
-\item[Beschreibung] \hfill \\ Neue Klasse zum Verwalten bzw. Abspielen der Geräusche und Musik im Spiel. Wurde eingeführt, um die Tonausgabe zu vereinfachen.
+\item[Allgemein] \hfill \\ Neue Klasse zum Verwalten bzw. Abspielen der Geräusche und Musik im Spiel. Wurde eingeführt, um die Tonausgabe zu vereinfachen.
 	
 \item[Methoden] \hfill \\
 	\vspace{-.8cm}
@@ -19,5 +27,30 @@
 		\item $\texttt{\textbf{playDefaultMusic}()}$ \\ Spielt die Standardmusik des Spiels in einer Schleife ab.
 	
 		\item $\texttt{\textbf{playMusic}()}$ \\ Spielt gegebene Musik in einer Schleife ab.
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public abstract class \textbf{ViewController} implements Screen, ProfileManagerObserver}}
+
+\begin{description}
+\item[Allgemein] \hfill \\ (Umbenennung) Ursprünglich die Controller-Klasse des Entwurfs. Implementiert jetzt das ProfileManagerObserver-Interface, da dies sonst selbst von fast allen Unterklassen implementiert wird.
+	
+\item[Neue Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{\textbf{queueAssets}()}$ \\ Wurde eingeführt, damit beim Ladevorgang jeder Unterklasse von \textbf{ViewController} ihre benötigten Assets laden kann. Die Methode übergibt dabei benötigte Assets in die Warteschlange des AssetManagers.
+		\item $\texttt{\textbf{create}()}$ \\ Wird nach dem Ladevorgang aufgerufen, um die ViewController, mit den jetzt geladenen Assets, zu initialisieren.
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public abstract class \textbf{StageViewController} extends ViewController}}
+
+\begin{description}
+\item[Allgemein] \hfill \\ Spezialisierter \textbf{ViewController}, welcher einen eigenen Bildschirm im Spiel repräsentiert. \textbf{ViewController}, die einen Bildschirm darstellen, haben viele häufig identische Methoden. Der \textbf{StageViewController} gibt den vom \textbf{ViewController} geerbten Methoden eine solche Standardimplementierung, wodurch Redundanz verhindert wird.
+
+\item[Neue Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{\textbf{getStage}()}$ \\ Liefert die Stage, die den kompletten Bildschirm darstellt (auf ihr sind alle GUI-Elemente verankert) zurück.
 	\end{itemize}
 \end{description}

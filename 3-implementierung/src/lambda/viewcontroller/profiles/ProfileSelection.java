@@ -113,7 +113,7 @@ public class ProfileSelection extends StageViewController {
         //addProfile-Button
         addButton = new ImageButton(manager.get(skinJson, Skin.class), "addButton");
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
-        buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 6);
+        buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
         buttonContainer.align(Align.bottomRight);
         buttonContainer.setActor(addButton);
         addButton.addListener(new addProfileClickListener());
