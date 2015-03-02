@@ -97,7 +97,6 @@ public class SettingsViewController extends StageViewController {
         soundSlider.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                AudioManager.playSound("testSound");
                 settings.setSoundVolume(soundSlider.getValue());
             }
         });
