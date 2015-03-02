@@ -6,9 +6,6 @@
 		"standardMode": true,
 		"colorEquivalence": true,
 		"lockedColors": [
-			{
-			"color": "blue",
-			}
 		],
 		"defaultStrategy": "NORMAL_ORDER",
 		"availableRedStrats": [
@@ -17,30 +14,19 @@
 			}
 		],
 		"useableElements": [
-			{
-			"elementType": "VARIABLE"
-			},
-			{
-			"elementType": "ABSTRACTION"
-			}
 		],
 		"tutorial": [
 		],
 		"constellations": {
-			"_comment": "(lambdax.x)y , x is blue and y is red",
+			"_comment": "xx",
 			"start": {
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
-						"type": "abstraction",
-						"locked": true,
-						"color": "blue",
-						"inside": {
-							"type": "variable",
-							"locked": true,
-							"color": "blue"
-						}
+						"type": "variable",
+						"locked": false,
+						"color": "white",
 					},
 					"right": {
 						"type": "variable",
@@ -51,9 +37,18 @@
 			},
 			"goal": {
 				"child": {
-					"type": "variable",
+					"type": "application",
 					"locked": true,
-					"color": "red"
+					"left": {
+						"type": "variable",
+						"locked": false,
+						"color": "blue",
+					},
+					"right": {
+						"type": "variable",
+						"locked": false,
+						"color": "blue"
+					}		
 				}
 			},
 			"hint": {
@@ -61,21 +56,16 @@
 					"type": "application",
 					"locked": true,
 					"left": {
-						"type": "abstraction",
-						"locked": true,
+						"type": "variable",
+						"locked": false,
 						"color": "blue",
-						"inside": {
-							"type": "variable",
-							"locked": true,
-							"color": "blue"
-						}
 					},
 					"right": {
 						"type": "variable",
 						"locked": false,
 						"color": "white"
-					}			
-				}
+					}	
+				}	
 			}
 		}
 	}

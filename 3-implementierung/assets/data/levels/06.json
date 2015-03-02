@@ -7,7 +7,10 @@
 		"colorEquivalence": true,
 		"lockedColors": [
 			{
-			"color": "blue",
+			"color": "cyan",
+			},
+			{
+			"color": "yellow",
 			}
 		],
 		"defaultStrategy": "NORMAL_ORDER",
@@ -27,33 +30,65 @@
 		"tutorial": [
 		],
 		"constellations": {
-			"_comment": "(lambdax.x)y , x is blue and y is red",
+			"_comment": "(lx.(lw.y)t)v",
 			"start": {
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
-						"type": "abstraction",
+						"type": "application",
 						"locked": true,
-						"color": "blue",
-						"inside": {
+						"left": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "blue",
+							"inside": {
+								"type": "abstraction",
+								"locked": false,
+								"color": "white",
+								"inside": {
+									"type": "variable",
+									"locked": true,
+									"color": "red"
+								}
+							}
+						},
+						"right": {
 							"type": "variable",
 							"locked": true,
-							"color": "blue"
-						}
+							"color": "cyan"
+						}			
 					},
 					"right": {
 						"type": "variable",
-						"locked": false,
-						"color": "white"
+						"locked": true,
+						"color": "yellow"
 					}			
 				}
 			},
 			"goal": {
 				"child": {
-					"type": "variable",
+					"type": "application",
 					"locked": true,
-					"color": "red"
+					"left": {
+						"type": "application",
+						"locked": true,
+						"left": {
+							"type": "variable",
+							"locked": true,
+							"color": "red"
+						},
+						"right": {
+							"type": "variable",
+							"locked": true,
+							"color": "yellow"
+						}			
+					},
+					"right": {
+						"type": "variable",
+						"locked": true,
+						"color": "cyan"
+					}			
 				}
 			},
 			"hint": {
@@ -61,19 +96,51 @@
 					"type": "application",
 					"locked": true,
 					"left": {
-						"type": "abstraction",
+						"type": "application",
 						"locked": true,
-						"color": "blue",
-						"inside": {
+						"left": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "blue",
+							"inside": {
+								"type": "abstraction",
+								"locked": false,
+								"color": "white",
+								"inside": {
+									"type": "application",
+									"locked": true,
+									"left": {
+										"type": "application",
+										"locked": true,
+										"left": {
+											"type": "variable",
+											"locked": true,
+											"color": "red"
+										},
+										"right": {
+											"type": "variable",
+											"locked": false,
+											"color": "white"
+										}			
+									},
+									"right": {
+										"type": "variable",
+										"locked": false,
+										"color": "white"
+									}			
+								}
+							}
+						},
+						"right": {
 							"type": "variable",
 							"locked": true,
-							"color": "blue"
-						}
+							"color": "cyan"
+						}			
 					},
 					"right": {
 						"type": "variable",
-						"locked": false,
-						"color": "white"
+						"locked": true,
+						"color": "yellow"
 					}			
 				}
 			}

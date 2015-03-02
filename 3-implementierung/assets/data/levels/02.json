@@ -17,17 +17,11 @@
 			}
 		],
 		"useableElements": [
-			{
-			"elementType": "VARIABLE"
-			},
-			{
-			"elementType": "ABSTRACTION"
-			}
 		],
 		"tutorial": [
 		],
 		"constellations": {
-			"_comment": "(lambdax.x)y , x is blue and y is red",
+			"_comment": "(lx.x)y , x is blue and y is red",
 			"start": {
 				"child": {
 					"type": "application",

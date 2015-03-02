@@ -4,10 +4,10 @@
 		"difficulty": 1 ,
 		"coins": 10,
 		"standardMode": true,
-		"colorEquivalence": true,
+		"colorEquivalence": false,
 		"lockedColors": [
 			{
-			"color": "blue",
+			"color": "purple",
 			}
 		],
 		"defaultStrategy": "NORMAL_ORDER",
@@ -22,6 +22,9 @@
 			},
 			{
 			"elementType": "ABSTRACTION"
+			},
+			{
+			"elementType": "PARANTHESIS"
 			}
 		],
 		"tutorial": [
@@ -30,30 +33,26 @@
 			"_comment": "(lambdax.x)y , x is blue and y is red",
 			"start": {
 				"child": {
-					"type": "application",
+					"type": "abstraction",
 					"locked": true,
-					"left": {
-						"type": "abstraction",
-						"locked": true,
-						"color": "blue",
-						"inside": {
-							"type": "variable",
-							"locked": true,
-							"color": "blue"
-						}
-					},
-					"right": {
+					"color": "green",
+					"inside": {
 						"type": "variable",
-						"locked": false,
-						"color": "white"
-					}			
+						"locked": true,
+						"color": "green"
+					}		
 				}
 			},
 			"goal": {
 				"child": {
-					"type": "variable",
+					"type": "abstraction",
 					"locked": true,
-					"color": "red"
+					"color": "purple",
+					"inside": {
+						"type": "variable",
+						"locked": true,
+						"color": "purple"
+					}		
 				}
 			},
 			"hint": {
@@ -63,17 +62,22 @@
 					"left": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "blue",
+						"color": "green",
 						"inside": {
 							"type": "variable",
 							"locked": true,
-							"color": "blue"
+							"color": "green"
 						}
 					},
 					"right": {
-						"type": "variable",
+						"type": "abstraction",
 						"locked": false,
-						"color": "white"
+						"color": "white",
+						"inside": {
+							"type": "variable",
+							"locked": false,
+							"color": "white"
+						}
 					}			
 				}
 			}

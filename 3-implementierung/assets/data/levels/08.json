@@ -4,11 +4,8 @@
 		"difficulty": 1 ,
 		"coins": 10,
 		"standardMode": true,
-		"colorEquivalence": true,
+		"colorEquivalence": false,
 		"lockedColors": [
-			{
-			"color": "blue",
-			}
 		],
 		"defaultStrategy": "NORMAL_ORDER",
 		"availableRedStrats": [
@@ -22,6 +19,9 @@
 			},
 			{
 			"elementType": "ABSTRACTION"
+			},
+			{
+			"elementType": "PARANTHESIS"
 			}
 		],
 		"tutorial": [
@@ -30,51 +30,80 @@
 			"_comment": "(lambdax.x)y , x is blue and y is red",
 			"start": {
 				"child": {
-					"type": "application",
+					"type": "abstraction",
 					"locked": true,
-					"left": {
+					"color": "orange",
+					"inside": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "blue",
+						"color": "cyan",
 						"inside": {
-							"type": "variable",
+							"type": "application",
 							"locked": true,
-							"color": "blue"
+							"left": {
+								"type": "variable",
+								"locked": true,
+								"color": "orange"
+							},
+							"right": {
+								"type": "variable",
+								"locked": true,
+								"color": "cyan"
+							}			
 						}
-					},
-					"right": {
-						"type": "variable",
-						"locked": false,
-						"color": "white"
-					}			
+					}		
 				}
 			},
 			"goal": {
 				"child": {
-					"type": "variable",
+					"type": "abstraction",
 					"locked": true,
-					"color": "red"
+					"color": "cyan",
+					"inside": {
+						"type": "abstraction",
+						"locked": true,
+						"color": "olive",
+						"inside": {
+							"type": "application",
+							"locked": true,
+							"left": {
+								"type": "variable",
+								"locked": true,
+								"color": "cyan"
+							},
+							"right": {
+								"type": "variable",
+								"locked": true,
+								"color": "olive"
+							}			
+						}
+					}		
 				}
 			},
 			"hint": {
 				"child": {
-					"type": "application",
+					"type": "abstraction",
 					"locked": true,
-					"left": {
+					"color": "orange",
+					"inside": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "blue",
+						"color": "cyan",
 						"inside": {
-							"type": "variable",
+							"type": "application",
 							"locked": true,
-							"color": "blue"
+							"left": {
+								"type": "variable",
+								"locked": true,
+								"color": "orange"
+							},
+							"right": {
+								"type": "variable",
+								"locked": true,
+								"color": "cyan"
+							}			
 						}
-					},
-					"right": {
-						"type": "variable",
-						"locked": false,
-						"color": "white"
-					}			
+					}		
 				}
 			}
 		}
