@@ -1,0 +1,63 @@
+\subsection{\texttt{package lambda}}
+
+\subsubsection{\normalfont \texttt{public class \textbf{LambdaGame} extends Game}}
+
+\begin{description}
+\item[Neue Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{\textbf{getController}()}$ \\ Gibt die ViewController-Instanz des Spiel zu einer übergebenen Klasse zurück.
+		\item $\texttt{\textbf{setScreen}()}$ \\ Setzt den aktuell angezeigten Bildschirm.
+		\item $\texttt{\textbf{addViewController}()}$ \\ Fügt dem Spiel einen neuen ViewController hinzu.
+		\item $\texttt{\textbf{createViewControllers}()}$ \\ Nachdem alle Assets geladen sind initialisiert ein Anruf dieser Methode alle ViewController des Spiels.
+	\end{itemize}
+	
+\item[Entfernte Methoden] (Ersetzt durch \textbf{getController}()) \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{\textbf{getAchievementMenuVC}()}$
+		\item $\texttt{\textbf{getDropDownMenuVC}()}$
+		\item $\texttt{\textbf{getStatisticVC}()}$ 			
+		\item $\texttt{\textbf{getMainMenuVC}()}$			
+		\item $\texttt{\textbf{getSettingsVC}()}$			
+		\item $\texttt{\textbf{getShopVC}()}$			
+		\item $\texttt{\textbf{getShopItemVC}()}$			
+		\item $\texttt{\textbf{getProfileSelectionVC}()}$		
+		\item $\texttt{\textbf{getLangEditVC}()}$		
+		\item $\texttt{\textbf{getNameEditVC}()}$		
+		\item $\texttt{\textbf{getAvatarEditVC}()}$		
+		\item $\texttt{\textbf{getLevelSelectionVC}()}$		
+		\item $\texttt{\textbf{getEditorVC}()}$		
+		\item $\texttt{\textbf{getReductionVC}()}$
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{Observable}<Observer>}}
+
+\begin{description}
+\item[Allgemein] \hfill \\ Da Android Java 8 nicht unterstützt wurden Lambda Expressions von Java durch anonyme innere Klassen ersetzt, was hauptsächlich das Observable betraf. Dies geschah mit Hilfe eigener Consumer und Supplier Interfaces. (ebenfalls in \texttt{package lambda} zu finden.)
+\end{description}
+
+\subsubsection{\normalfont \texttt{public interface \textbf{Consumer}<T>}}
+
+\begin{description}
+\item[Allgemein] \hfill \\ Neues Interface, das dem Consumer Interface von Java 8 entspricht. Da Android kein Java 8 unterstützt wurde Consumer selber Implementiert um auf die Lambda Expressions des Entwurfs verzichten zu können.
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{\textbf{accept}()}$ \\ Entsprechend des Consumer Interfaces von Java 8.
+	\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public interface \textbf{Supplier}<T>}}
+
+\begin{description}
+\item[Allgemein] \hfill \\ Neues Interface, das dem Supplier Interface von Java 8 entspricht. Da Android kein Java 8 unterstützt wurde Supplier selber Implementiert um auf die Lambda Expressions des Entwurfs verzichten zu können.
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{\textbf{get}()}$ \\ Entsprechend des Supplier Interfaces von Java 8.
+	\end{itemize}
+\end{description}
