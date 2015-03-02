@@ -189,8 +189,10 @@ public abstract class LambdaNodeViewController extends Actor {
         } else {
             // Update position downwards if root is reached, then update drag&drop sources and targets
             updatePosition(0.0f, 0.0f);
-            viewController.getDragAndDrop().clear();
-            updateDragAndDrop();
+            if (viewController.isEditable()) {
+                viewController.getDragAndDrop().clear();
+                updateDragAndDrop();
+            }
         }
     }
     

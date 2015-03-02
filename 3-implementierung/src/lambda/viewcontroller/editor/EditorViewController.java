@@ -43,7 +43,6 @@ import lambda.viewcontroller.reduction.ReductionViewController;
  * @author Florian Fervers
  */
 public final class EditorViewController extends StageViewController implements EditorModelObserver, LambdaTermObserver {
-	
     /**
      * The viewcontroller of the term that is being edited.
      */
@@ -60,6 +59,10 @@ public final class EditorViewController extends StageViewController implements E
      * The toolbar elements: Abstraction, parenthesis, variable
      */
     private final LambdaTermViewController[] toolbarElements;
+    /**
+     * The toolbar ui element containing placable elements.
+     */
+    private Table bottomToolBar;
     
     /**
      * Creates a new instance of EditorViewController.
@@ -73,9 +76,8 @@ public final class EditorViewController extends StageViewController implements E
     
     @Override
     public void queueAssets(AssetManager manager) {
-        // TODO master skin
-        manager.load("data/skins/levelSkin.pack", TextureAtlas.class);
-        manager.load("data/skins/levelSkin.json", Skin.class, new SkinLoader.SkinParameter("data/skins/levelSkin.pack"));
+        manager.load("data/skins/MasterSkin.atlas", TextureAtlas.class);
+        manager.load("data/skins/MasterSkin.json", Skin.class, new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
     }
     
     @Override
@@ -88,13 +90,12 @@ public final class EditorViewController extends StageViewController implements E
         main.setFillParent(true);
         main.setDebug(true); // TODO remove
         
-        // TODO master_skin
-        ImageButton pauseButton = new ImageButton(manager.get("data/skins/levelSkin.json", Skin.class), "pauseButton");
-        ImageButton hintButton = new ImageButton(manager.get("data/skins/levelSkin.json", Skin.class), "hintButton");
-        ImageButton helpButton = new ImageButton(manager.get("data/skins/levelSkin.json", Skin.class), "questionButton");
-        ImageButton targetButton = new ImageButton(manager.get("data/skins/levelSkin.json", Skin.class), "targetButton");
-        ImageButton reductionStrategyButton = new ImageButton(manager.get("data/skins/levelSkin.json", Skin.class), "....");
-        ImageButton finishedButton = new ImageButton(manager.get("data/skins/levelSkin.json", Skin.class), "......");
+        ImageButton pauseButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "pauseButton");
+        ImageButton hintButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "infoButton");
+        ImageButton helpButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "helpButton");
+        ImageButton targetButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "okayButton");
+        ImageButton reductionStrategyButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "okayButton");
+        ImageButton finishedButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "playButton");
         
         Table leftToolBar = new Table();
         leftToolBar.add(pauseButton).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
@@ -103,25 +104,13 @@ public final class EditorViewController extends StageViewController implements E
         leftToolBar.row();
         leftToolBar.add(helpButton).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
         
-        Table bottomToolBar = new Table();
-        bottomToolBar.setBackground(new TextureRegionDrawable(manager.get("data/skins/levelSkin.pack", TextureAtlas.class).findRegion("bar")));
+        bottomToolBar = new Table();
+        bottomToolBar.setBackground(new TextureRegionDrawable(manager.get("data/skins/MasterSkin.atlas", TextureAtlas.class).findRegion("elements_bar")));
         
         main.add(leftToolBar).expandY().left().top();
         main.add(targetButton).right().top();
         main.row();
         main.add(bottomToolBar).height(0.15f * getStage().getHeight()).expandX().bottom();
-        
-        // Tool bar
-        LambdaRoot abstraction = new LambdaRoot();
-        abstraction.setChild(new LambdaAbstraction(abstraction, Color.WHITE, true));
-        toolbarElements[0] = LambdaTermViewController.build(abstraction, false, model.getLevelContext());
-        LambdaRoot application = new LambdaRoot();
-        application.setChild(new LambdaApplication(application, true));
-        toolbarElements[1] = LambdaTermViewController.build(application, false, model.getLevelContext());
-        LambdaRoot variable = new LambdaRoot();
-        variable.setChild(new LambdaVariable(variable, Color.WHITE, true));
-        toolbarElements[2] = LambdaTermViewController.build(variable, false, model.getLevelContext());
-        // TODO toolbar background
         
         final Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
         pauseButton.addListener(new ClickListener(){
@@ -156,7 +145,7 @@ public final class EditorViewController extends StageViewController implements E
                 new Dialog("", dialogSkin) {
                     {
                         clear();
-                        List<ReductionStrategy> strategies = new ArrayList<ReductionStrategy>(); //replace with getlevelcontext .getLevelModel().getAvailableRedStrats();
+                        List<ReductionStrategy> strategies = new ArrayList<>(); //replace with getlevelcontext .getLevelModel().getAvailableRedStrats();
                         strategies.add(ReductionStrategy.APPLICATIVE_ORDER);//test/delete
                         strategies.add(ReductionStrategy.CALL_BY_NAME);//test/delete
                         strategies.add(ReductionStrategy.CALL_BY_VALUE);//test/delete
@@ -222,6 +211,21 @@ public final class EditorViewController extends StageViewController implements E
         background = context.getBgImage();
         getStage().addActor(background);
         background.toBack();
+        
+        // Reset toolbar elements
+        LambdaRoot abstraction = new LambdaRoot();
+        abstraction.setChild(new LambdaAbstraction(abstraction, Color.WHITE, true));
+        toolbarElements[0] = LambdaTermViewController.build(abstraction, false, model.getLevelContext());
+        LambdaRoot application = new LambdaRoot();
+        application.setChild(new LambdaApplication(application, true));
+        toolbarElements[1] = LambdaTermViewController.build(application, false, model.getLevelContext());
+        LambdaRoot variable = new LambdaRoot();
+        variable.setChild(new LambdaVariable(variable, Color.WHITE, true));
+        toolbarElements[2] = LambdaTermViewController.build(variable, false, model.getLevelContext());
+        bottomToolBar.clear();
+        bottomToolBar.add(toolbarElements[0]).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
+        bottomToolBar.add(toolbarElements[1]).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
+        bottomToolBar.add(toolbarElements[2]).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
         
         model.getTerm().addObserver(this);
     }
