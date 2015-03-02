@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -60,6 +63,7 @@ public class LevelSelectionViewController extends StageViewController implements
     @Override
     public void queueAssets(AssetManager assets) {
     	levelManager.queueAssets(assets);
+    	assets.load("data/backgrounds/levelmenu.png", Texture.class, new TextureParameter());
     }
 
     /**
@@ -178,6 +182,12 @@ public class LevelSelectionViewController extends StageViewController implements
      */
     @Override
     public void create(final AssetManager manager) {
+
+        Image background = new Image(manager.get("data/backgrounds/levelmenu.png", Texture.class));
+        background.setWidth(getStage().getWidth());
+        background.setHeight(getStage().getHeight());
+        getStage().addActor(background);
+        
     	skin = manager.get("data/skins/MasterSkin.json", Skin.class);
     	ProfileManager.getManager().addObserver(this);
     	ImageButton leftButton = new ImageButton(skin, "backButton"); 

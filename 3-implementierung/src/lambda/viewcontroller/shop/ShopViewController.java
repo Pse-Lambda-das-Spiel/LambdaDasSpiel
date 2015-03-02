@@ -1,6 +1,8 @@
 package lambda.viewcontroller.shop;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
@@ -8,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton.ImageTextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
 import lambda.model.profiles.ProfileManager;
 import lambda.model.profiles.ProfileModel;
 import lambda.model.profiles.ProfileModelObserver;
@@ -58,6 +61,7 @@ public class ShopViewController extends StageViewController implements ProfileMo
     @Override
     public void queueAssets(AssetManager assets) {
         shop.queueAssets(assets);
+        assets.load("data/backgrounds/default.png", Texture.class, new TextureParameter());
     }
 
     @Override
@@ -69,6 +73,11 @@ public class ShopViewController extends StageViewController implements ProfileMo
     @Override
     public void create(final AssetManager manager) {
        
+        Image background = new Image(manager.get("data/backgrounds/default.png", Texture.class));
+        background.setWidth(getStage().getWidth());
+        background.setHeight(getStage().getHeight());
+        getStage().addActor(background);
+        
         skin = manager.get(masterSkin, Skin.class); 
         shop.setAllAssets(manager);
         Table mainTable = new Table();

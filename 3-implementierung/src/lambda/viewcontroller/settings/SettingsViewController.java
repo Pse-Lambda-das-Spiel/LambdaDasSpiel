@@ -2,9 +2,12 @@ package lambda.viewcontroller.settings;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
+import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -53,10 +56,17 @@ public class SettingsViewController extends StageViewController {
     public void queueAssets(AssetManager assets) {
         assets.load(skinJson, Skin.class,
                 new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
+        assets.load("data/backgrounds/settings.png", Texture.class, new TextureParameter());
     }
 
     @Override
     public void create(final AssetManager manager) {
+        
+        Image background = new Image(manager.get("data/backgrounds/settings.png", Texture.class));
+        background.setWidth(getStage().getWidth());
+        background.setHeight(getStage().getHeight());
+        getStage().addActor(background);
+        
         this.manager = manager;
         Table settingsView = new Table();
         settingsView.align(Align.top);

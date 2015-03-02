@@ -7,6 +7,8 @@ import java.util.Map;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
+import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
@@ -96,6 +98,7 @@ public class AchievementMenuViewController extends StageViewController {
 	 */
     @Override
     public void queueAssets(AssetManager assets) {
+        assets.load("data/backgrounds/default.png", Texture.class, new TextureParameter());
     }
     
     /**
@@ -103,6 +106,12 @@ public class AchievementMenuViewController extends StageViewController {
      */
     @Override
     public void create(final AssetManager manager) {
+        
+        Image background = new Image(manager.get("data/backgrounds/default.png", Texture.class));
+        background.setWidth(getStage().getWidth());
+        background.setHeight(getStage().getHeight());
+        getStage().addActor(background);
+        
     	AchievementMenuViewController.manager = manager;
     	ProfileManager.getManager().addObserver(this);
     	skin = manager.get("data/skins/MasterSkin.json", Skin.class);

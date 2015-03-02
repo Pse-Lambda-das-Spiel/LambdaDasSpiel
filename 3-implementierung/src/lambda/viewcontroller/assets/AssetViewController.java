@@ -32,11 +32,11 @@ public class AssetViewController extends StageViewController {
         manager = new AssetManager();
         
         // Load assets only for loading screen and block until finished
-        manager.load("data/loading.jpg", Texture.class);
+        manager.load("data/backgrounds/loading.png", Texture.class);
         manager.finishLoading();
         
         // TODO progress bar etc
-        Image image = new Image(manager.get("data/loading.jpg", Texture.class));
+        Image image = new Image(manager.get("data/backgrounds/loading.png", Texture.class));
         image.setWidth(getStage().getWidth());
         image.setHeight(getStage().getHeight());
         getStage().addActor(image);

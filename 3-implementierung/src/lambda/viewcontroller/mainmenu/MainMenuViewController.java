@@ -80,7 +80,7 @@ public class MainMenuViewController extends StageViewController {
 		TextureParameter param = new TextureParameter();
 		param.magFilter = TextureFilter.Linear;
 		param.minFilter = TextureFilter.Linear;
-		manager.load("data/mainmenu.png", Texture.class, param);
+		manager.load("data/backgrounds/mainmenu.png", Texture.class, param);
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class MainMenuViewController extends StageViewController {
 		this.manager = manager;
 		ProfileManager.getManager().addObserver(this);
 		skin = manager.get("data/skins/MasterSkin.json", Skin.class);
-		Image background = new Image(manager.get("data/mainmenu.png", Texture.class));
+		Image background = new Image(manager.get("data/backgrounds/mainmenu.png", Texture.class));
 		background.setWidth(getStage().getWidth());
 		background.setHeight(getStage().getHeight());
 		getStage().addActor(background);
