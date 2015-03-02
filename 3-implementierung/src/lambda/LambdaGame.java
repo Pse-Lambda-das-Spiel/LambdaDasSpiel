@@ -17,16 +17,19 @@ import lambda.viewcontroller.profiles.ProfileEditAvatar;
 import lambda.viewcontroller.profiles.ProfileEditLang;
 import lambda.viewcontroller.profiles.ProfileEditName;
 import lambda.viewcontroller.profiles.ProfileSelection;
-import lambda.viewcontroller.reduction.ReductionViewController;
 import lambda.viewcontroller.settings.SettingsViewController;
 import lambda.viewcontroller.shop.ShopViewController;
 
 /**
  * The main class of this application.
- * 
+ *
  * @author Florian Fervers, Robert Hochweiss
  */
 public class LambdaGame extends Game {
+    /**
+     * Indicates whether debugging output is enabled.
+     */
+    public static final boolean DEBUG = true;
     /**
      * Stores all controllers mapped by their names.
      */
@@ -40,37 +43,40 @@ public class LambdaGame extends Game {
     }
 
     /**
-     * Returns the viewController with the given class or null if no such viewController exists.
-     * 
+     * Returns the viewController with the given class or null if no such
+     * viewController exists.
+     *
      * @param <T> the type of the viewController
      * @param vcClass the class of the viewController
-     * @return the viewController with the given class or null if no such viewController exists
+     * @return the viewController with the given class or null if no such
+     * viewController exists
      */
     public <T extends ViewController> T getController(Class<T> vcClass) {
         return (T) viewControllers.get(vcClass);
     }
-    
+
     /**
      * Sets the viewController with the given name to be the current screen.
-     * 
+     *
      * @param vcClass the class of the viewController
      */
     public void setScreen(Class vcClass) {
         setScreen(getController(vcClass));
     }
-    
+
     /**
      * Adds the given view controller to the map of view controllers.
-     * 
+     *
      * @param viewController the new view controller
      */
     private void addViewController(ViewController viewController) {
         viewController.setGame(this);
         viewControllers.put(viewController.getClass(), viewController);
     }
-    
+
     /**
-     * Calls the create() method of all view controllers. Called after assets are loaded before profile selection is shown.
+     * Calls the create() method of all view controllers. Called after assets
+     * are loaded before profile selection is shown.
      */
     public void createViewControllers() {
         for (ViewController viewController : viewControllers.values()) {
@@ -85,7 +91,7 @@ public class LambdaGame extends Game {
     public void create() {
         // TODO Use reflection?
         addViewController(new AssetViewController());
-        
+
         addViewController(new ProfileSelection());
         addViewController(new ProfileEditLang());
         addViewController(new ProfileEditName());
@@ -96,25 +102,24 @@ public class LambdaGame extends Game {
         addViewController(new ShopViewController());
         addViewController(new LevelSelectionViewController());
         addViewController(new EditorViewController());
-        
+
         /*
-        addViewController(new MainMenuViewController());
-        addViewController(new LevelSelectionViewController());
+         addViewController(new MainMenuViewController());
+         addViewController(new LevelSelectionViewController());
         
-        addViewController(new ReductionViewController());
+         addViewController(new ReductionViewController());
         
-        addViewController(new SettingsViewController());
-        addViewController(new ShopViewController());
-        addViewController(new StatisticViewController());
-        addViewController(new AchievementMenuViewController());*/
-        
+         addViewController(new SettingsViewController());
+         addViewController(new ShopViewController());
+         addViewController(new StatisticViewController());
+         addViewController(new AchievementMenuViewController());*/
         AudioManager.queueAssets(getController(AssetViewController.class).getManager());
-        
+
         // Queue all assets for loading
         for (ViewController viewController : viewControllers.values()) {
             viewController.queueAssets(getController(AssetViewController.class).getManager());
         }
-        
+
         // Show loading screen
         setScreen(AssetViewController.class);
     }
@@ -129,9 +134,8 @@ public class LambdaGame extends Game {
             viewController.dispose();
         }
     }
-    
+
     // Bot methods are necessary for rendering and resizing the screens correctly.
-    
     /**
      * Called when the Application should render itself.
      */
@@ -139,12 +143,12 @@ public class LambdaGame extends Game {
     public void render() {
         super.render();
     }
-    
+
     /**
-     * Called when the Application is resized. 
-     * This can happen at any point during a non-paused state 
-     * but will never happen before a call to create().
-     * 
+     * Called when the Application is resized. This can happen at any point
+     * during a non-paused state but will never happen before a call to
+     * create().
+     *
      * @param width the new width in pixels
      * @param height the new height in pixels
      */

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import lambda.model.lambdaterm.LambdaAbstraction;
 
 /**
@@ -15,15 +16,15 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
     /**
      * The texture of the first block of the lamb.
      */
-    private final Texture front;
+    private final TextureRegion front;
     /**
      * The center texture of the lamb. Will be used multiple times.
      */
-    private final Texture center;
+    private final TextureRegion center;
     /**
      * The back texture of the lamb.
      */
-    private final Texture back;
+    private final TextureRegion back;
     /**
      * Indicates whether the spell is currently being or has been animated. Is set to true when the animation starts.
      */
@@ -76,6 +77,7 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
         }
         // Front
         batch.draw(front, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+        
         //.getKeyFrame(stateTime) TODO
         synchronized (getViewController()) {
             if (animate) {

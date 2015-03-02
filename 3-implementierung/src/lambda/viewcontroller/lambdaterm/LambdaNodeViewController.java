@@ -8,9 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import lambda.Consumer;
-import lambda.model.editormode.EditorModelObserver;
+import static lambda.LambdaGame.DEBUG;
 import lambda.model.lambdaterm.LambdaTerm;
-import lambda.model.lambdaterm.LambdaTermObserver;
 import lambda.model.lambdaterm.visitor.FrontInserter;
 import lambda.model.lambdaterm.visitor.SiblingInserter;
 import lambda.viewcontroller.lambdaterm.draganddrop.LambdaTermDragSource;
@@ -18,7 +17,7 @@ import lambda.viewcontroller.lambdaterm.draganddrop.LambdaTermDropTarget;
 
 /**
  * Represents a single viewcontroller node in a LambdaTermViewController.
- * 
+ *
  * @author Florian Fervers
  */
 public abstract class LambdaNodeViewController extends Actor {
@@ -27,7 +26,8 @@ public abstract class LambdaNodeViewController extends Actor {
      */
     public static final float EPSILON = 1e-6f;
     /**
-     * The width of one displayed block. Variables consist of one block, parenthesis and abstractions of at least three.
+     * The width of one displayed block. Variables consist of one block,
+     * parenthesis and abstractions of at least three.
      */
     public static final float BLOCK_WIDTH = 100.0f;
     /**
@@ -54,13 +54,14 @@ public abstract class LambdaNodeViewController extends Actor {
      * The viewcontroller child nodes.
      */
     private final List<LambdaNodeViewController> children;
-    
+
     /**
      * Creates a new instance of LambdaNodeViewController.
-     * 
+     *
      * @param linkedTerm the term that is displayed by this viewcontroller
      * @param parent the parent viewcontroller node
-     * @param viewController the viewcontroller on which this node is being displayed
+     * @param viewController the viewcontroller on which this node is being
+     * displayed
      */
     public LambdaNodeViewController(LambdaTerm linkedTerm, LambdaNodeViewController parent, LambdaTermViewController viewController) {
         if (linkedTerm == null) {
@@ -74,63 +75,66 @@ public abstract class LambdaNodeViewController extends Actor {
         this.viewController = viewController;
         children = new LinkedList<>();
     }
-    
+
     /**
-     * Returns whether this node is a root, i.e. whether the parent node is null.
-     * 
+     * Returns whether this node is a root, i.e. whether the parent node is
+     * null.
+     *
      * @return true if this node is a root, false otherwise
      */
     public boolean isRoot() {
         return parent == null;
     }
-    
+
     /**
      * Returns the term that is displayed by this viewcontroller.
-     * 
+     *
      * @return the term that is displayed by this viewcontroller
      */
     public LambdaTerm getLinkedTerm() {
         return linkedTerm;
     }
-    
+
     /**
      * Returns the viewcontroller parent node if this node.
-     * 
+     *
      * @return the viewcontroller parent node if this node
      */
     public LambdaNodeViewController getParentNode() {
         return parent;
     }
-    
+
     /**
      * Returns the viewcontroller that displays this node.
-     * 
+     *
      * @return the viewcontroller that displays this node
      */
     public LambdaTermViewController getViewController() {
         return viewController;
     }
-    
+
     /**
      * Returns the child at the given index.
-     * 
+     *
      * @param index the child's index
      * @return the child at the given index
      */
     public LambdaNodeViewController getChild(int index) {
         return children.get(index);
     }
-    
+
     /**
      * Returns the minimum width of this node view.
-     * 
+     *
      * @return the minimum width of this node view
      */
     public abstract float getMinWidth();
-    
+
     /**
-     * Inserts the given node as a child of this node left to the given right sibling. Will insert child at the end of the children list if right sibling is null.
-     * 
+     * Inserts the given node as a child of this node left to the given right
+     * sibling. Will insert child at the end of the children list if right
+     * sibling is null.
+     *
      * @param child the child to be inserted
      * @param rightSibling the right sibling
      * @throws IllegalArgumentException if child is null or rightSibling is null
@@ -151,14 +155,14 @@ public abstract class LambdaNodeViewController extends Actor {
                 }
             }
         }
-        
+
         viewController.addNode(child);
-        updateWidth();
+        child.updateWidth();
     }
-    
+
     /**
      * Removes the given child node from this node.
-     * 
+     *
      * @param child the child to be removed
      * @throws IllegalArgumentException if child is null
      */
@@ -167,12 +171,15 @@ public abstract class LambdaNodeViewController extends Actor {
             throw new IllegalArgumentException("Child node viewcontroller cannot be null!");
         }
         children.remove(child);
+        
         viewController.removeNode(child);
-        updateWidth();
+        child.updateWidth();
     }
-    
+
     /**
-     * Calculates the width of the current node. Then traverses up the tree. If the node is reached, updates positions and then drag&drop sources sand targets.
+     * Calculates the width of the current node. Then traverses up the tree. If
+     * the node is reached, updates positions and then drag&drop sources sand
+     * targets.
      */
     private void updateWidth() {
         // Calculate own width
@@ -182,7 +189,10 @@ public abstract class LambdaNodeViewController extends Actor {
         }
         width = Math.max(width, getMinWidth());
         setWidth(width);
-        
+        if (DEBUG) {
+            System.out.println("        Updated width of (" + getLinkedTerm().toString() + ") to " + width);
+        }
+
         // Recurse
         if (!isRoot()) {
             parent.updateWidth();
@@ -195,16 +205,19 @@ public abstract class LambdaNodeViewController extends Actor {
             }
         }
     }
-    
+
     /**
      * Sets the position for the current node. Then traverses down the tree.
-     * 
+     *
      * @param x the new x-coordinate of this node
      * @param y the new y-coordinate of this node
      */
     private void updatePosition(float x, float y) {
         setPosition(x, y);
-        
+        if (DEBUG) {
+            System.out.println("        Updated position of (" + getLinkedTerm().toString() + ") to (" + x + ", " + y + ")");
+        }
+
         // Recurse
         y += BLOCK_HEIGHT;
         for (LambdaNodeViewController child : children) {
@@ -212,9 +225,10 @@ public abstract class LambdaNodeViewController extends Actor {
             x += child.getWidth();
         }
     }
-    
+
     /**
-     * Updates the drag&drop source for this node and the drag&drop targets for all spaces next to its children. Then traverses down the tree.
+     * Updates the drag&drop source for this node and the drag&drop targets for
+     * all spaces next to its children. Then traverses down the tree.
      */
     private void updateDragAndDrop() {
         if (getViewController().isEditable()) {
@@ -226,13 +240,13 @@ public abstract class LambdaNodeViewController extends Actor {
                 // First target left of all children
                 Rectangle target = new Rectangle(this.getX() - GAP_SIZE / 2, this.getY(), GAP_SIZE, BLOCK_HEIGHT);
                 //dragAndDrop.addTarget(new LambdaTermDropTarget(target, term -> getLinkedTerm().accept(new FrontInserter(term))));
-                dragAndDrop.addTarget(new LambdaTermDropTarget(target, 
-            		new Consumer<LambdaTerm>(){
-                         @Override
-                         public void accept(LambdaTerm term) {
-                        	 LambdaNodeViewController.this.getLinkedTerm().accept(new FrontInserter(term));
-                         }
-                     }));
+                dragAndDrop.addTarget(new LambdaTermDropTarget(target,
+                        new Consumer<LambdaTerm>() {
+                            @Override
+                            public void accept(LambdaTerm term) {
+                                LambdaNodeViewController.this.getLinkedTerm().accept(new FrontInserter(term));
+                            }
+                        }));
 
                 // Targets right of each child
                 for (LambdaNodeViewController childVC : children) {
@@ -240,12 +254,12 @@ public abstract class LambdaNodeViewController extends Actor {
                     target = new Rectangle(childVC.getX() + BLOCK_WIDTH - GAP_SIZE / 2, childVC.getY(), GAP_SIZE, BLOCK_HEIGHT);
                     //dragAndDrop.addTarget(new LambdaTermDropTarget(target, term -> childTerm.accept(new SiblingInserter(term, false))));
                     dragAndDrop.addTarget(new LambdaTermDropTarget(target,
-                		new Consumer<LambdaTerm>(){
-                    		@Override
-                    		public void accept(LambdaTerm term) {
-                    			childTerm.accept(new SiblingInserter(term, false));
-                        }
-                    }));
+                            new Consumer<LambdaTerm>() {
+                                @Override
+                                public void accept(LambdaTerm term) {
+                                    childTerm.accept(new SiblingInserter(term, false));
+                                }
+                            }));
                 }
             }
 
@@ -255,20 +269,20 @@ public abstract class LambdaNodeViewController extends Actor {
             }
         }
     }
-    
+
     /**
      * Returns a string representation of this object.
-     * 
+     *
      * @return a string representation of this object
      */
     @Override
     public String toString() {
         return linkedTerm.toString();
     }
-    
+
     /**
      * Returns whether this and the other object are equal.
-     * 
+     *
      * @param other the other object
      * @return true if this and the other object are equal, false otherwise
      */

@@ -1,10 +1,12 @@
 package lambda.model.lambdaterm.visitor;
 
+import com.badlogic.gdx.graphics.Color;
+import java.util.HashMap;
+import java.util.Map;
 import lambda.model.lambdaterm.InvalidLambdaTermException;
 import lambda.model.lambdaterm.LambdaAbstraction;
 import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.LambdaRoot;
-import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.LambdaVariable;
 
 /**
@@ -13,6 +15,10 @@ import lambda.model.lambdaterm.LambdaVariable;
  * @author Florian Fervers
  */
 public class ToStringVisitor extends ValidLambdaTermVisitor<String> {
+    /**
+     * Maps colors to variable names.
+     */
+    //private final Map<Color, String> variableNames;
     /**
      * Stores the resulting string.
      */
@@ -32,6 +38,7 @@ public class ToStringVisitor extends ValidLambdaTermVisitor<String> {
     public ToStringVisitor() {
         super("Cannot convert an invalid lambda term to string!");
         isRightApplicationChild = false;
+        //variableNames = new HashMap<>();
     }
 
     /**
@@ -76,8 +83,8 @@ public class ToStringVisitor extends ValidLambdaTermVisitor<String> {
         boolean paranthesis = isLeftApplicationChild || isRightApplicationChild;
         isLeftApplicationChild = false;
         isRightApplicationChild = false;
-        // TODO: adjust to rgba
-        result = (paranthesis ? "(" : "") + "/" + Character.toString((char) node.getColor().r) + "." + node.getInside().accept(this) + (paranthesis ? ")" : "");
+        
+        result = (paranthesis ? "(" : "") + "/" + getVariableName(node.getColor()) + "." + node.getInside().accept(this) + (paranthesis ? ")" : "");
     }
     
     /**
@@ -88,8 +95,7 @@ public class ToStringVisitor extends ValidLambdaTermVisitor<String> {
      */
     @Override
     public void visitValid(LambdaVariable node) {
-    	// adjust to rgba
-        result = Character.toString((char) node.getColor().r);
+    	result = getVariableName(node.getColor());
     }
     
     /**
@@ -100,5 +106,22 @@ public class ToStringVisitor extends ValidLambdaTermVisitor<String> {
     @Override
     public String getResult() {
         return result;
+    }
+    
+    /**
+     * Returns a variable name for the given color.
+     * 
+     * @param color the color
+     * @return a variable name for the given color
+     */
+    private String getVariableName(Color color) {
+        /*if (variableNames.containsKey(color)) {
+            return variableNames.get(color);
+        } else {
+            String variableName = Character.toString((char) ('a' + variableNames.size()));
+            variableNames.put(color, variableName);
+            return variableName;
+        }*/
+        return Character.toString((char) ('a' + (Math.abs(color.hashCode()) % ('z' - 'a' + 1)))); // TODO
     }
 }

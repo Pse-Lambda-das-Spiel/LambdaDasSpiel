@@ -2,6 +2,7 @@ package lambda.viewcontroller.lambdaterm;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import lambda.model.lambdaterm.LambdaApplication;
 
 /**
@@ -13,15 +14,15 @@ public class LambdaParenthesisViewController extends LambdaNodeViewController {
     /**
      * The front texture of the lamb.
      */
-    private final Texture front;
+    private final TextureRegion front;
     /**
      * The center texture of the lamb. Will be used multiple times.
      */
-    private final Texture center;
+    private final TextureRegion center;
     /**
      * The back texture of the lamb.
      */
-    private final Texture back;
+    private final TextureRegion back;
     
     /**
      * Creates a new instance of LambdaParenthesisViewController.

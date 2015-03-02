@@ -39,7 +39,7 @@ import lambda.viewcontroller.reduction.ReductionViewController;
 
 /**
  * The viewconroller for the editor getStage() of a level.
- * 
+ *
  * @author Florian Fervers
  */
 public final class EditorViewController extends StageViewController implements EditorModelObserver, LambdaTermObserver {
@@ -63,7 +63,7 @@ public final class EditorViewController extends StageViewController implements E
      * The toolbar ui element containing placable elements.
      */
     private Table bottomToolBar;
-    
+
     /**
      * Creates a new instance of EditorViewController.
      */
@@ -73,75 +73,75 @@ public final class EditorViewController extends StageViewController implements E
         background = null;
         toolbarElements = new LambdaTermViewController[3];
     }
-    
+
     @Override
     public void queueAssets(AssetManager manager) {
         manager.load("data/skins/MasterSkin.atlas", TextureAtlas.class);
         manager.load("data/skins/MasterSkin.json", Skin.class, new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
     }
-    
+
     @Override
     public void create(final AssetManager manager) {
         model.addObserver(this);
-        
+
         // Set up ui elements
         Table main = new Table();
         getStage().addActor(main);
         main.setFillParent(true);
         main.setDebug(true); // TODO remove
-        
+
         ImageButton pauseButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "pauseButton");
         ImageButton hintButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "infoButton");
         ImageButton helpButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "helpButton");
         ImageButton targetButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "okayButton");
         ImageButton reductionStrategyButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "okayButton");
         ImageButton finishedButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "playButton");
-        
+
         Table leftToolBar = new Table();
         leftToolBar.add(pauseButton).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
         leftToolBar.row();
         leftToolBar.add(hintButton).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
         leftToolBar.row();
         leftToolBar.add(helpButton).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
-        
+
         bottomToolBar = new Table();
         bottomToolBar.setBackground(new TextureRegionDrawable(manager.get("data/skins/MasterSkin.atlas", TextureAtlas.class).findRegion("elements_bar")));
-        
+
         main.add(leftToolBar).expandY().left().top();
         main.add(targetButton).right().top();
         main.row();
         main.add(bottomToolBar).height(0.15f * getStage().getHeight()).expandX().bottom();
-        
+
         final Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
-        pauseButton.addListener(new ClickListener(){
+        pauseButton.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y){
+            public void clicked(InputEvent event, float x, float y) {
                 new PauseDialog(dialogSkin, manager.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
                         I18NBundle.class), getStage().getWidth(), getStage().getHeight()).show(getStage());
             }
         });
-        hintButton.addListener(new ClickListener(){
+        hintButton.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y){
-                new HintDialog(dialogSkin, /*get levelcontext*/null, getStage().getWidth(), getStage().getHeight()).show(getStage());
+            public void clicked(InputEvent event, float x, float y) {
+                new HintDialog(dialogSkin, /*get levelcontext*/ null, getStage().getWidth(), getStage().getHeight()).show(getStage());
             }
         });
-        helpButton.addListener(new ClickListener(){
+        helpButton.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y){
+            public void clicked(InputEvent event, float x, float y) {
                 new HelpDialog(dialogSkin, manager.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
                         I18NBundle.class), getStage().getWidth(), getStage().getHeight()).show(getStage());
             }
         });
-        targetButton.addListener(new ClickListener(){
+        targetButton.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y){
-                new TargetDialog(dialogSkin, /*get levelcontext*/null, getStage().getWidth(), getStage().getHeight()).show(getStage());
+            public void clicked(InputEvent event, float x, float y) {
+                new TargetDialog(dialogSkin, /*get levelcontext*/ null, getStage().getWidth(), getStage().getHeight()).show(getStage());
             }
         });
-        reductionStrategyButton.addListener(new ClickListener(){
+        reductionStrategyButton.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y){
+            public void clicked(InputEvent event, float x, float y) {
                 new Dialog("", dialogSkin) {
                     {
                         clear();
@@ -153,7 +153,7 @@ public final class EditorViewController extends StageViewController implements E
                         int size = (int) Math.ceil(Math.sqrt(strategies.size()));
                         pad(size * 6);
                         int i = 0;
-                        for (final ReductionStrategy strategy: strategies) {
+                        for (final ReductionStrategy strategy : strategies) {
                             if (i++ % size == 0) {
                                 row().space(10);
                             }
@@ -171,9 +171,9 @@ public final class EditorViewController extends StageViewController implements E
                 }.show(getStage());
             }
         });
-        finishedButton.addListener(new ClickListener(){
+        finishedButton.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y){
+            public void clicked(InputEvent event, float x, float y) {
                 if (model.getTerm().accept(new IsValidVisitor())) {
                     getGame().getController(ReductionViewController.class).reset(model);
                     getGame().setScreen(ReductionViewController.class);
@@ -181,10 +181,10 @@ public final class EditorViewController extends StageViewController implements E
             }
         });
     }
-    
+
     /**
      * Resets this view controller with the given values.
-     * 
+     *
      * @param context the current level context
      * @throws IllegalArgumentException if context is null
      */
@@ -192,10 +192,10 @@ public final class EditorViewController extends StageViewController implements E
         if (context == null) {
             throw new IllegalArgumentException("Level context cannot be null!");
         }
-        
+
         // Reset editor model
         model.reset(context);
-        
+
         // Reset lambda term viewcontroller
         if (term != null) {
             term.remove();
@@ -203,7 +203,7 @@ public final class EditorViewController extends StageViewController implements E
         term = LambdaTermViewController.build(context.getLevelModel().getStart(), true, context);
         getStage().addActor(term);
         term.toBack();
-        
+
         // Reset background image
         if (background != null) {
             background.remove();
@@ -211,9 +211,9 @@ public final class EditorViewController extends StageViewController implements E
         background = context.getBgImage();
         getStage().addActor(background);
         background.toBack();
-        
+
         // Reset toolbar elements
-        LambdaRoot abstraction = new LambdaRoot();
+        /*LambdaRoot abstraction = new LambdaRoot();
         abstraction.setChild(new LambdaAbstraction(abstraction, Color.WHITE, true));
         toolbarElements[0] = LambdaTermViewController.build(abstraction, false, model.getLevelContext());
         LambdaRoot application = new LambdaRoot();
@@ -225,14 +225,15 @@ public final class EditorViewController extends StageViewController implements E
         bottomToolBar.clear();
         bottomToolBar.add(toolbarElements[0]).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
         bottomToolBar.add(toolbarElements[1]).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
-        bottomToolBar.add(toolbarElements[2]).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
-        
+        bottomToolBar.add(toolbarElements[2]).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();*/
+
         model.getTerm().addObserver(this);
     }
-    
+
     /**
-     * Is called when the lambdaterm is changed. Updates drag&drop sources for toolbar elements.
-     * 
+     * Is called when the lambdaterm is changed. Updates drag&drop sources for
+     * toolbar elements.
+     *
      * @param oldTerm the old term to be replaced
      * @param newTerm the new replacing term
      */
@@ -243,28 +244,29 @@ public final class EditorViewController extends StageViewController implements E
             term.getDragAndDrop().addSource(new LambdaTermDragSource(toolbarElement.getRoot().getChild(0), false));
         }
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void show() {
-    	super.show();
+        super.show();
         if (term == null) {
             throw new IllegalStateException("Cannot show the editor viewController without calling reset before!");
         }
     }
 
     /**
-     * Called when the a new reduction strategy is selected. Updates the strategy button image.
-     * 
+     * Called when the a new reduction strategy is selected. Updates the
+     * strategy button image.
+     *
      * @param strategy the new strategy
      */
     @Override
     public void strategyChanged(ReductionStrategy strategy) {
         // TODO change strategy image
     }
-    
+
     private class PauseDialog extends Dialog {
         public PauseDialog(Skin dialogSkin, I18NBundle language, float stageWidth, float stageHeight) {
             super("", dialogSkin);
@@ -279,7 +281,7 @@ public final class EditorViewController extends StageViewController implements E
                 }
             });
             add(continueButton).width(width).height(height).padTop(25).padLeft(25).padRight(25);
-            
+
             row();
             TextButton resetButton = new TextButton(language.get("reset"), dialogSkin);
             resetButton.addListener(new ClickListener() {
@@ -290,7 +292,7 @@ public final class EditorViewController extends StageViewController implements E
                 }
             });
             add(resetButton).width(width).height(height).pad(10);
-            
+
             row();
             TextButton menuButton = new TextButton(language.get("mainMenu"), dialogSkin);
             menuButton.addListener(new ClickListener() {
@@ -305,20 +307,20 @@ public final class EditorViewController extends StageViewController implements E
         }
     }
 
-	@Override
-	public void setColor(LambdaValue term, Color color) {		
-	}
+    @Override
+    public void setColor(LambdaValue term, Color color) {
+    }
 
-	@Override
-	public void alphaConverted(LambdaValue term, Color color) {		
-	}
+    @Override
+    public void alphaConverted(LambdaValue term, Color color) {
+    }
 
-	@Override
-	public void applicationStarted(LambdaAbstraction abstraction,
-			LambdaTerm applicant) {		
-	}
+    @Override
+    public void applicationStarted(LambdaAbstraction abstraction,
+            LambdaTerm applicant) {
+    }
 
-	@Override
-	public void variableReplaced(LambdaVariable variable, LambdaTerm replacing) {		
-	}
+    @Override
+    public void variableReplaced(LambdaVariable variable, LambdaTerm replacing) {
+    }
 }

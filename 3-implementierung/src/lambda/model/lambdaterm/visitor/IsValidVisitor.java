@@ -72,8 +72,10 @@ public class IsValidVisitor implements LambdaTermVisitor<Boolean> {
                 LambdaUtils.getRoot(node).accept(this);
             } else {
                 result &= node.getParent() != null && node.getLeft() != null && node.getRight() != null;
-                node.getLeft().accept(this);
-                node.getRight().accept(this);
+                if (result) {
+                    node.getLeft().accept(this);
+                    node.getRight().accept(this);
+                }
             }
         }
     }
@@ -92,7 +94,9 @@ public class IsValidVisitor implements LambdaTermVisitor<Boolean> {
             } else {
                 result &= node.getParent() != null && node.getInside() != null && !mBoundColors.contains(node.getColor());
                 mBoundColors.push(node.getColor());
-                node.getInside().accept(this);
+                if (result) {
+                    node.getInside().accept(this);
+                }
                 mBoundColors.pop();
             }
         }
