@@ -20,10 +20,8 @@ public class DropDownMenuViewController<T extends ShopItemModel> extends Actor {
     private ShopItemTypeModel<T> shopItemTypeModel;
     private VerticalGroup groupButtons;
     private VerticalGroup groupVCs;
-    private Stage stage;
 
     public DropDownMenuViewController(ShopItemTypeModel<T> shopItemTypeModel, Stage stage) {
-    	this.stage = stage;
         this.shopItemTypeModel = shopItemTypeModel;
         groupButtons = new VerticalGroup().align(Align.center);
         groupVCs = new VerticalGroup().align(Align.center);

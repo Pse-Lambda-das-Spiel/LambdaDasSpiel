@@ -1,8 +1,6 @@
 package lambda.viewcontroller.shop;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
@@ -10,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton.ImageTextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-
 import lambda.model.profiles.ProfileManager;
 import lambda.model.profiles.ProfileModel;
 import lambda.model.profiles.ProfileModelObserver;
@@ -91,6 +88,9 @@ public class ShopViewController extends StageViewController implements ProfileMo
                 table.removeActor(musicTable);
                 table.removeActor(imagesTable);
                 table.removeActor(elementsTable);
+                musicB = false;
+                imageB = false;
+                elementsB = false;
                 getGame().setScreen(MainMenuViewController.class);
             }
         });
@@ -160,6 +160,7 @@ public class ShopViewController extends StageViewController implements ProfileMo
         table = new VerticalGroup().align(Align.top).pad(15);
         getStage().addActor(table);
         table.addActor(musicTypeButton);
+        
         //MUSIC        
         musicTable = new VerticalGroup().align(Align.center);
         musicTable = music.getGroup();
