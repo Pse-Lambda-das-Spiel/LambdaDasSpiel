@@ -3,27 +3,27 @@ package lambda.viewcontroller.level;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import java.awt.Color;
 
 /**
  * @author: Kay Schmitteckert
  */
 public class VariableUIContext extends ElementUIContext implements ApplicationListener {
 
-    private Texture tVariable;
-    private Texture mVariable;
+    private TextureRegion tVariable;
+    private TextureRegion mVariable;
 
-    public VariableUIContext(Texture variable, Texture mask) {
+    public VariableUIContext(TextureRegion variable, TextureRegion mask) {
         tVariable = variable;
         mVariable = mask;
     }
     
-    public Texture getTexture() { // TODO
+    public TextureRegion getTexture() {
         return tVariable;
+    }
+    
+    public TextureRegion getMask() {
+        return mVariable;
     }
 
     @Override

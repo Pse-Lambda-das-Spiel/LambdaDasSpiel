@@ -1,22 +1,22 @@
 package lambda.viewcontroller.level;
 
 import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
  * @author: Kay Schmitteckert
  */
 public class ParanthesisUIContext extends ElementUIContext  implements ApplicationListener {
     
-    private Texture tFront;
-    private Texture tCenter;
-    private Texture tBack;
-    private Texture mFront;
-    private Texture mCenter;
-    private Texture mBack;
+    private TextureRegion tFront;
+    private TextureRegion tCenter;
+    private TextureRegion tBack;
+    private TextureRegion mFront;
+    private TextureRegion mCenter;
+    private TextureRegion mBack;
 
-    public ParanthesisUIContext(Texture front, Texture center, Texture back, 
-            Texture mFront, Texture mCenter, Texture mBack) {
+    public ParanthesisUIContext(TextureRegion front, TextureRegion center, TextureRegion back, 
+            TextureRegion mFront, TextureRegion mCenter, TextureRegion mBack) {
         tFront = front;
         tCenter = center;
         tBack = back;
@@ -26,44 +26,44 @@ public class ParanthesisUIContext extends ElementUIContext  implements Applicati
     }
 
     
-    public Texture getFront() { // TODO
+    public TextureRegion getFront() { // TODO
         return tFront;
     }
     
-    public Texture getCenter() { // TODO
+    public TextureRegion getCenter() { // TODO
         return tCenter;
     }
     
-    public Texture getBack() { // TODO
+    public TextureRegion getBack() { // TODO
         return tBack;
     }
 
-    public Texture getmFront() {
+    public TextureRegion getmFront() {
         return mFront;
     }
 
 
-    public void setmFront(Texture mFront) {
+    public void setmFront(TextureRegion mFront) {
         this.mFront = mFront;
     }
 
 
-    public Texture getmCenter() {
+    public TextureRegion getmCenter() {
         return mCenter;
     }
 
 
-    public void setmCenter(Texture mCenter) {
+    public void setmCenter(TextureRegion mCenter) {
         this.mCenter = mCenter;
     }
 
 
-    public Texture getmBack() {
+    public TextureRegion getmBack() {
         return mBack;
     }
 
 
-    public void setmBack(Texture mBack) {
+    public void setmBack(TextureRegion mBack) {
         this.mBack = mBack;
     }
 

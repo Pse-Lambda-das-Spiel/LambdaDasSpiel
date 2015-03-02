@@ -187,38 +187,38 @@ public class ShopModel {
         // sets every asset to the element items
         for (ElementUIContextFamily familyItem : this.elementUIContextFamilies.getItems()) {
             TextureAtlas atlas = assets.get(familyItem.getFilepath());
-            VariableUIContext variable = new VariableUIContext(atlas.findRegion("gem").getTexture(), atlas.findRegion("gem_mask").getTexture());
-            AbstractionUIContext abstraction = new AbstractionUIContext(atlas.findRegion("front_magicstick").getTexture(), 
-                    atlas.findRegion("center").getTexture(), 
-                    atlas.findRegion("back").getTexture(),
-                    atlas.findRegion("front_mask").getTexture(),
-                    atlas.findRegion("center_mask").getTexture(),
-                    atlas.findRegion("back_mask").getTexture());
-            ParanthesisUIContext parenthesis = new ParanthesisUIContext(atlas.findRegion("front").getTexture(), 
-                    atlas.findRegion("center").getTexture(), 
-                    atlas.findRegion("back").getTexture(),
-                    atlas.findRegion("front_mask").getTexture(),
-                    atlas.findRegion("center_mask").getTexture(),
-                    atlas.findRegion("back_mask").getTexture());
+            VariableUIContext variable = new VariableUIContext(atlas.findRegion("gem"), atlas.findRegion("gem_mask"));
+            AbstractionUIContext abstraction = new AbstractionUIContext(atlas.findRegion("front_magicstick"), 
+                    atlas.findRegion("center"), 
+                    atlas.findRegion("back"),
+                    atlas.findRegion("front_mask"),
+                    atlas.findRegion("center_mask"),
+                    atlas.findRegion("back_mask"));
+            ParanthesisUIContext parenthesis = new ParanthesisUIContext(atlas.findRegion("front"), 
+                    atlas.findRegion("center"), 
+                    atlas.findRegion("back"),
+                    atlas.findRegion("front_mask"),
+                    atlas.findRegion("center_mask"),
+                    atlas.findRegion("back_mask"));
             familyItem.setAbstractionUIContext(abstraction);
             familyItem.setParanthesisUIContext(parenthesis);
             familyItem.setVariableUIContext(variable);  
         }
         // set the default elements
         TextureAtlas atlas = assets.get("data/items/elementuis/default.atlas");
-        VariableUIContext variable = new VariableUIContext(atlas.findRegion("gem").getTexture(), atlas.findRegion("gem_mask").getTexture());
-        AbstractionUIContext abstraction = new AbstractionUIContext(atlas.findRegion("front_magicstick").getTexture(), 
-                atlas.findRegion("center").getTexture(), 
-                atlas.findRegion("back").getTexture(),
-                atlas.findRegion("front_mask").getTexture(),
-                atlas.findRegion("center_mask").getTexture(),
-                atlas.findRegion("back_mask").getTexture());
-        ParanthesisUIContext parenthesis = new ParanthesisUIContext(atlas.findRegion("front").getTexture(), 
-                atlas.findRegion("center").getTexture(), 
-                atlas.findRegion("back").getTexture(),
-                atlas.findRegion("front_mask").getTexture(),
-                atlas.findRegion("center_mask").getTexture(),
-                atlas.findRegion("back_mask").getTexture());
+        VariableUIContext variable = new VariableUIContext(atlas.findRegion("gem"), atlas.findRegion("gem_mask"));
+        AbstractionUIContext abstraction = new AbstractionUIContext(atlas.findRegion("front_magicstick"), 
+                atlas.findRegion("center"), 
+                atlas.findRegion("back"),
+                atlas.findRegion("front_mask"),
+                atlas.findRegion("center_mask"),
+                atlas.findRegion("back_mask"));
+        ParanthesisUIContext parenthesis = new ParanthesisUIContext(atlas.findRegion("front"), 
+                atlas.findRegion("center"), 
+                atlas.findRegion("back"),
+                atlas.findRegion("front_mask"),
+                atlas.findRegion("center_mask"),
+                atlas.findRegion("back_mask"));
         ElementUIContextFamily familyItem = new ElementUIContextFamily("default", 0, "data/items/elementuis/default.atlas");
         familyItem.setAbstractionUIContext(abstraction);
         familyItem.setParanthesisUIContext(parenthesis);
