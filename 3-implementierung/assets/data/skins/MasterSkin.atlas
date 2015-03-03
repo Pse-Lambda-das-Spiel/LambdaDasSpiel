@@ -191,38 +191,15 @@ white
   offset: 0, 0
   index: -1
 
-
-
 MasterSkin.png
 format: RGBA8888
-filter: Linear,Linear
+filter: Nearest,Nearest
 repeat: none
 dialog
   rotate: false
   xy: 1, 523
   size: 800, 487
   orig: 800, 487
-  offset: 0, 0
-  index: -1
-sandbox
-  rotate: false
-  xy: 803, 810
-  size: 200, 200
-  orig: 200, 200
-  offset: 0, 0
-  index: -1
-achievement_locked
-  rotate: false
-  xy: 803, 590
-  size: 192, 218
-  orig: 192, 218
-  offset: 0, 0
-  index: -1
-achievement_unlocked
-  rotate: false
-  xy: 803, 370
-  size: 192, 218
-  orig: 192, 218
   offset: 0, 0
   index: -1
 elementType
@@ -232,51 +209,79 @@ elementType
   orig: 700, 317
   offset: 0, 0
   index: -1
-activated
-  rotate: false
-  xy: 1, 102
-  size: 481, 100
-  orig: 481, 100
-  offset: 0, 0
-  index: -1
 elements_bar
   rotate: false
-  xy: 1, 1
+  xy: 1, 103
   size: 595, 99
   orig: 595, 99
   offset: 0, 0
   index: -1
 text_field
   rotate: false
-  xy: 1, 1
+  xy: 1, 103
   size: 595, 99
   orig: 595, 99
   offset: 0, 0
   index: -1
+activated
+  rotate: false
+  xy: 1, 1
+  size: 481, 100
+  orig: 481, 100
+  offset: 0, 0
+  index: -1
+achievement_locked
+  rotate: false
+  xy: 803, 792
+  size: 192, 218
+  orig: 192, 218
+  offset: 0, 0
+  index: -1
+achievement_unlocked
+  rotate: false
+  xy: 803, 572
+  size: 192, 218
+  orig: 192, 218
+  offset: 0, 0
+  index: -1
+sandbox
+  rotate: false
+  xy: 703, 321
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
 buyable
   rotate: false
-  xy: 484, 102
+  xy: 484, 1
   size: 481, 100
   orig: 481, 100
   offset: 0, 0
   index: -1
 checkbox_off
   rotate: false
-  xy: 703, 428
+  xy: 598, 109
   size: 82, 93
   orig: 82, 93
   offset: 0, 0
   index: -1
 checkbox_on
   rotate: false
-  xy: 703, 333
+  xy: 703, 226
   size: 82, 93
   orig: 82, 93
   offset: 0, 0
   index: -1
+colorField
+  rotate: false
+  xy: 787, 255
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
 slider
   rotate: false
-  xy: 787, 348
+  xy: 997, 990
   size: 20, 20
   orig: 20, 20
   offset: 0, 0

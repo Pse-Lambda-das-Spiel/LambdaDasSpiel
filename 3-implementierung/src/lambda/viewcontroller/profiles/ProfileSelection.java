@@ -6,7 +6,6 @@ import java.util.List;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -20,9 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.I18NBundle;
 
-import lambda.model.levels.ReductionStrategy;
 import lambda.model.profiles.ProfileManager;
 import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.StageViewController;
@@ -147,8 +144,6 @@ public class ProfileSelection extends StageViewController {
             AudioManager.playSound("buttonClick");
             String name = ((TextButton) event.getListenerActor()).getText().toString();
             if (!name.equals("")) {
-                
-                
                 ProfileManager.getManager().setCurrentProfile(name);
                 AudioManager.setLoggedIn(true);
                 getGame().setScreen(MainMenuViewController.class);
