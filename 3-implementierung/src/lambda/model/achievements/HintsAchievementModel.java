@@ -33,15 +33,6 @@ public class HintsAchievementModel extends AchievementModel {
 			checkRequirements(ProfileManager.getManager().getCurrentProfile().getStatistics());
 		}
 	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void initialize() {
-		setIconPathAchievementUnlocked("achievements/hints/ul_" + getId());
-		setIconPathAchievementLocked("achievements/hints/l_" + getId());
-	}
 
 	/**
 	 * {@inheritDoc}

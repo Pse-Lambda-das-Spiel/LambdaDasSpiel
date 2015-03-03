@@ -33,15 +33,6 @@ public class GemsPlacedPerLevelAchievementModel extends PerLevelAchievementModel
 			checkRequirements(ProfileManager.getManager().getCurrentProfile().getStatistics());
 		}
 	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void initialize() {
-		setIconPathAchievementUnlocked("achievements/gems_placed_per_level/ul_" + getId());
-		setIconPathAchievementLocked("achievements/gems_placed_per_level/l_" + getId());
-	}
 
 	/**
 	 * {@inheritDoc}

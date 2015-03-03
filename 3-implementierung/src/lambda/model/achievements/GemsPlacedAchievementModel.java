@@ -33,15 +33,6 @@ public class GemsPlacedAchievementModel extends AchievementModel {
 			checkRequirements(ProfileManager.getManager().getCurrentProfile().getStatistics());
 		}
 	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void initialize() {
-		setIconPathAchievementUnlocked("achievements/gems_placed/ul_" + getId());
-		setIconPathAchievementLocked("achievements/gems_placed/l_" + getId());
-	}
 
 	/**
 	 * {@inheritDoc}

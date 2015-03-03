@@ -33,15 +33,6 @@ public class LambsEnchantedAchievementModel extends AchievementModel {
 			checkRequirements(ProfileManager.getManager().getCurrentProfile().getStatistics());
 		}
 	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void initialize() {
-		setIconPathAchievementUnlocked("achievements/lambs_enchanted/ul_" + getId());
-		setIconPathAchievementLocked("achievements/lambs_enchanted/l_" + getId());
-	}
 
 	/**
 	 * {@inheritDoc}

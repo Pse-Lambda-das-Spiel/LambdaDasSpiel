@@ -34,15 +34,6 @@ public class DifficultyAchievementModel extends AchievementModel {
 			checkRequirements(ProfileManager.getManager().getCurrentProfile().getStatistics());
 		}
 	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void initialize() {
-		setIconPathAchievementUnlocked("achievements/difficulty/ul_" + getId());
-		setIconPathAchievementLocked("achievements/difficulty/l_" + getId());
-	}
 
 	/**
 	 * {@inheritDoc}

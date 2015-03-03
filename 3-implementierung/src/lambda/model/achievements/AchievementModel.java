@@ -39,7 +39,10 @@ public abstract class AchievementModel extends Observable<AchievementModelObserv
 	 * Initialize the achievement.
 	 * 
 	 */
-	public abstract void initialize();
+	public void initialize() {
+		setIconPathAchievementUnlocked("achievement_unlocked");
+		setIconPathAchievementLocked("achievement_locked");
+	}
 	
 	/**
 	 * Resets the description and requirement description of the achievement.

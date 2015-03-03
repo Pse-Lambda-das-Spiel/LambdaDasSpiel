@@ -38,15 +38,6 @@ public class LevelAchievementModel extends AchievementModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void initialize() {
-		setIconPathAchievementUnlocked("achievements/level/ul_" + getId());
-		setIconPathAchievementLocked("achievements/level/l_" + getId());
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public void reset(AssetManager assets) {
 		if (assets == null) {
 			throw new IllegalArgumentException("assets cannot be null!");

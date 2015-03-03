@@ -19,6 +19,7 @@ import lambda.viewcontroller.profiles.ProfileEditName;
 import lambda.viewcontroller.profiles.ProfileSelection;
 import lambda.viewcontroller.settings.SettingsViewController;
 import lambda.viewcontroller.shop.ShopViewController;
+import lambda.viewcontroller.statistics.StatisticViewController;
 
 /**
  * The main class of this application.
@@ -102,6 +103,7 @@ public class LambdaGame extends Game {
         addViewController(new ShopViewController());
         addViewController(new LevelSelectionViewController());
         addViewController(new EditorViewController());
+        addViewController(new StatisticViewController());
 
         /*
          addViewController(new MainMenuViewController());

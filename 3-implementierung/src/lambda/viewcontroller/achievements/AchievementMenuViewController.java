@@ -44,6 +44,7 @@ public class AchievementMenuViewController extends StageViewController {
 	private Label titleLabel;
 	private Table achievementTable;
 	private static Skin skin;
+	private final float buttonSize;
 	
 	/**
 	 * Creates a new instance of this class.
@@ -53,6 +54,7 @@ public class AchievementMenuViewController extends StageViewController {
 		labelMap = new HashMap<>();
 		achievementManager = AchievementManager.getManager();
 		achievementManager.loadAchievements(achievementVCList);
+		buttonSize = getStage().getWidth() / 10;
 	}
 
 	/**
@@ -138,7 +140,7 @@ public class AchievementMenuViewController extends StageViewController {
 				AchievementViewController achievementVC = achievementVCList.get(tmpIndex + j);
 				achievementVC.initializeButton();
 				achievementVC.addListener(new AchievementClickListener());
-				achievementTable.add(achievementVC).size(80);
+				achievementTable.add(achievementVC).size(buttonSize);
 			}
 			achievementTable.row();
 			tmpIndex += n;
@@ -152,8 +154,8 @@ public class AchievementMenuViewController extends StageViewController {
 		        }
 		});
 		mainTable.add(titleLabel).colspan(2).center().row();
-		mainTable.add(back).align(Align.bottomLeft).pad(15);
-		mainTable.add(scrollPane).expand().fill().center();
+		mainTable.add(back).align(Align.bottomLeft).pad(15).size(buttonSize);
+		mainTable.add(scrollPane).expand().fill().left();
     }
     
     
@@ -165,8 +167,8 @@ public class AchievementMenuViewController extends StageViewController {
             final float width = getStage().getWidth();
             new Dialog("", skin) {
             	{
-            		setWidth(width / 2);
-            		setHeight(height / 2);
+            		setWidth(width / 4);
+            		setHeight(height / 4);
             		addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
@@ -176,10 +178,10 @@ public class AchievementMenuViewController extends StageViewController {
                     });
             		// getImage() removes the image from its button so the button has to be copied before that
             		Image image= (new ImageButton(clickedActor.getStyle()).getImage());
-                	add(image).pad(30,10,30,30).size(100);
+                	add(image).top().pad(30,10,30,30).size(buttonSize * 1.5f);
                 	Label label = new Label(clickedActor.getText(), skin, "robotoLight");
                 	label.setWrap(true);
-                	add(label).width(getWidth());
+                	add(label).width(width / 2);
             	}
             }.show(getStage());
         }

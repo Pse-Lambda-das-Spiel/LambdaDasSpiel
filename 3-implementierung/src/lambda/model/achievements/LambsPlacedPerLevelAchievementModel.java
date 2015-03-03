@@ -33,15 +33,6 @@ public class LambsPlacedPerLevelAchievementModel extends PerLevelAchievementMode
 			checkRequirements(ProfileManager.getManager().getCurrentProfile().getStatistics());
 		}
 	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void initialize() {
-		setIconPathAchievementUnlocked("achievements/lambs_placed_per_level/ul_" + getId());
-		setIconPathAchievementLocked("achievements/lambs_placed_per_level/l_" + getId());
-	}
 
 	/**
 	 * {@inheritDoc}

@@ -32,15 +32,6 @@ public class TimeAchievementModel extends AchievementModel {
 			checkRequirements(ProfileManager.getManager().getCurrentProfile().getStatistics());
 		}
 	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void initialize() {
-		setIconPathAchievementUnlocked("achievements/time/ul_" +getId());
-		setIconPathAchievementLocked("achievements/time/l_" + getId());
-	}
 
 	/**
 	 * {@inheritDoc}

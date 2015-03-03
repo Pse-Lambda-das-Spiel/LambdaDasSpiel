@@ -33,15 +33,6 @@ public class GemsEnchantedAchievementModel extends AchievementModel {
 			checkRequirements(ProfileManager.getManager().getCurrentProfile().getStatistics());
 		}
 	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void initialize() {
-		setIconPathAchievementUnlocked("achievements/gems_enchanted/ul_" + getId());
-		setIconPathAchievementLocked("achievements/gems_enchanted/l_" + getId());
-	}
 
 	/**
 	 * {@inheritDoc}
