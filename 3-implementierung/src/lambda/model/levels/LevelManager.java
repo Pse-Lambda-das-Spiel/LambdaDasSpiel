@@ -27,6 +27,11 @@ public class LevelManager {
 	 * The path to the atlas file of the cloud animation
 	 */
 	public static final String CLOUD_ANIMATIONPATH = "data/animation/cloud/cloud.atlas";
+	
+	/**
+	 * The path to the atlas file of the glow
+	 */
+	public static final String GLOW = "data/animation/glow/glow.atlas";
 	private AssetManager assetManager;
     private static LevelManager manager;
     private String[] levelFilePaths;
@@ -99,6 +104,7 @@ public class LevelManager {
     	}
     	assets.load(MAGIC_ANIMATIONPATH, TextureAtlas.class);
     	assets.load(CLOUD_ANIMATIONPATH, TextureAtlas.class);
+    	assets.load(GLOW, TextureAtlas.class);
     }
     	
    

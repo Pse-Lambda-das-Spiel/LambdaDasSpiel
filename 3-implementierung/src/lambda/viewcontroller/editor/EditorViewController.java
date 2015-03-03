@@ -156,7 +156,7 @@ public final class EditorViewController extends StageViewController implements E
         reductionStrategyButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                float height = getStage().getHeight();
+                final float height = getStage().getHeight();
                 new Dialog("", dialogSkin) {
                     {
                         clear();

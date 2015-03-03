@@ -5,15 +5,39 @@
 		"coins": 10,
 		"standardMode": true,
 		"colorEquivalence": true,
-		"lockedColors": [
+		"availableColors": [
 			{
-			"color": "blue",
+			"Color": "blue"
+			},
+			{
+			"Color": "red"
+			},
+			{
+			"Color": "green"
+			},
+			{
+			"Color": "cyan"
+			},
+			{
+			"Color": "orange"
+			},
+			{
+			"Color": "yellow"
 			}
 		],
 		"defaultStrategy": "NORMAL_ORDER",
 		"availableRedStrats": [
 			{
 			"reductionStrategy": "NORMAL_ORDER"
+			},
+			{
+			"reductionStrategy": "APPLICATIVE_ORDER"
+			},
+			{
+			"reductionStrategy": "CALL_BY_NAME"
+			},
+			{
+			"reductionStrategy": "CALL_BY_VALUE"
 			}
 		],
 		"useableElements": [
@@ -22,6 +46,9 @@
 			},
 			{
 			"elementType": "ABSTRACTION"
+			},
+			{
+			"elementType": "PARANTHESIS"
 			}
 		],
 		"tutorial": [
@@ -35,47 +62,53 @@
 					"left": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "blue",
+						"color": "orange",
 						"inside": {
 							"type": "variable",
 							"locked": true,
-							"color": "blue"
+							"color": "orange"
 						}
 					},
 					"right": {
-						"type": "variable",
-						"locked": false,
-						"color": "white"
+						"type": "abstraction",
+						"locked": true,
+						"color": "yellow",
+						"inside": {
+							"type": "variable",
+							"locked": true,
+							"color": "yellow"
+						}
 					}			
 				}
 			},
 			"goal": {
 				"child": {
-					"type": "variable",
+					"type": "abstraction",
 					"locked": true,
-					"color": "red"
+					"color": "green",
+					"inside": {
+						"type": "application",
+						"locked": true,
+						"left": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "cyan",
+							"inside": {
+								"type": "variable",
+								"locked": true,
+								"color": "cyan"
+							}
+						},
+						"right": {
+							"type": "variable",
+							"locked": true,
+							"color": "green",
+						}			
+					}
 				}
 			},
 			"hint": {
-				"child": {
-					"type": "application",
-					"locked": true,
-					"left": {
-						"type": "abstraction",
-						"locked": true,
-						"color": "blue",
-						"inside": {
-							"type": "variable",
-							"locked": true,
-							"color": "blue"
-						}
-					},
-					"right": {
-						"type": "variable",
-						"locked": false,
-						"color": "white"
-					}			
-				}
+				"child": null,
 			}
 		}
 	}

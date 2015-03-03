@@ -3,11 +3,26 @@
 		"levelId": 17 ,
 		"difficulty": 3 ,
 		"coins": 10,
-		"standardMode": true,
+		"standardMode":false,
 		"colorEquivalence": true,
-		"lockedColors": [
+		"availableColors": [
 			{
-			"color": "blue",
+			"Color": "blue"
+			},
+			{
+			"Color": "red"
+			},
+			{
+			"Color": "green"
+			},
+			{
+			"Color": "cyan"
+			},
+			{
+			"Color": "orange"
+			},
+			{
+			"Color": "yellow"
 			}
 		],
 		"defaultStrategy": "NORMAL_ORDER",
@@ -22,6 +37,9 @@
 			},
 			{
 			"elementType": "ABSTRACTION"
+			},
+			{
+			"elementType": "PARANTHESIS"
 			}
 		],
 		"tutorial": [
@@ -35,47 +53,44 @@
 					"left": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "blue",
+						"color": "cyan",
 						"inside": {
-							"type": "variable",
+							"type": "abstraction",
 							"locked": true,
-							"color": "blue"
+							"color": "blue",
+							"inside": {
+								"type": "application",
+								"locked": true,
+								"left": {
+									"type": "variable",
+									"locked": true,
+									"color": "cyan"
+								},
+								"right": {
+									"type": "variable",
+									"locked": true,
+									"color": "blue"
+								}			
+							}
 						}
 					},
 					"right": {
-						"type": "variable",
-						"locked": false,
-						"color": "white"
+						"type": "abstraction",
+						"locked": true,
+						"color": "red",
+						"inside": {
+							"type": "variable",
+							"locked": true,
+							"color": "red"
+						}
 					}			
 				}
 			},
 			"goal": {
-				"child": {
-					"type": "variable",
-					"locked": true,
-					"color": "red"
-				}
+				"child": null,
 			},
 			"hint": {
-				"child": {
-					"type": "application",
-					"locked": true,
-					"left": {
-						"type": "abstraction",
-						"locked": true,
-						"color": "blue",
-						"inside": {
-							"type": "variable",
-							"locked": true,
-							"color": "blue"
-						}
-					},
-					"right": {
-						"type": "variable",
-						"locked": false,
-						"color": "white"
-					}			
-				}
+				"child": null,	
 			}
 		}
 	}
