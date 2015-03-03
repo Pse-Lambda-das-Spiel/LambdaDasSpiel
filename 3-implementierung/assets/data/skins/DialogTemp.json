@@ -29,6 +29,8 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	CALL_BY_VALUE_Button: { up: callbyvalue },
 	continueButton: { up: play },
 	resetButton: { up: reload },
-	menuButton: { up: menu }
+	menuButton: { up: menu },
+	nextLevelButton: { up: next },
+	restartButton: { up: reload }
 }
 }

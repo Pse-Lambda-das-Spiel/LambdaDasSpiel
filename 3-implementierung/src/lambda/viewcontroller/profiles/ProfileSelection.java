@@ -159,13 +159,15 @@ public class ProfileSelection extends StageViewController {
             ImageButton clickedButton = (ImageButton) event.getListenerActor();
             final String name = profileButtons.get(editButtons.indexOf(clickedButton)).getText().toString();
             final Skin temp = manager.get("data/skins/DialogTemp.json", Skin.class);
+            float size = getStage().getHeight() / 5;
             //dialog to choose between editing the profile or deleting it. 
             new Dialog("", temp) {
                 {
                     clear();
+                    pad(space * 3 / 2);
                     Label nameLabel = new Label(name, temp);
-                    add(nameLabel).pad(space * 3 / 2).padBottom(0).colspan(2);
-                    row();
+                    add(nameLabel).colspan(2);
+                    row().space(10);
                     //configuration/edit option
                     ImageButton configButton = new ImageButton(temp, "configButton");
                     configButton.addListener(new ClickListener() {
@@ -177,7 +179,7 @@ public class ProfileSelection extends StageViewController {
                             getGame().setScreen(ProfileEditLang.class);
                         }
                     });
-                    add(configButton).pad(space).padBottom(space * 3 / 2).align(Align.bottomRight);
+                    add(configButton).size(size);
                     //delete option. opens confirm dialog
                     ImageButton deleteButton = new ImageButton(temp, "deleteButton");
                     deleteButton.addListener(new ClickListener() {
@@ -187,15 +189,16 @@ public class ProfileSelection extends StageViewController {
                             confirm();
                         }
                     });
-                    add(deleteButton).pad(space).padBottom(space * 3 / 2).align(Align.bottomLeft);
+                    add(deleteButton).size(size);
                 }
                 
                 //asks for confirmation if the profile should be deleted
                 private void confirm() {
                     clear();
+                    pad(space * 3 / 2);
                     Label nameLabel = new Label(name, temp);
-                    add(nameLabel).pad(space * 3 / 2).padBottom(0).colspan(2);
-                    row();
+                    add(nameLabel).colspan(2);
+                    row().space(10);
                     //yes
                     ImageButton yesButton = new ImageButton(temp, "yesButton");
                     yesButton.addListener(new ClickListener() {
@@ -206,7 +209,7 @@ public class ProfileSelection extends StageViewController {
                             ProfileManager.getManager().delete(name);
                         }
                     });
-                    add(yesButton).pad(space).padBottom(space * 3 / 2).align(Align.bottomRight);
+                    add(yesButton).size(size);
                     //no
                     ImageButton noButton = new ImageButton(temp, "noButton");
                     noButton.addListener(new ClickListener() {
@@ -216,7 +219,7 @@ public class ProfileSelection extends StageViewController {
                             remove();
                         }
                     });
-                    add(noButton).pad(space).padBottom(space * 3 / 2).align(Align.bottomLeft);
+                    add(noButton).size(size);
                 }
             }.show(getStage());
         }

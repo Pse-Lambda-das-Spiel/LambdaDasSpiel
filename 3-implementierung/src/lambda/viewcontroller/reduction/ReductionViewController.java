@@ -256,34 +256,16 @@ public class ReductionViewController extends StageViewController implements Redu
     private class FinishDialog extends Dialog {
         public FinishDialog(boolean levelComplete, int coins, Skin dialogSkin, I18NBundle language, float stageWidth, float stageHeight) {
             super("", dialogSkin);
-            float width = stageWidth / 2;
-            float height = stageHeight / 8;
             clear();
+            pad(stageWidth / 64);
             
             Label levelLabel;
-            if (levelComplete) {
-                levelLabel = new Label(language.get("levelCompleted"), dialogSkin);
-            } else {
-                levelLabel = new Label(language.get("levelFailed"), dialogSkin);
-            }
+            levelLabel = new Label(language.get(levelComplete ? "levelCompleted" : "levelFailed"), dialogSkin);
             levelLabel.setFontScale(0.6f);
-            add(levelLabel).pad(25).padBottom(0);
+            add(levelLabel).colspan(levelComplete ? 3 : 2);
             
-            row();
-            TextButton restartButton = new TextButton(language.get("restart"), dialogSkin);
-            restartButton.getLabel().setFontScale(0.6f);
-            restartButton.addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    //TODO reset
-                    remove();
-                }
-            });
-            add(restartButton).width(width).height(height).padLeft(25).padRight(25);
-            
-            row();
-            TextButton menuButton = new TextButton(language.get("mainMenu"), dialogSkin);
-            menuButton.getLabel().setFontScale(0.6f);
+            row().space(10);
+            ImageButton menuButton = new ImageButton(dialogSkin, "menuButton");
             menuButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -292,26 +274,33 @@ public class ReductionViewController extends StageViewController implements Redu
                     remove();
                 }
             });
+            add(menuButton).size(stageHeight / 4);
+            
+            ImageButton restartButton = new ImageButton(dialogSkin, "restartButton");
+            restartButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    //TODO reset
+                    remove();
+                }
+            });
+            add(restartButton).size(stageHeight / 4);
+            
             if (levelComplete) {
-                add(menuButton).width(width).height(height).pad(10);
-                row();
-                TextButton nextButton = new TextButton(language.get("nextLevel"), dialogSkin);
-                nextButton.getLabel().setFontScale(0.6f);
-                nextButton.addListener(new ClickListener() {
+                ImageButton nextLevelButton = new ImageButton(dialogSkin, "nextLevelButton");
+                nextLevelButton.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         // TODO nextlevel
                         remove();
                     }
                 });
-                add(nextButton).width(width).height(height).pad(10);
+                add(nextLevelButton).size(stageHeight / 4);
                 
                 row();
                 Label coinsLabel = new Label(language.format("coinsGained", coins), dialogSkin);
                 coinsLabel.setFontScale(0.6f);
-                add(coinsLabel).pad(25).padTop(0);
-            } else {
-                add(menuButton).width(width).height(height).pad(25).padTop(0);
+                add(coinsLabel).colspan(3);
             }
         }
     }
