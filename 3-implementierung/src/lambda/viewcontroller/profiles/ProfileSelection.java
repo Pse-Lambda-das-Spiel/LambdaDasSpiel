@@ -19,7 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.I18NBundle;
 
 import lambda.model.profiles.ProfileManager;
 import lambda.viewcontroller.AudioManager;
@@ -158,18 +157,18 @@ public class ProfileSelection extends StageViewController {
             AudioManager.playSound("buttonClick");
             ImageButton clickedButton = (ImageButton) event.getListenerActor();
             final String name = profileButtons.get(editButtons.indexOf(clickedButton)).getText().toString();
-            final Skin temp = manager.get("data/skins/DialogTemp.json", Skin.class);
-            float size = getStage().getHeight() / 5;
+            final Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
+            final float size = getStage().getHeight() / 5;
             //dialog to choose between editing the profile or deleting it. 
-            new Dialog("", temp) {
+            new Dialog("", dialogSkin) {
                 {
                     clear();
                     pad(space * 3 / 2);
-                    Label nameLabel = new Label(name, temp);
+                    Label nameLabel = new Label(name, dialogSkin);
                     add(nameLabel).colspan(2);
                     row().space(10);
                     //configuration/edit option
-                    ImageButton configButton = new ImageButton(temp, "configButton");
+                    ImageButton configButton = new ImageButton(dialogSkin, "configButton");
                     configButton.addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
@@ -181,7 +180,7 @@ public class ProfileSelection extends StageViewController {
                     });
                     add(configButton).size(size);
                     //delete option. opens confirm dialog
-                    ImageButton deleteButton = new ImageButton(temp, "deleteButton");
+                    ImageButton deleteButton = new ImageButton(dialogSkin, "deleteButton");
                     deleteButton.addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
@@ -196,11 +195,11 @@ public class ProfileSelection extends StageViewController {
                 private void confirm() {
                     clear();
                     pad(space * 3 / 2);
-                    Label nameLabel = new Label(name, temp);
+                    Label nameLabel = new Label(name, dialogSkin);
                     add(nameLabel).colspan(2);
                     row().space(10);
                     //yes
-                    ImageButton yesButton = new ImageButton(temp, "yesButton");
+                    ImageButton yesButton = new ImageButton(dialogSkin, "yesButton");
                     yesButton.addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
@@ -211,7 +210,7 @@ public class ProfileSelection extends StageViewController {
                     });
                     add(yesButton).size(size);
                     //no
-                    ImageButton noButton = new ImageButton(temp, "noButton");
+                    ImageButton noButton = new ImageButton(dialogSkin, "noButton");
                     noButton.addListener(new ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {

@@ -18,7 +18,7 @@ import lambda.viewcontroller.level.TutorialMessage;
 
 /**
  * This class helps with the loading process of level json files.
- * It encapsulates all functionality needed for accessing and loading level json files and initialising the levels.
+ * It encapsulates all functionality needed for accessing and loading level json files and initializing the levels.
  * It also encapsulates all functionality needed for accessing and loading difficulty setting files of the levels
  * and their components, the background image files and music files.
  * 
@@ -54,10 +54,10 @@ public final class LevelLoadHelper {
 		for (JsonValue entry = availableRedStrats.child(); entry != null; entry = entry.next) {
 			redStratsList.add(convertJsonToReductionStrategy(entry.getString("reductionStrategy")));
 		}
-		List<Color> lockedColors = new ArrayList<>();
-		JsonValue lockedColorsValue = level.get("lockedColors");
-		for (JsonValue entry = lockedColorsValue.child(); entry != null; entry = entry.next) {
-			lockedColors.add(setColor(entry.getString("color")));
+		List<Color> availableColors = new ArrayList<>();
+		JsonValue availableColorsValue = level.get("availableColors");
+		for (JsonValue entry = availableColorsValue.child(); entry != null; entry = entry.next) {
+			availableColors.add(setColor(entry.getString("color")));
 		}
 		JsonValue constellations = level.get("constellations");
 		JsonValue start = constellations.get("start");
@@ -67,7 +67,7 @@ public final class LevelLoadHelper {
 				convertJsonToConstellation(goal), convertJsonToConstellation(hint), convertJsonToTutorial(tutorial), 
 				redStratsList, convertJsonToUseableElements(useableElements), 
 				level.getInt("difficulty"), level.getInt("coins"), level.getBoolean("standardMode"),
-				level.getBoolean("colorEquivalence"), lockedColors, defaultStrategy);
+				level.getBoolean("colorEquivalence"), availableColors, defaultStrategy);
 		return levelModel;
 	}
 
@@ -170,10 +170,6 @@ public final class LevelLoadHelper {
 	
 	
 	private static Color setColor(String color) {
-		/* 
-		 * other colors needed ? not all colors usable in the mask in a level ?(it should be only six colors for the mask),
-		 * if you want to add specific colors than add them in the rgba format where each component
-		 */
 		switch(color) {
 		case "blue":
 			return Color.BLUE;
