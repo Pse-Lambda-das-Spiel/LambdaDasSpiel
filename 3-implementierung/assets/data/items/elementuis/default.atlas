@@ -9,7 +9,7 @@ back
   orig: 150, 150
   offset: 0, 0
   index: -1
-back_mask_black
+back_mask
   rotate: false
   xy: 154, 2
   size: 150, 150
@@ -30,14 +30,14 @@ center_mask
   orig: 150, 150
   offset: 0, 0
   index: -1
-front_magicstick
+front
   rotate: false
   xy: 154, 154
   size: 150, 150
   orig: 150, 150
   offset: 0, 0
   index: -1
-front_mask
+front_magicstick
   rotate: false
   xy: 306, 154
   size: 150, 150
