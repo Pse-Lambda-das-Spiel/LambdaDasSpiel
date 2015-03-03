@@ -31,6 +31,7 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	resetButton: { up: reload },
 	menuButton: { up: menu },
 	nextLevelButton: { up: next },
-	restartButton: { up: reload }
+	restartButton: { up: reload },
+	colorButton: { up: checkbox_off }
 }
 }
