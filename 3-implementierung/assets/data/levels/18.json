@@ -1,14 +1,11 @@
 {
 	"level": {
 		"levelId": 18 ,
-		"difficulty": 1 ,
+		"difficulty": 3 ,
 		"coins": 10,
-		"standardMode": true,
+		"standardMode": false,
 		"colorEquivalence": true,
 		"lockedColors": [
-			{
-			"color": "blue",
-			}
 		],
 		"defaultStrategy": "NORMAL_ORDER",
 		"availableRedStrats": [
@@ -22,6 +19,9 @@
 			},
 			{
 			"elementType": "ABSTRACTION"
+			},
+			{
+			"elementType": "PARANTHESIS"
 			}
 		],
 		"tutorial": [
@@ -33,6 +33,62 @@
 					"type": "application",
 					"locked": true,
 					"left": {
+						"type": "application",
+						"locked": true,
+						"left": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "cyan",
+							"inside": {
+								"type": "abstraction",
+								"locked": true,
+								"color": "yellow",
+								"inside": {
+									"type": "application",
+									"locked": true,
+									"left": {
+										"type": "application",
+										"locked": true,
+										"left": {
+											"type": "variable",
+											"locked": true,
+											"color": "cyan"
+										},
+										"right": {
+											"type": "variable",
+											"locked": true,
+											"color": "cyan"
+										}			
+									},
+									"right": {
+										"type": "application",
+										"locked": true,
+										"left": {
+											"type": "variable",
+											"locked": true,
+											"color": "yellow"
+										},
+										"right": {
+											"type": "variable",
+											"locked": true,
+											"color": "green"
+										}			
+									}			
+								}
+							}
+						},
+						"right": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "red",
+							"inside": {
+								"type": "variable",
+								"locked": true,
+								"color": "red"
+							}
+						}			
+					},
+					"right": {
 						"type": "abstraction",
 						"locked": true,
 						"color": "blue",
@@ -41,41 +97,14 @@
 							"locked": true,
 							"color": "blue"
 						}
-					},
-					"right": {
-						"type": "variable",
-						"locked": false,
-						"color": "white"
 					}			
 				}
 			},
 			"goal": {
-				"child": {
-					"type": "variable",
-					"locked": true,
-					"color": "red"
-				}
+				"child":null
 			},
 			"hint": {
-				"child": {
-					"type": "application",
-					"locked": true,
-					"left": {
-						"type": "abstraction",
-						"locked": true,
-						"color": "blue",
-						"inside": {
-							"type": "variable",
-							"locked": true,
-							"color": "blue"
-						}
-					},
-					"right": {
-						"type": "variable",
-						"locked": false,
-						"color": "white"
-					}			
-				}
+				"child": null
 			}
 		}
 	}

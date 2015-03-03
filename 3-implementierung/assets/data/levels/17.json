@@ -1,7 +1,7 @@
 {
 	"level": {
 		"levelId": 17 ,
-		"difficulty": 1 ,
+		"difficulty": 3 ,
 		"coins": 10,
 		"standardMode": true,
 		"colorEquivalence": true,

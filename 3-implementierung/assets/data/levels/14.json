@@ -1,14 +1,11 @@
 {
 	"level": {
 		"levelId": 14,
-		"difficulty": 1 ,
+		"difficulty": 3 ,
 		"coins": 10,
-		"standardMode": true,
+		"standardMode": false,
 		"colorEquivalence": true,
 		"lockedColors": [
-			{
-			"color": "blue",
-			}
 		],
 		"defaultStrategy": "NORMAL_ORDER",
 		"availableRedStrats": [
@@ -22,6 +19,9 @@
 			},
 			{
 			"elementType": "ABSTRACTION"
+			},
+			{
+			"elementType": "PARANTHESIS"
 			}
 		],
 		"tutorial": [
@@ -35,46 +35,37 @@
 					"left": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "blue",
+						"color": "green",
 						"inside": {
-							"type": "variable",
+							"type": "application",
 							"locked": true,
-							"color": "blue"
+							"left": {
+								"type": "variable",
+								"locked": true,
+								"color": "green"
+							},
+							"right": {
+								"type": "variable",
+								"locked": true,
+								"color": "green"
+							}			
 						}
 					},
 					"right": {
 						"type": "variable",
-						"locked": false,
-						"color": "white"
+						"locked": true,
+						"color": "yellow"
 					}			
 				}
 			},
 			"goal": {
-				"child": {
-					"type": "variable",
-					"locked": true,
-					"color": "red"
-				}
+				"child": null
 			},
 			"hint": {
 				"child": {
-					"type": "application",
+					"type": "variable",
 					"locked": true,
-					"left": {
-						"type": "abstraction",
-						"locked": true,
-						"color": "blue",
-						"inside": {
-							"type": "variable",
-							"locked": true,
-							"color": "blue"
-						}
-					},
-					"right": {
-						"type": "variable",
-						"locked": false,
-						"color": "white"
-					}			
+					"color": "yellow"
 				}
 			}
 		}

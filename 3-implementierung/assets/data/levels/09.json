@@ -1,13 +1,16 @@
 {
 	"level": {
 		"levelId": 9 ,
-		"difficulty": 1 ,
+		"difficulty": 2 ,
 		"coins": 10,
 		"standardMode": true,
 		"colorEquivalence": true,
 		"lockedColors": [
 			{
-			"color": "blue",
+			"color": "cyan",
+			},
+			{
+			"color": "pink",
 			}
 		],
 		"defaultStrategy": "NORMAL_ORDER",
@@ -22,6 +25,9 @@
 			},
 			{
 			"elementType": "ABSTRACTION"
+			},
+			{
+			"elementType": "PARANTHESIS"
 			}
 		],
 		"tutorial": [
@@ -33,27 +39,40 @@
 					"type": "application",
 					"locked": true,
 					"left": {
-						"type": "abstraction",
+						"type": "variable",
 						"locked": true,
-						"color": "blue",
-						"inside": {
-							"type": "variable",
-							"locked": true,
-							"color": "blue"
-						}
+						"color": "pink"
 					},
 					"right": {
 						"type": "variable",
-						"locked": false,
-						"color": "white"
+						"locked": true,
+						"color": "cyan"
 					}			
 				}
 			},
 			"goal": {
 				"child": {
-					"type": "variable",
+					"type": "application",
 					"locked": true,
-					"color": "red"
+					"left": {
+						"type": "application",
+						"locked": true,
+						"left": {
+							"type": "variable",
+							"locked": true,
+							"color": "pink"
+						},
+						"right": {
+							"type": "variable",
+							"locked": true,
+							"color": "pink"
+						}		
+					},
+					"right": {
+						"type": "variable",
+						"locked": true,
+						"color": "cyan"
+					}			
 				}
 			},
 			"hint": {
@@ -61,19 +80,24 @@
 					"type": "application",
 					"locked": true,
 					"left": {
-						"type": "abstraction",
+						"type": "application",
 						"locked": true,
-						"color": "blue",
-						"inside": {
+						"left": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "white",
+							"inside": null,
+						},
+						"right": {
 							"type": "variable",
 							"locked": true,
-							"color": "blue"
-						}
+							"color": "pink"
+						}		
 					},
 					"right": {
 						"type": "variable",
-						"locked": false,
-						"color": "white"
+						"locked": true,
+						"color": "cyan"
 					}			
 				}
 			}

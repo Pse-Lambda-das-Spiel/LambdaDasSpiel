@@ -1,14 +1,11 @@
 {
 	"level": {
 		"levelId": 11 ,
-		"difficulty": 1 ,
+		"difficulty": 2 ,
 		"coins": 10,
 		"standardMode": true,
 		"colorEquivalence": true,
 		"lockedColors": [
-			{
-			"color": "blue",
-			}
 		],
 		"defaultStrategy": "NORMAL_ORDER",
 		"availableRedStrats": [
@@ -22,6 +19,9 @@
 			},
 			{
 			"elementType": "ABSTRACTION"
+			},
+			{
+			"elementType": "PARANTHESIS"
 			}
 		],
 		"tutorial": [
@@ -33,27 +33,73 @@
 					"type": "application",
 					"locked": true,
 					"left": {
-						"type": "abstraction",
+						"type": "application",
 						"locked": true,
-						"color": "blue",
-						"inside": {
-							"type": "variable",
+						"left": {
+							"type": "abstraction",
 							"locked": true,
-							"color": "blue"
+							"color": "orange",
+							"inside": {
+								"type": "application",
+								"locked": true,
+								"left": {
+									"type": "variable",
+									"locked": true,
+									"color": "orange",
+								},
+								"right": {
+									"type": "variable",
+									"locked": false,
+									"color": "white"
+								}	
+							}
+						},
+						"right": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "red",
+							"inside": {
+								"type": "variable",
+								"locked": false,
+								"color": "white"
+							}
 						}
 					},
 					"right": {
-						"type": "variable",
-						"locked": false,
-						"color": "white"
+						"type": "application",
+						"locked": true,
+						"left": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "blue",
+							"inside": {
+								"type": "variable",
+								"locked": true,
+								"color": "blue"
+							}
+						},
+						"right": {
+							"type": "variable",
+							"locked": true,
+							"color": "cyan"
+						}			
 					}			
 				}
 			},
 			"goal": {
 				"child": {
-					"type": "variable",
+					"type": "application",
 					"locked": true,
-					"color": "red"
+					"left": {
+						"type": "variable",
+						"locked": true,
+						"color": "yellow",
+					},
+					"right": {
+						"type": "variable",
+						"locked": true,
+						"color": "cyan"
+					}	
 				}
 			},
 			"hint": {
@@ -61,19 +107,56 @@
 					"type": "application",
 					"locked": true,
 					"left": {
-						"type": "abstraction",
+						"type": "application",
 						"locked": true,
-						"color": "blue",
-						"inside": {
-							"type": "variable",
+						"left": {
+							"type": "abstraction",
 							"locked": true,
-							"color": "blue"
+							"color": "orange",
+							"inside": {
+								"type": "application",
+								"locked": true,
+								"left": {
+									"type": "variable",
+									"locked": true,
+									"color": "orange",
+								},
+								"right": {
+									"type": "variable",
+									"locked": true,
+									"color": "yellow"
+								}	
+							}
+						},
+						"right": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "red",
+							"inside": {
+								"type": "variable",
+								"locked": false,
+								"color": "white"
+							}
 						}
 					},
 					"right": {
-						"type": "variable",
-						"locked": false,
-						"color": "white"
+						"type": "application",
+						"locked": true,
+						"left": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "blue",
+							"inside": {
+								"type": "variable",
+								"locked": true,
+								"color": "blue"
+							}
+						},
+						"right": {
+							"type": "variable",
+							"locked": true,
+							"color": "cyan"
+						}			
 					}			
 				}
 			}
