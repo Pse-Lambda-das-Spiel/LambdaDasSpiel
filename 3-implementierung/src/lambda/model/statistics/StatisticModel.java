@@ -1,5 +1,7 @@
 package lambda.model.statistics;
 
+import java.util.Date;
+
 import lambda.Consumer;
 import lambda.Observable;
 
@@ -22,8 +24,9 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	private int hintsNotUsed;
 	private int levelTries;
 	private int successfulLevelTries;
-	private long beginTime ;
+	private long beginTime = System.currentTimeMillis() ;
 	private long timePlayed;
+	
 	
 	public StatisticModel() {
 	}
@@ -308,5 +311,12 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	public void setSuccessfulLevelTries(int successfulLevelTries) {
 		this.successfulLevelTries = successfulLevelTries;
 	}
+	public void update(){
+		long diff = System.currentTimeMillis() - this.beginTime;
+	    long newPlayedTime = (this.getTimePlayed()+ diff/60000);
+		this.setTimePlayed(newPlayedTime);
+		this.beginTime = (new Date()).getTime();
+	}
+	
 
 }
