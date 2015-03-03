@@ -159,7 +159,7 @@ public class ProfileSelection extends StageViewController {
             ImageButton clickedButton = (ImageButton) event.getListenerActor();
             final String name = profileButtons.get(editButtons.indexOf(clickedButton)).getText().toString();
             final Skin temp = manager.get("data/skins/DialogTemp.json", Skin.class);
-            float size = getStage().getHeight() / 5;
+            final float size = getStage().getHeight() / 5;
             //dialog to choose between editing the profile or deleting it. 
             new Dialog("", temp) {
                 {

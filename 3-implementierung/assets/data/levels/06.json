@@ -5,12 +5,24 @@
 		"coins": 10,
 		"standardMode": true,
 		"colorEquivalence": true,
-		"lockedColors": [
+		"availableColors": [
 			{
-			"color": "cyan",
+			"Color": "blue"
 			},
 			{
-			"color": "yellow",
+			"Color": "red"
+			},
+			{
+			"Color": "green"
+			},
+			{
+			"Color": "pink"
+			},
+			{
+			"Color": "orange"
+			},
+			{
+			"Color": "purple"
 			}
 		],
 		"defaultStrategy": "NORMAL_ORDER",

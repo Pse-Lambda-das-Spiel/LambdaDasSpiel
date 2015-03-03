@@ -8,7 +8,7 @@ import lambda.model.lambdaterm.LambdaRoot;
 import lambda.viewcontroller.level.TutorialMessage;
 
 /**
- * Represents a level
+ * Represents a level.
  *
  * @author Kay Schmitteckert
  */
@@ -21,7 +21,7 @@ public class LevelModel {
 
 
 	private boolean colorEquivalence; 
-    private List<Color> lockedColors;
+    private List<Color> availableColors;
     private LambdaRoot start;
     private LambdaRoot goal;
     private LambdaRoot hint;
@@ -32,7 +32,7 @@ public class LevelModel {
     
 
     /**
-     * Creates a new instance of this class and initialize it with the given data.s
+     * Creates a new instance of this class and initialize it with the given data.
      *
      * @param id                 The Id of this level
      * @param start              the start board constellation of this level
@@ -44,13 +44,15 @@ public class LevelModel {
      * @param difficulty         the level difficulty
      * @param coins              the coins you will get if you complete the level
      * @param standardMode       indicates whether the level has to be solved in standard mode or reversed
-     * @param colorEquivalence	 indicates whether color equivalenz or alpha equivalenz is checked
+     * @param colorEquivalence	 indicates whether color equivalence or alpha equivalenz is checked
+     * @param availableColors 	 the available colors for the coloring of this level
+     * @param defaultStrategy 	 the default reduction strategy of this level
      */
     public LevelModel(int id, LambdaRoot start,
                       LambdaRoot goal, LambdaRoot hint,
                       List<TutorialMessage> tutorial, List<ReductionStrategy> availableRedStrats,
                       List<ElementType> useableElements, int difficulty, int coins, boolean standardMode, 
-                      boolean colorEquivalence, List<Color> lockedColors, ReductionStrategy defaultStrategy) {
+                      boolean colorEquivalence, List<Color> availableColors, ReductionStrategy defaultStrategy) {
         this.id = id;
         this.start = start;
         this.goal = goal;
@@ -61,7 +63,7 @@ public class LevelModel {
         this.difficulty = difficulty;
         this.standardMode = standardMode;
         this.colorEquivalence =colorEquivalence;
-        this.lockedColors = lockedColors;
+        this.availableColors = availableColors;
         this.defaultStrategy = defaultStrategy; 
     }
 
@@ -168,6 +170,11 @@ public class LevelModel {
     }
     
     /**
+     * Returns whether color equivalence is set or not.
+     * Color equivalence determines whether the colors of the lambda terms should be considered or not 
+     * when comparing the user input to the goal of the level.
+     * If color equivalence is false, alpha equivalence is automatically set.
+     * 
 	 * @return the colorEquivalence
 	 */
 	public boolean isColorEquivalence() {
@@ -175,10 +182,12 @@ public class LevelModel {
 	}
 
 	/**
+	 * Returns all colors available for the coloring dialog of this level.
+	 * 
 	 * @return the lockedColors
 	 */
-	public List<Color> getLockedColors() {
-		return lockedColors;
+	public List<Color> getAvailableColors() {
+		return availableColors;
 	}
 
 }

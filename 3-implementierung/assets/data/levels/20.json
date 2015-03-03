@@ -5,7 +5,25 @@
 		"coins": 10,
 		"standardMode": false,
 		"colorEquivalence": true,
-		"lockedColors": [
+		"availableColors": [
+			{
+			"Color": "blue"
+			},
+			{
+			"Color": "red"
+			},
+			{
+			"Color": "green"
+			},
+			{
+			"Color": "cyan"
+			},
+			{
+			"Color": "orange"
+			},
+			{
+			"Color": "yellow"
+			}
 		],
 		"defaultStrategy": "APPLICATIVE_ORDER",
 		"availableRedStrats": [
