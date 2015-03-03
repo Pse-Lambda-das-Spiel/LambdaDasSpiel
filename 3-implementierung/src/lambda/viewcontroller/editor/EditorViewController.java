@@ -156,6 +156,7 @@ public final class EditorViewController extends StageViewController implements E
         reductionStrategyButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                float height = getStage().getHeight();
                 new Dialog("", dialogSkin) {
                     {
                         clear();
@@ -165,11 +166,11 @@ public final class EditorViewController extends StageViewController implements E
                         strategies.add(ReductionStrategy.CALL_BY_VALUE);//test/delete
                         strategies.add(ReductionStrategy.NORMAL_ORDER);//test/delete*/
                         int size = (int) Math.ceil(Math.sqrt(strategies.size()));
-                        pad(size * 6);
+                        pad(height / 48);
                         int i = 0;
                         for (final ReductionStrategy strategy : strategies) {
                             if (i++ % size == 0) {
-                                row().space(10);
+                                row().size(height / 5).space(10);
                             }
                             ImageButton stratButton = new ImageButton(dialogSkin, strategy.name() + "_Button");
                             stratButton.addListener(new ClickListener() {
