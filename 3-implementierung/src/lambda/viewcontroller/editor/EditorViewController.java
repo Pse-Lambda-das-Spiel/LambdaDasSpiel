@@ -408,8 +408,8 @@ public final class EditorViewController extends StageViewController implements E
     }
     
     /* Dialog for color selection. Copy into right place.
-    Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
-    float height = getStage().getHeight();
+    final Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
+    final float height = getStage().getHeight();
     new Dialog("", dialogSkin) {
                     {
                         clear();
@@ -439,7 +439,7 @@ public final class EditorViewController extends StageViewController implements E
                             add(colorButton);
                         }
                     }
-                }.show(getStage()); 
+                }.show(getStage());
      */
     
 }
