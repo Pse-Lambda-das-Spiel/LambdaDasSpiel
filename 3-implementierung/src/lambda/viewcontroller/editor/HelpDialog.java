@@ -32,7 +32,7 @@ public class HelpDialog extends Dialog {
         pauseGameHelp.setFontScale(0.7f);
         add(pauseGameHelp);
         row();
-        add(new Image(skin.getAtlas().createSprite("accept"))).size(stageHeight / 8); //TODO change to goal image
+        add(new Image(skin.getAtlas().createSprite("goal"))).size(stageHeight / 8);
         Label goalHelp = new Label(language.get("goalHelp"), skin);
         goalHelp.setFontScale(0.7f);
         add(goalHelp);
@@ -47,7 +47,7 @@ public class HelpDialog extends Dialog {
         goToRedHelp.setFontScale(0.7f);
         add(goToRedHelp);
         row();
-        add(new Image(skin.getAtlas().createSprite("strategy"))).size(stageHeight / 8);      //TODO  
+        add(new Image(skin.getAtlas().createSprite("strategy"))).size(stageHeight / 8);
         Label strategyHelp = new Label(language.get("strategyHelp"), skin);
         strategyHelp.setFontScale(0.7f);
         add(strategyHelp);

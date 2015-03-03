@@ -355,40 +355,38 @@ public final class EditorViewController extends StageViewController implements E
     private class PauseDialog extends Dialog {
         public PauseDialog(Skin dialogSkin, I18NBundle language, float stageWidth, float stageHeight) {
             super("", dialogSkin);
-            float width = stageWidth * 0.7f;
-            float height = stageHeight / 5;
-            row();
-            TextButton continueButton = new TextButton(language.get("continue"), dialogSkin);
+            pad(stageWidth / 64);
+            row().space(10);
+            
+            ImageButton menuButton = new ImageButton(dialogSkin, "menuButton");
+            menuButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    //TODO
+                    getGame().setScreen(MainMenuViewController.class);
+                    remove();
+                }
+            });
+            add(menuButton).size(stageHeight / 4);
+            
+            ImageButton resetButton = new ImageButton(dialogSkin, "resetButton");
+            resetButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    //TODO
+                    remove();
+                }
+            });
+            add(resetButton).size(stageHeight / 4);
+
+            ImageButton continueButton = new ImageButton(dialogSkin, "continueButton");
             continueButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     remove();
                 }
             });
-            add(continueButton).width(width).height(height).padTop(25).padLeft(25).padRight(25);
-
-            row();
-            TextButton resetButton = new TextButton(language.get("reset"), dialogSkin);
-            resetButton.addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    //TODO reset Level
-                    remove();
-                }
-            });
-            add(resetButton).width(width).height(height).pad(10);
-
-            row();
-            TextButton menuButton = new TextButton(language.get("mainMenu"), dialogSkin);
-            menuButton.addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    //TODO ?
-                    getGame().setScreen(MainMenuViewController.class);
-                    remove();
-                }
-            });
-            add(menuButton).width(width).height(height).padBottom(35).padLeft(25).padRight(25);
+            add(continueButton).size(stageHeight / 4);
         }
     }
 

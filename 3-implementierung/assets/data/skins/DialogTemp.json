@@ -19,13 +19,16 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	default: { font: default-font, fontColor: black }
 },
 com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
-	configButton: { up: settings},
-	deleteButton: { up: bin},
-	yesButton: { up: accept},
-	noButton: { up: abort},
-	NORMAL_ORDER_Button: { up: normalorder},
-	APPLICATIVE_ORDER_Button: { up: applicativeorder},
-	CALL_BY_NAME_Button: { up: callbyname},
-	CALL_BY_VALUE_Button: { up: callbyvalue}
+	configButton: { up: settings },
+	deleteButton: { up: bin },
+	yesButton: { up: accept },
+	noButton: { up: abort },
+	NORMAL_ORDER_Button: { up: normalorder },
+	APPLICATIVE_ORDER_Button: { up: applicativeorder },
+	CALL_BY_NAME_Button: { up: callbyname },
+	CALL_BY_VALUE_Button: { up: callbyvalue },
+	continueButton: { up: play },
+	resetButton: { up: reload },
+	menuButton: { up: menu }
 }
 }
