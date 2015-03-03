@@ -4,6 +4,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 import lambda.model.shop.ElementUIContextFamily;
@@ -24,6 +25,7 @@ public class LevelContext {
     private DifficultySetting difficultySetting;
     private Animation cloudAnimation;
     private Animation magicAnimation;
+    private TextureRegion glow;
 
     /**
      * Creates a new instance of this class
@@ -33,6 +35,7 @@ public class LevelContext {
         this.manager = LevelManager.getLevelManager();
         this.magicAnimation = new Animation(1/15f, manager.getAssetManager().get(LevelManager.MAGIC_ANIMATIONPATH, TextureAtlas.class).getRegions());
         this.cloudAnimation = new Animation(1/15f, manager.getAssetManager().get(LevelManager.CLOUD_ANIMATIONPATH, TextureAtlas.class).getRegions());
+        this.glow = new TextureRegion((manager.getAssetManager().get(LevelManager.GLOW, TextureAtlas.class)).findRegion("glow"));
         elementUIContextFamily = ShopModel.getShop().getElementUIContextFamilies().getActivatedItem();
         
         /*not needed anymore
