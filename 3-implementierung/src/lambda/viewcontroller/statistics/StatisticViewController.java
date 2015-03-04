@@ -49,8 +49,9 @@ public class StatisticViewController extends StageViewController {
 
 	public StatisticViewController() {
 		ProfileManager.getManager().addObserver(this);
+		//
+        space = getStage().getWidth() / 64;
 		statistics = new StatisticModel();
-		space = getStage().getWidth() / 64;
 	}
 
     @Override
@@ -128,6 +129,7 @@ public class StatisticViewController extends StageViewController {
     public void show() {
         super.show();
         statistics = ProfileManager.getManager().getCurrentProfile().getStatistics() ;
+     // statistics.setTimePlayed(30); 
         lambsEnchanted.setText("Lambs enchanted = "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getLambsEnchanted()));
         gemsEnchanted.setText("Gems enchanted = "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getGemsEnchanted()));
         gemsPlaced.setText("Gems placed = "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getGemsPlaced()));
