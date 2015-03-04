@@ -11,22 +11,16 @@
 	\vspace{-.8cm}
 	\begin{itemize}
 		\item $\texttt{\textbf{LevelManager}()}$ \\ Instanziiert ein neues und gleichzeitig das einzige Objekt dieser Klasse und wird von $\texttt{public LevelManager \textbf{getLevelManager}()}$ aufgerufen.
+		\item $\texttt{public LevelModel \textbf{getLevelModel}(int id)}$ \\ Gibt das LevelModel mit der übergebenen Id zurück.
+		\item $\texttt{public DifficultySetting \textbf{getDifficulty}(int id)}$ \\ Gibt die DifficultySetting mit der übergebenen Id zurück.
 	\end{itemize}
 \end{description}
 
-\item[Methoden] \hfill \\
-	\vspace{-.8cm}
-	\begin{itemize}
-		\item $\texttt{public LevelModel \textbf{getLevelModel}(int id)}$ \\ Gibt das LevelModel mit der übergebenen Id zurück.
-		\end{itemize}
-\end{description}
+\subsubsection{\normalfont \texttt{public class \textbf{LevelContext}}}
 
-\item[Methoden] \hfill \\
-	\vspace{-.8cm}
-	\begin{itemize}
-		\item $\texttt{public DifficultySetting \textbf{getDifficulty}(int id)}$ \\ Gibt die DifficultySetting mit der übergebenen Id zurück.
-		\end{itemize}
-\end{description}
+\begin{description}
+
+\item[Allgemein] \hfill \\ Diese Klasse hält nun auch noch die Animationen, die vorher in den jeweiligen ElementUIContexts - also den Spielelementen - gehalten worden wären. Grund dafür ist, dass die Animationen für jede Element-Familie gleich sind und somit nicht in jeder Familie gehalten werden müssen.
 
 \subsubsection{\normalfont \texttt{public class \textbf{LevelLoadHelper}}}
 

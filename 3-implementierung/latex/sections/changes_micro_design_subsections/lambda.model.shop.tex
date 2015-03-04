@@ -1,1 +1,23 @@
 \subsection{\texttt{package lambda.model.shop}}
+\item[Allgemein] \hfill \\ In diesem Package wurde lediglich die Klassen $\texttt{\textbf{SpriteModel}()}$, ersetzt durch die Klasse $\texttt{\textbf{ElementUIContextFamily}()}$, die sich vorher im Package \texttt{package lambda.viewcontroller.level} befand. Grund dafür ist, dass es sich hierbei sowohl um die Spielelemente im Editormodus handelt als auch um ein Item, welches im Shop erwerbbar ist. Somit wurde entschieden diese Klasse zusammen mit den anderen Items in diesem Package zu belassen.
+
+
+\item[Entfernte Klassen] \hfill \\ $\texttt{\textbf{SpriteModel}()}$
+\item[Hinzugefügte Klassen] \hfill \\ $\texttt{\textbf{ElementUIContextFamily}()}$
+
+\subsubsection{\normalfont \texttt{public class \textbf{ShopModel}}}
+
+\begin{description}
+
+\item[Allgemein] \hfill \\ Die Klasse wurde als Singleton implementiert, um einen einfachen und globalen Zugriff auf die Items zu garantieren.
+
+\item[Hinzugefügte Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public ShopModel \textbf{getShopModel}()}$ \\ Instanziiert ein neues und gleichzeitig das einzige Objekt (falls noch keines existiert) dieser Klasse und gibt dieses zurück.
+		\item $\texttt{public void \textbf{loadAllMusictems}(AssetManager assets)}$ \\ Erstellt alle Musik-Items und setzt diese in die Liste der dazugehörigen Kategorie.
+		\item $\texttt{public void \textbf{loadAllImagetems}(AssetManager assets)}$ \\ Erstellt alle Hintergrund-Items und setzt diese in die Liste der dazugehörigen Kategorie. 
+		\item $\texttt{public void \textbf{loadAllElementtems}(AssetManager assets)}$ \\ Erstellt alle Element-Items und setzt diese in die Liste der dazugehörigen Kategorie.
+		\item $\texttt{public void \textbf{setAllAssets}(AssetManager assets)}$ \\ Setzt alle Assets in die richtigen Items, sowie auch alle Default-Items, welche aktiviert sind, wenn noch kein Item gekauft wurde. 
+		\end{itemize}
+\end{description}
