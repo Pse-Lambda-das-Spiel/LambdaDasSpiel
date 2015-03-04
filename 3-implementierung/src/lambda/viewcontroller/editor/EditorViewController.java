@@ -15,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
@@ -26,6 +25,8 @@ import java.util.List;
 import lambda.model.editormode.EditorModel;
 import lambda.model.editormode.EditorModelObserver;
 import lambda.model.lambdaterm.LambdaAbstraction;
+import lambda.model.lambdaterm.LambdaApplication;
+import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.LambdaTermObserver;
 import lambda.model.lambdaterm.LambdaValue;
@@ -48,7 +49,8 @@ import lambda.viewcontroller.reduction.ReductionViewController;
  */
 public final class EditorViewController extends StageViewController implements EditorModelObserver, LambdaTermObserver, InputProcessor {
     /**
-     * The initial offset of the term from the top left corner in percentages of screen size.
+     * The initial offset of the term from the top left corner in percentages of
+     * screen size.
      */
     public static final Vector2 INITIAL_TERM_OFFSET = new Vector2(0.2f, 0.2f);
     /**
@@ -79,6 +81,10 @@ public final class EditorViewController extends StageViewController implements E
      * Last down cursor y position.
      */
     private int lastY = 0;
+    /**
+     * Indicates whether the screen is currently being dragged.
+     */
+    private boolean isDraggingScreen;
 
     /**
      * Creates a new instance of EditorViewController.
@@ -88,6 +94,7 @@ public final class EditorViewController extends StageViewController implements E
         model = new EditorModel();
         background = null;
         toolbarElements = new LambdaTermViewController[3];
+        isDraggingScreen = false;
     }
 
     @Override
@@ -99,7 +106,7 @@ public final class EditorViewController extends StageViewController implements E
     @Override
     public void create(final AssetManager manager) {
         model.addObserver(this);
-        
+
         // Set up ui elements
         Table main = new Table();
         getStage().addActor(main);
@@ -126,7 +133,7 @@ public final class EditorViewController extends StageViewController implements E
         main.add(leftToolBar).expandY().left().top();
         main.add(targetButton).right().top();
         main.row();
-        main.add(bottomToolBar).height(0.15f * getStage().getHeight()).expandX().bottom();
+        main.add(bottomToolBar).height(0.25f * getStage().getHeight()).expandX().bottom();
 
         final Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
         pauseButton.addListener(new ClickListener() {
@@ -207,7 +214,7 @@ public final class EditorViewController extends StageViewController implements E
         if (term == null) {
             throw new IllegalStateException("Cannot show the editor viewController without calling reset before!");
         }
-        
+
         InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(getStage());
         multiplexer.addProcessor(this);
@@ -232,7 +239,7 @@ public final class EditorViewController extends StageViewController implements E
         if (term != null) {
             term.remove();
         }
-        term = LambdaTermViewController.build(context.getLevelModel().getStart(), true, context);
+        term = LambdaTermViewController.build(context.getLevelModel().getStart(), true, context, getStage(), false);
         getStage().addActor(term);
         term.toBack();
         term.setPosition(getStage().getWidth() * INITIAL_TERM_OFFSET.x, getStage().getHeight() * (1 - INITIAL_TERM_OFFSET.y));
@@ -246,35 +253,25 @@ public final class EditorViewController extends StageViewController implements E
         background.toBack();
 
         // Reset toolbar elements
-        /*LambdaRoot abstraction = new LambdaRoot();
-         abstraction.setChild(new LambdaAbstraction(abstraction, Color.WHITE, true));
-         toolbarElements[0] = LambdaTermViewController.build(abstraction, false, model.getLevelContext());
-         LambdaRoot application = new LambdaRoot();
-         application.setChild(new LambdaApplication(application, true));
-         toolbarElements[1] = LambdaTermViewController.build(application, false, model.getLevelContext());
-         LambdaRoot variable = new LambdaRoot();
-         variable.setChild(new LambdaVariable(variable, Color.WHITE, true));
-         toolbarElements[2] = LambdaTermViewController.build(variable, false, model.getLevelContext());
-         bottomToolBar.clear();
-         bottomToolBar.add(toolbarElements[0]).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
-         bottomToolBar.add(toolbarElements[1]).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
-         bottomToolBar.add(toolbarElements[2]).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();*/
-        model.getTerm().addObserver(this);
-    }
-
-    /**
-     * Is called when the lambdaterm is changed. Updates drag&drop sources for
-     * toolbar elements.
-     *
-     * @param oldTerm the old term to be replaced
-     * @param newTerm the new replacing term
-     */
-    @Override
-    public void replaceTerm(LambdaTerm oldTerm, LambdaTerm newTerm) {
-        // Add drag&drop sources for toolbar elements
+        LambdaRoot abstraction = new LambdaRoot();
+        abstraction.setChild(new LambdaAbstraction(abstraction, Color.WHITE, true));
+        toolbarElements[0] = LambdaTermViewController.build(abstraction, false, model.getLevelContext(), getStage(), false);
+        LambdaRoot application = new LambdaRoot();
+        application.setChild(new LambdaApplication(application, true));
+        toolbarElements[1] = LambdaTermViewController.build(application, false, model.getLevelContext(), getStage(), true);
+        LambdaRoot variable = new LambdaRoot();
+        variable.setChild(new LambdaVariable(variable, Color.WHITE, true));
+        toolbarElements[2] = LambdaTermViewController.build(variable, false, model.getLevelContext(), getStage(), false);
         for (LambdaTermViewController toolbarElement : toolbarElements) {
-            term.getDragAndDrop().addSource(new LambdaTermDragSource(toolbarElement.getRoot().getChild(0), false));
+            term.addPermanentDragSource(new LambdaTermDragSource(toolbarElement.getRoot().getChild(0), false, term));
         }
+        bottomToolBar.clear();
+        bottomToolBar.add(toolbarElements[0]).top().left();
+        bottomToolBar.add(toolbarElements[1]).top().left();
+        bottomToolBar.add(toolbarElements[2]).top().left();
+        bottomToolBar.row();
+
+        model.getTerm().addObserver(this);
     }
 
     /**
@@ -288,11 +285,14 @@ public final class EditorViewController extends StageViewController implements E
         // TODO change strategy image
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean keyDown(int keycode) {
-    	if (keycode == Keys.BACK) {
-			getGame().setScreen(LevelSelectionViewController.class);
-    	}
+        if (keycode == Keys.BACK) {
+            getGame().setScreen(LevelSelectionViewController.class);
+        }
         return false;
     }
 
@@ -319,7 +319,8 @@ public final class EditorViewController extends StageViewController implements E
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         lastX = screenX;
         lastY = screenY;
-        return false;
+        isDraggingScreen = true;
+        return true;
     }
 
     /**
@@ -327,7 +328,8 @@ public final class EditorViewController extends StageViewController implements E
      */
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
+        isDraggingScreen = false;
+        return true;
     }
 
     /**
@@ -335,9 +337,11 @@ public final class EditorViewController extends StageViewController implements E
      */
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        term.moveBy((screenX - lastX) / 2.0f, (lastY - screenY) / 2.0f);
-        lastX = screenX;
-        lastY = screenY;
+        if (isDraggingScreen) {
+            term.moveBy((screenX - lastX) / 2.0f, (lastY - screenY) / 2.0f);
+            lastX = screenX;
+            lastY = screenY;
+        }
         return true;
     }
 
@@ -362,7 +366,7 @@ public final class EditorViewController extends StageViewController implements E
             super("", dialogSkin);
             pad(stageWidth / 64);
             row().space(10);
-            
+
             ImageButton menuButton = new ImageButton(dialogSkin, "menuButton");
             menuButton.addListener(new ClickListener() {
                 @Override
@@ -373,7 +377,7 @@ public final class EditorViewController extends StageViewController implements E
                 }
             });
             add(menuButton).size(stageHeight / 4);
-            
+
             ImageButton resetButton = new ImageButton(dialogSkin, "resetButton");
             resetButton.addListener(new ClickListener() {
                 @Override
@@ -404,48 +408,51 @@ public final class EditorViewController extends StageViewController implements E
     }
 
     @Override
-    public void applicationStarted(LambdaAbstraction abstraction,
-            LambdaTerm applicant) {
+    public void applicationStarted(LambdaAbstraction abstraction, LambdaTerm applicant) {
     }
 
     @Override
     public void variableReplaced(LambdaVariable variable, LambdaTerm replacing) {
     }
-    
+
+    @Override
+    public void replaceTerm(LambdaTerm oldTerm, LambdaTerm newTerm) {
+    }
+
     /* Dialog for color selection. Copy into right place.
-    final Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
-    final float height = getStage().getHeight();
-        new Dialog("", dialogSkin) {
-            {
-                clear();
-                List<Color> colors = new ArrayList<>(); // replace with getlevelcontext .getLevelModel().getAvailableColors();
-                colors.add(new Color(0, 0, 0, 1));// test/delete
-                colors.add(new Color(0, 0, 1, 1));// test/delete
-                colors.add(new Color(0, 1, 0, 1));// test/delete
-                colors.add(new Color(0, 1, 1, 1));// test/delete
-                colors.add(new Color(1, 0, 0, 1));// test/delete
-                colors.add(new Color(1, 0, 1, 1));// test/delete
-                colors.add(new Color(1, 1, 0, 1));// test/delete
-                colors.add(new Color(1, 1, 1, 1));// test/delete
-                int size = (int) Math.ceil(Math.sqrt(colors.size()));
-                pad(height / 24);
-                int i = 0;
-                for (final Color color : colors) {
-                    if (i++ % size == 0) {
-                        row().size(height / 9).space(10);
-                    }
-                    ImageButton colorButton = new ImageButton(dialogSkin, "colorButton");
-                    colorButton.setColor(color);
-                    colorButton.addListener(new ClickListener() {
-                        @Override
-                        public void clicked(InputEvent event, float x, float y) {
-                            // TODO coloring
-                            remove();
-                        }
-                    });
-                    add(colorButton);
-                }
-            }
-        }.show(getStage());
-     */   
+     final Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
+     final float height = getStage().getHeight();
+     new Dialog("", dialogSkin) {
+     {
+     clear();
+     List<Color> colors = new ArrayList<>(); // replace with getlevelcontext .getLevelModel().getAvailableColors();
+     colors.add(new Color(0, 0, 0, 1));// test/delete
+     colors.add(new Color(0, 0, 1, 1));// test/delete
+     colors.add(new Color(0, 1, 0, 1));// test/delete
+     colors.add(new Color(0, 1, 1, 1));// test/delete
+     colors.add(new Color(1, 0, 0, 1));// test/delete
+     colors.add(new Color(1, 0, 1, 1));// test/delete
+     colors.add(new Color(1, 1, 0, 1));// test/delete
+     colors.add(new Color(1, 1, 1, 1));// test/delete
+     int size = (int) Math.ceil(Math.sqrt(colors.size()));
+     pad(height / 24);
+     int i = 0;
+     for (final Color color : colors) {
+     if (i++ % size == 0) {
+     row().size(height / 9).space(10);
+     }
+     ImageButton colorButton = new ImageButton(dialogSkin, "colorButton");
+     colorButton.setColor(color);
+     colorButton.addListener(new ClickListener() {
+     @Override
+     public void clicked(InputEvent event, float x, float y) {
+     // TODO coloring
+     remove();
+     }
+     });
+     add(colorButton);
+     }
+     }
+     }.show(getStage());
+     */
 }

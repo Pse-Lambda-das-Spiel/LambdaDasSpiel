@@ -7,8 +7,9 @@ import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.LambdaVariable;
 
 /**
- * A visitor on a lambdaterm that inserts an application between the visited node and its parent and adds a sibling to that application.
- * 
+ * A visitor on a lambdaterm that inserts an application between the visited
+ * node and its parent and adds a sibling to that application.
+ *
  * @author Florian Fervers
  */
 public class SiblingInserter implements LambdaTermVisitor {
@@ -17,29 +18,32 @@ public class SiblingInserter implements LambdaTermVisitor {
      */
     private final LambdaTerm sibling;
     /**
-     * True if the sibling is inserted as the left application child, false if it is inserted as the right child.
+     * True if the sibling is inserted as the left application child, false if
+     * it is inserted as the right child.
      */
     private final boolean left;
     /**
-     * The child node that is visited first. Traverses to the parent node and then inserts the new application.
+     * The child node that is visited first. Traverses to the parent node and
+     * then inserts the new application.
      */
     private LambdaTerm oldChild;
-    
+
     /**
      * Creates a new instance of SiblingInserter.
-     * 
+     *
      * @param sibling the sibling to be inserted
-     * @param left true if the sibling is inserted as the left application child, false if it is inserted as the right child
+     * @param left true if the sibling is inserted as the left application
+     * child, false if it is inserted as the right child
      */
     public SiblingInserter(LambdaTerm sibling, boolean left) {
         this.sibling = sibling;
         this.left = left;
         oldChild = null;
     }
-    
+
     /**
      * Visits the given lambda root.
-     * 
+     *
      * @param node the root to be visited
      */
     @Override
@@ -50,10 +54,10 @@ public class SiblingInserter implements LambdaTermVisitor {
             node.setChild(buildApplication(node));
         }
     }
-    
+
     /**
      * Visits the given lambda application.
-     * 
+     *
      * @param node the application to be visited
      */
     @Override
@@ -69,10 +73,10 @@ public class SiblingInserter implements LambdaTermVisitor {
             }
         }
     }
-    
+
     /**
      * Visits the given lambda abstraction.
-     * 
+     *
      * @param node the abstraction to be visited
      */
     @Override
@@ -84,10 +88,10 @@ public class SiblingInserter implements LambdaTermVisitor {
             node.setInside(buildApplication(node));
         }
     }
-    
+
     /**
      * Visits the given lambda variable.
-     * 
+     *
      * @param node the variable to be visited
      */
     @Override
@@ -99,14 +103,15 @@ public class SiblingInserter implements LambdaTermVisitor {
             assert(false); // Variables don't have children
         }
     }
-    
+
     /**
      * Builds the inserted application for the given parent.
-     * 
+     *
      * @param parent the inserted application's parent
      * @return the built application
      */
     private LambdaApplication buildApplication(LambdaTerm parent) {
+        assert(oldChild.getParent() == parent);
         LambdaApplication application = new LambdaApplication(parent, sibling.isLocked());
         if (left) {
             application.setLeft(sibling);
@@ -118,8 +123,8 @@ public class SiblingInserter implements LambdaTermVisitor {
         return application;
     }
 
-	@Override
-	public Object getResult() {
-		return null;
-	}
+    @Override
+    public Object getResult() {
+        return null;
+    }
 }

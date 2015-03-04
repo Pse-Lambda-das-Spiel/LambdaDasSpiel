@@ -21,9 +21,10 @@ public abstract class LambdaValueViewController extends LambdaNodeViewController
      * @param linkedTerm the value displayed by this node
      * @param parent the parent viewcontroller node
      * @param viewController the viewcontroller on which this node will be displayed
+     * @param canHaveChildren true if this node can have children, false otherwise
      */
-    public LambdaValueViewController(LambdaValue linkedTerm, LambdaNodeViewController parent, LambdaTermViewController viewController) {
-        super(linkedTerm, parent, viewController);
+    public LambdaValueViewController(LambdaValue linkedTerm, LambdaNodeViewController parent, LambdaTermViewController viewController, boolean canHaveChildren) {
+        super(linkedTerm, parent, viewController, canHaveChildren);
         color = linkedTerm.getColor();
     }
     

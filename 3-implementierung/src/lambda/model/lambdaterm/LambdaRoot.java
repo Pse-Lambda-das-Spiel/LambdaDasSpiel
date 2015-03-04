@@ -96,17 +96,4 @@ public class LambdaRoot extends LambdaTerm {
     public int hashCode() {
         return getClass().hashCode() + Objects.hashCode(child);
     }
-    
-    /**
-     * Returns a string representation of this object.
-     * 
-     * @return a string representation of this object.
-     */
-    @Override
-    public String toString() {
-        if (this.accept(new IsValidVisitor())) {
-            return this.accept(new ToStringVisitor());
-        } 
-        return "Invalid";
-    }
 }

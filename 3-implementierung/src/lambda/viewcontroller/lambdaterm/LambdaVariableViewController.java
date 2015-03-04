@@ -37,7 +37,7 @@ public class LambdaVariableViewController extends LambdaValueViewController {
      * displayed
      */
     public LambdaVariableViewController(LambdaVariable linkedTerm, LambdaNodeViewController parent, LambdaTermViewController viewController) {
-        super(linkedTerm, parent, viewController);
+        super(linkedTerm, parent, viewController, false);
         texture = viewController.getContext().getElementUIContextFamily().getVariable().getTexture();
 
         animate = false;
@@ -63,7 +63,9 @@ public class LambdaVariableViewController extends LambdaValueViewController {
     @Override
     public void draw(Batch batch, float alpha) {
         // Texture
+        batch.setColor(getLambdaColor());
         batch.draw(texture, getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+        batch.setColor(1f, 1f, 1f, 1f);
 
         // Smoke animation TODO: scale over applicant
         synchronized (getViewController()) {
