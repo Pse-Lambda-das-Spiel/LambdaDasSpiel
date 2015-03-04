@@ -111,5 +111,15 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	notBuyable: 	{ up: not_buyable},
 	activated: 	{ up: activated},
 	bin: 				{ up: bin },
+	goal:		{ up: goal},
+	undo:	{ up: undo},
+	applicativeOrder: { up: applicativeorder},
+	callByName: { up: callbyname},
+	normalOrder: { up: normalorder},
+	callByValue: { up: callbyvalue},
+	strategy: { up: strategy}
+
+
+
 },
 }
