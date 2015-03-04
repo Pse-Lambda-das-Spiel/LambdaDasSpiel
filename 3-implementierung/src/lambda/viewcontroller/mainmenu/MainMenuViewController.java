@@ -61,7 +61,7 @@ public class MainMenuViewController extends StageViewController implements Profi
 	public void changedProfile() {
 		ProfileManager pManager = ProfileManager.getManager();
 		profileImg.setDrawable(new SpriteDrawable(new Sprite(
-		manager.get("data/avatar/" + pManager.getCurrentProfile().getAvatar() + ".jpg", Texture.class))));
+		manager.get("data/avatar/" + pManager.getCurrentProfile().getAvatar() + ".png", Texture.class))));
 		profileName.setText(pManager.getCurrentProfile().getName());
 		coins.setText(Integer.toString(ProfileManager.getManager().getCurrentProfile().getCoins()));
 		soundButtonContainer.setActor((pManager.getCurrentProfile().getSettings().isMusicOn() ? sound_unmuted : sound_muted));

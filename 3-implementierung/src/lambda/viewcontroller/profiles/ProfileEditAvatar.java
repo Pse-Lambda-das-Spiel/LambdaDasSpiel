@@ -56,7 +56,7 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
         String start = profileEdit.getAvatar();
         String current = start;
         do {
-            assets.load(avatarPath + "/" + profileEdit.getAvatar() + ".jpg", Texture.class);
+            assets.load(avatarPath + "/" + profileEdit.getAvatar() + ".png", Texture.class);
             profileEdit.nextAvatar();
             current = profileEdit.getAvatar();
         } while (!current.equals(start));
@@ -121,7 +121,7 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
     @Override 
     public void changedAvatar() {
         avatarPic.setDrawable(new SpriteDrawable(
-                new Sprite(manager.get(avatarPath + "/" + profileEdit.getAvatar() + ".jpg", Texture.class))));
+                new Sprite(manager.get(avatarPath + "/" + profileEdit.getAvatar() + ".png", Texture.class))));
     }
     
     @Override 

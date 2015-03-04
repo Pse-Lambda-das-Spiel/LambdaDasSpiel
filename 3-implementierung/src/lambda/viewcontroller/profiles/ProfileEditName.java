@@ -24,7 +24,6 @@ import lambda.model.profiles.ProfileManager;
 import lambda.model.profiles.ProfileModel;
 import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.StageViewController;
-import lambda.viewcontroller.mainmenu.MainMenuViewController;
 
 /**
  * Represents a screen of the profile configuration/creation.
