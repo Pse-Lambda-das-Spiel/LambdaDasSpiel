@@ -1,5 +1,6 @@
 package lambda.viewcontroller.lambdaterm;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -8,10 +9,12 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
+
 import java.util.IdentityHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
 import lambda.Consumer;
 import static lambda.LambdaGame.DEBUG;
 import lambda.model.lambdaterm.LambdaAbstraction;
@@ -21,6 +24,7 @@ import lambda.model.lambdaterm.LambdaTermObserver;
 import lambda.model.lambdaterm.LambdaValue;
 import lambda.model.lambdaterm.LambdaVariable;
 import lambda.model.levels.LevelContext;
+import lambda.viewcontroller.editor.EditorViewController;
 import lambda.viewcontroller.lambdaterm.draganddrop.DropLocationActor;
 import lambda.viewcontroller.lambdaterm.draganddrop.LambdaTermDragSource;
 import lambda.viewcontroller.lambdaterm.draganddrop.LambdaTermDropTarget;
@@ -74,6 +78,9 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
      */
     private final List<LambdaTermDragSource> permanentDropSources;
 
+    private AssetManager assets;
+    
+    
     /**
      * Creates a new instance of LambdaTermViewController.
      *
@@ -97,10 +104,9 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
         if (DEBUG) {
             System.out.println("Building " + (editable ? "" : "non-") + "editable VC for term \"" + root.toString() + "\"");
         }
-
+        
         LambdaTermViewController result = new LambdaTermViewController(editable, context, forceParenthesis);
         result.setStage(stage);
-
         // Observe lambda term model
         root.addObserver(result);
 
@@ -119,6 +125,14 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
         return result;
     }
 
+    public void setAssets(AssetManager assets) {
+        this.assets = assets;
+    }
+    
+    public AssetManager getAssets() {
+        return assets;
+    }
+    
     /**
      * Creates a new instance of LambdaTermViewController. Only used by build()
      * since it is required to pass this as a reference to other functions.

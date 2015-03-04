@@ -253,6 +253,7 @@ public final class EditorViewController extends StageViewController implements E
             term.remove();
         }
         term = LambdaTermViewController.build(context.getLevelModel().getStart(), true, context, getStage(), false);
+        term.setAssets(getGame().getController(AssetViewController.class).getManager());
         getStage().addActor(term);
         term.toBack();
         term.setPosition(getStage().getWidth() * INITIAL_TERM_OFFSET.x, getStage().getHeight() * (1 - INITIAL_TERM_OFFSET.y));
