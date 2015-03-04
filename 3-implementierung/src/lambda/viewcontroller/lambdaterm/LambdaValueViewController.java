@@ -43,31 +43,36 @@ public abstract class LambdaValueViewController extends LambdaNodeViewController
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (!getLinkedTerm().isLocked() && viewController.isEditable()) {
-                    final Skin dialogSkin = viewController.getAssets().get("data/skins/DialogTemp.json", Skin.class);
+                    final Skin dialogSkin = viewController.getAssets().get(
+                            "data/skins/DialogTemp.json", Skin.class);
                     final float height = getStage().getHeight();
                     new Dialog("", dialogSkin) {
-                    {
-                    clear();
-                    List<Color> colors =viewController.getContext().getLevelModel().getAvailableColors();
-                    int size = (int) Math.ceil(Math.sqrt(colors.size()));
-                    pad(height / 24);
-                    int i = 0;
-                    for (final Color color : colors) {
-                    if (i++ % size == 0) {
-                    row().size(height / 9).space(10);
-                    }
-                    ImageButton colorButton = new ImageButton(dialogSkin, "colorButton");
-                    colorButton.setColor(color);
-                    colorButton.addListener(new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        ((LambdaValue) getLinkedTerm()).setColor(color);
-                    remove();
-                    }
-                    });
-                    add(colorButton);
-                    }
-                    }
+                        {
+                            clear();
+                            List<Color> colors = viewController.getContext()
+                                    .getLevelModel().getAvailableColors();
+                            int size = (int) Math.ceil(Math.sqrt(colors.size()));
+                            pad(height / 24);
+                            int i = 0;
+                            for (final Color color : colors) {
+                                if (i++ % size == 0) {
+                                    row().size(height / 9).space(10);
+                                }
+                                ImageButton colorButton = new ImageButton(
+                                        dialogSkin, "colorButton");
+                                colorButton.setColor(color);
+                                colorButton.addListener(new ClickListener() {
+                                    @Override
+                                    public void clicked(InputEvent event,
+                                            float x, float y) {
+                                        ((LambdaValue) getLinkedTerm())
+                                                .setColor(color);
+                                        remove();
+                                    }
+                                });
+                                add(colorButton);
+                            }
+                        }
                     }.show(getStage());
                 }
             }
