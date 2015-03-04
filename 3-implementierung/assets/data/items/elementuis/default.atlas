@@ -44,23 +44,30 @@ front_magicstick
   orig: 150, 150
   offset: 0, 0
   index: -1
-front_mask
+front_magicstick_mask
   rotate: false
   xy: 2, 306
   size: 150, 150
   orig: 150, 150
   offset: 0, 0
   index: -1
-gem
+front_mask
   rotate: false
   xy: 154, 306
   size: 150, 150
   orig: 150, 150
   offset: 0, 0
   index: -1
+gem
+  rotate: false
+  xy: 306, 306
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
 gem_mask
   rotate: false
-  xy: 154, 306
+  xy: 306, 306
   size: 150, 150
   orig: 150, 150
   offset: 0, 0

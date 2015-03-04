@@ -197,7 +197,7 @@ public class ShopModel {
             ParanthesisUIContext parenthesis = new ParanthesisUIContext(atlas.findRegion("front"), 
                     atlas.findRegion("center"), 
                     atlas.findRegion("back"),
-                    atlas.findRegion("front_mask"),
+                    atlas.findRegion("front_magicstick_mask"),
                     atlas.findRegion("center_mask"),
                     atlas.findRegion("back_mask"));
             familyItem.setAbstractionUIContext(abstraction);
