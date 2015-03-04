@@ -9,6 +9,8 @@ import lambda.model.lambdaterm.visitor.RemoveTermVisitor;
 import java.text.ParseException;
 
 import com.badlogic.gdx.graphics.Color;
+import java.util.Map;
+import lambda.model.levels.LevelManager;
 
 /**
  * A utility class with helper methods for lambda terms.
@@ -69,7 +71,17 @@ public final class LambdaUtils {
                     
                     // Inside term
                     ++index[0];
-                    LambdaAbstraction abstraction = new LambdaAbstraction(null, new Color(variableName, variableName, variableName, 1), false); // TODO: Generate color from variable name?
+                    Color color = null;
+                    for (Map.Entry<Color, String> pair : LevelManager.getLevelManager().getAllLevelColors().entrySet()) {
+                        if (pair.getValue().equals(Character.toString(variableName))) {
+                            color = pair.getKey();
+                            break;
+                        }
+                    }
+                    if (color == null) {
+                        color = new Color(variableName, variableName, variableName, 1);
+                    }
+                    LambdaAbstraction abstraction = new LambdaAbstraction(null, color, false); // TODO: Generate color from variable name?
                     abstraction.setInside(fromString(string, index, depth + 1, lastParenthesisOpenDepth, closingParanthesis));
                     terms.add(abstraction);
                     break;
