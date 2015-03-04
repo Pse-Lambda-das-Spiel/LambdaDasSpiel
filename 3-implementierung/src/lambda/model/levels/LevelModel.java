@@ -34,17 +34,17 @@ public class LevelModel {
     /**
      * Creates a new instance of this class and initialize it with the given data.
      *
-     * @param id                 The Id of this level
+     * @param id                 The id of this level
      * @param start              the start board constellation of this level
      * @param goal               the goal board constellation of this level
      * @param hint               the hint to solve this level
      * @param tutorial           the list of all associated Tutorial messages
      * @param availableRedStrats the list of all available reduction strategies for this level
-     * @param useableElements    the usuable elements of this level
+     * @param useableElements    the useable elements of this level
      * @param difficulty         the level difficulty
      * @param coins              the coins you will get if you complete the level
      * @param standardMode       indicates whether the level has to be solved in standard mode or reversed
-     * @param colorEquivalence	 indicates whether color equivalence or alpha equivalenz is checked
+     * @param colorEquivalence	 indicates whether color equivalence or alpha equivalence is checked
      * @param availableColors 	 the available colors for the coloring of this level
      * @param defaultStrategy 	 the default reduction strategy of this level
      */
@@ -68,7 +68,6 @@ public class LevelModel {
     }
 
     /**
-     * /**
      * Returns the Id of the level
      *
      * @return id
@@ -87,7 +86,7 @@ public class LevelModel {
     }
 
     /**
-     * Returns if the level has to be solved in standardmode or reverse
+     * Returns if the level has to be solved in standard mode or reverse
      *
      * @return standardMode
      */
@@ -114,7 +113,7 @@ public class LevelModel {
     }
 
     /**
-     * Returns a hint which can be used to solce the level
+     * Returns a hint which can be used to solve the level
      *
      * @return hint
      */
@@ -189,5 +188,4 @@ public class LevelModel {
 	public List<Color> getAvailableColors() {
 		return availableColors;
 	}
-
 }

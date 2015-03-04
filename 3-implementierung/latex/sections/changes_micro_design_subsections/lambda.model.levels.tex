@@ -1,0 +1,33 @@
+\subsection{\texttt{package lambda.model.levels}}
+
+\item[Allgemein] \hfill \\ Diesem Package wurden zwei Loader hinzugefügt, welche der von libGDX bereitgestellte AssetManager benötigt, um die LevelModels, sowie die DifficultySettings zu laden und zu halten. Es handelt sich dabei um die Klassen $\texttt{\textbf{LevelModelLoader}()}$, sowie um $\texttt{\textbf{DifficultySettingsLoader}()}$ und benötigen keiner weiteren Beschreibung.
+
+\subsubsection{\normalfont \texttt{public class \textbf{LevelManager}}}
+
+\begin{description}
+
+\item[Allgemein] \hfill \\ Neue Klasse, um alle benötigten Information für die Levels zu managen und zu setzen. Sie wurde der Übersichtlichkeit wegen eingeführt und weiterhin um die Komplexität der Klasse LevelModel zu eliminieren. Die Klasse ist als Singleton implementiert, um schnellen und globalen Zugriff auf Levelinformationen zu garantieren.
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{\textbf{LevelManager}()}$ \\ Instanziiert ein neues und gleichzeitig das einzige Objekt dieser Klasse und wird von $\texttt{public LevelManager \textbf{getLevelManager}()}$ aufgerufen.
+	\end{itemize}
+\end{description}
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public LevelModel \textbf{getLevelModel}(int id)}$ \\ Gibt das LevelModel mit der übergebenen Id zurück.
+		\end{itemize}
+\end{description}
+
+\item[Methoden] \hfill \\
+	\vspace{-.8cm}
+	\begin{itemize}
+		\item $\texttt{public DifficultySetting \textbf{getDifficulty}(int id)}$ \\ Gibt die DifficultySetting mit der übergebenen Id zurück.
+		\end{itemize}
+\end{description}
+
+\subsubsection{\normalfont \texttt{public class \textbf{LevelLoadHelper}}}
+
+\item[Allgemein] \hfill \\ Diese Klasse wurde vom Package \texttt{package lambda.utils} in dieses Package verschoben, da die verschiedenen Helfer-Klassen nun direkt bei den dazugehörenden Models liegen.
