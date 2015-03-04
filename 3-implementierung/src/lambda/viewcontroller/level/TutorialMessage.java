@@ -34,12 +34,12 @@ public class TutorialMessage extends Dialog {
 		message.setWrap(true);
 		if (model.getImageName().equals("")) {
 			message.setFontScale(0.7f);
-			add(message).maxWidth(stageWidth / 2);
+			add(message).width(stageWidth / 2);
 		} else {
 			add(new Image(skin.getAtlas().createSprite(model.getImageName()))).size(
 					stageHeight / 8).row();
 			message.setFontScale(0.7f);
-			add(message).maxWidth(stageWidth / 2);
+			add(message).width(stageWidth / 2);
 		}
 		addListener(new ClickListener() {
 			@Override
