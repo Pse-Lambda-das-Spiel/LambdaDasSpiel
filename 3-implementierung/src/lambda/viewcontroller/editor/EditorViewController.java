@@ -34,11 +34,14 @@ import lambda.model.lambdaterm.LambdaVariable;
 import lambda.model.lambdaterm.visitor.IsValidVisitor;
 import lambda.model.levels.LevelContext;
 import lambda.model.levels.ReductionStrategy;
+import lambda.model.levels.TutorialMessageModel;
 import lambda.model.profiles.ProfileManager;
 import lambda.viewcontroller.StageViewController;
+import lambda.viewcontroller.assets.AssetViewController;
 import lambda.viewcontroller.lambdaterm.LambdaTermViewController;
 import lambda.viewcontroller.lambdaterm.draganddrop.LambdaTermDragSource;
 import lambda.viewcontroller.level.LevelSelectionViewController;
+import lambda.viewcontroller.level.TutorialMessage;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
 import lambda.viewcontroller.reduction.ReductionViewController;
 
@@ -219,6 +222,15 @@ public final class EditorViewController extends StageViewController implements E
         multiplexer.addProcessor(getStage());
         multiplexer.addProcessor(this);
         Gdx.input.setInputProcessor(multiplexer);
+        List<TutorialMessageModel> tutorialList = model.getLevelContext().getLevelModel().getTutorial();
+        AssetManager assets = getGame().getController(AssetViewController.class).getManager();
+        final Skin dialogSkin = assets.get("data/skins/DialogTemp.json", Skin.class);
+        I18NBundle language = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
+        final float width = getStage().getWidth();
+        final float height = getStage().getHeight();
+        for (TutorialMessageModel t : tutorialList) {
+        	(new TutorialMessage(t, dialogSkin ,language, height, width)).show(getStage());
+        }
     }
 
     /**

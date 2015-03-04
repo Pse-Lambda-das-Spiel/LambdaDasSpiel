@@ -25,7 +25,7 @@ public class LevelModel {
     private LambdaRoot start;
     private LambdaRoot goal;
     private LambdaRoot hint;
-    private List<TutorialMessage> tutorial;
+    private List<TutorialMessageModel> tutorial;
     private List<ReductionStrategy> availableRedStrats;
     private List<ElementType> useableElements;
     private ReductionStrategy defaultStrategy;
@@ -38,7 +38,7 @@ public class LevelModel {
      * @param start              the start board constellation of this level
      * @param goal               the goal board constellation of this level
      * @param hint               the hint to solve this level
-     * @param tutorial           the list of all associated Tutorial messages
+     * @param tutorial           the list of all associated Tutorial messages models
      * @param availableRedStrats the list of all available reduction strategies for this level
      * @param useableElements    the usuable elements of this level
      * @param difficulty         the level difficulty
@@ -50,7 +50,7 @@ public class LevelModel {
      */
     public LevelModel(int id, LambdaRoot start,
                       LambdaRoot goal, LambdaRoot hint,
-                      List<TutorialMessage> tutorial, List<ReductionStrategy> availableRedStrats,
+                      List<TutorialMessageModel> tutorial, List<ReductionStrategy> availableRedStrats,
                       List<ElementType> useableElements, int difficulty, int coins, boolean standardMode, 
                       boolean colorEquivalence, List<Color> availableColors, ReductionStrategy defaultStrategy) {
         this.id = id;
@@ -127,7 +127,7 @@ public class LevelModel {
      *
      * @return tutorial
      */
-    public List<TutorialMessage> getTutorial() {
+    public List<TutorialMessageModel> getTutorial() {
         return tutorial;
     }
 

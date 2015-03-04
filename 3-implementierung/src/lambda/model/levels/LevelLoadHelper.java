@@ -63,8 +63,9 @@ public final class LevelLoadHelper {
 		JsonValue start = constellations.get("start");
 		JsonValue goal = constellations.get("goal");
 		JsonValue hint = constellations.get("hint");
-		LevelModel levelModel = new LevelModel(level.getInt("levelId"), convertJsonToConstellation(start), 
-				convertJsonToConstellation(goal), convertJsonToConstellation(hint), convertJsonToTutorial(tutorial), 
+		int id = level.getInt("levelId");
+		LevelModel levelModel = new LevelModel(id, convertJsonToConstellation(start), 
+				convertJsonToConstellation(goal), convertJsonToConstellation(hint), convertJsonToTutorial(tutorial, id), 
 				redStratsList, convertJsonToUseableElements(useableElements), 
 				level.getInt("difficulty"), level.getInt("coins"), level.getBoolean("standardMode"),
 				level.getBoolean("colorEquivalence"), availableColors, defaultStrategy);
@@ -106,19 +107,23 @@ public final class LevelLoadHelper {
 		return elementTypeList;
 	}
 	
-	private static List<TutorialMessage> convertJsonToTutorial(JsonValue value) {
-		List<TutorialMessage> tutorialMessageList = new ArrayList<>();
+	private static List<TutorialMessageModel> convertJsonToTutorial(JsonValue value, int levelId) {
+		List<TutorialMessageModel> tutorialMessageModelList = new ArrayList<>();
 		// It is not necessary for all levels to have TutorialMessages
 		if (value.size == 0) {
-			return tutorialMessageList;
+			return tutorialMessageModelList;
 		}
 		for (JsonValue entry = value.child(); entry != null; entry = entry.next) {
-			if (entry.getString("tutorialId").equals("")) {
-				throw new InvalidJsonException("A tutorial id must not be empty!");
+			if (entry.getString("tutorialId").equals("") || entry.getString("tutorialId") == null) {
+				throw new InvalidJsonException("A tutorial id must not be empty or null!");
 			}
-			tutorialMessageList.add(new TutorialMessage(entry.getString("tutorialId"), null, null, null, null)); // TODO
+			if (entry.getString("tutorialId") == null) {
+				throw new InvalidJsonException("The image name of a tutorial id must not be null!");
+			}
+			String tutorialId = "tutorial_" + Integer.toString(levelId) + "_" + entry.getString("tutorialId");
+			tutorialMessageModelList.add(new TutorialMessageModel(tutorialId, entry.getString("image")));
 		}
-		return tutorialMessageList;
+		return tutorialMessageModelList;
 	}
 	
 	private static LambdaRoot convertJsonToConstellation(JsonValue constellation) {

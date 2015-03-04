@@ -1,76 +1,52 @@
 package lambda.viewcontroller.level;
 
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
+import lambda.model.levels.TutorialMessageModel;
+
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.I18NBundle;
 
 /**
  * This class represents a full tutorial including the area and vector
  *
- * @author Kay Schmitteckert
+ * @author Kay Schmitteckertm Robert Hochweiss
  */
-public class TutorialMessage {
-
-	String id;
-	String message;
-	Rectangle bound;
-	Vector2 arrowStart;
-	Vector2 arrowEnd;
+public class TutorialMessage extends Dialog {
 
 	/**
 	 * Creates a new TutorialMessage.
 	 *
-	 * @param id the id of the new TutorialMessage
+	 * @param model The TutorialModel of this message
+	 * @param skin Dialogskin
+     * @param language Language in which the tutorial is presented.
+     * @param stageHeight Height of the stage on which the dialog should be shown.
+     * @param stageWidth Width of the stage on which the dialog should be shown.
 	 */
-	public TutorialMessage(String id, String message, Rectangle bound, Vector2 arrowStart, Vector2 arrowEnd) {
-		this.id = id;
-		this.message = message;
-		this.bound = bound;
-		this.arrowStart = arrowStart;
-		this.arrowEnd = arrowEnd;
+	public TutorialMessage(TutorialMessageModel model, Skin skin, I18NBundle language, float stageHeight, float stageWidth) {
+		super("", skin);
+		clear();
+		pad(stageHeight / 20);
+		Label message = new Label(language.get(model.getId()), skin);
+		message.setWrap(true);
+		if (model.getImageName().equals("")) {
+			message.setFontScale(0.7f);
+			add(message).maxWidth(stageWidth / 2);
+		} else {
+			add(new Image(skin.getAtlas().createSprite(model.getImageName()))).size(
+					stageHeight / 8).row();
+			message.setFontScale(0.7f);
+			add(message).maxWidth(stageWidth / 2);
+		}
+		addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				remove();
+			}
+		});
 	}
 
-	/**
-	 * Returns the id of this TutorialMessage.
-	 *
-	 * @return the id the id of this TutorialMessage
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * Returns the message of the tutorial
-	 *
-	 * @return the message of the tutorial
-	 */
-	public String getMessage() {
-		return message;
-	}
-
-	/**
-	 * Returns a Rectangle which represents the area in which the message/tutorial will be displayed
-	 *
-	 * @return Rectangle in which the tutorial will be displayed
-	 */
-	public Rectangle getBound() {
-		return bound;
-	}
-
-	/**
-	 * Returns the start of the vector
-	 *
-	 * @return the start of the vector
-	 */
-	public Vector2 getArrowStart() {
-		return arrowStart;
-	}
-
-	/**
-	 * Returns the end of the vector
-	 *
-	 * @return the end of the vector
-	 */
-	public Vector2 getArrowEnd() {
-		return arrowEnd;
-	}
 }
