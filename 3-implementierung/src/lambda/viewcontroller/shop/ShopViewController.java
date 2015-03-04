@@ -24,7 +24,7 @@ import lambda.viewcontroller.mainmenu.MainMenuViewController;
 
 
 /**
- * 
+ * This class represents the view of the shop
  * 
  * @author Kay Schmitteckert
  */
@@ -52,6 +52,9 @@ public class ShopViewController extends StageViewController implements ProfileMo
     private static Skin skin;
    
 
+    /**
+     * Creates a new instance of this class
+     */
     public ShopViewController() {
         shop = ShopModel.getShop();
         profile = new ProfileModel("");
@@ -60,7 +63,6 @@ public class ShopViewController extends StageViewController implements ProfileMo
         musicB = false;
         imageB = false;
         elementsB = false;
-        
     }
 
     @Override
@@ -193,6 +195,12 @@ public class ShopViewController extends StageViewController implements ProfileMo
        
     }
     
+    /**
+     * Returns a text button style
+     * 
+     * @param icon the identifier for the style
+     * @return the specific text button style of the identifier
+     */
     public static TextButtonStyle getTextButtonStyle(String icon) {
         TextButtonStyle style = new TextButtonStyle(skin.get(TextButtonStyle.class));
         style.up = skin.getDrawable(icon);
@@ -200,17 +208,33 @@ public class ShopViewController extends StageViewController implements ProfileMo
         return style;
     }
     
+    /**
+     * Returns a image button style
+     * 
+     * @param icon the identifier for the style
+     * @return the specific image button style of the identifier
+     */
     public static ImageButtonStyle getImageButtonStyle(String icon) {
         ImageButtonStyle style = new ImageButtonStyle(skin.get(ImageButtonStyle.class));
         style.imageUp = skin.getDrawable(icon);
         return style;
     }
+    
+    /**
+     * Returns a image text button style
+     * 
+     * @param icon the identifier for the style
+     * @return the specific image text button style of the identifier
+     */
     public static ImageTextButtonStyle getImageTextButtonStyle(String icon) {
         ImageTextButtonStyle style = new ImageTextButtonStyle(skin.get(ImageTextButtonStyle.class));
         style.imageUp = skin.getDrawable(icon);
         return style;
     }
 
+    /**
+     * Is called when the profile is changed
+     */
     public void changedProfile() {
         profile.removeObserver(this);
         profile = ProfileManager.getManager().getCurrentProfile();
@@ -220,6 +244,9 @@ public class ShopViewController extends StageViewController implements ProfileMo
         elementsTable = elementUIs.updateButtons();
     }
     
+    /**
+     * Is called when the coins are changed
+     */
     @SuppressWarnings("unchecked")
     public void changedCoins() {
         coins.setText(String.valueOf(ProfileManager.getManager().getCurrentProfile().getCoins()));
@@ -246,6 +273,11 @@ public class ShopViewController extends StageViewController implements ProfileMo
         }
     }
     
+    /**
+     * Returns the master skin
+     * 
+     * @return the master skin
+     */
     public static Skin getSkin() {
         return skin;
     }

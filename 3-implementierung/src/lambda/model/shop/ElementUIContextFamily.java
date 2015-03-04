@@ -5,7 +5,7 @@ import lambda.viewcontroller.level.ParanthesisUIContext;
 import lambda.viewcontroller.level.VariableUIContext;
 
 /**
- * Created by kay on 19.01.15.
+ * Represents a whole family of elements which are placed in the editor mode
  * 
  * @author Kay Schmitteckert
  */
@@ -16,9 +16,10 @@ public class ElementUIContextFamily extends ShopItemModel {
     private AbstractionUIContext abstractionUIContext;
 
     /**
+     * Creates a new instance of this class
      * 
-     * @param id
-     * @param price
+     * @param id the if of this item
+     * @param price the price of this item
      */
     public ElementUIContextFamily(String id, int price, String filepath) {
         super(id, price, filepath);
@@ -26,40 +27,57 @@ public class ElementUIContextFamily extends ShopItemModel {
     }
     
     /**
-     * Returns the sprite of the paranthesis
+     * Returns the parenthesis element
      *
-     * @return paranthesis
+     * @return the context of the parenthesis
      */
     public ParanthesisUIContext getParenthesis() {
         return paranthesisUIContext;
     }
 
     /**
-     * Returns the sprite of the variable
+     * Returns the variable element
      *
-     * @return variable
+     * @return the context of the variable
      */
     public VariableUIContext getVariable() {
         return variableUIContext;
     }
 
     /**
-     * Returns the sprite of the front of the application
+     * Returns the abstraction element
      *
-     * @return applicationFront
+     * @return the context of the abstraction
      */
     public AbstractionUIContext getAbstraction() {
         return abstractionUIContext;
     }
 
-    public void setParanthesisUIContext(ParanthesisUIContext paranthesisUIContext) {
-        this.paranthesisUIContext = paranthesisUIContext;
+    /**
+     * Sets the committed element as new parenthesis
+     * 
+     * @param the new parenthesis
+     */
+    public void setParanthesisUIContext(ParanthesisUIContext parenthesisUIContext) {
+        this.paranthesisUIContext = parenthesisUIContext;
     }
 
+    
+    /**
+     * Sets the committed element as new variable
+     * 
+     * @param the new variable
+     */
     public void setVariableUIContext(VariableUIContext variableUIContext) {
         this.variableUIContext = variableUIContext;
     }
 
+    
+    /**
+     * Sets the committed element as new abstraction
+     * 
+     * @param the new abstraction
+     */
     public void setAbstractionUIContext(AbstractionUIContext abstractionUIContext) {
         this.abstractionUIContext = abstractionUIContext;
     }

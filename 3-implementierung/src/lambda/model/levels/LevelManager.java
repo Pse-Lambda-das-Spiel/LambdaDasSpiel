@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 /**
- * LevelManager holds two lists: One list which contains all LevelModels
- * and another one which contains all DifficultySettings.
+ * LevelManager manages everything which is needed for the level contexts.
+ * This manager loads all leveld, difficulty settings and several assets which are used in every level.
  *
  * @author: Kay Schmitteckert
  */
@@ -71,7 +71,10 @@ public class LevelManager {
     }
 
     /**
-   	 * @return 
+     * Returns the level with the id of the parameter
+     * 
+     * @param id the id of the level which will be returned
+   	 * @return the level with this id
    	 */
    	public LevelModel getLevel(int id) {
    		LevelModel level = assetManager.get(levelFilePaths[id], LevelModel.class);
@@ -79,13 +82,21 @@ public class LevelManager {
    	}
 
    	/**
-   	 * @return 
+   	 * Returns the difficulty settings with the id of the parameter
+   	 * 
+   	 * @param id the id of the difficulty settings which whill be returned
+   	 * @return the difficulty settings with this id
    	 */
    	public DifficultySetting getDifficultySetting(int id) {
    		DifficultySetting difficultySetting = assetManager.get(difficultySettingFilePaths[id - 1], DifficultySetting.class);
    		return difficultySetting;
    	}
     
+   	/**
+   	 * Loads everything which is needed for the level contexts
+   	 * 
+   	 * @param assets the static asset manager
+   	 */
     public void queueAssets(AssetManager assets) {
     	assetManager = assets;
     	assets.setLoader(LevelModel.class, new LevelModelLoader(new InternalFileHandleResolver()));
@@ -116,5 +127,4 @@ public class LevelManager {
     public AssetManager getAssetManager() {
         return assetManager;
     }
-    
 }

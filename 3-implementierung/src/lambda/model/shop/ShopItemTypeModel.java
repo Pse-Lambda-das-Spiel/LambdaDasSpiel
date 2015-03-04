@@ -4,7 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- *
+ * Represents a category of a ShopItemModel. 
+ * This class holds a list of all its items and also the activated item.
  *
  * @author Kay Schmitteckert
  */
@@ -16,7 +17,9 @@ public class ShopItemTypeModel<T extends ShopItemModel> {
     private T defaultItem;
 
     /**
-     *
+     * Creates a new instance of this class
+     * 
+     * @param typeName the identifier of this category
      */
     public ShopItemTypeModel(String typeName) {
         this.typeName = typeName;
@@ -52,7 +55,7 @@ public class ShopItemTypeModel<T extends ShopItemModel> {
             return defaultItem;
         }
         else {
-        return activatedItem;
+            return activatedItem;
         }
     }
     
@@ -60,7 +63,6 @@ public class ShopItemTypeModel<T extends ShopItemModel> {
      * Sets the default item
      * 
      * @param item which is the default one
-     * 
      */
     public void setDefaultItem(T defaultItem) {
         this.defaultItem = defaultItem;

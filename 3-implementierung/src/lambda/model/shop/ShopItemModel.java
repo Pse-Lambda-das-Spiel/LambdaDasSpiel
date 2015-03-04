@@ -20,8 +20,13 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
     protected boolean purchased;
     protected boolean activated;
 
+
     /**
-     *
+     * Creates a new instance of this class
+     * 
+     * @param id the if of this item
+     * @param price the price of this item
+     * @param filepath the path to the asset
      */
     public ShopItemModel(String id, int price, String filepath) {
         this.id = id;
@@ -70,9 +75,9 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
     }
 
     /**
-     * Returns the Id of this item
+     * Returns the id of this item
      *
-     * @return Id
+     * @return the id of this item
      */
     public String getId() {
         return id;
@@ -81,7 +86,7 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
     /**
      * Returns the price of this item
      *
-     * @return price
+     * @return the price of this item
      */
     public int getPrice() {
         return price;
@@ -108,7 +113,7 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
 	}
 
 	/**
-     * Setter for purchased
+     * Sets the new state of purchased and notifies the other classes
      *
 	 * @param purchased the boolean to set
 	 */
@@ -122,17 +127,38 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
          });
 	}
 
+	/**
+	 * Returns the filepath of this item 
+	 * 
+	 * @return the filepath of the asset
+	 */
     public String getFilepath() {
         return filepath;
     }
     
+    /**
+     * Returns the category in which this item is available
+     * 
+     * @return the category of this item
+     */
     public ShopItemTypeModel<?> getShopItemType() {
         return shopItemType;
     }
 
+    /**
+     * Returns the state of this item.
+     * 
+     * @return true if activated, false if not
+     */
     public boolean isActivated() {
         return activated;
     }
+    
+    /**
+     * Sets the new state of this item and notifies the other classes about this change
+     * 
+     * @param activated is the boolean to set
+     */
     public void setActivated(final boolean activated) {
         this.activated = activated;
         notify(new Consumer<ShopItemModelObserver>(){

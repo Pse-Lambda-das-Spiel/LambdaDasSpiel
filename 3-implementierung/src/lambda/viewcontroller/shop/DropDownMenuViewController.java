@@ -13,6 +13,8 @@ import lambda.model.shop.ShopItemTypeModel;
 
 
 /**
+ * Represents the elements of the drop down menu in the shop and holds every item of one category.
+ * 
  * @author: Kay Schmitteckert
  */
 public class DropDownMenuViewController<T extends ShopItemModel> extends Actor {
@@ -21,6 +23,12 @@ public class DropDownMenuViewController<T extends ShopItemModel> extends Actor {
     private VerticalGroup groupButtons;
     private VerticalGroup groupVCs;
 
+    /**
+     * Creates a new instance of this class and creates a view controller for every item
+     * 
+     * @param shopItemTypeModel the category of the items
+     * @param stage the stage
+     */
     public DropDownMenuViewController(ShopItemTypeModel<T> shopItemTypeModel, Stage stage) {
         this.shopItemTypeModel = shopItemTypeModel;
         groupButtons = new VerticalGroup().align(Align.center);
@@ -34,6 +42,11 @@ public class DropDownMenuViewController<T extends ShopItemModel> extends Actor {
         }
     }
     
+    /**
+     * Updates the vertical groups while call "setCurrentState()" of every item
+     * 
+     * @return the updated vertical group of the buttons
+     */
     public VerticalGroup updateButtons() {
         SnapshotArray<Actor> itemVCs = groupVCs.getChildren();
         VerticalGroup updatedButtons = new VerticalGroup();
@@ -45,7 +58,6 @@ public class DropDownMenuViewController<T extends ShopItemModel> extends Actor {
         return updatedButtons;
     }
 
-
     /**
      * Returns the category
      *
@@ -54,17 +66,22 @@ public class DropDownMenuViewController<T extends ShopItemModel> extends Actor {
     public ShopItemTypeModel<T> getShopItemTypeModel() {
         return shopItemTypeModel;
     }
-
-    public void draw(float width, float height) {
-
-    }
     
+    /**
+     * Returns the vertical group of the items buttons
+     * 
+     * @return vertical group of every button
+     */
     public VerticalGroup getGroup() {
         return groupButtons;
     }
     
+    /**
+     * Returns the vertical group of the items view controller
+     * 
+     * @return vertical group of every view controller
+     */
     public VerticalGroup getGroupVCs() {
         return groupVCs;
     }
-
 }

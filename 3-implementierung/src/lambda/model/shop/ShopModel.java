@@ -29,7 +29,7 @@ public class ShopModel {
     private ShopItemTypeModel<ElementUIContextFamily> elementUIContextFamilies;
     
     /**
-     * Private Constructor of this class. It will be call by "getShop()"
+     * Private Constructor of this class. It will be called by "getShop()"
      */
     private ShopModel() {
         music = new ShopItemTypeModel<MusicItemModel>("music");

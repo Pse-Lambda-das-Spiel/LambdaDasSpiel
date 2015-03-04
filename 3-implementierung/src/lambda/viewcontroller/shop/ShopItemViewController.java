@@ -15,6 +15,9 @@ import lambda.model.shop.ShopItemModel;
 import lambda.model.shop.ShopItemModelObserver;
 
 /**
+ * Represents the ImageTextButtons of an item in the shop
+ * This class updates the button when coins are changed, any item is purchased or activated
+ * 
  * @author: Kay Schmitteckert
  */
 public class ShopItemViewController<T extends ShopItemModel> extends Actor implements ShopItemModelObserver {
@@ -23,6 +26,12 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor imple
     private TextButton currentState;
     private Stage stage;
 
+    /**
+     * Creates a new instance of this class
+     * 
+     * @param model the model of the item
+     * @param stage the stage
+     */
     public ShopItemViewController(T model, Stage stage) {
         this.model = model;
         this.stage = stage;
@@ -31,10 +40,20 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor imple
                 ShopViewController.getTextButtonStyle("not_buyable"));
     }
 
+    /**
+     * Returns the model of this item
+     * 
+     * @return the model of this item
+     */
     public T getModel() {
         return model;
     }
 
+    /**
+     * Is called when the state of this item has changed
+     * 
+     * @param purchased the new state
+     */
     public void purchasedChanged(boolean purchased) {
         if (purchased) {
             currentState.setStyle(ShopViewController.getTextButtonStyle("purchased"));
@@ -47,6 +66,11 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor imple
         }
     }
 
+    /**
+     * Is called when the state of this item has changed
+     * 
+     * @param activated the new state
+     */
     public void activatedChanged(boolean activated) {
         if (activated) {
             currentState.setStyle(ShopViewController.getTextButtonStyle("activated"));
@@ -56,6 +80,9 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor imple
         }
     }
     
+    /**
+     * Updates the view of the button
+     */
     public void setCurrentState() {
         currentState = new TextButton(model.getShopItemType().getTypeName() + " " + model.getId(), 
                 ShopViewController.getTextButtonStyle("not_buyable") );
@@ -76,10 +103,19 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor imple
         }
         currentState.addListener(new ItemClickListener());
     }
+    
+    /**
+     * Returns the current button view of this item
+     * 
+     * @return a text button of the current state
+     */
     public TextButton getCurrentState() {
         return currentState;
     }
 
+    /**
+     * ClickListener for the button of this item
+     */
     private class ItemClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
@@ -155,8 +191,7 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor imple
                             }
                         });
                         add(noButton).pad(space).padBottom(space * 3 / 2).align(Align.bottomLeft);
-                    }
-                       
+                    } 
                 }.show(stage);
             }
         }

@@ -115,4 +115,12 @@ public class LevelContext {
         return cloudAnimation;
     }
 
+    /**
+     * Returns the glow which shows where you are placing an element
+     * 
+     * @return the glow texture
+     */
+    public TextureRegion getGlow() {
+        return glow;
+    }
 }
