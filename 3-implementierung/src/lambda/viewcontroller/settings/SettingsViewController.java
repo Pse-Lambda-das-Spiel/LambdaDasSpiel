@@ -75,7 +75,7 @@ public class SettingsViewController extends StageViewController {
         settingsView.setFillParent(true);
         float height = getStage().getHeight() / 10;
         float width = getStage().getWidth() * 0.8f;
-        settingsView.row().height(height);
+        settingsView.row().height(height).space(space * 3);
         settingsView.add();
         settingsView.row().height(height);
         musicLabel = new Label(null, manager.get(skinJson, Skin.class));
@@ -88,10 +88,10 @@ public class SettingsViewController extends StageViewController {
                 settings.setMusicVolume(musicSlider.getValue());
             }
         });
-        settingsView.add(musicSlider).width(width).space(space);
+        settingsView.add(musicSlider).width(width);
         settingsView.row().height(height);
         soundLabel = new Label(null, manager.get(skinJson, Skin.class));
-        settingsView.add(soundLabel).width(width).space(space * 2);
+        settingsView.add(soundLabel).width(width);
         settingsView.row().height(height);
         soundSlider = new Slider(0, 1, 0.01f, false,  manager.get(skinJson, Skin.class));
         soundSlider.addListener(new ChangeListener() {
@@ -100,7 +100,7 @@ public class SettingsViewController extends StageViewController {
                 settings.setSoundVolume(soundSlider.getValue());
             }
         });
-        settingsView.add(soundSlider).width(width).space(space);
+        settingsView.add(soundSlider).width(width);
         settingsView.row().height(height);
         statistics = new TextButton("", manager.get(skinJson, Skin.class));
         statistics.addListener(new ClickListener() {

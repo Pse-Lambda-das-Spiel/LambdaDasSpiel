@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.I18NBundle;
 
 import lambda.model.levels.LevelContext;
 import lambda.model.levels.LevelManager;
@@ -253,7 +254,9 @@ public class LevelSelectionViewController extends StageViewController implements
 				}
 				*/
 				
-				// TODO help dialog
+			    new HelpDialog(manager.get("data/skins/DialogTemp.json", Skin.class),
+                        manager.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
+                        I18NBundle.class), getStage().getWidth(), getStage().getHeight()).show(getStage());
 			}
     	});
     	

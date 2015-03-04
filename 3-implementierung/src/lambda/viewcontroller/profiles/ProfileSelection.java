@@ -207,8 +207,6 @@ public class ProfileSelection extends StageViewController {
             AudioManager.playSound("buttonClick");
             String name = ((TextButton) event.getListenerActor()).getText().toString();
             if (!name.equals("")) {
-                
-                
                 ProfileManager.getManager().setCurrentProfile(name);
                 AudioManager.setLoggedIn(true);
                 getGame().setScreen(MainMenuViewController.class);
