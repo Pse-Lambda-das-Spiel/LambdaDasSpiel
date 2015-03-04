@@ -57,23 +57,23 @@ public class LevelManager {
     }
 
     private void setAllLevelColors() {
-    	allLevelColors.put(Color.BLUE, "blue");
-    	allLevelColors.put(Color.RED, "red");
-    	allLevelColors.put(Color.GREEN, "green");
-    	allLevelColors.put(Color.CYAN, "cyan");
-    	allLevelColors.put(Color.ORANGE, "orange");
-    	allLevelColors.put(Color.YELLOW, "yellow");
-    	allLevelColors.put(Color.PINK, "pink");
-    	allLevelColors.put(Color.PURPLE, "purple");
-    	allLevelColors.put(Color.OLIVE, "olive");
-    	allLevelColors.put(Color.BLACK, "black");
-    	allLevelColors.put(Color.WHITE, "white");
-    	allLevelColors.put(Color.GRAY, "gray");
-    	allLevelColors.put(Color.MAGENTA, "magenta");
-    	allLevelColors.put(Color.MAROON, "maroon");
-    	allLevelColors.put(Color.NAVY, "navy");
-    	allLevelColors.put(Color.TEAL, "teal");
-    	allLevelColors.put(Color.CLEAR, "clear");
+    	allLevelColors.put(Color.BLUE, "a");
+    	allLevelColors.put(Color.RED, "b");
+    	allLevelColors.put(Color.GREEN, "c");
+    	allLevelColors.put(Color.CYAN, "d");
+    	allLevelColors.put(Color.ORANGE, "e");
+    	allLevelColors.put(Color.YELLOW, "f");
+    	allLevelColors.put(Color.PINK, "g");
+    	allLevelColors.put(Color.PURPLE, "h");
+    	allLevelColors.put(Color.OLIVE, "i");
+    	allLevelColors.put(Color.BLACK, "j");
+    	allLevelColors.put(Color.WHITE, "k");
+    	allLevelColors.put(Color.GRAY, "l");
+    	allLevelColors.put(Color.MAGENTA, "m");
+    	allLevelColors.put(Color.MAROON, "n");
+    	allLevelColors.put(Color.NAVY, "o");
+    	allLevelColors.put(Color.TEAL, "p");
+    	allLevelColors.put(Color.CLEAR, "q");
     }
     
     /**
