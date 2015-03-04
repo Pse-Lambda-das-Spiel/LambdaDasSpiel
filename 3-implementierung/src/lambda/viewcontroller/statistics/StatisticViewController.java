@@ -38,19 +38,19 @@ public class StatisticViewController extends StageViewController {
 	private TextButton gemsEnchanted;
 	private TextButton gemsPlaced;
 	private TextButton lambsPlaced;
-	private TextButton levelTries;
-	private TextButton successfulLevelTries;
+	private TextButton levelCompleted;
+	private TextButton hintsNotUsed;
 	private TextButton timePlayed;
+	I18NBundle language ;
 	
-	
+	//Label label = new Label("Initial string", skin, "robotoLight");
 	
 	private AssetManager manager;
 	 private final float space;
 
 	public StatisticViewController() {
 		ProfileManager.getManager().addObserver(this);
-		//
-        space = getStage().getWidth() / 64;
+		space = getStage().getWidth() / 64;
 		statistics = new StatisticModel();
 	}
 
@@ -64,7 +64,7 @@ public class StatisticViewController extends StageViewController {
 
     @Override
     public void create(final AssetManager manager) {
-    	 setLastViewController(SettingsViewController.class);
+    	this.manager = manager;
     	 Image background = new Image(manager.get("data/backgrounds/default.png", Texture.class));
          background.setWidth(getStage().getWidth());
          background.setHeight(getStage().getHeight());
@@ -74,8 +74,8 @@ public class StatisticViewController extends StageViewController {
          gemsEnchanted = new TextButton("", manager.get(skin, Skin.class));
          gemsPlaced = new TextButton("", manager.get(skin, Skin.class));
          lambsPlaced = new TextButton("", manager.get(skin, Skin.class));
-         levelTries = new TextButton("", manager.get(skin, Skin.class));
-         successfulLevelTries = new TextButton("", manager.get(skin, Skin.class));
+         levelCompleted = new TextButton("", manager.get(skin, Skin.class));
+         hintsNotUsed = new TextButton("", manager.get(skin, Skin.class));
          timePlayed = new TextButton("", manager.get(skin, Skin.class));
          
          
@@ -84,7 +84,7 @@ public class StatisticViewController extends StageViewController {
          getStage().addActor(statisticsView);
          statisticsView.setFillParent(true);
          float height = getStage().getHeight() / 15;
-         float width = getStage().getWidth() * 0.5f;
+         float width = getStage().getWidth() * 0.7f;
          statisticsView.row().height(height);
          statisticsView.add();
          statisticsView.row().height(height);
@@ -104,16 +104,16 @@ public class StatisticViewController extends StageViewController {
         statisticsView.row().height(height);
         statisticsView.add();
         statisticsView.row().height(height);
-        statisticsView.add(levelTries).width(width);
+        statisticsView.add(levelCompleted).width(width);
         statisticsView.row().height(height);
         statisticsView.add();
         statisticsView.row().height(height);
-        statisticsView.add(successfulLevelTries).width(width);
+        statisticsView.add(hintsNotUsed).width(width);
         statisticsView.row().height(height);
         statisticsView.add();
         statisticsView.row().height(height);
         statisticsView.add(timePlayed).width(width);
-        
+         
          //backButton
          ImageButton backButton = new ImageButton(manager.get(skin, Skin.class), "backButton");
          Container<ImageButton> buttonContainer = new Container<ImageButton>();
@@ -128,15 +128,13 @@ public class StatisticViewController extends StageViewController {
     }
     public void show() {
         super.show();
-        statistics = ProfileManager.getManager().getCurrentProfile().getStatistics() ;
-     // statistics.setTimePlayed(30); 
-        lambsEnchanted.setText("Lambs enchanted = "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getLambsEnchanted()));
-        gemsEnchanted.setText("Gems enchanted = "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getGemsEnchanted()));
-        gemsPlaced.setText("Gems placed = "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getGemsPlaced()));
-        lambsPlaced.setText("Lambs placed = "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getLambsPlaced()));
-        levelTries.setText("Level tries = "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getLevelTries()));
-        successfulLevelTries.setText("Successful level tries = "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getSuccessfulLevelTries()));
-        timePlayed.setText("Time played = "+ Long.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getTimePlayed())+" min");
+        lambsEnchanted.setText(language.get("lambsEnchantedAchievementLabel") + " : " + Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getLambsEnchanted())) ;
+        gemsEnchanted.setText(language.get("lambsEnchantedAchievementLabel") + " : "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getGemsEnchanted()));
+        gemsPlaced.setText(language.get("gemsEnchantedAchievementLabel") + " : " + Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getGemsPlaced()));
+        lambsPlaced.setText(language.get("lambsPlacedAchievementLabel") + " : " + Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getLambsPlaced()));
+        levelCompleted.setText(language.get("levelAchievementLabel") + " : "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getLevelCompleted()));
+        hintsNotUsed.setText(language.get("hintsAchievementLabel") + " : "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getHintsNotUsed()));
+        timePlayed.setText(language.get("timeAchievementLabel") + " : " + statistics.convert(  ProfileManager.getManager().getCurrentProfile().getStatistics().getTimePlayed()));
         
         
      }
@@ -144,8 +142,11 @@ public class StatisticViewController extends StageViewController {
     public void changedProfile() {
     	statistics.update();
     	statistics = ProfileManager.getManager().getCurrentProfile().getStatistics() ; 
-       
+    	language = manager.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), 
+				I18NBundle.class);
+    	
     }
+    
     private class backClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {

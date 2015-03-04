@@ -11,21 +11,19 @@ import lambda.Observable;
  *
  */
 public class StatisticModel extends Observable<StatisticModelObserver> {
-
-	private int lambsEnchanted;
 	private int gemsEnchanted;
+	private int lambsEnchanted;
 	private int gemsPlaced;
 	private int lambsPlaced;
-	private int lambsEnchantedPerLevel;
 	private int gemsEnchantedPerLevel;
+	private int lambsEnchantedPerLevel;
 	private int gemsPlacedPerLevel;
 	private int lambsPlacedPerLevel;
 	private int levelCompleted;
-	private int hintsNotUsed;
-	private int levelTries;
-	private int successfulLevelTries;
+	private int  hintsNotUsed;
 	private long beginTime = System.currentTimeMillis() ;
 	private long timePlayed;
+	
 	
 	public StatisticModel() {
 	}
@@ -283,39 +281,30 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
          });
 	}
 
-	/**
-	 * @return the levelTries
-	 */
-	public int getLevelTries() {
-		return levelTries;
-	}
+	
 
-	/**
-	 * @return the successfulLevelTries
-	 */
-	public int getSuccessfulLevelTries() {
-		return successfulLevelTries;
-	}
 
-	/**
-	 * @param levelTries the levelTries to set
-	 */
-	public void setLevelTries(int levelTries) {
-		this.levelTries = levelTries;     
-	}
+	
 
 	/**
 	 * @param successfulLevelTries the successfulLevelTries to set
 	 */
-	public void setSuccessfulLevelTries(int successfulLevelTries) {
-		this.successfulLevelTries = successfulLevelTries;
-	}
 	
 	public void update(){
 		long diff = System.currentTimeMillis() - this.beginTime;
-	    long newPlayedTime = (this.getTimePlayed()+ diff/60000);
+	    long newPlayedTime = (this.getTimePlayed()+ diff/1000);
 		this.setTimePlayed(newPlayedTime);
 		this.beginTime = (new Date()).getTime();
 	}
-
+	
+public String convert(long time){
+	String result="" ;
+	if(time < 60)
+		result += time + " s ";
+	else if (time < 3600)
+		result += time/60 + " min " + time%60 + " s ";
+	else result += time/3600 + " h "+ (time%3600)/60 + " min " + (time%3600)%60 + " s ";
+	return result ;
+	
+}
 }
