@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
 import lambda.model.profiles.ProfileManager;
 import lambda.model.shop.ShopItemModel;
 import lambda.model.shop.ShopItemModelObserver;
@@ -58,7 +59,7 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor imple
     public void setCurrentState() {
         currentState = new TextButton(model.getShopItemType().getTypeName() + " " + model.getId(), 
                 ShopViewController.getTextButtonStyle("not_buyable") );
-        
+
         if (model.isPurchased()) {
             if (model.isActivated()) {
                 currentState.setStyle(ShopViewController.getTextButtonStyle("activated"));
@@ -67,7 +68,7 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor imple
                 currentState.setStyle(ShopViewController.getTextButtonStyle("purchased"));
             }
         }
-        else if (model.getPrice() >= ProfileManager.getManager().getCurrentProfile().getCoins()) {
+        else if (model.getPrice() <= ProfileManager.getManager().getCurrentProfile().getCoins()) {
             currentState.setStyle(ShopViewController.getTextButtonStyle("buyable"));
         }
         else {
@@ -139,6 +140,8 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor imple
                             @Override
                             public void clicked(InputEvent event, float x, float y) {
                                 model.buy();
+                                setVisible(false);
+                                hide();
                             }
                         });
                         add(accept).pad(space).padBottom(space * 3 / 2).align(Align.bottomRight);

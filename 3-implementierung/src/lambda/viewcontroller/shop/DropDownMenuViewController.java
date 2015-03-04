@@ -62,24 +62,9 @@ public class DropDownMenuViewController<T extends ShopItemModel> extends Actor {
     public VerticalGroup getGroup() {
         return groupButtons;
     }
-
-/*
-    private class PurchaseClickListener extends ClickListener {
-        @Override
-        public void clicked(InputEvent event, float x, float y) {
-            //TODO: optional: Dialog: Do you really want to buy this icon?
-            ImageButton clickedButton = (ImageButton) event.getListenerActor();
-            itemVCList.get(purchaseButtons.indexOf(clickedButton)).getModel().buy();
-        }
+    
+    public VerticalGroup getGroupVCs() {
+        return groupVCs;
     }
 
-    private class ActivateClickListener extends ClickListener {
-        @Override
-        public void clicked(InputEvent event, float x, float y) {
-            //TODO: optional: (Dialog: Do you really want to activate this icon?)
-            ImageButton clickedButton = (ImageButton) event.getListenerActor();
-            itemVCList.get(purchaseButtons.indexOf(clickedButton)).getModel().activate();
-        }
-    }
-    */
 }

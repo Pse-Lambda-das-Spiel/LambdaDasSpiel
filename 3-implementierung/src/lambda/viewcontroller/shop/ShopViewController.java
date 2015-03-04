@@ -3,6 +3,7 @@ package lambda.viewcontroller.shop;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
@@ -216,6 +217,27 @@ public class ShopViewController extends StageViewController implements ProfileMo
     
     public void changedCoins() {
         coins.setText(String.valueOf(ProfileManager.getManager().getCurrentProfile().getCoins()));
+        for (Actor item : music.getGroupVCs().getChildren()) {
+            ShopItemViewController<MusicItemModel> itemVC = (ShopItemViewController<MusicItemModel>) item;
+            itemVC.setCurrentState();
+            table.removeActor(musicTable);
+            musicB = !musicB;
+            musicTable = music.updateButtons();
+        }
+        for (Actor item : bgImages.getGroupVCs().getChildren()) {
+            ShopItemViewController<BackgroundImageItemModel> itemVC = (ShopItemViewController<BackgroundImageItemModel>) item;
+            itemVC.setCurrentState();
+            table.removeActor(imagesTable);
+            imageB = !imageB;
+            imagesTable = bgImages.updateButtons();
+        }
+        for (Actor item : elementUIs.getGroupVCs().getChildren()) {
+            ShopItemViewController<ElementUIContextFamily> itemVC = (ShopItemViewController<ElementUIContextFamily>) item;
+            itemVC.setCurrentState();
+            table.removeActor(elementsTable);
+            elementsB = !elementsB;
+            elementsTable = elementUIs.updateButtons();
+        }
     }
     
     public static Skin getSkin() {
