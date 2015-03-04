@@ -1,9 +1,12 @@
 package lambda.viewcontroller.lambdaterm.draganddrop;
 
+import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import static lambda.LambdaGame.DEBUG;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
@@ -32,6 +35,15 @@ public class LambdaTermDragSource extends Source {
      * The view controller on which the drag&drop is happening.
      */
     private final LambdaTermViewController viewController;
+    /**
+     * Indicates whether the current drag&drop element came from this source.
+     */
+    public boolean dragStarted;
+    /**
+     * Indicates whether the source node has been removed from its previous
+     * tree.
+     */
+    public boolean removedFromTree;
 
     /**
      * Creates a new drag&drop source for the given lambdaterm node.
@@ -47,6 +59,20 @@ public class LambdaTermDragSource extends Source {
         this.node = node;
         this.split = split;
         this.viewController = viewController;
+        dragStarted = false;
+        removedFromTree = false;
+
+        // Remove node from tree if necessary after drag has started
+        node.addListener(new InputListener() {
+            @Override
+            public boolean handle(Event e) {
+                if (dragStarted && !removedFromTree && split) {
+                    node.getLinkedTerm().accept(new RemoveTermVisitor());
+                    removedFromTree = true;
+                }
+                return false;
+            }
+        });
 
         if (DEBUG_DRAG_AND_DROP) {
             System.out.println("        Added drop source (" + node.getLinkedTerm().toString() + ") at (" + node.getX() + ", " + node.getY() + ")");
@@ -68,14 +94,12 @@ public class LambdaTermDragSource extends Source {
             System.out.println("Start dragging term (" + node.getLinkedTerm().toString() + ")");
         }
 
-        // Remove selected node from tree
-        if (split) {
-            node.getLinkedTerm().accept(new RemoveTermVisitor());
-        }
-
         // Payload is selected node
         Payload payload = new Payload();
-        payload.setObject(split ? node.getLinkedTerm() : node.getLinkedTerm().accept(new CopyVisitor()));
+        payload.setObject(node.getLinkedTerm().accept(new CopyVisitor()));
+
+        // Nodes that are created with drag&drop are never locked 
+        ((LambdaTerm) payload.getObject()).setLocked(false);
 
         // Drag actor is a new lambda term vc for the selected node
         LambdaRoot selection = new LambdaRoot();
@@ -86,6 +110,9 @@ public class LambdaTermDragSource extends Source {
 
         // Display drop targets
         viewController.displayDropTargets(true);
+
+        removedFromTree = false;
+        dragStarted = true;
 
         return payload;
     }
@@ -103,5 +130,7 @@ public class LambdaTermDragSource extends Source {
     @Override
     public void dragStop(InputEvent event, float x, float y, int pointer, Payload payload, Target target) {
         viewController.displayDropTargets(false);
+        dragStarted = false;
+        removedFromTree = false;
     }
 }

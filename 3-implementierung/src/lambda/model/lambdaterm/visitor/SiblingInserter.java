@@ -68,7 +68,8 @@ public class SiblingInserter implements LambdaTermVisitor {
         } else {
             if (node.getLeft() == oldChild) {
                 node.setLeft(buildApplication(node));
-            } else { // if (node.getRight() == oldChild)
+            } else {
+                assert(node.getRight() == oldChild);
                 node.setRight(buildApplication(node));
             }
         }
@@ -112,7 +113,7 @@ public class SiblingInserter implements LambdaTermVisitor {
      */
     private LambdaApplication buildApplication(LambdaTerm parent) {
         assert(oldChild.getParent() == parent);
-        LambdaApplication application = new LambdaApplication(parent, sibling.isLocked());
+        LambdaApplication application = new LambdaApplication(null, sibling.isLocked());
         if (left) {
             application.setLeft(sibling);
             application.setRight(oldChild);
@@ -120,6 +121,7 @@ public class SiblingInserter implements LambdaTermVisitor {
             application.setRight(sibling);
             application.setLeft(oldChild);
         }
+        application.setParent(parent);
         return application;
     }
 

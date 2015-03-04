@@ -101,11 +101,11 @@ public class NodeViewControllerCreator implements LambdaTermVisitor {
             parent.insertChild(new LambdaParenthesisViewController(node, parent, viewController), rightSibling);
         }
         // Traverse
-        if (node.getLeft() != null) {
-            node.accept(new ViewInsertionVisitor(node.getLeft(), viewController, forceParenthesis));
-        }
         if (node.getRight() != null) {
             node.accept(new ViewInsertionVisitor(node.getRight(), viewController, forceParenthesis));
+        }
+        if (node.getLeft() != null) {
+            node.accept(new ViewInsertionVisitor(node.getLeft(), viewController, forceParenthesis));
         }
     }
 

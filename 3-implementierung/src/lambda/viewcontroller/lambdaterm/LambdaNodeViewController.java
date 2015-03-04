@@ -8,6 +8,7 @@ import java.util.List;
 
 import lambda.Consumer;
 import static lambda.LambdaGame.DEBUG;
+import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.visitor.FrontInserter;
 import lambda.model.lambdaterm.visitor.SiblingInserter;
@@ -80,6 +81,8 @@ public abstract class LambdaNodeViewController extends Actor {
         this.canHaveChildren = canHaveChildren;
         children = new LinkedList<>();
         setHeight(BLOCK_HEIGHT);
+        assert(viewController.getStage() != null);
+        setStage(viewController.getStage());
     }
 
     /**
@@ -196,7 +199,7 @@ public abstract class LambdaNodeViewController extends Actor {
         width = Math.max(width, getMinWidth());
         setWidth(width);
         if (DEBUG) {
-            //System.out.println("        Updated size of " + this.getLinkedTerm().getClass().getSimpleName() + " (" + getLinkedTerm().toString() + ") to (" + getWidth() + ", " + getHeight() + ")");
+            // System.out.println("        Updated size of " + this.getLinkedTerm().getClass().getSimpleName() + " (" + getLinkedTerm().toString() + ") to (" + getWidth() + ", " + getHeight() + ")");
         }
 
         // Recurse
@@ -219,8 +222,8 @@ public abstract class LambdaNodeViewController extends Actor {
     private void updatePosition(float x, float y) {
         setPosition(x, y);
         getViewController().setSize(Math.max(getViewController().getX(), x + this.getWidth()), Math.max(getViewController().getY(), -y + this.getHeight() + BLOCK_HEIGHT));
-        if (DEBUG_DRAG_AND_DROP) {
-            System.out.println("        Updated position of " + this.getLinkedTerm().getClass().getSimpleName() + " (" + getLinkedTerm().toString() + ") to (" + getX() + ", " + getY() + ")");
+        if (DEBUG) {
+            // System.out.println("        Updated position of " + this.getLinkedTerm().getClass().getSimpleName() + " (" + getLinkedTerm().toString() + ") to (" + getX() + ", " + getY() + ")");
         }
 
         // Recurse
@@ -248,46 +251,70 @@ public abstract class LambdaNodeViewController extends Actor {
                 getViewController().clearDragAndDrop();
             } else if (!getLinkedTerm().isLocked()) {
                 // Add drag&drop source for all elements but the root
+                assert(this.getStage() != null);
                 getViewController().addDragSource(new LambdaTermDragSource(this, true, this.getViewController()));
             }
 
             // Add drop targets next to children
             if (canHaveChildren) {
-                if (DEBUG_DRAG_AND_DROP) {
-                    System.out.println("        Adding drop targets next to children of " + this.getLinkedTerm().getClass().getSimpleName() + " (" + this.getLinkedTerm().toString() + "):");
-                }
-
                 // 1. First target left of all children
                 Rectangle target;
                 if (children.isEmpty()) {
                     // Drop target in the center below this element
                     target = new Rectangle(this.getX() + this.getWidth() / 2.0f - GAP_SIZE / 2, this.getY() - BLOCK_HEIGHT, GAP_SIZE, BLOCK_HEIGHT);
+                    if (DEBUG_DRAG_AND_DROP) {
+                        System.out.println("        Adding drop target below " + getLinkedTerm().getClass().getSimpleName() + " (" + getLinkedTerm().toString() + ")");
+                    }
+                    getViewController().addDropTarget(new Consumer<LambdaTerm>() {
+                        @Override
+                        public void accept(LambdaTerm term) {
+                            if (DEBUG) {
+                                System.out.println("Inserting " + term.getClass().getSimpleName() + " (" + term.toString() + ") as first and only child of " + getLinkedTerm().getClass().getSimpleName() + " (" + getLinkedTerm().toString() + ")");
+                            }
+                            getLinkedTerm().accept(new FrontInserter(term));
+                        }
+                    }, target);
                 } else {
                     // Drop target left of first child
                     target = new Rectangle(children.get(0).getX(), children.get(0).getY(), GAP_SIZE, BLOCK_HEIGHT);
-                }
-                getViewController().addDropTarget(new Consumer<LambdaTerm>() {
-                    @Override
-                    public void accept(LambdaTerm term) {
-                        if (DEBUG) {
-                            System.out.println("Inserting " + term.getClass().getSimpleName() + " (" + term.toString() + ") as first child of " + getLinkedTerm().getClass().getSimpleName() + " (" + getLinkedTerm().toString() + ")");
-                        }
-                        LambdaNodeViewController.this.getLinkedTerm().accept(new FrontInserter(term));
+                    if (DEBUG_DRAG_AND_DROP) {
+                        System.out.println("        Adding drop target left of " + children.get(0).getLinkedTerm().getClass().getSimpleName() + " (" + children.get(0).getLinkedTerm().toString() + ")");
                     }
-                }, target);
+
+                    getViewController().addDropTarget(new Consumer<LambdaTerm>() {
+                        @Override
+                        public void accept(LambdaTerm term) {
+                            if (DEBUG) {
+                                System.out.println("Inserting " + term.getClass().getSimpleName() + " (" + term.toString() + ") as left sibling of " + children.get(0).getLinkedTerm().getClass().getSimpleName() + " (" + children.get(0).getLinkedTerm().toString() + ")");
+                            }
+                            children.get(0).getLinkedTerm().accept(new SiblingInserter(term, true));
+                        }
+                    }, target);
+                }
 
                 // 2. Targets right of each child
                 int index = 0;
                 for (LambdaNodeViewController childVC : children) {
-                    final LambdaTerm childTerm = childVC.getLinkedTerm();
+                    LambdaTerm childTerm = childVC.getLinkedTerm();
+                    if (index > 0) {
+                        // Sibling is the parent application
+                        childTerm = childTerm.getParent();
+                        assert (childTerm instanceof LambdaApplication);
+                    }
+
+                    if (DEBUG_DRAG_AND_DROP) {
+                        System.out.println("        Adding drop target right of " + childTerm.getClass().getSimpleName() + " (" + childTerm.toString() + ")");
+                    }
+
+                    final LambdaTerm siblingTerm = childTerm;
                     target = new Rectangle(childVC.getX() + childVC.getWidth() - (index == children.size() - 1 ? GAP_SIZE : GAP_SIZE / 2), childVC.getY(), GAP_SIZE, BLOCK_HEIGHT);
                     getViewController().addDropTarget(new Consumer<LambdaTerm>() {
                         @Override
                         public void accept(LambdaTerm term) {
                             if (DEBUG) {
-                                System.out.println("Inserting " + term.getClass().getSimpleName() + " (" + term.toString() + ") as right sibling of " + getLinkedTerm().getClass().getSimpleName() + " (" + getLinkedTerm().toString() + ")");
+                                System.out.println("Inserting " + term.getClass().getSimpleName() + " (" + term.toString() + ") as right sibling of " + siblingTerm.getClass().getSimpleName() + " (" + siblingTerm.toString() + ")");
                             }
-                            childTerm.accept(new SiblingInserter(term, false));
+                            siblingTerm.accept(new SiblingInserter(term, false));
                         }
                     }, target);
                     index++;

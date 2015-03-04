@@ -4,16 +4,16 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
-
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import java.util.IdentityHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import lambda.Consumer;
 import static lambda.LambdaGame.DEBUG;
-
 import lambda.model.lambdaterm.LambdaAbstraction;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
@@ -37,7 +37,7 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
     /**
      * Indicates whether drag&drop debugging output on the console is enabled.
      */
-    public static final boolean DEBUG_DRAG_AND_DROP = false;
+    public static final boolean DEBUG_DRAG_AND_DROP = true;
     /**
      * Indicates whether this term can be modified by the user.
      */
@@ -154,8 +154,8 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
     @Override
     public void replaceTerm(LambdaTerm oldTerm, LambdaTerm newTerm) {
         if (DEBUG) {
-            System.out.println("    Term: Replacing " + (oldTerm == null ? "null" : oldTerm.getClass().getSimpleName() + " (" + oldTerm.toString() + ")") + " with "
-                    + (newTerm == null ? "null" : newTerm.getClass().getSimpleName() + " (" + newTerm.toString() + ")"));
+            System.out.println("    Term: Replacing " + (oldTerm == null ? "null" : oldTerm.getClass().getSimpleName() + " (" + oldTerm.toString() + ") under parent " + oldTerm.getParent().getClass().getSimpleName() + "(" + oldTerm.getParent().toString() + ")") + " with "
+                    + (newTerm == null ? "null" : newTerm.getClass().getSimpleName() + " (" + newTerm.toString() + ") under parent " + newTerm.getParent().getClass().getSimpleName() + " (" + newTerm.getParent().toString() + ")"));
         }
         if (oldTerm != null) {
             oldTerm.accept(new ViewRemovalVisitor(this));
@@ -357,7 +357,7 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
      *
      * @param source the new drag&drop source
      */
-    public void addDragSource(LambdaTermDragSource source) {
+    public void addDragSource(final LambdaTermDragSource source) {
         dragAndDrop.addSource(source);
     }
 

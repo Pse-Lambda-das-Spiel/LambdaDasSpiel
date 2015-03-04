@@ -109,6 +109,6 @@ public class LambdaVariableViewController extends LambdaValueViewController {
             return false;
         }
         LambdaVariableViewController variable = (LambdaVariableViewController) other;
-        return super.equals(variable) && variable.getColor().equals(this.getColor());
+        return super.equals(variable) && variable.getLambdaColor().equals(this.getLambdaColor());
     }
 }

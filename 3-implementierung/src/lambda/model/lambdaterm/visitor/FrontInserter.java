@@ -93,9 +93,10 @@ public class FrontInserter implements LambdaTermVisitor {
      * @return the built application
      */
     private LambdaApplication buildApplication(LambdaTerm parent, LambdaTerm sibling) {
-        LambdaApplication application = new LambdaApplication(parent, sibling.isLocked());
+        LambdaApplication application = new LambdaApplication(null, sibling.isLocked());
         application.setLeft(inserted);
         application.setRight(sibling);
+        application.setParent(parent);
         return application;
     }
 

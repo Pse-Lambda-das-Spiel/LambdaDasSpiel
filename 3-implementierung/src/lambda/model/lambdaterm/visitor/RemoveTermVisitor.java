@@ -34,6 +34,7 @@ public class RemoveTermVisitor implements LambdaTermVisitor {
         if (remove != null) {
             assert(node.getChild() == remove);
             node.setChild(null);
+            remove.setParent(null);
         }
     }
     
@@ -47,11 +48,11 @@ public class RemoveTermVisitor implements LambdaTermVisitor {
         if (remove != null) {
             if (node.getLeft() == remove) {
                 node.setLeft(null);
-            } else if (node.getRight() == remove) {
-                node.setRight(null);
             } else {
-                assert(false);
+                assert(node.getRight() == remove);
+                node.setRight(null);
             }
+            remove.setParent(null);
         } else if (node.getParent() != null) {
             remove = node;
             node.getParent().accept(this);
@@ -68,6 +69,7 @@ public class RemoveTermVisitor implements LambdaTermVisitor {
         if (remove != null) {
             assert(node.getInside() == remove);
             node.setInside(null);
+            remove.setParent(null);
         } else if (node.getParent() != null) {
             remove = node;
             node.getParent().accept(this);

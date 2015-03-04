@@ -147,6 +147,6 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
             return false;
         }
         LambdaAbstractionViewController abstraction = (LambdaAbstractionViewController) other;
-        return super.equals(abstraction) && abstraction.getColor().equals(this.getColor());
+        return super.equals(abstraction) && abstraction.getLambdaColor().equals(this.getLambdaColor());
     }
 }

@@ -149,7 +149,7 @@ public final class EditorViewController extends StageViewController implements E
         hintButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new HintDialog(dialogSkin, /*get levelcontext*/ null, getStage().getWidth(), getStage().getHeight()).show(getStage());
+                new HintDialog(dialogSkin, EditorViewController.this.model.getLevelContext(), getStage()).show(getStage());
             }
         });
         helpButton.addListener(new ClickListener() {
@@ -162,7 +162,7 @@ public final class EditorViewController extends StageViewController implements E
         targetButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new TargetDialog(dialogSkin, /*get levelcontext*/ null, getStage().getWidth(), getStage().getHeight()).show(getStage());
+                new TargetDialog(dialogSkin, EditorViewController.this.model.getLevelContext(), getStage()).show(getStage());
             }
         });
         reductionStrategyButton.addListener(new ClickListener() {

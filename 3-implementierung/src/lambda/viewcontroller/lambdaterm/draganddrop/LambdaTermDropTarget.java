@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import lambda.Consumer;
 import static lambda.LambdaGame.DEBUG;
 import lambda.model.lambdaterm.LambdaTerm;
-import static lambda.viewcontroller.lambdaterm.LambdaTermViewController.DEBUG_DRAG_AND_DROP;
 
 /**
  * A class that represents a target for a drag&drop operation on a lambda term.
@@ -33,10 +32,6 @@ public class LambdaTermDropTarget extends Target {
     public LambdaTermDropTarget(Rectangle targetRectangle, Consumer<LambdaTerm> insertOperation, DropLocationActor actor) {
         super(actor);
         this.insertOperation = insertOperation;
-
-        if (DEBUG_DRAG_AND_DROP) {
-            System.out.println("        Added drop target at (" + targetRectangle.toString() + ")");
-        }
     }
 
     /**
@@ -75,7 +70,8 @@ public class LambdaTermDropTarget extends Target {
     }
 
     /**
-     * Called when the current drag&drop element leaves this target or a drop has occurred.
+     * Called when the current drag&drop element leaves this target or a drop
+     * has occurred.
      *
      * @param source the source of the current drag&drop element
      * @param payload the payload of the drag&drop
