@@ -34,7 +34,7 @@ public abstract class LambdaValueViewController extends LambdaNodeViewController
         this.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (!getLinkedTerm().isLocked()) {
+                if (!getLinkedTerm().isLocked() && viewController.isEditable()) {
                     // TODO show color dialog
                     // ((LambdaValue) getLinkedTerm()).setColor(...);
                 }
