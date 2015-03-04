@@ -66,6 +66,7 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
     public void create(final AssetManager manager) {
         profileEdit.addObserver(this);
         this.manager = manager;
+        setLastViewController(ProfileEditName.class);
         
         Table avatarSelection = new Table();
         avatarSelection.align(Align.top);
@@ -81,12 +82,12 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
         avatarSelection.add();
         avatarSelection.add(chooseAvatar).width(getStage().getWidth() / 2);
         
-        avatarSelection.row().height(getStage().getHeight() / 2);
+        avatarSelection.row();
         ImageButton selectLeft = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
         avatarSelection.add(selectLeft).size(getStage().getHeight() / 5).space(space);
         selectLeft.addListener(new selectLeftClickListener());
         avatarPic = new Image();
-        avatarSelection.add(avatarPic).width(getStage().getWidth() / 2).space(space);
+        avatarSelection.add(avatarPic).size(getStage().getHeight() / 2).space(space);
         ImageButton selectRight = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
         avatarSelection.add(selectRight).size(getStage().getHeight() / 5).space(space);
         selectRight.addListener(new selectRightClickListener());
@@ -155,7 +156,6 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
                 m.setCurrentProfile(m.getCurrentProfile().getName());
                 final Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
                 final float height = getStage().getHeight();
-                final float width = getStage().getWidth();
                 new Dialog("", dialogSkin) {
                     private boolean changedToMainMenu = false;
                     {
@@ -166,7 +166,7 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
                         greeting.setFontScale(1.5f);
                         add(greeting);
                         row().space(height / 8);
-                        add(new Image(avatarPic.getDrawable())).width(width / 3).height(height / 3);
+                        add(new Image(avatarPic.getDrawable())).size(height / 2);
                         Timer.schedule(new Task() {
                             @Override
                             public void run() {

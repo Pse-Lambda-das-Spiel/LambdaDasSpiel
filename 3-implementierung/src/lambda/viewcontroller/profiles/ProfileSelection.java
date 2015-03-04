@@ -3,6 +3,11 @@ package lambda.viewcontroller.profiles;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
@@ -19,6 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.I18NBundle;
 
 import lambda.model.profiles.ProfileManager;
 import lambda.viewcontroller.AudioManager;
@@ -58,13 +64,70 @@ public class ProfileSelection extends StageViewController {
         assets.load("data/backgrounds/default.png", Texture.class, new TextureParameter());
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void show() {
-        super.show();
-        if (ProfileManager.getManager().getNames().size() == 0) {
-            new addProfileClickListener().clicked(null, 0, 0);
-        }
-    }
+	public void show() {
+		InputProcessor backProcessor = new InputAdapter() {
+			@Override
+			public boolean keyDown(int keycode) {
+				if (keycode == Keys.BACK) {
+					if (ProfileManager.getManager().getCurrentProfile() != null) {
+						final Skin dialogSkin = manager.get(
+								"data/skins/DialogTemp.json", Skin.class);
+						final float size = getStage().getHeight() / 5;
+						new Dialog("", dialogSkin) {
+							{
+								clear();
+								pad(space * 3);
+								String exitString = manager.get(
+										ProfileManager.getManager()
+												.getCurrentProfile()
+												.getLanguage(),
+										I18NBundle.class).get("exitString");
+								Label nameLabel = new Label(exitString,
+										dialogSkin);
+								add(nameLabel).colspan(2);
+								row().space(10);
+								// yes
+								ImageButton yesButton = new ImageButton(
+										dialogSkin, "yesButton");
+								yesButton.addListener(new ClickListener() {
+									@Override
+									public void clicked(InputEvent event,
+											float x, float y) {
+										AudioManager.playSound("buttonClick");
+										Gdx.app.exit();
+									}
+								});
+								add(yesButton).size(size);
+								// no
+								ImageButton noButton = new ImageButton(
+										dialogSkin, "noButton");
+								noButton.addListener(new ClickListener() {
+									@Override
+									public void clicked(InputEvent event,
+											float x, float y) {
+										AudioManager.playSound("buttonClick");
+										remove();
+									}
+								});
+								add(noButton).size(size);
+							}
+						}.show(getStage());
+					}
+				}
+				return false;
+			}
+		};
+		InputMultiplexer multiplexer = new InputMultiplexer(getStage(),
+				backProcessor);
+		Gdx.input.setInputProcessor(multiplexer);
+		if (ProfileManager.getManager().getNames().size() == 0) {
+			new addProfileClickListener().clicked(null, 0, 0);
+		}
+	}
 
     @Override
     public void pause() {
@@ -144,6 +207,8 @@ public class ProfileSelection extends StageViewController {
             AudioManager.playSound("buttonClick");
             String name = ((TextButton) event.getListenerActor()).getText().toString();
             if (!name.equals("")) {
+                
+                
                 ProfileManager.getManager().setCurrentProfile(name);
                 AudioManager.setLoggedIn(true);
                 getGame().setScreen(MainMenuViewController.class);

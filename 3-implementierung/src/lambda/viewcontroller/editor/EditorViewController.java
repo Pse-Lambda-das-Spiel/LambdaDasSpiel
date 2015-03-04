@@ -3,6 +3,7 @@ package lambda.viewcontroller.editor;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.graphics.Color;
@@ -36,6 +37,7 @@ import lambda.model.profiles.ProfileManager;
 import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.lambdaterm.LambdaTermViewController;
 import lambda.viewcontroller.lambdaterm.draganddrop.LambdaTermDragSource;
+import lambda.viewcontroller.level.LevelSelectionViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
 import lambda.viewcontroller.reduction.ReductionViewController;
 
@@ -97,7 +99,7 @@ public final class EditorViewController extends StageViewController implements E
     @Override
     public void create(final AssetManager manager) {
         model.addObserver(this);
-
+        
         // Set up ui elements
         Table main = new Table();
         getStage().addActor(main);
@@ -288,6 +290,9 @@ public final class EditorViewController extends StageViewController implements E
 
     @Override
     public boolean keyDown(int keycode) {
+    	if (keycode == Keys.BACK) {
+			getGame().setScreen(LevelSelectionViewController.class);
+    	}
         return false;
     }
 
@@ -408,40 +413,39 @@ public final class EditorViewController extends StageViewController implements E
     }
     
     /* Dialog for color selection. Copy into right place.
-        final Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
-        final float height = getStage().getHeight();
-            new Dialog("", dialogSkin) {
-                {
-                    clear();
-                    List<Color> colors = new ArrayList<>(); // replace with getlevelcontext .getLevelModel().getAvailableColors();
-                    colors.add(new Color(0, 0, 0, 1));// test/delete
-                    colors.add(new Color(0, 0, 1, 1));// test/delete
-                    colors.add(new Color(0, 1, 0, 1));// test/delete
-                    colors.add(new Color(0, 1, 1, 1));// test/delete
-                    colors.add(new Color(1, 0, 0, 1));// test/delete
-                    colors.add(new Color(1, 0, 1, 1));// test/delete
-                    colors.add(new Color(1, 1, 0, 1));// test/delete
-                    colors.add(new Color(1, 1, 1, 1));// test/delete
-                    int size = (int) Math.ceil(Math.sqrt(colors.size()));
-                    pad(height / 24);
-                    int i = 0;
-                    for (final Color color : colors) {
-                        if (i++ % size == 0) {
-                            row().size(height / 9).space(10);
-                        }
-                        ImageButton colorButton = new ImageButton(dialogSkin, "colorButton");
-                        colorButton.setColor(color);
-                        colorButton.addListener(new ClickListener() {
-                            @Override
-                            public void clicked(InputEvent event, float x, float y) {
-                                // TODO coloring
-                                remove();
-                            }
-                        });
-                        add(colorButton);
+    final Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
+    final float height = getStage().getHeight();
+        new Dialog("", dialogSkin) {
+            {
+                clear();
+                List<Color> colors = new ArrayList<>(); // replace with getlevelcontext .getLevelModel().getAvailableColors();
+                colors.add(new Color(0, 0, 0, 1));// test/delete
+                colors.add(new Color(0, 0, 1, 1));// test/delete
+                colors.add(new Color(0, 1, 0, 1));// test/delete
+                colors.add(new Color(0, 1, 1, 1));// test/delete
+                colors.add(new Color(1, 0, 0, 1));// test/delete
+                colors.add(new Color(1, 0, 1, 1));// test/delete
+                colors.add(new Color(1, 1, 0, 1));// test/delete
+                colors.add(new Color(1, 1, 1, 1));// test/delete
+                int size = (int) Math.ceil(Math.sqrt(colors.size()));
+                pad(height / 24);
+                int i = 0;
+                for (final Color color : colors) {
+                    if (i++ % size == 0) {
+                        row().size(height / 9).space(10);
                     }
+                    ImageButton colorButton = new ImageButton(dialogSkin, "colorButton");
+                    colorButton.setColor(color);
+                    colorButton.addListener(new ClickListener() {
+                        @Override
+                        public void clicked(InputEvent event, float x, float y) {
+                            // TODO coloring
+                            remove();
+                        }
+                    });
+                    add(colorButton);
                 }
-            }.show(getStage());
-     */
-    
+            }
+        }.show(getStage());
+     */   
 }

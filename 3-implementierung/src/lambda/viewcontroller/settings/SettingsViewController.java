@@ -62,7 +62,7 @@ public class SettingsViewController extends StageViewController {
 
     @Override
     public void create(final AssetManager manager) {
-        
+    	setLastViewController(MainMenuViewController.class);
         Image background = new Image(manager.get("data/backgrounds/settings.png", Texture.class));
         background.setWidth(getStage().getWidth());
         background.setHeight(getStage().getHeight());

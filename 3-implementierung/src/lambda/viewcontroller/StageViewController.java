@@ -1,6 +1,10 @@
 package lambda.viewcontroller;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -13,12 +17,14 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 public abstract class StageViewController extends ViewController {
 
 	private final Stage stage;
+	private ViewController lastViewController;
 	
 	/** 
 	 * Creates an new instance of this class.
 	 */
 	public StageViewController() {
 		stage = new Stage(new ScreenViewport());
+		lastViewController = null;
 	}
     
     /**
@@ -29,13 +35,45 @@ public abstract class StageViewController extends ViewController {
 	public Stage getStage() {
 		return stage;
 	}
+	
+	/**
+     * Returns the reference to the ViewController that is shown 
+     * when the Android back key is pressed while this ViewController is active.
+     * 
+   	 * @return the ViewController that was shown before this one
+   	 */
+   	public ViewController getLastViewController() {
+   		return lastViewController;
+   	}
+
+   	/**
+   	 * Sets the ViewController with the given name as ViewController that is shown 
+   	 * when the Android back key is pressed while this ViewController is active.
+   	 * 
+   	 * @param vcClass the class of the to be shown ViewController
+   	 */
+   	public void setLastViewController(Class vcClass) {
+   		// The order of the ViewController is fixed
+   		this.lastViewController = getGame().getController(vcClass);
+   	}
 
 	/**
      * {@inheritDoc}
      */
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(stage);
+        InputProcessor backProcessor = new InputAdapter() {
+            @Override
+            public boolean keyDown(int keycode) {
+            	if (keycode == Keys.BACK) {
+        			getGame().setScreen(lastViewController.getClass());
+            	}
+    			return false;
+            }
+        };
+        InputMultiplexer multiplexer = new InputMultiplexer(stage,
+                backProcessor);
+        Gdx.input.setInputProcessor(multiplexer);
     }
 
     /**

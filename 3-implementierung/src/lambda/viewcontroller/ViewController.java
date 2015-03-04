@@ -4,6 +4,7 @@ import lambda.LambdaGame;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
+
 import lambda.model.profiles.ProfileManagerObserver;
 
 /**
@@ -14,19 +15,19 @@ import lambda.model.profiles.ProfileManagerObserver;
  * 
  * @author Robert Hochweiss, Florian Fervers
  */
-public abstract class ViewController implements Screen, ProfileManagerObserver {
+public  abstract class ViewController implements Screen, ProfileManagerObserver {
     /**
      * Stores the game's main class.
      */
     private LambdaGame game;
 
-    /**
+	/**
      * Creates a new instance of this class. At this point no assets are loaded.
      */
     public ViewController() {
         game = null;
     }
-
+    
     /**
      * Returns the reference to the main class.
      * 
@@ -94,4 +95,5 @@ public abstract class ViewController implements Screen, ProfileManagerObserver {
 	@Override
 	public void dispose() {		
 	}
+	
 }

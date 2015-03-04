@@ -284,10 +284,14 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
         return profiles;
     }
     
+    private void saveNames() {
+        Gdx.files.local(PROFILE_FOLDER + ".json").writeString(new Json().prettyPrint(getNames()), false);
+    }
+    
     private FileHandle[] listSubdirectories(FileHandle files[]) {
-        int i = 0;
-        for (int j = 0; j < files.length; j++) {
-            if (files[j].isDirectory()) {
+       int i = 0;
+       for (int j = 0; j < files.length; j++) {
+           if (files[j].isDirectory()) {
                 i++;
             } else {
                 files[j] = null;
@@ -302,10 +306,6 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
             }
         }
         return result;
-    }
-    
-    private void saveNames() {
-        Gdx.files.local(PROFILE_FOLDER + ".json").writeString(new Json().prettyPrint(getNames()), false);
     }
 
 }

@@ -1,6 +1,8 @@
 package lambda.viewcontroller.mainmenu;
 
+import lambda.model.levels.LevelManager;
 import lambda.model.profiles.ProfileManager;
+import lambda.model.profiles.ProfileModelObserver;
 import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.achievements.AchievementMenuViewController;
@@ -31,7 +33,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
  * 
  * @author Farid, Robert Hochweiss
  */
-public class MainMenuViewController extends StageViewController {
+public class MainMenuViewController extends StageViewController implements ProfileModelObserver {
 
 	private Skin skin;
 	private Label coins;
@@ -42,14 +44,16 @@ public class MainMenuViewController extends StageViewController {
     private ImageButton sound_muted;
 	private ImageButton sound_unmuted;
 	private final float buttonSize;
+	private final float padSpace;
 
 	/**
 	 * Creates a object of the class without initializing the screen.
 	 */
 	public MainMenuViewController() {
 		buttonSize =  (getStage().getWidth() / 8);
+		padSpace = (getStage().getHeight() / 48);
 	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -59,17 +63,8 @@ public class MainMenuViewController extends StageViewController {
 		profileImg.setDrawable(new SpriteDrawable(new Sprite(
 		manager.get("data/avatar/" + pManager.getCurrentProfile().getAvatar() + ".jpg", Texture.class))));
 		profileName.setText(pManager.getCurrentProfile().getName());
-		soundButtonContainer.setActor((pManager.getCurrentProfile().getSettings().isMusicOn() ? sound_unmuted : sound_muted));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void show() {
-		super.show();
-		// Update coin label
 		coins.setText(Integer.toString(ProfileManager.getManager().getCurrentProfile().getCoins()));
+		soundButtonContainer.setActor((pManager.getCurrentProfile().getSettings().isMusicOn() ? sound_unmuted : sound_muted));
 	}
 
 	/**
@@ -90,13 +85,13 @@ public class MainMenuViewController extends StageViewController {
 	public void create(final AssetManager manager) {
 		this.manager = manager;
 		ProfileManager.getManager().addObserver(this);
+		setLastViewController(ProfileSelection.class);
 		skin = manager.get("data/skins/MasterSkin.json", Skin.class);
 		Image background = new Image(manager.get("data/backgrounds/main.png", Texture.class));
 		background.setWidth(getStage().getWidth());
 		background.setHeight(getStage().getHeight());
 		getStage().addActor(background);
 		
-		// TODO: Replace with logoutButton when its finished
 		ImageButton logoutButton = new ImageButton(skin, "backButton");
 		ImageButton settingsButton = new ImageButton(skin, "settingsButton");
 		sound_unmuted = new ImageButton(skin, "unmutedButton");
@@ -113,34 +108,30 @@ public class MainMenuViewController extends StageViewController {
 		profileImg = new Image();
 		
 		Container<ImageButton> settingsButtonContainer = new Container<>();
-		settingsButtonContainer.pad(15).align(Align.bottomLeft);
+		settingsButtonContainer.pad(padSpace).align(Align.bottomLeft);
 		settingsButtonContainer.setActor(settingsButton);
 		getStage().addActor(settingsButtonContainer);
 		settingsButtonContainer.setFillParent(true);
-		settingsButton.setSize(buttonSize, buttonSize);
-		settingsButton.scaleBy(buttonSize);
-		settingsButtonContainer.size(buttonSize);
+		settingsButtonContainer.maxSize(buttonSize);
 
 		soundButtonContainer = new Container<>();
-		soundButtonContainer.pad(15).align(Align.bottomRight);
-		sound_unmuted.setSize(buttonSize, buttonSize);
-		sound_muted.setSize(buttonSize, buttonSize);
+		soundButtonContainer.pad(padSpace).align(Align.bottomRight);
 		soundButtonContainer.setActor(sound_unmuted);
 		getStage().addActor(soundButtonContainer);
 		soundButtonContainer.setFillParent(true);
+		soundButtonContainer.maxSize(buttonSize);
 
 		Container<ImageTextButton> coinButtonContainer = new Container<>();
-		coinButtonContainer.pad(15).align(Align.topRight).setSize(buttonSize, buttonSize);
-		coinButton.setSize(buttonSize, buttonSize);
+		coinButtonContainer.pad(padSpace).align(Align.topRight).setSize(buttonSize, buttonSize);
 		coinButtonContainer.setActor(coinButton);
 		getStage().addActor(coinButtonContainer);
 		coinButtonContainer.setFillParent(true);
+		coinButtonContainer.maxSize(buttonSize * 1.4f);
 		
 		Table profileTable = new Table();
-		profileTable.pad(25).align(Align.topLeft);
-		logoutButton.setSize(buttonSize, buttonSize);
-		profileTable.add(logoutButton).align(Align.left).spaceBottom(getStage().getHeight() / 8).row();
-		profileTable.add(profileImg).row();
+		profileTable.pad(padSpace * 1.5f).align(Align.topLeft);
+		profileTable.add(logoutButton).align(Align.left).spaceBottom(getStage().getHeight() / 40).maxSize(buttonSize).row();
+		profileTable.add(profileImg).size(buttonSize).row();
 		profileTable.add(profileName);
 		getStage().addActor(profileTable);
 		profileTable.setFillParent(true);
@@ -163,11 +154,16 @@ public class MainMenuViewController extends StageViewController {
 				getGame().setScreen(ProfileSelection.class);
 			}
 		});
-		// tmp until LevelSelectionVC is finished
 		startButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				getGame().setScreen(LevelSelectionViewController.class);
+				int levelIndex = ProfileManager.getManager().getCurrentProfile().getLevelIndex();
+				// start with the first level again, if all level have been solved
+				if (levelIndex > LevelManager.getLevelManager().getNumberOfLevels()) {
+					levelIndex = 1;
+				}
+				getGame().getController(LevelSelectionViewController.class).
+					startLevel(LevelManager.getLevelManager().getLevel(levelIndex));
 			}
 		});
 		levelMenuButton.addListener(new ClickListener() {
@@ -209,5 +205,20 @@ public class MainMenuViewController extends StageViewController {
 			}
 		});
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void changedCoins() {
+		// Update coin label
+		coins.setText(Integer.toString(ProfileManager.getManager().getCurrentProfile().getCoins()));
+	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void changedLevelIndex() {		
+	}
 }
