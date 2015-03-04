@@ -24,6 +24,8 @@ import lambda.viewcontroller.mainmenu.MainMenuViewController;
 
 
 /**
+ * 
+ * 
  * @author Kay Schmitteckert
  */
 public class ShopViewController extends StageViewController implements ProfileModelObserver {
@@ -32,21 +34,23 @@ public class ShopViewController extends StageViewController implements ProfileMo
     private ProfileModel profile;
     private Label coins;
     private VerticalGroup table;
-    private boolean musicB;
-    private boolean imageB;
-    private boolean elementsB;
     
     private DropDownMenuViewController<MusicItemModel> music;
     private DropDownMenuViewController<BackgroundImageItemModel> bgImages;
     private DropDownMenuViewController<ElementUIContextFamily> elementUIs;
-
-    private final String masterSkin = "data/skins/MasterSkin.json";
-    
-    private static Skin skin;
-    
     private VerticalGroup musicTable;
     private VerticalGroup imagesTable;
     private VerticalGroup elementsTable;
+    private boolean musicB;
+    private boolean imageB;
+    private boolean elementsB;
+    
+    /**
+     * Path to the MasterSkin
+     */
+    private final String masterSkin = "data/skins/MasterSkin.json";
+    private static Skin skin;
+   
 
     public ShopViewController() {
         shop = ShopModel.getShop();
@@ -188,6 +192,7 @@ public class ShopViewController extends StageViewController implements ProfileMo
         
        
     }
+    
     public static TextButtonStyle getTextButtonStyle(String icon) {
         TextButtonStyle style = new TextButtonStyle(skin.get(TextButtonStyle.class));
         style.up = skin.getDrawable(icon);
@@ -215,6 +220,7 @@ public class ShopViewController extends StageViewController implements ProfileMo
         elementsTable = elementUIs.updateButtons();
     }
     
+    @SuppressWarnings("unchecked")
     public void changedCoins() {
         coins.setText(String.valueOf(ProfileManager.getManager().getCurrentProfile().getCoins()));
         for (Actor item : music.getGroupVCs().getChildren()) {
