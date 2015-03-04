@@ -210,7 +210,7 @@ public class ReductionViewController extends StageViewController implements Redu
         if (term == null) {
             throw new IllegalStateException("Cannot show the reduction viewController without calling reset before!");
         }
-        
+
         InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(getStage());
         multiplexer.addProcessor(this);
@@ -242,7 +242,15 @@ public class ReductionViewController extends StageViewController implements Redu
     public void busyChanged(boolean busy) {
         stepButton.setDisabled(busy);
         playPauseButton.setDisabled(busy);
-        stepRevertButton.setDisabled(busy && model.getHistorySize() > 0);
+        stepRevertButton.setDisabled(model.isBusy() || model.getHistorySize() == 0);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void historySizeChanged(int newSize) {
+        stepRevertButton.setDisabled(model.isBusy() || model.getHistorySize() == 0);
     }
 
     /**
