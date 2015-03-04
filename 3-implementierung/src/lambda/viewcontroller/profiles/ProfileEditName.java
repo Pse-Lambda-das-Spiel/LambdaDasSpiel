@@ -124,10 +124,10 @@ public class ProfileEditName extends StageViewController implements ProfileEditO
                         if (ProfileManager.getManager().changeCurrentName(name)) {
                             getGame().setScreen(ProfileEditLang.class);
                         } else {
-                            new NameDialog("nameTaken").show(getStage());
+                            new NameDialog("nameTaken", getStage().getHeight()).show(getStage());
                         }
                     } else {
-                        new NameDialog("nameEmpty").show(getStage());   
+                        new NameDialog("nameEmpty", getStage().getHeight()).show(getStage());   
                     }
             	}
     			return false;
@@ -146,10 +146,10 @@ public class ProfileEditName extends StageViewController implements ProfileEditO
                 if (ProfileManager.getManager().changeCurrentName(name)) {
                     getGame().setScreen(ProfileEditAvatar.class);
                 } else {
-                    new NameDialog("nameTaken").show(getStage());
+                    new NameDialog("nameTaken", getStage().getHeight()).show(getStage());
                 }
             } else {
-                new NameDialog("nameEmpty").show(getStage());
+                new NameDialog("nameEmpty", getStage().getHeight()).show(getStage());
             }
         }
     }
@@ -165,28 +165,33 @@ public class ProfileEditName extends StageViewController implements ProfileEditO
                 if (ProfileManager.getManager().changeCurrentName(name)) {
                     getGame().setScreen(ProfileEditLang.class);
                 } else {
-                    new NameDialog("nameTaken").show(getStage());
+                    new NameDialog("nameTaken", getStage().getHeight()).show(getStage());
                 }
             } else {
-                new NameDialog("nameEmpty").show(getStage());   
+                new NameDialog("nameEmpty", getStage().getHeight()).show(getStage());   
             }
         }
     }
     
     private class NameDialog extends Dialog {
-        public NameDialog(String key) {
+        public NameDialog(String key, float stageHeight) {
             super("", manager.get("data/skins/DialogTemp.json", Skin.class));
+            clear();
+            pad(space);
             Label enterName = new Label(manager.get(profileEdit.getLang(), I18NBundle.class).get(key),
                     manager.get("data/skins/DialogTemp.json", Skin.class));
             enterName.setFontScale(0.5f);
-            text(enterName).pad(15);
-            button(manager.get(profileEdit.getLang(), I18NBundle.class).get("ok")).pad(30);
-            addListener(new ClickListener() {
+            add(enterName);
+            row();
+            ImageButton yesButton = new ImageButton(manager.get("data/skins/DialogTemp.json", Skin.class), "yesButton");
+            yesButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    AudioManager.playSound("buttonClick");
                     remove();
                 }
             });
+            add(yesButton).size(stageHeight / 5);
         }
     }
 
