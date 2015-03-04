@@ -119,8 +119,8 @@ public final class EditorViewController extends StageViewController implements E
         ImageButton pauseButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "pauseButton");
         ImageButton hintButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "infoButton");
         ImageButton helpButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "helpButton");
-        ImageButton targetButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "okayButton");
-        ImageButton reductionStrategyButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "okayButton");
+        ImageButton targetButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "goal");
+        ImageButton reductionStrategyButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "strategy");
         ImageButton finishedButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "playButton");
 
         Table leftToolBar = new Table();
@@ -137,7 +137,8 @@ public final class EditorViewController extends StageViewController implements E
         main.add(targetButton).right().top();
         main.row();
         main.add(bottomToolBar).height(0.25f * getStage().getHeight()).expandX().bottom();
-        main.add(finishedButton).size(0.20f * getStage().getWidth(), 0.20f * getStage().getWidth());
+        main.add(reductionStrategyButton).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth());
+        main.add(finishedButton).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth());
 
         final Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
         pauseButton.addListener(new ClickListener() {
@@ -246,7 +247,7 @@ public final class EditorViewController extends StageViewController implements E
         }
 
         // Reset editor model
-        model.reset(context);
+        model.reset(context); // TODO usable elements and reduction strategies
 
         // Reset lambda term viewcontroller
         if (term != null) {

@@ -175,8 +175,8 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                     ReductionModel.this.notify(new Consumer<ReductionModelObserver>() {
                         @Override
                         public void accept(ReductionModelObserver observer) {
-                            observer.reductionFinished(current.accept(
-                                    new IsAlphaEquivalentVisitor(ReductionModel.this.context.getLevelModel().getGoal())));
+                            observer.reductionFinished((current.equals(ReductionModel.this.context.getLevelModel().getGoal()) && ReductionModel.this.context.getLevelModel().isColorEquivalence()) ||
+                                    (current.accept(new IsAlphaEquivalentVisitor(ReductionModel.this.context.getLevelModel().getGoal())) && !ReductionModel.this.context.getLevelModel().isColorEquivalence()));
                         }
                     });
                 }
