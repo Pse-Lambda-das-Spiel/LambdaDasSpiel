@@ -93,6 +93,11 @@ public class LambdaTermDragSource extends Source {
         if (DEBUG) {
             System.out.println("Start dragging term (" + node.getLinkedTerm().toString() + ")");
         }
+        
+        if (split) {
+            node.getLinkedTerm().accept(new RemoveTermVisitor());
+            return null;
+        }
 
         // Payload is selected node
         Payload payload = new Payload();
