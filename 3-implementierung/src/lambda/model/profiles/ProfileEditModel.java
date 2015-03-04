@@ -14,7 +14,7 @@ import lambda.Observable;
  */
 public class ProfileEditModel extends Observable<ProfileEditObserver> {
 
-    private final static int AVATAR_NUMBER = 10;
+    private final static int AVATAR_NUMBER = 6;
     private List<String> lang;
     private int selectedLang;
     private List<String> avatar;
