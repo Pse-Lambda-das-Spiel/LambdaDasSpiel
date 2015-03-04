@@ -18,6 +18,7 @@ import lambda.viewcontroller.profiles.ProfileEditAvatar;
 import lambda.viewcontroller.profiles.ProfileEditLang;
 import lambda.viewcontroller.profiles.ProfileEditName;
 import lambda.viewcontroller.profiles.ProfileSelection;
+import lambda.viewcontroller.reduction.ReductionViewController;
 import lambda.viewcontroller.settings.SettingsViewController;
 import lambda.viewcontroller.shop.ShopViewController;
 import lambda.viewcontroller.statistics.StatisticViewController;
@@ -91,8 +92,9 @@ public class LambdaGame extends Game {
      */
     @Override
     public void create() {
-    	Gdx.input.setCatchBackKey(true);
-    	Gdx.input.setCatchMenuKey(true);
+        Gdx.input.setCatchBackKey(true);
+        Gdx.input.setCatchMenuKey(true);
+
         // TODO Use reflection?
         addViewController(new AssetViewController());
 
@@ -107,17 +109,8 @@ public class LambdaGame extends Game {
         addViewController(new LevelSelectionViewController());
         addViewController(new EditorViewController());
         addViewController(new StatisticViewController());
+        addViewController(new ReductionViewController());
 
-        /*
-         addViewController(new MainMenuViewController());
-         addViewController(new LevelSelectionViewController());
-        
-         addViewController(new ReductionViewController());
-        
-         addViewController(new SettingsViewController());
-         addViewController(new ShopViewController());
-         addViewController(new StatisticViewController());
-         addViewController(new AchievementMenuViewController());*/
         AudioManager.queueAssets(getController(AssetViewController.class).getManager());
 
         // Queue all assets for loading
@@ -130,8 +123,8 @@ public class LambdaGame extends Game {
     }
 
     /**
-     * Called when the Application is exited.
-     * Releases all resources used by this game.
+     * Called when the Application is exited. Releases all resources used by
+     * this game.
      */
     @Override
     public void dispose() {
@@ -140,7 +133,7 @@ public class LambdaGame extends Game {
             viewController.dispose();
         }
         Gdx.input.setCatchBackKey(false);
-    	Gdx.input.setCatchMenuKey(false);
+        Gdx.input.setCatchMenuKey(false);
     }
 
     /**
@@ -163,5 +156,5 @@ public class LambdaGame extends Game {
     public void resize(int width, int height) {
         super.resize(width, height);
     }
-    
+
 }
