@@ -127,26 +127,28 @@ public class StatisticViewController extends StageViewController {
     }
     public void show() {
         super.show();
+        statistics = ProfileManager.getManager().getCurrentProfile().getStatistics() ;
         lambsEnchanted.setText("Lambs enchanted = "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getLambsEnchanted()));
         gemsEnchanted.setText("Gems enchanted = "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getGemsEnchanted()));
         gemsPlaced.setText("Gems placed = "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getGemsPlaced()));
         lambsPlaced.setText("Lambs placed = "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getLambsPlaced()));
         levelTries.setText("Level tries = "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getLevelTries()));
         successfulLevelTries.setText("Successful level tries = "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getSuccessfulLevelTries()));
-        timePlayed.setText("Time played = "+ Long.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getTimePlayed()));
+        timePlayed.setText("Time played = "+ Long.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getTimePlayed())+" min");
         
         
      }
     @Override
     public void changedProfile() {
-        
+    	statistics.update();
+    	statistics = ProfileManager.getManager().getCurrentProfile().getStatistics() ; 
        
     }
     private class backClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             AudioManager.playSound("buttonClick");
-            getGame().setScreen(MainMenuViewController.class);
+            getGame().setScreen(SettingsViewController.class);
         }
     }
 }
