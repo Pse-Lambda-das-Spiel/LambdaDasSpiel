@@ -137,6 +137,7 @@ public final class EditorViewController extends StageViewController implements E
         main.add(targetButton).right().top();
         main.row();
         main.add(bottomToolBar).height(0.25f * getStage().getHeight()).expandX().bottom();
+        main.add(finishedButton).size(0.20f * getStage().getWidth(), 0.20f * getStage().getWidth());
 
         final Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
         pauseButton.addListener(new ClickListener() {
