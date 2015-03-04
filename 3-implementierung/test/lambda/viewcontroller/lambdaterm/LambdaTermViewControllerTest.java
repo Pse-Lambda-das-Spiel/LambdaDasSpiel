@@ -40,7 +40,7 @@ public class LambdaTermViewControllerTest {
      */
     @Test
     public void testBetaReduction() throws ParseException {
-        LambdaRoot term = LambdaUtils.fromString("(/a.a f g h) ((/b.b) (/z. (/c.c) z)) (/f.f f) r");
+        LambdaRoot term = LambdaUtils.fromString("(/a.a f g h) ((/b.b) (/d. (/c.c) d)) (/f.f f) q");
         
         LambdaTermViewController vc = LambdaTermViewController.build(term, false, new LevelContext(null), null, false); // TODO Level context
         

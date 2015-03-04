@@ -28,6 +28,7 @@ public class TargetDialog extends Dialog {
         clear();
         pad(stage.getHeight() / 48);
         LambdaTermViewController goal = LambdaTermViewController.build(context.getLevelModel().getGoal(), false, context, stage, false);
+        goal.addOffset(0.0f, 300.0f); // TODO number
         add(goal);
         goal.toBack();
         addListener(new ClickListener() {
