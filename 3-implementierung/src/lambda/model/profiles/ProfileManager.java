@@ -251,7 +251,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
             if (save.exists()) {
                 names = new Json().fromJson(String[].class, save);
             }
-            if (listSubdirectories(profileFolder.list()).length == names.length) {
+            if (profileFolder.list().length == names.length) {
                 List<ProfileModel> profiles = new LinkedList<ProfileModel>();
                 for (String name : names) {
                     ProfileModel profile = ProfileLoadHelper.loadProfile(name);
@@ -273,7 +273,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     //tries all profiles currently in the profileFolder (ignoring profiles.json)
     private List<ProfileModel> loadAllSavedProfiles(FileHandle profileFolder) {
         List<ProfileModel> profiles = new LinkedList<ProfileModel>();
-        for (FileHandle file : listSubdirectories(profileFolder.list())) {
+        for (FileHandle file : profileFolder.list()) {
             ProfileModel profile = ProfileLoadHelper.loadProfile(file.name());
             if (!file.name().equals(profile.getName())) {
                 throw new InvalidProfilesException(
@@ -282,26 +282,6 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
             profiles.add(profile);
         }
         return profiles;
-    }
-    
-    private FileHandle[] listSubdirectories(FileHandle files[]) {
-        int i = 0;
-        for (int j = 0; j < files.length; j++) {
-            if (files[j].isDirectory()) {
-                i++;
-            } else {
-                files[j] = null;
-            }
-        }
-        FileHandle[] result = new FileHandle[i];
-        i = 0;
-        for (FileHandle file: files) {
-            if (file != null) {
-                result[i] = file;
-                i++;
-            }
-        }
-        return result;
     }
     
     private void saveNames() {

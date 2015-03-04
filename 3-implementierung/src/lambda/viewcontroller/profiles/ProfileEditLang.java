@@ -1,5 +1,10 @@
 package lambda.viewcontroller.profiles;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.graphics.Texture;
@@ -117,6 +122,28 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
                 new Sprite(manager.get(profileEdit.getLangPic(), Texture.class))));
         lang.setText(manager.get(profileEdit.getLang(), I18NBundle.class).get("language"));
     }
+	
+	/**
+     * {@inheritDoc}
+     */
+	@Override
+	public void show() {
+		InputProcessor backProcessor = new InputAdapter() {
+			@Override
+			public boolean keyDown(int keycode) {
+				if (keycode == Keys.BACK) {
+					ProfileManager m = ProfileManager.getManager();
+					if (m.getNames().size() != 1 || !deleteOnBack) {
+						getGame().setScreen(ProfileSelection.class);
+					}
+				}
+				return false;
+			}
+		};
+		InputMultiplexer multiplexer = new InputMultiplexer(getStage(),
+				backProcessor);
+		Gdx.input.setInputProcessor(multiplexer);
+	}
     
     private class selectLeftClickListener extends ClickListener {
         @Override

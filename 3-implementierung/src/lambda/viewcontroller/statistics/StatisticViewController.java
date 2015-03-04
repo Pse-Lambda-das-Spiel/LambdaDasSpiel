@@ -49,9 +49,8 @@ public class StatisticViewController extends StageViewController {
 
 	public StatisticViewController() {
 		ProfileManager.getManager().addObserver(this);
-		//
-		space = getStage().getWidth() / 64;
 		statistics = new StatisticModel();
+		space = getStage().getWidth() / 64;
 	}
 
     @Override
@@ -64,6 +63,7 @@ public class StatisticViewController extends StageViewController {
 
     @Override
     public void create(final AssetManager manager) {
+    	 setLastViewController(SettingsViewController.class);
     	 Image background = new Image(manager.get("data/backgrounds/default.png", Texture.class));
          background.setWidth(getStage().getWidth());
          background.setHeight(getStage().getHeight());
@@ -112,7 +112,7 @@ public class StatisticViewController extends StageViewController {
         statisticsView.add();
         statisticsView.row().height(height);
         statisticsView.add(timePlayed).width(width);
-         
+        
          //backButton
          ImageButton backButton = new ImageButton(manager.get(skin, Skin.class), "backButton");
          Container<ImageButton> buttonContainer = new Container<ImageButton>();
@@ -127,30 +127,26 @@ public class StatisticViewController extends StageViewController {
     }
     public void show() {
         super.show();
-        statistics = ProfileManager.getManager().getCurrentProfile().getStatistics() ;
-       // statistics.setTimePlayed(30); 
-        lambsEnchanted.setText("Lambs enchanted = " + Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getLambsEnchanted())) ;
+        lambsEnchanted.setText("Lambs enchanted = "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getLambsEnchanted()));
         gemsEnchanted.setText("Gems enchanted = "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getGemsEnchanted()));
         gemsPlaced.setText("Gems placed = "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getGemsPlaced()));
         lambsPlaced.setText("Lambs placed = "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getLambsPlaced()));
         levelTries.setText("Level tries = "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getLevelTries()));
         successfulLevelTries.setText("Successful level tries = "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getSuccessfulLevelTries()));
-        timePlayed.setText("Time played = "+ Long.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getTimePlayed())+" min");
+        timePlayed.setText("Time played = "+ Long.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getTimePlayed()));
         
         
      }
     @Override
     public void changedProfile() {
-    	statistics.update();
-    	statistics = ProfileManager.getManager().getCurrentProfile().getStatistics() ; 
-    	
+        
+       
     }
-    
     private class backClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             AudioManager.playSound("buttonClick");
-            getGame().setScreen(SettingsViewController.class);
+            getGame().setScreen(MainMenuViewController.class);
         }
     }
 }

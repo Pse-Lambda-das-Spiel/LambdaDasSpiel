@@ -1,6 +1,10 @@
 package lambda.viewcontroller.assets;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.graphics.GL20;
@@ -96,7 +100,24 @@ public class AssetViewController extends StageViewController {
         super.dispose();
         manager.dispose();
     }
-
+    
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void show() {
+		InputProcessor backProcessor = new InputAdapter() {
+			@Override
+			public boolean keyDown(int keycode) {
+				// DO nothing
+				return false;
+			}
+		};
+		InputMultiplexer multiplexer = new InputMultiplexer(getStage(),
+				backProcessor);
+		Gdx.input.setInputProcessor(multiplexer);
+	}
+	
     /**
      * Queues all assets needed by this viewController to be loaded by the given asset manager.
      * 

@@ -3,14 +3,13 @@ package lambda.viewcontroller.level;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -23,7 +22,6 @@ import lambda.model.levels.LevelContext;
 import lambda.model.levels.LevelManager;
 import lambda.model.levels.LevelModel;
 import lambda.model.profiles.ProfileManager;
-import lambda.model.profiles.ProfileModel;
 import lambda.model.profiles.ProfileModelObserver;
 import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.editor.EditorViewController;
@@ -65,7 +63,7 @@ public class LevelSelectionViewController extends StageViewController implements
     	levelManager.queueAssets(assets);
     	assets.load("data/backgrounds/levelmenu.png", Texture.class, new TextureParameter());
     }
-
+    
     /**
      * {@inheritDoc}
      */
@@ -115,6 +113,20 @@ public class LevelSelectionViewController extends StageViewController implements
 			updateLevelButton(levelButtons.get(levelIndex - 1), "unlocked", levelManager.getLevel(levelIndex));
 		}
 	}
+	
+	/**
+	 * Creates a new {@link LevelContext} with the given level and starts the level.
+	 * 
+	 * @param level the to be started level
+	 * @throws IllegalArgumentException level is null
+	 */
+	public void startLevel(LevelModel level) {
+		if (level == null) {
+			throw new IllegalArgumentException("The to be started level cannot be null!");
+		}
+		getGame().getController(EditorViewController.class).reset(new LevelContext(level));       
+		getGame().setScreen(EditorViewController.class);
+	}
     
 	/**
 	 * Update the background and the listeners of the given level button according to the given new state.
@@ -122,9 +134,9 @@ public class LevelSelectionViewController extends StageViewController implements
 	 * @param levelButton the level button which background is to be changed
 	 * @param newState the new state of the level button
 	 * @param level the {@link LevelModel} that is represented by the button
-	 * @throws IllegalArgumentException if levelButton or difficultySetting is null or if newState is invalid or null
+	 * @throws IllegalArgumentException if levelButton or level is null or if newState is invalid or null
 	 */
-    public void updateLevelButton(TextButton levelButton, String newState, final LevelModel level) {
+    public void updateLevelButton(final TextButton levelButton, String newState, final LevelModel level) {
     	if (levelButton == null) {
     		throw new IllegalArgumentException("The levelButton cannot be null!");
     	}
@@ -148,18 +160,16 @@ public class LevelSelectionViewController extends StageViewController implements
     		levelButton.addListener(new ClickListener() {
     			@Override
     			public void clicked(InputEvent event, float x, float y) {
-    				getGame().getController(EditorViewController.class).reset(new LevelContext(level));
-    				getGame().setScreen(EditorViewController.class);
+    				startLevel(level);
     			}
-    		});
+			});
     		break;
     	case "unlocked":
     		levelButton.clearListeners();
     		levelButton.addListener(new ClickListener() {
     			@Override
     			public void clicked(InputEvent event, float x, float y) {
-    				getGame().getController(EditorViewController.class).reset(new LevelContext(level));
-    				getGame().setScreen(EditorViewController.class);
+    				startLevel(level);
     			}
     		});
     		break;
@@ -168,7 +178,7 @@ public class LevelSelectionViewController extends StageViewController implements
     	}
     	// change background of button according to newState
     	TextButtonStyle style = new TextButtonStyle(skin.get("level", TextButtonStyle.class));
-    	if (newState.equalsIgnoreCase("locked")) {
+    	if (newState.equals("locked")) {
     		style.up = skin.getDrawable("level_" + newState);
     	} else {
     		style.up = skin.getDrawable("level_" + newState 
@@ -182,7 +192,7 @@ public class LevelSelectionViewController extends StageViewController implements
      */
     @Override
     public void create(final AssetManager manager) {
-
+    	setLastViewController(MainMenuViewController.class);
         Image background = new Image(manager.get("data/backgrounds/levelmenu.png", Texture.class));
         background.setWidth(getStage().getWidth());
         background.setHeight(getStage().getHeight());
@@ -229,8 +239,7 @@ public class LevelSelectionViewController extends StageViewController implements
     	sandboxButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				getGame().getController(EditorViewController.class).reset(new LevelContext(levelManager.getLevel(0)));
-				getGame().setScreen(EditorViewController.class);
+				startLevel(levelManager.getLevel(0));
 			}
     	});
     	
@@ -253,12 +262,12 @@ public class LevelSelectionViewController extends StageViewController implements
     }
 
     private void displayLevelButtons() {
-    	int pageNumber = levelManager.getNumberOfLevels() / levelManager.LEVEL_PER_DIFFICULTY;
-    	if ((levelManager.getNumberOfLevels() % levelManager.LEVEL_PER_DIFFICULTY) > 0) {
+    	int pageNumber = levelManager.getNumberOfLevels() / LevelManager.LEVEL_PER_DIFFICULTY;
+    	if ((levelManager.getNumberOfLevels() % LevelManager.LEVEL_PER_DIFFICULTY) > 0) {
     		pageNumber++;
     	}
-    	int rowNumber = levelManager.LEVEL_PER_DIFFICULTY / LEVEL_BUTTONS_PER_ROW;
-    	if ((levelManager.LEVEL_PER_DIFFICULTY % LEVEL_BUTTONS_PER_ROW) > 0) {
+    	int rowNumber = LevelManager.LEVEL_PER_DIFFICULTY / LEVEL_BUTTONS_PER_ROW;
+    	if ((LevelManager.LEVEL_PER_DIFFICULTY % LEVEL_BUTTONS_PER_ROW) > 0) {
     		rowNumber++;
     	}
     	int n = 0;

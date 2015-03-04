@@ -1,5 +1,10 @@
 package lambda.viewcontroller.profiles;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
@@ -19,6 +24,7 @@ import lambda.model.profiles.ProfileManager;
 import lambda.model.profiles.ProfileModel;
 import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.StageViewController;
+import lambda.viewcontroller.mainmenu.MainMenuViewController;
 
 /**
  * Represents a screen of the profile configuration/creation.
@@ -101,6 +107,35 @@ public class ProfileEditName extends StageViewController implements ProfileEditO
     @Override 
     public void changedLanguage() {
         enterName.setText(manager.get(profileEdit.getLang(), I18NBundle.class).get("enterName"));
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void show() {
+        InputProcessor backProcessor = new InputAdapter() {
+            @Override
+            public boolean keyDown(int keycode) {
+            	if (keycode == Keys.BACK) {
+            		String name = nameField.getText().trim();
+                    if (newProfile) {
+                        getGame().setScreen(ProfileEditLang.class);
+                    } else if (!name.equals("")) {
+                        if (ProfileManager.getManager().changeCurrentName(name)) {
+                            getGame().setScreen(ProfileEditLang.class);
+                        } else {
+                            new NameDialog("nameTaken").show(getStage());
+                        }
+                    } else {
+                        new NameDialog("nameEmpty").show(getStage());   
+                    }
+            	}
+    			return false;
+            }
+        };
+        InputMultiplexer multiplexer = new InputMultiplexer(getStage(), backProcessor);
+        Gdx.input.setInputProcessor(multiplexer);
     }
     
     private class continueClickListener extends ClickListener {

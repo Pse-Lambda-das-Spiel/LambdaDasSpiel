@@ -66,6 +66,7 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
     public void create(final AssetManager manager) {
         profileEdit.addObserver(this);
         this.manager = manager;
+        setLastViewController(ProfileEditName.class);
         
         Table avatarSelection = new Table();
         avatarSelection.align(Align.top);

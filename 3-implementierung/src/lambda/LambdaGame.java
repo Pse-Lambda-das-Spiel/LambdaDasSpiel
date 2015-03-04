@@ -3,6 +3,7 @@ package lambda;
 import lambda.viewcontroller.editor.EditorViewController;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -90,6 +91,8 @@ public class LambdaGame extends Game {
      */
     @Override
     public void create() {
+    	Gdx.input.setCatchBackKey(true);
+    	Gdx.input.setCatchMenuKey(true);
         // TODO Use reflection?
         addViewController(new AssetViewController());
 
@@ -127,6 +130,7 @@ public class LambdaGame extends Game {
     }
 
     /**
+     * Called when the Application is exited.
      * Releases all resources used by this game.
      */
     @Override
@@ -135,9 +139,10 @@ public class LambdaGame extends Game {
         for (ViewController viewController : viewControllers.values()) {
             viewController.dispose();
         }
+        Gdx.input.setCatchBackKey(false);
+    	Gdx.input.setCatchMenuKey(false);
     }
 
-    // Bot methods are necessary for rendering and resizing the screens correctly.
     /**
      * Called when the Application should render itself.
      */
@@ -158,4 +163,5 @@ public class LambdaGame extends Game {
     public void resize(int width, int height) {
         super.resize(width, height);
     }
+    
 }

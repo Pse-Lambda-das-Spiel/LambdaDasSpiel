@@ -18,6 +18,7 @@ import lambda.model.profiles.ProfileManager;
 import lambda.model.reductionmode.ReductionModel;
 import lambda.model.reductionmode.ReductionModelObserver;
 import lambda.viewcontroller.StageViewController;
+import lambda.viewcontroller.editor.EditorViewController;
 import lambda.viewcontroller.lambdaterm.LambdaTermViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
 
@@ -74,7 +75,7 @@ public class ReductionViewController extends StageViewController implements Redu
     public void create(final AssetManager manager) {
         //needed in reductionFinished(...)
         this.assets = manager;
-        
+        setLastViewController(EditorViewController.class);
         model.addObserver(this);
         
         // Set up ui elements
