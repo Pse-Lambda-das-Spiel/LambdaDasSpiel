@@ -64,6 +64,7 @@ public class MainMenuViewController extends StageViewController implements Profi
 		manager.get("data/avatar/" + pManager.getCurrentProfile().getAvatar() + ".png", Texture.class))));
 		profileName.setText(pManager.getCurrentProfile().getName());
 		coins.setText(Integer.toString(ProfileManager.getManager().getCurrentProfile().getCoins()));
+		ProfileManager.getManager().getCurrentProfile().addObserver(this);
 		soundButtonContainer.setActor((pManager.getCurrentProfile().getSettings().isMusicOn() ? sound_unmuted : sound_muted));
 	}
 
@@ -126,7 +127,7 @@ public class MainMenuViewController extends StageViewController implements Profi
 		coinButtonContainer.setActor(coinButton);
 		getStage().addActor(coinButtonContainer);
 		coinButtonContainer.setFillParent(true);
-		coinButtonContainer.maxSize(buttonSize * 1.4f);
+		coinButtonContainer.maxSize(buttonSize * 2f);
 		
 		Table profileTable = new Table();
 		profileTable.pad(padSpace * 1.5f).align(Align.topLeft);

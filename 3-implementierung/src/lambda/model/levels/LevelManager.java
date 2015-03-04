@@ -1,10 +1,14 @@
 package lambda.model.levels;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.Color;
 
 /**
  * LevelManager manages everything which is needed for the level contexts.
@@ -38,8 +42,9 @@ public class LevelManager {
 	private String[] difficultySettingFilePaths;
 	private String[] difficultyBGImageFilePaths;
 	private String[] difficultyMusicFilePaths;
+	private Map<Color, String> allLevelColors;
 
-    /**
+	/**
      * Creates an instance of this class and loads the two required lists
      */
     private LevelManager() {
@@ -47,8 +52,39 @@ public class LevelManager {
         difficultySettingFilePaths = LevelLoadHelper.loadAllDifficultyPaths();
         difficultyMusicFilePaths = LevelLoadHelper.loadAllDifficultyMusicFilePaths();
         difficultyBGImageFilePaths = LevelLoadHelper.loadAllDifficultyBGImageFilePaths();
+        allLevelColors = new HashMap<>();
+        setAllLevelColors();
     }
 
+    private void setAllLevelColors() {
+    	allLevelColors.put(Color.BLUE, "blue");
+    	allLevelColors.put(Color.RED, "red");
+    	allLevelColors.put(Color.GREEN, "green");
+    	allLevelColors.put(Color.CYAN, "cyan");
+    	allLevelColors.put(Color.ORANGE, "orange");
+    	allLevelColors.put(Color.YELLOW, "yellow");
+    	allLevelColors.put(Color.PINK, "pink");
+    	allLevelColors.put(Color.PURPLE, "purple");
+    	allLevelColors.put(Color.OLIVE, "olive");
+    	allLevelColors.put(Color.BLACK, "black");
+    	allLevelColors.put(Color.WHITE, "white");
+    	allLevelColors.put(Color.GRAY, "gray");
+    	allLevelColors.put(Color.MAGENTA, "magenta");
+    	allLevelColors.put(Color.MAROON, "maroon");
+    	allLevelColors.put(Color.NAVY, "navy");
+    	allLevelColors.put(Color.TEAL, "teal");
+    	allLevelColors.put(Color.CLEAR, "clear");
+    }
+    
+    /**
+     * Returns a map of all possible colors in a level, with the color as the key and the name of the color as value.
+     * 
+   	 * @return the allLevelColors all posible colors in a level
+   	 */
+   	public Map<Color, String> getAllLevelColors() {
+   		return allLevelColors;
+   	}
+    
     /**
      * Returns the LevelManager
      *
