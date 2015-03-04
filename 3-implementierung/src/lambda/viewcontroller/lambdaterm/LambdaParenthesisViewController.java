@@ -1,6 +1,5 @@
 package lambda.viewcontroller.lambdaterm;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import lambda.model.lambdaterm.LambdaApplication;
@@ -23,6 +22,18 @@ public class LambdaParenthesisViewController extends LambdaNodeViewController {
      * The back texture of the lamb.
      */
     private final TextureRegion back;
+    /**
+     * The front mask of the lamb. Will be colored white.
+     */
+    private final TextureRegion frontMask;
+    /**
+     * The center mask of the lamb. Will be used multiple times. Will be colored white.
+     */
+    private final TextureRegion centerMask;
+    /**
+     * The back mask of the lamb. Will be colored white.
+     */
+    private final TextureRegion backMask;
     
     /**
      * Creates a new instance of LambdaParenthesisViewController.
@@ -32,11 +43,15 @@ public class LambdaParenthesisViewController extends LambdaNodeViewController {
      * @param viewController the viewcontroller on which this node will be displayed
      */
     public LambdaParenthesisViewController(LambdaApplication linkedTerm, LambdaNodeViewController parent, LambdaTermViewController viewController) {
-        super(linkedTerm, parent, viewController);
+        super(linkedTerm, parent, viewController, true);
         
         front = viewController.getContext().getElementUIContextFamily().getParenthesis().getFront();
         center = viewController.getContext().getElementUIContextFamily().getParenthesis().getCenter();
         back = viewController.getContext().getElementUIContextFamily().getParenthesis().getBack();
+        
+        frontMask = viewController.getContext().getElementUIContextFamily().getAbstraction().getmFront(); // TODO add reference to masks in parenthesis
+        centerMask = viewController.getContext().getElementUIContextFamily().getAbstraction().getmCenter();
+        backMask = viewController.getContext().getElementUIContextFamily().getAbstraction().getmBack();
     }
 
     /**
@@ -46,7 +61,7 @@ public class LambdaParenthesisViewController extends LambdaNodeViewController {
      */
     @Override
     public float getMinWidth() {
-        return 3 * BLOCK_WIDTH;
+        return 2 * BLOCK_WIDTH;
     }
     
     /**
@@ -57,15 +72,19 @@ public class LambdaParenthesisViewController extends LambdaNodeViewController {
      */
     @Override
     public void draw(Batch batch, float alpha) {
+        // color is white
         // Back
         batch.draw(back, getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+        batch.draw(backMask, getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
         // Center
         float x;
         for (x = getX() + BLOCK_WIDTH; x < getWidth() - 1 * BLOCK_WIDTH - EPSILON; x += BLOCK_WIDTH) {
             batch.draw(center, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+            batch.draw(centerMask, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
         }
         // Front
         batch.draw(front, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+        batch.draw(frontMask, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
     }
     
     /**

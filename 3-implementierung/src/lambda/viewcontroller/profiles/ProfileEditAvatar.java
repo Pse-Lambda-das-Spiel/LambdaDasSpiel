@@ -64,6 +64,11 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
 
     @Override
     public void create(final AssetManager manager) {
+        Image background = new Image(manager.get("data/backgrounds/default.png", Texture.class));
+        background.setWidth(getStage().getWidth());
+        background.setHeight(getStage().getHeight());
+        getStage().addActor(background);
+        
         profileEdit.addObserver(this);
         this.manager = manager;
         setLastViewController(ProfileEditName.class);

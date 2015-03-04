@@ -43,6 +43,18 @@
 			}
 		],
 		"tutorial": [
+			{
+				"tutorialId": "0",
+				"image": "",
+			},
+			{
+				"tutorialId": "1",
+				"image": "",
+			},
+			{
+				"tutorialId": "2",
+				"image": "applicativeorder",
+			}
 		],
 		"constellations": {
 			"_comment": "(lambdax.x)y , x is blue and y is red",

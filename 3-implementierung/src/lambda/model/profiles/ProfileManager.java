@@ -251,6 +251,13 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
             if (save.exists()) {
                 names = new Json().fromJson(String[].class, save);
             }
+            for (int i = 0; i + 1 < names.length; i++) {
+                for (int j = i + 1; j < names.length; j++) {
+                    if (names[i].equals(names[j])) {
+                        return loadAllSavedProfiles(profileFolder);
+                    }
+                }
+            }
             if (listSubdirectories(profileFolder.list()).length == names.length) {
                 List<ProfileModel> profiles = new LinkedList<ProfileModel>();
                 for (String name : names) {

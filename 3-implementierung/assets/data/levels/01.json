@@ -34,6 +34,26 @@
 		"useableElements": [
 		],
 		"tutorial": [
+			{	
+				"tutorialId": "0",
+				"image": "",
+			},
+			{
+				"tutorialId": "1",
+				"image": "goal",
+			},
+			{
+				"tutorialId": "2",
+				"image": "info",
+			},
+			{
+				"tutorialId": "3",
+				"image": "",
+			},
+			{
+				"tutorialId": "4",
+				"image": "",
+			},
 		],
 		"constellations": {
 			"_comment": "xx",

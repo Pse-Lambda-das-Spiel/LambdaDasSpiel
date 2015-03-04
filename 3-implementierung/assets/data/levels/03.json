@@ -37,6 +37,10 @@
 			},
 		],
 		"tutorial": [
+			{
+				"tutorialId": "0",
+				"image": "",
+			}
 		],
 		"constellations": {
 			"_comment": "(lt.t)u",

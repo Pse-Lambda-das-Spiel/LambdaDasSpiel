@@ -1,1 +1,11 @@
 \section{Eigene Exceptions}
+
+\subsection{\texttt{InvalidProfilesException}}
+Eine \textbf{InvalidProfilesException} wird geworfen, wenn die Datei, die das Profil darstellt, korrekt gelesen werden kann, aber im größeren Zusammenhang Fehler auftreten.
+Zum Beispiel: 2 Profile werden geladen, die beide den gleichen Namen haben. Dies ist nicht erlaubt und löst eine \textbf{InvalidProfilesException} aus.
+
+\subsection{\texttt{InvalidJsonException}}
+Eine \textbf{InvalidProfilesException} wird geworfen, falls eine Json Datei, wie ein Level, gelesen werden kann, aber inhaltlich falsch ist.
+
+\subsection{\texttt{InvalidLambdaTermException}}
+Eine \textbf{InvalidLambdaTermException} wird geworfen, falls es ein Problem gibt während eine Operation auf einem LambdaTerm ausgeführt wird, das dadurch bedingt ist, dass dieser LambdaTerm ungültig ist.

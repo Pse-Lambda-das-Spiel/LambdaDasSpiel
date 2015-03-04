@@ -7,8 +7,9 @@ import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.LambdaVariable;
 
 /**
- * A visitor on a lambdaterm that inserts a given term as the first child of the visited term.
- * 
+ * A visitor on a lambdaterm that inserts a given term as the first child of the
+ * visited term.
+ *
  * @author Florian Fervers
  */
 public class FrontInserter implements LambdaTermVisitor {
@@ -16,18 +17,19 @@ public class FrontInserter implements LambdaTermVisitor {
      * The term to be inserted
      */
     private final LambdaTerm inserted;
+
     /**
-     * Creates a new instance of SiblingInserter.
-     * 
+     * Creates a new instance of FrontInserter.
+     *
      * @param inserted the term to be inserted
      */
     public FrontInserter(LambdaTerm inserted) {
         this.inserted = inserted;
     }
-    
+
     /**
      * Visits the given lambda root and inserts the node.
-     * 
+     *
      * @param node the root to be visited
      */
     @Override
@@ -38,10 +40,10 @@ public class FrontInserter implements LambdaTermVisitor {
             node.setChild(buildApplication(node, node.getChild()));
         }
     }
-    
+
     /**
      * Visits the given lambda application and inserts the node as left child.
-     * 
+     *
      * @param node the application to be visited
      */
     @Override
@@ -58,10 +60,10 @@ public class FrontInserter implements LambdaTermVisitor {
             node.setLeft(buildApplication(node, node.getLeft()));
         }
     }
-    
+
     /**
      * Visits the given lambda abstraction and inserts the node.
-     * 
+     *
      * @param node the abstraction to be visited
      */
     @Override
@@ -72,33 +74,34 @@ public class FrontInserter implements LambdaTermVisitor {
             node.setInside(buildApplication(node, node.getInside()));
         }
     }
-    
+
     /**
      * Visits the given lambda variable.
-     * 
+     *
      * @param node the variable to be visited
      */
     @Override
     public void visit(LambdaVariable node) {
-        assert(false);
+        assert (false);
     }
-    
+
     /**
      * Builds the inserted application for the given parent and sibling.
-     * 
+     *
      * @param parent the inserted application's parent
      * @param sibling the inserted element's new sibling
      * @return the built application
      */
     private LambdaApplication buildApplication(LambdaTerm parent, LambdaTerm sibling) {
-        LambdaApplication application = new LambdaApplication(parent, sibling.isLocked());
+        LambdaApplication application = new LambdaApplication(null, sibling.isLocked());
         application.setLeft(inserted);
         application.setRight(sibling);
+        application.setParent(parent);
         return application;
     }
 
-	@Override
-	public Object getResult() {
-		return null;
-	}
+    @Override
+    public Object getResult() {
+        return null;
+    }
 }

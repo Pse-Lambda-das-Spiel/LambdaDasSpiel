@@ -69,6 +69,11 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
 
     @Override
     public void create(final AssetManager manager) {
+        Image background = new Image(manager.get("data/backgrounds/default.png", Texture.class));
+        background.setWidth(getStage().getWidth());
+        background.setHeight(getStage().getHeight());
+        getStage().addActor(background);
+        
         profileEdit.addObserver(this);
         this.manager = manager;
         Table langSelection = new Table();
