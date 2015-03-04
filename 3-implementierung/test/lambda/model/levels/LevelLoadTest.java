@@ -8,9 +8,8 @@ import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.badlogic.gdx.backends.lwjgl.LwjglFiles;
 
-import lambda.GdxTestRunner;
-//import com.badlogic.gdx.backends.lwjgl.LwjglFiles;
 import lambda.model.lambdaterm.LambdaAbstraction;
 import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.LambdaRoot;
@@ -27,14 +26,12 @@ import java.util.Locale;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-// This test is only for the desktop at the moment, so move it to the desktop sub project.
 
 /**
  * This is test for the LevelLoadHelper and the LevelModelLoader.
  * 
  * @author Robert Hochweiss
  */
-@RunWith(GdxTestRunner.class)
 public class LevelLoadTest {
 	
 	private static LevelModel testLevel;
@@ -42,24 +39,33 @@ public class LevelLoadTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		//Gdx.files = new LwjglFiles();
+		Gdx.files = new LwjglFiles();
 		assets = new AssetManager();
 		LambdaRoot start = new LambdaRoot();
 		LambdaRoot goal = new LambdaRoot();
 		LambdaRoot hint = new LambdaRoot();
-		List<TutorialMessage> tutorial = new ArrayList<>();
+		List<TutorialMessageModel> tutorial = new ArrayList<>();
 		List<ReductionStrategy> availableRedStrats = new ArrayList<>();
 		List<ElementType> useableElements = new ArrayList<>();
-		// tutorial.add(new TutorialMessage("8", null, null, null, null)); // TODO
+		List<Color> availableColors = new ArrayList<>();
+		availableColors.add(Color.PINK);
+		availableColors.add(Color.RED);
+		availableColors.add(Color.GREEN);
+		availableColors.add(Color.CYAN);
+		availableColors.add(Color.ORANGE);
+		availableColors.add(Color.YELLOW);
 		availableRedStrats.add(ReductionStrategy.NORMAL_ORDER);
-		useableElements.add(ElementType.VARIABLE);
-		useableElements.add(ElementType.ABSTRACTION);
 		// Do you know any better way to initialize the lambdaterm constellations?
+		tutorial.add(new TutorialMessageModel("tutorial_2_0", ""));
+		tutorial.add(new TutorialMessageModel("tutorial_2_1", ""));
+		tutorial.add(new TutorialMessageModel("tutorial_2_2", ""));
+		tutorial.add(new TutorialMessageModel("tutorial_2_3", ""));
+		tutorial.add(new TutorialMessageModel("tutorial_2_4", ""));
 		
 		// Initialize the test start constellation: (lx.x)y, lx is blue, x is white, y is white
 		LambdaApplication startApplication = new LambdaApplication(start, true);
 		LambdaAbstraction startAbstraction = new LambdaAbstraction(startApplication, new Color(Color.BLUE), false);
-		startAbstraction.setInside(new LambdaVariable(startAbstraction, new Color(Color.WHITE), false));
+		startAbstraction.setInside(new LambdaVariable(startAbstraction, new Color(Color.BLUE), false));
 		startApplication.setLeft(startAbstraction);
 		startApplication.setRight(new LambdaVariable(startApplication, new Color(Color.WHITE), false));
 		start.setChild(startApplication);
@@ -72,7 +78,9 @@ public class LevelLoadTest {
 		hintApplication.setLeft(hintAbstraction);
 		hintApplication.setRight(new LambdaVariable(hintApplication, new Color(Color.WHITE), false));
 		hint.setChild(hintApplication);
-		testLevel = new LevelModel(3, start, goal, hint, tutorial, availableRedStrats, useableElements, 1, 10, true);
+		testLevel = new LevelModel(2, start, goal, hint, tutorial, availableRedStrats, useableElements, 1, 10, true,
+					true, availableColors, ReductionStrategy.NORMAL_ORDER);
+		
 	}
 
 	@AfterClass
@@ -89,21 +97,12 @@ public class LevelLoadTest {
 	public void tearDown() throws Exception {
 	}
 	
-	@Test
-	public void simpleTest() {
-		assets.load("data/i18n/StringBundle_de", I18NBundle.class);
-		assets.finishLoading();
-		I18NBundle testBundle = assets.get("data/i18n/StringBundle_de", I18NBundle.class);
-		System.out.println(testBundle.format("gemsEnchantedAchievement", 4));
-		assertTrue(true);
-	}
-	
 	/**
 	 * Tests the loading of a sample level json file(in this case 03.json).
 	 */
 	@Test
 	public void testLoadLevel() {
-		LevelModel jsonLevel = LevelLoadHelper.loadLevel(Gdx.files.internal("data/levels/03.json"));
+		LevelModel jsonLevel = LevelLoadHelper.loadLevel(Gdx.files.internal("data/levels/02.json"));
 		assertEquals(testLevel.getId(), jsonLevel.getId());
 		assertEquals(testLevel.getCoins(), jsonLevel.getCoins());
 		assertEquals(testLevel.getDifficulty(), jsonLevel.getDifficulty());
@@ -112,8 +111,10 @@ public class LevelLoadTest {
 		assertEquals(testLevel.getGoal(), jsonLevel.getGoal());
 		assertEquals(testLevel.getHint(), jsonLevel.getHint());
 		for (int i = 0; i < jsonLevel.getTutorial().size(); i++) {
-			//assertEquals(testLevel.getTutorial().get(i).getId(), jsonLevel.getTutorial().get(i).getId());
+			assertEquals(testLevel.getTutorial().get(i).getId(), jsonLevel.getTutorial().get(i).getId());
+			assertEquals(testLevel.getTutorial().get(i).getImageName(), jsonLevel.getTutorial().get(i).getImageName());
 		}
+		assertEquals(testLevel.getAvailableColors(), jsonLevel.getAvailableColors());
 		assertEquals(testLevel.getAvailableRedStrats(), jsonLevel.getAvailableRedStrats());
 		assertEquals(testLevel.getUseableElements(), jsonLevel.getUseableElements());
 	}
@@ -121,7 +122,7 @@ public class LevelLoadTest {
 	@Test
 	public void testLoadAllLevels() {
 		int number = LevelLoadHelper.loadAllLevelPaths().length;
-		assertEquals(5, number);
+		assertEquals(25, number);
 	}
 	
 	/**
@@ -130,11 +131,10 @@ public class LevelLoadTest {
 	@Test
 	public void testLevelModelLoader() {
 		assets.setLoader(LevelModel.class, new LevelModelLoader(new InternalFileHandleResolver()));
-		assets.load("data/levels/03.json", LevelModel.class);
+		assets.load("data/levels/02.json", LevelModel.class);
 		while (!(assets.update())) {
-			System.out.println("Wait until its loaded...");
 		}
-		LevelModel loadedLevel = assets.get("data/levels/03.json", LevelModel.class);
+		LevelModel loadedLevel = assets.get("data/levels/02.json", LevelModel.class);
 		assertEquals(testLevel.getId(), loadedLevel.getId());
 		assertEquals(testLevel.getCoins(), loadedLevel.getCoins());
 		assertEquals(testLevel.getDifficulty(), loadedLevel.getDifficulty());
@@ -143,8 +143,10 @@ public class LevelLoadTest {
 		assertEquals(testLevel.getGoal(), loadedLevel.getGoal());
 		assertEquals(testLevel.getHint(), loadedLevel.getHint());
 		for (int i = 0; i < loadedLevel.getTutorial().size(); i++) {
-			//assertEquals(testLevel.getTutorial().get(i).getId(), loadedLevel.getTutorial().get(i).getId());
+			assertEquals(testLevel.getTutorial().get(i).getId(), loadedLevel.getTutorial().get(i).getId());
+			assertEquals(testLevel.getTutorial().get(i).getImageName(), loadedLevel.getTutorial().get(i).getImageName());
 		}
+		assertEquals(testLevel.getAvailableColors(), loadedLevel.getAvailableColors());
 		assertEquals(testLevel.getAvailableRedStrats(), loadedLevel.getAvailableRedStrats());
 		assertEquals(testLevel.getUseableElements(), loadedLevel.getUseableElements());
 	}
