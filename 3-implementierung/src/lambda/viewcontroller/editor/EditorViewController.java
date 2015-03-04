@@ -252,7 +252,8 @@ public final class EditorViewController extends StageViewController implements E
         if (term != null) {
             term.remove();
         }
-        term = LambdaTermViewController.build(context.getLevelModel().getStart(), true, context, getStage(), false);
+        term = LambdaTermViewController.build(model.getTerm(), true, context, getStage(), false);
+        term.setAssets(getGame().getController(AssetViewController.class).getManager());
         getStage().addActor(term);
         term.toBack();
         term.setPosition(getStage().getWidth() * INITIAL_TERM_OFFSET.x, getStage().getHeight() * (1 - INITIAL_TERM_OFFSET.y));
@@ -431,41 +432,5 @@ public final class EditorViewController extends StageViewController implements E
     @Override
     public void replaceTerm(LambdaTerm oldTerm, LambdaTerm newTerm) {
     }
-
-    /* Dialog for color selection. Copy into right place.
-     final Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
-     final float height = getStage().getHeight();
-     new Dialog("", dialogSkin) {
-     {
-     clear();
-     List<Color> colors = new ArrayList<>(); // replace with getlevelcontext .getLevelModel().getAvailableColors();
-     colors.add(new Color(0, 0, 0, 1));// test/delete
-     colors.add(new Color(0, 0, 1, 1));// test/delete
-     colors.add(new Color(0, 1, 0, 1));// test/delete
-     colors.add(new Color(0, 1, 1, 1));// test/delete
-     colors.add(new Color(1, 0, 0, 1));// test/delete
-     colors.add(new Color(1, 0, 1, 1));// test/delete
-     colors.add(new Color(1, 1, 0, 1));// test/delete
-     colors.add(new Color(1, 1, 1, 1));// test/delete
-     int size = (int) Math.ceil(Math.sqrt(colors.size()));
-     pad(height / 24);
-     int i = 0;
-     for (final Color color : colors) {
-     if (i++ % size == 0) {
-     row().size(height / 9).space(10);
-     }
-     ImageButton colorButton = new ImageButton(dialogSkin, "colorButton");
-     colorButton.setColor(color);
-     colorButton.addListener(new ClickListener() {
-     @Override
-     public void clicked(InputEvent event, float x, float y) {
-     // TODO coloring
-     remove();
-     }
-     });
-     add(colorButton);
-     }
-     }
-     }.show(getStage());
-     */
+    
 }

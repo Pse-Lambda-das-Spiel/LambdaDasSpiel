@@ -26,4 +26,11 @@ public interface ReductionModelObserver {
      * @param levelComplete true if the final term is alpha equivalent to the level's target term, false otherwise
      */
     public void reductionFinished(boolean levelComplete);
+    
+    /**
+     * Called when the history stack size has changed.
+     * 
+     * @param newSize the new size of the histoy stack
+     */
+    public void historySizeChanged(int newSize);
 }

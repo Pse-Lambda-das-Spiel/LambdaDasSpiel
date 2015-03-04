@@ -54,7 +54,7 @@ public class LambdaTermDragSource extends Source {
      * @param viewController the view controller on which the drag&drop is
      * happening
      */
-    public LambdaTermDragSource(LambdaNodeViewController node, boolean split, LambdaTermViewController viewController) {
+    public LambdaTermDragSource(final LambdaNodeViewController node, final boolean split, LambdaTermViewController viewController) {
         super(node);
         this.node = node;
         this.split = split;
@@ -94,7 +94,7 @@ public class LambdaTermDragSource extends Source {
             System.out.println("Start dragging term (" + node.getLinkedTerm().toString() + ")");
         }
         
-        if (split) {
+        if (split) { // TODO temp
             node.getLinkedTerm().accept(new RemoveTermVisitor());
             return null;
         }
