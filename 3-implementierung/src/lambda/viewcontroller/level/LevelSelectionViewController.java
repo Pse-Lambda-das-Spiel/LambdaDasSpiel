@@ -3,7 +3,6 @@ package lambda.viewcontroller.level;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.graphics.Texture;
@@ -72,12 +71,11 @@ public class LevelSelectionViewController extends StageViewController implements
     public void show() {
     	super.show();
     	int levelIndex = ProfileManager.getManager().getCurrentProfile().getLevelIndex();
-    	int pageNumber = (levelIndex - 1) / LevelManager.LEVEL_PER_DIFFICULTY;
+    	int pageNumber = levelIndex / LevelManager.LEVEL_PER_DIFFICULTY;
     	if (pageNumber >= levelStack.size()) {
-    		currentPage = levelStack.size() - 1;
-    	} else {
-    		currentPage = pageNumber;
-    	}
+    		pageNumber--;
+    	} 
+		currentPage = pageNumber;
     	levelStack.setPageVisible(currentPage);
     }
     
@@ -149,7 +147,7 @@ public class LevelSelectionViewController extends StageViewController implements
     	}
     	/*
     	 * normal order for states: locked => unlocked => completed (order can be different because of profile change)
-    	 * locked => unlocked: level can be startet
+    	 * locked => unlocked: level can be started
     	 * unlocked, completed => locked (at a profile change): level cannot be started
     	 */
     	switch(newState) {
@@ -247,13 +245,6 @@ public class LevelSelectionViewController extends StageViewController implements
     	helpButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				/* for the test pupose
-				ProfileModel profile = ProfileManager.getManager().getCurrentProfile();
-				if (profile.getLevelIndex() <= levelManager.getNumberOfLevels() + 1) {
-					profile.setLevelIndex(profile.getLevelIndex() + 1);
-				}
-				*/
-				
 			    new HelpDialog(manager.get("data/skins/DialogTemp.json", Skin.class),
                         manager.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
                         I18NBundle.class), getStage().getWidth(), getStage().getHeight()).show(getStage());

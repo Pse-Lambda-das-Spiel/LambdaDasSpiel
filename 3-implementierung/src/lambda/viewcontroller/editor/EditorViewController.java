@@ -230,8 +230,9 @@ public final class EditorViewController extends StageViewController implements E
         I18NBundle language = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
         final float width = getStage().getWidth();
         final float height = getStage().getHeight();
-        for (TutorialMessageModel t : tutorialList) {
-        	(new TutorialMessage(t, dialogSkin ,language, height, width)).show(getStage());
+        (new TargetDialog(dialogSkin, EditorViewController.this.model.getLevelContext(), getStage())).show(getStage());
+        for (int i = tutorialList.size() - 1; i >= 0; i--) {
+        	(new TutorialMessage(tutorialList.get(i), dialogSkin ,language, height, width)).show(getStage());
         }
     }
 

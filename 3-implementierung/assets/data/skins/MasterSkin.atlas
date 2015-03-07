@@ -191,99 +191,282 @@ white
   offset: 0, 0
   index: -1
 
+
 MasterSkin.png
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Linear,Linear
 repeat: none
 dialog
   rotate: false
-  xy: 1, 523
+  xy: 1, 1541
   size: 800, 487
   orig: 800, 487
   offset: 0, 0
   index: -1
-elementType
+level_completed5
   rotate: false
-  xy: 1, 204
+  xy: 803, 1628
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+imageType
+  rotate: false
+  xy: 803, 1309
   size: 700, 317
   orig: 700, 317
   offset: 0, 0
   index: -1
-elements_bar
+level_unlocked4
   rotate: false
-  xy: 1, 103
-  size: 595, 99
-  orig: 595, 99
+  xy: 1205, 1628
+  size: 400, 400
+  orig: 400, 400
   offset: 0, 0
   index: -1
-text_field
+elementType
   rotate: false
-  xy: 1, 103
-  size: 595, 99
-  orig: 595, 99
+  xy: 1, 1222
+  size: 700, 317
+  orig: 700, 317
+  offset: 0, 0
+  index: -1
+musicType
+  rotate: false
+  xy: 703, 1043
+  size: 699, 264
+  orig: 699, 264
+  offset: 0, 0
+  index: -1
+checkbox_on
+  rotate: false
+  xy: 703, 1446
+  size: 82, 93
+  orig: 82, 93
+  offset: 0, 0
+  index: -1
+checkbox_off
+  rotate: false
+  xy: 703, 1351
+  size: 82, 93
+  orig: 82, 93
+  offset: 0, 0
+  index: -1
+slider
+  rotate: false
+  xy: 703, 1329
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+slide_bar
+  rotate: false
+  xy: 1, 1195
+  size: 656, 25
+  orig: 656, 25
+  offset: 0, 0
+  index: -1
+text_button
+  rotate: false
+  xy: 1, 954
+  size: 600, 239
+  orig: 600, 239
+  offset: 0, 0
+  index: -1
+colorField
+  rotate: false
+  xy: 603, 1129
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+level_unlocked2
+  rotate: false
+  xy: 1404, 907
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+level_completed1
+  rotate: false
+  xy: 1607, 1628
+  size: 400, 400
+  orig: 400, 400
   offset: 0, 0
   index: -1
 activated
   rotate: false
-  xy: 1, 1
+  xy: 1505, 1526
   size: 481, 100
   orig: 481, 100
   offset: 0, 0
   index: -1
+coin
+  rotate: false
+  xy: 1505, 1320
+  size: 192, 204
+  orig: 192, 204
+  offset: 0, 0
+  index: -1
+sandbox
+  rotate: false
+  xy: 1699, 1324
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+level_unlocked5
+  rotate: false
+  xy: 603, 641
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+level_completed2
+  rotate: false
+  xy: 1, 552
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
 achievement_locked
   rotate: false
-  xy: 803, 792
+  xy: 403, 734
   size: 192, 218
   orig: 192, 218
   offset: 0, 0
   index: -1
 achievement_unlocked
   rotate: false
-  xy: 803, 572
+  xy: 403, 514
   size: 192, 218
   orig: 192, 218
   offset: 0, 0
   index: -1
-sandbox
+level
   rotate: false
-  xy: 703, 321
-  size: 200, 200
-  orig: 200, 200
+  xy: 1, 150
+  size: 400, 400
+  orig: 400, 400
   offset: 0, 0
   index: -1
-buyable
+text_field
   rotate: false
-  xy: 484, 1
+  xy: 1005, 806
+  size: 595, 99
+  orig: 595, 99
+  offset: 0, 0
+  index: -1
+elements_bar
+  rotate: false
+  xy: 1005, 806
+  size: 595, 99
+  orig: 595, 99
+  offset: 0, 0
+  index: -1
+level_completed4
+  rotate: false
+  xy: 1602, 505
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+goal
+  rotate: false
+  xy: 1806, 1125
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+next
+  rotate: false
+  xy: 1806, 926
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+level_unlocked1
+  rotate: false
+  xy: 1005, 404
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+level_locked
+  rotate: false
+  xy: 403, 112
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+level_completed3
+  rotate: false
+  xy: 1407, 103
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+accept
+  rotate: false
+  xy: 1407, 607
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+level_unlocked3
+  rotate: false
+  xy: 805, 2
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+play
+  rotate: false
+  xy: 805, 442
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+pause
+  rotate: false
+  xy: 1207, 205
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+callbyvalue
+  rotate: false
+  xy: 1207, 6
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+purchased
+  rotate: false
+  xy: 1401, 1
   size: 481, 100
   orig: 481, 100
   offset: 0, 0
   index: -1
-checkbox_off
+not_buyable
   rotate: false
-  xy: 598, 109
-  size: 82, 93
-  orig: 82, 93
+  xy: 1, 10
+  size: 481, 100
+  orig: 481, 100
   offset: 0, 0
   index: -1
-checkbox_on
+okay
   rotate: false
-  xy: 703, 226
-  size: 82, 93
-  orig: 82, 93
+  xy: 1809, 306
+  size: 192, 197
+  orig: 192, 197
   offset: 0, 0
   index: -1
-colorField
+forward
   rotate: false
-  xy: 787, 255
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: -1
-slider
-  rotate: false
-  xy: 997, 990
-  size: 20, 20
-  orig: 20, 20
+  xy: 1809, 107
+  size: 192, 197
+  orig: 192, 197
   offset: 0, 0
   index: -1
 
@@ -291,72 +474,149 @@ MasterSkin2.png
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-imageType
+buyable
   rotate: false
-  xy: 1, 696
-  size: 700, 317
-  orig: 700, 317
+  xy: 1, 399
+  size: 481, 100
+  orig: 481, 100
   offset: 0, 0
   index: -1
-coin
+applicativeorder
   rotate: false
-  xy: 703, 809
-  size: 192, 204
-  orig: 192, 204
-  offset: 0, 0
-  index: -1
-abort
-  rotate: false
-  xy: 703, 610
+  xy: 1, 200
   size: 192, 197
   orig: 192, 197
   offset: 0, 0
   index: -1
-musicType
-  rotate: false
-  xy: 1, 430
-  size: 699, 264
-  orig: 699, 264
-  offset: 0, 0
-  index: -1
-level_locked
-  rotate: false
-  xy: 1, 28
-  size: 400, 400
-  orig: 400, 400
-  offset: 0, 0
-  index: -1
-slide_bar
+help
   rotate: false
   xy: 1, 1
-  size: 656, 25
-  orig: 656, 25
-  offset: 0, 0
-  index: -1
-level
-  rotate: false
-  xy: 403, 28
-  size: 400, 400
-  orig: 400, 400
-  offset: 0, 0
-  index: -1
-accept
-  rotate: false
-  xy: 805, 411
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-achievements
-  rotate: false
-  xy: 805, 212
   size: 192, 197
   orig: 192, 197
   offset: 0, 0
   index: -1
 add
   rotate: false
-  xy: 805, 13
+  xy: 195, 200
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+strategy
+  rotate: false
+  xy: 195, 1
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+start
+  rotate: false
+  xy: 484, 307
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: -1
+muted
+  rotate: false
+  xy: 678, 307
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: -1
+reload
+  rotate: false
+  xy: 872, 302
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+callbyname
+  rotate: false
+  xy: 1066, 302
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+undo
+  rotate: false
+  xy: 1260, 302
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+info
+  rotate: false
+  xy: 1454, 302
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+normalorder
+  rotate: false
+  xy: 1648, 302
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+back
+  rotate: false
+  xy: 1842, 302
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+abort
+  rotate: false
+  xy: 389, 108
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+bin
+  rotate: false
+  xy: 583, 108
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+unmuted
+  rotate: false
+  xy: 777, 108
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: -1
+levelmenu
+  rotate: false
+  xy: 971, 103
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+prev
+  rotate: false
+  xy: 1165, 103
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+settings
+  rotate: false
+  xy: 1359, 103
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+menu
+  rotate: false
+  xy: 1553, 103
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+achievements
+  rotate: false
+  xy: 1747, 103
   size: 192, 197
   orig: 192, 197
   offset: 0, 0
@@ -366,272 +626,10 @@ MasterSkin3.png
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-level_completed1
-  rotate: false
-  xy: 1, 607
-  size: 400, 400
-  orig: 400, 400
-  offset: 0, 0
-  index: -1
-level_completed2
-  rotate: false
-  xy: 1, 205
-  size: 400, 400
-  orig: 400, 400
-  offset: 0, 0
-  index: -1
-not_buyable
-  rotate: false
-  xy: 1, 103
-  size: 481, 100
-  orig: 481, 100
-  offset: 0, 0
-  index: -1
-purchased
+tutorials/coloring
   rotate: false
   xy: 1, 1
-  size: 481, 100
-  orig: 481, 100
-  offset: 0, 0
-  index: -1
-level_completed3
-  rotate: false
-  xy: 403, 607
-  size: 400, 400
-  orig: 400, 400
-  offset: 0, 0
-  index: -1
-level_completed4
-  rotate: false
-  xy: 403, 205
-  size: 400, 400
-  orig: 400, 400
-  offset: 0, 0
-  index: -1
-applicativeorder
-  rotate: false
-  xy: 484, 6
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-back
-  rotate: false
-  xy: 678, 6
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-bin
-  rotate: false
-  xy: 805, 810
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-callbyname
-  rotate: false
-  xy: 805, 611
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-callbyvalue
-  rotate: false
-  xy: 805, 412
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-forward
-  rotate: false
-  xy: 805, 213
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-
-MasterSkin4.png
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-level_completed5
-  rotate: false
-  xy: 1, 602
-  size: 400, 400
-  orig: 400, 400
-  offset: 0, 0
-  index: -1
-level_unlocked1
-  rotate: false
-  xy: 1, 200
-  size: 400, 400
-  orig: 400, 400
-  offset: 0, 0
-  index: -1
-goal
-  rotate: false
-  xy: 1, 1
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-help
-  rotate: false
-  xy: 195, 1
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-info
-  rotate: false
-  xy: 389, 1
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-level_unlocked2
-  rotate: false
-  xy: 583, 602
-  size: 400, 400
-  orig: 400, 400
-  offset: 0, 0
-  index: -1
-level_unlocked3
-  rotate: false
-  xy: 403, 200
-  size: 400, 400
-  orig: 400, 400
-  offset: 0, 0
-  index: -1
-levelmenu
-  rotate: false
-  xy: 583, 1
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-menu
-  rotate: false
-  xy: 777, 1
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-next
-  rotate: false
-  xy: 805, 403
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-normalorder
-  rotate: false
-  xy: 805, 204
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-
-MasterSkin5.png
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-text_button
-  rotate: false
-  xy: 1, 754
-  size: 600, 239
-  orig: 600, 239
-  offset: 0, 0
-  index: -1
-level_unlocked4
-  rotate: false
-  xy: 1, 352
-  size: 400, 400
-  orig: 400, 400
-  offset: 0, 0
-  index: -1
-level_unlocked5
-  rotate: false
-  xy: 603, 593
-  size: 400, 400
-  orig: 400, 400
-  offset: 0, 0
-  index: -1
-okay
-  rotate: false
-  xy: 1, 153
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-pause
-  rotate: false
-  xy: 403, 555
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-play
-  rotate: false
-  xy: 195, 153
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-prev
-  rotate: false
-  xy: 403, 356
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-reload
-  rotate: false
-  xy: 597, 394
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-settings
-  rotate: false
-  xy: 791, 394
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-muted
-  rotate: false
-  xy: 597, 200
-  size: 192, 192
-  orig: 192, 192
-  offset: 0, 0
-  index: -1
-start
-  rotate: false
-  xy: 791, 200
-  size: 192, 192
-  orig: 192, 192
-  offset: 0, 0
-  index: -1
-strategy
-  rotate: false
-  xy: 403, 157
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-undo
-  rotate: false
-  xy: 597, 1
-  size: 192, 197
-  orig: 192, 197
-  offset: 0, 0
-  index: -1
-unmuted
-  rotate: false
-  xy: 791, 6
-  size: 192, 192
-  orig: 192, 192
+  size: 713, 123
+  orig: 713, 123
   offset: 0, 0
   index: -1

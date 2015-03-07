@@ -24,7 +24,7 @@ public class LevelStack extends Stack {
 	 */
 	public LevelStack() {
 		pages = new ArrayList<>();
-		currentVisiblePage = 1;
+		currentVisiblePage = 0;
 	}
 	
 	/**

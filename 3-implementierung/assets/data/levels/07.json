@@ -45,15 +45,15 @@
 		"tutorial": [
 			{
 				"tutorialId": "0",
-				"image": null,
+				"image": "",
 			},
 			{
 				"tutorialId": "1",
-				"image": null,
+				"image": "",
 			},
 			{
 				"tutorialId": "2",
-				"image": null,
+				"image": "",
 			},
 		],
 		"constellations": {

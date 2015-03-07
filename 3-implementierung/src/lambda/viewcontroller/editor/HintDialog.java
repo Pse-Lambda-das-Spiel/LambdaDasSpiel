@@ -28,7 +28,7 @@ public class HintDialog extends Dialog {
         clear();
         pad(stage.getHeight() / 48);
         LambdaTermViewController hint = LambdaTermViewController.build(context.getLevelModel().getHint(), false, context, stage, false);
-        hint.addOffset(0.0f, 300.0f); // TODO number
+        //hint.addOffset(0.0f, 300.0f); // TODO number
         add(hint);
         hint.toBack();
         addListener(new ClickListener() {
