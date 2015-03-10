@@ -185,7 +185,8 @@ public final class LevelLoadHelper {
 		case "green":
 			return Color.GREEN;
 		case "orange":
-			return Color.ORANGE;
+			return Color.valueOf("ff8106ff");
+			//return Color.ORANGE;
 		case "cyan":
 			return Color.CYAN;
 		case "pink":

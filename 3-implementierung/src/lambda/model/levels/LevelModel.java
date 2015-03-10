@@ -61,6 +61,7 @@ public class LevelModel {
         this.availableRedStrats = availableRedStrats;
         this.useableElements = useableElements;
         this.difficulty = difficulty;
+        this.coins = coins;
         this.standardMode = standardMode;
         this.colorEquivalence =colorEquivalence;
         this.availableColors = availableColors;

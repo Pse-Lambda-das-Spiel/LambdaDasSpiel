@@ -18,12 +18,16 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import lambda.model.editormode.EditorModel;
+import lambda.model.levels.LevelManager;
+import lambda.model.levels.LevelModel;
 import lambda.model.profiles.ProfileManager;
+import lambda.model.profiles.ProfileModel;
 import lambda.model.reductionmode.ReductionModel;
 import lambda.model.reductionmode.ReductionModelObserver;
 import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.editor.EditorViewController;
 import lambda.viewcontroller.lambdaterm.LambdaTermViewController;
+import lambda.viewcontroller.level.LevelSelectionViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
 
 /**
@@ -263,8 +267,10 @@ public class ReductionViewController extends StageViewController implements Redu
     @Override
     public void reductionFinished(boolean levelComplete) {
         //add coins to player etc.
-        new FinishDialog(levelComplete, /*getCoins*/ 0, assets.get("data/skins/DialogTemp.json", Skin.class), assets.get(ProfileManager
-                        .getManager().getCurrentProfile().getLanguage(), I18NBundle.class), getStage().getWidth(), getStage().getHeight()).show(getStage());
+        new FinishDialog(levelComplete, model.getContext().getLevelModel().getCoins(), 
+        				assets.get("data/skins/DialogTemp.json", Skin.class), 
+        				assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class), 
+        				getStage().getWidth(), getStage().getHeight()).show(getStage());
     }
 
     /**
@@ -361,7 +367,8 @@ public class ReductionViewController extends StageViewController implements Redu
             resetButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    //TODO
+                    getGame().getController(LevelSelectionViewController.class).
+                    			startLevel(model.getContext().getLevelModel());
                     remove();
                 }
             });
@@ -384,6 +391,7 @@ public class ReductionViewController extends StageViewController implements Redu
             clear();
             pad(stageWidth / 64);
 
+            final LevelModel playedLevel = model.getContext().getLevelModel();
             Label levelLabel;
             levelLabel = new Label(language.get(levelComplete ? "levelCompleted" : "levelFailed"), dialogSkin);
             levelLabel.setFontScale(0.6f);
@@ -405,7 +413,7 @@ public class ReductionViewController extends StageViewController implements Redu
             restartButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    //TODO reset
+                	getGame().getController(LevelSelectionViewController.class).startLevel(playedLevel);
                     remove();
                 }
             });
@@ -416,16 +424,28 @@ public class ReductionViewController extends StageViewController implements Redu
                 nextLevelButton.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        // TODO nextlevel
+                    	LevelManager levelManager = LevelManager.getLevelManager();
+                    	// if the last level was solved, start with level 1 again
+                    	if (playedLevel.getId() == levelManager.getNumberOfLevels()) {
+                    		getGame().getController(LevelSelectionViewController.class).startLevel(levelManager.getLevel(1));
+                    	} else {
+                    		getGame().getController(LevelSelectionViewController.class).
+                    			startLevel(levelManager.getLevel(playedLevel.getId() + 1));
+                    	}
                         remove();
                     }
                 });
-                add(nextLevelButton).size(stageHeight / 4);
+                add(nextLevelButton).size(stageHeight / 4).row();
 
-                row();
-                Label coinsLabel = new Label(language.format("coinsGained", coins), dialogSkin);
-                coinsLabel.setFontScale(0.6f);
-                add(coinsLabel).colspan(3);
+                ProfileModel currentProfile = ProfileManager.getManager().getCurrentProfile();
+                // update levelindex and coins only if a new level was solved
+                if (playedLevel.getId() == currentProfile.getLevelIndex()) {
+                	 currentProfile.setLevelIndex(currentProfile.getLevelIndex() + 1);
+                	 currentProfile.setCoins(currentProfile.getCoins() + coins);
+                	 Label coinsLabel = new Label(language.format("coinsGained", coins), dialogSkin);
+                     coinsLabel.setFontScale(0.6f);
+                     add(coinsLabel).colspan(3);
+                }
             }
         }
     }
