@@ -29,7 +29,6 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         avatar = new LinkedList<String>();
         selectedAvatar = 0;
 
-        // TODO get keys from filenames in lang folder
         lang.add("data/i18n/StringBundle_de");
         lang.add("data/i18n/StringBundle_en");
         lang.add("data/i18n/StringBundle_fr");
@@ -130,10 +129,6 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         if (avatar == null) {
             throw new IllegalArgumentException("avatar cannot be null");
         }
-        /*
-         * this.avatar = this.avatar.subList(0, AVATAR_NUMBER - 1); //add bought
-         * avatar id's to selection
-         */
         selectedAvatar = this.avatar.indexOf(avatar);
         if (selectedAvatar == -1) {
             selectedAvatar = 0;

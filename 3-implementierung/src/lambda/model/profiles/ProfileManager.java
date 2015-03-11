@@ -34,6 +34,9 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
         profileEdit = new ProfileEditModel();
         currentProfile = null;
         profiles = loadProfiles(Gdx.files.local(PROFILE_FOLDER));
+        if (profiles.size() > MAX_NUMBER_OF_PROFILES) {
+            throw new InvalidProfilesException("The profile-folder contains more than the maximum number of profiles.");
+        }
         saveNames();
     }
 
@@ -80,7 +83,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
                 notify(new Consumer<ProfileManagerObserver>(){
                     @Override
                     public void accept(ProfileManagerObserver observer) {
-                        observer.changedProfile();;
+                        observer.changedProfile();
                     }
                 });
                 return true;
@@ -122,7 +125,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
         notify(new Consumer<ProfileManagerObserver>(){
             @Override
             public void accept(ProfileManagerObserver observer) {
-                observer.changedProfileList();;
+                observer.changedProfileList();
             }
         });
         return true;
@@ -265,10 +268,12 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
                     if (profile == null) {
                         return loadAllSavedProfiles(profileFolder);
                     }
+                    /*
                     if (!name.equals(profile.getName())) {
                         throw new InvalidProfilesException(
                                 "a profile's name and it's save folder's name aren't the same");
                     }
+                    */
                     profiles.add(profile);
                 }
                 return profiles;
@@ -282,10 +287,10 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
         List<ProfileModel> profiles = new LinkedList<ProfileModel>();
         for (FileHandle file : listSubdirectories(profileFolder.list())) {
             ProfileModel profile = ProfileLoadHelper.loadProfile(file.name());
-            if (!file.name().equals(profile.getName())) {
+            /*if (!file.name().equals(profile.getName())) {
                 throw new InvalidProfilesException(
                         "a profile's name and it's save folder's name aren't the same");
-            }
+            }*/
             profiles.add(profile);
         }
         return profiles;

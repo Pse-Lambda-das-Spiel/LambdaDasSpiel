@@ -2,6 +2,7 @@ package lambda.model.profiles;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglFiles;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,9 +31,44 @@ public class ProfileModelTest implements ProfileModelObserver {
 
     @After
     public void tearDown() throws Exception {
-        profile.removeObserver(this);
+        if (profile != null) {
+            profile.removeObserver(this);
+            profile = null;
+        }
     }
-
+    
+    /**
+     * Makes sure that the String for ProfileModel(String) cannot be null.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullProfile() {
+        new ProfileModel(null);
+    }
+    
+    /**
+     * Makes sure that the String for ProfileModel(String, ProfileModel) cannot be null.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testRenameProfileNullName() {
+        new ProfileModel(null, profile);
+    }
+    
+    /**
+     * Makes sure that the ProfileModel for ProfileModel(String, ProfileModel) cannot be null.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testRenameProfileNullOld() {
+        new ProfileModel("testName", null);
+    }
+    
+    /**
+     * Makes sure that the String for ProfileModel(String, ProfileModel) cannot be empty.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testRenameProfileNoName() {
+        new ProfileModel("", profile);
+    }
+    
     /**
      * Tests a new profile for correct standard values.
      */
@@ -92,6 +128,38 @@ public class ProfileModelTest implements ProfileModelObserver {
         assertNotNull(profile.getStatistics());
     }
 
+    /**
+     * Makes sure setAvatar() doesn't accept null as argument.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetAvatarNull() {
+        profile.setAvatar(null);
+    }
+    
+    /**
+     * Makes sure setLanguage() doesn't accept null as argument.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetLanguageNull() {
+        profile.setLanguage(null);
+    }
+    
+    /**
+     * Makes sure setLevelIndex() doesn't accept a value smaller than 1.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testLevelIndexSmallerOne() {
+        profile.setLevelIndex(0);
+    }
+    
+    /**
+     * Makes sure setCoins() doesn't accept a negative values.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testCoinsNegative() {
+        profile.setCoins(-1);
+    }
+    
     @Override
     public void changedLevelIndex() {
         calledChangedLevelIndex = true;

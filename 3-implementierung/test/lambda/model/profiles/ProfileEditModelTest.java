@@ -37,6 +37,26 @@ public class ProfileEditModelTest implements ProfileEditObserver {
         edit.removeObserver(this);
     }
 
+    
+    /**
+     * Makes sure setLang() doesn't accept null as argument.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetLangNull() {
+        edit.setLang(null);
+    }
+    
+    /**
+     * Tries to set a language that doesn't exist. setLang() should than set back to the standard language.
+     */
+    @Test
+    public void testWrongLang() {
+        edit.nextLang();
+        assertNotEquals(baseLang, edit.getLang());
+        edit.setLang("noLang");
+        assertEquals(baseLang, edit.getLang());
+    }
+    
     /**
      * Tests nextLang and previousLang with their getters (getLang and
      * getLangPic), while making sure the correct ProfileEditObserver-methods
@@ -93,6 +113,26 @@ public class ProfileEditModelTest implements ProfileEditObserver {
         }
     }
 
+    /**
+     * Makes sure setAvatar() doesn't accept null as argument.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetAvatarNull() {
+        edit.setAvatar(null);
+    }
+    
+    /**
+     * Tries to set an avatar that doesn't exist. setAvatar() should than set back to the standard avatar.
+     */
+    @Test
+    public void testWrongAvatar() {
+        edit.nextAvatar();
+        assertNotEquals(baseAvatar, edit.getAvatar());
+        edit.setAvatar("noAvatar");
+        assertEquals(baseAvatar, edit.getAvatar());
+    }
+    
+    
     /**
      * Tests nextAvatar and previousAvatar and their getter getAvatar, while
      * making sure the correct ProfileEditObserver-methods are called.
