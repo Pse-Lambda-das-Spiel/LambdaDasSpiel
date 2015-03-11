@@ -99,6 +99,7 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	pauseButton: 		{ up: pause},
 	playButton: 		{ up: play},
 	prevButton: 		{ up: prev},
+	forwardButton: 		{ up: forward},
 	unmutedButton: 		{ up: unmuted},
 	mutedButton: 		{ up: muted},
 	levelMenuButton:	{ up: levelmenu},

@@ -14,7 +14,6 @@ import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.LambdaVariable;
-import lambda.viewcontroller.level.TutorialMessage;
 
 /**
  * This class helps with the loading process of level json files.
@@ -185,12 +184,14 @@ public final class LevelLoadHelper {
 		case "green":
 			return Color.GREEN;
 		case "orange":
-			return Color.valueOf("ff8106ff");
+			return Color.valueOf("ff8000ff");
 			//return Color.ORANGE;
 		case "cyan":
-			return Color.CYAN;
+			return Color.valueOf("00ffffff");
+			//return Color.CYAN;
 		case "pink":
-			return Color.PINK;
+			return Color.valueOf("ff0080ff");
+			//return Color.PINK;
 		case "purple": 
 			return Color.PURPLE;
 		case "olive":

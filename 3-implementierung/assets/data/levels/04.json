@@ -101,7 +101,7 @@
 						"left": {
 							"type": "variable",
 							"locked": true,
-							"color": "white"
+							"color": "cyan"
 						},
 						"right": {
 							"type": "variable",
@@ -111,8 +111,8 @@
 					},
 					"right": {
 						"type": "variable",
-						"locked": false,
-						"color": "white"
+						"locked": true,
+						"color": "blue"
 					}		
 				}
 			},

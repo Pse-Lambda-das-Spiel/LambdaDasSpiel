@@ -110,7 +110,7 @@ public class ReductionViewController extends StageViewController implements Redu
         ImageButton pauseButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "pauseButton");
         ImageButton helpButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "helpButton");
         stepRevertButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "prevButton");
-        stepButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "nextButton");
+        stepButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "forwardButton");
         playPauseButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "playButton");
         ImageButton backToEditorButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "backButton");
 
