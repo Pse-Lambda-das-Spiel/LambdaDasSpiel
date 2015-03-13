@@ -26,11 +26,11 @@ public class TargetDialog extends Dialog {
     public TargetDialog(Skin skin, LevelContext context, Stage stage) {
         super("", skin);
         clear();
-        pad(stage.getHeight() / 48);
+        setFillParent(true);
         LambdaTermViewController goal = LambdaTermViewController.build(context.getLevelModel().getGoal(), false, context, stage, false);
-        //goal.addOffset(0.0f, 300.0f); // TODO number
-        add(goal);
         goal.toBack();
+        goal.setPosition((stage.getWidth() - goal.getWidth()) / 2, stage.getHeight() * 0.8f);
+        addActor(goal);
         addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

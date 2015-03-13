@@ -42,12 +42,6 @@ public class TutorialMessage extends Dialog {
 			message.setFontScale(0.7f);
 			add(message).width(stageWidth / 2);
 		}
-		addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				remove();
-			}
-		});
 	}
 
 }

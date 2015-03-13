@@ -270,10 +270,20 @@ public final class EditorViewController extends StageViewController implements
 		I18NBundle language = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
 		final float width = getStage().getWidth();
 		final float height = getStage().getHeight();
-		(new TargetDialog(dialogSkin,EditorViewController.this.model.getLevelContext(), getStage())).show(getStage());
-		for (int i = tutorialList.size() - 1; i >= 0; i--) {
-			(new TutorialMessage(tutorialList.get(i), dialogSkin, language, height, width)).show(getStage());
+		final Dialog dialogs[] = new Dialog[tutorialList.size() + 1];
+		for (int i = 0; i + 1 < dialogs.length; i++) {
+		    final int pos = i;
+		    dialogs[pos] = new TutorialMessage(tutorialList.get(i), dialogSkin, language, height, width);
+		    dialogs[pos].addListener(new ClickListener() {
+		        @Override
+	            public void clicked(InputEvent event, float x, float y) {
+		            dialogs[pos + 1].show(getStage());
+		            dialogs[pos].remove();
+	            }
+		    });
 		}
+		dialogs[dialogs.length - 1] = new TargetDialog(dialogSkin, EditorViewController.this.model.getLevelContext(), getStage());
+		dialogs[0].show(getStage());
 	}
 
 	/**

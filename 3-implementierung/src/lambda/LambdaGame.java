@@ -123,6 +123,18 @@ public class LambdaGame extends Game {
     }
 
     /**
+     * Called when the Application is paused, usually when it's not active or visible on screen.
+     * An Application is also paused before it is destroyed.
+     */
+    @Override
+    public void pause() {
+        super.pause();
+        for (ViewController viewController : viewControllers.values()) {
+            viewController.pause();
+        }
+    }
+    
+    /**
      * Called when the Application is exited. Releases all resources used by
      * this game.
      */

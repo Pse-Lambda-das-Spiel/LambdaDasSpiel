@@ -26,11 +26,11 @@ public class HintDialog extends Dialog {
     public HintDialog(Skin skin, LevelContext context, Stage stage) {
         super("", skin);
         clear();
-        pad(stage.getHeight() / 48);
+        setFillParent(true);
         LambdaTermViewController hint = LambdaTermViewController.build(context.getLevelModel().getHint(), false, context, stage, false);
-        //hint.addOffset(0.0f, 300.0f); // TODO number
-        add(hint);
         hint.toBack();
+        hint.setPosition((stage.getWidth() - hint.getWidth())/2, stage.getHeight()*0.8f);
+        addActor(hint);
         addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

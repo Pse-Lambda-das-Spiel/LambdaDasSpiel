@@ -268,12 +268,6 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
                     if (profile == null) {
                         return loadAllSavedProfiles(profileFolder);
                     }
-                    /*
-                    if (!name.equals(profile.getName())) {
-                        throw new InvalidProfilesException(
-                                "a profile's name and it's save folder's name aren't the same");
-                    }
-                    */
                     profiles.add(profile);
                 }
                 return profiles;
@@ -286,12 +280,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     private List<ProfileModel> loadAllSavedProfiles(FileHandle profileFolder) {
         List<ProfileModel> profiles = new LinkedList<ProfileModel>();
         for (FileHandle file : listSubdirectories(profileFolder.list())) {
-            ProfileModel profile = ProfileLoadHelper.loadProfile(file.name());
-            /*if (!file.name().equals(profile.getName())) {
-                throw new InvalidProfilesException(
-                        "a profile's name and it's save folder's name aren't the same");
-            }*/
-            profiles.add(profile);
+            profiles.add(ProfileLoadHelper.loadProfile(file.name()));
         }
         return profiles;
     }

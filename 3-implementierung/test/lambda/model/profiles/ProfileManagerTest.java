@@ -35,7 +35,6 @@ public class ProfileManagerTest implements ProfileManagerObserver {
     private static String unusedName = "unusedName";
     private static FileHandle profileFolder;
     private static FileHandle nameFile;
-;
     
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
