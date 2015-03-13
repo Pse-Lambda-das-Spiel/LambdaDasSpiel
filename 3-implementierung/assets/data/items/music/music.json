@@ -2,7 +2,32 @@
 	"00": {
 		"id": "0",
 		"price": 10 ,
-		"filepath": "data/items/music/00.mp3"
+		"filename": "00",
+	},
+	"01": {
+		"id": "1",
+		"price": 20 ,
+		"filename": "Happy Day"
+	},
+	"02": {
+		"id": "2",
+		"price": 25 ,
+		"filename": "Deep Space"
+	},
+	"03": {
+		"id": "3",
+		"price": 30 ,
+		"filename": "Dark Night"
+	},
+	"04": {
+		"id": "4",
+		"price": 40 ,
+		"filename": "Adventure"
+	},
+	"05": {
+		"id": "5",
+		"price": 50 ,
+		"filename": "Future Tech"
 	}
 }
 

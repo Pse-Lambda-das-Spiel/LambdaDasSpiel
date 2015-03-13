@@ -34,7 +34,7 @@ public class ShopModel {
     private ShopModel() {
         music = new ShopItemTypeModel<MusicItemModel>("music");
         images = new ShopItemTypeModel<BackgroundImageItemModel>("images");
-        elementUIContextFamilies = new ShopItemTypeModel<ElementUIContextFamily>("sprites");
+        elementUIContextFamilies = new ShopItemTypeModel<ElementUIContextFamily>("elements");
     }
 
     /**
@@ -93,6 +93,8 @@ public class ShopModel {
      * @param assets the asset manager
      */
     public void loadAllMusicItems(AssetManager assets) {
+        String directory = "data/items/music/";
+        String type = ".mp3";
         FileHandle file = Gdx.files.internal("data/items/music/music.json");
         JsonReader reader = new JsonReader();
         JsonValue jsonFile = reader.parse(file);
@@ -103,9 +105,9 @@ public class ShopModel {
             //Read the json file and set the attributes
             String id = music.getString("id");
             int price = music.getInt("price");
-            String filepath = music.getString("filepath");
-            MusicItemModel musicItem = new MusicItemModel(id, price, filepath);
-            assets.load(filepath, Music.class);
+            String filename = music.getString("filename");
+            MusicItemModel musicItem = new MusicItemModel(id, price, filename);
+            assets.load(directory + filename + type, Music.class);
             this.music.getItems().add(musicItem);
             i++;
         }
@@ -119,6 +121,8 @@ public class ShopModel {
      * @param assets the asset manager
      */
     public void loadAllImageItems(AssetManager assets) {
+        String directory = "data/items/images/";
+        String type = ".png";
         FileHandle file = Gdx.files.internal("data/items/images/images.json");
         JsonReader reader = new JsonReader();
         JsonValue jsonFile = reader.parse(file);
@@ -129,9 +133,9 @@ public class ShopModel {
             //Read the json file and set the attributes
             String id = image.getString("id");
             int price = image.getInt("price");
-            String filepath = image.getString("filepath");
-            BackgroundImageItemModel imageItem = new BackgroundImageItemModel(id, price, filepath);
-            assets.load(filepath, Texture.class);
+            String filename = image.getString("filename");
+            BackgroundImageItemModel imageItem = new BackgroundImageItemModel(id, price, filename);
+            assets.load(directory + filename + type, Texture.class);
             this.images.getItems().add(imageItem);
             i++;
         }
@@ -145,6 +149,8 @@ public class ShopModel {
      * @param assets the asset manager
      */
     public void loadAllElementItems(AssetManager assets) {
+        String directory = "data/items/elementuis/";
+        String type = ".atlas";
         FileHandle file = Gdx.files.internal("data/items/elementuis/elementuis.json");
         JsonReader reader = new JsonReader();
         JsonValue jsonFile = reader.parse(file);
@@ -155,9 +161,9 @@ public class ShopModel {
             //Read the json file and set the attributes
             String id = image.getString("id");
             int price = image.getInt("price");
-            String filepath = image.getString("filepath");
-            assets.load(filepath, TextureAtlas.class);
-            ElementUIContextFamily familyItem = new ElementUIContextFamily(id, price, filepath);
+            String filename = image.getString("filename");
+            assets.load(directory + filename + type, TextureAtlas.class);
+            ElementUIContextFamily familyItem = new ElementUIContextFamily(id, price, filename);
             elementUIContextFamilies.getItems().add(i, familyItem);
             i++;
         }
@@ -167,26 +173,32 @@ public class ShopModel {
     
     public void setAllAssets(AssetManager assets) {
         // sets every asset to the item
+        String directory = "data/items/music/";
+        String type = ".mp3";
         for (MusicItemModel musicItem : this.music.getItems()) {
-            musicItem.setMusic(assets.get(musicItem.getFilepath(), Music.class));
+            musicItem.setMusic(assets.get(directory + musicItem.getFilename() + type, Music.class));
         }
         // set the default music
         MusicItemModel musicItem = new MusicItemModel("default", 0, "data/levels/music/default.mp3");
-        musicItem.setMusic(assets.get(musicItem.getFilepath(), Music.class));
+        musicItem.setMusic(assets.get(musicItem.getFilename(), Music.class));
         music.setDefaultItem(musicItem);
         
         // sets every asset to the image items
+        directory = "data/items/images/";
+        type = ".png";
         for (BackgroundImageItemModel imageItem : this.images.getItems()) {
-            imageItem.setImage(assets.get(imageItem.getFilepath(), Texture.class));
+            imageItem.setImage(assets.get(directory + imageItem.getFilename() + type, Texture.class));
         }
         // set the default image
         BackgroundImageItemModel imageItem = new BackgroundImageItemModel("default", 0, "data/levels/images/default.png");
-        imageItem.setImage(assets.get(imageItem.getFilepath(), Texture.class));
+        imageItem.setImage(assets.get(imageItem.getFilename(), Texture.class));
         images.setDefaultItem(imageItem);
         
         // sets every asset to the element items
+        directory = "data/items/elementuis/";
+        type = ".atlas";
         for (ElementUIContextFamily familyItem : this.elementUIContextFamilies.getItems()) {
-            TextureAtlas atlas = assets.get(familyItem.getFilepath());
+            TextureAtlas atlas = assets.get(directory + familyItem.getFilename() + type);
             VariableUIContext variable = new VariableUIContext(atlas.findRegion("gem"), atlas.findRegion("gem_mask"));
             AbstractionUIContext abstraction = new AbstractionUIContext(atlas.findRegion("front_magicstick"), 
                     atlas.findRegion("center"), 

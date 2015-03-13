@@ -84,7 +84,8 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor imple
      * Updates the view of the button
      */
     public void setCurrentState() {
-        currentState = new TextButton(model.getShopItemType().getTypeName() + " " + model.getId(), 
+
+        currentState = new TextButton(model.getFilename(), 
                 ShopViewController.getTextButtonStyle("not_buyable") );
 
         if (model.isPurchased()) {

@@ -13,7 +13,7 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
 
     private String id;
     private int price;
-    private String filepath;
+    private String filename;
     private ShopModel shop;
     @SuppressWarnings("rawtypes")
     protected ShopItemTypeModel shopItemType;
@@ -28,10 +28,10 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
      * @param price the price of this item
      * @param filepath the path to the asset
      */
-    public ShopItemModel(String id, int price, String filepath) {
+    public ShopItemModel(String id, int price, String filename) {
         this.id = id;
         this.price = price;
-        this.filepath = filepath;
+        this.filename = filename;
         purchased = false;
         activated = false;
     }
@@ -128,12 +128,12 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
 	}
 
 	/**
-	 * Returns the filepath of this item 
+	 * Returns the filename of this item 
 	 * 
-	 * @return the filepath of the asset
+	 * @return the filename of the asset
 	 */
-    public String getFilepath() {
-        return filepath;
+    public String getFilename() {
+        return filename;
     }
     
     /**

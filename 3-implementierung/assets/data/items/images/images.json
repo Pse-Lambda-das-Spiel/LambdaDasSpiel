@@ -2,7 +2,7 @@
 	"00": {
 		"id": 0,
 		"price": 10 ,
-		"filepath": "data/items/images/00.png"
+		"filename": "example"
 	}
 }
 
