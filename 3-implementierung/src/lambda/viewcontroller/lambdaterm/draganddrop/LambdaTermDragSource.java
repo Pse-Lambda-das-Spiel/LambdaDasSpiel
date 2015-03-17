@@ -7,11 +7,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
+
 import static lambda.LambdaGame.DEBUG;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.visitor.CopyVisitor;
 import lambda.model.lambdaterm.visitor.RemoveTermVisitor;
+import lambda.model.profiles.ProfileManager;
 import lambda.viewcontroller.lambdaterm.LambdaNodeViewController;
 import lambda.viewcontroller.lambdaterm.LambdaTermViewController;
 import static lambda.viewcontroller.lambdaterm.LambdaTermViewController.DEBUG_DRAG_AND_DROP;
@@ -137,5 +139,17 @@ public class LambdaTermDragSource extends Source {
         viewController.displayDropTargets(false);
         dragStarted = false;
         removedFromTree = false;
+        //update statistics
+        if(this.node.getCanHaveChildren()){
+        	int tempLambsPalced = ProfileManager.getManager().getCurrentProfile().getStatistics().getLambsPlaced();
+        	int tempLambsPalcedPerLevel = ProfileManager.getManager().getCurrentProfile().getStatistics().getLambsPlacedPerLevel();
+        	ProfileManager.getManager().getCurrentProfile().getStatistics().setLambsPlaced(++tempLambsPalced);
+        	ProfileManager.getManager().getCurrentProfile().getStatistics().setLambsPlacedPerLevel(++tempLambsPalcedPerLevel);
+        }else{
+        	int tempGemsPalced = ProfileManager.getManager().getCurrentProfile().getStatistics().getGemsPlaced();
+        	int tempGemsPalcedPerLevel = ProfileManager.getManager().getCurrentProfile().getStatistics().getGemsPlacedPerLevel();
+        	ProfileManager.getManager().getCurrentProfile().getStatistics().setGemsPlaced(++tempGemsPalced);
+        	ProfileManager.getManager().getCurrentProfile().getStatistics().setGemsPlacedPerLevel(++tempGemsPalcedPerLevel);
+        }
     }
 }
