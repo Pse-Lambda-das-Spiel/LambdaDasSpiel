@@ -49,9 +49,9 @@ public class LambdaParenthesisViewController extends LambdaNodeViewController {
         center = viewController.getContext().getElementUIContextFamily().getParenthesis().getCenter();
         back = viewController.getContext().getElementUIContextFamily().getParenthesis().getBack();
         
-        frontMask = viewController.getContext().getElementUIContextFamily().getAbstraction().getmFront(); // TODO add reference to masks in parenthesis
-        centerMask = viewController.getContext().getElementUIContextFamily().getAbstraction().getmCenter();
-        backMask = viewController.getContext().getElementUIContextFamily().getAbstraction().getmBack();
+        frontMask = viewController.getContext().getElementUIContextFamily().getParenthesis().getmFront();
+        centerMask = viewController.getContext().getElementUIContextFamily().getParenthesis().getmCenter();
+        backMask = viewController.getContext().getElementUIContextFamily().getParenthesis().getmBack();
     }
 
     /**

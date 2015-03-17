@@ -37,7 +37,7 @@ public abstract class LambdaNodeViewController extends Actor {
     /**
      * The size of the gap between two nodes.
      */
-    public static final float GAP_SIZE = 15.0f;
+    public static final float GAP_SIZE = 30.0f;
     /**
      * The term that is displayed by this viewcontroller.
      */

@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
+import lambda.LambdaGame;
 
 import lambda.model.editormode.EditorModel;
 import lambda.model.levels.LevelManager;
@@ -36,6 +37,10 @@ import lambda.viewcontroller.mainmenu.MainMenuViewController;
  * @author Florian Fervers
  */
 public class ReductionViewController extends StageViewController implements ReductionModelObserver, InputProcessor {
+    /**
+     * For debugging outputs.
+     */
+    public static final boolean DEBUG = false && LambdaGame.DEBUG;
     /**
      * The initial offset of the term from the top left corner in percentages of
      * screen size.
@@ -147,19 +152,25 @@ public class ReductionViewController extends StageViewController implements Redu
         stepRevertButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                model.stepRevert();
+                if (!stepRevertButton.isDisabled()) { // How come this is even necessary!?
+                    model.stepRevert();
+                }
             }
         });
         stepButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                model.step();
+                if (!stepButton.isDisabled()) {
+                    model.step();
+                }
             }
         });
         playPauseButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                model.togglePlay();
+                if (!playPauseButton.isDisabled()) {
+                    model.togglePlay();
+                }
             }
         });
         backToEditorButton.addListener(new ClickListener() {
@@ -202,7 +213,14 @@ public class ReductionViewController extends StageViewController implements Redu
         getStage().addActor(background);
         background.toBack();
 
+        stepButton.setDisabled(false);
+        playPauseButton.setDisabled(false);
         stepRevertButton.setDisabled(true);
+        if (DEBUG) {
+            System.out.println("Disabled stepRevert in reset");
+            System.out.println("Enabled step in reset");
+            System.out.println("Enabled pausePlay in reset");
+        }
     }
 
     /**
@@ -247,6 +265,11 @@ public class ReductionViewController extends StageViewController implements Redu
         stepButton.setDisabled(busy);
         playPauseButton.setDisabled(busy);
         stepRevertButton.setDisabled(model.isBusy() || model.getHistorySize() == 0);
+        if (DEBUG) {
+            System.out.println((stepRevertButton.isDisabled() ? "Disabled" : "Enabled") + " stepRevert in busyChanged(" + model.isBusy() + ", " + model.getHistorySize() + ")");
+            System.out.println((playPauseButton.isDisabled() ? "Disabled" : "Enabled") + " playPause in busyChanged(" + model.isBusy() + ", " + model.getHistorySize() + ")");
+            System.out.println((stepButton.isDisabled() ? "Disabled" : "Enabled") + " step in busyChanged(" + model.isBusy() + ", " + model.getHistorySize() + ")");
+        }
     }
 
     /**
@@ -255,6 +278,9 @@ public class ReductionViewController extends StageViewController implements Redu
     @Override
     public void historySizeChanged(int newSize) {
         stepRevertButton.setDisabled(model.isBusy() || model.getHistorySize() == 0);
+        if (DEBUG) {
+            System.out.println((stepRevertButton.isDisabled() ? "Disabled" : "Enabled") + " stepRevert in historySizeChanged(" + model.isBusy() + ", " + model.getHistorySize() + ")");
+        }
     }
 
     /**
@@ -267,10 +293,10 @@ public class ReductionViewController extends StageViewController implements Redu
     @Override
     public void reductionFinished(boolean levelComplete) {
         //add coins to player etc.
-        new FinishDialog(levelComplete, model.getContext().getLevelModel().getCoins(), 
-        				assets.get("data/skins/DialogTemp.json", Skin.class), 
-        				assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class), 
-        				getStage().getWidth(), getStage().getHeight()).show(getStage());
+        new FinishDialog(levelComplete, model.getContext().getLevelModel().getCoins(),
+                assets.get("data/skins/DialogTemp.json", Skin.class),
+                assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class),
+                getStage().getWidth(), getStage().getHeight()).show(getStage());
     }
 
     /**
@@ -368,7 +394,7 @@ public class ReductionViewController extends StageViewController implements Redu
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     getGame().getController(LevelSelectionViewController.class).
-                    			startLevel(model.getContext().getLevelModel());
+                            startLevel(model.getContext().getLevelModel());
                     remove();
                 }
             });
@@ -413,7 +439,7 @@ public class ReductionViewController extends StageViewController implements Redu
             restartButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                	getGame().getController(LevelSelectionViewController.class).startLevel(playedLevel);
+                    getGame().getController(LevelSelectionViewController.class).startLevel(playedLevel);
                     remove();
                 }
             });
@@ -424,14 +450,14 @@ public class ReductionViewController extends StageViewController implements Redu
                 nextLevelButton.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                    	LevelManager levelManager = LevelManager.getLevelManager();
-                    	// if the last level was solved, start with level 1 again
-                    	if (playedLevel.getId() == levelManager.getNumberOfLevels()) {
-                    		getGame().getController(LevelSelectionViewController.class).startLevel(levelManager.getLevel(1));
-                    	} else {
-                    		getGame().getController(LevelSelectionViewController.class).
-                    			startLevel(levelManager.getLevel(playedLevel.getId() + 1));
-                    	}
+                        LevelManager levelManager = LevelManager.getLevelManager();
+                        // if the last level was solved, start with level 1 again
+                        if (playedLevel.getId() == levelManager.getNumberOfLevels()) {
+                            getGame().getController(LevelSelectionViewController.class).startLevel(levelManager.getLevel(1));
+                        } else {
+                            getGame().getController(LevelSelectionViewController.class).
+                                    startLevel(levelManager.getLevel(playedLevel.getId() + 1));
+                        }
                         remove();
                     }
                 });
@@ -440,11 +466,11 @@ public class ReductionViewController extends StageViewController implements Redu
                 ProfileModel currentProfile = ProfileManager.getManager().getCurrentProfile();
                 // update levelindex and coins only if a new level was solved
                 if (playedLevel.getId() == currentProfile.getLevelIndex()) {
-                	 currentProfile.setLevelIndex(currentProfile.getLevelIndex() + 1);
-                	 currentProfile.setCoins(currentProfile.getCoins() + coins);
-                	 Label coinsLabel = new Label(language.format("coinsGained", coins), dialogSkin);
-                     coinsLabel.setFontScale(0.6f);
-                     add(coinsLabel).colspan(3);
+                    currentProfile.setLevelIndex(currentProfile.getLevelIndex() + 1);
+                    currentProfile.setCoins(currentProfile.getCoins() + coins);
+                    Label coinsLabel = new Label(language.format("coinsGained", coins), dialogSkin);
+                    coinsLabel.setFontScale(0.6f);
+                    add(coinsLabel).colspan(3);
                 }
             }
         }
