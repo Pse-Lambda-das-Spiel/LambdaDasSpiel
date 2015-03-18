@@ -7,22 +7,27 @@
 		"colorEquivalence": true,
 		"availableColors": [
 			{
-			"Color": "blue"
+			"color": "x"
 			},
 			{
-			"Color": "red"
+			"color": "y"
 			},
 			{
-			"Color": "green"
+			"color": "z"
 			},
 			{
-			"Color": "cyan"
+			"color": "t"
 			},
 			{
-			"Color": "orange"
+			"color": "u"
 			},
 			{
-			"Color": "yellow"
+			"color": "v"
+			}
+		],
+		"lockedColors": [
+			{
+			"color": "s"
 			}
 		],
 		"defaultStrategy": "NORMAL_ORDER",
@@ -45,43 +50,44 @@
 		"tutorial": [
 		],
 		"constellations": {
-			"_comment": "(lambdax.x)y , x is blue and y is red",
 			"start": {
+				"_comment": "(lu.uv)(ls.s)",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "orange",
+						"color": "u",
 						"inside": {
 							"type": "application",
 							"locked": true,
 							"left": {
 								"type": "variable",
 								"locked": true,
-								"color": "orange"
+								"color": "u"
 							},
 							"right": {
 								"type": "variable",
 								"locked": true,
-								"color": "yellow"
+								"color": "v"
 							}			
 						}
 					},
 					"right": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "pink",
+						"color": "s",
 						"inside": {
 							"type": "variable",
 							"locked": true,
-							"color": "pink"
+							"color": "s"
 						}
 					}			
 				}
 			},
 			"goal": {
+				"_comment": "vx(ls.sx)",
 				"child": {
 					"type": "application",
 					"locked": true,
@@ -91,12 +97,12 @@
 						"left": {
 							"type": "variable",
 							"locked": true,
-							"color": "yellow"
+							"color": "v"
 						},
 						"right": {
 							"type": "variable",
 							"locked": true,
-							"color": "blue"
+							"color": "x"
 						}
 					},
 					"right": {
@@ -105,55 +111,56 @@
 						"left": {
 							"type": "variable",
 							"locked": true,
-							"color": "orange"
+							"color": "u"
 						},
 						"right": {
 							"type": "variable",
 							"locked": true,
-							"color": "orange"
+							"color": "u"
 						}			
 					}			
 				}
 			},
 			"hint": {
+				"_comment": "(lu.uv)(ls.sx)",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "orange",
+						"color": "u",
 						"inside": {
 							"type": "application",
 							"locked": true,
 							"left": {
 								"type": "variable",
 								"locked": true,
-								"color": "orange"
+								"color": "u"
 							},
 							"right": {
 								"type": "variable",
 								"locked": true,
-								"color": "yellow"
+								"color": "v"
 							}			
 						}
 					},
 					"right": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "pink",
+						"color": "s",
 						"inside": {
 							"type": "application",
 							"locked": true,
 							"left": {
 								"type": "variable",
 								"locked": true,
-								"color": "pink"
+								"color": "s"
 							},
 							"right": {
 								"type": "variable",
 								"locked": true,
-								"color": "blue"
+								"color": "x"
 							}	
 						}		
 					}			

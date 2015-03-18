@@ -1,11 +1,9 @@
 package lambda.model.levels;
 
 import java.util.List;
-
 import com.badlogic.gdx.graphics.Color;
 
 import lambda.model.lambdaterm.LambdaRoot;
-import lambda.viewcontroller.level.TutorialMessage;
 
 /**
  * Represents a level.
@@ -15,19 +13,18 @@ import lambda.viewcontroller.level.TutorialMessage;
 public class LevelModel {
 
     private int id;
-    private int difficulty;
-    private int coins;
-    private boolean standardMode;
-
-
-	private boolean colorEquivalence; 
-    private List<Color> availableColors;
     private LambdaRoot start;
     private LambdaRoot goal;
     private LambdaRoot hint;
     private List<TutorialMessageModel> tutorial;
     private List<ReductionStrategy> availableRedStrats;
     private List<ElementType> useableElements;
+    private int difficulty;
+    private int coins;
+    private boolean standardMode;
+	private boolean colorEquivalence; 
+    private List<Color> availableColors;
+    private List<Color> lockedColors;
     private ReductionStrategy defaultStrategy;
     
 
@@ -45,14 +42,17 @@ public class LevelModel {
      * @param coins              the coins you will get if you complete the level
      * @param standardMode       indicates whether the level has to be solved in standard mode or reversed
      * @param colorEquivalence	 indicates whether color equivalence or alpha equivalence is checked
-     * @param availableColors 	 the available colors for the coloring of this level
+     * @param availableColors 	 the available colors for the coloring of this level(not available for alpha conversion)
+     * @param lockedColors		 the locked colors of this level 
+     * 							 (neither available for coloring dialog nor alpha conversion)
      * @param defaultStrategy 	 the default reduction strategy of this level
      */
     public LevelModel(int id, LambdaRoot start,
                       LambdaRoot goal, LambdaRoot hint,
                       List<TutorialMessageModel> tutorial, List<ReductionStrategy> availableRedStrats,
                       List<ElementType> useableElements, int difficulty, int coins, boolean standardMode, 
-                      boolean colorEquivalence, List<Color> availableColors, ReductionStrategy defaultStrategy) {
+                      boolean colorEquivalence, List<Color> availableColors, List<Color> lockedColors, 
+                      ReductionStrategy defaultStrategy) {
         this.id = id;
         this.start = start;
         this.goal = goal;
@@ -65,6 +65,7 @@ public class LevelModel {
         this.standardMode = standardMode;
         this.colorEquivalence =colorEquivalence;
         this.availableColors = availableColors;
+        this.lockedColors = lockedColors;
         this.defaultStrategy = defaultStrategy; 
     }
 
@@ -158,12 +159,10 @@ public class LevelModel {
         return coins;
     }
 
-
-  
      /**
       *  Returns the default strategy for the level.
       *  
-      * @return the default strategy
+      * @return the defaultStrategy
       */
     public ReductionStrategy getDefaultStrategy() {
         return defaultStrategy;
@@ -183,10 +182,21 @@ public class LevelModel {
 
 	/**
 	 * Returns all colors available for the coloring dialog of this level.
+	 * These colors are not available as new colors for an alpha conversion in this level.
 	 * 
-	 * @return the lockedColors
+	 * @return the availableColors of this level
 	 */
 	public List<Color> getAvailableColors() {
 		return availableColors;
+	}
+
+	/**
+	 * Returns the list of colors which are neither available for the coloring dialog of this level 
+	 * nor as new colors for an alpha conversion in this level.
+	 * 
+	 * @return the lockedColors
+	 */
+	public List<Color> getLockedColors() {
+		return lockedColors;
 	}
 }

@@ -1,11 +1,7 @@
 package lambda.model.levels;
 
-import lambda.model.lambdaterm.LambdaRoot;
-import lambda.viewcontroller.level.TutorialMessage;
-
 import org.junit.After;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -14,7 +10,6 @@ import org.junit.Test;
 import com.badlogic.gdx.graphics.Color;
 
 import java.util.LinkedList;
-import java.util.List;
 
 
 /**
@@ -28,7 +23,8 @@ public class LevelModelTest {
     public void setUp() throws Exception {
         level = new LevelModel(13, null, null, null,
                 new LinkedList<TutorialMessageModel>(), new LinkedList<ReductionStrategy>(),
-                new LinkedList<ElementType>(), 3, 13, true, true, new LinkedList<Color>(), ReductionStrategy.NORMAL_ORDER);
+                new LinkedList<ElementType>(), 3, 13, true, true, new LinkedList<Color>(),
+                new LinkedList<Color>(), ReductionStrategy.NORMAL_ORDER);
 
     }
 
@@ -53,13 +49,10 @@ public class LevelModelTest {
         assertTrue(level.getAvailableRedStrats().get(2) == ReductionStrategy.CALL_BY_VALUE);
         level.getAvailableRedStrats().add(3, ReductionStrategy.NORMAL_ORDER);
         assertTrue(level.getAvailableRedStrats().get(3) == ReductionStrategy.NORMAL_ORDER);
-
     }
 
     @After
     public void tearDown() throws Exception {
     }
-
-
 
 }

@@ -1,9 +1,7 @@
 package lambda.model.levels;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-
 /**
- * This class represents the model of a {@link TutorialMessage} and hold all not graphical data.
+ * This class represents the model of a {@link TutorialMessage} and holds all non graphical data.
  * 
  * @author Robert Hochweiss
  *

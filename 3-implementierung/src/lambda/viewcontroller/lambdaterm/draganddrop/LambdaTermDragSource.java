@@ -140,7 +140,7 @@ public class LambdaTermDragSource extends Source {
         dragStarted = false;
         removedFromTree = false;
         //update statistics
-        if(this.node.getCanHaveChildren()){
+        if(this.node.isCanHaveChildren()){
         	int tempLambsPalced = ProfileManager.getManager().getCurrentProfile().getStatistics().getLambsPlaced();
         	int tempLambsPalcedPerLevel = ProfileManager.getManager().getCurrentProfile().getStatistics().getLambsPlacedPerLevel();
         	ProfileManager.getManager().getCurrentProfile().getStatistics().setLambsPlaced(++tempLambsPalced);

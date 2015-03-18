@@ -7,23 +7,25 @@
 		"colorEquivalence": true,
 		"availableColors": [
 			{
-			"Color": "blue"
+			"color": "x"
 			},
 			{
-			"Color": "red"
+			"color": "y"
 			},
 			{
-			"Color": "green"
+			"color": "z"
 			},
 			{
-			"Color": "cyan"
+			"color": "t"
 			},
 			{
-			"Color": "orange"
+			"color": "u"
 			},
 			{
-			"Color": "yellow"
+			"color": "v"
 			}
+		],
+		"lockedColors": [
 		],
 		"defaultStrategy": "NORMAL_ORDER",
 		"availableRedStrats": [
@@ -53,45 +55,47 @@
 			},
 		],
 		"constellations": {
-			"_comment": "(lambdax.x)y , x is blue and y is red",
 			"start": {
+				"_comment": "(lz.zz)v",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "green",
+						"color": "z",
 						"inside": {
 							"type": "application",
 							"locked": true,
 							"left": {
 								"type": "variable",
 								"locked": true,
-								"color": "green"
+								"color": "z"
 							},
 							"right": {
 								"type": "variable",
 								"locked": true,
-								"color": "green"
+								"color": "z"
 							}			
 						}
 					},
 					"right": {
 						"type": "variable",
 						"locked": true,
-						"color": "yellow"
+						"color": "v"
 					}			
 				}
 			},
 			"goal": {
+				"_comment": "vv",
 				"child": null
 			},
 			"hint": {
+				"_comment": "v",
 				"child": {
 					"type": "variable",
 					"locked": true,
-					"color": "yellow"
+					"color": "v"
 				}
 			}
 		}

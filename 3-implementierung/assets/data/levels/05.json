@@ -4,25 +4,30 @@
 		"difficulty": 1 ,
 		"coins": 10,
 		"standardMode": true,
-		"colorEquivalence": false,
+		"colorEquivalence": true,
 		"availableColors": [
 			{
-			"Color": "pink"
+			"color": "s"
 			},
 			{
-			"Color": "red"
+			"color": "y"
 			},
 			{
-			"Color": "green"
+			"color": "z"
 			},
 			{
-			"Color": "cyan"
+			"color": "t"
 			},
 			{
-			"Color": "orange"
+			"color": "u"
 			},
 			{
-			"Color": "yellow"
+			"color": "v"
+			}
+		],
+		"lockedColors": [
+			{
+			"color": "x"
 			}
 		],
 		"defaultStrategy": "NORMAL_ORDER",
@@ -39,78 +44,80 @@
 		"tutorial": [
 		],
 		"constellations": {
-			"_comment": "ly.(lx.x)y)z",
 			"start": {
+				"_comment": "ly.(lx.x)y)z",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "red",
+						"color": "y",
 						"inside": {
 							"type": "application",
 							"locked": true,
 							"left": {
 								"type": "abstraction",
 								"locked": true,
-								"color": "blue",
+								"color": "x",
 								"inside": {
 									"type": "variable",
 									"locked": true,
-									"color": "blue"
+									"color": "x"
 								}
 							},
 							"right": {
 								"type": "variable",
 								"locked": true,
-								"color": "red"
+								"color": "y"
 							}			
 						}
 					},
 					"right": {
 						"type": "variable",
 						"locked": true,
-						"color": "green"
+						"color": "z"
 					}			
 				}
 			},
 			"goal": {
+				"_comment": "zz",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
 						"type": "variable",
 						"locked": true,
-						"color": "green"
+						"color": "z"
 								
 					},
 					"right": {
 						"type": "variable",
 						"locked": true,
-						"color": "green"
+						"color": "z"
 					}			
 				}
 			},
 			"hint": {
+				"_comment": "ly.(lx.x)yw)z",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "red",
+						"color": "y",
 						"inside": {
 							"type": "application",
 							"locked": true,
 							"left": {
 								"type": "abstraction",
 								"locked": true,
-								"color": "blue",
+								"color": "x",
 								"inside": {
 									"type": "variable",
 									"locked": true,
-									"color": "blue"
+									"color": "x"
 								}
 							},
 							"right": {
@@ -119,13 +126,13 @@
 								"left": {
 									"type": "variable",
 									"locked": true,
-									"color": "red"
+									"color": "y"
 								
 								},
 								"right": {
 									"type": "variable",
 									"locked": false,
-									"color": "white"
+									"color": "w"
 								}		
 							}			
 						}
@@ -133,7 +140,7 @@
 					"right": {
 						"type": "variable",
 						"locked": true,
-						"color": "green"
+						"color": "z"
 					}			
 				}
 			}

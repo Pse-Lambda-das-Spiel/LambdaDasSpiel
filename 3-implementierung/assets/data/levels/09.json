@@ -7,22 +7,30 @@
 		"colorEquivalence": true,
 		"availableColors": [
 			{
-			"Color": "blue"
+			"color": "x"
 			},
 			{
-			"Color": "red"
+			"color": "y"
 			},
 			{
-			"Color": "green"
+			"color": "z"
 			},
 			{
-			"Color": "purple"
+			"color": "r"
 			},
 			{
-			"Color": "orange"
+			"color": "u"
 			},
 			{
-			"Color": "yellow"
+			"color": "v"
+			}
+		],
+		"lockedColors": [
+			{
+			"color": "s"
+			},
+			{
+			"color": "t"
 			}
 		],
 		"defaultStrategy": "NORMAL_ORDER",
@@ -45,24 +53,25 @@
 		"tutorial": [
 		],
 		"constellations": {
-			"_comment": "(lambdax.x)y , x is blue and y is red",
 			"start": {
+				"_comment": "st",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
 						"type": "variable",
 						"locked": true,
-						"color": "pink"
+						"color": "s"
 					},
 					"right": {
 						"type": "variable",
 						"locked": true,
-						"color": "cyan"
+						"color": "t"
 					}			
 				}
 			},
 			"goal": {
+				"_comment": "sst",
 				"child": {
 					"type": "application",
 					"locked": true,
@@ -72,22 +81,23 @@
 						"left": {
 							"type": "variable",
 							"locked": true,
-							"color": "pink"
+							"color": "s"
 						},
 						"right": {
 							"type": "variable",
 							"locked": true,
-							"color": "pink"
+							"color": "s"
 						}		
 					},
 					"right": {
 						"type": "variable",
 						"locked": true,
-						"color": "cyan"
+						"color": "t"
 					}			
 				}
 			},
 			"hint": {
+				"_comment": "(lw.)st",
 				"child": {
 					"type": "application",
 					"locked": true,
@@ -97,19 +107,19 @@
 						"left": {
 							"type": "abstraction",
 							"locked": true,
-							"color": "white",
+							"color": "w",
 							"inside": null,
 						},
 						"right": {
 							"type": "variable",
 							"locked": true,
-							"color": "pink"
+							"color": "s"
 						}		
 					},
 					"right": {
 						"type": "variable",
 						"locked": true,
-						"color": "cyan"
+						"color": "t"
 					}			
 				}
 			}

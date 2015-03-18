@@ -360,4 +360,13 @@ public abstract class LambdaNodeViewController extends Actor {
         }
         return true;
     }
+
+	/**
+	 * Returns whether this node can have children
+	 * 
+	 * @return true if this can have children, false otherwise
+	 */
+	public boolean isCanHaveChildren() {
+		return canHaveChildren;
+	}
 }

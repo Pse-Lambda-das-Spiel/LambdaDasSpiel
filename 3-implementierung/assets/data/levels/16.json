@@ -7,23 +7,25 @@
 		"colorEquivalence": true,
 		"availableColors": [
 			{
-			"Color": "blue"
+			"color": "x"
 			},
 			{
-			"Color": "red"
+			"color": "y"
 			},
 			{
-			"Color": "green"
+			"color": "z"
 			},
 			{
-			"Color": "cyan"
+			"color": "t"
 			},
 			{
-			"Color": "orange"
+			"color": "u"
 			},
 			{
-			"Color": "yellow"
+			"color": "v"
 			}
+		],
+		"lockedColors": [
 		],
 		"defaultStrategy": "NORMAL_ORDER",
 		"availableRedStrats": [
@@ -45,8 +47,8 @@
 		"tutorial": [
 		],
 		"constellations": {
-			"_comment": "(lambdax.x)y , x is blue and y is red",
 			"start": {
+				"_comment": "(lv.lx.ly.vxy)(lt.t)(lu.u)",
 				"child": {
 					"type": "application",
 					"locked": true,
@@ -56,15 +58,15 @@
 						"left": {
 							"type": "abstraction",
 							"locked": true,
-							"color": "yellow",
+							"color": "v",
 							"inside": {
 								"type": "abstraction",
 								"locked": true,
-								"color": "blue",
+								"color": "x",
 								"inside": {
 									"type": "abstraction",
 									"locked": true,
-									"color": "red",
+									"color": "y",
 									"inside": {
 										"type": "application",
 										"locked": true,
@@ -74,18 +76,18 @@
 											"left": {
 												"type": "variable",
 												"locked": true,
-												"color": "yellow",
+												"color": "v",
 											},
 											"right": {
 												"type": "variable",
 												"locked": true,
-												"color": "blue"
+												"color": "x"
 											}		
 										},
 										"right": {
 											"type": "variable",
 											"locked": true,
-											"color": "red"
+											"color": "y"
 										}		
 									}
 								}
@@ -94,38 +96,40 @@
 						"right": {
 							"type": "abstraction",
 							"locked": true,
-							"color": "cyan",
+							"color": "t",
 							"inside": {
 								"type": "variable",
 								"locked": true,
-								"color": "cyan"
+								"color": "t"
 							}
 						}			
 					},
 					"right": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "orange",
+						"color": "u",
 						"inside": {
 							"type": "variable",
 							"locked": true,
-							"color": "orange"
+							"color": "u"
 						}
 					}			
 				}
 			},
 			"goal": {
+				"_comment": "ly.y",
 				"child": null
 			},
 			"hint": {
+				"_comment": "lw.w",
 				"child": {
 					"type": "abstraction",
 					"locked": false,
-					"color": "white",
+					"color": "w",
 					"inside": {
 						"type": "variable",
 						"locked": false,
-						"color": "white"
+						"color": "w"
 					}
 				}
 			}

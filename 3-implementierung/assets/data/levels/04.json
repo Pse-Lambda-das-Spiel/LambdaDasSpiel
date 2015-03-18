@@ -7,22 +7,30 @@
 		"colorEquivalence": true,
 		"availableColors": [
 			{
-			"Color": "blue"
+			"color": "x"
 			},
 			{
-			"Color": "red"
+			"color": "y"
 			},
 			{
-			"Color": "pink"
+			"color": "s"
 			},
 			{
-			"Color": "purple"
+			"color": "r"
 			},
 			{
-			"Color": "orange"
+			"color": "u"
 			},
 			{
-			"Color": "yellow"
+			"color": "v"
+			}
+		],
+		"lockedColors": [
+			{
+			"color": "z"
+			},
+			{
+			"color": "t"
 			}
 		],
 		"defaultStrategy": "NORMAL_ORDER",
@@ -36,15 +44,15 @@
 		"tutorial": [
 		],
 		"constellations": {
-			"_comment": "(lu.wsw)(lz.tz)",
 			"start": {
+				"_comment": "(lu.wsw)(lz.tz)",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "orange",
+						"color": "u",
 						"inside": {
 							"type": "application",
 							"locked": true,
@@ -55,43 +63,44 @@
 								"left": {
 									"type": "variable",
 									"locked": false,
-									"color": "white"
+									"color": "w"
 								},
 								"right": {
 									"type": "variable",
 									"locked": true,
-									"color": "pink"
+									"color": "s"
 								}
 							},
 							"right": {
 								"type": "variable",
 								"locked": false,
-								"color": "white"
+								"color": "w"
 							}		
 						}
 					},
 					"right": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "green",
+						"color": "z",
 						"inside": {
 							"type": "application",
 								"locked": true,
 								"left": {
 									"type": "variable",
 									"locked": true,
-									"color": "cyan"
+									"color": "t"
 								},
 								"right": {
 									"type": "variable",
 									"locked": true,
-									"color": "green"
+									"color": "z"
 								}
 						}
 					}			
 				}
 			},
 			"goal": {
+				"_comment": "tsx",
 				"child": {
 					"type": "application",
 					"locked": true,
@@ -101,29 +110,30 @@
 						"left": {
 							"type": "variable",
 							"locked": true,
-							"color": "cyan"
+							"color": "t"
 						},
 						"right": {
 							"type": "variable",
 							"locked": true,
-							"color": "pink"
+							"color": "s"
 						}
 					},
 					"right": {
 						"type": "variable",
 						"locked": true,
-						"color": "blue"
+						"color": "x"
 					}		
 				}
 			},
 			"hint": {
+				"_comment": "(lu.wsx)(lz.tz)",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "orange",
+						"color": "u",
 						"inside": {
 							"type": "application",
 							"locked": true,
@@ -134,37 +144,37 @@
 								"left": {
 									"type": "variable",
 									"locked": false,
-									"color": "white"
+									"color": "w"
 								},
 								"right": {
 									"type": "variable",
 									"locked": true,
-									"color": "pink"
+									"color": "s"
 								}
 							},
 							"right": {
 								"type": "variable",
 								"locked": true,
-								"color": "blue"
+								"color": "x"
 							}		
 						}
 					},
 					"right": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "green",
+						"color": "z",
 						"inside": {
 							"type": "application",
 								"locked": true,
 								"left": {
 									"type": "variable",
 									"locked": true,
-									"color": "cyan"
+									"color": "t"
 								},
 								"right": {
 									"type": "variable",
 									"locked": true,
-									"color": "green"
+									"color": "z"
 								}
 						}
 					}			

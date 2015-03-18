@@ -12,7 +12,8 @@ import com.badlogic.gdx.graphics.Color;
 
 /**
  * LevelManager manages everything which is needed for the level contexts.
- * This manager loads all leveld, difficulty settings and several assets which are used in every level.
+ * This manager loads all levels, difficulty settings and several assets which are used in every level
+ * as well as the mapping of variables to colors and reversed.
  *
  * @author: Kay Schmitteckert
  */
@@ -42,48 +43,21 @@ public class LevelManager {
 	private String[] difficultySettingFilePaths;
 	private String[] difficultyBGImageFilePaths;
 	private String[] difficultyMusicFilePaths;
-	private Map<Color, String> allLevelColors;
+	private static Map<Character, Color> variablesToColors;
+	private static Map<Color, Character> colorsToVariables;
 
 	/**
      * Creates an instance of this class and loads the two required lists
      */
     private LevelManager() {
+    	variablesToColors = new HashMap<>();
+    	colorsToVariables = new HashMap<>();
+    	LevelLoadHelper.loadAllColors(variablesToColors, colorsToVariables);
         levelFilePaths = LevelLoadHelper.loadAllLevelPaths();
         difficultySettingFilePaths = LevelLoadHelper.loadAllDifficultyPaths();
         difficultyMusicFilePaths = LevelLoadHelper.loadAllDifficultyMusicFilePaths();
         difficultyBGImageFilePaths = LevelLoadHelper.loadAllDifficultyBGImageFilePaths();
-        allLevelColors = new HashMap<>();
-        setAllLevelColors();
     }
-
-    private void setAllLevelColors() {
-    	allLevelColors.put(Color.BLUE, "a");
-    	allLevelColors.put(Color.RED, "b");
-    	allLevelColors.put(Color.GREEN, "c");
-    	allLevelColors.put(Color.CYAN, "d");
-    	allLevelColors.put(Color.ORANGE, "e");
-    	allLevelColors.put(Color.YELLOW, "f");
-    	allLevelColors.put(Color.PINK, "g");
-    	allLevelColors.put(Color.PURPLE, "h");
-    	allLevelColors.put(Color.OLIVE, "i");
-    	allLevelColors.put(Color.BLACK, "j");
-    	allLevelColors.put(Color.WHITE, "k");
-    	allLevelColors.put(Color.GRAY, "l");
-    	allLevelColors.put(Color.MAGENTA, "m");
-    	allLevelColors.put(Color.MAROON, "n");
-    	allLevelColors.put(Color.NAVY, "o");
-    	allLevelColors.put(Color.TEAL, "p");
-    	allLevelColors.put(Color.CLEAR, "q");
-    }
-    
-    /**
-     * Returns a map of all possible colors in a level, with the color as the key and the name of the color as value.
-     * 
-   	 * @return the allLevelColors all posible colors in a level
-   	 */
-   	public Map<Color, String> getAllLevelColors() {
-   		return allLevelColors;
-   	}
     
     /**
      * Returns the LevelManager
@@ -124,7 +98,8 @@ public class LevelManager {
    	 * @return the difficulty settings with this id
    	 */
    	public DifficultySetting getDifficultySetting(int id) {
-   		DifficultySetting difficultySetting = assetManager.get(difficultySettingFilePaths[id - 1], DifficultySetting.class);
+   		DifficultySetting difficultySetting = assetManager.get(difficultySettingFilePaths[id - 1],
+   																DifficultySetting.class);
    		return difficultySetting;
    	}
     
@@ -163,4 +138,52 @@ public class LevelManager {
     public AssetManager getAssetManager() {
         return assetManager;
     }
+
+	/**
+	 * Returns the mapping of variables to colors with the variables as key.
+	 * 
+	 * @return the variablesToColors
+	 */
+	public static Map<Character, Color> getVariablesToColors() {
+		return variablesToColors;
+	}
+
+	/**
+	 * Returns the mapping of colors to variables with the colors as key.
+	 * 
+	 * @return the colorsToVariables
+	 */
+	public static Map<Color, Character> getColorsToVariables() {
+		return colorsToVariables;
+	}
+	
+	
+	/**
+	 * Converts a variable to its specific color.
+	 * 
+	 * @param variable the to be converted variable
+	 * @return the specific color for the given variable
+	 * @throws IllegalArgumentException if there is no color stored for the given variable
+	 */
+	public static Color convertVariableToColor(char variable) {
+		if (variablesToColors.get(variable) == null) {
+			throw new IllegalArgumentException("There is no color for the variable: " + variable);
+		}
+		return variablesToColors.get(variable);
+	}
+	
+	/**
+	 * Converts a color to its specific variable.
+	 * 
+	 * @param color the to be converted color
+	 * @return the specific variable for the given color
+	 * @throws IllegalArgumentException if there is no variable stored for the given color
+	 */
+	public static char convertColorToVariable(Color color) {
+		if (colorsToVariables.get(color) == null) {
+			throw new IllegalArgumentException("There is no variable for the color: " + color.toString());
+		}
+		return colorsToVariables.get(color);
+	}
+
 }

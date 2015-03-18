@@ -2,6 +2,7 @@ package lambda.model.levels;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -19,7 +20,8 @@ import lambda.model.lambdaterm.LambdaVariable;
  * This class helps with the loading process of level json files.
  * It encapsulates all functionality needed for accessing and loading level json files and initializing the levels.
  * It also encapsulates all functionality needed for accessing and loading difficulty setting files of the levels
- * and their components, the background image files and music files.
+ * and their components, the background image files and music files, 
+ * as well as loading all possible colors of a level and their associated variables.
  * 
  * @author Robert Hochweiss
  */
@@ -34,7 +36,7 @@ public final class LevelLoadHelper {
 	 * @param file the {@link FileHandle} of the to be loaded level
 	 * @return the LevelModel initialized with the level data from the json file
 	 * @throws InvalidJsonException if the corresponding json file has invalid content
-	 * @throws IOException if there is an error while reading the level json file
+	 * @throws JsonParseException if there is an error while reading the level json file
 	 */
 	public static LevelModel loadLevel(FileHandle file) {
 		JsonReader reader = new JsonReader();
@@ -53,10 +55,17 @@ public final class LevelLoadHelper {
 		for (JsonValue entry = availableRedStrats.child(); entry != null; entry = entry.next) {
 			redStratsList.add(convertJsonToReductionStrategy(entry.getString("reductionStrategy")));
 		}
+		if (!(redStratsList.contains(defaultStrategy))) {
+			throw new InvalidJsonException("The default reduction strategy must be " 
+											+ "in the list of the available reduction strategies!");
+		}
 		List<Color> availableColors = new ArrayList<>();
-		JsonValue availableColorsValue = level.get("availableColors");
-		for (JsonValue entry = availableColorsValue.child(); entry != null; entry = entry.next) {
-			availableColors.add(setColor(entry.getString("color")));
+		for (JsonValue entry = level.get("availableColors").child(); entry != null; entry = entry.next) {
+			availableColors.add(LevelManager.convertVariableToColor(entry.getChar("color")));
+		}
+		List<Color> lockedColors = new ArrayList<>();
+		for (JsonValue entry = level.get("lockedColors").child(); entry != null; entry = entry.next) {
+			lockedColors.add(LevelManager.convertVariableToColor(entry.getChar("color")));
 		}
 		JsonValue constellations = level.get("constellations");
 		JsonValue start = constellations.get("start");
@@ -67,7 +76,7 @@ public final class LevelLoadHelper {
 				convertJsonToConstellation(goal), convertJsonToConstellation(hint), convertJsonToTutorial(tutorial, id), 
 				redStratsList, convertJsonToUseableElements(useableElements), 
 				level.getInt("difficulty"), level.getInt("coins"), level.getBoolean("standardMode"),
-				level.getBoolean("colorEquivalence"), availableColors, defaultStrategy);
+				level.getBoolean("colorEquivalence"), availableColors, lockedColors, defaultStrategy);
 		return levelModel;
 	}
 
@@ -127,7 +136,7 @@ public final class LevelLoadHelper {
 	
 	private static LambdaRoot convertJsonToConstellation(JsonValue constellation) {
 		LambdaRoot root = new LambdaRoot();
-		root.setChild(selectNextNode(constellation.child(), root));
+		root.setChild(selectNextNode(constellation.get("child"), root));
 		return root;
 	}
 	
@@ -139,15 +148,15 @@ public final class LevelLoadHelper {
 	}
 	
 	private static LambdaAbstraction convertJsonToAbstraction(JsonValue value, LambdaTerm parent) {
-		LambdaAbstraction abstraction = new LambdaAbstraction(parent, setColor(value.getString("color")),
-				value.getBoolean("locked"));
+		LambdaAbstraction abstraction = new LambdaAbstraction(parent, 
+				LevelManager.convertVariableToColor(value.getChar("color")),value.getBoolean("locked"));
 		abstraction.setInside(selectNextNode(value.get("inside"), abstraction));
 		return abstraction;
 	}
 	
 	private static LambdaVariable convertJsonToVariable(JsonValue value, LambdaTerm parent) {
-		LambdaVariable variable = new LambdaVariable(parent, setColor(value.getString("color")), 
-				value.getBoolean("locked"));
+		LambdaVariable variable = new LambdaVariable(parent, 
+				LevelManager.convertVariableToColor(value.getChar("color")), value.getBoolean("locked"));
 		return variable;
 	}
 	
@@ -170,37 +179,6 @@ public final class LevelLoadHelper {
 			throw new InvalidJsonException("The LambdaTerm must be an application, an abstraction or a variable!");
 		}
 		return nextNode;
-	}
-	
-	
-	private static Color setColor(String color) {
-		switch(color) {
-		case "blue":
-			return Color.BLUE;
-		case "red":
-			return Color.RED;
-		case "yellow":
-			return Color.YELLOW;
-		case "green":
-			return Color.GREEN;
-		case "orange":
-			return Color.valueOf("ff8000ff");
-			//return Color.ORANGE;
-		case "cyan":
-			return Color.valueOf("00ffffff");
-			//return Color.CYAN;
-		case "pink":
-			return Color.valueOf("ff0080ff");
-			//return Color.PINK;
-		case "purple": 
-			return Color.PURPLE;
-		case "olive":
-			return Color.OLIVE;
-		case "white":
-			return Color.WHITE;
-		default:
-			throw new InvalidJsonException("Invalid color!");
-		}
 	}
 
 	/**
@@ -227,7 +205,7 @@ public final class LevelLoadHelper {
 	 * @param file the {@link FileHandle}  of the to be loaded difficulty settings
 	 * @return settings for a difficulty
 	 * @throws InvalidJsonException if the corresponding json file has invalid content
-	 * @throws IOException if there is an error while reading the level json file
+	 * @throws JsonParseException if there is an error while reading the level json file
 	 */
 	public static DifficultySetting loadDifficulty(FileHandle file) {
 		JsonReader reader = new JsonReader();
@@ -248,7 +226,7 @@ public final class LevelLoadHelper {
 	 * Returns the paths to all DifficultySetting files
 	 *
 	 * @return an array which contains the paths for all DifficultySettings
-	 * @throws IOException if there is an error while reading the level json file
+	 * @throws JsonParseException if there is an error while reading the json file
 	 */
 	public static String[] loadAllDifficultyPaths() {
 		FileHandle file = Gdx.files.internal("data/difficulties/numberOfDifficulties.json");
@@ -266,7 +244,7 @@ public final class LevelLoadHelper {
 	 * Returns the paths to all difficulty background image files.
 	 *
 	 * @return an array which contains the paths for all difficulty background image files;
-	 * @throws IOException if there is an error while reading the level json file
+	 * @throws JsonParseException if there is an error while reading the json file
 	 */
 	public static String[] loadAllDifficultyBGImageFilePaths() {
 		FileHandle file = Gdx.files.internal("data/levels/images/numberOfImages.json");
@@ -284,7 +262,7 @@ public final class LevelLoadHelper {
 	 * Returns the paths to all difficulty music files.
 	 *
 	 * @return an array which contains the paths for all difficulty music files;
-	 * @throws IOException if there is an error while reading the level json file
+	 * @throws JsonParseException if there is an error while reading the json file
 	 */
 	public static String[] loadAllDifficultyMusicFilePaths() {
 		FileHandle file = Gdx.files.internal("data/levels/music/numberOfMusic.json");
@@ -296,6 +274,38 @@ public final class LevelLoadHelper {
 			difficultyMusicFilePaths[i] = "data/levels/music/" + String.format("%02d", i + 1) + ".mp3";
 		}
 		return difficultyMusicFilePaths;
+	}
+	
+	/**
+	 * Loads all possible colors that can appear in a level and stores them and their specific variables in maps.
+	 * 
+	 * @param variablesToColors the map where the mapping from variables to colors is to be stored
+	 * @param colorsToVariables the map where the mapping from colors to variables is to be stored
+	 * @throws IllegalArgumentException if variablesToColors and/or colorsToVariables is null
+	 * @throws InvalidJsonException if the colors json file contains duplicate mappings
+	 * @throws JsonParseException if there is an error while reading the colors json file
+	 */
+	public static void loadAllColors(Map<Character, Color> variablesToColors, Map<Color, Character> colorsToVariables) {
+		if ((variablesToColors == null) || (colorsToVariables == null)) {
+			throw new IllegalArgumentException("The mappings of the variables to colors and reversed cannot be null!");
+		}
+		FileHandle file = Gdx.files.internal("data/levels/colors.json");
+		JsonReader reader = new JsonReader();
+		JsonValue jsonFile = reader.parse(file);
+		for (JsonValue entry = jsonFile.child().child(); entry != null; entry = entry.next) {
+			char variable = entry.getChar("variable");
+			Color color = Color.valueOf(entry.getString("color"));
+			// duplicate mappings are not allowed
+			if (variablesToColors.containsKey(variable)) {
+				throw new InvalidJsonException("There is already a mapping with the variable: " + variable);
+			}
+			if (variablesToColors.containsValue(color)) {
+				throw new InvalidJsonException("There is already a mapping with the color: " + color.toString());
+			}
+			// As a replacement for a bijective map
+			variablesToColors.put(variable, color);
+			colorsToVariables.put(color, variable);
+		}
 	}
 	
 }

@@ -72,11 +72,11 @@ public final class LambdaUtils {
                     // Inside term
                     ++index[0];
                     Color color = null;
-                    for (Map.Entry<Color, String> pair : LevelManager.getLevelManager().getAllLevelColors().entrySet()) {
-                        if (pair.getValue().equals(Character.toString(variableName))) {
-                            color = pair.getKey();
-                            break;
-                        }
+                    for (Map.Entry<Color, Character> pair : LevelManager.getColorsToVariables().entrySet()) {
+                    	 if (pair.getValue().equals(variableName)) {
+                             color = pair.getKey();
+                             break;
+                         }
                     }
                     if (color == null) {
                         color = new Color(variableName, variableName, variableName, 1);

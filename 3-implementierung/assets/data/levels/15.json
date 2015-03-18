@@ -7,23 +7,25 @@
 		"colorEquivalence": true,
 		"availableColors": [
 			{
-			"Color": "blue"
+			"color": "x"
 			},
 			{
-			"Color": "red"
+			"color": "y"
 			},
 			{
-			"Color": "green"
+			"color": "z"
 			},
 			{
-			"Color": "cyan"
+			"color": "t"
 			},
 			{
-			"Color": "orange"
+			"color": "u"
 			},
 			{
-			"Color": "yellow"
+			"color": "v"
 			}
+		],
+		"lockedColors": [
 		],
 		"defaultStrategy": "NORMAL_ORDER",
 		"availableRedStrats": [
@@ -45,67 +47,69 @@
 		"tutorial": [
 		],
 		"constellations": {
-			"_comment": "(lambdax.x)y , x is blue and y is red",
 			"start": {
+				"_comment": "(lu.(lt.tt)u)x",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "orange",
+						"color": "u",
 						"inside": {
 							"type": "application",
 							"locked": true,
 							"left": {
 								"type": "abstraction",
 								"locked": true,
-								"color": "blue",
+								"color": "x",
 								"inside": {
 									"type": "application",
 									"locked": true,
 									"left": {
 										"type": "variable",
 										"locked": true,
-										"color": "cyan",
+										"color": "t",
 									},
 									"right": {
 										"type": "variable",
 										"locked": true,
-										"color": "cyan"
+										"color": "t"
 									}			
 								}
 							},
 							"right": {
 								"type": "variable",
 								"locked": true,
-								"color": "orange"
+								"color": "u"
 							}			
 						}
 					},
 					"right": {
 						"type": "variable",
 						"locked": true,
-						"color": "blue"
+						"color": "x"
 					}			
 				}
 			},
 			"goal": {
+				"_comment": "xx",
 				"child": null
 			},
 			"hint": {
+				"_comment": "ww",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
 						"type": "variable",
 						"locked": false,
-						"color": "white"
+						"color": "w"
 					},
 					"right": {
 						"type": "variable",
 						"locked": false,
-						"color": "white"
+						"color": "w"
 					}			
 				}
 			}

@@ -7,22 +7,27 @@
 		"colorEquivalence": true,
 		"availableColors": [
 			{
-			"Color": "pink"
+			"color": "s"
 			},
 			{
-			"Color": "red"
+			"color": "y"
 			},
 			{
-			"Color": "green"
+			"color": "z"
 			},
 			{
-			"Color": "cyan"
+			"color": "t"
 			},
 			{
-			"Color": "orange"
+			"color": "u"
 			},
 			{
-			"Color": "yellow"
+			"color": "v"
+			}
+		],
+		"lockedColors": [
+			{
+			"color": "x"
 			}
 		],
 		"defaultStrategy": "NORMAL_ORDER",
@@ -56,53 +61,55 @@
 			}
 		],
 		"constellations": {
-			"_comment": "(lx.x)y , x is blue and y is red",
 			"start": {
+				"_comment": "(lx.x)w",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "blue",
+						"color": "x",
 						"inside": {
 							"type": "variable",
 							"locked": true,
-							"color": "blue"
+							"color": "x"
 						}
 					},
 					"right": {
 						"type": "variable",
 						"locked": false,
-						"color": "white"
+						"color": "w"
 					}			
 				}
 			},
 			"goal": {
+				"_comment": "y",
 				"child": {
 					"type": "variable",
 					"locked": true,
-					"color": "red"
+					"color": "y"
 				}
 			},
 			"hint": {
+				"_comment": "(lx.x)w",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "blue",
+						"color": "x",
 						"inside": {
 							"type": "variable",
 							"locked": true,
-							"color": "blue"
+							"color": "x"
 						}
 					},
 					"right": {
 						"type": "variable",
 						"locked": false,
-						"color": "white"
+						"color": "w"
 					}			
 				}
 			}
