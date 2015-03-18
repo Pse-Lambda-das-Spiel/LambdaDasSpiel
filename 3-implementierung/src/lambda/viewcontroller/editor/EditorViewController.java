@@ -213,7 +213,7 @@ public final class EditorViewController extends StageViewController implements E
                         strategies.add(ReductionStrategy.CALL_BY_VALUE);// test/delete
                         strategies.add(ReductionStrategy.NORMAL_ORDER);// test/delete*/
                         int size = (int) Math.ceil(Math.sqrt(strategies.size()));
-                        pad(height / 48);
+                        pad(height / 72 * size);
                         int i = 0;
                         for (final ReductionStrategy strategy : strategies) {
                             if (i++ % size == 0) {
@@ -231,6 +231,15 @@ public final class EditorViewController extends StageViewController implements E
                             });
                             add(stratButton);
                         }
+                        final Dialog dialog = this;
+                        addListener(new ClickListener() {
+                            @Override
+                            public void clicked(InputEvent event, float x, float y) {
+                                if (!(0 < x && 0 < y && x < dialog.getWidth() && y < dialog.getHeight())) {
+                                    remove();
+                                }
+                            }
+                        });
                     }
                 }.show(getStage());
             }

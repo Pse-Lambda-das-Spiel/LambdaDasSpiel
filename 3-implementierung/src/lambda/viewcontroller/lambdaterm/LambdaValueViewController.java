@@ -52,7 +52,7 @@ public abstract class LambdaValueViewController extends LambdaNodeViewController
                             List<Color> colors = viewController.getContext()
                                     .getLevelModel().getAvailableColors();
                             int size = (int) Math.ceil(Math.sqrt(colors.size()));
-                            pad(height / 24);
+                            pad(height / 72 * size);
                             int i = 0;
                             for (final Color color : colors) {
                                 if (i++ % size == 0) {
@@ -72,6 +72,15 @@ public abstract class LambdaValueViewController extends LambdaNodeViewController
                                 });
                                 add(colorButton);
                             }
+                            final Dialog dialog = this;
+                            addListener(new ClickListener() {
+                                @Override
+                                public void clicked(InputEvent event, float x, float y) {
+                                    if (!(0 < x && 0 < y && x < dialog.getWidth() && y < dialog.getHeight())) {
+                                        remove();
+                                    }
+                                }
+                            });
                         }
                     }.show(getStage());
                 }

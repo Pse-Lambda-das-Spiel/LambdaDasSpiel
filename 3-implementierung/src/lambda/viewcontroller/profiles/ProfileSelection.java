@@ -252,11 +252,20 @@ public class ProfileSelection extends StageViewController {
                         }
                     });
                     add(deleteButton).size(size);
+                    final Dialog dialog = this;
+                    addListener(new ClickListener() {
+                        @Override
+                        public void clicked(InputEvent event, float x, float y) {
+                            if (!(0 < x && 0 < y && x < dialog.getWidth() && y < dialog.getHeight())) {
+                                remove();
+                            }
+                        }
+                    });
                 }
                 
                 //asks for confirmation if the profile should be deleted
                 private void confirm() {
-                    clear();
+                    clearChildren();
                     pad(space * 3 / 2);
                     Label nameLabel = new Label(name, dialogSkin);
                     add(nameLabel).colspan(2);
