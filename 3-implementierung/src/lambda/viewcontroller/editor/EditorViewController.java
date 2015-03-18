@@ -177,7 +177,9 @@ public final class EditorViewController extends StageViewController implements E
         hintButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new HintDialog(dialogSkin, EditorViewController.this.model
+                new HintDialog(dialogSkin, manager.get(ProfileManager
+                        .getManager().getCurrentProfile().getLanguage(),
+                        I18NBundle.class), EditorViewController.this.model
                         .getLevelContext(), getStage()).show(getStage());
             }
         });
@@ -186,14 +188,15 @@ public final class EditorViewController extends StageViewController implements E
             public void clicked(InputEvent event, float x, float y) {
                 new HelpDialog(dialogSkin, manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
-                        I18NBundle.class), getStage().getWidth(), getStage()
-                        .getHeight()).show(getStage());
+                        I18NBundle.class), getStage()).show(getStage());
             }
         });
         targetButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new TargetDialog(dialogSkin, EditorViewController.this.model
+                new TargetDialog(dialogSkin, manager.get(ProfileManager
+                        .getManager().getCurrentProfile().getLanguage(),
+                        I18NBundle.class), EditorViewController.this.model
                         .getLevelContext(), getStage()).show(getStage());
             }
         });
@@ -292,7 +295,7 @@ public final class EditorViewController extends StageViewController implements E
                 }
             });
         }
-        dialogs[dialogs.length - 1] = new TargetDialog(dialogSkin, EditorViewController.this.model.getLevelContext(), getStage());
+        dialogs[dialogs.length - 1] = new TargetDialog(dialogSkin, language, EditorViewController.this.model.getLevelContext(), getStage());
         dialogs[0].show(getStage());
     }
 

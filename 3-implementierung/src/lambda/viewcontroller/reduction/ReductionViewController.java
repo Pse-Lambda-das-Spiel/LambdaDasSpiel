@@ -146,7 +146,7 @@ public class ReductionViewController extends StageViewController implements Redu
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 new HelpDialog(dialogSkin, manager.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
-                        I18NBundle.class), getStage().getWidth(), getStage().getHeight()).show(getStage());
+                        I18NBundle.class), getStage()).show(getStage());
             }
         });
         stepRevertButton.addListener(new ClickListener() {
