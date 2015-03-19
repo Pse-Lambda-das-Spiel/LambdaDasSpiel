@@ -128,13 +128,13 @@ public class StatisticViewController extends StageViewController {
     }
     public void show() {
         super.show();
-        lambsEnchanted.setText(language.get("lambsEnchantedAchievementLabel") + " : " + Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getLambsEnchanted())) ;
-        gemsEnchanted.setText(language.get("lambsEnchantedAchievementLabel") + " : "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getGemsEnchanted()));
-        gemsPlaced.setText(language.get("gemsEnchantedAchievementLabel") + " : " + Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getGemsPlaced()));
-        lambsPlaced.setText(language.get("lambsPlacedAchievementLabel") + " : " + Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getLambsPlaced()));
-        levelCompleted.setText(language.get("levelAchievementLabel") + " : "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getLevelCompleted()));
-        hintsNotUsed.setText(language.get("hintsAchievementLabel") + " : "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getHintsNotUsed()));
-        timePlayed.setText(language.get("timeAchievementLabel") + " : " + statistics.convert(  ProfileManager.getManager().getCurrentProfile().getStatistics().getTimePlayed()));
+        lambsEnchanted.setText(language.get("lambsEnchantedAchievementLabel") + ": " + Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getLambsEnchanted())) ;
+        gemsEnchanted.setText(language.get("lambsEnchantedAchievementLabel") + ": "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getGemsEnchanted()));
+        gemsPlaced.setText(language.get("gemsEnchantedAchievementLabel") + ": " + Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getGemsPlaced()));
+        lambsPlaced.setText(language.get("lambsPlacedAchievementLabel") + ": " + Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getLambsPlaced()));
+        levelCompleted.setText(language.get("levelAchievementLabel") + ": "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getLevelCompleted()));
+        hintsNotUsed.setText(language.get("hintsAchievementLabel") + ": "+ Integer.toString(  ProfileManager.getManager().getCurrentProfile().getStatistics().getHintsNotUsed()));
+        timePlayed.setText(language.get("timeAchievementLabel") + ": " + statistics.convert(  ProfileManager.getManager().getCurrentProfile().getStatistics().getTimePlayed()));
         
         
      }

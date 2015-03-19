@@ -9,10 +9,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.I18NBundle;
 
 import lambda.model.profiles.ProfileManager;
 import lambda.model.shop.ShopItemModel;
 import lambda.model.shop.ShopItemModelObserver;
+import lambda.model.shop.ShopModel;
 
 /**
  * Represents the ImageTextButtons of an item in the shop
@@ -130,7 +132,7 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor imple
                            clear();
                            // getImage() removes the image from its button so the button has to be copied before that
                            float space = stage.getWidth() / 64;
-                           Label label = new Label("Willst du Item " + model.getId() + "\n aktivieren?", ShopViewController.getSkin());
+                           Label label = new Label(ShopViewController.getLanguage().format("item_activated", model.getFilename()), ShopViewController.getSkin());
                            add(label).pad(stage.getWidth() / 64).padBottom(0).padRight(400);
                            row();
                            
@@ -166,7 +168,7 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor imple
                         clear();
                         // getImage() removes the image from its button so the button has to be copied before that
                         float space = stage.getWidth() / 64;
-                        Label label = new Label("Willst du " + model.getPrice() + " Münzen \n gegen dieses Item \n eintauschen?", ShopViewController.getSkin());
+                        Label label = new Label(ShopViewController.getLanguage().format("item_buy", model.getPrice(), model.getFilename()), ShopViewController.getSkin());
                         add(label).pad(stage.getWidth() / 64).padBottom(0).padRight(400);
                         row();
                         
@@ -201,7 +203,7 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor imple
                         clear();
                         // getImage() removes the image from its button so the button has to be copied before that
                         float space = stage.getWidth() / 64;
-                        Label label = new Label("Du hast nicht genug Münzen, \n um dieses Item zu kaufen! \n Dieses item kostet " + model.getPrice() + " Münzen!" , ShopViewController.getSkin());
+                        Label label = new Label(ShopViewController.getLanguage().format("item_notBuyable", model.getFilename(), model.getPrice()), ShopViewController.getSkin());
                         add(label).pad(stage.getWidth() / 64).padBottom(0).padRight(400);
                         row();
                         

@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton.ImageTextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.I18NBundle;
 
 import lambda.model.profiles.ProfileManager;
 import lambda.model.profiles.ProfileModel;
@@ -50,6 +51,7 @@ public class ShopViewController extends StageViewController implements ProfileMo
      */
     private final String masterSkin = "data/skins/MasterSkin.json";
     private static Skin skin;
+    private static I18NBundle language;
    
 
     /**
@@ -84,6 +86,7 @@ public class ShopViewController extends StageViewController implements ProfileMo
         background.setWidth(getStage().getWidth());
         background.setHeight(getStage().getHeight());
         getStage().addActor(background);
+        language = manager.get(profile.getLanguage(), I18NBundle.class);
         
         skin = manager.get(masterSkin, Skin.class); 
         shop.setAllAssets(manager);
@@ -281,7 +284,15 @@ public class ShopViewController extends StageViewController implements ProfileMo
     public static Skin getSkin() {
         return skin;
     }
-
+    
+    /**
+     * Returns the current language
+     * 
+     * @return the current language 
+     */
+    public static I18NBundle getLanguage() {
+        return language;
+    }
 	@Override
 	public void changedLevelIndex() {		
 	}

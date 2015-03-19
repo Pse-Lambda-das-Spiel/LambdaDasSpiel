@@ -22,7 +22,7 @@ public class LevelModel {
     private int difficulty;
     private int coins;
     private boolean standardMode;
-	private boolean colorEquivalence; 
+	private boolean colorEquivalence;
     private List<Color> availableColors;
     private List<Color> lockedColors;
     private ReductionStrategy defaultStrategy;
@@ -63,7 +63,7 @@ public class LevelModel {
         this.difficulty = difficulty;
         this.coins = coins;
         this.standardMode = standardMode;
-        this.colorEquivalence =colorEquivalence;
+        this.colorEquivalence = colorEquivalence;
         this.availableColors = availableColors;
         this.lockedColors = lockedColors;
         this.defaultStrategy = defaultStrategy; 
