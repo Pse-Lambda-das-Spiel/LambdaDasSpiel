@@ -207,14 +207,7 @@ public final class EditorViewController extends StageViewController implements E
                 new Dialog("", dialogSkin) {
                     {
                         clear();
-                        List<ReductionStrategy> strategies = new ArrayList<>(); // replace
-                        // with
-                        // getlevelcontext
-                        // .getLevelModel().getAvailableRedStrats();
-                        strategies.add(ReductionStrategy.APPLICATIVE_ORDER);// test/delete
-                        strategies.add(ReductionStrategy.CALL_BY_NAME);// test/delete
-                        strategies.add(ReductionStrategy.CALL_BY_VALUE);// test/delete
-                        strategies.add(ReductionStrategy.NORMAL_ORDER);// test/delete*/
+                        List<ReductionStrategy> strategies = EditorViewController.this.model.getLevelContext().getLevelModel().getAvailableRedStrats();
                         int size = (int) Math.ceil(Math.sqrt(strategies.size()));
                         pad(height / 72 * size);
                         int i = 0;
@@ -311,7 +304,7 @@ public final class EditorViewController extends StageViewController implements E
         }
 
         // Reset editor model
-        model.reset(context); // TODO usable elements and reduction strategies
+        model.reset(context);
 
         // Reset lambda term viewcontroller
         if (term != null) {
@@ -369,7 +362,6 @@ public final class EditorViewController extends StageViewController implements E
      */
     @Override
     public void strategyChanged(ReductionStrategy strategy) {
-        // TODO change strategy image
     }
 
     /**

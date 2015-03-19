@@ -8,12 +8,12 @@ import lambda.model.lambdaterm.LambdaTermObserver;
 import lambda.model.lambdaterm.visitor.ApplicationVisitor;
 
 /**
- * Represents a visitor on a lambda term that performs a beta reduction with normal order strategy. Can only visit a valid lambda term.
- * 
- * Strategy:
- * 1. Applications: Left child reduced before right child
- * 2. Abstractions: Apply arguments before reducing inner term
- * 
+ * Represents a visitor on a lambda term that performs a beta reduction with
+ * normal order strategy. Can only visit a valid lambda term.
+ *
+ * Strategy: 1. Applications: Left child reduced before right child 2.
+ * Abstractions: Apply arguments before reducing inner term
+ *
  * @author Florian Fervers
  */
 public class ReductionStrategyNormalOrder extends BetaReductionVisitor {
@@ -22,10 +22,11 @@ public class ReductionStrategyNormalOrder extends BetaReductionVisitor {
      */
     public ReductionStrategyNormalOrder() {
     }
-    
+
     /**
-     * Visits the given lambda application and performs a normal order reduction if possible.
-     * 
+     * Visits the given lambda application and performs a normal order reduction
+     * if possible.
+     *
      * @param node the application to be visited
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
@@ -36,7 +37,7 @@ public class ReductionStrategyNormalOrder extends BetaReductionVisitor {
             // Left child first
             applicant = node.getRight();
             node.setLeft(node.getLeft().accept(this));
-            
+
             // Right child if no reduction was performed
             applicant = null;
             if (node.getRight() == null) {
@@ -53,10 +54,11 @@ public class ReductionStrategyNormalOrder extends BetaReductionVisitor {
             result = node;
         }
     }
-    
+
     /**
-     * Visits the given lambda abstraction and performs a normal order reduction if possible.
-     * 
+     * Visits the given lambda abstraction and performs a normal order reduction
+     * if possible.
+     *
      * @param node the abstraction to be visited
      * @throws InvalidLambdaTermException if the visited term is invalid
      */
@@ -65,13 +67,13 @@ public class ReductionStrategyNormalOrder extends BetaReductionVisitor {
         if (!hasReduced) {
             if (applicant != null) {
                 // Perform application
-                node.notify(new Consumer<LambdaTermObserver>(){
+                node.notify(new Consumer<LambdaTermObserver>() {
                     @Override
                     public void accept(LambdaTermObserver observer) {
-                    	observer.applicationStarted(node, applicant);
+                        observer.applicationStarted(node, applicant);
                     }
                 });
-                result = node.getInside().accept(new ApplicationVisitor(node.getColor(), applicant));
+                result = node.getInside().accept(new ApplicationVisitor(node.getColor(), applicant, alphaConversionColors));
                 applicant = null;
                 hasReduced = true;
             } else {

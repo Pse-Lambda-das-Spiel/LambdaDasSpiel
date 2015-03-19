@@ -80,7 +80,7 @@ public class ReductionStrategyApplicativeOrder extends BetaReductionVisitor {
                     	observer.applicationStarted(node, applicant);
                     }
                 });
-                result = node.getInside().accept(new ApplicationVisitor(node.getColor(), myApplicant));
+                result = node.getInside().accept(new ApplicationVisitor(node.getColor(), myApplicant, alphaConversionColors));
                 hasReduced = true;
             } else {
                 // Has performed reduction in the inner term or no applicant is given
