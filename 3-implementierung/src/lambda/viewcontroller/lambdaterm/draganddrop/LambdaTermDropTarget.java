@@ -1,83 +1,101 @@
 package lambda.viewcontroller.lambdaterm.draganddrop;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
-import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
-import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
-
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import lambda.Consumer;
-import static lambda.LambdaGame.DEBUG;
 import lambda.model.lambdaterm.LambdaTerm;
+import lambda.viewcontroller.lambdaterm.LambdaTermViewController;
 
 /**
- * A class that represents a target for a drag&drop operation on a lambda term.
+ * An actor that displays the target drop location for a drag&drop operation on
+ * a lambdaterm.
  *
  * @author Florian Fervers
  */
-public class LambdaTermDropTarget extends Target {
+public class LambdaTermDropTarget extends Actor {
     /**
-     * The operation that inserts the payload into the original lambdaterm tree.
+     * The color that the actor will display when a dragged element is over it.
+     */
+    public static final Color HOVER_COLOR = Color.GREEN; // TODO: better color
+    /**
+     * The texture of the glow effect of drag&drop targets.
+     */
+    private final TextureRegion glowTexture;
+    /**
+     * Indicates whether this actor should be highlighted (i.e. when a drag&drop
+     * element is hovered over this actor).
+     */
+    private boolean hovered;
+    /**
+     * The operation that inserts the dropped node at this location.
      */
     private final Consumer<LambdaTerm> insertOperation;
 
     /**
-     * Creates a new drag&drop target for the given parameters.
+     * Creates a new drop location actor in the given rectangle.
      *
-     * @param targetRectangle the target rectangle where a selection can be
-     * dropped
-     * @param insertOperation the operation that inserts the payload into the
-     * original lambdaterm tree
-     * @param actor the actor for the drop location
+     * @param rectangle the target drop rectangle
+     * @param viewController the view controller on which the drag&drop is
+     * @param insertOperation the operation for inserting an element into the
+     * term when it is dropped here happening
      */
-    public LambdaTermDropTarget(Rectangle targetRectangle, Consumer<LambdaTerm> insertOperation, DropLocationActor actor) {
-        super(actor);
+    public LambdaTermDropTarget(Rectangle rectangle, LambdaTermViewController viewController, Consumer<LambdaTerm> insertOperation) {
+        this.setBounds(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
         this.insertOperation = insertOperation;
+        glowTexture = viewController.getContext().getGlow();
+        hovered = false;
+        setVisible(false);
     }
 
     /**
-     * When the drop operation is finished.
+     * Sets whether a drag&drop element is currently being hovered over this
+     * actor.
      *
-     * @param source the drag&drop source
-     * @param payload the payload that was dragged
-     * @param x the x-coordinate of the drop
-     * @param y the y-coordinate of the drop
-     * @param pointer the touch index
+     * @param hovered true if a drag&drop element is currently being hovered
+     * over this actor, false otherwise
+     */
+    public void setHovered(boolean hovered) {
+        this.hovered = hovered;
+    }
+
+    /**
+     * Performs the insert operation with the given lambda term.
+     *
+     * @param term the lambda term to be inserted
+     */
+    public void insert(LambdaTerm term) {
+        insertOperation.accept(term);
+    }
+
+    /**
+     * Draws this node.
+     *
+     * @param batch the batch on which the node will be drawn
+     * @param alpha the parent's alpha
      */
     @Override
-    public void drop(Source source, Payload payload, float x, float y, int pointer) {
-        if (DEBUG) {
-            System.out.println("Dropping term (" + ((LambdaTerm) payload.getObject()).toString() + ")");
+    public void draw(Batch batch, float alpha) {
+        if (hovered) {
+            batch.setColor(HOVER_COLOR);
         }
-
-        // Insert payload into lambdaterm tree
-        insertOperation.accept((LambdaTerm) payload.getObject());
+        batch.draw(glowTexture, getX(), getY(), getWidth(), getHeight());
+        batch.setColor(1f, 1f, 1f, 1f);
     }
 
     /**
-     * Called when a drag&drop selection is dragged over this target.
+     * Returns whether the given point is on this actor.
      *
-     * @param source the drag&drop source
-     * @param payload the payload of the drag&drop operation
-     * @param x the current x-coordinate of the touch
-     * @param y the current y-coordinate of the touch
-     * @param pointer the touch index
-     * @return true since the payload can be dropped here
+     * @param x the x-coordinate of the point
+     * @param y the y-coordinate of the point
+     * @return true if the given point is on this actor, false otherwise
      */
-    @Override
-    public boolean drag(Source source, Payload payload, float x, float y, int pointer) {
-        ((DropLocationActor) getActor()).setHovered(true);
-        return true;
-    }
-
-    /**
-     * Called when the current drag&drop element leaves this target or a drop
-     * has occurred.
-     *
-     * @param source the source of the current drag&drop element
-     * @param payload the payload of the drag&drop
-     */
-    @Override
-    public void reset(Source source, Payload payload) {
-        ((DropLocationActor) getActor()).setHovered(false);
+    public boolean isOn(float x, float y) {
+        Vector2 pos = screenToLocalCoordinates(new Vector2(x, y));
+        return pos.x >= 0.0f && pos.x < getWidth() && pos.y >= 0.0f && pos.y < getHeight();
     }
 }

@@ -1,155 +1,84 @@
 package lambda.viewcontroller.lambdaterm.draganddrop;
 
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
-import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
-import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
-import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
-
-import static lambda.LambdaGame.DEBUG;
-import lambda.model.lambdaterm.LambdaRoot;
-import lambda.model.lambdaterm.LambdaTerm;
-import lambda.model.lambdaterm.visitor.CopyVisitor;
-import lambda.model.lambdaterm.visitor.RemoveTermVisitor;
-import lambda.model.profiles.ProfileManager;
+import com.badlogic.gdx.math.Vector2;
 import lambda.viewcontroller.lambdaterm.LambdaNodeViewController;
-import lambda.viewcontroller.lambdaterm.LambdaTermViewController;
-import static lambda.viewcontroller.lambdaterm.LambdaTermViewController.DEBUG_DRAG_AND_DROP;
 
 /**
- * A class that represents a source for a drag&drop operation on a lambda term.
+ * Represents a drag&drop source in a lambda term.
  *
  * @author Florian Fervers
  */
-public class LambdaTermDragSource extends Source {
+public class LambdaTermDragSource {
     /**
-     * The node that can be dragged.
+     * The drag source node.
      */
     private final LambdaNodeViewController node;
     /**
-     * Indicates if f the selected term should be split off from the original
-     * tree.
+     * Indicates whether the dragged node should be removed from its parent when
+     * dragged.
      */
     private final boolean split;
     /**
-     * The view controller on which the drag&drop is happening.
+     * Indicates whether this source should not be removed when the term is
+     * updated.
      */
-    private final LambdaTermViewController viewController;
-    /**
-     * Indicates whether the current drag&drop element came from this source.
-     */
-    public boolean dragStarted;
-    /**
-     * Indicates whether the source node has been removed from its previous
-     * tree.
-     */
-    public boolean removedFromTree;
+    private final boolean permanent;
 
     /**
-     * Creates a new drag&drop source for the given lambdaterm node.
+     * Creates a new drag source.
      *
-     * @param node the lambdaterm node
-     * @param split true if the selected term should be split off from the
-     * original tree, false otherwise
-     * @param viewController the view controller on which the drag&drop is
-     * happening
+     * @param node the source node
+     * @param split true if the dragged node should be removed from its parent
+     * when dragged, false otherwise
+     * @param permanent true if this source should not be removed when the term
+     * is updated, false otherwise
      */
-    public LambdaTermDragSource(final LambdaNodeViewController node, final boolean split, LambdaTermViewController viewController) {
-        super(node);
+    public LambdaTermDragSource(LambdaNodeViewController node, boolean split, boolean permanent) {
         this.node = node;
         this.split = split;
-        this.viewController = viewController;
-        dragStarted = false;
-        removedFromTree = false;
-
-        // Remove node from tree if necessary after drag has started
-        node.addListener(new InputListener() {
-            @Override
-            public boolean handle(Event e) {
-                if (dragStarted && !removedFromTree && split) {
-                    node.getLinkedTerm().accept(new RemoveTermVisitor());
-                    removedFromTree = true;
-                }
-                return false;
-            }
-        });
-
-        if (DEBUG_DRAG_AND_DROP) {
-            System.out.println("        Added drop source (" + node.getLinkedTerm().toString() + ") at (" + node.getX() + ", " + node.getY() + ")");
-        }
+        this.permanent = permanent;
     }
 
     /**
-     * Called when the dragging operation starts.
+     * Returns the source node.
      *
-     * @param event the event that caused the drag operation
-     * @param x the x-coordinate of the drag
-     * @param y the y-coordinate of the drag
-     * @param pointer the touch index
-     * @return a payload containing the selected node
+     * @return the source node
      */
-    @Override
-    public Payload dragStart(InputEvent event, float x, float y, int pointer) {
-        if (DEBUG) {
-            System.out.println("Start dragging term (" + node.getLinkedTerm().toString() + ")");
-        }
-        
-        if (split) { // TODO temp
-            node.getLinkedTerm().accept(new RemoveTermVisitor());
-            return null;
-        }
-
-        // Payload is selected node
-        Payload payload = new Payload();
-        payload.setObject(node.getLinkedTerm().accept(new CopyVisitor()));
-
-        // Nodes that are created with drag&drop are never locked 
-        ((LambdaTerm) payload.getObject()).setLocked(false);
-
-        // Drag actor is a new lambda term vc for the selected node
-        LambdaRoot selection = new LambdaRoot();
-        selection.setChild((LambdaTerm) payload.getObject());
-        LambdaTermViewController dragActor = LambdaTermViewController.build(selection, false, node.getViewController().getContext(), node.getStage(), node.getViewController().isForcingParenthesis());
-        dragActor.addOffset(dragActor.getX() - dragActor.getWidth() / 2.0f, dragActor.getY() + dragActor.getHeight() / 2.0f);
-        payload.setDragActor(dragActor);
-
-        // Display drop targets
-        viewController.displayDropTargets(true);
-
-        removedFromTree = false;
-        dragStarted = true;
-
-        return payload;
+    public LambdaNodeViewController getNode() {
+        return node;
     }
 
     /**
-     * Called when the dragging operation ended.
+     * Returns whether the dragged node should be removed from its parent when
+     * dragged.
      *
-     * @param event the event that caused the drop operation
-     * @param x the x-coordinate of the drop
-     * @param y the y-coordinate of the drop
-     * @param pointer the touch index
-     * @param payload a payload containing the selected node
-     * @param target the drop target
+     * @return true if the dragged node should be removed from its parent when
+     * dragged, false otherwise
      */
-    @Override
-    public void dragStop(InputEvent event, float x, float y, int pointer, Payload payload, Target target) {
-        viewController.displayDropTargets(false);
-        dragStarted = false;
-        removedFromTree = false;
-        //update statistics
-        if(this.node.isCanHaveChildren()){
-        	int tempLambsPalced = ProfileManager.getManager().getCurrentProfile().getStatistics().getLambsPlaced();
-        	int tempLambsPalcedPerLevel = ProfileManager.getManager().getCurrentProfile().getStatistics().getLambsPlacedPerLevel();
-        	ProfileManager.getManager().getCurrentProfile().getStatistics().setLambsPlaced(++tempLambsPalced);
-        	ProfileManager.getManager().getCurrentProfile().getStatistics().setLambsPlacedPerLevel(++tempLambsPalcedPerLevel);
-        }else{
-        	int tempGemsPalced = ProfileManager.getManager().getCurrentProfile().getStatistics().getGemsPlaced();
-        	int tempGemsPalcedPerLevel = ProfileManager.getManager().getCurrentProfile().getStatistics().getGemsPlacedPerLevel();
-        	ProfileManager.getManager().getCurrentProfile().getStatistics().setGemsPlaced(++tempGemsPalced);
-        	ProfileManager.getManager().getCurrentProfile().getStatistics().setGemsPlacedPerLevel(++tempGemsPalcedPerLevel);
-        }
+    public boolean shouldSplit() {
+        return split;
+    }
+
+    /**
+     * Returns whether this source should not be removed when the term is
+     * updated.
+     *
+     * @return true if this source should not be removed when the term is
+     * updated, false otherwise
+     */
+    public boolean isPermanent() {
+        return permanent;
+    }
+
+    /**
+     * Returns whether the given point is on this source.
+     *
+     * @param x the x-coordinate of the point
+     * @param y the y-coordinate of the point
+     * @return true if the given point is on this actor, false otherwise
+     */
+    public boolean isOn(float x, float y) {
+        Vector2 pos = node.screenToLocalCoordinates(new Vector2(x, y));
+        return pos.x >= 0.0f && pos.x < node.getWidth() && pos.y >= 0.0f && pos.y < node.getHeight();
     }
 }

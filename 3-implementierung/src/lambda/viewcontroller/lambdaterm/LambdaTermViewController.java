@@ -2,19 +2,13 @@ package lambda.viewcontroller.lambdaterm;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 
 import java.util.IdentityHashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
-import lambda.Consumer;
-import static lambda.LambdaGame.DEBUG;
 import lambda.model.lambdaterm.LambdaAbstraction;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
@@ -22,9 +16,7 @@ import lambda.model.lambdaterm.LambdaTermObserver;
 import lambda.model.lambdaterm.LambdaValue;
 import lambda.model.lambdaterm.LambdaVariable;
 import lambda.model.levels.LevelContext;
-import lambda.viewcontroller.lambdaterm.draganddrop.DropLocationActor;
-import lambda.viewcontroller.lambdaterm.draganddrop.LambdaTermDragSource;
-import lambda.viewcontroller.lambdaterm.draganddrop.LambdaTermDropTarget;
+import lambda.viewcontroller.lambdaterm.draganddrop.DragAndDrop;
 import lambda.viewcontroller.lambdaterm.visitor.ViewInsertionVisitor;
 import lambda.viewcontroller.lambdaterm.visitor.ViewRemovalVisitor;
 
@@ -36,9 +28,13 @@ import lambda.viewcontroller.lambdaterm.visitor.ViewRemovalVisitor;
  */
 public final class LambdaTermViewController extends Group implements LambdaTermObserver {
     /**
+     * Indicates whether debugging output is enabled.
+     */
+    public static final boolean DEBUG = false;
+    /**
      * Indicates whether drag&drop debugging output on the console is enabled.
      */
-    public static final boolean DEBUG_DRAG_AND_DROP = false && DEBUG;
+    public static final boolean DEBUG_DRAG_AND_DROP = false;
     /**
      * Indicates whether this term can be modified by the user.
      */
@@ -57,23 +53,14 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
      */
     private LambdaNodeViewController root;
     /**
-     * Handles the dragging and dropping of nodes.
+     * Handles drag&drop events on sources and targets.
      */
     private final DragAndDrop dragAndDrop;
     /**
-     * The current list of drag&drop targets.
-     */
-    private final List<DropLocationActor> dropTargets;
-    /**
-     * Indicates whether all applications should be displayed with a
+     * Indicates whether root applications should be displayed with a
      * parenthesis.
      */
     private final boolean forceParenthesis;
-    /**
-     * A list of permanent drag&drop sources. Will not be deleted when drag&drop
-     * elements are cleared.
-     */
-    private final List<LambdaTermDragSource> permanentDropSources;
 
     private AssetManager assets;
 
@@ -85,8 +72,8 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
      * false otherwise
      * @param context contains all data of the current level
      * @param stage used for drag&drop
-     * @param forceParenthesis true if all applications should be displayed with
-     * a parenthesis
+     * @param forceParenthesis true if root applications should be displayed
+     * with a parenthesis
      * @return the new LambdaTermViewController
      * @throws IllegalArgumentException if root is null or context is null
      */
@@ -136,19 +123,16 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
      * @param editable true if this viewconroller can be edited by the user,
      * false otherwise
      * @param context contains all data of the current level
-     * @param forceParenthesis true if all applications should be displayed with
-     * a parenthesis
+     * @param forceParenthesis true if root applications should be displayed
+     * with a parenthesis
      */
     private LambdaTermViewController(boolean editable, LevelContext context, boolean forceParenthesis) {
         this.editable = editable;
         this.context = context;
-        this.dropTargets = new LinkedList<>();
         this.forceParenthesis = forceParenthesis;
-        this.permanentDropSources = new LinkedList<>();
         nodeMap = new IdentityHashMap<>();
         if (editable) {
-            dragAndDrop = new DragAndDrop();
-            dragAndDrop.setButton(0);
+            dragAndDrop = new DragAndDrop(this);
         } else {
             dragAndDrop = null;
         }
@@ -354,64 +338,12 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
     }
 
     /**
-     * Adds a new drag&drop target to this term.
+     * Returns the drag&drop handler.
      *
-     * @param insertOperation the operation for inserting an element into the
-     * term when it is dropped here
-     * @param target the drop location
+     * @return the drag&drop handler
      */
-    public void addDropTarget(Consumer<LambdaTerm> insertOperation, Rectangle target) {
-        DropLocationActor actor = new DropLocationActor(target, this);
-        dragAndDrop.addTarget(new LambdaTermDropTarget(target, insertOperation, actor));
-        this.addActor(actor);
-        dropTargets.add(actor);
-    }
-
-    /**
-     * Adds a new drag&drop source to this term.
-     *
-     * @param source the new drag&drop source
-     */
-    public void addDragSource(final LambdaTermDragSource source) {
-        dragAndDrop.addSource(source);
-    }
-
-    /**
-     * Adds a new drag&drop source to this term.
-     *
-     * @param source the new drag&drop source
-     */
-    public void addPermanentDragSource(LambdaTermDragSource source) {
-        permanentDropSources.add(source);
-        dragAndDrop.addSource(source);
-    }
-
-    /**
-     * Clears all current drag&drop sources and targets.
-     */
-    public void clearDragAndDrop() {
-        dragAndDrop.clear();
-        for (DropLocationActor actor : dropTargets) {
-            actor.remove();
-        }
-        dropTargets.clear();
-        for (LambdaTermDragSource source : permanentDropSources) {
-            dragAndDrop.addSource(source);
-        }
-    }
-
-    /**
-     * Sets whether drop targets should be displayed.
-     *
-     * @param display true if drop targets should be displayed, false otherwise
-     */
-    public void displayDropTargets(boolean display) {
-        if (DEBUG_DRAG_AND_DROP) {
-            System.out.println("    " + (display ? "Showing" : "Hiding") + " " + dropTargets.size() + " drop targets");
-        }
-        for (DropLocationActor actor : dropTargets) {
-            actor.setVisible(display);
-        }
+    public DragAndDrop getDragAndDrop() {
+        return dragAndDrop;
     }
 
     /**

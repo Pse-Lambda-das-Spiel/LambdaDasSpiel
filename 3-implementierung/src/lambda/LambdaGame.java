@@ -32,7 +32,7 @@ public class LambdaGame extends Game {
     /**
      * Indicates whether debugging output is enabled.
      */
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     /**
      * Stores all controllers mapped by their names.
      */
