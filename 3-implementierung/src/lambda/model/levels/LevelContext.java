@@ -37,15 +37,6 @@ public class LevelContext {
         this.cloudAnimation = new Animation(1/15f, manager.getAssetManager().get(LevelManager.CLOUD_ANIMATIONPATH, TextureAtlas.class).getRegions());
         this.glow = new TextureRegion((manager.getAssetManager().get(LevelManager.GLOW, TextureAtlas.class)).findRegion("glow"));
         elementUIContextFamily = ShopModel.getShop().getElementUIContextFamilies().getActivatedItem();
-        
-        /*not needed anymore
-        // Should be loaded centrally
-        String magicPath = "data/animation/magic/Magic_Animation.atlas";
-        String cloudPath = "data/animation/cloud/cloud.atlas";
-        
-        this.magicAnimation = new Animation(1/15f, manager.getAssetManager().get(magicPath, TextureAtlas.class).getRegions());
-        this.cloudAnimation = new Animation(1/15f, manager.getAssetManager().get(cloudPath, TextureAtlas.class).getRegions());
-        */
      
         if(levelModel.getId() != 0) {
             // for standard levels
