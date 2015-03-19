@@ -31,6 +31,7 @@ import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.LambdaTermObserver;
 import lambda.model.lambdaterm.LambdaValue;
 import lambda.model.lambdaterm.LambdaVariable;
+import lambda.model.lambdaterm.visitor.ColorCollectionVisitor;
 import lambda.model.lambdaterm.visitor.IsValidVisitor;
 import lambda.model.levels.ElementType;
 import lambda.model.levels.LevelContext;
@@ -243,10 +244,12 @@ public final class EditorViewController extends StageViewController implements E
         finishedButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (model.getTerm().accept(new IsValidVisitor())) {
-                    getGame().getController(ReductionViewController.class)
-                            .reset(model);
+                if (model.getTerm().accept(new IsValidVisitor())
+                        && !model.getTerm().accept(new ColorCollectionVisitor(ColorCollectionVisitor.TYPE_ALL)).contains(Color.WHITE)) {
+                    getGame().getController(ReductionViewController.class).reset(model);
                     getGame().setScreen(ReductionViewController.class);
+                } else {
+                    // TODO: Invalid term dialog
                 }
             }
         });

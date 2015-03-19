@@ -149,13 +149,13 @@ public class ApplicationVisitor extends ValidLambdaTermVisitor<LambdaTerm> {
                     i--;
                 }
             }
-            alphaColors.removeAll(LambdaUtils.getRoot(term).accept(new ColorCollectionVisitor(ColorCollectionVisitor.Type.FREE)));
+            alphaColors.removeAll(LambdaUtils.getRoot(term).accept(new ColorCollectionVisitor(ColorCollectionVisitor.TYPE_FREE_VARIABLE)));
             assert (alphaColors.size() > 0); // TODO
 
             // Perform alpha conversion if necessary
             // Find intersection of bound variables in left term and free variables in right term
-            Set<Color> collidingColors = term.accept(new ColorCollectionVisitor(ColorCollectionVisitor.Type.BOUND));
-            collidingColors.retainAll(applicant.accept(new ColorCollectionVisitor(ColorCollectionVisitor.Type.FREE)));
+            Set<Color> collidingColors = term.accept(new ColorCollectionVisitor(ColorCollectionVisitor.TYPE_FREE_VARIABLE | ColorCollectionVisitor.TYPE_ABSTRACTION));
+            collidingColors.retainAll(applicant.accept(new ColorCollectionVisitor(ColorCollectionVisitor.TYPE_ABSTRACTION)));
             collidingColors.remove(this.color);
             for (Color collision : collidingColors) {
                 term.accept(new AlphaConversionVisitor(collision, alphaColors.get(0)));
