@@ -209,26 +209,17 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
         if (!paused || busy || pauseRequested || history.isEmpty()) {
             throw new IllegalStateException("Cannot revert the last reduction step in the current model state!");
         }
-        setBusy(true);
 
         // Reverts the last step in a separate thread
-        new Thread() {
+        setBusy(true);
+        current.setChild(history.pop().getChild());
+        ReductionModel.this.notify(new Consumer<ReductionModelObserver>() {
             @Override
-            public void run() {
-                current.setChild(history.pop().getChild());
-
-                ReductionModel.this.notify(new Consumer<ReductionModelObserver>() {
-                    @Override
-                    public void accept(ReductionModelObserver observer) {
-                        observer.historySizeChanged(history.size());
-                    }
-                });
-
-                setBusy(false);
+            public void accept(ReductionModelObserver observer) {
+                observer.historySizeChanged(history.size());
             }
-        }.start();
-
-        // TODO wait till animation is finished?
+        });
+        setBusy(false);
     }
 
     /**

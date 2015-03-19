@@ -32,8 +32,8 @@ public class LevelModelTest {
     public void testUseableElements() {
         level.getUseableElements().add(0, ElementType.ABSTRACTION);
         assertTrue(level.getUseableElements().get(0) == ElementType.ABSTRACTION);
-        level.getUseableElements().add(1, ElementType.PARANTHESIS);
-        assertTrue(level.getUseableElements().get(1) == ElementType.PARANTHESIS);
+        level.getUseableElements().add(1, ElementType.PARENTHESIS);
+        assertTrue(level.getUseableElements().get(1) == ElementType.PARENTHESIS);
         level.getUseableElements().add(2, ElementType.VARIABLE);
         assertTrue(level.getUseableElements().get(2) == ElementType.VARIABLE);
 

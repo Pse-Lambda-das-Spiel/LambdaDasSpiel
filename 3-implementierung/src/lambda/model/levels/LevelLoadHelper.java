@@ -106,7 +106,7 @@ public final class LevelLoadHelper {
 				elementTypeList.add((ElementType.ABSTRACTION));
 				break;
 			case "PARANTHESIS":
-				elementTypeList.add((ElementType.PARANTHESIS));
+				elementTypeList.add((ElementType.PARENTHESIS));
 				break;
 			default:
 				throw new InvalidJsonException("Invalid useable element type!");

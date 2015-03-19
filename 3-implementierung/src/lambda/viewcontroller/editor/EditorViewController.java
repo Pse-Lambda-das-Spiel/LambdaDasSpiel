@@ -343,7 +343,7 @@ public final class EditorViewController extends StageViewController implements E
             abstraction.setChild(new LambdaAbstraction(abstraction, Color.WHITE, true));
             toolbarElements.add(LambdaTermViewController.build(abstraction, false, model.getLevelContext(), getStage(), true));
         }
-        if (model.getLevelContext().getLevelModel().getUseableElements().contains(ElementType.PARANTHESIS)) { // TODO parnEnthesis
+        if (model.getLevelContext().getLevelModel().getUseableElements().contains(ElementType.PARENTHESIS)) {
             LambdaRoot application = new LambdaRoot();
             application.setChild(new LambdaApplication(application, true));
             toolbarElements.add(LambdaTermViewController.build(application, false, model.getLevelContext(), getStage(), true));

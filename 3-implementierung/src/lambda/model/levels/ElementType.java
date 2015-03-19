@@ -7,6 +7,8 @@ package lambda.model.levels;
 public enum ElementType {
     /**
      * Represents variable
+     *//**
+     * Represents variable
      */
     VARIABLE,
     /**
@@ -16,5 +18,5 @@ public enum ElementType {
     /**
      * Represents paranthesis
      */
-    PARANTHESIS
+    PARENTHESIS
 }
