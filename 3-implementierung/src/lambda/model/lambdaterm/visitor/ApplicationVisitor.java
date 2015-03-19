@@ -149,7 +149,7 @@ public class ApplicationVisitor extends ValidLambdaTermVisitor<LambdaTerm> {
                 }
             }
             alphaColors.removeAll(LambdaUtils.getRoot(term).accept(new ColorCollectionVisitor(ColorCollectionVisitor.Type.FREE)));
-            assert(alphaColors.size() > 0); // TODO
+            assert (alphaColors.size() > 0); // TODO
 
             // Perform alpha conversion if necessary
             // Find intersection of bound variables in left term and free variables in right term
@@ -162,7 +162,7 @@ public class ApplicationVisitor extends ValidLambdaTermVisitor<LambdaTerm> {
             }
 
             // Remove applicant to tell application that it was reduced => application result is in left child node
-            applicant.accept(new RemoveTermVisitor());
+            applicant.accept(new ReplaceTermVisitor(null));
         }
     }
 

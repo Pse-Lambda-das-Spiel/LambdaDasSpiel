@@ -4,12 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import lambda.model.lambdaterm.visitor.IsValidVisitor;
-import lambda.model.lambdaterm.visitor.RemoveTermVisitor;
 
 import java.text.ParseException;
 
-import com.badlogic.gdx.graphics.Color;
-import java.util.Map;
 import lambda.model.levels.LevelManager;
 
 /**
@@ -141,26 +138,6 @@ public final class LambdaUtils {
             throw new IllegalArgumentException("Lambda term cannot be null!");
         }
         return term.getParent() == null ? term : getRoot(term.getParent());
-    }
-
-    /**
-     * Splits of a term by removing it from its parent and passing it to a new
-     * LambdaRoot as child.
-     *
-     * @param term the term to be split off
-     * @return the new LambdaRoot with the split off term as child
-     */
-    public static LambdaRoot split(LambdaTerm term) {
-        if (!term.accept(new IsValidVisitor())) {
-            throw new InvalidLambdaTermException("Can only split a valid lambda term!");
-        }
-        if (term.getParent() == null) {
-            throw new InvalidLambdaTermException("Cannot split a root!");
-        }
-        term.accept(new RemoveTermVisitor());
-        LambdaRoot result = new LambdaRoot();
-        result.setChild(term);
-        return result;
     }
 
     /**

@@ -10,7 +10,7 @@ import lambda.Consumer;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.visitor.CopyVisitor;
-import lambda.model.lambdaterm.visitor.RemoveTermVisitor;
+import lambda.model.lambdaterm.visitor.ReplaceTermVisitor;
 import lambda.viewcontroller.lambdaterm.LambdaTermViewController;
 
 /**
@@ -19,6 +19,10 @@ import lambda.viewcontroller.lambdaterm.LambdaTermViewController;
  * @author Florian Fervers
  */
 public class DragAndDrop extends InputAdapter {
+    /**
+     * Indicates whether debugging output is enabled.
+     */
+    public static final boolean DEBUG = false;
     /**
      * The minimum distance of dragging the touch to be recognized as a drag
      * operation.
@@ -76,7 +80,7 @@ public class DragAndDrop extends InputAdapter {
     public void dragStart(LambdaTermDragSource source) {
         LambdaTerm term;
         if (source.shouldSplit()) {
-            source.getNode().getLinkedTerm().accept(new RemoveTermVisitor());
+            source.getNode().getLinkedTerm().accept(new ReplaceTermVisitor(null));
             term = source.getNode().getLinkedTerm();
         } else {
             term = source.getNode().getLinkedTerm().accept(new CopyVisitor());
@@ -92,6 +96,10 @@ public class DragAndDrop extends InputAdapter {
 
         for (LambdaTermDropTarget actor : dropTargets) {
             actor.setVisible(true);
+        }
+
+        if (DEBUG) {
+            System.out.println("Dragging " + term.toString() + " from " + vc.getRoot().getLinkedTerm().toString());
         }
     }
 
@@ -126,6 +134,10 @@ public class DragAndDrop extends InputAdapter {
         if (currentTarget != null) {
             currentTarget.insert(dragged.getRoot().getChild(0).getLinkedTerm());
             currentTarget.setHovered(false);
+        }
+
+        if (DEBUG) {
+            System.out.println("Dropped " + dragged.getRoot().getLinkedTerm().toString() + " resulting in " + vc.getRoot().getLinkedTerm().toString());
         }
     }
 
