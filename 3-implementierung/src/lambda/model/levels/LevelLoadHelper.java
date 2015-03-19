@@ -285,7 +285,7 @@ public final class LevelLoadHelper {
 	 * @throws InvalidJsonException if the colors json file contains duplicate mappings
 	 * @throws JsonParseException if there is an error while reading the colors json file
 	 */
-	public static void loadAllColors(Map<Character, Color> variablesToColors, Map<Color, Character> colorsToVariables) {
+	public static void loadAllColors(Map<Character, String> variablesToColors, Map<String, Character> colorsToVariables) {
 		if ((variablesToColors == null) || (colorsToVariables == null)) {
 			throw new IllegalArgumentException("The mappings of the variables to colors and reversed cannot be null!");
 		}
@@ -294,17 +294,17 @@ public final class LevelLoadHelper {
 		JsonValue jsonFile = reader.parse(file);
 		for (JsonValue entry = jsonFile.child().child(); entry != null; entry = entry.next) {
 			char variable = entry.getChar("variable");
-			Color color = Color.valueOf(entry.getString("color"));
+			String colorHexString = entry.getString("color");
 			// duplicate mappings are not allowed
 			if (variablesToColors.containsKey(variable)) {
 				throw new InvalidJsonException("There is already a mapping with the variable: " + variable);
 			}
-			if (variablesToColors.containsValue(color)) {
-				throw new InvalidJsonException("There is already a mapping with the color: " + color.toString());
+			if (variablesToColors.containsValue(colorHexString)) {
+				throw new InvalidJsonException("There is already a mapping with the color: " + colorHexString);
 			}
 			// As a replacement for a bijective map
-			variablesToColors.put(variable, color);
-			colorsToVariables.put(color, variable);
+			variablesToColors.put(variable, colorHexString);
+			colorsToVariables.put(colorHexString, variable);
 		}
 	}
 	

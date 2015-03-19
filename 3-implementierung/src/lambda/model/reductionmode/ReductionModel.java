@@ -1,7 +1,9 @@
 package lambda.model.reductionmode;
 
 import com.badlogic.gdx.graphics.Color;
-import java.util.Set;
+
+import java.util.HashSet;
+import java.util.List;
 import java.util.Stack;
 
 import lambda.Consumer;
@@ -107,10 +109,10 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
         pauseRequested = false;
         busy = false;
 
-        Set<Color> alphaConversionColors = LevelManager.getColorsToVariables().keySet();
+        List<Color> alphaConversionColors = LevelManager.getAllColors();
         alphaConversionColors.removeAll(context.getLevelModel().getAvailableColors());
         alphaConversionColors.removeAll(context.getLevelModel().getLockedColors());
-        this.strategy.setAlphaConversionColors(alphaConversionColors);
+        this.strategy.setAlphaConversionColors(new HashSet<>(alphaConversionColors));
     }
 
     /**

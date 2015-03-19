@@ -1,7 +1,10 @@
 package lambda.model.levels;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
@@ -43,8 +46,8 @@ public class LevelManager {
 	private String[] difficultySettingFilePaths;
 	private String[] difficultyBGImageFilePaths;
 	private String[] difficultyMusicFilePaths;
-	private static Map<Character, Color> variablesToColors;
-	private static Map<Color, Character> colorsToVariables;
+	private static Map<Character, String> variablesToColors;
+	private static Map<String, Character> colorsToVariables;
 
 	/**
      * Creates an instance of this class and loads the two required lists
@@ -140,20 +143,20 @@ public class LevelManager {
     }
 
 	/**
-	 * Returns the mapping of variables to colors with the variables as key.
+	 * Returns the mapping of variables to colors (as hexstrings)  with the variables as key.
 	 * 
 	 * @return the variablesToColors
 	 */
-	public static Map<Character, Color> getVariablesToColors() {
+	public static Map<Character, String> getVariablesToColors() {
 		return variablesToColors;
 	}
 
 	/**
-	 * Returns the mapping of colors to variables with the colors as key.
+	 * Returns the mapping of colors (as hexstrings) to variables with the colors as key.
 	 * 
 	 * @return the colorsToVariables
 	 */
-	public static Map<Color, Character> getColorsToVariables() {
+	public static Map<String, Character> getColorsToVariables() {
 		return colorsToVariables;
 	}
 	
@@ -169,7 +172,7 @@ public class LevelManager {
 		if (variablesToColors.get(variable) == null) {
 			throw new IllegalArgumentException("There is no color for the variable: " + variable);
 		}
-		return variablesToColors.get(variable);
+		return Color.valueOf(variablesToColors.get(variable));
 	}
 	
 	/**
@@ -180,10 +183,19 @@ public class LevelManager {
 	 * @throws IllegalArgumentException if there is no variable stored for the given color
 	 */
 	public static char convertColorToVariable(Color color) {
-		if (colorsToVariables.get(color) == null) {
+		String hexString = color.toString();
+		if (colorsToVariables.get(hexString) == null) {
 			throw new IllegalArgumentException("There is no variable for the color: " + color.toString());
 		}
-		return colorsToVariables.get(color);
+		return colorsToVariables.get(hexString);
+	}
+	
+	public static List<Color> getAllColors() {
+		List<Color> colors = new ArrayList<>();
+		for (String hex : colorsToVariables.keySet()) {
+			colors.add(Color.valueOf(hex));
+		}
+		return colors;
 	}
 
 }

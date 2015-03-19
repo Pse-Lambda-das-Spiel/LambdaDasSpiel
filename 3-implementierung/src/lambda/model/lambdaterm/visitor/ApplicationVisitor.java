@@ -64,6 +64,7 @@ public class ApplicationVisitor extends ValidLambdaTermVisitor<LambdaTerm> {
         }
         this.color = color;
         this.applicant = applicant;
+        this.alphaConversionColors = alphaConversionColors;
         result = null;
         hasCheckedAlphaConversion = false;
     }
