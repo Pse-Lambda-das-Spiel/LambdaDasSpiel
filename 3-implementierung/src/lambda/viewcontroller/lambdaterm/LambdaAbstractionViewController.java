@@ -94,7 +94,7 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
         batch.setColor(1f, 1f, 1f, 1f);
         // Center
         float x;
-        for (x = getX() + BLOCK_WIDTH; x < getWidth() - 1 * BLOCK_WIDTH - EPSILON; x += BLOCK_WIDTH) {
+        for (x = getX() + BLOCK_WIDTH; x < getX() + getWidth() - BLOCK_WIDTH - EPSILON; x += BLOCK_WIDTH) {
             batch.draw(center, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
             batch.setColor(getLambdaColor().r, getLambdaColor().g, getLambdaColor().b, 1.0f);
             batch.draw(centerMask, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);

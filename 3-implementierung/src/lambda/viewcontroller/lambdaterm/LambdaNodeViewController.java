@@ -24,7 +24,7 @@ public abstract class LambdaNodeViewController extends Actor {
     /**
      * Max distance of two floats to still be considered equal.
      */
-    public static final float EPSILON = 1e-6f;
+    public static final float EPSILON = 1e-3f;
     /**
      * The width of one displayed block. Variables consist of one block,
      * parenthesis and abstractions of at least three.
@@ -81,7 +81,7 @@ public abstract class LambdaNodeViewController extends Actor {
         this.canHaveChildren = canHaveChildren;
         children = new LinkedList<>();
         setHeight(BLOCK_HEIGHT);
-        assert(viewController.getStage() != null);
+        assert (viewController.getStage() != null);
         setStage(viewController.getStage());
     }
 
@@ -248,11 +248,11 @@ public abstract class LambdaNodeViewController extends Actor {
                     System.out.println("        Clearing drag&drop");
                 }
 
-                getViewController().clearDragAndDrop();
+                getViewController().getDragAndDrop().clearDragAndDrop();
             } else if (!getLinkedTerm().isLocked()) {
                 // Add drag&drop source for all elements but the root
-                assert(this.getStage() != null);
-                getViewController().addDragSource(new LambdaTermDragSource(this, true, this.getViewController()));
+                assert (this.getStage() != null);
+                getViewController().getDragAndDrop().addDragSource(new LambdaTermDragSource(this, true, false));
             }
 
             // Add drop targets next to children
@@ -265,7 +265,7 @@ public abstract class LambdaNodeViewController extends Actor {
                     if (DEBUG_DRAG_AND_DROP) {
                         System.out.println("        Adding drop target below " + getLinkedTerm().getClass().getSimpleName() + " (" + getLinkedTerm().toString() + ")");
                     }
-                    getViewController().addDropTarget(new Consumer<LambdaTerm>() {
+                    getViewController().getDragAndDrop().addDropTarget(new Consumer<LambdaTerm>() {
                         @Override
                         public void accept(LambdaTerm term) {
                             if (DEBUG) {
@@ -281,7 +281,7 @@ public abstract class LambdaNodeViewController extends Actor {
                         System.out.println("        Adding drop target left of " + children.get(0).getLinkedTerm().getClass().getSimpleName() + " (" + children.get(0).getLinkedTerm().toString() + ")");
                     }
 
-                    getViewController().addDropTarget(new Consumer<LambdaTerm>() {
+                    getViewController().getDragAndDrop().addDropTarget(new Consumer<LambdaTerm>() {
                         @Override
                         public void accept(LambdaTerm term) {
                             if (DEBUG) {
@@ -308,7 +308,7 @@ public abstract class LambdaNodeViewController extends Actor {
 
                     final LambdaTerm siblingTerm = childTerm;
                     target = new Rectangle(childVC.getX() + childVC.getWidth() - (index == children.size() - 1 ? GAP_SIZE : GAP_SIZE / 2), childVC.getY(), GAP_SIZE, BLOCK_HEIGHT);
-                    getViewController().addDropTarget(new Consumer<LambdaTerm>() {
+                    getViewController().getDragAndDrop().addDropTarget(new Consumer<LambdaTerm>() {
                         @Override
                         public void accept(LambdaTerm term) {
                             if (DEBUG) {
@@ -360,13 +360,4 @@ public abstract class LambdaNodeViewController extends Actor {
         }
         return true;
     }
-
-	/**
-	 * Returns whether this node can have children
-	 * 
-	 * @return true if this can have children, false otherwise
-	 */
-	public boolean isCanHaveChildren() {
-		return canHaveChildren;
-	}
 }

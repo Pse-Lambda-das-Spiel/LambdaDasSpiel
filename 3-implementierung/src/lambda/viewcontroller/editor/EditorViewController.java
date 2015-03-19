@@ -19,7 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -154,7 +153,8 @@ public final class EditorViewController extends StageViewController implements E
                         "elements_bar")));
 
         main.add(leftToolBar).expandY().left().top();
-        main.add(targetButton).right().top();
+        main.add(targetButton).size(0.10f * getStage().getWidth(),
+                0.10f * getStage().getWidth()).right().top();
         main.row();
         main.add(bottomToolBar).height(0.25f * getStage().getHeight())
                 .expandX().bottom();
@@ -258,11 +258,11 @@ public final class EditorViewController extends StageViewController implements E
     @Override
     public void show() {
         if (term == null) {
-            throw new IllegalStateException(
-                    "Cannot show the editor viewController without calling reset before!");
+            throw new IllegalStateException("Cannot show the editor viewController without calling reset before!");
         }
 
         InputMultiplexer multiplexer = new InputMultiplexer();
+        multiplexer.addProcessor(term.getDragAndDrop());
         multiplexer.addProcessor(getStage());
         multiplexer.addProcessor(this);
         Gdx.input.setInputProcessor(multiplexer);
@@ -330,24 +330,25 @@ public final class EditorViewController extends StageViewController implements E
         // Reset toolbar elements
         toolbarElements.clear();
         bottomToolBar.clear();
+        if (model.getLevelContext().getLevelModel().getUseableElements().contains(ElementType.VARIABLE)) {
+            LambdaRoot variable = new LambdaRoot();
+            variable.setChild(new LambdaVariable(variable, Color.WHITE, true));
+            toolbarElements.add(LambdaTermViewController.build(variable, false, model.getLevelContext(), getStage(), true));
+        }
         if (model.getLevelContext().getLevelModel().getUseableElements().contains(ElementType.ABSTRACTION)) {
             LambdaRoot abstraction = new LambdaRoot();
             abstraction.setChild(new LambdaAbstraction(abstraction, Color.WHITE, true));
-            toolbarElements.add(LambdaTermViewController.build(abstraction, false, model.getLevelContext(), getStage(), false));
+            toolbarElements.add(LambdaTermViewController.build(abstraction, false, model.getLevelContext(), getStage(), true));
         }
-        if (model.getLevelContext().getLevelModel().getUseableElements().contains(ElementType.PARANTHESIS)) {
+        if (model.getLevelContext().getLevelModel().getUseableElements().contains(ElementType.PARANTHESIS)) { // TODO parnEnthesis
             LambdaRoot application = new LambdaRoot();
             application.setChild(new LambdaApplication(application, true));
             toolbarElements.add(LambdaTermViewController.build(application, false, model.getLevelContext(), getStage(), true));
         }
-        if (model.getLevelContext().getLevelModel().getUseableElements().contains(ElementType.VARIABLE)) {
-            LambdaRoot variable = new LambdaRoot();
-            variable.setChild(new LambdaVariable(variable, Color.WHITE, true));
-            toolbarElements.add(LambdaTermViewController.build(variable, false, model.getLevelContext(), getStage(), false));
-        }
         for (LambdaTermViewController toolbarElement : toolbarElements) {
-            term.addPermanentDragSource(new LambdaTermDragSource(toolbarElement.getRoot().getChild(0), false, term));
-            bottomToolBar.add(toolbarElement).top().left();
+            toolbarElement.addOffset(0.0f, toolbarElement.getHeight() / 4);
+            term.getDragAndDrop().addDragSource(new LambdaTermDragSource(toolbarElement.getRoot().getChild(0), false, true));
+            bottomToolBar.add(toolbarElement).left();
         }
         bottomToolBar.row();
 

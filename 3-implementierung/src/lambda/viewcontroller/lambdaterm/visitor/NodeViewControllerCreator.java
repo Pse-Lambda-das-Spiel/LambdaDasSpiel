@@ -44,7 +44,7 @@ public class NodeViewControllerCreator implements LambdaTermVisitor {
      */
     private final LambdaTerm rightSibling;
     /**
-     * Indicates whether all applications should be displayed with a
+     * Indicates whether root applications should be displayed with a
      * parenthesis.
      */
     private final boolean forceParenthesis;
@@ -58,8 +58,8 @@ public class NodeViewControllerCreator implements LambdaTermVisitor {
      * @param viewController the viewController that the node will be inserted
      * into
      * @param rightSibling the right sibling of the inserted element
-     * @param forceParenthesis true if all applications should be displayed with
-     * a parenthesis
+     * @param forceParenthesis true if root applications should be displayed
+     * with a parenthesis
      * @throws IllegalArgumentException if parent is null or viewController is
      * null
      */
@@ -97,7 +97,8 @@ public class NodeViewControllerCreator implements LambdaTermVisitor {
      */
     @Override
     public void visit(LambdaApplication node) {
-        if (canCreateParenthesis || forceParenthesis) {
+        if (canCreateParenthesis
+                || forceParenthesis && (node.getParent() == null || node.getParent().getParent() == null)) {
             parent.insertChild(new LambdaParenthesisViewController(node, parent, viewController), rightSibling);
         }
         // Traverse

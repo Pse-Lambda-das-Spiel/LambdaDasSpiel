@@ -42,7 +42,8 @@ public class ViewInsertionVisitor implements LambdaTermVisitor {
      */
     private boolean isRightApplicationChild;
     /**
-     * Indicates whether all applications should be displayed with a parenthesis.
+     * Indicates whether root applications should be displayed with a
+     * parenthesis.
      */
     private final boolean forceParenthesis;
 
@@ -52,14 +53,11 @@ public class ViewInsertionVisitor implements LambdaTermVisitor {
      * @param inserted the inserted node
      * @param viewController the viewController that the node will be inserted
      * into
-     * @param forceParenthesis true if all applications should be displayed with a parenthesis
-     * @throws IllegalArgumentException if inserted is null or viewController is
-     * null
+     * @param forceParenthesis true if root applications should be displayed
+     * with a parenthesis
+     * @throws IllegalArgumentException if viewController is null
      */
     public ViewInsertionVisitor(LambdaTerm inserted, LambdaTermViewController viewController, boolean forceParenthesis) {
-        if (inserted == null) {
-            throw new IllegalArgumentException("Inserted LambdaTerm cannot be null!");
-        }
         if (viewController == null) {
             throw new IllegalArgumentException("ViewController cannot be null!");
         }
@@ -79,7 +77,9 @@ public class ViewInsertionVisitor implements LambdaTermVisitor {
      */
     @Override
     public void visit(LambdaRoot node) {
-        insertChild(viewController.getNode(node));
+        if (inserted != null) {
+            insertChild(viewController.getNode(node));
+        }
     }
 
     /**
@@ -90,22 +90,24 @@ public class ViewInsertionVisitor implements LambdaTermVisitor {
      */
     @Override
     public void visit(LambdaApplication node) {
-        // Check for right sibling
-        if (rightSibling == null && lastVisited == node.getLeft()) {
-            rightSibling = node.getRight();
-        }
-        // Check if paranthesis are necessary around inserted element
-        if (inserted == node.getRight()) {
-            isRightApplicationChild = true;
-        }
+        if (inserted != null) {
+            // Check for right sibling
+            if (rightSibling == null && lastVisited == node.getLeft()) {
+                rightSibling = node.getRight();
+            }
+            // Check if paranthesis are necessary around inserted element
+            if (inserted == node.getRight()) {
+                isRightApplicationChild = true;
+            }
 
-        if (viewController.hasNode(node)) {
-            // Visited application is displayed by a parenthesis node => insert child here
-            insertChild(viewController.getNode(node));
-        } else {
-            // Implicit parenthesis => traverse to parent
-            lastVisited = node;
-            node.getParent().accept(this);
+            if (viewController.hasNode(node)) {
+                // Visited application is displayed by a parenthesis node => insert child here
+                insertChild(viewController.getNode(node));
+            } else {
+                // Implicit parenthesis => traverse to parent
+                lastVisited = node;
+                node.getParent().accept(this);
+            }
         }
     }
 
@@ -117,7 +119,9 @@ public class ViewInsertionVisitor implements LambdaTermVisitor {
      */
     @Override
     public void visit(LambdaAbstraction node) {
-        insertChild(viewController.getNode(node));
+        if (inserted != null) {
+            insertChild(viewController.getNode(node));
+        }
     }
 
     /**
@@ -128,7 +132,7 @@ public class ViewInsertionVisitor implements LambdaTermVisitor {
      */
     @Override
     public void visit(LambdaVariable node) {
-        assert(false);
+        assert (false);
     }
 
     /**
@@ -138,7 +142,7 @@ public class ViewInsertionVisitor implements LambdaTermVisitor {
      * @param parent the parent node
      */
     private void insertChild(LambdaNodeViewController parent) {
-        assert(parent != null);
+        assert (parent != null);
         inserted.accept(new NodeViewControllerCreator(parent, isRightApplicationChild, viewController, rightSibling, forceParenthesis));
     }
 
