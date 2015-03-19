@@ -1,11 +1,10 @@
 package lambda.model.lambdaterm.visitor;
 
-import com.badlogic.gdx.graphics.Color;
-import lambda.model.lambdaterm.InvalidLambdaTermException;
 import lambda.model.lambdaterm.LambdaAbstraction;
 import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaVariable;
+import lambda.model.levels.LevelManager;
 
 /**
  * Represents a visitor on a lambda term that converts a lambda term to a
@@ -78,7 +77,7 @@ public class ToStringVisitor implements LambdaTermVisitor<String> {
         } else {
             right = "null";
         }
-        
+
         isLeftApplicationChild = false;
         isRightApplicationChild = false;
         result = (paranthesis ? "(" : "") + left + " " + right + (paranthesis ? ")" : "");
@@ -95,7 +94,7 @@ public class ToStringVisitor implements LambdaTermVisitor<String> {
         boolean paranthesis = isLeftApplicationChild || isRightApplicationChild;
         isLeftApplicationChild = false;
         isRightApplicationChild = false;
-        
+
         String inside;
         if (node.getInside() != null) {
             inside = node.getInside().accept(this);
@@ -103,7 +102,7 @@ public class ToStringVisitor implements LambdaTermVisitor<String> {
             inside = "null";
         }
 
-        result = (paranthesis ? "(" : "") + "/" + getVariableName(node.getColor()) + "." + inside + (paranthesis ? ")" : "");
+        result = (paranthesis ? "(" : "") + "/" + Character.toString(LevelManager.convertColorToVariable(node.getColor())) + "." + inside + (paranthesis ? ")" : "");
     }
 
     /**
@@ -114,7 +113,7 @@ public class ToStringVisitor implements LambdaTermVisitor<String> {
      */
     @Override
     public void visit(LambdaVariable node) {
-        result = getVariableName(node.getColor());
+        result = Character.toString(LevelManager.convertColorToVariable(node.getColor()));
     }
 
     /**
@@ -125,22 +124,5 @@ public class ToStringVisitor implements LambdaTermVisitor<String> {
     @Override
     public String getResult() {
         return result;
-    }
-
-    /**
-     * Returns a variable name for the given color.
-     *
-     * @param color the color
-     * @return a variable name for the given color
-     */
-    private String getVariableName(Color color) {
-        /*if (variableNames.containsKey(color)) {
-         return variableNames.get(color);
-         } else {
-         String variableName = Character.toString((char) ('a' + variableNames.size()));
-         variableNames.put(color, variableName);
-         return variableName;
-         }*/
-        return Character.toString((char) ('a' + (Math.abs(color.hashCode()) % ('z' - 'a' + 1)))); // TODO
     }
 }

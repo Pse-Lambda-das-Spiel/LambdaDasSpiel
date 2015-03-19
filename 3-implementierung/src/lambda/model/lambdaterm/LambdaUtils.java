@@ -71,17 +71,7 @@ public final class LambdaUtils {
                     
                     // Inside term
                     ++index[0];
-                    Color color = null;
-                    for (Map.Entry<Color, Character> pair : LevelManager.getColorsToVariables().entrySet()) {
-                    	 if (pair.getValue().equals(variableName)) {
-                             color = pair.getKey();
-                             break;
-                         }
-                    }
-                    if (color == null) {
-                        color = new Color(variableName, variableName, variableName, 1);
-                    }
-                    LambdaAbstraction abstraction = new LambdaAbstraction(null, color, false); // TODO: Generate color from variable name?
+                    LambdaAbstraction abstraction = new LambdaAbstraction(null, LevelManager.convertVariableToColor(variableName), false);
                     abstraction.setInside(fromString(string, index, depth + 1, lastParenthesisOpenDepth, closingParanthesis));
                     terms.add(abstraction);
                     break;
@@ -102,7 +92,7 @@ public final class LambdaUtils {
                 }
                 default: { // New variable
                     char variableName = string.charAt(index[0]++);
-                    terms.add(new LambdaVariable(null, new Color(variableName, variableName, variableName, 1), false));// TODO: Generate color from variable name?
+                    terms.add(new LambdaVariable(null, LevelManager.convertVariableToColor(variableName), false));
                     break;
                 }
             }

@@ -1,5 +1,7 @@
 package lambda.model.reductionmode;
 
+import com.badlogic.gdx.graphics.Color;
+import java.util.Set;
 import java.util.Stack;
 
 import lambda.Consumer;
@@ -9,6 +11,7 @@ import lambda.model.lambdaterm.visitor.CopyVisitor;
 import lambda.model.lambdaterm.visitor.IsAlphaEquivalentVisitor;
 import lambda.model.lambdaterm.visitor.strategy.BetaReductionVisitor;
 import lambda.model.levels.LevelContext;
+import lambda.model.levels.LevelManager;
 
 /**
  * Contains data and logics of the reduction mode. Will be observed by the
@@ -22,7 +25,7 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
      */
     private final Stack<LambdaRoot> history;
     /**
-     * Indicated whether the automatic reduction is paused. When paused is true
+     * Indicates whether the automatic reduction is paused. When paused is true
      * the model will automatically perform reduction steps until either a pause
      * is requested, a minimal term is reached or the maximum number of
      * reduction steps has been performed.
@@ -103,6 +106,11 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
         paused = true;
         pauseRequested = false;
         busy = false;
+
+        Set<Color> alphaConversionColors = LevelManager.getColorsToVariables().keySet();
+        alphaConversionColors.removeAll(context.getLevelModel().getAvailableColors());
+        alphaConversionColors.removeAll(context.getLevelModel().getLockedColors());
+        this.strategy.setAlphaConversionColors(alphaConversionColors);
     }
 
     /**
@@ -175,8 +183,8 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                     ReductionModel.this.notify(new Consumer<ReductionModelObserver>() {
                         @Override
                         public void accept(ReductionModelObserver observer) {
-                            observer.reductionFinished((current.equals(ReductionModel.this.context.getLevelModel().getGoal()) && ReductionModel.this.context.getLevelModel().isColorEquivalence()) ||
-                                    (current.accept(new IsAlphaEquivalentVisitor(ReductionModel.this.context.getLevelModel().getGoal())) && !ReductionModel.this.context.getLevelModel().isColorEquivalence()));
+                            observer.reductionFinished((current.equals(ReductionModel.this.context.getLevelModel().getGoal()) && ReductionModel.this.context.getLevelModel().isColorEquivalence())
+                                    || (current.accept(new IsAlphaEquivalentVisitor(ReductionModel.this.context.getLevelModel().getGoal())) && !ReductionModel.this.context.getLevelModel().isColorEquivalence()));
                         }
                     });
                 }

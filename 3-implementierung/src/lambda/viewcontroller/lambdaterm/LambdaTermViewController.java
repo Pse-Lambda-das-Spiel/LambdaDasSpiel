@@ -234,7 +234,12 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
         ((LambdaValueViewController) getNode(term)).setLambdaColor(color);
     }
 
-    // TODO javadoc
+    /**
+     * Adds an offset to all nodes in this tree.
+     *
+     * @param x x-coordinate of the offset
+     * @param y y-coordinate of the offset
+     */
     public void addOffset(float x, float y) {
         for (Actor child : this.getChildren()) {
             child.moveBy(x, y);
