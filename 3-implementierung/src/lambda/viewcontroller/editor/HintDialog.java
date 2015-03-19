@@ -29,7 +29,7 @@ public class HintDialog extends Dialog {
         super("", skin);
         clear();
         setFillParent(true);
-        if (context.getLevelModel().getHint() == null) {
+        if (context.getLevelModel().getHint().getChild() == null) {
             Label noHint = new Label(language.get("noHint"), skin);
             noHint.setWrap(true);
             add(noHint).width(stage.getWidth() * 0.8f);
