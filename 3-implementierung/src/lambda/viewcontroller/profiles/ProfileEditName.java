@@ -8,6 +8,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -89,8 +90,19 @@ public class ProfileEditName extends StageViewController implements ProfileEditO
                 }
             }
         });
-        nameField.getStyle().background.setLeftWidth(space * 3 / 2);
-        nameField.getStyle().background.setRightWidth(space * 3 / 2);
+        nameField.addListener(new InputListener() {
+            @Override
+            public boolean keyDown (InputEvent event, int keycode) {
+                if (keycode == Keys.BACK) {
+                    nameField.getOnscreenKeyboard().show(false);
+                    getStage().setKeyboardFocus(null);
+                    Gdx.input.getInputProcessor().keyDown(keycode);
+                }
+                return false;
+            }
+        });
+        nameField.getStyle().background.setLeftWidth(space * 3);
+        nameField.getStyle().background.setRightWidth(space * 3);
         nameSelection.add(nameField).width(getStage().getWidth() * 2 / 3).space(space);
 
         ImageButton backButton = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
