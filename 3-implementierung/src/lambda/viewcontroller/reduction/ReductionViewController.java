@@ -418,11 +418,14 @@ public class ReductionViewController extends StageViewController implements Redu
             pad(stageWidth / 64);
 
             final LevelModel playedLevel = model.getContext().getLevelModel();
-            Label levelLabel;
-            levelLabel = new Label(language.get(levelComplete ? "levelCompleted" : "levelFailed"), dialogSkin);
-            levelLabel.setFontScale(0.6f);
-            add(levelLabel).colspan(levelComplete ? 3 : 2);
-
+            // if the level is not the sandbox
+            if (playedLevel.getId() != 0) {
+            	 Label levelLabel;
+                 levelLabel = new Label(language.get(levelComplete ? "levelCompleted" : "levelFailed"), dialogSkin);
+                 levelLabel.setFontScale(0.6f);
+                 add(levelLabel).colspan(levelComplete ? 3 : 2);
+            }
+           
             row().space(10);
             ImageButton menuButton = new ImageButton(dialogSkin, "menuButton");
             menuButton.addListener(new ClickListener() {
@@ -445,7 +448,8 @@ public class ReductionViewController extends StageViewController implements Redu
             });
             add(restartButton).size(stageHeight / 4);
 
-            if (levelComplete) {
+            // if the level is complete and not the sandbox
+            if (levelComplete && (playedLevel.getId() != 0)) {
                 ImageButton nextLevelButton = new ImageButton(dialogSkin, "nextLevelButton");
                 nextLevelButton.addListener(new ClickListener() {
                     @Override

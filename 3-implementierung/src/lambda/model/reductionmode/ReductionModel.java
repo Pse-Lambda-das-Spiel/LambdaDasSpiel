@@ -3,6 +3,7 @@ package lambda.model.reductionmode;
 import com.badlogic.gdx.graphics.Color;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Stack;
 
@@ -112,7 +113,9 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
         List<Color> alphaConversionColors = LevelManager.getAllColors();
         alphaConversionColors.removeAll(context.getLevelModel().getAvailableColors());
         alphaConversionColors.removeAll(context.getLevelModel().getLockedColors());
-        this.strategy.setAlphaConversionColors(new HashSet<>(alphaConversionColors));
+        // white should not be among the replacement colors for an alpha conversion
+        alphaConversionColors.remove(Color.valueOf("ffffffff"));
+        this.strategy.setAlphaConversionColors(new LinkedHashSet<>(alphaConversionColors));
     }
 
     /**
@@ -185,8 +188,12 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                     ReductionModel.this.notify(new Consumer<ReductionModelObserver>() {
                         @Override
                         public void accept(ReductionModelObserver observer) {
-                            observer.reductionFinished((current.equals(ReductionModel.this.context.getLevelModel().getGoal()) && ReductionModel.this.context.getLevelModel().isColorEquivalence())
-                                    || (current.accept(new IsAlphaEquivalentVisitor(ReductionModel.this.context.getLevelModel().getGoal())) && !ReductionModel.this.context.getLevelModel().isColorEquivalence()));
+                        	if (context.getLevelModel().getId() == 0) {
+                        		observer.reductionFinished(true);
+                        	} else {
+                        		observer.reductionFinished((current.equals(ReductionModel.this.context.getLevelModel().getGoal()) && ReductionModel.this.context.getLevelModel().isColorEquivalence())
+                                        || (current.accept(new IsAlphaEquivalentVisitor(ReductionModel.this.context.getLevelModel().getGoal())) && !ReductionModel.this.context.getLevelModel().isColorEquivalence()));
+                        	}
                         }
                     });
                 }
