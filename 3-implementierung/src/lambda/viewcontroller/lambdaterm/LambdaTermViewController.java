@@ -110,6 +110,7 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
 
         // Recursive insertion of children
         root.accept(new ViewInsertionVisitor(root.getChild(), result, forceParenthesis));
+        result.getRoot().updateWidth();
 
         return result;
     }
@@ -265,13 +266,15 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
      */
     @Override
     public void alphaConversionFinished() {
-        // Block until animation is complete
-        synchronized (this) {
-            while (!lastAlphaConvertedNode.isColorAnimationFinished()) {
-                try {
-                    wait();
-                } catch (InterruptedException ex) {
-                    // TODO 
+        if (lastAlphaConvertedNode != null) {
+            // Block until animation is complete
+            synchronized (this) {
+                while (!lastAlphaConvertedNode.isColorAnimationFinished()) {
+                    try {
+                        wait();
+                    } catch (InterruptedException ex) {
+                        // TODO 
+                    }
                 }
             }
         }

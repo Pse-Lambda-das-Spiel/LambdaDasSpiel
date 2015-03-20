@@ -90,6 +90,14 @@ public final class EditorViewController extends StageViewController implements E
      * Indicates whether the screen is currently being dragged.
      */
     private boolean isDraggingScreen;
+    /**
+     * Displays a hint on click.
+     */
+    private ImageButton hintButton;
+    /**
+     * Displays the level goal on click.
+     */
+    private ImageButton targetButton;
 
     /**
      * Creates a new instance of EditorViewController.
@@ -121,11 +129,11 @@ public final class EditorViewController extends StageViewController implements E
 
         ImageButton pauseButton = new ImageButton(manager.get(
                 "data/skins/MasterSkin.json", Skin.class), "pauseButton");
-        ImageButton hintButton = new ImageButton(manager.get(
+        hintButton = new ImageButton(manager.get(
                 "data/skins/MasterSkin.json", Skin.class), "infoButton");
         ImageButton helpButton = new ImageButton(manager.get(
                 "data/skins/MasterSkin.json", Skin.class), "helpButton");
-        ImageButton targetButton = new ImageButton(manager.get(
+        targetButton = new ImageButton(manager.get(
                 "data/skins/MasterSkin.json", Skin.class), "goal");
         ImageButton reductionStrategyButton = new ImageButton(manager.get(
                 "data/skins/MasterSkin.json", Skin.class), "strategy");
@@ -279,19 +287,23 @@ public final class EditorViewController extends StageViewController implements E
         I18NBundle language = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
         final float width = getStage().getWidth();
         final float height = getStage().getHeight();
-        final Dialog dialogs[] = new Dialog[tutorialList.size() + 1];
-        for (int i = 0; i + 1 < dialogs.length; i++) {
+        final Dialog dialogs[] = new Dialog[tutorialList.size() + (targetButton.isVisible() ? 1 : 0)];
+        for (int i = 0; i + (targetButton.isVisible() ? 1 : 0) < dialogs.length; i++) {
             final int pos = i;
             dialogs[pos] = new TutorialMessage(tutorialList.get(i), dialogSkin, language, height, width);
             dialogs[pos].addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    dialogs[pos + 1].show(getStage());
+                    if (pos + 1 < dialogs.length) {
+                        dialogs[pos + 1].show(getStage());
+                    }
                     dialogs[pos].remove();
                 }
             });
         }
-        dialogs[dialogs.length - 1] = new TargetDialog(dialogSkin, language, EditorViewController.this.model.getLevelContext(), getStage());
+        if (targetButton.isVisible()) {
+            dialogs[dialogs.length - 1] = new TargetDialog(dialogSkin, language, EditorViewController.this.model.getLevelContext(), getStage());
+        }
         dialogs[0].show(getStage());
     }
 
@@ -354,6 +366,10 @@ public final class EditorViewController extends StageViewController implements E
             bottomToolBar.add(toolbarElement).left();
         }
         bottomToolBar.row();
+
+        // Reset button visibilities
+        hintButton.setVisible(model.getLevelContext().getLevelModel().getHint().getChild() != null);
+        targetButton.setVisible(model.getLevelContext().getLevelModel().getGoal().getChild() != null);
 
         model.getTerm().addObserver(this);
     }
@@ -421,7 +437,13 @@ public final class EditorViewController extends StageViewController implements E
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         if (isDraggingScreen) {
-            term.moveBy((screenX - lastX) / 2.0f, (lastY - screenY) / 2.0f);
+            if (model.getTerm().getChild() == null) {
+                // Reset screen position if no element is present
+                term.setPosition(getStage().getWidth() * INITIAL_TERM_OFFSET.x, getStage().getHeight() * (1 - INITIAL_TERM_OFFSET.y));
+            } else {
+                // Drag screen
+                term.moveBy((screenX - lastX) / 2.0f, (lastY - screenY) / 2.0f);
+            }
             lastX = screenX;
             lastY = screenY;
         }

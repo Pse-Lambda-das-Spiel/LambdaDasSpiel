@@ -263,7 +263,7 @@ public abstract class LambdaNodeViewController extends Actor {
      * the node is reached, updates positions and then drag&drop sources sand
      * targets.
      */
-    private void updateWidth() {
+    public void updateWidth() {
         // Calculate own width
         float width = 0.0f;
         for (LambdaNodeViewController child : children) {
@@ -292,7 +292,7 @@ public abstract class LambdaNodeViewController extends Actor {
      * @param x the new x-coordinate of this node
      * @param y the new y-coordinate of this node
      */
-    private void updatePosition(float x, float y) {
+    public void updatePosition(float x, float y) {
         setPosition(x, y);
         getViewController().setSize(Math.max(getViewController().getX(), x + this.getWidth()), Math.max(getViewController().getY(), -y + this.getHeight() + BLOCK_HEIGHT));
         if (DEBUG) {
@@ -313,7 +313,7 @@ public abstract class LambdaNodeViewController extends Actor {
      * Updates the drag&drop source for this node and the drag&drop targets for
      * all spaces next to its children. Then traverses down the tree.
      */
-    private void updateDragAndDrop() {
+    public void updateDragAndDrop() {
         if (getViewController().isEditable()) {
             if (this.isRoot()) {
                 // Clear drag&drop once when at the root
