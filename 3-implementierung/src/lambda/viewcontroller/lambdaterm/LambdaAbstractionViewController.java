@@ -113,7 +113,7 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
         batch.draw(frontMask, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
         batch.setColor(1f, 1f, 1f, 1f);
 
-        super.draw(batch, alpha);
+        drawVanishAnimation(batch, alpha);
 
         // Animation
         synchronized (getViewController()) {

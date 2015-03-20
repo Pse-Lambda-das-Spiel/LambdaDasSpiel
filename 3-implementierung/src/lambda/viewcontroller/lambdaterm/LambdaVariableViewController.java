@@ -74,8 +74,8 @@ public class LambdaVariableViewController extends LambdaValueViewController {
         batch.setColor(getCurrentColor());
         batch.draw(texture, getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
         batch.setColor(1f, 1f, 1f, 1f);
-
-        super.draw(batch, alpha);
+        
+        drawVanishAnimation(batch, alpha);
 
         // Smoke animation
         synchronized (getViewController()) {

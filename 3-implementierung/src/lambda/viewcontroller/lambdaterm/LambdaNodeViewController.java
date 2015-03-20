@@ -71,12 +71,12 @@ public abstract class LambdaNodeViewController extends Actor {
      * application is currently being or has been run. Is set to true when the
      * animation starts.
      */
-    private boolean animateVanish;
+    private boolean animateVanishSmoke;
     /**
      * The time since the start of the animation or zero if the animation hasn't
      * started yet.
      */
-    private float vanishStateTime;
+    private float vanishSmokeStateTime;
 
     /**
      * Creates a new instance of LambdaNodeViewController.
@@ -99,8 +99,8 @@ public abstract class LambdaNodeViewController extends Actor {
         this.viewController = viewController;
         this.canHaveChildren = canHaveChildren;
         animation = viewController.getContext().getCloudAnimation();
-        animateVanish = false;
-        vanishStateTime = 0.0f;
+        animateVanishSmoke = false;
+        vanishSmokeStateTime = 0.0f;
         children = new LinkedList<>();
         setHeight(BLOCK_HEIGHT);
         assert (viewController.getStage() != null);
@@ -179,7 +179,7 @@ public abstract class LambdaNodeViewController extends Actor {
      * Starts the vanish animation.
      */
     public void animateVanish() {
-        animateVanish = true;
+        animateVanishSmoke = true;
     }
 
     /**
@@ -188,25 +188,24 @@ public abstract class LambdaNodeViewController extends Actor {
      * @return true if the vanish animation is finished, false otherwise
      */
     public boolean isVanishAnimationFinished() {
-        return vanishStateTime >= animation.getAnimationDuration();
+        return vanishSmokeStateTime >= animation.getAnimationDuration();
     }
 
     /**
-     * Draws this node.
+     * Draws the vanish animation over this node family if necessary.
      *
      * @param batch the batch on which the node will be drawn
      * @param alpha the parent's alpha
      */
-    @Override
-    public void draw(Batch batch, float alpha) {
+    public void drawVanishAnimation(Batch batch, float alpha) {
         // Vanish animation
         synchronized (getViewController()) {
-            if (animateVanish) {
+            if (animateVanishSmoke) {
                 float familyHeight = getFamilyHeight();
-                batch.draw(animation.getKeyFrame(vanishStateTime), getX(), getY() - familyHeight + BLOCK_HEIGHT, getWidth(), familyHeight);
-                vanishStateTime += Gdx.graphics.getDeltaTime();
+                batch.draw(animation.getKeyFrame(vanishSmokeStateTime), getX(), getY() - familyHeight + BLOCK_HEIGHT, getWidth(), familyHeight);
+                vanishSmokeStateTime += Gdx.graphics.getDeltaTime();
                 if (isVanishAnimationFinished()) {
-                    animateVanish = false;
+                    animateVanishSmoke = false;
                     getViewController().notifyAll();
                 }
             }

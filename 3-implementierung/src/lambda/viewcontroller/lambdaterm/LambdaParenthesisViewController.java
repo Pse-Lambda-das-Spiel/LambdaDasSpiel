@@ -89,7 +89,7 @@ public class LambdaParenthesisViewController extends LambdaNodeViewController {
         batch.draw(front, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
         batch.draw(frontMask, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
 
-        super.draw(batch, alpha);
+        drawVanishAnimation(batch, alpha);
     }
 
     /**

@@ -2,6 +2,7 @@ package lambda.viewcontroller.lambdaterm;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -196,6 +197,7 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
     @Override
     public void removingApplicant(LambdaTerm applicant) {
         LambdaNodeViewController vc = ((LambdaNodeViewController) getNode(applicant));
+        vc.setZIndex(Integer.MAX_VALUE);
 
         // Start animation and block until it is complete
         synchronized (this) {
