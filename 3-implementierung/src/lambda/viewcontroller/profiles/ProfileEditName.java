@@ -80,10 +80,19 @@ public class ProfileEditName extends StageViewController implements ProfileEditO
         nameSelection.row().height(getStage().getHeight() / 3);
         nameField = new TextField("", manager.get(skinJson, Skin.class));
         nameField.setMaxLength(20);
+        nameField.setTextFieldListener(new TextField.TextFieldListener() {
+            @Override
+            public void keyTyped(TextField textField, char key) {
+                if (key == '\n' || key == '\r') {
+                    textField.getOnscreenKeyboard().show(false);
+                    getStage().setKeyboardFocus(null);
+                }
+            }
+        });
         nameField.getStyle().background.setLeftWidth(space * 3 / 2);
         nameField.getStyle().background.setRightWidth(space * 3 / 2);
         nameSelection.add(nameField).width(getStage().getWidth() * 2 / 3).space(space);
-        
+
         ImageButton backButton = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
         buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
