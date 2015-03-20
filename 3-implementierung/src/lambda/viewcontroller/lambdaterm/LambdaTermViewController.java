@@ -61,6 +61,11 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
      * parenthesis.
      */
     private final boolean forceParenthesis;
+    /**
+     * The last node that has been alpha converted or null if no node has been
+     * alpha converted yet.
+     */
+    private LambdaValueViewController lastAlphaConvertedNode;
 
     private AssetManager assets;
 
@@ -130,6 +135,7 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
         this.editable = editable;
         this.context = context;
         this.forceParenthesis = forceParenthesis;
+        lastAlphaConvertedNode = null;
         nodeMap = new IdentityHashMap<>();
         if (editable) {
             dragAndDrop = new DragAndDrop(this);
@@ -171,8 +177,30 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
 
         // Start animation and block until it is complete
         synchronized (this) {
-            vc.animate();
-            while (!vc.isAnimationFinished()) {
+            vc.animateMagic();
+            while (!vc.isMagicAnimationFinished()) {
+                try {
+                    wait();
+                } catch (InterruptedException ex) {
+                    // TODO 
+                }
+            }
+        }
+    }
+
+    /**
+     * Called before the given applicant is removed during an application.
+     *
+     * @param applicant the removed applicant
+     */
+    @Override
+    public void removingApplicant(LambdaTerm applicant) {
+        LambdaNodeViewController vc = ((LambdaNodeViewController) getNode(applicant));
+
+        // Start animation and block until it is complete
+        synchronized (this) {
+            vc.animateVanish();
+            while (!vc.isVanishAnimationFinished()) {
                 try {
                     wait();
                 } catch (InterruptedException ex) {
@@ -195,8 +223,8 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
 
         // Start smoke animation and block until it is complete
         synchronized (this) {
-            vc.animate();
-            while (!vc.isAnimationFinished()) {
+            vc.animateSmoke();
+            while (!vc.isSmokeAnimationFinished()) {
                 try {
                     wait();
                 } catch (InterruptedException ex) {
@@ -214,8 +242,37 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
      */
     @Override
     public void setColor(LambdaValue term, Color color) {
-        // TODO animation color change
-        ((LambdaValueViewController) getNode(term)).setLambdaColor(color);
+        LambdaValueViewController vc = ((LambdaValueViewController) getNode(term));
+
+        vc.setTargetColor(color, true);
+    }
+
+    /**
+     * Called when the given values color is changed during an alpha conversion.
+     *
+     * @param term the modified term
+     * @param color the new color
+     */
+    @Override
+    public void alphaConverted(LambdaValue term, Color color) {
+        lastAlphaConvertedNode = ((LambdaValueViewController) getNode(term));
+    }
+
+    /**
+     * Called when a single alpha conversion is finished.
+     */
+    @Override
+    public void alphaConversionFinished() {
+        // Block until animation is complete
+        synchronized (this) {
+            while (!lastAlphaConvertedNode.isColorAnimationFinished()) {
+                try {
+                    wait();
+                } catch (InterruptedException ex) {
+                    // TODO 
+                }
+            }
+        }
     }
 
     /**
@@ -359,9 +416,5 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
         }
         LambdaTermViewController vc = (LambdaTermViewController) other;
         return this.editable == vc.editable && this.root.equals(vc.root);
-    }
-
-    @Override
-    public void alphaConverted(LambdaValue term, Color color) {
     }
 }

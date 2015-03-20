@@ -1,6 +1,7 @@
 package lambda.viewcontroller.lambdaterm;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import lambda.model.lambdaterm.LambdaAbstraction;
@@ -38,6 +39,10 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
      */
     private final TextureRegion backMask;
     /**
+     * The animation that is shown before an application is performed.
+     */
+    private final Animation animation;
+    /**
      * Indicates whether the spell is currently being or has been animated. Is
      * set to true when the animation starts.
      */
@@ -46,7 +51,7 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
      * The time since the start of the animation or zero if the animation hasn't
      * started yet.
      */
-    private float stateTime;
+    private float magicStateTime;
 
     /**
      * Creates a new instance of LambdaAbstractionViewController.
@@ -64,8 +69,9 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
         frontMask = viewController.getContext().getElementUIContextFamily().getAbstraction().getmFront();
         centerMask = viewController.getContext().getElementUIContextFamily().getAbstraction().getmCenter();
         backMask = viewController.getContext().getElementUIContextFamily().getAbstraction().getmBack();
+        animation = viewController.getContext().getMagicAnimation();
         animate = false;
-        stateTime = 0.0f;
+        magicStateTime = 0.0f;
     }
 
     /**
@@ -86,31 +92,35 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
      */
     @Override
     public void draw(Batch batch, float alpha) {
+        updateColorAnimation();
+
         // Back
-        Gdx.gl.glColorMask(true, true, true, false);
         batch.draw(back, getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
-        batch.setColor(getLambdaColor().r, getLambdaColor().g, getLambdaColor().b, 1.0f);
+        batch.setColor(getCurrentColor().r, getCurrentColor().g, getCurrentColor().b, 1.0f);
         batch.draw(backMask, getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
         batch.setColor(1f, 1f, 1f, 1f);
         // Center
         float x;
         for (x = getX() + BLOCK_WIDTH; x < getX() + getWidth() - BLOCK_WIDTH - EPSILON; x += BLOCK_WIDTH) {
             batch.draw(center, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
-            batch.setColor(getLambdaColor().r, getLambdaColor().g, getLambdaColor().b, 1.0f);
+            batch.setColor(getCurrentColor().r, getCurrentColor().g, getCurrentColor().b, 1.0f);
             batch.draw(centerMask, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
             batch.setColor(1f, 1f, 1f, 1f);
         }
         // Front
         batch.draw(front, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
-        batch.setColor(getLambdaColor().r, getLambdaColor().g, getLambdaColor().b, 1.0f);
+        batch.setColor(getCurrentColor().r, getCurrentColor().g, getCurrentColor().b, 1.0f);
         batch.draw(frontMask, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
         batch.setColor(1f, 1f, 1f, 1f);
 
-        //.getKeyFrame(stateTime) TODO
+        super.draw(batch, alpha);
+
+        // Animation
         synchronized (getViewController()) {
             if (animate) {
-                stateTime += Gdx.graphics.getDeltaTime();
-                if (isAnimationFinished()) {
+                batch.draw(animation.getKeyFrame(magicStateTime), x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+                magicStateTime += Gdx.graphics.getDeltaTime();
+                if (isMagicAnimationFinished()) {
                     animate = false;
                     getViewController().notifyAll();
                 }
@@ -121,7 +131,7 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
     /**
      * Starts the spell animation.
      */
-    public void animate() {
+    public void animateMagic() {
         animate = true;
     }
 
@@ -130,9 +140,8 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
      *
      * @return true if the spell animation is finished, false otherwise
      */
-    public boolean isAnimationFinished() {
-        return true;
-        //return stateTime > front.getAnimationDuration(); TODO
+    public boolean isMagicAnimationFinished() {
+        return magicStateTime >= animation.getAnimationDuration();
     }
 
     /**
@@ -147,6 +156,6 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
             return false;
         }
         LambdaAbstractionViewController abstraction = (LambdaAbstractionViewController) other;
-        return super.equals(abstraction) && abstraction.getLambdaColor().equals(this.getLambdaColor());
+        return super.equals(abstraction) && abstraction.getCurrentColor().equals(this.getCurrentColor());
     }
 }

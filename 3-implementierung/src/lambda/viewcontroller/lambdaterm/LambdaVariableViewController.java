@@ -1,6 +1,7 @@
 package lambda.viewcontroller.lambdaterm;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import lambda.model.lambdaterm.LambdaVariable;
@@ -17,16 +18,20 @@ public class LambdaVariableViewController extends LambdaValueViewController {
      * Indicates whether the animation for replacing this variable is currently
      * being or has been run. Is set to true when the animation starts.
      */
-    private boolean animate;
+    private boolean animateSmoke;
     /**
      * The time since the start of the animation or zero if the animation hasn't
      * started yet.
      */
-    private float stateTime;
+    private float smokeStateTime;
     /**
      * The variable's texture.
      */
     private final TextureRegion texture;
+    /**
+     * The animation that is shown while an application is being performed.
+     */
+    private final Animation animation;
 
     /**
      * Creates a new instance of LambdaVariableViewController.
@@ -39,9 +44,10 @@ public class LambdaVariableViewController extends LambdaValueViewController {
     public LambdaVariableViewController(LambdaVariable linkedTerm, LambdaNodeViewController parent, LambdaTermViewController viewController) {
         super(linkedTerm, parent, viewController, false);
         texture = viewController.getContext().getElementUIContextFamily().getVariable().getTexture();
+        animation = viewController.getContext().getCloudAnimation();
 
-        animate = false;
-        stateTime = 0.0f;
+        animateSmoke = false;
+        smokeStateTime = 0.0f;
     }
 
     /**
@@ -62,18 +68,22 @@ public class LambdaVariableViewController extends LambdaValueViewController {
      */
     @Override
     public void draw(Batch batch, float alpha) {
+        updateColorAnimation();
+
         // Texture
-        batch.setColor(getLambdaColor());
+        batch.setColor(getCurrentColor());
         batch.draw(texture, getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
         batch.setColor(1f, 1f, 1f, 1f);
 
-        // Smoke animation TODO: scale over applicant
+        super.draw(batch, alpha);
+
+        // Smoke animation
         synchronized (getViewController()) {
-            if (animate) {
-                //batch.draw(animation.getKeyFrame(stateTime), getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT); TODO
-                stateTime += Gdx.graphics.getDeltaTime();
-                if (isAnimationFinished()) {
-                    animate = false;
+            if (animateSmoke) {
+                batch.draw(animation.getKeyFrame(smokeStateTime), getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+                smokeStateTime += Gdx.graphics.getDeltaTime();
+                if (isSmokeAnimationFinished()) {
+                    animateSmoke = false;
                     getViewController().notifyAll();
                 }
             }
@@ -83,8 +93,8 @@ public class LambdaVariableViewController extends LambdaValueViewController {
     /**
      * Starts the smoke animation.
      */
-    public void animate() {
-        animate = true;
+    public void animateSmoke() {
+        animateSmoke = true;
     }
 
     /**
@@ -92,9 +102,8 @@ public class LambdaVariableViewController extends LambdaValueViewController {
      *
      * @return true if the smoke animation is finished, false otherwise
      */
-    public boolean isAnimationFinished() {
-        return true;
-        // return stateTime > animation.getAnimationDuration(); TODO
+    public boolean isSmokeAnimationFinished() {
+        return smokeStateTime >= animation.getAnimationDuration();
     }
 
     /**
@@ -109,6 +118,6 @@ public class LambdaVariableViewController extends LambdaValueViewController {
             return false;
         }
         LambdaVariableViewController variable = (LambdaVariableViewController) other;
-        return super.equals(variable) && variable.getLambdaColor().equals(this.getLambdaColor());
+        return super.equals(variable) && variable.getCurrentColor().equals(this.getCurrentColor());
     }
 }

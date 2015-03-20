@@ -1,5 +1,6 @@
 package lambda.viewcontroller.lambdaterm;
 
+import com.badlogic.gdx.Gdx;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.Color;
@@ -19,9 +20,22 @@ import lambda.model.lambdaterm.LambdaValue;
  */
 public abstract class LambdaValueViewController extends LambdaNodeViewController {
     /**
-     * The color of this variable.
+     * The duration of the color change animation.
      */
-    private Color color;
+    public static final float COLOR_ANIMATION_DURATION = 0.5f;
+    /**
+     * The color of this variable before the animation started.
+     */
+    private Color initialColor;
+    /**
+     * The target color of this variable after the animation.
+     */
+    private Color targetColor;
+    /**
+     * The time since the start of the animation or zero if the animation hasn't
+     * started yet.
+     */
+    private float colorStateTime;
 
     /**
      * Creates a new instance of LambdaValueViewController.
@@ -35,8 +49,10 @@ public abstract class LambdaValueViewController extends LambdaNodeViewController
      */
     public LambdaValueViewController(LambdaValue linkedTerm, LambdaNodeViewController parent, final LambdaTermViewController viewController, boolean canHaveChildren) {
         super(linkedTerm, parent, viewController, canHaveChildren);
-        color = linkedTerm.getColor();
-        if (!linkedTerm.isLocked()) {
+        initialColor = linkedTerm.getColor();
+        targetColor = linkedTerm.getColor();
+        colorStateTime = COLOR_ANIMATION_DURATION;
+        if (!linkedTerm.isLocked() && viewController.isEditable()) {
             this.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -89,21 +105,49 @@ public abstract class LambdaValueViewController extends LambdaNodeViewController
     }
 
     /**
+     * Updates the color animation.
+     */
+    protected synchronized void updateColorAnimation() {
+        synchronized (getViewController()) {
+            if (colorStateTime < COLOR_ANIMATION_DURATION) {
+                colorStateTime += Gdx.graphics.getDeltaTime();
+                if (isColorAnimationFinished()) {
+                    getViewController().notifyAll();
+                }
+            }
+        }
+    }
+
+    /**
      * Returns the color of this value.
      *
      * @return the color of this value
      */
-    public Color getLambdaColor() {
-        return color;
+    public synchronized Color getCurrentColor() {
+        Color c0 = initialColor.cpy().mul(1.0f - colorStateTime / COLOR_ANIMATION_DURATION);
+        Color c1 = targetColor.cpy().mul(colorStateTime / COLOR_ANIMATION_DURATION);
+        return c0.add(c1);
     }
 
     /**
-     * Sets the color of this value.
+     * Sets the target color of this value and starts the animation.
      *
      * @param color the new color
+     * @param animated true if the color change should be animated, false
+     * otherwise
      */
-    public void setLambdaColor(Color color) {
-        this.color = color;
+    public synchronized void setTargetColor(Color color, boolean animated) {
+        colorStateTime = animated ? 0.0f : COLOR_ANIMATION_DURATION;
+        initialColor = getCurrentColor();
+        targetColor = color;
     }
 
+    /**
+     * Returns whether the color change animation is fininshed.
+     *
+     * @return true if the color change animation is finished, false otherwise
+     */
+    public synchronized boolean isColorAnimationFinished() {
+        return colorStateTime >= COLOR_ANIMATION_DURATION;
+    }
 }

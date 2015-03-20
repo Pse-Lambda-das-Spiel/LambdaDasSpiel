@@ -88,6 +88,8 @@ public class LambdaParenthesisViewController extends LambdaNodeViewController {
         // Front
         batch.draw(front, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
         batch.draw(frontMask, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+
+        super.draw(batch, alpha);
     }
 
     /**

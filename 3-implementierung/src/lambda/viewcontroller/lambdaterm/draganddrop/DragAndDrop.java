@@ -214,12 +214,16 @@ public class DragAndDrop extends InputAdapter {
      */
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        if (currentSource != null && touchDown == null) {
-            dragStop();
-            currentSource = null;
-            return true;
+        if (pointer == 0) {
+            if (currentSource != null && touchDown == null) {
+                dragStop();
+                currentSource = null;
+                return true;
+            } else {
+                currentSource = null;
+                return false;
+            }
         } else {
-            currentSource = null;
             return false;
         }
     }
@@ -229,23 +233,27 @@ public class DragAndDrop extends InputAdapter {
      */
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        if (currentSource != null) {
-            if (touchDown != null && new Vector2(screenX, screenY).dst(touchDown) >= MIN_DRAG_DISTANCE) {
-                // Touch down but drag not started yet
-                dragStart(currentSource);
-                touchDown = null;
-            }
-            if (touchDown == null) {
-                LambdaTermDropTarget t = null;
-                for (LambdaTermDropTarget target : dropTargets) {
-                    if (target.isOn(Gdx.input.getX(), Gdx.input.getY())) {
-                        t = target;
-                        break;
-                    }
+        if (pointer == 0) {
+            if (currentSource != null) {
+                if (touchDown != null && new Vector2(screenX, screenY).dst(touchDown) >= MIN_DRAG_DISTANCE) {
+                    // Touch down but drag not started yet
+                    dragStart(currentSource);
+                    touchDown = null;
                 }
-                drag(t);
+                if (touchDown == null) {
+                    LambdaTermDropTarget t = null;
+                    for (LambdaTermDropTarget target : dropTargets) {
+                        if (target.isOn(Gdx.input.getX(), Gdx.input.getY())) {
+                            t = target;
+                            break;
+                        }
+                    }
+                    drag(t);
+                }
+                return true;
+            } else {
+                return false;
             }
-            return true;
         } else {
             return false;
         }

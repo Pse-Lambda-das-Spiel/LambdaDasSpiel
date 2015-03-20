@@ -121,13 +121,14 @@ public class ApplicationVisitor extends ValidLambdaTermVisitor<LambdaTerm> {
     public void visitValid(final LambdaVariable node) {
         checkAlphaConversion(node);
         result = node.getColor().equals(color) ? applicant.accept(new CopyVisitor()) : node;
-        node.notify(new Consumer<LambdaTermObserver>() {
-            @Override
-            public void accept(LambdaTermObserver observer) {
-                observer.variableReplaced(node, result);
-            }
-        });
-
+        if (result != node) {
+            node.notify(new Consumer<LambdaTermObserver>() {
+                @Override
+                public void accept(LambdaTermObserver observer) {
+                    observer.variableReplaced(node, result);
+                }
+            });
+        }
     }
 
     /**
@@ -160,9 +161,21 @@ public class ApplicationVisitor extends ValidLambdaTermVisitor<LambdaTerm> {
             for (Color collision : collidingColors) {
                 term.accept(new AlphaConversionVisitor(collision, alphaColors.get(0)));
                 alphaColors.remove(0);
+                term.notify(new Consumer<LambdaTermObserver>() {
+                    @Override
+                    public void accept(LambdaTermObserver observer) {
+                        observer.alphaConversionFinished();
+                    }
+                });
             }
 
             // Remove applicant to tell application that it was reduced => application result is in left child node
+            term.notify(new Consumer<LambdaTermObserver>() {
+                @Override
+                public void accept(LambdaTermObserver observer) {
+                    observer.removingApplicant(applicant);
+                }
+            });
             applicant.accept(new ReplaceTermVisitor(null));
         }
     }

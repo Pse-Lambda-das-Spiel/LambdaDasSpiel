@@ -1,5 +1,8 @@
 package lambda.viewcontroller.lambdaterm;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
@@ -37,7 +40,7 @@ public abstract class LambdaNodeViewController extends Actor {
     /**
      * The size of the gap between two nodes.
      */
-    public static final float GAP_SIZE = 30.0f;
+    public static final float GAP_SIZE = 50.0f;
     /**
      * The term that is displayed by this viewcontroller.
      */
@@ -58,6 +61,22 @@ public abstract class LambdaNodeViewController extends Actor {
      * Indicates whether this node can have children.
      */
     private final boolean canHaveChildren;
+    /**
+     * The animation that is shown when an applicant is removed during an
+     * application.
+     */
+    private final Animation animation;
+    /**
+     * Indicates whether the animation for removing an applicant during an
+     * application is currently being or has been run. Is set to true when the
+     * animation starts.
+     */
+    private boolean animateVanish;
+    /**
+     * The time since the start of the animation or zero if the animation hasn't
+     * started yet.
+     */
+    private float vanishStateTime;
 
     /**
      * Creates a new instance of LambdaNodeViewController.
@@ -79,6 +98,9 @@ public abstract class LambdaNodeViewController extends Actor {
         this.parent = parent;
         this.viewController = viewController;
         this.canHaveChildren = canHaveChildren;
+        animation = viewController.getContext().getCloudAnimation();
+        animateVanish = false;
+        vanishStateTime = 0.0f;
         children = new LinkedList<>();
         setHeight(BLOCK_HEIGHT);
         assert (viewController.getStage() != null);
@@ -138,6 +160,58 @@ public abstract class LambdaNodeViewController extends Actor {
      * @return the minimum width of this node view
      */
     public abstract float getMinWidth();
+
+    /**
+     * Returns the family height (i.e. height of this node and all children
+     * combined).
+     *
+     * @return the family height
+     */
+    public float getFamilyHeight() {
+        float result = 0.0f;
+        for (LambdaNodeViewController child : children) {
+            result = Math.max(child.getFamilyHeight(), result);
+        }
+        return result + BLOCK_HEIGHT;
+    }
+
+    /**
+     * Starts the vanish animation.
+     */
+    public void animateVanish() {
+        animateVanish = true;
+    }
+
+    /**
+     * Returns whether the vanish animation is fininshed.
+     *
+     * @return true if the vanish animation is finished, false otherwise
+     */
+    public boolean isVanishAnimationFinished() {
+        return vanishStateTime >= animation.getAnimationDuration();
+    }
+
+    /**
+     * Draws this node.
+     *
+     * @param batch the batch on which the node will be drawn
+     * @param alpha the parent's alpha
+     */
+    @Override
+    public void draw(Batch batch, float alpha) {
+        // Vanish animation
+        synchronized (getViewController()) {
+            if (animateVanish) {
+                float familyHeight = getFamilyHeight();
+                batch.draw(animation.getKeyFrame(vanishStateTime), getX(), getY() - familyHeight + BLOCK_HEIGHT, getWidth(), familyHeight);
+                vanishStateTime += Gdx.graphics.getDeltaTime();
+                if (isVanishAnimationFinished()) {
+                    animateVanish = false;
+                    getViewController().notifyAll();
+                }
+            }
+        }
+    }
 
     /**
      * Inserts the given node as a child of this node left to the given right

@@ -444,6 +444,14 @@ public final class EditorViewController extends StageViewController implements E
         return false;
     }
 
+    @Override
+    public void alphaConversionFinished() {
+    }
+
+    @Override
+    public void removingApplicant(LambdaTerm applicant) {
+    }
+
     private class PauseDialog extends Dialog {
         public PauseDialog(Skin dialogSkin, I18NBundle language,
                 float stageWidth, float stageHeight) {
