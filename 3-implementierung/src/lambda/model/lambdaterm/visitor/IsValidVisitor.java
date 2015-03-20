@@ -53,8 +53,10 @@ public class IsValidVisitor implements LambdaTermVisitor<Boolean> {
                 hasVisitedRoot = true;
                 LambdaUtils.getRoot(node).accept(this);
             } else {
-                result &= node.getParent() == null && node.getChild() != null;
-                node.getChild().accept(this);
+                result &= (node.getParent() == null ) && (node.getChild() != null) ;
+                if (node.getChild() != null) {
+                	node.getChild().accept(this);
+                }
             }
         }
     }
