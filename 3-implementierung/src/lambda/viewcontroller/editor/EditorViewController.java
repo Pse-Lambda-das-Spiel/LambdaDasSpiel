@@ -497,7 +497,7 @@ public final class EditorViewController extends StageViewController implements E
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     EditorViewController.this.reset(model.getLevelContext());
-                    showStartDialogs();
+                    EditorViewController.this.show();
                     remove();
                 }
             });
