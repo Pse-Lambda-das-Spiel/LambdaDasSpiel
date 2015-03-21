@@ -23,6 +23,7 @@ import lambda.model.levels.LevelManager;
 import lambda.model.levels.LevelModel;
 import lambda.model.profiles.ProfileManager;
 import lambda.model.profiles.ProfileModelObserver;
+import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.editor.EditorViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
@@ -70,6 +71,7 @@ public class LevelSelectionViewController extends StageViewController implements
     @Override
     public void show() {
     	super.show();
+    	AudioManager.playDefaultMusic();
     	int levelIndex = ProfileManager.getManager().getCurrentProfile().getLevelIndex();
     	int pageNumber = levelIndex / LevelManager.LEVEL_PER_DIFFICULTY;
     	if (pageNumber >= levelStack.size()) {
