@@ -38,6 +38,7 @@ import lambda.model.levels.LevelContext;
 import lambda.model.levels.ReductionStrategy;
 import lambda.model.levels.TutorialMessageModel;
 import lambda.model.profiles.ProfileManager;
+import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.assets.AssetViewController;
 import lambda.viewcontroller.lambdaterm.LambdaTermViewController;
@@ -271,7 +272,7 @@ public final class EditorViewController extends StageViewController implements E
         if (term == null) {
             throw new IllegalStateException("Cannot show the editor viewController without calling reset before!");
         }
-
+        AudioManager.playMusic(model.getLevelContext().getMusic());
         InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(term.getDragAndDrop());
         multiplexer.addProcessor(getStage());

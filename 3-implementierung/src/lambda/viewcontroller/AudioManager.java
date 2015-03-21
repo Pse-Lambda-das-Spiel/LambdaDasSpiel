@@ -124,8 +124,10 @@ public class AudioManager implements ProfileManagerObserver, SettingsModelObserv
         if (music == null) {
             throw new IllegalArgumentException("music cannot be null");
         }
-        manager.music.stop();
-        manager.music = music;
+        if (music != manager.music) {
+            manager.music.stop();
+            manager.music = music;
+        }
         manager.changedMusicOn();
         manager.music.setLooping(true);
         manager.music.play();

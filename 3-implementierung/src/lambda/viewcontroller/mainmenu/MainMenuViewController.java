@@ -78,7 +78,16 @@ public class MainMenuViewController extends StageViewController implements Profi
 		param.minFilter = TextureFilter.Linear;
 		manager.load("data/backgrounds/main.png", Texture.class, param);
 	}
-
+	
+	/**
+     * {@inheritDoc}
+     */
+	@Override
+    public void show() {
+        super.show();
+        AudioManager.playDefaultMusic();
+    }
+	
 	/**
 	 * {@inheritDoc}
 	 */
