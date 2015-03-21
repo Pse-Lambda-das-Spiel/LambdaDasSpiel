@@ -45,6 +45,7 @@ public class ShopViewController extends StageViewController implements ProfileMo
     private boolean musicB;
     private boolean imageB;
     private boolean elementsB;
+    private AssetManager assets;
     
     /**
      * Path to the MasterSkin
@@ -81,6 +82,7 @@ public class ShopViewController extends StageViewController implements ProfileMo
 
     @Override
     public void create(final AssetManager manager) {
+        this.assets = manager;
     	setLastViewController(MainMenuViewController.class);
         Image background = new Image(manager.get("data/backgrounds/default.png", Texture.class));
         background.setWidth(getStage().getWidth());
@@ -241,6 +243,7 @@ public class ShopViewController extends StageViewController implements ProfileMo
     public void changedProfile() {
         profile.removeObserver(this);
         profile = ProfileManager.getManager().getCurrentProfile();
+        language = assets.get(profile.getLanguage(), I18NBundle.class);;
         profile.addObserver(this);
         musicTable = music.updateButtons();
         imagesTable = bgImages.updateButtons();
@@ -293,6 +296,7 @@ public class ShopViewController extends StageViewController implements ProfileMo
     public static I18NBundle getLanguage() {
         return language;
     }
+    
 	@Override
 	public void changedLevelIndex() {		
 	}
