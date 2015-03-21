@@ -32,6 +32,7 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	menuButton: { up: menu },
 	nextLevelButton: { up: next },
 	restartButton: { up: reload },
-	colorButton: { up: colorField }
+	colorButton: { up: colorField },
+	levelMenuButton: { up: levelmenu}
 }
 }

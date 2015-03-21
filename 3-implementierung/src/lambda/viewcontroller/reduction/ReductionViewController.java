@@ -16,8 +16,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
-import lambda.LambdaGame;
 
+import lambda.LambdaGame;
 import lambda.model.editormode.EditorModel;
 import lambda.model.levels.LevelManager;
 import lambda.model.levels.LevelModel;
@@ -423,7 +423,7 @@ public class ReductionViewController extends StageViewController implements Redu
             	 Label levelLabel;
                  levelLabel = new Label(language.get(levelComplete ? "levelCompleted" : "levelFailed"), dialogSkin);
                  levelLabel.setFontScale(0.6f);
-                 add(levelLabel).colspan(levelComplete ? 3 : 2);
+                 add(levelLabel).colspan(levelComplete ? 4 : 3);
             }
            
             row().space(10);
@@ -437,6 +437,16 @@ public class ReductionViewController extends StageViewController implements Redu
                 }
             });
             add(menuButton).size(stageHeight / 4);
+            
+            ImageButton levelMenuButton = new ImageButton(dialogSkin, "levelMenuButton");
+            levelMenuButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    getGame().setScreen(LevelSelectionViewController.class);
+                    remove();
+                }
+            });
+            add(levelMenuButton).size(stageHeight / 4);
 
             ImageButton restartButton = new ImageButton(dialogSkin, "restartButton");
             restartButton.addListener(new ClickListener() {

@@ -492,6 +492,16 @@ public final class EditorViewController extends StageViewController implements E
                 }
             });
             add(menuButton).size(stageHeight / 4);
+            
+            ImageButton levelMenuButton = new ImageButton(dialogSkin, "levelMenuButton");
+            levelMenuButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    getGame().setScreen(LevelSelectionViewController.class);
+                    remove();
+                }
+            });
+            add(levelMenuButton).size(stageHeight / 4);
 
             ImageButton resetButton = new ImageButton(dialogSkin, "resetButton");
             resetButton.addListener(new ClickListener() {
