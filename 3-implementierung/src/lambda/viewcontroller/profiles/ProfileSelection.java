@@ -73,50 +73,52 @@ public class ProfileSelection extends StageViewController {
 			@Override
 			public boolean keyDown(int keycode) {
 				if (keycode == Keys.BACK) {
-					if (ProfileManager.getManager().getCurrentProfile() != null) {
-						final Skin dialogSkin = manager.get(
-								"data/skins/DialogTemp.json", Skin.class);
-						final float size = getStage().getHeight() / 5;
-						new Dialog("", dialogSkin) {
-							{
-								clear();
-								pad(space * 3);
-								String exitString = manager.get(
-										ProfileManager.getManager()
-												.getCurrentProfile()
-												.getLanguage(),
+					final Skin dialogSkin = manager.get(
+							"data/skins/DialogTemp.json", Skin.class);
+					final float size = getStage().getHeight() / 5;
+					new Dialog("", dialogSkin) {
+						{
+							clear();
+							pad(space * 3);
+							String exitString = "";
+							// English as standard language if no profile was selected
+							if (ProfileManager.getManager().getCurrentProfile() == null) {
+								exitString = manager.get("data/i18n/StringBundle_en",
 										I18NBundle.class).get("exitString");
-								Label nameLabel = new Label(exitString,
-										dialogSkin);
-								add(nameLabel).colspan(2);
-								row().space(10);
-								// yes
-								ImageButton yesButton = new ImageButton(
-										dialogSkin, "yesButton");
-								yesButton.addListener(new ClickListener() {
-									@Override
-									public void clicked(InputEvent event,
-											float x, float y) {
-										AudioManager.playSound("buttonClick");
-										Gdx.app.exit();
-									}
-								});
-								add(yesButton).size(size);
-								// no
-								ImageButton noButton = new ImageButton(
-										dialogSkin, "noButton");
-								noButton.addListener(new ClickListener() {
-									@Override
-									public void clicked(InputEvent event,
-											float x, float y) {
-										AudioManager.playSound("buttonClick");
-										remove();
-									}
-								});
-								add(noButton).size(size);
+							} else {
+								exitString = manager.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
+										I18NBundle.class).get("exitString");
 							}
-						}.show(getStage());
-					}
+							Label nameLabel = new Label(exitString,
+									dialogSkin);
+							add(nameLabel).colspan(2);
+							row().space(10);
+							// yes
+							ImageButton yesButton = new ImageButton(
+									dialogSkin, "yesButton");
+							yesButton.addListener(new ClickListener() {
+								@Override
+								public void clicked(InputEvent event,
+										float x, float y) {
+									AudioManager.playSound("buttonClick");
+									Gdx.app.exit();
+								}
+							});
+							add(yesButton).size(size);
+							// no
+							ImageButton noButton = new ImageButton(
+									dialogSkin, "noButton");
+							noButton.addListener(new ClickListener() {
+								@Override
+								public void clicked(InputEvent event,
+										float x, float y) {
+									AudioManager.playSound("buttonClick");
+									remove();
+								}
+							});
+							add(noButton).size(size);
+						}
+					}.show(getStage());
 				}
 				return false;
 			}

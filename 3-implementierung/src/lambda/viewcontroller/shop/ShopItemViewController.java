@@ -132,7 +132,7 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor imple
                            clear();
                            // getImage() removes the image from its button so the button has to be copied before that
                            float space = stage.getWidth() / 64;
-                           Label label = new Label(ShopViewController.getLanguage().format("item_activated", model.getFilename()), ShopViewController.getSkin());
+                           Label label = new Label(ShopViewController.getLanguage().format("item_activate", model.getFilename()), ShopViewController.getSkin());
                            add(label).pad(stage.getWidth() / 64).padBottom(0).padRight(400);
                            row();
                            

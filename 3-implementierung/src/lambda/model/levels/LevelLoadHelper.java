@@ -105,7 +105,7 @@ public final class LevelLoadHelper {
 			case "ABSTRACTION":
 				elementTypeList.add((ElementType.ABSTRACTION));
 				break;
-			case "PARANTHESIS":
+			case "PARENTHESIS":
 				elementTypeList.add((ElementType.PARENTHESIS));
 				break;
 			default:
