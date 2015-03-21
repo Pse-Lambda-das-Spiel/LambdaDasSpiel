@@ -2,7 +2,6 @@ package lambda.viewcontroller.lambdaterm;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -58,11 +57,6 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
      */
     private final DragAndDrop dragAndDrop;
     /**
-     * Indicates whether root applications should be displayed with a
-     * parenthesis.
-     */
-    private final boolean forceParenthesis;
-    /**
      * The last node that has been alpha converted or null if no node has been
      * alpha converted yet.
      */
@@ -78,12 +72,10 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
      * false otherwise
      * @param context contains all data of the current level
      * @param stage used for drag&drop
-     * @param forceParenthesis true if root applications should be displayed
-     * with a parenthesis
      * @return the new LambdaTermViewController
      * @throws IllegalArgumentException if root is null or context is null
      */
-    public static LambdaTermViewController build(LambdaRoot root, boolean editable, LevelContext context, Stage stage, boolean forceParenthesis) {
+    public static LambdaTermViewController build(LambdaRoot root, boolean editable, LevelContext context, Stage stage) {
         if (root == null) {
             throw new IllegalArgumentException("Lambda term cannot be null!");
         }
@@ -94,7 +86,7 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
             System.out.println("Building " + (editable ? "" : "non-") + "editable VC for term \"" + root.toString() + "\"");
         }
 
-        LambdaTermViewController result = new LambdaTermViewController(editable, context, forceParenthesis);
+        LambdaTermViewController result = new LambdaTermViewController(editable, context);
         result.setStage(stage);
         // Observe lambda term model
         root.addObserver(result);
@@ -109,7 +101,7 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
         result.addNode(result.root);
 
         // Recursive insertion of children
-        root.accept(new ViewInsertionVisitor(root.getChild(), result, forceParenthesis));
+        root.accept(new ViewInsertionVisitor(root.getChild(), result));
         result.getRoot().updateWidth();
 
         return result;
@@ -130,13 +122,10 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
      * @param editable true if this viewconroller can be edited by the user,
      * false otherwise
      * @param context contains all data of the current level
-     * @param forceParenthesis true if root applications should be displayed
-     * with a parenthesis
      */
-    private LambdaTermViewController(boolean editable, LevelContext context, boolean forceParenthesis) {
+    private LambdaTermViewController(boolean editable, LevelContext context) {
         this.editable = editable;
         this.context = context;
-        this.forceParenthesis = forceParenthesis;
         lastAlphaConvertedNode = null;
         nodeMap = new IdentityHashMap<>();
         if (editable) {
@@ -163,7 +152,7 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
             oldTerm.accept(new ViewRemovalVisitor(this));
         }
         if (newTerm != null) {
-            newTerm.getParent().accept(new ViewInsertionVisitor(newTerm, this, forceParenthesis));
+            newTerm.getParent().accept(new ViewInsertionVisitor(newTerm, this));
         }
     }
 
@@ -317,16 +306,6 @@ public final class LambdaTermViewController extends Group implements LambdaTermO
      */
     public LambdaNodeViewController getRoot() {
         return root;
-    }
-
-    /**
-     * Returns whether all applications should be displayed with a parenthesis.
-     *
-     * @return true if all applications should be displayed with a parenthesis,
-     * false otherwise
-     */
-    public boolean isForcingParenthesis() {
-        return forceParenthesis;
     }
 
     /**

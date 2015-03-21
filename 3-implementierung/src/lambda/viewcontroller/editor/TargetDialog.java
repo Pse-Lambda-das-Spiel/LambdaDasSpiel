@@ -15,17 +15,19 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.I18NBundle;
 
 /**
- * The target-dialog of the EditorViewController. It shows the goal of the level.
- * 
+ * The target-dialog of the EditorViewController. It shows the goal of the
+ * level.
+ *
  * @author Kai Fieger
  */
 public class TargetDialog extends Dialog {
 
     /**
      * Creates a new target-dialog.
-     * 
+     *
      * @param skin Dialogskin
-     * @param context The TargetDialog shows the target/goal given is this LevelContext
+     * @param context The TargetDialog shows the target/goal given is this
+     * LevelContext
      * @param stage Stage in which the Dialog will be shown.
      */
     public TargetDialog(Skin skin, I18NBundle language, LevelContext context, Stage stage) {
@@ -34,15 +36,15 @@ public class TargetDialog extends Dialog {
         align(Align.top);
         setFillParent(true);
         LevelModel level = context.getLevelModel();
-        String key = level.isStandardMode() ?  "goalDialog" : "reverseGoalDialog";
+        String key = level.isStandardMode() ? "goalDialog" : "reverseGoalDialog";
         Label goalLabel = new Label(language.get(key), skin);
         float pad = stage.getHeight() / 15;
         add(goalLabel).padTop(pad);
         LambdaTermViewController goal = LambdaTermViewController.build(
-                level.isStandardMode() ?  level.getGoal() : level.getStart(), false, context, stage, false);
+                level.isStandardMode() ? level.getGoal() : level.getStart(), false, context, stage);
         goal.toBack();
-        goal.setPosition((stage.getWidth() - goal.getWidth()) / 2, stage.getHeight() 
-                - goalLabel.getHeight() - 2 * pad  - LambdaValueViewController.BLOCK_HEIGHT);
+        goal.setPosition((stage.getWidth() - goal.getWidth()) / 2, stage.getHeight()
+                - goalLabel.getHeight() - 2 * pad - LambdaValueViewController.BLOCK_HEIGHT);
         addActor(goal);
         addListener(new ClickListener() {
             @Override
@@ -51,5 +53,5 @@ public class TargetDialog extends Dialog {
             }
         });
     }
-    
+
 }

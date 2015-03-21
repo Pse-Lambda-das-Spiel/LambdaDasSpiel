@@ -90,7 +90,7 @@ public class DragAndDrop extends InputAdapter {
         // Drag actor is a new lambda term vc for the selected node
         LambdaRoot selection = new LambdaRoot();
         selection.setChild((LambdaTerm) term);
-        dragged = LambdaTermViewController.build(selection, false, vc.getContext(), vc.getStage(), true);
+        dragged = LambdaTermViewController.build(selection, false, vc.getContext(), vc.getStage());
         dragged.addOffset(-dragged.getWidth() / 2.0f, -dragged.getHeight() / 2.0f);
         vc.getStage().addActor(dragged);
 

@@ -200,7 +200,7 @@ public class ReductionViewController extends StageViewController implements Redu
         if (term != null) {
             term.remove();
         }
-        term = LambdaTermViewController.build(model.getTerm(), true, model.getContext(), getStage(), false);
+        term = LambdaTermViewController.build(model.getTerm(), true, model.getContext(), getStage());
         getStage().addActor(term);
         term.toBack();
         term.setPosition(getStage().getWidth() * INITIAL_TERM_OFFSET.x, getStage().getHeight() * (1 - INITIAL_TERM_OFFSET.y));
@@ -388,7 +388,7 @@ public class ReductionViewController extends StageViewController implements Redu
                 }
             });
             add(menuButton).size(stageHeight / 4);
-            
+
             ImageButton levelMenuButton = new ImageButton(dialogSkin, "levelMenuButton");
             levelMenuButton.addListener(new ClickListener() {
                 @Override
@@ -430,12 +430,12 @@ public class ReductionViewController extends StageViewController implements Redu
             final LevelModel playedLevel = model.getContext().getLevelModel();
             // if the level is not the sandbox
             if (playedLevel.getId() != 0) {
-            	 Label levelLabel;
-                 levelLabel = new Label(language.get(levelComplete ? "levelCompleted" : "levelFailed"), dialogSkin);
-                 levelLabel.setFontScale(0.6f);
-                 add(levelLabel).colspan(levelComplete ? 4 : 3);
+                Label levelLabel;
+                levelLabel = new Label(language.get(levelComplete ? "levelCompleted" : "levelFailed"), dialogSkin);
+                levelLabel.setFontScale(0.6f);
+                add(levelLabel).colspan(levelComplete ? 4 : 3);
             }
-           
+
             row().space(10);
             ImageButton menuButton = new ImageButton(dialogSkin, "menuButton");
             menuButton.addListener(new ClickListener() {
@@ -447,7 +447,7 @@ public class ReductionViewController extends StageViewController implements Redu
                 }
             });
             add(menuButton).size(stageHeight / 4);
-            
+
             ImageButton levelMenuButton = new ImageButton(dialogSkin, "levelMenuButton");
             levelMenuButton.addListener(new ClickListener() {
                 @Override

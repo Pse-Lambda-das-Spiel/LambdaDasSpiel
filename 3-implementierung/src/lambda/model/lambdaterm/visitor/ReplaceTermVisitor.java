@@ -64,13 +64,6 @@ public class ReplaceTermVisitor implements LambdaTermVisitor {
                 node.setRight(replacing);
             }
             replaced.setParent(null);
-
-            // Continue upwards if at least one child is null
-            if (node.getRight() == null) {
-                node.accept(new ReplaceTermVisitor(node.getLeft()));
-            } else if (node.getLeft() == null) {
-                node.accept(new ReplaceTermVisitor(node.getRight()));
-            }
         } else if (node.getParent() != null) {
             replaced = node;
             node.getParent().accept(this);

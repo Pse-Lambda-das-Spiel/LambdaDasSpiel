@@ -43,11 +43,6 @@ public class NodeViewControllerCreator implements LambdaTermVisitor {
      * exists.
      */
     private final LambdaTerm rightSibling;
-    /**
-     * Indicates whether root applications should be displayed with a
-     * parenthesis.
-     */
-    private final boolean forceParenthesis;
 
     /**
      * Creates a new instance of NodeViewControllerCreator.
@@ -58,12 +53,10 @@ public class NodeViewControllerCreator implements LambdaTermVisitor {
      * @param viewController the viewController that the node will be inserted
      * into
      * @param rightSibling the right sibling of the inserted element
-     * @param forceParenthesis true if root applications should be displayed
-     * with a parenthesis
      * @throws IllegalArgumentException if parent is null or viewController is
      * null
      */
-    public NodeViewControllerCreator(LambdaNodeViewController parent, boolean canCreateParenthesis, LambdaTermViewController viewController, LambdaTerm rightSibling, boolean forceParenthesis) {
+    public NodeViewControllerCreator(LambdaNodeViewController parent, boolean canCreateParenthesis, LambdaTermViewController viewController, LambdaTerm rightSibling) {
         if (parent == null) {
             throw new IllegalArgumentException("Parent node viewcontroller cannot be null!");
         }
@@ -74,7 +67,6 @@ public class NodeViewControllerCreator implements LambdaTermVisitor {
         this.viewController = viewController;
         this.canCreateParenthesis = canCreateParenthesis;
         this.rightSibling = rightSibling;
-        this.forceParenthesis = forceParenthesis;
         result = null;
     }
 
@@ -97,16 +89,15 @@ public class NodeViewControllerCreator implements LambdaTermVisitor {
      */
     @Override
     public void visit(LambdaApplication node) {
-        if (canCreateParenthesis
-                || forceParenthesis && (node.getParent() == null || node.getParent().getParent() == null)) {
+        if (canCreateParenthesis || node.isExplicit()) {
             parent.insertChild(new LambdaParenthesisViewController(node, parent, viewController), rightSibling);
         }
         // Traverse
         if (node.getRight() != null) {
-            node.accept(new ViewInsertionVisitor(node.getRight(), viewController, forceParenthesis));
+            node.accept(new ViewInsertionVisitor(node.getRight(), viewController));
         }
         if (node.getLeft() != null) {
-            node.accept(new ViewInsertionVisitor(node.getLeft(), viewController, forceParenthesis));
+            node.accept(new ViewInsertionVisitor(node.getLeft(), viewController));
         }
     }
 
@@ -120,7 +111,7 @@ public class NodeViewControllerCreator implements LambdaTermVisitor {
     public void visit(LambdaAbstraction node) {
         parent.insertChild(new LambdaAbstractionViewController(node, parent, viewController), rightSibling);
         if (node.getInside() != null) {
-            node.accept(new ViewInsertionVisitor(node.getInside(), viewController, forceParenthesis));
+            node.accept(new ViewInsertionVisitor(node.getInside(), viewController));
         }
     }
 

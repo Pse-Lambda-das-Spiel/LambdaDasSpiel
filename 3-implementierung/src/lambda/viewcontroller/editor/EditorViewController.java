@@ -285,8 +285,8 @@ public final class EditorViewController extends StageViewController implements E
         List<TutorialMessageModel> tutorialList = model.getLevelContext().getLevelModel().getTutorial();
         AssetManager assets = getGame().getController(AssetViewController.class).getManager();
         final Skin dialogSkin = assets.get("data/skins/DialogTemp.json", Skin.class);
-		I18NBundle language = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
-				I18NBundle.class);
+        I18NBundle language = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
+                I18NBundle.class);
         final float width = getStage().getWidth();
         final float height = getStage().getHeight();
         final Dialog[] dialogs = new Dialog[tutorialList.size() + (targetButton.isVisible() ? 1 : 0)];
@@ -304,15 +304,15 @@ public final class EditorViewController extends StageViewController implements E
             });
         }
         if (targetButton.isVisible()) {
-			dialogs[dialogs.length - 1] = new TargetDialog(dialogSkin, language,
-					EditorViewController.this.model.getLevelContext(), getStage());
+            dialogs[dialogs.length - 1] = new TargetDialog(dialogSkin, language,
+                    EditorViewController.this.model.getLevelContext(), getStage());
         }
         /*
          * special handling necessary if there is no target and no tutorials, 
          * should not be necessary if non standard mode is rightly implemented
          */
         if (dialogs.length > 0) {
-        	 dialogs[0].show(getStage());
+            dialogs[0].show(getStage());
         }
     }
 
@@ -334,10 +334,8 @@ public final class EditorViewController extends StageViewController implements E
         if (term != null) {
             term.remove();
         }
-        term = LambdaTermViewController.build(model.getTerm(), true, context,
-                getStage(), false);
-        term.setAssets(getGame().getController(AssetViewController.class)
-                .getManager());
+        term = LambdaTermViewController.build(model.getTerm(), true, context, getStage());
+        term.setAssets(getGame().getController(AssetViewController.class).getManager());
         getStage().addActor(term);
         term.toBack();
         term.setPosition(getStage().getWidth() * INITIAL_TERM_OFFSET.x,
@@ -357,17 +355,17 @@ public final class EditorViewController extends StageViewController implements E
         if (model.getLevelContext().getLevelModel().getUseableElements().contains(ElementType.VARIABLE)) {
             LambdaRoot variable = new LambdaRoot();
             variable.setChild(new LambdaVariable(variable, Color.WHITE, true));
-            toolbarElements.add(LambdaTermViewController.build(variable, false, model.getLevelContext(), getStage(), true));
+            toolbarElements.add(LambdaTermViewController.build(variable, false, model.getLevelContext(), getStage()));
         }
         if (model.getLevelContext().getLevelModel().getUseableElements().contains(ElementType.ABSTRACTION)) {
             LambdaRoot abstraction = new LambdaRoot();
             abstraction.setChild(new LambdaAbstraction(abstraction, Color.WHITE, true));
-            toolbarElements.add(LambdaTermViewController.build(abstraction, false, model.getLevelContext(), getStage(), true));
+            toolbarElements.add(LambdaTermViewController.build(abstraction, false, model.getLevelContext(), getStage()));
         }
         if (model.getLevelContext().getLevelModel().getUseableElements().contains(ElementType.PARENTHESIS)) {
             LambdaRoot application = new LambdaRoot();
-            application.setChild(new LambdaApplication(application, true));
-            toolbarElements.add(LambdaTermViewController.build(application, false, model.getLevelContext(), getStage(), true));
+            application.setChild(new LambdaApplication(application, true, true));
+            toolbarElements.add(LambdaTermViewController.build(application, false, model.getLevelContext(), getStage()));
         }
         for (LambdaTermViewController toolbarElement : toolbarElements) {
             toolbarElement.addOffset(0.0f, toolbarElement.getHeight() / 4);
@@ -500,7 +498,7 @@ public final class EditorViewController extends StageViewController implements E
                 }
             });
             add(menuButton).size(stageHeight / 4);
-            
+
             ImageButton levelMenuButton = new ImageButton(dialogSkin, "levelMenuButton");
             levelMenuButton.addListener(new ClickListener() {
                 @Override

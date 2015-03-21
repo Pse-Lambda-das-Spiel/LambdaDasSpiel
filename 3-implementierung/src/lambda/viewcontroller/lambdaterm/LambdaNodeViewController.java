@@ -13,7 +13,9 @@ import lambda.Consumer;
 import static lambda.LambdaGame.DEBUG;
 import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.LambdaTerm;
+import lambda.model.lambdaterm.LambdaUtils;
 import lambda.model.lambdaterm.visitor.FrontInserter;
+import lambda.model.lambdaterm.visitor.ImplicitApplicationRemover;
 import lambda.model.lambdaterm.visitor.SiblingInserter;
 import static lambda.viewcontroller.lambdaterm.LambdaTermViewController.DEBUG_DRAG_AND_DROP;
 import lambda.viewcontroller.lambdaterm.draganddrop.LambdaTermDragSource;
@@ -345,6 +347,7 @@ public abstract class LambdaNodeViewController extends Actor {
                                 System.out.println("Inserting " + term.getClass().getSimpleName() + " (" + term.toString() + ") as first and only child of " + getLinkedTerm().getClass().getSimpleName() + " (" + getLinkedTerm().toString() + ")");
                             }
                             getLinkedTerm().accept(new FrontInserter(term));
+                            LambdaUtils.getRoot(getLinkedTerm()).accept(new ImplicitApplicationRemover());
                         }
                     }, target);
                 } else {
@@ -361,6 +364,7 @@ public abstract class LambdaNodeViewController extends Actor {
                                 System.out.println("Inserting " + term.getClass().getSimpleName() + " (" + term.toString() + ") as left sibling of " + children.get(0).getLinkedTerm().getClass().getSimpleName() + " (" + children.get(0).getLinkedTerm().toString() + ")");
                             }
                             children.get(0).getLinkedTerm().accept(new SiblingInserter(term, true));
+                            LambdaUtils.getRoot(getLinkedTerm()).accept(new ImplicitApplicationRemover());
                         }
                     }, target);
                 }
@@ -388,6 +392,7 @@ public abstract class LambdaNodeViewController extends Actor {
                                 System.out.println("Inserting " + term.getClass().getSimpleName() + " (" + term.toString() + ") as right sibling of " + siblingTerm.getClass().getSimpleName() + " (" + siblingTerm.toString() + ")");
                             }
                             siblingTerm.accept(new SiblingInserter(term, false));
+                            LambdaUtils.getRoot(getLinkedTerm()).accept(new ImplicitApplicationRemover());
                         }
                     }, target);
                     index++;

@@ -113,8 +113,7 @@ public class SiblingInserter implements LambdaTermVisitor {
      */
     private LambdaApplication buildApplication(LambdaTerm parent) {
         assert (oldChild.getParent() == parent);
-        LambdaApplication application = new LambdaApplication(null,
-                sibling.isLocked());
+        LambdaApplication application = new LambdaApplication(null, sibling.isLocked() || oldChild.isLocked(), false);
         if (left) {
             application.setLeft(sibling);
             application.setRight(oldChild);

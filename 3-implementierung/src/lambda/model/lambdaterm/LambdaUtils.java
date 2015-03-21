@@ -108,14 +108,14 @@ public final class LambdaUtils {
             return terms.get(0);
         } else {
             // Construct application hierarchy
-            LambdaApplication current = new LambdaApplication(null, false);
+            LambdaApplication current = new LambdaApplication(null, false, false);
 
             current.setLeft(terms.get(0));
             current.setRight(terms.get(1));
 
             for (int i = 2; i < terms.size(); i++) {
                 // New application as parent of last application
-                LambdaApplication application = new LambdaApplication(null, false);
+                LambdaApplication application = new LambdaApplication(null, false, false);
 
                 application.setLeft(current);
                 application.setRight(terms.get(i));

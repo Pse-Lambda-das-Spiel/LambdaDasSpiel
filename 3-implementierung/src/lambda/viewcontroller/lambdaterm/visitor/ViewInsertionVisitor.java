@@ -41,11 +41,6 @@ public class ViewInsertionVisitor implements LambdaTermVisitor {
      * application.
      */
     private boolean isRightApplicationChild;
-    /**
-     * Indicates whether root applications should be displayed with a
-     * parenthesis.
-     */
-    private final boolean forceParenthesis;
 
     /**
      * Creates a new ViewInsertionVisitor.
@@ -53,17 +48,14 @@ public class ViewInsertionVisitor implements LambdaTermVisitor {
      * @param inserted the inserted node
      * @param viewController the viewController that the node will be inserted
      * into
-     * @param forceParenthesis true if root applications should be displayed
-     * with a parenthesis
      * @throws IllegalArgumentException if viewController is null
      */
-    public ViewInsertionVisitor(LambdaTerm inserted, LambdaTermViewController viewController, boolean forceParenthesis) {
+    public ViewInsertionVisitor(LambdaTerm inserted, LambdaTermViewController viewController) {
         if (viewController == null) {
             throw new IllegalArgumentException("ViewController cannot be null!");
         }
         this.inserted = inserted;
         this.viewController = viewController;
-        this.forceParenthesis = forceParenthesis;
         rightSibling = null;
         lastVisited = inserted;
         isRightApplicationChild = false;
@@ -143,7 +135,7 @@ public class ViewInsertionVisitor implements LambdaTermVisitor {
      */
     private void insertChild(LambdaNodeViewController parent) {
         assert (parent != null);
-        inserted.accept(new NodeViewControllerCreator(parent, isRightApplicationChild, viewController, rightSibling, forceParenthesis));
+        inserted.accept(new NodeViewControllerCreator(parent, isRightApplicationChild, viewController, rightSibling));
     }
 
     @Override

@@ -141,7 +141,7 @@ public final class LevelLoadHelper {
 	}
 	
 	private static LambdaApplication convertJsonToApplication(JsonValue value, LambdaTerm parent) {
-		LambdaApplication application = new LambdaApplication(parent, value.getBoolean("locked"));
+		LambdaApplication application = new LambdaApplication(parent, value.getBoolean("locked"), false);
 		application.setLeft(selectNextNode(value.get("left"), application));
 		application.setRight(selectNextNode(value.get("right"), application));
 		return application;
