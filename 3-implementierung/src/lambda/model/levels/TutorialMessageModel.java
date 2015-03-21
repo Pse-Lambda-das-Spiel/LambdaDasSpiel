@@ -1,5 +1,6 @@
 package lambda.model.levels;
 
+
 /**
  * This class represents the model of a {@link TutorialMessage} and holds all non graphical data.
  * 

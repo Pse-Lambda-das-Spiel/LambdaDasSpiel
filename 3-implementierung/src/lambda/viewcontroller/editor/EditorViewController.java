@@ -285,10 +285,11 @@ public final class EditorViewController extends StageViewController implements E
         List<TutorialMessageModel> tutorialList = model.getLevelContext().getLevelModel().getTutorial();
         AssetManager assets = getGame().getController(AssetViewController.class).getManager();
         final Skin dialogSkin = assets.get("data/skins/DialogTemp.json", Skin.class);
-        I18NBundle language = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
+		I18NBundle language = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
+				I18NBundle.class);
         final float width = getStage().getWidth();
         final float height = getStage().getHeight();
-        final Dialog dialogs[] = new Dialog[tutorialList.size() + (targetButton.isVisible() ? 1 : 0)];
+        final Dialog[] dialogs = new Dialog[tutorialList.size() + (targetButton.isVisible() ? 1 : 0)];
         for (int i = 0; i + (targetButton.isVisible() ? 1 : 0) < dialogs.length; i++) {
             final int pos = i;
             dialogs[pos] = new TutorialMessage(tutorialList.get(i), dialogSkin, language, height, width);
@@ -303,9 +304,16 @@ public final class EditorViewController extends StageViewController implements E
             });
         }
         if (targetButton.isVisible()) {
-            dialogs[dialogs.length - 1] = new TargetDialog(dialogSkin, language, EditorViewController.this.model.getLevelContext(), getStage());
+			dialogs[dialogs.length - 1] = new TargetDialog(dialogSkin, language,
+					EditorViewController.this.model.getLevelContext(), getStage());
         }
-        dialogs[0].show(getStage());
+        /*
+         * special handling necessary if there is no target and no tutorials, 
+         * should not be necessary if non standard mode is rightly implemented
+         */
+        if (dialogs.length > 0) {
+        	 dialogs[0].show(getStage());
+        }
     }
 
     /**
