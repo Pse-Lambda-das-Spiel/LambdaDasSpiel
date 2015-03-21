@@ -15,5 +15,5 @@ public interface Supplier<T> {
 	 * 
 	 * @return the result
 	 */
-	public T get();
+	T get();
 }

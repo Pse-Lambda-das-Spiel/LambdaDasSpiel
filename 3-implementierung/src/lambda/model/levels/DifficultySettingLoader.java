@@ -1,7 +1,5 @@
 package lambda.model.levels;
 
-import lambda.model.levels.DifficultySetting;
-
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
