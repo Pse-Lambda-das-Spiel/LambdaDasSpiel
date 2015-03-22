@@ -7,9 +7,11 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -240,46 +242,26 @@ public class ReductionViewController extends StageViewController implements Redu
     }
 
     /**
-     * Called when the paused state is changed. Updates the play-pause button
-     * image.
+     * Called when the model state changes.
      *
-     * @param paused the new paused state
+     * @param busy indicates whether the model is currently performing a
+     * reduction step
+     * @param historySize the history size (>= 0)
+     * @param paused indicates whether the automatic reduction is currently
+     * paused
+     * @param pauseRequested indicates whether a pause of the automatic
+     * reduction is requested
      */
     @Override
-    public void pauseChanged(boolean paused) {
+    public void stateChanged(boolean busy, int historySize, boolean paused, boolean pauseRequested) {
+        stepButton.setDisabled(busy || !paused);
+        playPauseButton.setDisabled(busy && paused || pauseRequested);
+        stepRevertButton.setDisabled(busy || !paused || historySize == 0);
+
         if (paused) {
-            // TODO set playPauseButton image -> Play image
+            playPauseButton.setStyle(assets.get("data/skins/MasterSkin.json", Skin.class).get("playButton", ImageButtonStyle.class));
         } else {
-            // TODO set playPauseButton image -> Pause image
-        }
-    }
-
-    /**
-     * Called when the busy state is changed. Updates whether reduction buttons
-     * are enabled.
-     *
-     * @param busy the new busy state
-     */
-    @Override
-    public void busyChanged(boolean busy) {
-        stepButton.setDisabled(busy);
-        playPauseButton.setDisabled(busy);
-        stepRevertButton.setDisabled(model.isBusy() || model.getHistorySize() == 0);
-        if (DEBUG) {
-            System.out.println((stepRevertButton.isDisabled() ? "Disabled" : "Enabled") + " stepRevert in busyChanged(" + model.isBusy() + ", " + model.getHistorySize() + ")");
-            System.out.println((playPauseButton.isDisabled() ? "Disabled" : "Enabled") + " playPause in busyChanged(" + model.isBusy() + ", " + model.getHistorySize() + ")");
-            System.out.println((stepButton.isDisabled() ? "Disabled" : "Enabled") + " step in busyChanged(" + model.isBusy() + ", " + model.getHistorySize() + ")");
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void historySizeChanged(int newSize) {
-        stepRevertButton.setDisabled(model.isBusy() || model.getHistorySize() == 0);
-        if (DEBUG) {
-            System.out.println((stepRevertButton.isDisabled() ? "Disabled" : "Enabled") + " stepRevert in historySizeChanged(" + model.isBusy() + ", " + model.getHistorySize() + ")");
+            playPauseButton.setStyle(assets.get("data/skins/MasterSkin.json", Skin.class).get("pauseButton", ImageButtonStyle.class));
         }
     }
 

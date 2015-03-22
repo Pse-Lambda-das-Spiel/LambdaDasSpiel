@@ -134,7 +134,7 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
      * pause is requested
      */
     public void togglePlay() {
-        if (busy || pauseRequested) {
+        if (busy && paused || pauseRequested) {
             throw new IllegalStateException("Cannot start automatic reduction in the current model state!");
         }
 
@@ -145,6 +145,7 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
         } else {
             // Pause
             pauseRequested = true;
+            notifyState();
         }
     }
 
@@ -169,13 +170,7 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                 do {
                     // Save current term in history
                     history.push((LambdaRoot) current.accept(new CopyVisitor()));
-
-                    ReductionModel.this.notify(new Consumer<ReductionModelObserver>() {
-                        @Override
-                        public void accept(ReductionModelObserver observer) {
-                            observer.historySizeChanged(history.size());
-                        }
-                    });
+                    notifyState();
 
                     // Perform beta reduction
                     strategy.reset();
@@ -188,12 +183,12 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                     ReductionModel.this.notify(new Consumer<ReductionModelObserver>() {
                         @Override
                         public void accept(ReductionModelObserver observer) {
-                        	if (context.getLevelModel().getId() == 0) {
-                        		observer.reductionFinished(true);
-                        	} else {
-                        		observer.reductionFinished((current.equals(ReductionModel.this.context.getLevelModel().getGoal()) && ReductionModel.this.context.getLevelModel().isColorEquivalence())
+                            if (context.getLevelModel().getId() == 0) {
+                                observer.reductionFinished(true);
+                            } else {
+                                observer.reductionFinished((current.equals(ReductionModel.this.context.getLevelModel().getGoal()) && ReductionModel.this.context.getLevelModel().isColorEquivalence())
                                         || (current.accept(new IsAlphaEquivalentVisitor(ReductionModel.this.context.getLevelModel().getGoal())) && !ReductionModel.this.context.getLevelModel().isColorEquivalence()));
-                        	}
+                            }
                         }
                     });
                 }
@@ -220,12 +215,7 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
         // Reverts the last step in a separate thread
         setBusy(true);
         current.setChild(history.pop().getChild());
-        ReductionModel.this.notify(new Consumer<ReductionModelObserver>() {
-            @Override
-            public void accept(ReductionModelObserver observer) {
-                observer.historySizeChanged(history.size());
-            }
-        });
+        notifyState();
         setBusy(false);
     }
 
@@ -238,12 +228,7 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
     private void setPaused(final boolean paused) {
         if (paused != this.paused) {
             this.paused = paused;
-            notify(new Consumer<ReductionModelObserver>() {
-                @Override
-                public void accept(ReductionModelObserver observer) {
-                    observer.pauseChanged(paused);
-                }
-            });
+            notifyState();
         }
     }
 
@@ -257,23 +242,8 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
     private void setBusy(final boolean busy) {
         if (busy != this.busy) {
             this.busy = busy;
-            notify(new Consumer<ReductionModelObserver>() {
-                @Override
-                public void accept(ReductionModelObserver observer) {
-                    observer.busyChanged(busy);
-                }
-            });
+            notifyState();
         }
-    }
-
-    /**
-     * Returns whether the model is currently performing a reduction step.
-     *
-     * @return true if the model is currently performing a reduction step, false
-     * otherwise
-     */
-    public boolean isBusy() {
-        return busy;
     }
 
     /**
@@ -283,5 +253,17 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
      */
     public LevelContext getContext() {
         return context;
+    }
+
+    /**
+     * Notifies all observers of a state change.
+     */
+    private void notifyState() {
+        notify(new Consumer<ReductionModelObserver>() {
+            @Override
+            public void accept(ReductionModelObserver observer) {
+                observer.stateChanged(paused, history.size(), ReductionModel.this.paused, pauseRequested);
+            }
+        });
     }
 }
