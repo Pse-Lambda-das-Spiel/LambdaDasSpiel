@@ -475,7 +475,7 @@ public class ReductionViewController extends StageViewController implements Redu
                     currentProfile.setCoins(currentProfile.getCoins() + coins);
                     Label coinsLabel = new Label(language.format("coinsGained", coins), dialogSkin);
                     coinsLabel.setFontScale(0.6f);
-                    add(coinsLabel).colspan(3);
+                    add(coinsLabel).colspan(levelComplete ? 4 : 3);;
                 }
             }
         }
