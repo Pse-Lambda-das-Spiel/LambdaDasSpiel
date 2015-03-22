@@ -16,23 +16,42 @@ public class ShopModelTest {
 
     private static AssetManager assets;
     private ShopModel shop;
+    MusicItemModel musicItem;
+    BackgroundImageItemModel bgItem;
+    ElementUIContextFamily elementItem;
+    ShopItemTypeModel<MusicItemModel> music;
+    ShopItemTypeModel<BackgroundImageItemModel> bgImages;
+    ShopItemTypeModel<ElementUIContextFamily> elements;
 
     @Before
     public void setUp() throws Exception {
         Gdx.files = new LwjglFiles();
         assets = new AssetManager();
+        /*
+        music = new ShopItemTypeModel<MusicItemModel>("Music");
+        bgImages = new ShopItemTypeModel<BackgroundImageItemModel>("Images");
+        elements = new ShopItemTypeModel<ElementUIContextFamily>("Elements");
+        musicItem = new MusicItemModel("0", 10, "Happy Day.mp3");
+        music.getItems().add(musicItem);
+        bgItem = new BackgroundImageItemModel("0", 20, "Jungle.jpg");
+        bgImages.getItems().add(bgItem);
+        elementItem = new ElementUIContextFamily("0", 30, "Hat.atlas");
+        elements.getItems().add(elementItem);
+        */
         shop = ShopModel.getShop();
-        shop.setAssetManager(assets);
+        shop.queueAssets(assets);
+        assets.finishLoading();
+        
     }
 
     @Test
     public void testpaths() {
-        assertEquals(shop.getMusicFilePaths()[0], "data/items/music/00.json");
+        
     }
 
     @Test
     public void testMusicItemLoad() {
-        MusicItemModel music = shop.loadMusicItem(Gdx.files.internal("data/items/music/00.json"));
+        
     }
 
     /*

@@ -13,7 +13,7 @@ import java.util.LinkedList;
 
 
 /**
- * Created by kay on 21.01.15.
+ * @author Kay Schmitteckert
  */
 public class LevelModelTest {
 
@@ -49,6 +49,11 @@ public class LevelModelTest {
         assertTrue(level.getAvailableRedStrats().get(2) == ReductionStrategy.CALL_BY_VALUE);
         level.getAvailableRedStrats().add(3, ReductionStrategy.NORMAL_ORDER);
         assertTrue(level.getAvailableRedStrats().get(3) == ReductionStrategy.NORMAL_ORDER);
+    }
+    
+    @Test
+    public void testOtherGetters() {
+        
     }
 
     @After
