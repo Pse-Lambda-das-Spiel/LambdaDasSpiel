@@ -197,7 +197,7 @@ public class DragAndDrop extends InputAdapter {
      */
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if (pointer == 0) {
+        if (pointer == 0 && button == 0) {
             // Find source under mouse pointer
             currentSource = null;
             touchDown = null;
@@ -217,7 +217,7 @@ public class DragAndDrop extends InputAdapter {
      */
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        if (pointer == 0) {
+        if (pointer == 0 && button == 0) {
             if (currentSource != null && touchDown == null) {
                 dragStop();
                 currentSource = null;

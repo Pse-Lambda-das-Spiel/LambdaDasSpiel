@@ -54,10 +54,18 @@ public class ImplicitApplicationRemover implements LambdaTermVisitor<LambdaTerm>
         }
         result = node;
         if (!node.isExplicit()) {
+            // Replace this node
             if (node.getLeft() == null) {
                 result = node.getRight();
             } else if (node.getRight() == null) {
                 result = node.getLeft();
+            }
+        } else {
+            // Possibly replace children
+            if (node.getLeft() == null && node.getRight() != null) {
+                node.getRight().accept(new ApplicationReplacer(node));
+            } else if (node.getRight() == null && node.getLeft() != null) {
+                node.getLeft().accept(new ApplicationReplacer(node));
             }
         }
     }

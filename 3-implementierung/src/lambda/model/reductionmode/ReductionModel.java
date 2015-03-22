@@ -141,7 +141,7 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
 
         if (paused) {
             // Play
-            setPaused(false);
+            paused = false;
             step();
         } else {
             // Pause
@@ -162,7 +162,8 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
         if (busy || pauseRequested) {
             throw new IllegalStateException("Cannot perform a reduction step in the current model state!");
         }
-        setBusy(true);
+        busy = true;
+        notifyState();
 
         // Start performing steps in a separate thread
         new Thread() {
@@ -183,7 +184,8 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                         current.accept(strategy);
                     }
                 } while (!paused && !pauseRequested && strategy.hasReduced() && nodeCount <= LambdaTerm.MAX_NODES_PER_TERM);
-                setBusy(false);
+                busy = false;
+                notifyState();
 
                 // Minimal term reached
                 if (!strategy.hasReduced()) {
@@ -202,7 +204,8 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
 
                 // Steps finished
                 pauseRequested = false;
-                setPaused(true);
+                paused = true;
+                notifyState();
             }
         }.start();
     }
@@ -220,37 +223,11 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
         }
 
         // Reverts the last step in a separate thread
-        setBusy(true);
-        current.setChild(history.pop().getChild());
+        busy = true;
         notifyState();
-        setBusy(false);
-    }
-
-    /**
-     * Sets whether the automatic reduction is paused and informs all observers
-     * of the change.
-     *
-     * @param paused true if the automatic reduction is paused, false otherwise
-     */
-    private void setPaused(final boolean paused) {
-        if (paused != this.paused) {
-            this.paused = paused;
-            notifyState();
-        }
-    }
-
-    /**
-     * Sets whether the reduction model is currently performing a step and
-     * informs all observers of the change.
-     *
-     * @param busy true if the reduction model is currently performing a step,
-     * false otherwise
-     */
-    private void setBusy(final boolean busy) {
-        if (busy != this.busy) {
-            this.busy = busy;
-            notifyState();
-        }
+        current.setChild(history.pop().getChild());
+        busy = false;
+        notifyState();
     }
 
     /**
@@ -269,7 +246,7 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
         notify(new Consumer<ReductionModelObserver>() {
             @Override
             public void accept(ReductionModelObserver observer) {
-                observer.stateChanged(paused, history.size(), ReductionModel.this.paused, pauseRequested);
+                observer.stateChanged(busy, history.size(), ReductionModel.this.paused, pauseRequested);
             }
         });
     }
