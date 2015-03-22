@@ -480,6 +480,11 @@ public final class EditorViewController extends StageViewController implements E
     public void removingApplicant(LambdaTerm applicant) {
     }
 
+    @Override
+    public void termChanged(LambdaTerm term) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private class PauseDialog extends Dialog {
         public PauseDialog(Skin dialogSkin, I18NBundle language,
                 float stageWidth, float stageHeight) {

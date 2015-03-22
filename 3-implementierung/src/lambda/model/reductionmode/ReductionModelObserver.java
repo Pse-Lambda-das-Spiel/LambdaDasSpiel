@@ -1,5 +1,7 @@
 package lambda.model.reductionmode;
 
+import lambda.model.lambdaterm.LambdaTerm;
+
 /**
  * Interface that provides all messages that can be sent from the reduction
  * model to its observers.
@@ -7,6 +9,13 @@ package lambda.model.reductionmode;
  * @author Florian Fervers
  */
 public interface ReductionModelObserver {
+    /**
+     * Called the model is reset with a new lamdba term.
+     *
+     * @param term the new lambda term.
+     */
+    public void termChanged(LambdaTerm term);
+
     /**
      * Called when the model state changes.
      *

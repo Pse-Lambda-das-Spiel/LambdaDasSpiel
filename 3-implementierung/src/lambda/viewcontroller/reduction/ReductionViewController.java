@@ -21,6 +21,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 
 import lambda.LambdaGame;
 import lambda.model.editormode.EditorModel;
+import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.levels.LevelManager;
 import lambda.model.levels.LevelModel;
 import lambda.model.profiles.ProfileManager;
@@ -351,6 +352,11 @@ public class ReductionViewController extends StageViewController implements Redu
     @Override
     public boolean scrolled(int amount) {
         return false;
+    }
+
+    @Override
+    public void termChanged(LambdaTerm term) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private class PauseDialog extends Dialog {
