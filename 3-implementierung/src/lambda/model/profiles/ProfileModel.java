@@ -152,7 +152,7 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
                     "levelIndex cannot be smaller than 1");
         }
         this.levelIndex = levelIndex;
-        notify(new Consumer<ProfileModelObserver>(){
+        notify(new Consumer<ProfileModelObserver>() {
             @Override
             public void accept(ProfileModelObserver observer) {
                 observer.changedLevelIndex();
@@ -182,7 +182,7 @@ public class ProfileModel extends Observable<ProfileModelObserver> {
             throw new IllegalArgumentException("coins cannot be smaller than 0");
         }
         this.coins = coins;
-        notify(new Consumer<ProfileModelObserver>(){
+        notify(new Consumer<ProfileModelObserver>() {
             @Override
             public void accept(ProfileModelObserver observer) {
                 observer.changedCoins();

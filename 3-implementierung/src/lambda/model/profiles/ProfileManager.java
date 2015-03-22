@@ -24,6 +24,9 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
      * The maximum number of allowed profiles.
      */
     public static final int MAX_NUMBER_OF_PROFILES = 6;
+    /**
+     * Name of the directory in which the profiles are saved.
+     */
     public static final String PROFILE_FOLDER = "profiles";
     private static ProfileManager manager;
     private final ProfileEditModel profileEdit;
@@ -80,7 +83,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
                 if (!currentProfile.getName().equals("")) {
                     ProfileLoadHelper.loadIntoShop(currentProfile.getName());
                 }
-                notify(new Consumer<ProfileManagerObserver>(){
+                notify(new Consumer<ProfileManagerObserver>() {
                     @Override
                     public void accept(ProfileManagerObserver observer) {
                         observer.changedProfile();
@@ -122,7 +125,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
         delete(currentProfile.getName());
         currentProfile = newProfile;
         saveNames();
-        notify(new Consumer<ProfileManagerObserver>(){
+        notify(new Consumer<ProfileManagerObserver>() {
             @Override
             public void accept(ProfileManagerObserver observer) {
                 observer.changedProfileList();
@@ -162,7 +165,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
             }
             ProfileModel newProfile = new ProfileModel("");
             profiles.add(newProfile);
-            notify(new Consumer<ProfileManagerObserver>(){
+            notify(new Consumer<ProfileManagerObserver>() {
                 @Override
                 public void accept(ProfileManagerObserver observer) {
                     observer.changedProfileList();
@@ -221,7 +224,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
                         .deleteDirectory();
             }
             saveNames();
-            notify(new Consumer<ProfileManagerObserver>(){
+            notify(new Consumer<ProfileManagerObserver>() {
                 @Override
                 public void accept(ProfileManagerObserver observer) {
                     observer.changedProfileList();
@@ -289,7 +292,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
         Gdx.files.local(PROFILE_FOLDER + ".json").writeString(new Json().prettyPrint(getNames()), false);
     }
     
-    private FileHandle[] listSubdirectories(FileHandle files[]) {
+    private FileHandle[] listSubdirectories(FileHandle[] files) {
        int i = 0;
        for (int j = 0; j < files.length; j++) {
            if (files[j].isDirectory()) {

@@ -13,12 +13,12 @@ public interface ProfileModelObserver {
      * Gets called by an observed ProfileModel-object as the level-progress is
      * changed.
      */
-    public void changedLevelIndex();
+    void changedLevelIndex();
 
     /**
      * Gets called by an observed ProfileModel-object as the number of owned
      * coins is changed.
      */
-    public void changedCoins();
+    void changedCoins();
 
 }

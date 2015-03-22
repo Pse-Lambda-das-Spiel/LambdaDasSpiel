@@ -20,9 +20,9 @@ import com.badlogic.gdx.audio.Sound;
  * @author Kai Fieger
  */
 public class AudioManager implements ProfileManagerObserver, SettingsModelObserver {
-    private static final String soundFolder = "data/sounds/";
-    private static final String defaultMusic = "data/defaultMusic.mp3";
-    private static final AudioManager manager = new AudioManager();
+    private static final String SOUND_FOLDER = "data/sounds/";
+    private static final String DEFAULT_MUSIC = "data/defaultMusic.mp3";
+    private static final AudioManager MANAGER = new AudioManager();
     private AssetManager assets;
     private SettingsModel settings;
     private Music music;
@@ -47,13 +47,13 @@ public class AudioManager implements ProfileManagerObserver, SettingsModelObserv
      * @param assets the asset manager
      */
     public static void queueAssets(AssetManager assets) {
-        manager.assets = assets;
-        assets.load(defaultMusic, Music.class);
+        MANAGER.assets = assets;
+        assets.load(DEFAULT_MUSIC, Music.class);
         try {
-            BufferedReader reader = Gdx.files.internal(soundFolder + "names.txt").reader(4096);
+            BufferedReader reader = Gdx.files.internal(SOUND_FOLDER + "names.txt").reader(4096);
             String name = null;
             while ((name = reader.readLine()) != null) {
-                assets.load(soundFolder + name + ".mp3", Sound.class);
+                assets.load(SOUND_FOLDER + name + ".mp3", Sound.class);
             }
             reader.close();
         } catch (IOException e) {
@@ -67,7 +67,7 @@ public class AudioManager implements ProfileManagerObserver, SettingsModelObserv
      * Has to be called after all assets queued through queueAssets are loaded.
      */
     public static void init() {
-        manager.music = manager.assets.get(defaultMusic, Music.class);
+        MANAGER.music = MANAGER.assets.get(DEFAULT_MUSIC, Music.class);
         playDefaultMusic();
     }
 
@@ -78,8 +78,8 @@ public class AudioManager implements ProfileManagerObserver, SettingsModelObserv
      * @param loggedIn if player is currently logged in or not
      */
     public static void setLoggedIn(boolean loggedIn) {
-        manager.loggedIn = loggedIn;
-        manager.changedMusicOn();
+        MANAGER.loggedIn = loggedIn;
+        MANAGER.changedMusicOn();
     }
     
     /**
@@ -89,8 +89,8 @@ public class AudioManager implements ProfileManagerObserver, SettingsModelObserv
      * @param name Name of the sound.
      */
     public static void playSound(String name) {
-        if (manager.assets.isLoaded(soundFolder + name + ".mp3", Sound.class)) {
-            playSound(manager.assets.get(soundFolder + name + ".mp3", Sound.class));
+        if (MANAGER.assets.isLoaded(SOUND_FOLDER + name + ".mp3", Sound.class)) {
+            playSound(MANAGER.assets.get(SOUND_FOLDER + name + ".mp3", Sound.class));
         }
     }
     
@@ -103,7 +103,7 @@ public class AudioManager implements ProfileManagerObserver, SettingsModelObserv
         if (sound == null) {
             throw new IllegalArgumentException("sound cannot be null");
         }
-        sound.play((manager.loggedIn ? manager.settings.getSoundVolume() : 0.2f));
+        sound.play((MANAGER.loggedIn ? MANAGER.settings.getSoundVolume() : 0.2f));
     }
     
     /**
@@ -111,7 +111,7 @@ public class AudioManager implements ProfileManagerObserver, SettingsModelObserv
      * after stopping any other music that might be playing through the AudioManager.
      */
     public static void playDefaultMusic() {
-        playMusic(manager.assets.get(defaultMusic, Music.class));
+        playMusic(MANAGER.assets.get(DEFAULT_MUSIC, Music.class));
     }
     
     /**
@@ -124,13 +124,13 @@ public class AudioManager implements ProfileManagerObserver, SettingsModelObserv
         if (music == null) {
             throw new IllegalArgumentException("music cannot be null");
         }
-        if (music != manager.music) {
-            manager.music.stop();
-            manager.music = music;
+        if (music != MANAGER.music) {
+            MANAGER.music.stop();
+            MANAGER.music = music;
         }
-        manager.changedMusicOn();
-        manager.music.setLooping(true);
-        manager.music.play();
+        MANAGER.changedMusicOn();
+        MANAGER.music.setLooping(true);
+        MANAGER.music.play();
     }
     
     @Override

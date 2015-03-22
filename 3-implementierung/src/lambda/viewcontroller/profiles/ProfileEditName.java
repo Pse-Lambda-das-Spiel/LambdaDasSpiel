@@ -92,7 +92,7 @@ public class ProfileEditName extends StageViewController implements ProfileEditO
         });
         nameField.addListener(new InputListener() {
             @Override
-            public boolean keyDown (InputEvent event, int keycode) {
+            public boolean keyDown(InputEvent event, int keycode) {
                 if (keycode == Keys.BACK) {
                     nameField.getOnscreenKeyboard().show(false);
                     getStage().setKeyboardFocus(null);
@@ -110,7 +110,7 @@ public class ProfileEditName extends StageViewController implements ProfileEditO
         buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
         buttonContainer.align(Align.bottomLeft);
         buttonContainer.setActor(backButton);
-        backButton.addListener(new backClickListener());
+        backButton.addListener(new BackClickListener());
         getStage().addActor(buttonContainer);
         buttonContainer.setFillParent(true);
         
@@ -119,7 +119,7 @@ public class ProfileEditName extends StageViewController implements ProfileEditO
         buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
         buttonContainer.align(Align.bottomRight);
         buttonContainer.setActor(continueButton);
-        continueButton.addListener(new continueClickListener());
+        continueButton.addListener(new ContinueClickListener());
         getStage().addActor(buttonContainer);
         buttonContainer.setFillParent(true);
     }
@@ -165,7 +165,7 @@ public class ProfileEditName extends StageViewController implements ProfileEditO
         Gdx.input.setInputProcessor(multiplexer);
     }
     
-    private class continueClickListener extends ClickListener {
+    private class ContinueClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             AudioManager.playSound("buttonClick");
@@ -182,7 +182,7 @@ public class ProfileEditName extends StageViewController implements ProfileEditO
         }
     }
     
-    private class backClickListener extends ClickListener {
+    private class BackClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             AudioManager.playSound("buttonClick");

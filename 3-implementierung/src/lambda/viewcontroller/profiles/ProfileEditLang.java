@@ -82,13 +82,13 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
         langSelection.row().height(getStage().getHeight() / 2);
         ImageButton selectLeft = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
         langSelection.add(selectLeft).size(getStage().getHeight() / 5).space(space);
-        selectLeft.addListener(new selectLeftClickListener());
+        selectLeft.addListener(new SelectLeftClickListener());
         langPic = new Image();
         langSelection.add(langPic).width(getStage().getWidth() / 2).space(space);
         ImageButton selectRight = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
         langSelection.add(selectRight).size(getStage().getHeight() / 5).space(space);
-        selectRight.addListener(new selectRightClickListener());
-        lang = new Label(null ,manager.get(skinJson, Skin.class));
+        selectRight.addListener(new SelectRightClickListener());
+        lang = new Label(null, manager.get(skinJson, Skin.class));
         lang.setAlignment(Align.center);
         langSelection.row().height(getStage().getHeight() / 5);
         langSelection.add();
@@ -99,7 +99,7 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
         buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
         buttonContainer.align(Align.bottomLeft);
         buttonContainer.setActor(backButton);
-        backButton.addListener(new backClickListener());
+        backButton.addListener(new BackClickListener());
         getStage().addActor(buttonContainer);
         buttonContainer.setFillParent(true);
         
@@ -108,7 +108,7 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
         buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
         buttonContainer.align(Align.bottomRight);
         buttonContainer.setActor(continueButton);
-        continueButton.addListener(new continueClickListener());
+        continueButton.addListener(new ContinueClickListener());
         getStage().addActor(buttonContainer);
         buttonContainer.setFillParent(true);
     }
@@ -117,7 +117,7 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
     public void changedProfile() {
         ProfileManager m = ProfileManager.getManager();
         deleteOnBack = m.getCurrentProfile().getName().equals("");
-        backButton.setVisible(m.getNames().size() != 1 || !deleteOnBack );
+        backButton.setVisible(m.getNames().size() != 1 || !deleteOnBack);
         profileEdit.setLang(m.getCurrentProfile().getLanguage());
     }
     
@@ -150,7 +150,7 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
 		Gdx.input.setInputProcessor(multiplexer);
 	}
     
-    private class selectLeftClickListener extends ClickListener {
+    private class SelectLeftClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             AudioManager.playSound("buttonClick");
@@ -158,7 +158,7 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
         }
     }
     
-    private class selectRightClickListener extends ClickListener {
+    private class SelectRightClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             AudioManager.playSound("buttonClick");
@@ -166,7 +166,7 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
         }
     }
     
-    private class continueClickListener extends ClickListener {
+    private class ContinueClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             AudioManager.playSound("buttonClick");
@@ -175,7 +175,7 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
         }
     }
     
-    private class backClickListener extends ClickListener {
+    private class BackClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             AudioManager.playSound("buttonClick");

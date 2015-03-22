@@ -127,7 +127,7 @@ public class ProfileSelection extends StageViewController {
 				backProcessor);
 		Gdx.input.setInputProcessor(multiplexer);
 		if (ProfileManager.getManager().getNames().size() == 0) {
-			new addProfileClickListener().clicked(null, 0, 0);
+			new AddProfileClickListener().clicked(null, 0, 0);
 		}
 	}
 
@@ -168,11 +168,11 @@ public class ProfileSelection extends StageViewController {
             pButton.getLabel().setFontScale(0.5f);
             profileView.add(pButton).width(getStage().getWidth() * 0.55f).space(space);
             profileButtons.add(pButton);
-            pButton.addListener(new selectProfileClickListener());
+            pButton.addListener(new SelectProfileClickListener());
             ImageButton eButton = new ImageButton(manager.get(skinJson, Skin.class), "editButton");
             profileView.add(eButton).width(height).align(Align.top);
             editButtons.add(eButton);
-            eButton.addListener(new editProfileClickListener());
+            eButton.addListener(new EditProfileClickListener());
         }
         //addProfile-Button
         addButton = new ImageButton(manager.get(skinJson, Skin.class), "addButton");
@@ -180,7 +180,7 @@ public class ProfileSelection extends StageViewController {
         buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
         buttonContainer.align(Align.bottomRight);
         buttonContainer.setActor(addButton);
-        addButton.addListener(new addProfileClickListener());
+        addButton.addListener(new AddProfileClickListener());
         getStage().addActor(buttonContainer);
         buttonContainer.setFillParent(true);
         changedProfileList();
@@ -203,7 +203,7 @@ public class ProfileSelection extends StageViewController {
         addButton.setVisible(names.size() != profileButtons.size());
     }
     
-    private class selectProfileClickListener extends ClickListener {
+    private class SelectProfileClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             AudioManager.playSound("buttonClick");
@@ -216,7 +216,7 @@ public class ProfileSelection extends StageViewController {
         }
     }
     
-    private class editProfileClickListener extends ClickListener {
+    private class EditProfileClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             AudioManager.playSound("buttonClick");
@@ -298,7 +298,7 @@ public class ProfileSelection extends StageViewController {
         }
     }
     
-    private class addProfileClickListener extends ClickListener {
+    private class AddProfileClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             AudioManager.playSound("buttonClick");

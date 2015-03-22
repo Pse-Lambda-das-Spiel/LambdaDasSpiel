@@ -13,13 +13,13 @@ public interface ProfileManagerObserver {
      * Gets called by an observed ProfileManager-object as the selected profile
      * (the current user profile) is changed.
      */
-    public void changedProfile();
+    void changedProfile();
 
     /**
      * Gets called by an observed ProfileManager-object if there is a change in
      * the list of all profilenames the ProfileManager currently manages (for
      * example after creating/renaming/deleting a profile).
      */
-    public void changedProfileList();
+    void changedProfileList();
 
 }

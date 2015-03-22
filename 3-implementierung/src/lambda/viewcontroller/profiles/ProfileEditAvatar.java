@@ -78,7 +78,7 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
         getStage().addActor(avatarSelection);
         avatarSelection.setFillParent(true);
 
-        chooseAvatar = new Label(null ,manager.get(skinJson, Skin.class));
+        chooseAvatar = new Label(null, manager.get(skinJson, Skin.class));
         chooseAvatar.setFontScale(0.7f);
         chooseAvatar.setAlignment(Align.center);
         avatarSelection.row().height(getStage().getHeight() / 20);
@@ -90,19 +90,19 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
         avatarSelection.row();
         ImageButton selectLeft = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
         avatarSelection.add(selectLeft).size(getStage().getHeight() / 5).space(space);
-        selectLeft.addListener(new selectLeftClickListener());
+        selectLeft.addListener(new SelectLeftClickListener());
         avatarPic = new Image();
         avatarSelection.add(avatarPic).size(getStage().getHeight() / 2).space(space);
         ImageButton selectRight = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
         avatarSelection.add(selectRight).size(getStage().getHeight() / 5).space(space);
-        selectRight.addListener(new selectRightClickListener());
+        selectRight.addListener(new SelectRightClickListener());
         
         ImageButton backButton = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
         buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
         buttonContainer.align(Align.bottomLeft);
         buttonContainer.setActor(backButton);
-        backButton.addListener(new backClickListener());
+        backButton.addListener(new BackClickListener());
         getStage().addActor(buttonContainer);
         buttonContainer.setFillParent(true);
         
@@ -111,7 +111,7 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
         buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
         buttonContainer.align(Align.bottomRight);
         buttonContainer.setActor(continueButton);
-        continueButton.addListener(new acceptClickListener());
+        continueButton.addListener(new AcceptClickListener());
         getStage().addActor(buttonContainer);
         buttonContainer.setFillParent(true);
     }
@@ -134,7 +134,7 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
         chooseAvatar.setText(manager.get(profileEdit.getLang(), I18NBundle.class).get("chooseAvatar"));
     }
     
-    private class selectLeftClickListener extends ClickListener {
+    private class SelectLeftClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             AudioManager.playSound("buttonClick");
@@ -142,7 +142,7 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
         }
     }
     
-    private class selectRightClickListener extends ClickListener {
+    private class SelectRightClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             AudioManager.playSound("buttonClick");
@@ -150,7 +150,7 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
         }
     }
     
-    private class acceptClickListener extends ClickListener {
+    private class AcceptClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             AudioManager.playSound("buttonClick");
@@ -199,11 +199,11 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
         }
     }
     
-    private class backClickListener extends ClickListener {
+    private class BackClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             AudioManager.playSound("buttonClick");
-            ProfileManager.getManager().getCurrentProfile().setAvatar(profileEdit.getAvatar());;
+            ProfileManager.getManager().getCurrentProfile().setAvatar(profileEdit.getAvatar());
             getGame().setScreen(ProfileEditName.class);
         }
     }

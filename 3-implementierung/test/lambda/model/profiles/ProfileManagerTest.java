@@ -85,7 +85,7 @@ public class ProfileManagerTest implements ProfileManagerObserver {
     @Test(expected = InvalidProfilesException.class)
     public void testTooManyProfiles() {
         String[] maxProfiles = new String[ProfileManager.MAX_NUMBER_OF_PROFILES + 1];
-        for (int i = 0; i < maxProfiles.length  ; i++) {
+        for (int i = 0; i < maxProfiles.length; i++) {
             maxProfiles[i] = "testName" + i;
         }
         saveProfiles(maxProfiles);
@@ -238,7 +238,7 @@ public class ProfileManagerTest implements ProfileManagerObserver {
     @Test
     public void testCreateTooManyProfiles() {
         String[] maxProfiles = new String[ProfileManager.MAX_NUMBER_OF_PROFILES];
-        for (int i = 0; i < maxProfiles.length  ; i++) {
+        for (int i = 0; i < maxProfiles.length; i++) {
             maxProfiles[i] = "testName" + i;
         }
         saveProfiles(maxProfiles);

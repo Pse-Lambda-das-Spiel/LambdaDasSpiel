@@ -13,18 +13,18 @@ public interface SettingsModelObserver {
      * Gets called by an observed SettingsModel-object as the music is turned on
      * or off.
      */
-    public void changedMusicOn();
+    void changedMusicOn();
 
     /**
      * Gets called by an observed SettingsModel-object as the music volume is
      * changed.
      */
-    public void changedMusicVolume();
+    void changedMusicVolume();
 
     /**
      * Gets called by an observed SettingsModel-object as the sound volume is
      * changed.
      */
-    public void changedSoundVolume();
+    void changedSoundVolume();
 
 }

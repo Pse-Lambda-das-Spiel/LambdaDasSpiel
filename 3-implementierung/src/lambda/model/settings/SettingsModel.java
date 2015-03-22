@@ -38,10 +38,11 @@ public class SettingsModel extends Observable<SettingsModelObserver> {
      * {@link SettingsModelObserver#changedMusicOn() changedMusicOn()} method.
      * 
      * @param musicOn
+     *            If the game should play music or not.
      */
     public void setMusicOn(boolean musicOn) {
         this.musicOn = musicOn;
-        notify(new Consumer<SettingsModelObserver>(){
+        notify(new Consumer<SettingsModelObserver>() {
             @Override
             public void accept(SettingsModelObserver observer) {
                 observer.changedMusicOn();
@@ -76,10 +77,10 @@ public class SettingsModel extends Observable<SettingsModelObserver> {
         } else {
             this.musicVolume = musicVolume;
         }
-        notify(new Consumer<SettingsModelObserver>(){
+        notify(new Consumer<SettingsModelObserver>() {
             @Override
             public void accept(SettingsModelObserver observer) {
-                observer.changedMusicVolume();;
+                observer.changedMusicVolume();
             }
         });
     }
@@ -111,7 +112,7 @@ public class SettingsModel extends Observable<SettingsModelObserver> {
         } else {
             this.soundVolume = soundVolume;
         }
-        notify(new Consumer<SettingsModelObserver>(){
+        notify(new Consumer<SettingsModelObserver>() {
             @Override
             public void accept(SettingsModelObserver observer) {
                 observer.changedSoundVolume();

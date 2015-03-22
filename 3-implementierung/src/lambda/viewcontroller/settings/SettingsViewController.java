@@ -117,7 +117,7 @@ public class SettingsViewController extends StageViewController {
         buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
         buttonContainer.align(Align.bottomLeft);
         buttonContainer.setActor(backButton);
-        backButton.addListener(new backClickListener());
+        backButton.addListener(new BackClickListener());
         getStage().addActor(buttonContainer);
         buttonContainer.setFillParent(true);
         changedProfileList();
@@ -135,7 +135,7 @@ public class SettingsViewController extends StageViewController {
         soundSlider.setValue(settings.getSoundVolume());
     }
 
-    private class backClickListener extends ClickListener {
+    private class BackClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             AudioManager.playSound("buttonClick");

@@ -14,7 +14,7 @@ import lambda.Observable;
  */
 public class ProfileEditModel extends Observable<ProfileEditObserver> {
 
-    private final static int AVATAR_NUMBER = 10;
+    private static final int AVATAR_NUMBER = 10;
     private List<String> lang;
     private int selectedLang;
     private List<String> avatar;
@@ -56,7 +56,7 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         if (selectedLang == -1) {
             selectedLang = 0;
         }
-        notify(new Consumer<ProfileEditObserver>(){
+        notify(new Consumer<ProfileEditObserver>() {
             @Override
             public void accept(ProfileEditObserver observer) {
                 observer.changedLanguage();
@@ -73,7 +73,7 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         if (++selectedLang == lang.size()) {
             selectedLang = 0;
         }
-        notify(new Consumer<ProfileEditObserver>(){
+        notify(new Consumer<ProfileEditObserver>() {
             @Override
             public void accept(ProfileEditObserver observer) {
                 observer.changedLanguage();
@@ -90,7 +90,7 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         if (--selectedLang < 0) {
             selectedLang = lang.size() - 1;
         }
-        notify(new Consumer<ProfileEditObserver>(){
+        notify(new Consumer<ProfileEditObserver>() {
             @Override
             public void accept(ProfileEditObserver observer) {
                 observer.changedLanguage();
@@ -133,7 +133,7 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         if (selectedAvatar == -1) {
             selectedAvatar = 0;
         }
-        notify(new Consumer<ProfileEditObserver>(){
+        notify(new Consumer<ProfileEditObserver>() {
             @Override
             public void accept(ProfileEditObserver observer) {
                 observer.changedAvatar();
@@ -150,7 +150,7 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         if (++selectedAvatar == avatar.size()) {
             selectedAvatar = 0;
         }
-        notify(new Consumer<ProfileEditObserver>(){
+        notify(new Consumer<ProfileEditObserver>() {
             @Override
             public void accept(ProfileEditObserver observer) {
                 observer.changedAvatar();
@@ -167,7 +167,7 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         if (--selectedAvatar < 0) {
             selectedAvatar = avatar.size() - 1;
         }
-        notify(new Consumer<ProfileEditObserver>(){
+        notify(new Consumer<ProfileEditObserver>() {
             @Override
             public void accept(ProfileEditObserver observer) {
                 observer.changedAvatar();
