@@ -4,7 +4,9 @@ import lambda.model.lambdaterm.LambdaAbstraction;
 import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
+import lambda.model.lambdaterm.LambdaUtils;
 import lambda.model.lambdaterm.LambdaVariable;
+import lambda.model.lambdaterm.visitor.strategy.NodeCounter;
 
 /**
  * A visitor on a lambdaterm that inserts an application between the visited
@@ -27,6 +29,15 @@ public class SiblingInserter implements LambdaTermVisitor {
      * then inserts the new application.
      */
     private LambdaTerm oldChild;
+    /**
+     * Indicates whether the lamdba term limits (i.e. maximum number of nodes)
+     * have been checked.
+     */
+    private boolean hasCheckedTermLimits;
+    /**
+     * Indicates whether the term could be inserted.
+     */
+    private boolean result;
 
     /**
      * Creates a new instance of SiblingInserter.
@@ -39,6 +50,8 @@ public class SiblingInserter implements LambdaTermVisitor {
         this.sibling = sibling;
         this.left = left;
         oldChild = null;
+        hasCheckedTermLimits = false;
+        result = true;
     }
 
     /**
@@ -48,6 +61,9 @@ public class SiblingInserter implements LambdaTermVisitor {
      */
     @Override
     public void visit(LambdaRoot node) {
+        if (!checkTermLimits(node)) {
+            return;
+        }
         if (oldChild == null) {
             assert (false); // Roots don't have parents
         } else {
@@ -62,6 +78,9 @@ public class SiblingInserter implements LambdaTermVisitor {
      */
     @Override
     public void visit(LambdaApplication node) {
+        if (!checkTermLimits(node)) {
+            return;
+        }
         if (oldChild == null) {
             oldChild = node;
             node.getParent().accept(this);
@@ -82,6 +101,9 @@ public class SiblingInserter implements LambdaTermVisitor {
      */
     @Override
     public void visit(LambdaAbstraction node) {
+        if (!checkTermLimits(node)) {
+            return;
+        }
         if (oldChild == null) {
             oldChild = node;
             node.getParent().accept(this);
@@ -97,6 +119,9 @@ public class SiblingInserter implements LambdaTermVisitor {
      */
     @Override
     public void visit(LambdaVariable node) {
+        if (!checkTermLimits(node)) {
+            return;
+        }
         if (oldChild == null) {
             oldChild = node;
             node.getParent().accept(this);
@@ -129,5 +154,19 @@ public class SiblingInserter implements LambdaTermVisitor {
     @Override
     public Object getResult() {
         return null;
+    }
+
+    /**
+     * Checks whether the term can be inserted into the given term.
+     *
+     * @param visited the visited term
+     * @return true if the insertion is valid, false otherwise
+     */
+    private boolean checkTermLimits(LambdaTerm visited) {
+        if (!hasCheckedTermLimits) {
+            hasCheckedTermLimits = true;
+            result = LambdaUtils.getRoot(visited).accept(new NodeCounter()) + sibling.accept(new NodeCounter()) <= LambdaTerm.MAX_NODES_PER_TERM;
+        }
+        return result;
     }
 }

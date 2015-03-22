@@ -2,7 +2,6 @@ package lambda.model.reductionmode;
 
 import com.badlogic.gdx.graphics.Color;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Stack;
@@ -10,9 +9,11 @@ import java.util.Stack;
 import lambda.Consumer;
 import lambda.Observable;
 import lambda.model.lambdaterm.LambdaRoot;
+import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.visitor.CopyVisitor;
 import lambda.model.lambdaterm.visitor.IsAlphaEquivalentVisitor;
 import lambda.model.lambdaterm.visitor.strategy.BetaReductionVisitor;
+import lambda.model.lambdaterm.visitor.strategy.NodeCounter;
 import lambda.model.levels.LevelContext;
 import lambda.model.levels.LevelManager;
 
@@ -167,15 +168,21 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
         new Thread() {
             @Override
             public void run() {
+                int nodeCount;
                 do {
                     // Save current term in history
                     history.push((LambdaRoot) current.accept(new CopyVisitor()));
                     notifyState();
 
+                    // Check limits
+                    nodeCount = current.accept(new NodeCounter());
+
                     // Perform beta reduction
-                    strategy.reset();
-                    current.accept(strategy);
-                } while (!paused && !pauseRequested && strategy.hasReduced());
+                    if (nodeCount <= LambdaTerm.MAX_NODES_PER_TERM) {
+                        strategy.reset();
+                        current.accept(strategy);
+                    }
+                } while (!paused && !pauseRequested && strategy.hasReduced() && nodeCount <= LambdaTerm.MAX_NODES_PER_TERM);
                 setBusy(false);
 
                 // Minimal term reached

@@ -4,7 +4,9 @@ import lambda.model.lambdaterm.LambdaAbstraction;
 import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
+import lambda.model.lambdaterm.LambdaUtils;
 import lambda.model.lambdaterm.LambdaVariable;
+import lambda.model.lambdaterm.visitor.strategy.NodeCounter;
 
 /**
  * A visitor on a lambdaterm that inserts a given term as the first child of the
@@ -12,11 +14,20 @@ import lambda.model.lambdaterm.LambdaVariable;
  *
  * @author Florian Fervers
  */
-public class FrontInserter implements LambdaTermVisitor {
+public class FrontInserter implements LambdaTermVisitor<Boolean> {
     /**
      * The term to be inserted
      */
     private final LambdaTerm inserted;
+    /**
+     * Indicates whether the lamdba term limits (i.e. maximum number of nodes)
+     * have been checked.
+     */
+    private boolean hasCheckedTermLimits;
+    /**
+     * Indicates whether the term could be inserted.
+     */
+    private boolean result;
 
     /**
      * Creates a new instance of FrontInserter.
@@ -25,6 +36,8 @@ public class FrontInserter implements LambdaTermVisitor {
      */
     public FrontInserter(LambdaTerm inserted) {
         this.inserted = inserted;
+        hasCheckedTermLimits = false;
+        result = true;
     }
 
     /**
@@ -34,6 +47,9 @@ public class FrontInserter implements LambdaTermVisitor {
      */
     @Override
     public void visit(LambdaRoot node) {
+        if (!checkTermLimits(node)) {
+            return;
+        }
         if (node.getChild() == null) {
             node.setChild(inserted);
         } else {
@@ -48,6 +64,9 @@ public class FrontInserter implements LambdaTermVisitor {
      */
     @Override
     public void visit(LambdaApplication node) {
+        if (!checkTermLimits(node)) {
+            return;
+        }
         if (node.getLeft() == null) {
             // Insert left
             node.setLeft(inserted);
@@ -68,6 +87,9 @@ public class FrontInserter implements LambdaTermVisitor {
      */
     @Override
     public void visit(LambdaAbstraction node) {
+        if (!checkTermLimits(node)) {
+            return;
+        }
         if (node.getInside() == null) {
             node.setInside(inserted);
         } else {
@@ -101,7 +123,21 @@ public class FrontInserter implements LambdaTermVisitor {
     }
 
     @Override
-    public Object getResult() {
-        return null;
+    public Boolean getResult() {
+        return result;
+    }
+
+    /**
+     * Checks whether the term can be inserted into the given term.
+     *
+     * @param visited the visited term
+     * @return true if the insertion is valid, false otherwise
+     */
+    private boolean checkTermLimits(LambdaTerm visited) {
+        if (!hasCheckedTermLimits) {
+            hasCheckedTermLimits = true;
+            result = LambdaUtils.getRoot(visited).accept(new NodeCounter()) + inserted.accept(new NodeCounter()) <= LambdaTerm.MAX_NODES_PER_TERM;
+        }
+        return result;
     }
 }

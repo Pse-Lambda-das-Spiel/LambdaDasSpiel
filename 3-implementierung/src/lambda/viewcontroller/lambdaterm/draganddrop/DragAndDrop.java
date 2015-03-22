@@ -10,6 +10,7 @@ import lambda.Consumer;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.visitor.CopyVisitor;
+import lambda.model.lambdaterm.visitor.ImplicitApplicationRemover;
 import lambda.model.lambdaterm.visitor.ReplaceTermVisitor;
 import lambda.viewcontroller.lambdaterm.LambdaTermViewController;
 
@@ -81,6 +82,7 @@ public class DragAndDrop extends InputAdapter {
         LambdaTerm term;
         if (source.shouldSplit()) {
             source.getNode().getLinkedTerm().accept(new ReplaceTermVisitor(null));
+            vc.getRoot().getLinkedTerm().accept(new ImplicitApplicationRemover());
             term = source.getNode().getLinkedTerm();
         } else {
             term = source.getNode().getLinkedTerm().accept(new CopyVisitor());
@@ -134,6 +136,7 @@ public class DragAndDrop extends InputAdapter {
         if (currentTarget != null) {
             currentTarget.insert(dragged.getRoot().getChild(0).getLinkedTerm());
             currentTarget.setHovered(false);
+            vc.getRoot().getLinkedTerm().accept(new ImplicitApplicationRemover());
         }
 
         if (DEBUG) {

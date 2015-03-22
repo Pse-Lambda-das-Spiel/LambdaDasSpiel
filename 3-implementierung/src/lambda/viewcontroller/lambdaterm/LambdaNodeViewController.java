@@ -274,7 +274,7 @@ public abstract class LambdaNodeViewController extends Actor {
         width = Math.max(width, getMinWidth());
         setWidth(width);
         if (DEBUG) {
-            // System.out.println("        Updated size of " + this.getLinkedTerm().getClass().getSimpleName() + " (" + getLinkedTerm().toString() + ") to (" + getWidth() + ", " + getHeight() + ")");
+            System.out.println("        Updated size of " + this.getLinkedTerm().getClass().getSimpleName() + " (" + getLinkedTerm().toString() + ") to (" + getWidth() + ", " + getHeight() + ")");
         }
 
         // Recurse
@@ -298,7 +298,7 @@ public abstract class LambdaNodeViewController extends Actor {
         setPosition(x, y);
         getViewController().setSize(Math.max(getViewController().getX(), x + this.getWidth()), Math.max(getViewController().getY(), -y + this.getHeight() + BLOCK_HEIGHT));
         if (DEBUG) {
-            // System.out.println("        Updated position of " + this.getLinkedTerm().getClass().getSimpleName() + " (" + getLinkedTerm().toString() + ") to (" + getX() + ", " + getY() + ")");
+            System.out.println("        Updated position of " + this.getLinkedTerm().getClass().getSimpleName() + " (" + getLinkedTerm().toString() + ") to (" + getX() + ", " + getY() + ")");
         }
 
         // Recurse
@@ -347,7 +347,6 @@ public abstract class LambdaNodeViewController extends Actor {
                                 System.out.println("Inserting " + term.getClass().getSimpleName() + " (" + term.toString() + ") as first and only child of " + getLinkedTerm().getClass().getSimpleName() + " (" + getLinkedTerm().toString() + ")");
                             }
                             getLinkedTerm().accept(new FrontInserter(term));
-                            LambdaUtils.getRoot(getLinkedTerm()).accept(new ImplicitApplicationRemover());
                         }
                     }, target);
                 } else {
@@ -364,7 +363,6 @@ public abstract class LambdaNodeViewController extends Actor {
                                 System.out.println("Inserting " + term.getClass().getSimpleName() + " (" + term.toString() + ") as left sibling of " + children.get(0).getLinkedTerm().getClass().getSimpleName() + " (" + children.get(0).getLinkedTerm().toString() + ")");
                             }
                             children.get(0).getLinkedTerm().accept(new SiblingInserter(term, true));
-                            LambdaUtils.getRoot(getLinkedTerm()).accept(new ImplicitApplicationRemover());
                         }
                     }, target);
                 }

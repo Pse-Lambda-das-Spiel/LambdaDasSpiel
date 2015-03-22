@@ -75,13 +75,7 @@ public class AssetViewController extends StageViewController {
             // Loading finished => go to profile selection
             getGame().createViewControllers();
             AudioManager.init();
-            /* 
-            LevelSkin is missing so I can not test it properly
-      
-            getGame().getController(EditorViewController.class).reset(context);
-            getGame().setScreen(EditorViewController.class);
-             */
-           
+            
             getGame().setScreen(ProfileSelection.class);
         }
 

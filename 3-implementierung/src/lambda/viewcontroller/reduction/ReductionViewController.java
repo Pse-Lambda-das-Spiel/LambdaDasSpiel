@@ -112,7 +112,6 @@ public class ReductionViewController extends StageViewController implements Redu
         Table main = new Table();
         getStage().addActor(main);
         main.setFillParent(true);
-        main.setDebug(true); // TODO remove
 
         ImageButton pauseButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "pauseButton");
         ImageButton helpButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "helpButton");

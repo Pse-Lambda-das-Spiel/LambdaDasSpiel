@@ -126,7 +126,6 @@ public final class EditorViewController extends StageViewController implements E
         Table main = new Table();
         getStage().addActor(main);
         main.setFillParent(true);
-        main.setDebug(true); // TODO remove
 
         ImageButton pauseButton = new ImageButton(manager.get(
                 "data/skins/MasterSkin.json", Skin.class), "pauseButton");

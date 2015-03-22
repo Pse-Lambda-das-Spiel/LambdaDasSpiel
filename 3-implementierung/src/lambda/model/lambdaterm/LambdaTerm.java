@@ -12,6 +12,10 @@ import lambda.model.lambdaterm.visitor.ToStringVisitor;
  */
 public abstract class LambdaTerm extends Observable<LambdaTermObserver> {
     /**
+     * (Roughly :D) the maximum number of nodes on a lambda term.
+     */
+    public static final int MAX_NODES_PER_TERM = 100;
+    /**
      * The parent node.
      */
     private LambdaTerm parent;
