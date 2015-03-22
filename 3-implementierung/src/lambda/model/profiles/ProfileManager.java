@@ -10,6 +10,9 @@ import com.badlogic.gdx.utils.Json;
 
 import lambda.Consumer;
 import lambda.Observable;
+import lambda.model.shop.ShopItemModel;
+import lambda.model.shop.ShopItemTypeModel;
+import lambda.model.shop.ShopModel;
 
 /**
  * The ProfileManager controls the games profiles. It contains a list of all
@@ -80,7 +83,16 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
         for (ProfileModel profile : profiles) {
             if (profile.getName().equals(name)) {
                 currentProfile = profile;
-                if (!currentProfile.getName().equals("")) {
+                if (currentProfile.getName().equals("")) {
+                    ShopModel shop = ShopModel.getShop();
+                    ShopItemTypeModel<?>[] types = {shop.getElementUIContextFamilies(), shop.getImages(), shop.getMusic()};
+                    for (int i = 0; i < types.length; i++) {
+                        types[i].setActivatedItem(null);
+                        for (ShopItemModel item : types[i].getItems()) {
+                            item.setPurchased(false);
+                        }
+                    }
+                } else {
                     ProfileLoadHelper.loadIntoShop(currentProfile.getName());
                 }
                 notify(new Consumer<ProfileManagerObserver>() {
