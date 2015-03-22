@@ -7,6 +7,7 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.SerializationException;
 
 import lambda.Consumer;
 import lambda.Observable;
@@ -86,9 +87,9 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
                 if (currentProfile.getName().equals("")) {
                     ShopModel shop = ShopModel.getShop();
                     ShopItemTypeModel<?>[] types = {shop.getElementUIContextFamilies(), shop.getImages(), shop.getMusic()};
-                    for (int i = 0; i < types.length; i++) {
-                        types[i].setActivatedItem(null);
-                        for (ShopItemModel item : types[i].getItems()) {
+                    for (ShopItemTypeModel<?> type: types) {
+                        type.setActivatedItem(null);
+                        for (ShopItemModel item : type.getItems()) {
                             item.setPurchased(false);
                         }
                     }
@@ -267,11 +268,15 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
             FileHandle save = Gdx.files.local(PROFILE_FOLDER + ".json");
             String[] names = {};
             if (save.exists()) {
-                names = new Json().fromJson(String[].class, save);
+                try {
+                    names = new Json().fromJson(String[].class, save);
+                } catch (SerializationException e) {
+                    return loadAllSavedProfiles(profileFolder);
+                }
             }
             for (int i = 0; i + 1 < names.length; i++) {
                 for (int j = i + 1; j < names.length; j++) {
-                    if (names[i].equals(names[j])) {
+                    if (names[i].equals(names[j]) || names[i].equals("")) {
                         return loadAllSavedProfiles(profileFolder);
                     }
                 }
