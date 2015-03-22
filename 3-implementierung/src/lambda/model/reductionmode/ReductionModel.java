@@ -8,6 +8,7 @@ import java.util.Stack;
 
 import lambda.Consumer;
 import lambda.Observable;
+import lambda.model.editormode.EditorModelObserver;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.visitor.CopyVisitor;
@@ -104,6 +105,12 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
             throw new IllegalStateException("Cannot start automatic reduction in the current model state!");
         }
         current = term;
+        notify(new Consumer<ReductionModelObserver>() {
+            @Override
+            public void accept(ReductionModelObserver observer) {
+                observer.termChanged(current);
+            }
+        });
         this.strategy = strategy;
         this.context = context;
         history.clear();

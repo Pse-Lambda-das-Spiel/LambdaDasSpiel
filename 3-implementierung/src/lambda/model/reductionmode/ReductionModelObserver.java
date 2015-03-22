@@ -10,7 +10,7 @@ import lambda.model.lambdaterm.LambdaTerm;
  */
 public interface ReductionModelObserver {
     /**
-     * Called the model is reset with a new lamdba term.
+     * Called when the model is reset with a new lamdba term.
      *
      * @param term the new lambda term.
      */

@@ -482,7 +482,6 @@ public final class EditorViewController extends StageViewController implements E
 
     @Override
     public void termChanged(LambdaTerm term) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private class PauseDialog extends Dialog {
