@@ -13,12 +13,14 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -212,29 +214,43 @@ public final class EditorViewController extends StageViewController implements E
         reductionStrategyButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                final float height = getStage().getHeight();
+                final float buttonSize = getStage().getHeight() / 6;
+                final float labelWidth = getStage().getWidth() / 2;
                 new Dialog("", dialogSkin) {
                     {
+                        I18NBundle language = manager.get(ProfileManager
+                                .getManager().getCurrentProfile().getLanguage(),
+                                I18NBundle.class);
                         clear();
-                        List<ReductionStrategy> strategies = EditorViewController.this.model.getLevelContext().getLevelModel().getAvailableRedStrats();
-                        int size = (int) Math.ceil(Math.sqrt(strategies.size()));
-                        pad(height / 72 * size);
-                        int i = 0;
-                        for (final ReductionStrategy strategy : strategies) {
-                            if (i++ % size == 0) {
-                                row().size(height / 5).space(10);
-                            }
+                        final List<ReductionStrategy> strategies = EditorViewController.this.model.getLevelContext().getLevelModel().getAvailableRedStrats();
+                        pad((buttonSize + labelWidth) / 20);
+                        Label labels[] = new Label[strategies.size()];
+                        for (int n = 0; n < strategies.size(); n++) {
                             ImageButton stratButton = new ImageButton(
-                                    dialogSkin, strategy.name() + "_Button");
+                                    dialogSkin, strategies.get(n).name() + "_Button");
+                            final int t = n;
                             stratButton.addListener(new ClickListener() {
                                 @Override
                                 public void clicked(InputEvent event, float x,
                                         float y) {
-                                    model.setStrategy(strategy);
+                                    model.setStrategy(strategies.get(t));
                                     remove();
                                 }
                             });
-                            add(stratButton);
+                            add(stratButton).size(buttonSize);
+                            labels[n] = new Label(language.get(strategies.get(n).name()), dialogSkin);
+                            add(labels[n]).width(labelWidth);
+                            row();
+                        }
+                        float smallestScale = Float.POSITIVE_INFINITY;
+                        for (Label label : labels) {
+                            float current = labelWidth / label.getStyle().font.getBounds(label.getText()).width;
+                            if (current < smallestScale) {
+                                smallestScale = current;
+                            }
+                        }
+                        for (Label label : labels) {
+                            label.setFontScale(smallestScale);
                         }
                         final Dialog dialog = this;
                         addListener(new ClickListener() {
@@ -488,20 +504,20 @@ public final class EditorViewController extends StageViewController implements E
         public PauseDialog(Skin dialogSkin, I18NBundle language,
                 float stageWidth, float stageHeight) {
             super("", dialogSkin);
-            pad(stageWidth / 64);
-            row().space(10);
-
+            
+            Label mainMenuLabel = new Label(language.get("mainMenu"), dialogSkin);
+            
             ImageButton menuButton = new ImageButton(dialogSkin, "menuButton");
             menuButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    // TODO
                     getGame().setScreen(MainMenuViewController.class);
                     remove();
                 }
             });
-            add(menuButton).size(stageHeight / 4);
 
+            Label levelMenuLabel = new Label(language.get("levelMenu"), dialogSkin);
+            
             ImageButton levelMenuButton = new ImageButton(dialogSkin, "levelMenuButton");
             levelMenuButton.addListener(new ClickListener() {
                 @Override
@@ -510,8 +526,9 @@ public final class EditorViewController extends StageViewController implements E
                     remove();
                 }
             });
-            add(levelMenuButton).size(stageHeight / 4);
-
+            
+            Label resetLabel = new Label(language.get("reset"), dialogSkin);
+            
             ImageButton resetButton = new ImageButton(dialogSkin, "resetButton");
             resetButton.addListener(new ClickListener() {
                 @Override
@@ -521,8 +538,9 @@ public final class EditorViewController extends StageViewController implements E
                     remove();
                 }
             });
-            add(resetButton).size(stageHeight / 4);
-
+            
+            Label continueLabel = new Label(language.get("continue"), dialogSkin);
+            
             ImageButton continueButton = new ImageButton(dialogSkin,
                     "continueButton");
             continueButton.addListener(new ClickListener() {
@@ -531,7 +549,31 @@ public final class EditorViewController extends StageViewController implements E
                     remove();
                 }
             });
-            add(continueButton).size(stageHeight / 4);
+            
+            clear();
+            float buttonSize = stageHeight / 4;
+            float labelWidth = buttonSize * 3 / 2;
+            float smallestScale = Float.POSITIVE_INFINITY;
+            Label labels[] = {mainMenuLabel, continueLabel, levelMenuLabel, resetLabel};
+            for (Label label : labels) {
+                float current = labelWidth / label.getStyle().font.getBounds(label.getText()).width;
+                if (current < smallestScale) {
+                    smallestScale = current;
+                }
+            }
+            for (Label label : labels) {
+                label.setFontScale(smallestScale);
+            }
+            pad(buttonSize / 4);
+            add(menuButton).size(buttonSize);
+            add(mainMenuLabel).width(labelWidth);
+            add(continueButton).size(buttonSize);
+            add(continueLabel).width(labelWidth);
+            row();
+            add(levelMenuButton).size(buttonSize);
+            add(levelMenuLabel).width(labelWidth);
+            add(resetButton).size(buttonSize);
+            add(resetLabel).width(labelWidth);
         }
     }
 

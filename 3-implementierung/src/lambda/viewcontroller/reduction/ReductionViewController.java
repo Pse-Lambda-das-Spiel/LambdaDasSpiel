@@ -1,5 +1,8 @@
 package lambda.viewcontroller.reduction;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
@@ -360,20 +363,20 @@ public class ReductionViewController extends StageViewController implements Redu
     private class PauseDialog extends Dialog {
         public PauseDialog(Skin dialogSkin, I18NBundle language, float stageWidth, float stageHeight) {
             super("", dialogSkin);
-            pad(stageWidth / 64);
-            row().space(10);
-
+            
+            Label mainMenuLabel = new Label(language.get("mainMenu"), dialogSkin);
+            
             ImageButton menuButton = new ImageButton(dialogSkin, "menuButton");
             menuButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    //TODO
                     getGame().setScreen(MainMenuViewController.class);
                     remove();
                 }
             });
-            add(menuButton).size(stageHeight / 4);
 
+            Label levelMenuLabel = new Label(language.get("levelMenu"), dialogSkin);
+            
             ImageButton levelMenuButton = new ImageButton(dialogSkin, "levelMenuButton");
             levelMenuButton.addListener(new ClickListener() {
                 @Override
@@ -382,8 +385,9 @@ public class ReductionViewController extends StageViewController implements Redu
                     remove();
                 }
             });
-            add(levelMenuButton).size(stageHeight / 4);
-
+            
+            Label resetLabel = new Label(language.get("reset"), dialogSkin);
+            
             ImageButton resetButton = new ImageButton(dialogSkin, "resetButton");
             resetButton.addListener(new ClickListener() {
                 @Override
@@ -393,46 +397,68 @@ public class ReductionViewController extends StageViewController implements Redu
                     remove();
                 }
             });
-            add(resetButton).size(stageHeight / 4);
-
-            ImageButton continueButton = new ImageButton(dialogSkin, "continueButton");
+            
+            Label continueLabel = new Label(language.get("continue"), dialogSkin);
+            
+            ImageButton continueButton = new ImageButton(dialogSkin,
+                    "continueButton");
             continueButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     remove();
                 }
             });
-            add(continueButton).size(stageHeight / 4);
+            clear();
+            float buttonSize = stageHeight / 4;
+            float labelWidth = buttonSize * 3 / 2;
+            float smallestScale = Float.POSITIVE_INFINITY;
+            Label labels[] = {mainMenuLabel, continueLabel, levelMenuLabel, resetLabel};
+            for (Label label : labels) {
+                float current = labelWidth / label.getStyle().font.getBounds(label.getText()).width;
+                if (current < smallestScale) {
+                    smallestScale = current;
+                }
+            }
+            for (Label label : labels) {
+                label.setFontScale(smallestScale);
+            }
+            pad(buttonSize / 4);
+            add(menuButton).size(buttonSize);
+            add(mainMenuLabel).width(labelWidth);
+            add(continueButton).size(buttonSize);
+            add(continueLabel).width(labelWidth);
+            row();
+            add(levelMenuButton).size(buttonSize);
+            add(levelMenuLabel).width(labelWidth);
+            add(resetButton).size(buttonSize);
+            add(resetLabel).width(labelWidth);
         }
     }
 
     private class FinishDialog extends Dialog {
         public FinishDialog(boolean levelComplete, int coins, Skin dialogSkin, I18NBundle language, float stageWidth, float stageHeight) {
             super("", dialogSkin);
-            clear();
-            pad(stageWidth / 64);
-
+            List<Label> labels = new ArrayList<Label>();
             final LevelModel playedLevel = model.getContext().getLevelModel();
-            // if the level is not the sandbox
-            if (playedLevel.getId() != 0) {
-                Label levelLabel;
-                levelLabel = new Label(language.get(levelComplete ? "levelCompleted" : "levelFailed"), dialogSkin);
-                levelLabel.setFontScale(0.6f);
-                add(levelLabel).colspan(levelComplete ? 4 : 3);
-            }
-
-            row().space(10);
+            ProfileModel currentProfile = ProfileManager.getManager().getCurrentProfile();
+            
+            Label levelLabel = new Label(language.get(levelComplete ? "levelCompleted" : "levelFailed"), dialogSkin);
+            
+            Label mainMenuLabel = new Label(language.get("mainMenu"), dialogSkin);
+            labels.add(mainMenuLabel);
+            
             ImageButton menuButton = new ImageButton(dialogSkin, "menuButton");
             menuButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    //TODO
                     getGame().setScreen(MainMenuViewController.class);
                     remove();
                 }
             });
-            add(menuButton).size(stageHeight / 4);
 
+            Label levelMenuLabel = new Label(language.get("levelMenu"), dialogSkin);
+            labels.add(levelMenuLabel);
+            
             ImageButton levelMenuButton = new ImageButton(dialogSkin, "levelMenuButton");
             levelMenuButton.addListener(new ClickListener() {
                 @Override
@@ -441,8 +467,10 @@ public class ReductionViewController extends StageViewController implements Redu
                     remove();
                 }
             });
-            add(levelMenuButton).size(stageHeight / 4);
 
+            Label restartLabel = new Label(language.get("restart"), dialogSkin);
+            labels.add(restartLabel);
+            
             ImageButton restartButton = new ImageButton(dialogSkin, "restartButton");
             restartButton.addListener(new ClickListener() {
                 @Override
@@ -451,37 +479,81 @@ public class ReductionViewController extends StageViewController implements Redu
                     remove();
                 }
             });
-            add(restartButton).size(stageHeight / 4);
 
+            Label nextLevelLabel = new Label(language.get("nextLevel"), dialogSkin);
+
+            ImageButton nextLevelButton = new ImageButton(dialogSkin, "nextLevelButton");
+            nextLevelButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    LevelManager levelManager = LevelManager.getLevelManager();
+                    // if the last level was solved, start with level 1 again
+                    if (playedLevel.getId() == levelManager.getNumberOfLevels()) {
+                        getGame().getController(LevelSelectionViewController.class).startLevel(levelManager.getLevel(1));
+                    } else {
+                        getGame().getController(LevelSelectionViewController.class).
+                                startLevel(levelManager.getLevel(playedLevel.getId() + 1));
+                    }
+                    remove();
+                }
+            });
+            
+            Label coinsLabel = new Label(language.format("coinsGained", coins), dialogSkin);
+            
             // if the level is complete and not the sandbox
             if (levelComplete && (playedLevel.getId() != 0)) {
-                ImageButton nextLevelButton = new ImageButton(dialogSkin, "nextLevelButton");
-                nextLevelButton.addListener(new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        LevelManager levelManager = LevelManager.getLevelManager();
-                        // if the last level was solved, start with level 1 again
-                        if (playedLevel.getId() == levelManager.getNumberOfLevels()) {
-                            getGame().getController(LevelSelectionViewController.class).startLevel(levelManager.getLevel(1));
-                        } else {
-                            getGame().getController(LevelSelectionViewController.class).
-                                    startLevel(levelManager.getLevel(playedLevel.getId() + 1));
-                        }
-                        remove();
-                    }
-                });
-                add(nextLevelButton).size(stageHeight / 4).row();
-
-                ProfileModel currentProfile = ProfileManager.getManager().getCurrentProfile();
-                // update levelindex and coins only if a new level was solved
-                if (playedLevel.getId() == currentProfile.getLevelIndex()) {
-                    currentProfile.setLevelIndex(currentProfile.getLevelIndex() + 1);
-                    currentProfile.setCoins(currentProfile.getCoins() + coins);
-                    Label coinsLabel = new Label(language.format("coinsGained", coins), dialogSkin);
-                    coinsLabel.setFontScale(0.6f);
-                    add(coinsLabel).colspan(levelComplete ? 4 : 3);;
+                labels.add(nextLevelLabel);
+            }
+            
+            float buttonSize = stageHeight / 4;
+            float labelWidth = buttonSize * 3 / 2;
+            float smallestScale = Float.POSITIVE_INFINITY;
+            for (Label label : labels) {
+                float current = labelWidth / label.getStyle().font.getBounds(label.getText()).width;
+                if (current < smallestScale) {
+                    smallestScale = current;
                 }
             }
+            for (Label label : labels) {
+                label.setFontScale(smallestScale);
+            }
+
+            clear();
+            pad(buttonSize / 4);
+            // if the level is not the sandbox
+            if (playedLevel.getId() != 0) {
+                levelLabel.setFontScale(2 * labelWidth / levelLabel.getStyle().font.getBounds(levelLabel.getText()).width);
+                add(levelLabel).colspan(2).width(2 * labelWidth);
+            }
+            row();
+            Table left = new Table();
+            left.add(menuButton).size(buttonSize);
+            left.add(mainMenuLabel).width(labelWidth);
+            left.row();
+            left.add(levelMenuButton).size(buttonSize);
+            left.add(levelMenuLabel).width(labelWidth);
+            add(left);
+            Table right = new Table();
+            if (levelComplete && (playedLevel.getId() != 0)) {
+                right.add(nextLevelButton).size(buttonSize);
+                right.add(nextLevelLabel).width(labelWidth);
+                right.row();
+            }
+            right.add(restartButton).size(buttonSize);
+            right.add(restartLabel).width(labelWidth);
+            add(right);
+            // if the level is not the sandbox
+            if (levelComplete && (playedLevel.getId() != 0)) {
+                if (playedLevel.getId() == currentProfile.getLevelIndex()) {
+                    row();
+                    coinsLabel.setFontScale(2 * labelWidth / coinsLabel.getStyle().font.getBounds(coinsLabel.getText()).width);
+                    add(coinsLabel).colspan(2).width(2 * labelWidth);
+                    // update levelindex and coins only if a new level was solved
+                    currentProfile.setLevelIndex(currentProfile.getLevelIndex() + 1);
+                    currentProfile.setCoins(currentProfile.getCoins() + coins);
+                }
+            }
+            
         }
     }
 
