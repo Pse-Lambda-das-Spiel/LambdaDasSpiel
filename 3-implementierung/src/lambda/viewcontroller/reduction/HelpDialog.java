@@ -33,11 +33,6 @@ public class HelpDialog extends Dialog {
         pauseGameHelp.setFontScale(0.7f);
         add(pauseGameHelp);
         row();
-        add(new Image(skin.getAtlas().createSprite("info"))).size(size);
-        Label infoHelp = new Label(language.get("infoHelp"), skin);
-        infoHelp.setFontScale(0.7f);
-        add(infoHelp);
-        row();
         add(new Image(skin.getAtlas().createSprite("play"))).size(size);
         Label playHelp = new Label(language.get("playHelp"), skin);
         playHelp.setFontScale(0.7f);
@@ -58,10 +53,6 @@ public class HelpDialog extends Dialog {
         forwardHelp.setFontScale(0.7f);
         add(forwardHelp);
         row();
-        add(new Image(skin.getAtlas().createSprite("reload"))).size(size);
-        Label reloadHelp = new Label(language.get("reloadHelp"), skin);
-        reloadHelp.setFontScale(0.7f);
-        add(reloadHelp);
         addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
