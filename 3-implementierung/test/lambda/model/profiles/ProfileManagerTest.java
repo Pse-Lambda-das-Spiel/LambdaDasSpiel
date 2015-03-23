@@ -9,6 +9,12 @@ import static org.junit.Assert.assertFalse;
 import java.lang.reflect.Field;
 import java.util.List;
 
+import lambda.model.shop.BackgroundImageItemModel;
+import lambda.model.shop.ElementUIContextFamily;
+import lambda.model.shop.MusicItemModel;
+import lambda.model.shop.ShopItemTypeModel;
+import lambda.model.shop.ShopModel;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -21,7 +27,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 
 /**
- * Tests the functionality of the ProfileManager.
+ * Tests the functionality of the ProfileManager and with it also the Profile{Save,Load}Helper.
  * 
  * @author Kai Fieger
  */
@@ -39,7 +45,6 @@ public class ProfileManagerTest implements ProfileManagerObserver {
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
         Gdx.files = new LwjglFiles();
-        
     }
 
     @AfterClass
@@ -170,6 +175,36 @@ public class ProfileManagerTest implements ProfileManagerObserver {
     public void testLoadWithWrongNames() {
         saveProfiles(testNames);
         saveNames(new String[] {unusedName, testNames[1], testNames[2]});
+        init();
+        List<String> names = manager.getNames();
+        assertEquals(testNames.length, names.size());
+        for (int i = 0; i < testNames.length; i++) {
+            assertTrue(names.contains(testNames[i]));
+        }
+    }
+    
+    /**
+     * Tests if the ProfileManager loads all profiles even if a name in the nameFile is empty/"".
+     */
+    @Test
+    public void testLoadWithEmptyName() {
+        saveProfiles(testNames);
+        saveNames(new String[] {"", testNames[1], testNames[2]});
+        init();
+        List<String> names = manager.getNames();
+        assertEquals(testNames.length, names.size());
+        for (int i = 0; i < testNames.length; i++) {
+            assertTrue(names.contains(testNames[i]));
+        }
+    }
+    
+    /**
+     * Tests if the ProfileManager loads all profiles even if nameFile contains an error.
+     */
+    @Test
+    public void testLoadWithCorruptedNames() {
+        saveProfiles(testNames);
+        nameFile.writeString("dead", false);
         init();
         List<String> names = manager.getNames();
         assertEquals(testNames.length, names.size());
@@ -391,6 +426,48 @@ public class ProfileManagerTest implements ProfileManagerObserver {
     public void testProfileEdit() {
         init();
         assertNotNull(manager.getProfileEdit());
+    }
+    
+    /**
+     * Tests some basic functions of the Profile{Load,Save}Helper concerning the profile's shop state.
+     */
+    @Test
+    public void testShopLoadSave() {
+        ProfileLoadHelper.loadIntoShop("doesnotexist");
+        ShopModel shop = ShopModel.getShop();
+        ShopItemTypeModel<?>[] types = {shop.getElementUIContextFamilies(), shop.getImages(), shop.getMusic()};
+        ElementUIContextFamily element = new ElementUIContextFamily("0", 1, "test");
+        BackgroundImageItemModel background = new BackgroundImageItemModel("0", 1, "test");
+        MusicItemModel music = new MusicItemModel("0", 1, "test");
+        for (ShopItemTypeModel<?> type : types) {
+            type.getItems().clear();
+            type.setActivatedItem(null);
+        }
+        shop.getElementUIContextFamilies().getItems().add(element);
+        shop.getImages().getItems().add(background);
+        shop.getMusic().getItems().add(music);
+        saveProfiles(testNames);
+        init();
+        manager.setCurrentProfile(testNames[0]);
+        shop.getElementUIContextFamilies().setActivatedItem(element);
+        shop.getImages().setActivatedItem(background);
+        shop.getMusic().setActivatedItem(music);
+        manager.save(testNames[0]);
+        manager.setCurrentProfile(testNames[1]);
+        for (ShopItemTypeModel<?> type : types) {
+            assertNull(type.getActivatedItem());
+        }
+        manager.save(testNames[1]);
+        manager.setCurrentProfile(testNames[0]);
+        for (ShopItemTypeModel<?> type : types) {
+            assertNotNull(type.getActivatedItem());
+        }
+        manager.save(testNames[0]);
+        manager.createProfile();
+        manager.setCurrentProfile("");
+        for (ShopItemTypeModel<?> type : types) {
+            assertNull(type.getActivatedItem());
+        }
     }
 
     @Override

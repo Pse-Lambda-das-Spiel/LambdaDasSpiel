@@ -147,7 +147,7 @@ public final class ProfileSaveHelper {
 							json.writeValue("activatedElementUIContextFamilyId", shopModel.
 															getElementUIContextFamilies().getActivatedItem().getId());
 						} else {
-							json.writeValue("ElementUIContextFamilyId", "");
+							json.writeValue("activatedElementUIContextFamilyId", "");
 						}
 						if (shopModel.getMusic().getActivatedItem() != null) {
 							json.writeValue("activatedMusicId", shopModel.getMusic().getActivatedItem().getId());
