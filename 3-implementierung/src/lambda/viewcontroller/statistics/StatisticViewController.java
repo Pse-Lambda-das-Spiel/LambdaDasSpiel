@@ -60,7 +60,8 @@ public class StatisticViewController extends StageViewController implements Stat
 	private Label lambsPlacedPerLevelValue;
 	private float buttonSize;
 	private float space;
-
+	private float textLabelWidth;
+	
 	/**
 	 * Creates a new StatisticViewController.
 	 */
@@ -68,8 +69,9 @@ public class StatisticViewController extends StageViewController implements Stat
 		statistics = new StatisticModel();
 		deltaProcessor = new DeltaStatisticProcessor();
 		labelTexts = new HashMap<>();
-		buttonSize = getStage().getWidth() / 10;
-		space = getStage().getHeight() / 36;
+		buttonSize = getStage().getHeight() / 5;
+		space = getStage().getWidth() / 64;
+		textLabelWidth = getStage().getWidth() / 2;
 	}
 
 	@Override
@@ -89,89 +91,87 @@ public class StatisticViewController extends StageViewController implements Stat
 		background.setHeight(getStage().getHeight());
 		getStage().addActor(background);
 
-		Table mainTable = new Table();
-		getStage().addActor(mainTable);
-		mainTable.setFillParent(true);
-
 		Table statisticsView = new Table();
+		statisticsView.pad(space * 3);
+		statisticsView.defaults().spaceBottom(space * 2);
 		LabelStyle style = new LabelStyle();
-		style.font = skin.getFont("roboto-font");
+		style.font = skin.getFont("default-font");
 		style.fontColor = Color.BLACK;
-
+        
 		Label timePlayedText = new Label("Initial string", style);
-		statisticsView.add(timePlayedText);
+		statisticsView.add(timePlayedText).width(textLabelWidth);
 		labelTexts.put("timePlayedLabel", timePlayedText);
 		timePlayedValue = new Label("Initial string", style);
 		statisticsView.add(timePlayedValue).row();
 
 		Label levelCompletedText = new Label("Initial string", style);
-		statisticsView.add(levelCompletedText);
+		statisticsView.add(levelCompletedText).width(textLabelWidth);
 		labelTexts.put("levelCompletedLabel", levelCompletedText);
 		levelCompletedValue = new Label("Initial string", style);
 		statisticsView.add(levelCompletedValue).row();
 
 		Label difficultiyText = new Label("Initial string", style);
-		statisticsView.add(difficultiyText);
+		statisticsView.add(difficultiyText).width(textLabelWidth);
 		labelTexts.put("difficultiesLabel", difficultiyText);
 		difficultiyValue = new Label("Initial string", style);
 		statisticsView.add(difficultiyValue).row();
 
 		Label successfulLevelTriesText = new Label("Initial string", style);
-		statisticsView.add(successfulLevelTriesText);
+		statisticsView.add(successfulLevelTriesText).width(textLabelWidth);
 		labelTexts.put("successfulLevelTriesLabel", successfulLevelTriesText);
 		successfulLevelTriesValue = new Label("Initial string", style);
 		statisticsView.add(successfulLevelTriesValue).row();
 
 		Label hintsText = new Label("Initial string", style);
-		statisticsView.add(hintsText);
+		statisticsView.add(hintsText).width(textLabelWidth);
 		labelTexts.put("hintsLabel", hintsText);
 		hintsValue = new Label("Initial string", style);
 		statisticsView.add(hintsValue).row();
 
 		Label gemsEnchantedText = new Label("Initial string", style);
-		statisticsView.add(gemsEnchantedText);
+		statisticsView.add(gemsEnchantedText).width(textLabelWidth);
 		labelTexts.put("gemsEnchantedLabel", gemsEnchantedText);
 		gemsEnchantedValue = new Label("Initial string", style);
 		statisticsView.add(gemsEnchantedValue).row();
 
 		Label lambsEnchantedText = new Label("Initial string", style);
-		statisticsView.add(lambsEnchantedText);
+		statisticsView.add(lambsEnchantedText).width(textLabelWidth);
 		labelTexts.put("lambsEnchantedLabel", lambsEnchantedText);
 		lambsEnchantedValue = new Label("Initial string", style);
 		statisticsView.add(lambsEnchantedValue).row();
 
 		Label gemsPlacedText = new Label("Initial string", style);
-		statisticsView.add(gemsPlacedText);
+		statisticsView.add(gemsPlacedText).width(textLabelWidth);
 		labelTexts.put("gemsPlacedLabel", gemsPlacedText);
 		gemsPlacedValue = new Label("Initial string", style);
 		statisticsView.add(gemsPlacedValue).row();
 
 		Label lambsPlacedText = new Label("Initial string", style);
-		statisticsView.add(lambsPlacedText);
+		statisticsView.add(lambsPlacedText).width(textLabelWidth);
 		labelTexts.put("lambsPlacedLabel", lambsPlacedText);
 		lambsPlacedValue = new Label("Initial string", style);
 		statisticsView.add(lambsPlacedValue).row();
 
 		Label gemsEnchantedPerLevelText = new Label("Initial string", style);
-		statisticsView.add(gemsEnchantedPerLevelText);
+		statisticsView.add(gemsEnchantedPerLevelText).width(textLabelWidth);
 		labelTexts.put("gemsEnchantedPerLevelLabel", gemsEnchantedPerLevelText);
 		gemsEnchantedPerLevelValue = new Label("Initial string", style);
 		statisticsView.add(gemsEnchantedPerLevelValue).row();
 
 		Label lambsEnchantedPerLevelText = new Label("Initial string", style);
-		statisticsView.add(lambsEnchantedPerLevelText);
+		statisticsView.add(lambsEnchantedPerLevelText).width(textLabelWidth);
 		labelTexts.put("lambsEnchantedPerLevelLabel", lambsEnchantedPerLevelText);
 		lambsEnchantedPerLevelValue = new Label("Initial string", style);
 		statisticsView.add(lambsEnchantedPerLevelValue).row();
 
 		Label gemsPlacedPerLevelText = new Label("Initial string", style);
-		statisticsView.add(gemsPlacedPerLevelText);
+		statisticsView.add(gemsPlacedPerLevelText).width(textLabelWidth);
 		labelTexts.put("gemsPlacedPerLevelLabel", gemsPlacedPerLevelText);
 		gemsPlacedPerLevelValue = new Label("Initial string", style);
 		statisticsView.add(gemsPlacedPerLevelValue).row();
 
 		Label lambsPlacedPerLevelText = new Label("Initial string", style);
-		statisticsView.add(lambsPlacedPerLevelText);
+		statisticsView.add(lambsPlacedPerLevelText).width(textLabelWidth);
 		labelTexts.put("lambsPlacedPerLevelLabel", lambsPlacedPerLevelText);
 		lambsPlacedPerLevelValue = new Label("Initial string", style);
 		statisticsView.add(lambsPlacedPerLevelValue).row();
@@ -179,8 +179,10 @@ public class StatisticViewController extends StageViewController implements Stat
 		ScrollPane scrollPane = new ScrollPane(statisticsView);
 		ImageButton backButton = new ImageButton(skin, "backButton");
 		backButton.addListener(new backClickListener());
-		mainTable.add(backButton).align(Align.bottomLeft).space(space).size(buttonSize);
-		mainTable.add(scrollPane).expand().fill().left();
+		backButton.setBounds(space * 5 / 2, space * 5 / 2, buttonSize, buttonSize);
+		getStage().addActor(scrollPane);
+		getStage().addActor(backButton);
+		scrollPane.setFillParent(true);
 	}
 
 	@Override
@@ -194,10 +196,36 @@ public class StatisticViewController extends StageViewController implements Stat
 	}
 
 	private void updateLabels(I18NBundle language) {
+	    float smallestScale = Float.POSITIVE_INFINITY;
 		// update Label texts
 		for (Map.Entry<String, Label> entry : labelTexts.entrySet()) {
 			entry.getValue().setText(language.get(entry.getKey()) + ":");
+			//finds factor to scale fonts 
+			float current = textLabelWidth / entry.getValue().getStyle().font.getBounds(
+			        entry.getValue().getText()).width;
+            if (current < smallestScale) {
+                smallestScale = current;
+            }
 		}
+		// scales the fonts of all labels
+		for (Map.Entry<String, Label> entry : labelTexts.entrySet()) {
+		    entry.getValue().setFontScale(smallestScale);
+		    entry.getValue().setAlignment(Align.center);
+        }
+		timePlayedValue.setFontScale(smallestScale);
+        levelCompletedValue.setFontScale(smallestScale);
+        difficultiyValue.setFontScale(smallestScale);
+        successfulLevelTriesValue.setFontScale(smallestScale);
+        hintsValue.setFontScale(smallestScale);
+        gemsEnchantedValue.setFontScale(smallestScale);
+        lambsEnchantedValue.setFontScale(smallestScale);
+        gemsPlacedValue.setFontScale(smallestScale);
+        lambsPlacedValue.setFontScale(smallestScale);
+        gemsEnchantedPerLevelValue.setFontScale(smallestScale);
+        lambsEnchantedPerLevelValue.setFontScale(smallestScale);
+        gemsPlacedPerLevelValue.setFontScale(smallestScale);
+        lambsPlacedPerLevelValue.setFontScale(smallestScale);
+		
 		// update Label values
 		timePlayedValue.setText(statistics.convertTimeToString());
 		levelCompletedValue.setText(Integer
