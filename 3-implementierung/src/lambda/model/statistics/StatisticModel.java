@@ -18,7 +18,6 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	private int lambsEnchantedPerLevel;
 	private int gemsPlacedPerLevel;
 	private int lambsPlacedPerLevel;
-	private int levelCompleted;
 	private int hintsNotUsed;
 	private int levelTries;
 	private int successfulLevelTries;
@@ -100,15 +99,6 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	 */
 	public int getLambsPlacedPerLevel() {
 		return lambsPlacedPerLevel;
-	}
-
-	/**
-	 * Returns the number of successfully completed level.
-	 * 
-	 * @return the number of successfully completed level
-	 */
-	public int getLevelCompleted() {
-		return levelCompleted;
 	}
 
 	/**
@@ -276,22 +266,6 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	}
 
 	/**
-	 * Sets the number of successfully completed level.
-	 * 
-	 * @param levelCompleted
-	 *            the number of successfully completed level to set
-	 */
-	public void setLevelCompleted(int levelCompleted) {
-		this.levelCompleted = levelCompleted;
-		notify(new Consumer<StatisticModelObserver>() {
-			@Override
-			public void accept(StatisticModelObserver observer) {
-				observer.changedLevelCompleted();
-			}
-		});
-	}
-
-	/**
 	 * Sets the number of successful level tries without using the hint.
 	 * 
 	 * @param hintsNotUsed
@@ -370,4 +344,5 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 		String result = hours + " h  " + String.format("%02d", min) + " min  " + String.format("%02d", sec) + " s";
 		return result;
 	}
+
 }

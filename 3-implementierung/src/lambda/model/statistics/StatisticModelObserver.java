@@ -57,12 +57,6 @@ public interface StatisticModelObserver {
 	public void changedGemsPlacedPerLevel();
 
 	/**
-	 * Gets called by an observed StatisticModel object as the number of completed level (one completed level counts
-	 * only once) is changed. The default implementation is empty.
-	 */
-	public void changedLevelCompleted();
-
-	/**
 	 * Gets called by an observed StatisticModel object as the number of not used hints (hint not used to solve level,
 	 * counts only once) is changed. The default implementation is empty.
 	 */

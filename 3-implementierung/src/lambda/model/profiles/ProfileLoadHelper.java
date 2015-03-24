@@ -71,7 +71,6 @@ public final class ProfileLoadHelper {
     	statistic.setGemsEnchantedPerLevel(statisticJson.getInt("gemsEnchantedPerLevel"));
     	statistic.setLambsPlacedPerLevel(statisticJson.getInt("lambsPlacedPerLevel"));
     	statistic.setGemsPlacedPerLevel(statisticJson.getInt("gemsPlacedPerLevel"));
-    	statistic.setLevelCompleted(statisticJson.getInt("levelCompleted"));
     	statistic.setHintsNotUsed(statisticJson.getInt("hintsNotUsed"));
     	statistic.setLevelTries(statisticJson.getInt("levelTries"));
     	statistic.setSuccessfulLevelTries(statisticJson.getInt("successfulLevelTries"));

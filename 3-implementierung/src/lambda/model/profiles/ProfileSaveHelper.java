@@ -114,7 +114,6 @@ public final class ProfileSaveHelper {
 						json.writeValue("gemsEnchantedPerLevel", statisticModel.getGemsEnchantedPerLevel());
 						json.writeValue("lambsPlacedPerLevel", statisticModel.getLambsPlacedPerLevel());
 						json.writeValue("gemsPlacedPerLevel", statisticModel.getGemsPlacedPerLevel());
-						json.writeValue("levelCompleted", statisticModel.getLevelCompleted());
 						json.writeValue("hintsNotUsed", statisticModel.getHintsNotUsed());
 						json.writeValue("levelTries", statisticModel.getLevelTries());
 						json.writeValue("successfulLevelTries", statisticModel.getSuccessfulLevelTries());

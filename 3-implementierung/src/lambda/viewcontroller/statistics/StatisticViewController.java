@@ -21,10 +21,14 @@ import com.badlogic.gdx.utils.I18NBundle;
 
 import lambda.model.levels.LevelManager;
 import lambda.model.profiles.ProfileManager;
+import lambda.model.profiles.ProfileModelObserver;
+import lambda.model.statistics.DeltaStatisticProcessor;
 import lambda.model.statistics.StatisticModel;
 import lambda.model.statistics.StatisticModelObserver;
 import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.StageViewController;
+import lambda.viewcontroller.editor.EditorViewController;
+import lambda.viewcontroller.reduction.ReductionViewController;
 import lambda.viewcontroller.settings.SettingsViewController;
 
 /**
@@ -32,12 +36,13 @@ import lambda.viewcontroller.settings.SettingsViewController;
  * 
  * @author Robert Hochweiss, Farid el-haddad
  */
-public class StatisticViewController extends StageViewController implements StatisticModelObserver {
+public class StatisticViewController extends StageViewController implements StatisticModelObserver,
+		ProfileModelObserver {
 
 	private String skinPath = "data/skins/MasterSkin.json";
 	private StatisticModel statistics;
 	private AssetManager manager;
-	private final float space;
+	private DeltaStatisticProcessor deltaProcessor;
 
 	private Map<String, Label> labelTexts;
 	private Label timePlayedValue;
@@ -53,14 +58,18 @@ public class StatisticViewController extends StageViewController implements Stat
 	private Label lambsEnchantedPerLevelValue;
 	private Label gemsPlacedPerLevelValue;
 	private Label lambsPlacedPerLevelValue;
+	private float buttonSize;
+	private float space;
 
 	/**
 	 * Creates a new StatisticViewController.
 	 */
 	public StatisticViewController() {
-		space = getStage().getWidth() / 64;
 		statistics = new StatisticModel();
+		deltaProcessor = new DeltaStatisticProcessor();
 		labelTexts = new HashMap<>();
+		buttonSize = getStage().getWidth() / 10;
+		space = getStage().getHeight() / 36;
 	}
 
 	@Override
@@ -72,6 +81,8 @@ public class StatisticViewController extends StageViewController implements Stat
 	public void create(final AssetManager manager) {
 		this.manager = manager;
 		ProfileManager.getManager().addObserver(this);
+		getGame().getController(EditorViewController.class).getModel().addObserver(deltaProcessor);
+		getGame().getController(ReductionViewController.class).getModel().addObserver(deltaProcessor);
 		Skin skin = manager.get(skinPath, Skin.class);
 		Image background = new Image(manager.get("data/backgrounds/default.png", Texture.class));
 		background.setWidth(getStage().getWidth());
@@ -83,11 +94,8 @@ public class StatisticViewController extends StageViewController implements Stat
 		mainTable.setFillParent(true);
 
 		Table statisticsView = new Table();
-		//statisticsView.defaults().size(size)
-		float height = getStage().getHeight() / 15;
-		float width = getStage().getWidth() * 0.7f;
 		LabelStyle style = new LabelStyle();
-		style.font = skin.getFont("default-font");
+		style.font = skin.getFont("roboto-font");
 		style.fontColor = Color.BLACK;
 
 		Label timePlayedText = new Label("Initial string", style);
@@ -168,43 +176,18 @@ public class StatisticViewController extends StageViewController implements Stat
 		lambsPlacedPerLevelValue = new Label("Initial string", style);
 		statisticsView.add(lambsPlacedPerLevelValue).row();
 
-		/*
-		 * Table statisticsView = new Table(); statisticsView.align(Align.top); getStage().addActor(statisticsView);
-		 * statisticsView.setFillParent(true);
-		 */
-
-		/*
-		 * statisticsView.row().height(height); statisticsView.add(); statisticsView.row().height(height);
-		 * statisticsView.add(lambsEnchanted).width(width); statisticsView.row().height(height); statisticsView.add();
-		 * statisticsView.row().height(height); statisticsView.add(gemsEnchanted).width(width);
-		 * statisticsView.row().height(height); statisticsView.add(); statisticsView.row().height(height);
-		 * statisticsView.add(gemsPlaced).width(width); statisticsView.row().height(height); statisticsView.add();
-		 * statisticsView.row().height(height); statisticsView.add(lambsPlaced).width(width);
-		 * statisticsView.row().height(height); statisticsView.add(); statisticsView.row().height(height);
-		 * statisticsView.add(levelCompleted).width(width); statisticsView.row().height(height); statisticsView.add();
-		 * statisticsView.row().height(height); statisticsView.add(hintsNotUsed).width(width);
-		 * statisticsView.row().height(height); statisticsView.add(); statisticsView.row().height(height);
-		 * statisticsView.add(timePlayed).width(width);
-		 */
-
 		ScrollPane scrollPane = new ScrollPane(statisticsView);
 		ImageButton backButton = new ImageButton(skin, "backButton");
 		backButton.addListener(new backClickListener());
-		mainTable.add(backButton).align(Align.bottomLeft);
+		mainTable.add(backButton).align(Align.bottomLeft).space(space).size(buttonSize);
 		mainTable.add(scrollPane).expand().fill().left();
-
-		/*
-		 * //backButton ImageButton backButton = new ImageButton(manager.get(skin, Skin.class), "backButton");
-		 * Container<ImageButton> buttonContainer = new Container<ImageButton>(); buttonContainer.pad(space * 5 /
-		 * 2).maxSize(getStage().getHeight() / 5); buttonContainer.align(Align.bottomLeft);
-		 * buttonContainer.setActor(backButton); backButton.addListener(new backClickListener());
-		 * getStage().addActor(buttonContainer); buttonContainer.setFillParent(true); changedProfileList();
-		 */
 	}
 
 	@Override
 	public void changedProfile() {
 		statistics = ProfileManager.getManager().getCurrentProfile().getStatistics();
+		statistics.addObserver(this);
+		ProfileManager.getManager().getCurrentProfile().addObserver(this);
 		I18NBundle language = manager.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
 				I18NBundle.class);
 		updateLabels(language);
@@ -217,8 +200,10 @@ public class StatisticViewController extends StageViewController implements Stat
 		}
 		// update Label values
 		timePlayedValue.setText(statistics.convertTimeToString());
-		levelCompletedValue.setText(Integer.toString(statistics.getLevelCompleted()));
-		int difficultiyCompleted = statistics.getLevelCompleted() / LevelManager.LEVEL_PER_DIFFICULTY;
+		levelCompletedValue.setText(Integer
+				.toString(ProfileManager.getManager().getCurrentProfile().getLevelIndex() - 1));
+		int difficultiyCompleted = (ProfileManager.getManager().getCurrentProfile().getLevelIndex() - 1)
+				/ LevelManager.LEVEL_PER_DIFFICULTY;
 		difficultiyValue.setText(Integer.toString(difficultiyCompleted));
 		successfulLevelTriesValue.setText(Integer.toString(statistics.getSuccessfulLevelTries()) + " / "
 				+ Integer.toString(statistics.getLevelTries()));
@@ -282,9 +267,11 @@ public class StatisticViewController extends StageViewController implements Stat
 	}
 
 	@Override
-	public void changedLevelCompleted() {
-		levelCompletedValue.setText(Integer.toString(statistics.getLevelCompleted()));
-		int difficultiesCompleted = statistics.getLevelCompleted() / LevelManager.LEVEL_PER_DIFFICULTY;
+	public void changedLevelIndex() {
+		levelCompletedValue.setText(Integer
+				.toString(ProfileManager.getManager().getCurrentProfile().getLevelIndex() - 1));
+		int difficultiesCompleted = (ProfileManager.getManager().getCurrentProfile().getLevelIndex() - 1)
+				/ LevelManager.LEVEL_PER_DIFFICULTY;
 		difficultiyValue.setText(Integer.toString(difficultiesCompleted));
 	}
 
@@ -309,5 +296,9 @@ public class StatisticViewController extends StageViewController implements Stat
 	public void changedSuccessfulLevelTries() {
 		successfulLevelTriesValue.setText(Integer.toString(statistics.getSuccessfulLevelTries()) + " / "
 				+ Integer.toString(statistics.getLevelTries()));
+	}
+
+	@Override
+	public void changedCoins() {
 	}
 }

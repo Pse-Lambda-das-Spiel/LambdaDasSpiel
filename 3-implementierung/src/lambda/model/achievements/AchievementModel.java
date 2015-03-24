@@ -4,6 +4,7 @@ import com.badlogic.gdx.assets.AssetManager;
 
 import lambda.Observable;
 import lambda.Consumer;
+import lambda.model.profiles.ProfileModelObserver;
 import lambda.model.statistics.StatisticModel;
 import lambda.model.statistics.StatisticModelObserver;
 
@@ -12,7 +13,7 @@ import lambda.model.statistics.StatisticModelObserver;
  * 
  * @author Robert Hochweiss
  */
-public abstract  class AchievementModel extends Observable<AchievementModelObserver> implements StatisticModelObserver {
+public abstract class AchievementModel extends Observable<AchievementModelObserver> implements StatisticModelObserver, ProfileModelObserver {
 	
 	private String id;
 	private int index;
@@ -226,10 +227,6 @@ public abstract  class AchievementModel extends Observable<AchievementModelObser
 	}
 
 	@Override
-	public void changedLevelCompleted() {		
-	}
-
-	@Override
 	public void changedHintsNotUsed() {		
 	}
 
@@ -243,6 +240,14 @@ public abstract  class AchievementModel extends Observable<AchievementModelObser
 
 	@Override
 	public void changedSuccessfulLevelTries() {		
+	}
+
+	@Override
+	public void changedLevelIndex() {
+	}
+
+	@Override
+	public void changedCoins() {
 	}
 	
 }
