@@ -35,10 +35,14 @@ public final class LevelLoadHelper {
 	 * 
 	 * @param file the {@link FileHandle} of the to be loaded level
 	 * @return the LevelModel initialized with the level data from the json file
+	 * @throws IllegalArgumentException if the given {@link FileHandle} file is null
 	 * @throws InvalidJsonException if the corresponding json file has invalid content
 	 * @throws JsonParseException if there is an error while reading the level json file
 	 */
 	public static LevelModel loadLevel(FileHandle file) {
+		if (file == null) {
+			throw new IllegalArgumentException("file cannot be null!");
+		}
 		JsonReader reader = new JsonReader();
 		JsonValue jsonFile = reader.parse(file);
 		JsonValue level = jsonFile.child();
@@ -72,10 +76,10 @@ public final class LevelLoadHelper {
 		JsonValue goal = constellations.get("goal");
 		JsonValue hint = constellations.get("hint");
 		int id = level.getInt("levelId");
-		LevelModel levelModel = new LevelModel(id, convertJsonToConstellation(start), 
-				convertJsonToConstellation(goal), convertJsonToConstellation(hint), convertJsonToTutorial(tutorial, id), 
-				redStratsList, convertJsonToUseableElements(useableElements), 
-				level.getInt("difficulty"), level.getInt("coins"), level.getBoolean("standardMode"),
+		LevelModel levelModel = new LevelModel(id, convertJsonToConstellation(start), convertJsonToConstellation(goal),
+				convertJsonToConstellation(hint), convertJsonToTutorial(tutorial, id), redStratsList,
+				convertJsonToUseableElements(useableElements), level.getInt("difficulty"), level.getInt("coins"),
+				level.getInt("maxReductionSteps"), level.getBoolean("standardMode"),
 				level.getBoolean("colorEquivalence"), availableColors, lockedColors, defaultStrategy);
 		return levelModel;
 	}
@@ -204,10 +208,14 @@ public final class LevelLoadHelper {
 	 *
 	 * @param file the {@link FileHandle}  of the to be loaded difficulty settings
 	 * @return settings for a difficulty
+	 * @throws IllegalArgumentException if the given {@link FileHandle} file is null
 	 * @throws InvalidJsonException if the corresponding json file has invalid content
 	 * @throws JsonParseException if there is an error while reading the level json file
 	 */
 	public static DifficultySetting loadDifficulty(FileHandle file) {
+		if (file == null) {
+			throw new IllegalArgumentException("file cannot be null!");
+		}
 		JsonReader reader = new JsonReader();
 		JsonValue jsonFile = reader.parse(file);
 		JsonValue difficulty = jsonFile.child();

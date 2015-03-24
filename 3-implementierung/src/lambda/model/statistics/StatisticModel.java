@@ -1,16 +1,15 @@
 package lambda.model.statistics;
 
-import java.util.Date;
-
 import lambda.Consumer;
 import lambda.Observable;
 
 /**
+ * This class serves as the statistic of a profile for the data gained through playing the levels of the game.
  * 
- * @author Farid el-haddad
- *
+ * @author Farid el-haddad, Robert Hochweiss
  */
 public class StatisticModel extends Observable<StatisticModelObserver> {
+
 	private int gemsEnchanted;
 	private int lambsEnchanted;
 	private int gemsPlaced;
@@ -20,291 +19,355 @@ public class StatisticModel extends Observable<StatisticModelObserver> {
 	private int gemsPlacedPerLevel;
 	private int lambsPlacedPerLevel;
 	private int levelCompleted;
-	private int  hintsNotUsed;
-	private long beginTime = System.currentTimeMillis() ;
+	private int hintsNotUsed;
+	private int levelTries;
+	private int successfulLevelTries;
 	private long timePlayed;
-	
-	
-	public StatisticModel() {
-	}
-	
-	
 
 	/**
-	 * @return the lambsEnchanted
+	 * Creates a new instance of this class.
+	 */
+	public StatisticModel() {
+	}
+
+	/**
+	 * Returns the number enchanted lambs.
+	 * 
+	 * @return the number of enchanted lambs
 	 */
 	public int getLambsEnchanted() {
 		return lambsEnchanted;
 	}
 
-
-
 	/**
-	 * @return the gemsEnchanted
+	 * Returns the number of enchanted gems.
+	 * 
+	 * @return the number of enchanted gems.
 	 */
 	public int getGemsEnchanted() {
 		return gemsEnchanted;
 	}
 
-
-
 	/**
-	 * @return the gemsPlaced
+	 * Returns the number of placed gems.
+	 * 
+	 * @return the number of placed gems
 	 */
 	public int getGemsPlaced() {
 		return gemsPlaced;
 	}
 
-
-
 	/**
-	 * @return the lambsPlaced
+	 * Returns the number of placed lambs.
+	 * 
+	 * @return the number of placed lambs
 	 */
 	public int getLambsPlaced() {
 		return lambsPlaced;
 	}
 
-
-
 	/**
-	 * @return the lambsEnchantedPerLevel
+	 * Returns the highest number of enchanted lambs in a level.
+	 * 
+	 * @return the highest number of enchanted lambs in a level.
 	 */
 	public int getLambsEnchantedPerLevel() {
 		return lambsEnchantedPerLevel;
 	}
 
-
-
 	/**
-	 * @return the gemsEnchantedPerLevel
+	 * Returns the highest number of enchanted gems in a level.
+	 * 
+	 * @return the highest number of enchanted gems in a level.
 	 */
 	public int getGemsEnchantedPerLevel() {
 		return gemsEnchantedPerLevel;
 	}
 
-
-
 	/**
-	 * @return the gemsPlacedPerLevel
+	 * Returns the highest number of placed gems in a level.
+	 * 
+	 * @return the highest number of placed gems in a level.
 	 */
 	public int getGemsPlacedPerLevel() {
 		return gemsPlacedPerLevel;
 	}
 
-
-
 	/**
-	 * @return the lambsPlacedPerLevel
+	 * Returns the highest number of placed lambs in a level.
+	 * 
+	 * @return the highest number of placed gems in a level.
 	 */
 	public int getLambsPlacedPerLevel() {
 		return lambsPlacedPerLevel;
 	}
 
-
-
 	/**
-	 * @return the levelCompleted
+	 * Returns the number of successfully completed level.
+	 * 
+	 * @return the number of successfully completed level
 	 */
 	public int getLevelCompleted() {
 		return levelCompleted;
 	}
 
-
-
 	/**
-	 * @return the hintsNotUsed
+	 * Returns the number of times when the hint was not used in a solved level.
+	 * 
+	 * @return the number of times when the hint was not used in a solved level.
 	 */
 	public int getHintsNotUsed() {
 		return hintsNotUsed;
 	}
 
-
-
 	/**
-	 * @return the beginTime
+	 * Returns the number of level tries.
+	 * 
+	 * @return the number of level tries
 	 */
-	public long getBeginTime() {
-		return beginTime;
+	public int getLevelTries() {
+		return levelTries;
 	}
 
-
+	/**
+	 * Returns the number of successful level tries.
+	 * 
+	 * @return the number of successful level tries
+	 */
+	public int getSuccessfulLevelTries() {
+		return successfulLevelTries;
+	}
 
 	/**
-	 * @return the timePlayed
+	 * Returns the played time spent playing levels in seconds.
+	 * 
+	 * @return the played time spent playing levels in seconds.
 	 */
 	public long getTimePlayed() {
 		return timePlayed;
 	}
 
-
-
 	/**
-	 * @param lambsEnchanted the lambsEnchanted to set
+	 * Sets the number of enchanted lambs.
+	 * 
+	 * @param lambsEnchanted
+	 *            the number of enchanted lambs. to set
 	 */
 	public void setLambsEnchanted(int lambsEnchanted) {
 		this.lambsEnchanted = lambsEnchanted;
-		 notify(new Consumer<StatisticModelObserver>(){
-             @Override
-             public void accept(StatisticModelObserver observer) {
-                 observer.changedLambsEnchanted();
-             }
-         });
+		notify(new Consumer<StatisticModelObserver>() {
+			@Override
+			public void accept(StatisticModelObserver observer) {
+				observer.changedLambsEnchanted();
+			}
+		});
 	}
 
 	/**
-	 * @param gemsEnchanted the gemsEnchanted to set
+	 * Sets the number of enchanted gems.
+	 * 
+	 * @param gemsEnchanted
+	 *            the number of enchanted gems to set.
 	 */
 	public void setGemsEnchanted(int gemsEnchanted) {
 		this.gemsEnchanted = gemsEnchanted;
-		 notify(new Consumer<StatisticModelObserver>(){
-             @Override
-             public void accept(StatisticModelObserver observer) {
-                 observer.changedGemsEnchanted();
-             }
-         });
+		notify(new Consumer<StatisticModelObserver>() {
+			@Override
+			public void accept(StatisticModelObserver observer) {
+				observer.changedGemsEnchanted();
+			}
+		});
 	}
 
 	/**
-	 * @param gemsPlaced the gemsPlaced to set
+	 * Sets the number of placed gems.
+	 * 
+	 * @param gemsPlaced
+	 *            the number of placed gems to set
 	 */
 	public void setGemsPlaced(int gemsPlaced) {
 		this.gemsPlaced = gemsPlaced;
-		 notify(new Consumer<StatisticModelObserver>(){
-             @Override
-             public void accept(StatisticModelObserver observer) {
-                 observer.changedGemsPlaced();
-             }
-         });
+		notify(new Consumer<StatisticModelObserver>() {
+			@Override
+			public void accept(StatisticModelObserver observer) {
+				observer.changedGemsPlaced();
+			}
+		});
 	}
 
 	/**
-	 * @param lambsPlaced the lambsPlaced to set
+	 * Sets the number of placed lambs.
+	 * 
+	 * @param lambsPlaced
+	 *            the number of placed lambs to set
 	 */
 	public void setLambsPlaced(int lambsPlaced) {
 		this.lambsPlaced = lambsPlaced;
-		 notify(new Consumer<StatisticModelObserver>(){
-             @Override
-             public void accept(StatisticModelObserver observer) {
-                 observer.changedLambsPlaced();
-             }
-         });
+		notify(new Consumer<StatisticModelObserver>() {
+			@Override
+			public void accept(StatisticModelObserver observer) {
+				observer.changedLambsPlaced();
+			}
+		});
 	}
 
 	/**
-	 * @param lambsEnchantedPerLevel the lambsEnchantedPerLevel to set
+	 * Sets the highest number of enchanted lambs in a level.
+	 * 
+	 * @param lambsEnchantedPerLevel
+	 *            the highest number of enchanted lambs in a level to set
 	 */
 	public void setLambsEnchantedPerLevel(int lambsEnchantedPerLevel) {
 		this.lambsEnchantedPerLevel = lambsEnchantedPerLevel;
-		 notify(new Consumer<StatisticModelObserver>(){
-             @Override
-             public void accept(StatisticModelObserver observer) {
-                 observer.changedLambsEnchantedPerLevel();
-             }
-         });
+		notify(new Consumer<StatisticModelObserver>() {
+			@Override
+			public void accept(StatisticModelObserver observer) {
+				observer.changedLambsEnchantedPerLevel();
+			}
+		});
 	}
 
 	/**
-	 * @param gemsEnchantedPerLevel the gemsEnchantedPerLevel to set
+	 * Sets the highest number of enchanted gems in a level.
+	 * 
+	 * @param gemsEnchantedPerLevel
+	 *            the highest number of enchanted gems in a level to set
 	 */
 	public void setGemsEnchantedPerLevel(int gemsEnchantedPerLevel) {
 		this.gemsEnchantedPerLevel = gemsEnchantedPerLevel;
-		 notify(new Consumer<StatisticModelObserver>(){
-             @Override
-             public void accept(StatisticModelObserver observer) {
-                 observer.changedGemsEnchantedPerLevel();
-             }
-         });
+		notify(new Consumer<StatisticModelObserver>() {
+			@Override
+			public void accept(StatisticModelObserver observer) {
+				observer.changedGemsEnchantedPerLevel();
+			}
+		});
 	}
 
 	/**
-	 * @param gemsPlacedPerLevel the gemsPlacedPerLevel to set
+	 * Sets the highest number of placed gems in a level.
+	 * 
+	 * @param gemsPlacedPerLevel
+	 *            the highest number of placed gems in a level
 	 */
 	public void setGemsPlacedPerLevel(int gemsPlacedPerLevel) {
 		this.gemsPlacedPerLevel = gemsPlacedPerLevel;
-		 notify(new Consumer<StatisticModelObserver>(){
-             @Override
-             public void accept(StatisticModelObserver observer) {
-                 observer.changedGemsPlacedPerLevel();
-             }
-         });
+		notify(new Consumer<StatisticModelObserver>() {
+			@Override
+			public void accept(StatisticModelObserver observer) {
+				observer.changedGemsPlacedPerLevel();
+			}
+		});
 	}
 
 	/**
-	 * @param lambsPlacedPerLevel the lambsPlacedPerLevel to set
+	 * Sets the highest number of placed lambs in a level.
+	 * 
+	 * @param lambsPlacedPerLevel
+	 *            the highest number of placed lambs in a level to set
 	 */
 	public void setLambsPlacedPerLevel(int lambsPlacedPerLevel) {
 		this.lambsPlacedPerLevel = lambsPlacedPerLevel;
-		 notify(new Consumer<StatisticModelObserver>(){
-             @Override
-             public void accept(StatisticModelObserver observer) {
-                 observer.changedLambsPlacedPerLevel();
-             }
-         });
+		notify(new Consumer<StatisticModelObserver>() {
+			@Override
+			public void accept(StatisticModelObserver observer) {
+				observer.changedLambsPlacedPerLevel();
+			}
+		});
 	}
 
 	/**
-	 * @param levelCompleted the levelCompleted to set
+	 * Sets the number of successfully completed level.
+	 * 
+	 * @param levelCompleted
+	 *            the number of successfully completed level to set
 	 */
 	public void setLevelCompleted(int levelCompleted) {
 		this.levelCompleted = levelCompleted;
-		 notify(new Consumer<StatisticModelObserver>(){
-             @Override
-             public void accept(StatisticModelObserver observer) {
-                 observer.changedLevelCompleted();
-             }
-         });
+		notify(new Consumer<StatisticModelObserver>() {
+			@Override
+			public void accept(StatisticModelObserver observer) {
+				observer.changedLevelCompleted();
+			}
+		});
 	}
 
 	/**
-	 * @param hintsNotUsed the hintsNotUsed to set
+	 * Sets the number of successful level tries without using the hint.
+	 * 
+	 * @param hintsNotUsed
+	 *            the number of successful level tries without using the hint to set
 	 */
 	public void setHintsNotUsed(int hintsNotUsed) {
 		this.hintsNotUsed = hintsNotUsed;
-		 notify(new Consumer<StatisticModelObserver>(){
-             @Override
-             public void accept(StatisticModelObserver observer) {
-                 observer.changedHintsNotUsed();
-             }
-         });
+		notify(new Consumer<StatisticModelObserver>() {
+			@Override
+			public void accept(StatisticModelObserver observer) {
+				observer.changedHintsNotUsed();
+			}
+		});
 	}
 
 	/**
-	 * @param timePlayed the timePlayed to set
+	 * Sets the number of level tries.
+	 * 
+	 * @param levelTries
+	 *            the number of level tries to set
+	 */
+	public void setLevelTries(int levelTries) {
+		this.levelTries = levelTries;
+		notify(new Consumer<StatisticModelObserver>() {
+			@Override
+			public void accept(StatisticModelObserver observer) {
+				observer.changedLevelTries();
+			}
+		});
+	}
+
+	/**
+	 * Sets the number of successful level tries.
+	 * 
+	 * @param successfulLevelTries
+	 *            the number of successful level tries to set
+	 */
+	public void setSuccessfulLevelTries(int successfulLevelTries) {
+		this.successfulLevelTries = successfulLevelTries;
+		notify(new Consumer<StatisticModelObserver>() {
+			@Override
+			public void accept(StatisticModelObserver observer) {
+				observer.changedSuccessfulLevelTries();
+			}
+		});
+	}
+
+	/**
+	 * Sets the played time spent playing in levels.
+	 * 
+	 * @param timePlayed
+	 *            the played time spent playing in levels to set
 	 */
 	public void setTimePlayed(long timePlayed) {
 		this.timePlayed = timePlayed;
-		 notify(new Consumer<StatisticModelObserver>(){
-             @Override
-             public void accept(StatisticModelObserver observer) {
-                 observer.changedTimePlayed();
-             }
-         });
+		notify(new Consumer<StatisticModelObserver>() {
+			@Override
+			public void accept(StatisticModelObserver observer) {
+				observer.changedTimePlayed();
+			}
+		});
 	}
-
-	
-
-
-	
 
 	/**
-	 * @param successfulLevelTries the successfulLevelTries to set
+	 * 
+	 * Returns the string representation of the played time in the format "h min s".
+	 * 
+	 * @return the string representation of the played time
 	 */
-	
-	public void update(){
-		long diff = System.currentTimeMillis() - this.beginTime;
-	    long newPlayedTime = (this.getTimePlayed()+ diff/1000);
-		this.setTimePlayed(newPlayedTime);
-		this.beginTime = (new Date()).getTime();
+	public String convertTimeToString() {
+		long sec = timePlayed;
+		long hours = sec / 3600;
+		sec %= 3600;
+		long min = sec / 60;
+		sec %= 60;
+		String result = hours + " h  " + String.format("%02d", min) + " min  " + String.format("%02d", sec) + " s";
+		return result;
 	}
-	
-public String convert(long time){
-	String result="" ;
-	if(time < 60)
-		result += time + " s ";
-	else if (time < 3600)
-		result += time/60 + " min " + time%60 + " s ";
-	else result += time/3600 + " h "+ (time%3600)/60 + " min " + (time%3600)%60 + " s ";
-	return result ;
-	
-}
 }

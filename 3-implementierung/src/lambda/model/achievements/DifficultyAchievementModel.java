@@ -29,7 +29,7 @@ public class DifficultyAchievementModel extends AchievementModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void changedLevelCompleted() {
+	public void changedLevelIndex() {
 		if (isLocked()) {
 			checkRequirements(ProfileManager.getManager().getCurrentProfile().getStatistics());
 		}
@@ -58,7 +58,7 @@ public class DifficultyAchievementModel extends AchievementModel {
 		if (statistic == null) {
 			throw new IllegalArgumentException("statistic cannot be null!");
 		}
-		if (statistic.getLevelCompleted() >=  reqLevelPerDifficultySolved) {
+		if (ProfileManager.getManager().getCurrentProfile().getLevelIndex() > reqLevelPerDifficultySolved) {
 			setLocked(false);
 		} else {
 			setLocked(true);

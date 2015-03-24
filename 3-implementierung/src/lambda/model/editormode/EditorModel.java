@@ -115,4 +115,28 @@ public class EditorModel extends Observable<EditorModelObserver> {
     public void update(ReductionModel model) {
         model.reset((LambdaRoot) term.accept(new CopyVisitor()), BetaReductionVisitor.fromReductionStrategy(strategy), context);
     }
+    
+    /**
+     * Called when the hint was used in the observing EditorViewController.
+     */
+    public void hintIsUsed() {
+    	 notify(new Consumer<EditorModelObserver>() {
+             @Override
+             public void accept(EditorModelObserver observer) {
+                 observer.hintUsed();
+             }
+         });
+    }
+    
+    /**
+     * Called when the level is started and the user can make input events.
+     */
+    public void levelIsStarted() {
+    	notify(new Consumer<EditorModelObserver>() {
+            @Override
+            public void accept(EditorModelObserver observer) {
+                observer.levelStarted();
+            }
+        });
+    }
 }

@@ -73,8 +73,9 @@ public final class ProfileLoadHelper {
     	statistic.setGemsPlacedPerLevel(statisticJson.getInt("gemsPlacedPerLevel"));
     	statistic.setLevelCompleted(statisticJson.getInt("levelCompleted"));
     	statistic.setHintsNotUsed(statisticJson.getInt("hintsNotUsed"));
-    	//statistic.setLevelTries(statisticJson.getInt("levelTries"));
-    	//statistic.setSuccessfulLevelTries(statisticJson.getInt("successfulLevelTries"));
+    	statistic.setLevelTries(statisticJson.getInt("levelTries"));
+    	statistic.setSuccessfulLevelTries(statisticJson.getInt("successfulLevelTries"));
+    	statistic.setTimePlayed(statisticJson.getLong("timePlayed"));
     }
 
     /**

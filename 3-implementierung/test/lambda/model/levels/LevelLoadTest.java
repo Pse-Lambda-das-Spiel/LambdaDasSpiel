@@ -25,7 +25,7 @@ import static org.junit.Assert.assertEquals;
  * @author Robert Hochweiss
  */
 public class LevelLoadTest {
-	
+
 	private static LevelModel testLevel;
 	private static AssetManager assets;
 
@@ -62,9 +62,9 @@ public class LevelLoadTest {
 		tutorial.add(new TutorialMessageModel("tutorial_2_2", ""));
 		tutorial.add(new TutorialMessageModel("tutorial_2_3", ""));
 		tutorial.add(new TutorialMessageModel("tutorial_2_4", ""));
-		
+
 		// Initialize the test start constellation: (lx.x)y, lx is blue, x is white, y is white
-		LambdaApplication startApplication = new LambdaApplication(start, true);
+		LambdaApplication startApplication = new LambdaApplication(start, true, false);
 		LambdaAbstraction startAbstraction = new LambdaAbstraction(startApplication, Color.valueOf("0000ffff"), false);
 		startAbstraction.setInside(new LambdaVariable(startAbstraction, Color.valueOf("0000ffff"), false));
 		startApplication.setLeft(startAbstraction);
@@ -73,15 +73,15 @@ public class LevelLoadTest {
 		// Initialize the test goal constellation: y, y is red
 		goal.setChild(new LambdaVariable(goal, Color.valueOf("ff0000ff"), false));
 		// Initialize the hint start constellation: (lx.x)y, lx is blue, x is blue, y is white
-		LambdaApplication hintApplication = new LambdaApplication(hint, true);
+		LambdaApplication hintApplication = new LambdaApplication(hint, true, false);
 		LambdaAbstraction hintAbstraction = new LambdaAbstraction(null, Color.valueOf("0000ffff"), false);
 		hintAbstraction.setInside(new LambdaVariable(hintAbstraction, Color.valueOf("0000ffff"), false));
 		hintApplication.setLeft(hintAbstraction);
 		hintApplication.setRight(new LambdaVariable(hintApplication, Color.valueOf("ffffffff"), false));
 		hint.setChild(hintApplication);
-		testLevel = new LevelModel(2, start, goal, hint, tutorial, availableRedStrats, useableElements, 1, 10, true,
-					true, availableColors, lockedColors, ReductionStrategy.NORMAL_ORDER);
-		
+		testLevel = new LevelModel(2, start, goal, hint, tutorial, availableRedStrats, useableElements, 1, 10, 50,
+				true, true, availableColors, lockedColors, ReductionStrategy.NORMAL_ORDER);
+
 	}
 
 	@AfterClass
@@ -97,7 +97,7 @@ public class LevelLoadTest {
 	@After
 	public void tearDown() throws Exception {
 	}
-	
+
 	/**
 	 * Tests the loading of a sample level json file(in this case 02.json).
 	 */
@@ -106,6 +106,7 @@ public class LevelLoadTest {
 		LevelModel jsonLevel = LevelLoadHelper.loadLevel(Gdx.files.internal("data/levels/02.json"));
 		assertEquals(testLevel.getId(), jsonLevel.getId());
 		assertEquals(testLevel.getCoins(), jsonLevel.getCoins());
+		assertEquals(testLevel.getMaxReductionSteps(), jsonLevel.getMaxReductionSteps());
 		assertEquals(testLevel.getDifficulty(), jsonLevel.getDifficulty());
 		assertEquals(testLevel.isStandardMode(), jsonLevel.isStandardMode());
 		assertEquals(testLevel.getStart(), jsonLevel.getStart());
@@ -130,7 +131,7 @@ public class LevelLoadTest {
 		int number = LevelLoadHelper.loadAllLevelPaths().length;
 		assertEquals(25, number);
 	}
-	
+
 	/**
 	 * Tests the loading of a sample level json file while using the {@link LevelModelLoader}.
 	 */
@@ -143,6 +144,7 @@ public class LevelLoadTest {
 		LevelModel loadedLevel = assets.get("data/levels/02.json", LevelModel.class);
 		assertEquals(testLevel.getId(), loadedLevel.getId());
 		assertEquals(testLevel.getCoins(), loadedLevel.getCoins());
+		assertEquals(testLevel.getMaxReductionSteps(), loadedLevel.getMaxReductionSteps());
 		assertEquals(testLevel.getDifficulty(), loadedLevel.getDifficulty());
 		assertEquals(testLevel.isStandardMode(), loadedLevel.isStandardMode());
 		assertEquals(testLevel.getStart(), loadedLevel.getStart());

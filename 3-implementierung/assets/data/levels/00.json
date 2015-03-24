@@ -3,6 +3,7 @@
 		"levelId": 0 ,
 		"difficulty": 1 ,
 		"coins": 0,
+		"maxReductionSteps" : 100,
 		"standardMode": true,
 		"colorEquivalence": true,
 		"availableColors": [

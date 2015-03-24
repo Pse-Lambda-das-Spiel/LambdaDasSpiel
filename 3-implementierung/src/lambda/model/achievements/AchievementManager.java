@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.JsonValue;
 
 import lambda.model.levels.InvalidJsonException;
 import lambda.model.profiles.ProfileManager;
+import lambda.model.profiles.ProfileModel;
 import lambda.model.statistics.StatisticModel;
 import lambda.viewcontroller.achievements.AchievementViewController;
 
@@ -86,8 +87,10 @@ public class AchievementManager {
 		}
 		Collection<AchievementModel> achievementCollection = achievements.values();
 		StatisticModel statistic = ProfileManager.getManager().getCurrentProfile().getStatistics();
+		ProfileModel currentProfile = ProfileManager.getManager().getCurrentProfile();
 		for (AchievementModel achievement : achievementCollection) {
 			statistic.addObserver(achievement);
+			currentProfile.addObserver(achievement);
 			achievement.reset(assets);
 		}
 	}

@@ -28,7 +28,7 @@ public class LevelAchievementModel extends AchievementModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void changedLevelCompleted() {
+	public void changedLevelIndex() {
 		if (isLocked()) {
 			checkRequirements(ProfileManager.getManager().getCurrentProfile().getStatistics());
 		}
@@ -55,7 +55,7 @@ public class LevelAchievementModel extends AchievementModel {
 		if (statistic == null) {
 			throw new IllegalArgumentException("statistic cannot be null!");
 		}
-		if (statistic.getLevelCompleted() >= reqLevelCompleted) {
+		if (ProfileManager.getManager().getCurrentProfile().getLevelIndex() > reqLevelCompleted) {
 			setLocked(false);
 		} else {
 			setLocked(true);

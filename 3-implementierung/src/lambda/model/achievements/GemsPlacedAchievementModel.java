@@ -47,7 +47,6 @@ public class GemsPlacedAchievementModel extends AchievementModel {
 		setRequirementsDescription(bundle.format("reqGemsPlacedAchievement", reqGemsPlaced));
 	}
 
-	
 	/**
 	 * {@inheritDoc}
 	 */

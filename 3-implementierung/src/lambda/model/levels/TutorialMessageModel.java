@@ -40,23 +40,4 @@ public class TutorialMessageModel {
 		return imageName;
 	}
 
-	/**
-	 *  Sets the ID of this {@link TutorialMessage}
-	 * 
-	 * @param id the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	/**
-	 * Sets the image name of this {@link TutorialMessage}
-	 * 
-	 * @param imageName the imageName to set
-	 */
-	public void setImageName(String imageName) {
-		this.imageName = imageName;
-	}
-
-
 }

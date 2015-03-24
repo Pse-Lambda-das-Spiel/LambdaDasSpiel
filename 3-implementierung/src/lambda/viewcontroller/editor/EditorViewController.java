@@ -188,6 +188,7 @@ public final class EditorViewController extends StageViewController implements E
         hintButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+            	EditorViewController.this.model.hintIsUsed();
                 new HintDialog(dialogSkin, manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
                         I18NBundle.class), EditorViewController.this.model
@@ -394,6 +395,7 @@ public final class EditorViewController extends StageViewController implements E
         targetButton.setVisible(model.getLevelContext().getLevelModel().getGoal().getChild() != null);
 
         model.getTerm().addObserver(this);
+        model.levelIsStarted();
     }
 
     /**
@@ -597,5 +599,22 @@ public final class EditorViewController extends StageViewController implements E
     @Override
     public void replaceTerm(LambdaTerm oldTerm, LambdaTerm newTerm) {
     }
+
+	/**
+	 * Returns the model of the editor.
+	 * 
+	 * @return the model of the editor
+	 */
+	public EditorModel getModel() {
+		return model;
+	}
+
+	@Override
+	public void levelStarted() {
+	}
+
+	@Override
+	public void hintUsed() {
+	}
 
 }

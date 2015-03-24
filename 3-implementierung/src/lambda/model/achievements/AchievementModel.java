@@ -12,7 +12,7 @@ import lambda.model.statistics.StatisticModelObserver;
  * 
  * @author Robert Hochweiss
  */
-public abstract class AchievementModel extends Observable<AchievementModelObserver> implements StatisticModelObserver {
+public abstract  class AchievementModel extends Observable<AchievementModelObserver> implements StatisticModelObserver {
 	
 	private String id;
 	private int index;
@@ -235,6 +235,14 @@ public abstract class AchievementModel extends Observable<AchievementModelObserv
 
 	@Override
 	public void changedTimePlayed() {		
+	}
+
+	@Override
+	public void changedLevelTries() {		
+	}
+
+	@Override
+	public void changedSuccessfulLevelTries() {		
 	}
 	
 }

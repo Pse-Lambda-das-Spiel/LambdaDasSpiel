@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
@@ -23,7 +22,7 @@ import com.badlogic.gdx.graphics.Color;
 public class LevelManager {
 
 	/**
-	 * The number of level per difficulty.
+	 * The maximum number of level per difficulty.
 	 */
 	public static final int LEVEL_PER_DIFFICULTY = 6;
 	  /**

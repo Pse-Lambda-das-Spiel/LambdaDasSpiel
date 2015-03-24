@@ -54,7 +54,9 @@ public class TimeAchievementModel extends AchievementModel {
 		if (statistic == null) {
 			throw new IllegalArgumentException("statistic cannot be null!");
 		}
-		if (statistic.getTimePlayed() >= reqTimePlayed) {
+		long timePlayed = statistic.getTimePlayed();
+		timePlayed /= 60;
+		if (timePlayed >= reqTimePlayed) {
 			setLocked(false);
 		} else {
 			setLocked(true);

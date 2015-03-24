@@ -23,4 +23,14 @@ public interface EditorModelObserver {
      * @param strategy the new strategy
      */
     public void strategyChanged(ReductionStrategy strategy);
+    
+    /**
+     * Called when the level is started.
+     */
+    public void levelStarted();
+    
+    /**
+     * Called when the hint of the level is used.
+     */
+    public void hintUsed();
 }

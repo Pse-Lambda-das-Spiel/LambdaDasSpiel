@@ -360,7 +360,16 @@ public class ReductionViewController extends StageViewController implements Redu
     public void termChanged(LambdaTerm term) {
     }
 
-    private class PauseDialog extends Dialog {
+    /**
+     * Returns the model of the reduction.
+     * 
+	 * @return the model of the reduction.
+	 */
+	public ReductionModel getModel() {
+		return model;
+	}
+
+	private class PauseDialog extends Dialog {
         public PauseDialog(Skin dialogSkin, I18NBundle language, float stageWidth, float stageHeight) {
             super("", dialogSkin);
             

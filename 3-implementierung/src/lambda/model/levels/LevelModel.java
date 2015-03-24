@@ -21,13 +21,13 @@ public class LevelModel {
     private List<ElementType> useableElements;
     private int difficulty;
     private int coins;
+    private int maxReductionSteps;
     private boolean standardMode;
 	private boolean colorEquivalence;
-    private List<Color> availableColors;
+	private List<Color> availableColors;
     private List<Color> lockedColors;
     private ReductionStrategy defaultStrategy;
     
-
     /**
      * Creates a new instance of this class and initialize it with the given data.
      *
@@ -40,6 +40,7 @@ public class LevelModel {
      * @param useableElements    the useable elements of this level
      * @param difficulty         the level difficulty
      * @param coins              the coins you will get if you complete the level
+     * @param maxReductionSteps	 the maximum number of allowed reductions steps in this level
      * @param standardMode       indicates whether the level has to be solved in standard mode or reversed
      * @param colorEquivalence	 indicates whether color equivalence or alpha equivalence is checked
      * @param availableColors 	 the available colors for the coloring of this level(not available for alpha conversion)
@@ -47,12 +48,10 @@ public class LevelModel {
      * 							 (neither available for coloring dialog nor alpha conversion)
      * @param defaultStrategy 	 the default reduction strategy of this level
      */
-    public LevelModel(int id, LambdaRoot start,
-                      LambdaRoot goal, LambdaRoot hint,
-                      List<TutorialMessageModel> tutorial, List<ReductionStrategy> availableRedStrats,
-                      List<ElementType> useableElements, int difficulty, int coins, boolean standardMode, 
-                      boolean colorEquivalence, List<Color> availableColors, List<Color> lockedColors, 
-                      ReductionStrategy defaultStrategy) {
+	public LevelModel(int id, LambdaRoot start, LambdaRoot goal, LambdaRoot hint, List<TutorialMessageModel> tutorial,
+			List<ReductionStrategy> availableRedStrats, List<ElementType> useableElements, int difficulty, int coins,
+			int maxReductionSteps, boolean standardMode, boolean colorEquivalence, List<Color> availableColors,
+			List<Color> lockedColors, ReductionStrategy defaultStrategy) {
         this.id = id;
         this.start = start;
         this.goal = goal;
@@ -62,6 +61,7 @@ public class LevelModel {
         this.useableElements = useableElements;
         this.difficulty = difficulty;
         this.coins = coins;
+        this.maxReductionSteps = maxReductionSteps;
         this.standardMode = standardMode;
         this.colorEquivalence = colorEquivalence;
         this.availableColors = availableColors;
@@ -159,6 +159,17 @@ public class LevelModel {
         return coins;
     }
 
+    /**
+	 * Returns the maximum number of allowed reduction steps in this level. This maximum number is the limit for the
+	 * reduction steps of the ReductionViewcontroller for this level. If this limit is exceeded the whole reduction
+	 * process will be aborted and the level try will be counted as not solved.
+	 * 
+	 * @return the maximum number of allowed reduction steps in this level
+	 */
+	public int getMaxReductionSteps() {
+		return maxReductionSteps;
+	}
+    
      /**
       *  Returns the default strategy for the level.
       *  
