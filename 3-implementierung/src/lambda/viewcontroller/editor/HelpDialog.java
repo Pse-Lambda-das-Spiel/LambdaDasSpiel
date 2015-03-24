@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.I18NBundle;
 
@@ -28,30 +29,40 @@ public class HelpDialog extends Dialog {
         clear();
         pad(stage.getHeight() / 20);
         float size = stage.getHeight() / 8;
+        float labelWidth = stage.getWidth() / 2;
         add(new Image(skin.getAtlas().createSprite("pause"))).size(size); //TODO change to gamePause image
         Label pauseGameHelp = new Label(language.get("pauseGameHelp"), skin);
-        pauseGameHelp.setFontScale(0.7f);
-        add(pauseGameHelp);
+        add(pauseGameHelp).width(labelWidth);
         row();
         add(new Image(skin.getAtlas().createSprite("goal"))).size(size);
         Label goalHelp = new Label(language.get("goalHelp"), skin);
-        goalHelp.setFontScale(0.7f);
-        add(goalHelp);
+        add(goalHelp).width(labelWidth);
         row();
         add(new Image(skin.getAtlas().createSprite("info"))).size(size);
         Label infoHelp = new Label(language.get("infoHelp"), skin);
-        infoHelp.setFontScale(0.7f);
-        add(infoHelp);
+        add(infoHelp).width(labelWidth);
         row();
         add(new Image(skin.getAtlas().createSprite("play"))).size(size);
         Label goToRedHelp = new Label(language.get("goToRedHelp"), skin);
-        goToRedHelp.setFontScale(0.7f);
-        add(goToRedHelp);
+        add(goToRedHelp).width(labelWidth);
         row();
         add(new Image(skin.getAtlas().createSprite("strategy"))).size(size);
         Label strategyHelp = new Label(language.get("strategyHelp"), skin);
-        strategyHelp.setFontScale(0.7f);
-        add(strategyHelp);
+        add(strategyHelp).width(labelWidth);
+
+        Label[] labels = {pauseGameHelp, goalHelp, infoHelp, goToRedHelp, strategyHelp};
+        float smallestScale = Float.POSITIVE_INFINITY;
+        for (Label label : labels) {
+            float current = labelWidth / label.getStyle().font.getBounds(label.getText()).width;
+            if (current < smallestScale) {
+                smallestScale = current;
+            }
+        }
+        for (Label label : labels) {
+            label.setFontScale(smallestScale);
+            label.setAlignment(Align.center);
+        }
+        
         addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

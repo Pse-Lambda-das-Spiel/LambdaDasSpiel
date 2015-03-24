@@ -7,6 +7,7 @@ import lambda.viewcontroller.lambdaterm.LambdaValueViewController;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -36,15 +37,34 @@ public class TargetDialog extends Dialog {
         align(Align.top);
         setFillParent(true);
         LevelModel level = context.getLevelModel();
-        String key = level.isStandardMode() ? "goalDialog" : "reverseGoalDialog";
-        Label goalLabel = new Label(language.get(key), skin);
+        Label goalLabel = new Label(language.get(level.isStandardMode() ? "goalDialog" : "reverseGoalDialog"), skin);
+        float scaleFactor = stage.getWidth() * 2 / 3 / goalLabel.getStyle().font.getBounds(goalLabel.getText()).width;
+        if (scaleFactor < 1) {
+            goalLabel.setFontScale(scaleFactor);
+        }
         float pad = stage.getHeight() / 15;
-        add(goalLabel).padTop(pad);
+        Cell<Label> goalCell = add(goalLabel).width(stage.getWidth() * 2 / 3).padTop(pad);
+        goalLabel.setAlignment(Align.center);
+        Cell<Label> colorCell = null;
+        if (!level.isColorEquivalence()) {
+            row();
+            Label colorLabel = new Label(language.get("alphaEquivalence"), skin);
+            colorLabel.setWrap(true);
+            scaleFactor = stage.getWidth() /*TODO* 4 / 3*/ / colorLabel.getStyle().font.getBounds(colorLabel.getText()).width;
+            if (scaleFactor < 1) {
+                colorLabel.setFontScale(scaleFactor);
+            }
+            colorCell = add(colorLabel).width(stage.getWidth() /*TODO* 2 / 3*/);
+            colorLabel.setAlignment(Align.center);
+        }
+        debug();
+        
         LambdaTermViewController goal = LambdaTermViewController.build(
                 level.isStandardMode() ? level.getGoal() : level.getStart(), false, context, stage);
         goal.toBack();
         goal.setPosition((stage.getWidth() - goal.getWidth()) / 2, stage.getHeight()
-                - goalLabel.getHeight() - 2 * pad - LambdaValueViewController.BLOCK_HEIGHT);
+                - goalCell.getPrefHeight() - (colorCell != null ? colorCell.getPrefHeight() : 0) 
+                - 2 * pad - LambdaValueViewController.BLOCK_HEIGHT);
         addActor(goal);
         addListener(new ClickListener() {
             @Override

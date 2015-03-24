@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.I18NBundle;
 
@@ -28,31 +29,41 @@ public class HelpDialog extends Dialog {
         clear();
         pad(stage.getHeight() / 20);
         float size = stage.getHeight() / 8;
+        float labelWidth = stage.getWidth() / 2;
         add(new Image(skin.getAtlas().createSprite("pause"))).size(size); //TODO change to gamePause image
         Label pauseGameHelp = new Label(language.get("pauseGameHelp"), skin);
-        pauseGameHelp.setFontScale(0.7f);
-        add(pauseGameHelp);
+        add(pauseGameHelp).width(labelWidth);
         row();
         add(new Image(skin.getAtlas().createSprite("play"))).size(size);
         Label playHelp = new Label(language.get("playHelp"), skin);
-        playHelp.setFontScale(0.7f);
-        add(playHelp);
+        add(playHelp).width(labelWidth);
         row();
         add(new Image(skin.getAtlas().createSprite("pause"))).size(size);
         Label pauseHelp = new Label(language.get("pauseHelp"), skin);
-        pauseHelp.setFontScale(0.7f);
-        add(pauseHelp);
+        add(pauseHelp).width(labelWidth);
         row();
         add(new Image(skin.getAtlas().createSprite("prev"))).size(size);
         Label prevHelp = new Label(language.get("prevHelp"), skin);
-        prevHelp.setFontScale(0.7f);
-        add(prevHelp);
+        add(prevHelp).width(labelWidth);
         row();
         add(new Image(skin.getAtlas().createSprite("forward"))).size(size);
         Label forwardHelp = new Label(language.get("forwardHelp"), skin);
-        forwardHelp.setFontScale(0.7f);
-        add(forwardHelp);
+        add(forwardHelp).width(labelWidth);
         row();
+        
+        Label[] labels = {pauseGameHelp, playHelp, pauseHelp, prevHelp, forwardHelp};
+        float smallestScale = Float.POSITIVE_INFINITY;
+        for (Label label : labels) {
+            float current = labelWidth / label.getStyle().font.getBounds(label.getText()).width;
+            if (current < smallestScale) {
+                smallestScale = current;
+            }
+        }
+        for (Label label : labels) {
+            label.setFontScale(smallestScale);
+            label.setAlignment(Align.center);
+        }
+        
         addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
