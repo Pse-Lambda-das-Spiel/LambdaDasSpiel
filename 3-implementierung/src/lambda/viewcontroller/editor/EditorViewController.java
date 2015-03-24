@@ -272,7 +272,9 @@ public final class EditorViewController extends StageViewController implements E
                 I18NBundle language = manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
                         I18NBundle.class);
-                if (!model.getTerm().accept(new IsValidVisitor())) {
+                if (model.getTerm().getChild() == null) {
+                    showDialog(language.get("invalidTermEmpty"));
+                } else if (!model.getTerm().accept(new IsValidVisitor())) {
                     showDialog(language.get("invalidTermOther"));
                 } else if (model.getTerm().accept(new ColorCollectionVisitor(ColorCollectionVisitor.TYPE_ALL)).contains(Color.WHITE)) {
                     showDialog(language.get("invalidTermWhite"));
