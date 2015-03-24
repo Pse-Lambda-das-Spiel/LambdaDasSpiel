@@ -269,13 +269,36 @@ public final class EditorViewController extends StageViewController implements E
         finishedButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (model.getTerm().accept(new IsValidVisitor())
-                        && !model.getTerm().accept(new ColorCollectionVisitor(ColorCollectionVisitor.TYPE_ALL)).contains(Color.WHITE)) {
+                I18NBundle language = manager.get(ProfileManager
+                        .getManager().getCurrentProfile().getLanguage(),
+                        I18NBundle.class);
+                if (!model.getTerm().accept(new IsValidVisitor())) {
+                    showDialog(language.get("invalidTermOther"));
+                } else if (model.getTerm().accept(new ColorCollectionVisitor(ColorCollectionVisitor.TYPE_ALL)).contains(Color.WHITE)) {
+                    showDialog(language.get("invalidTermWhite"));
+                } else {
                     getGame().getController(ReductionViewController.class).reset(model);
                     getGame().setScreen(ReductionViewController.class);
-                } else {
-                    // TODO: Invalid term dialog
                 }
+            }
+            
+            private  void showDialog(final String message) {
+                new Dialog("", dialogSkin) {
+                    {   
+                        clear();
+                        pad(EditorViewController.this.getStage().getHeight() / 20);
+                        Label errorLabel = new Label(message, dialogSkin);
+                        errorLabel.setFontScale(0.7f);
+                        errorLabel.setWrap(true);
+                        add(errorLabel).width(EditorViewController.this.getStage().getWidth() / 2);
+                        addListener(new ClickListener() {
+                            @Override
+                            public void clicked(InputEvent event, float x, float y) {
+                                remove();
+                            }
+                        });
+                    }
+                }.show(getStage());
             }
         });
     }
