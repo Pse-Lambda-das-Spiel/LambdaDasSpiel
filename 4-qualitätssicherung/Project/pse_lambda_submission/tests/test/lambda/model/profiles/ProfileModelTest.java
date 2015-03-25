@@ -1,11 +1,11 @@
 package lambda.model.profiles;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.backends.lwjgl.LwjglFiles;
+import com.libgdxtesting.GdxTestRunner;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
  * 
  * @author Kai Fieger
  */
+@RunWith(GdxTestRunner.class)
 public class ProfileModelTest implements ProfileModelObserver {
 
     private boolean calledChangedLevelIndex;
@@ -22,7 +23,6 @@ public class ProfileModelTest implements ProfileModelObserver {
 
     @Before
     public void setUp() throws Exception {
-        Gdx.files = new LwjglFiles();
         calledChangedLevelIndex = false;
         calledChangedCoins = false;
         profile = new ProfileModel("testName");

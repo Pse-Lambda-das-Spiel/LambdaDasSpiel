@@ -18,19 +18,20 @@ import lambda.model.shop.ShopModel;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.backends.lwjgl.LwjglFiles;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
+import com.libgdxtesting.GdxTestRunner;
 
 /**
  * Tests the functionality of the ProfileManager and with it also the Profile{Save,Load}Helper.
  * 
  * @author Kai Fieger
  */
+@RunWith(GdxTestRunner.class)
 public class ProfileManagerTest implements ProfileManagerObserver {
 
     private boolean calledChangedProfile;
@@ -41,11 +42,6 @@ public class ProfileManagerTest implements ProfileManagerObserver {
     private static String unusedName = "unusedName";
     private static FileHandle profileFolder;
     private static FileHandle nameFile;
-    
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-        Gdx.files = new LwjglFiles();
-    }
 
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
