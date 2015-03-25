@@ -32,7 +32,8 @@ public class FrontInserter implements LambdaTermVisitor<Boolean> {
     /**
      * Creates a new instance of FrontInserter.
      *
-     * @param inserted the term to be inserted
+     * @param inserted
+     *            the term to be inserted
      */
     public FrontInserter(LambdaTerm inserted) {
         this.inserted = inserted;
@@ -43,7 +44,8 @@ public class FrontInserter implements LambdaTermVisitor<Boolean> {
     /**
      * Visits the given lambda root and inserts the node.
      *
-     * @param node the root to be visited
+     * @param node
+     *            the root to be visited
      */
     @Override
     public void visit(LambdaRoot node) {
@@ -60,7 +62,8 @@ public class FrontInserter implements LambdaTermVisitor<Boolean> {
     /**
      * Visits the given lambda application and inserts the node as left child.
      *
-     * @param node the application to be visited
+     * @param node
+     *            the application to be visited
      */
     @Override
     public void visit(LambdaApplication node) {
@@ -83,7 +86,8 @@ public class FrontInserter implements LambdaTermVisitor<Boolean> {
     /**
      * Visits the given lambda abstraction and inserts the node.
      *
-     * @param node the abstraction to be visited
+     * @param node
+     *            the abstraction to be visited
      */
     @Override
     public void visit(LambdaAbstraction node) {
@@ -100,7 +104,8 @@ public class FrontInserter implements LambdaTermVisitor<Boolean> {
     /**
      * Visits the given lambda variable.
      *
-     * @param node the variable to be visited
+     * @param node
+     *            the variable to be visited
      */
     @Override
     public void visit(LambdaVariable node) {
@@ -110,12 +115,16 @@ public class FrontInserter implements LambdaTermVisitor<Boolean> {
     /**
      * Builds the inserted application for the given parent and sibling.
      *
-     * @param parent the inserted application's parent
-     * @param sibling the inserted element's new sibling
+     * @param parent
+     *            the inserted application's parent
+     * @param sibling
+     *            the inserted element's new sibling
      * @return the built application
      */
-    private LambdaApplication buildApplication(LambdaTerm parent, LambdaTerm sibling) {
-        LambdaApplication application = new LambdaApplication(null, sibling.isLocked() || inserted.isLocked(), false);
+    private LambdaApplication buildApplication(LambdaTerm parent,
+            LambdaTerm sibling) {
+        LambdaApplication application = new LambdaApplication(null,
+                sibling.isLocked() || inserted.isLocked(), false);
         application.setLeft(inserted);
         application.setRight(sibling);
         application.setParent(parent);
@@ -130,13 +139,15 @@ public class FrontInserter implements LambdaTermVisitor<Boolean> {
     /**
      * Checks whether the term can be inserted into the given term.
      *
-     * @param visited the visited term
+     * @param visited
+     *            the visited term
      * @return true if the insertion is valid, false otherwise
      */
     private boolean checkTermLimits(LambdaTerm visited) {
         if (!hasCheckedTermLimits) {
             hasCheckedTermLimits = true;
-            result = LambdaUtils.getRoot(visited).accept(new NodeCounter()) + inserted.accept(new NodeCounter()) <= LambdaTerm.MAX_NODES_PER_TERM;
+            result = LambdaUtils.getRoot(visited).accept(new NodeCounter())
+                    + inserted.accept(new NodeCounter()) <= LambdaTerm.MAX_NODES_PER_TERM;
         }
         return result;
     }

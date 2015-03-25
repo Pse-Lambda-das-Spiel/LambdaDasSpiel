@@ -1,59 +1,46 @@
 package lambda.viewcontroller.level;
 
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
+ * This class represents the variable (the gem) and holds every asset which is
+ * required to show the abstraction
+ * 
  * @author: Kay Schmitteckert
  */
-public class VariableUIContext extends ElementUIContext implements ApplicationListener {
+public class VariableUIContext extends ElementUIContext {
 
     private TextureRegion tVariable;
     private TextureRegion mVariable;
 
+    /**
+     * Creates a new instance of this class
+     * 
+     * @param variable
+     *            the gem image
+     * @param mask
+     *            the mask of the gem
+     */
     public VariableUIContext(TextureRegion variable, TextureRegion mask) {
         tVariable = variable;
         mVariable = mask;
     }
-    
+
+    /**
+     * Returns the texture of the gem
+     * 
+     * @return the texture of the gem
+     */
     public TextureRegion getTexture() {
         return tVariable;
     }
-    
+
+    /**
+     * Returns the mask of the gem
+     * 
+     * @return the mask of the gem
+     */
     public TextureRegion getMask() {
         return mVariable;
-    }
-
-    @Override
-    public void create() {
-
-    }
-
-    @Override
-    public void resize(int i, int i1) {
-
-    }
-
-    @Override
-    public void render() {
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void dispose() {
-        //spriteBatch.dispose();
     }
 }

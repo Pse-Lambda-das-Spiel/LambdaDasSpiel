@@ -14,13 +14,16 @@ public class MusicItemModel extends ShopItemModel {
     /**
      * Creates a new instance of this class
      * 
-     * @param id the if of this item
-     * @param price the price of this item
-     * @param filepath the path to the asset
+     * @param id
+     *            the if of this item
+     * @param price
+     *            the price of this item
+     * @param filepath
+     *            the path to the asset
      */
     public MusicItemModel(String id, int price, String filepath) {
-    	super(id, price, filepath);
-    	shopItemType = ShopModel.getShop().getMusic();
+        super(id, price, filepath);
+        shopItemType = ShopModel.getShop().getMusic();
     }
 
     /**
@@ -35,7 +38,8 @@ public class MusicItemModel extends ShopItemModel {
     /**
      * Sets the committed as new music
      * 
-     * @param the new music
+     * @param the
+     *            new music
      */
     public void setMusic(Music music) {
         this.music = music;

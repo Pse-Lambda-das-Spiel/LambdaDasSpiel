@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Represents a category of a ShopItemModel. 
- * This class holds a list of all its items and also the activated item.
+ * Represents a category of a ShopItemModel. This class holds a list of all its
+ * items and also the activated item.
  *
  * @author Kay Schmitteckert
  */
@@ -19,7 +19,8 @@ public class ShopItemTypeModel<T extends ShopItemModel> {
     /**
      * Creates a new instance of this class
      * 
-     * @param typeName the identifier of this category
+     * @param typeName
+     *            the identifier of this category
      */
     public ShopItemTypeModel(String typeName) {
         this.typeName = typeName;
@@ -28,7 +29,8 @@ public class ShopItemTypeModel<T extends ShopItemModel> {
     }
 
     /**
-     * Returns the name of the category, the type of all items inside this category.
+     * Returns the name of the category, the type of all items inside this
+     * category.
      *
      * @return the name of the category
      */
@@ -53,26 +55,26 @@ public class ShopItemTypeModel<T extends ShopItemModel> {
     public T getActivatedItem() {
         if (activatedItem == null) {
             return getDefaultItem();
-        }
-        else {
+        } else {
             return activatedItem;
         }
     }
-    
+
     /**
      * Sets the default item
      * 
-     * @param item which is the default one
+     * @param item
+     *            which is the default one
      */
     public void setDefaultItem(T defaultItem) {
         this.defaultItem = defaultItem;
     }
-    
 
     /**
      * Sets an item as activated
      *
-     * @param activate the item which will be the activated item
+     * @param activate
+     *            the item which will be the activated item
      */
     public void setActivatedItem(T activate) {
         activatedItem = activate;
@@ -80,7 +82,7 @@ public class ShopItemTypeModel<T extends ShopItemModel> {
             activate.setActivated(true);
         }
     }
-    
+
     /**
      * Returns the default Item
      * 

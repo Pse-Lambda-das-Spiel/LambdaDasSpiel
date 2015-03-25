@@ -25,7 +25,8 @@ public class ReplaceTermVisitor implements LambdaTermVisitor {
     /**
      * Creates a new ReplaceTermVisitor.
      *
-     * @param replacing the replacing lambda term
+     * @param replacing
+     *            the replacing lambda term
      */
     public ReplaceTermVisitor(LambdaTerm replacing) {
         this.replaced = null;
@@ -36,7 +37,8 @@ public class ReplaceTermVisitor implements LambdaTermVisitor {
      * Visits the given lambda root. If there is a term to be replaced, replaces
      * it in this node.
      *
-     * @param node the root to be visited
+     * @param node
+     *            the root to be visited
      */
     @Override
     public void visit(LambdaRoot node) {
@@ -52,7 +54,8 @@ public class ReplaceTermVisitor implements LambdaTermVisitor {
      * replaced it in this node. Saves this node as replaced node and traverses
      * to the parent node if possible.
      *
-     * @param node the application to be visited
+     * @param node
+     *            the application to be visited
      */
     @Override
     public void visit(LambdaApplication node) {
@@ -75,7 +78,8 @@ public class ReplaceTermVisitor implements LambdaTermVisitor {
      * replaces it in this node. Saves this node as replaced node and traverses
      * to the parent node if possible.
      *
-     * @param node the abstraction to be visited
+     * @param node
+     *            the abstraction to be visited
      */
     @Override
     public void visit(LambdaAbstraction node) {
@@ -93,7 +97,8 @@ public class ReplaceTermVisitor implements LambdaTermVisitor {
      * Visits the given lambda variable. Saves this node as replaced node and
      * traverses to the parent node if possible.
      *
-     * @param node the variable to be visited
+     * @param node
+     *            the variable to be visited
      */
     @Override
     public void visit(LambdaVariable node) {

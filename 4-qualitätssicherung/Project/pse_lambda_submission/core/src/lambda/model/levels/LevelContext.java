@@ -11,7 +11,8 @@ import lambda.model.shop.ElementUIContextFamily;
 import lambda.model.shop.ShopModel;
 
 /**
- * Represents the whole level context. Includes everything about the level and the difficulty
+ * Represents the whole level context. Includes everything about the level and
+ * the difficulty
  *
  * @author Kay Schmitteckert
  */
@@ -33,22 +34,32 @@ public class LevelContext {
     public LevelContext(LevelModel levelModel) {
         this.levelModel = levelModel;
         this.manager = LevelManager.getLevelManager();
-        this.magicAnimation = new Animation(1/15f, manager.getAssetManager().get(LevelManager.MAGIC_ANIMATIONPATH, TextureAtlas.class).getRegions());
-        this.cloudAnimation = new Animation(1/15f, manager.getAssetManager().get(LevelManager.CLOUD_ANIMATIONPATH, TextureAtlas.class).getRegions());
-        this.glow = new TextureRegion((manager.getAssetManager().get(LevelManager.GLOW, TextureAtlas.class)).findRegion("glow"));
-        elementUIContextFamily = ShopModel.getShop().getElementUIContextFamilies().getActivatedItem();
-     
-        if(levelModel.getId() != 0) {
+        this.magicAnimation = new Animation(1 / 15f, manager.getAssetManager()
+                .get(LevelManager.MAGIC_ANIMATIONPATH, TextureAtlas.class)
+                .getRegions());
+        this.cloudAnimation = new Animation(1 / 15f, manager.getAssetManager()
+                .get(LevelManager.CLOUD_ANIMATIONPATH, TextureAtlas.class)
+                .getRegions());
+        this.glow = new TextureRegion((manager.getAssetManager().get(
+                LevelManager.GLOW, TextureAtlas.class)).findRegion("glow"));
+        elementUIContextFamily = ShopModel.getShop()
+                .getElementUIContextFamilies().getActivatedItem();
+
+        if (levelModel.getId() != 0) {
             // for standard levels
-        	
-            difficultySetting = manager.getDifficultySetting(levelModel.getDifficulty());
-            music = manager.getAssetManager().get(difficultySetting.getMusicString(), Music.class);
-        	bgImage = new Image(manager.getAssetManager().get(difficultySetting.getBgImageString(), Texture.class));
-        }
-        else {
+
+            difficultySetting = manager.getDifficultySetting(levelModel
+                    .getDifficulty());
+            music = manager.getAssetManager().get(
+                    difficultySetting.getMusicString(), Music.class);
+            bgImage = new Image(manager.getAssetManager().get(
+                    difficultySetting.getBgImageString(), Texture.class));
+        } else {
             // for sandbox
-            music = ShopModel.getShop().getMusic().getActivatedItem().getMusic();
-            bgImage = new Image(ShopModel.getShop().getImages().getActivatedItem().getImage());
+            music = ShopModel.getShop().getMusic().getActivatedItem()
+                    .getMusic();
+            bgImage = new Image(ShopModel.getShop().getImages()
+                    .getActivatedItem().getImage());
         }
     }
 
@@ -62,7 +73,8 @@ public class LevelContext {
     }
 
     /**
-     * Returns the music which is played in the background during the level is active
+     * Returns the music which is played in the background during the level is
+     * active
      *
      * @return music
      */
@@ -71,7 +83,8 @@ public class LevelContext {
     }
 
     /**
-     * Returns the image which is shown in the background during the level is active
+     * Returns the image which is shown in the background during the level is
+     * active
      *
      * @return image
      */
@@ -87,7 +100,7 @@ public class LevelContext {
     public ElementUIContextFamily getElementUIContextFamily() {
         return elementUIContextFamily;
     }
-    
+
     /**
      * Returns the animation for the magic effect
      * 
@@ -96,7 +109,7 @@ public class LevelContext {
     public Animation getMagicAnimation() {
         return magicAnimation;
     }
-    
+
     /**
      * Returns the animation for the cloud effect
      * 

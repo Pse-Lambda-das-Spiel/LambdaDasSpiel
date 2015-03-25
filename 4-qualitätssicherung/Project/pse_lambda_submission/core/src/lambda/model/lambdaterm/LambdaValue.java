@@ -19,11 +19,14 @@ public abstract class LambdaValue extends LambdaTerm {
     /**
      * Creates a new lambda value. Used for setting parameters by subclasses.
      *
-     * @param parent the parent node
-     * @param rgbColor the color of this value
-     * @param locked true if this node can be modified by the user, false
-     * otherwise
-     * @throws IllegalArgumentException if color is null
+     * @param parent
+     *            the parent node
+     * @param rgbColor
+     *            the color of this value
+     * @param locked
+     *            true if this node can be modified by the user, false otherwise
+     * @throws IllegalArgumentException
+     *             if color is null
      */
     public LambdaValue(LambdaTerm parent, Color rgbColor, boolean locked) {
         super(parent, locked);
@@ -45,9 +48,11 @@ public abstract class LambdaValue extends LambdaTerm {
     /**
      * Sets the color of this value and notifies all observers of the change.
      *
-     * @param color the new color
+     * @param color
+     *            the new color
      * @return true if the color has changed, false otherwise
-     * @throws IllegalArgumentException if color is null
+     * @throws IllegalArgumentException
+     *             if color is null
      */
     public boolean setColor(final Color color) {
         if (color == null) {

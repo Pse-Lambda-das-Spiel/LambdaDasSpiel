@@ -10,7 +10,8 @@ public class InvalidLevelIdException extends RuntimeException {
     /**
      * Creates a new InvalidJsonException with an error message.
      * 
-     * @param message The description of the error.
+     * @param message
+     *            The description of the error.
      */
     public InvalidLevelIdException(String message) {
         super(message);

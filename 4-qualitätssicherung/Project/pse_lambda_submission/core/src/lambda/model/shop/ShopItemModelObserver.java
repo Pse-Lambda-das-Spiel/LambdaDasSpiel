@@ -10,10 +10,9 @@ public interface ShopItemModelObserver {
      */
     public void purchasedChanged(boolean purchased);
 
-
     /**
      *
      * @param activated
      */
-     public void activatedChanged(boolean activated);
+    public void activatedChanged(boolean activated);
 }

@@ -27,13 +27,17 @@ public class LambdaTermDragSource {
     /**
      * Creates a new drag source.
      *
-     * @param node the source node
-     * @param split true if the dragged node should be removed from its parent
-     * when dragged, false otherwise
-     * @param permanent true if this source should not be removed when the term
-     * is updated, false otherwise
+     * @param node
+     *            the source node
+     * @param split
+     *            true if the dragged node should be removed from its parent
+     *            when dragged, false otherwise
+     * @param permanent
+     *            true if this source should not be removed when the term is
+     *            updated, false otherwise
      */
-    public LambdaTermDragSource(LambdaNodeViewController node, boolean split, boolean permanent) {
+    public LambdaTermDragSource(LambdaNodeViewController node, boolean split,
+            boolean permanent) {
         this.node = node;
         this.split = split;
         this.permanent = permanent;
@@ -53,7 +57,7 @@ public class LambdaTermDragSource {
      * dragged.
      *
      * @return true if the dragged node should be removed from its parent when
-     * dragged, false otherwise
+     *         dragged, false otherwise
      */
     public boolean shouldSplit() {
         return split;
@@ -64,7 +68,7 @@ public class LambdaTermDragSource {
      * updated.
      *
      * @return true if this source should not be removed when the term is
-     * updated, false otherwise
+     *         updated, false otherwise
      */
     public boolean isPermanent() {
         return permanent;
@@ -73,12 +77,15 @@ public class LambdaTermDragSource {
     /**
      * Returns whether the given point is on this source.
      *
-     * @param x the x-coordinate of the point
-     * @param y the y-coordinate of the point
+     * @param x
+     *            the x-coordinate of the point
+     * @param y
+     *            the y-coordinate of the point
      * @return true if the given point is on this actor, false otherwise
      */
     public boolean isOn(float x, float y) {
         Vector2 pos = node.screenToLocalCoordinates(new Vector2(x, y));
-        return pos.x >= 0.0f && pos.x < node.getWidth() && pos.y >= 0.0f && pos.y < node.getHeight();
+        return pos.x >= 0.0f && pos.x < node.getWidth() && pos.y >= 0.0f
+                && pos.y < node.getHeight();
     }
 }

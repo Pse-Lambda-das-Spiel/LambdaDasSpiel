@@ -2,7 +2,12 @@
 	"00": {
 		"id": 0,
 		"price": 10 ,
-		"filename": "example"
+		"filename": "Football Field"
+	},
+	"01": {
+		"id": 1,
+		"price": 20 ,
+		"filename": "Dark Lava"
 	}
 }
 

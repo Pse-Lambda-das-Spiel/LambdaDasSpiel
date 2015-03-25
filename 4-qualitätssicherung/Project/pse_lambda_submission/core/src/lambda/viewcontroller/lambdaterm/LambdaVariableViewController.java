@@ -36,14 +36,19 @@ public class LambdaVariableViewController extends LambdaValueViewController {
     /**
      * Creates a new instance of LambdaVariableViewController.
      *
-     * @param linkedTerm the variable displayed by this node
-     * @param parent the parent viewcontroller node
-     * @param viewController the viewcontroller on which this node will be
-     * displayed
+     * @param linkedTerm
+     *            the variable displayed by this node
+     * @param parent
+     *            the parent viewcontroller node
+     * @param viewController
+     *            the viewcontroller on which this node will be displayed
      */
-    public LambdaVariableViewController(LambdaVariable linkedTerm, LambdaNodeViewController parent, LambdaTermViewController viewController) {
+    public LambdaVariableViewController(LambdaVariable linkedTerm,
+            LambdaNodeViewController parent,
+            LambdaTermViewController viewController) {
         super(linkedTerm, parent, viewController, false);
-        texture = viewController.getContext().getElementUIContextFamily().getVariable().getTexture();
+        texture = viewController.getContext().getElementUIContextFamily()
+                .getVariable().getTexture();
         animation = viewController.getContext().getCloudAnimation();
 
         animateSmoke = false;
@@ -63,8 +68,10 @@ public class LambdaVariableViewController extends LambdaValueViewController {
     /**
      * Draws this node.
      *
-     * @param batch the batch on which the node will be drawn
-     * @param alpha the parent's alpha
+     * @param batch
+     *            the batch on which the node will be drawn
+     * @param alpha
+     *            the parent's alpha
      */
     @Override
     public void draw(Batch batch, float alpha) {
@@ -74,13 +81,14 @@ public class LambdaVariableViewController extends LambdaValueViewController {
         batch.setColor(getCurrentColor());
         batch.draw(texture, getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
         batch.setColor(1f, 1f, 1f, 1f);
-        
+
         drawVanishAnimation(batch, alpha);
 
         // Smoke animation
         synchronized (getViewController()) {
             if (animateSmoke) {
-                batch.draw(animation.getKeyFrame(smokeStateTime), getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+                batch.draw(animation.getKeyFrame(smokeStateTime), getX(),
+                        getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
                 smokeStateTime += Gdx.graphics.getDeltaTime();
                 if (isSmokeAnimationFinished()) {
                     animateSmoke = false;
@@ -109,7 +117,8 @@ public class LambdaVariableViewController extends LambdaValueViewController {
     /**
      * Returns whether this and the other object are equal.
      *
-     * @param other the other object
+     * @param other
+     *            the other object
      * @return true if this and the other object are equal, false otherwise
      */
     @Override
@@ -118,6 +127,7 @@ public class LambdaVariableViewController extends LambdaValueViewController {
             return false;
         }
         LambdaVariableViewController variable = (LambdaVariableViewController) other;
-        return super.equals(variable) && variable.getCurrentColor().equals(this.getCurrentColor());
+        return super.equals(variable)
+                && variable.getCurrentColor().equals(this.getCurrentColor());
     }
 }

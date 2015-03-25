@@ -45,12 +45,15 @@ public class ViewInsertionVisitor implements LambdaTermVisitor {
     /**
      * Creates a new ViewInsertionVisitor.
      *
-     * @param inserted the inserted node
-     * @param viewController the viewController that the node will be inserted
-     * into
-     * @throws IllegalArgumentException if viewController is null
+     * @param inserted
+     *            the inserted node
+     * @param viewController
+     *            the viewController that the node will be inserted into
+     * @throws IllegalArgumentException
+     *             if viewController is null
      */
-    public ViewInsertionVisitor(LambdaTerm inserted, LambdaTermViewController viewController) {
+    public ViewInsertionVisitor(LambdaTerm inserted,
+            LambdaTermViewController viewController) {
         if (viewController == null) {
             throw new IllegalArgumentException("ViewController cannot be null!");
         }
@@ -65,7 +68,8 @@ public class ViewInsertionVisitor implements LambdaTermVisitor {
      * Visits the given lambda root and inserts a new node under the node that
      * displays the given root.
      *
-     * @param node the root to be visited
+     * @param node
+     *            the root to be visited
      */
     @Override
     public void visit(LambdaRoot node) {
@@ -78,7 +82,8 @@ public class ViewInsertionVisitor implements LambdaTermVisitor {
      * Visits the given lambda application and find the next parent that is
      * displayed by a node viewcontroller to insert the element there.
      *
-     * @param node the application to be visited
+     * @param node
+     *            the application to be visited
      */
     @Override
     public void visit(LambdaApplication node) {
@@ -93,7 +98,8 @@ public class ViewInsertionVisitor implements LambdaTermVisitor {
             }
 
             if (viewController.hasNode(node)) {
-                // Visited application is displayed by a parenthesis node => insert child here
+                // Visited application is displayed by a parenthesis node =>
+                // insert child here
                 insertChild(viewController.getNode(node));
             } else {
                 // Implicit parenthesis => traverse to parent
@@ -107,7 +113,8 @@ public class ViewInsertionVisitor implements LambdaTermVisitor {
      * Visits the given lambda abstraction and inserts a new node under the node
      * that displays the given abstraction.
      *
-     * @param node the abstraction to be visited
+     * @param node
+     *            the abstraction to be visited
      */
     @Override
     public void visit(LambdaAbstraction node) {
@@ -120,7 +127,8 @@ public class ViewInsertionVisitor implements LambdaTermVisitor {
      * Visits the given lambda variable. Cannot happen since variables don't
      * have children.
      *
-     * @param node the variable to be visited
+     * @param node
+     *            the variable to be visited
      */
     @Override
     public void visit(LambdaVariable node) {
@@ -131,11 +139,13 @@ public class ViewInsertionVisitor implements LambdaTermVisitor {
      * Inserts the given child under the given parent. Then recurses to the
      * node's children.
      *
-     * @param parent the parent node
+     * @param parent
+     *            the parent node
      */
     private void insertChild(LambdaNodeViewController parent) {
         assert (parent != null);
-        inserted.accept(new NodeViewControllerCreator(parent, isRightApplicationChild, viewController, rightSibling));
+        inserted.accept(new NodeViewControllerCreator(parent,
+                isRightApplicationChild, viewController, rightSibling));
     }
 
     @Override

@@ -30,7 +30,8 @@ public class NodeCounter implements LambdaTermVisitor<Integer> {
      * Visits the given lambda root, updates the counter and traverses
      * downwards.
      *
-     * @param node the root to be visited
+     * @param node
+     *            the root to be visited
      */
     @Override
     public void visit(LambdaRoot node) {
@@ -44,7 +45,8 @@ public class NodeCounter implements LambdaTermVisitor<Integer> {
      * Visits the given lambda application, updates the counter and traverses
      * downwards.
      *
-     * @param node the application to be visited
+     * @param node
+     *            the application to be visited
      */
     @Override
     public void visit(LambdaApplication node) {
@@ -61,7 +63,8 @@ public class NodeCounter implements LambdaTermVisitor<Integer> {
      * Visits the given lambda abstraction, updates the counter and traverses
      * downwards.
      *
-     * @param node the abstraction to be visited
+     * @param node
+     *            the abstraction to be visited
      */
     @Override
     public void visit(LambdaAbstraction node) {

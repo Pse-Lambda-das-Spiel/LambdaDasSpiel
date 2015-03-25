@@ -15,49 +15,58 @@ import com.badlogic.gdx.utils.Array;
  *
  * @author Robert Hochweiss
  */
-public class LevelModelLoader extends AsynchronousAssetLoader<LevelModel, LevelModelLoader.LevelModelParameter> {
-	
-	LevelModel level;
-	
-	/**
-	 * Creates an new LevelModelLoader.
-	 * @param resolver The {@link FileHandleResolver} that resolves a given filename to a {@link FileHandle}
-	 */
-	public LevelModelLoader(FileHandleResolver resolver) {
-		super(resolver);
-	}
+public class LevelModelLoader
+        extends
+        AsynchronousAssetLoader<LevelModel, LevelModelLoader.LevelModelParameter> {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void loadAsync(AssetManager manager, String fileName, FileHandle file, LevelModelParameter parameter) {
-		level = null;
-		level = LevelLoadHelper.loadLevel(file);
-	}
+    LevelModel level;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public LevelModel loadSync(AssetManager manager, String fileName, FileHandle file, LevelModelParameter parameter) {
-		LevelModel level = this.level;
-		this.level = null;
-		return level;
-	}
+    /**
+     * Creates an new LevelModelLoader.
+     * 
+     * @param resolver
+     *            The {@link FileHandleResolver} that resolves a given filename
+     *            to a {@link FileHandle}
+     */
+    public LevelModelLoader(FileHandleResolver resolver) {
+        super(resolver);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@SuppressWarnings("rawtypes")
+    /**
+     * {@inheritDoc}
+     */
     @Override
-	public Array<AssetDescriptor> getDependencies(String fileName, FileHandle file, LevelModelParameter parameter) {
-		return null;
-	}
+    public void loadAsync(AssetManager manager, String fileName,
+            FileHandle file, LevelModelParameter parameter) {
+        level = null;
+        level = LevelLoadHelper.loadLevel(file);
+    }
 
-	/**
-	 * A parameter class for a {@link LevelModel}.
-	 */
-	public static class LevelModelParameter extends AssetLoaderParameters<LevelModel> {
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public LevelModel loadSync(AssetManager manager, String fileName,
+            FileHandle file, LevelModelParameter parameter) {
+        LevelModel level = this.level;
+        this.level = null;
+        return level;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("rawtypes")
+    @Override
+    public Array<AssetDescriptor> getDependencies(String fileName,
+            FileHandle file, LevelModelParameter parameter) {
+        return null;
+    }
+
+    /**
+     * A parameter class for a {@link LevelModel}.
+     */
+    public static class LevelModelParameter extends
+            AssetLoaderParameters<LevelModel> {
+    }
 }

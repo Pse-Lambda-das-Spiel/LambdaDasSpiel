@@ -13,17 +13,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
  */
 
 public class StyleManager {
-    
+
     private static StyleManager styleManager;
     private static Skin skin;
-    
+
     /**
      * 
      */
     private StyleManager() {
-        
+
     }
-    
+
     /**
      * 
      * @return
@@ -34,45 +34,48 @@ public class StyleManager {
         }
         return styleManager;
     }
-    
+
     /**
      * 
      * @param assets
      */
     public void queueAssets(AssetManager assets) {
-        
+
     }
-    
+
     /**
      * 
      * @param icon
      * @return
      */
     public static TextButtonStyle getTextButtonStyle(String icon) {
-        TextButtonStyle style = new TextButtonStyle(skin.get(TextButtonStyle.class));
+        TextButtonStyle style = new TextButtonStyle(
+                skin.get(TextButtonStyle.class));
         style.up = skin.getDrawable(icon);
         style.down = skin.getDrawable(icon);
         return style;
     }
-    
+
     /**
      * 
      * @param icon
      * @return
      */
     public static ImageButtonStyle getImageButtonStyle(String icon) {
-        ImageButtonStyle style = new ImageButtonStyle(skin.get(ImageButtonStyle.class));
+        ImageButtonStyle style = new ImageButtonStyle(
+                skin.get(ImageButtonStyle.class));
         style.imageUp = skin.getDrawable(icon);
         return style;
     }
-    
+
     /**
      * 
      * @param icon
      * @return
      */
     public static ImageTextButtonStyle getImageTextButtonStyle(String icon) {
-        ImageTextButtonStyle style = new ImageTextButtonStyle(skin.get(ImageTextButtonStyle.class));
+        ImageTextButtonStyle style = new ImageTextButtonStyle(
+                skin.get(ImageTextButtonStyle.class));
         style.imageUp = skin.getDrawable(icon);
         return style;
     }

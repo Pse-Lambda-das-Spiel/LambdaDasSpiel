@@ -41,8 +41,10 @@ public class EditorModel extends Observable<EditorModelObserver> {
     /**
      * Resets the model with the given values.
      *
-     * @param context contains all data of the current level
-     * @throws IllegalArgumentException if context is null
+     * @param context
+     *            contains all data of the current level
+     * @throws IllegalArgumentException
+     *             if context is null
      */
     public void reset(LevelContext context) {
         if (context == null) {
@@ -50,7 +52,8 @@ public class EditorModel extends Observable<EditorModelObserver> {
         }
         this.context = context;
         strategy = context.getLevelModel().getDefaultStrategy();
-        term = (LambdaRoot) context.getLevelModel().getStart().accept(new CopyVisitor());
+        term = (LambdaRoot) context.getLevelModel().getStart()
+                .accept(new CopyVisitor());
         notify(new Consumer<EditorModelObserver>() {
             @Override
             public void accept(EditorModelObserver observer) {
@@ -71,12 +74,15 @@ public class EditorModel extends Observable<EditorModelObserver> {
     /**
      * Sets the currently selected reduction strategy.
      *
-     * @param strategy the new selected reduction strategy
-     * @throws IllegalArgumentException if strategy is null
+     * @param strategy
+     *            the new selected reduction strategy
+     * @throws IllegalArgumentException
+     *             if strategy is null
      */
     public void setStrategy(final ReductionStrategy strategy) {
         if (strategy == null) {
-            throw new IllegalArgumentException("Reduction strategy cannot be null!");
+            throw new IllegalArgumentException(
+                    "Reduction strategy cannot be null!");
         }
         if (strategy != this.strategy) {
             this.strategy = strategy;
@@ -110,29 +116,31 @@ public class EditorModel extends Observable<EditorModelObserver> {
     /**
      * Resets the reduction model with the current state of this editor model.
      *
-     * @param model the reduction model to be reset
+     * @param model
+     *            the reduction model to be reset
      */
     public void update(ReductionModel model) {
-        model.reset((LambdaRoot) term.accept(new CopyVisitor()), BetaReductionVisitor.fromReductionStrategy(strategy), context);
+        model.reset((LambdaRoot) term.accept(new CopyVisitor()),
+                BetaReductionVisitor.fromReductionStrategy(strategy), context);
     }
-    
+
     /**
      * Called when the hint was used in the observing EditorViewController.
      */
     public void hintIsUsed() {
-    	 notify(new Consumer<EditorModelObserver>() {
-             @Override
-             public void accept(EditorModelObserver observer) {
-                 observer.hintUsed();
-             }
-         });
+        notify(new Consumer<EditorModelObserver>() {
+            @Override
+            public void accept(EditorModelObserver observer) {
+                observer.hintUsed();
+            }
+        });
     }
-    
+
     /**
      * Called when the level is started and the user can make input events.
      */
     public void levelIsStarted() {
-    	notify(new Consumer<EditorModelObserver>() {
+        notify(new Consumer<EditorModelObserver>() {
             @Override
             public void accept(EditorModelObserver observer) {
                 observer.levelStarted();

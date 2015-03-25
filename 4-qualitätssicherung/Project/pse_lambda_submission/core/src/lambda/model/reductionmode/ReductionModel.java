@@ -83,15 +83,19 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
     /**
      * Resets the model with the given values.
      *
-     * @param term the term to be reduced
-     * @param strategy the reduction strategy
-     * @param context the current level context
-     * @throws IllegalArgumentException if term is null, strategy is null or
-     * context is null
-     * @throws IllegalStateException if the model is currently busy or not
-     * paused
+     * @param term
+     *            the term to be reduced
+     * @param strategy
+     *            the reduction strategy
+     * @param context
+     *            the current level context
+     * @throws IllegalArgumentException
+     *             if term is null, strategy is null or context is null
+     * @throws IllegalStateException
+     *             if the model is currently busy or not paused
      */
-    public void reset(LambdaRoot term, BetaReductionVisitor strategy, LevelContext context) {
+    public void reset(LambdaRoot term, BetaReductionVisitor strategy,
+            LevelContext context) {
         if (term == null) {
             throw new IllegalArgumentException("Lambda term cannot be null!");
         }
@@ -102,7 +106,8 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
             throw new IllegalArgumentException("Level context cannot be null!");
         }
         if (!paused || busy || pauseRequested) {
-            throw new IllegalStateException("Cannot start automatic reduction in the current model state!");
+            throw new IllegalStateException(
+                    "Cannot start automatic reduction in the current model state!");
         }
         current = term;
         notify(new Consumer<ReductionModelObserver>() {
@@ -119,11 +124,15 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
         busy = false;
 
         List<Color> alphaConversionColors = LevelManager.getAllColors();
-        alphaConversionColors.removeAll(context.getLevelModel().getAvailableColors());
-        alphaConversionColors.removeAll(context.getLevelModel().getLockedColors());
-        // white should not be among the replacement colors for an alpha conversion
+        alphaConversionColors.removeAll(context.getLevelModel()
+                .getAvailableColors());
+        alphaConversionColors.removeAll(context.getLevelModel()
+                .getLockedColors());
+        // white should not be among the replacement colors for an alpha
+        // conversion
         alphaConversionColors.remove(Color.valueOf("ffffffff"));
-        this.strategy.setAlphaConversionColors(new LinkedHashSet<>(alphaConversionColors));
+        this.strategy.setAlphaConversionColors(new LinkedHashSet<>(
+                alphaConversionColors));
     }
 
     /**
@@ -138,12 +147,14 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
     /**
      * Toggles the automatic reduction.
      *
-     * @throws IllegalStateException if a step is currently being performed or a
-     * pause is requested
+     * @throws IllegalStateException
+     *             if a step is currently being performed or a pause is
+     *             requested
      */
     public void togglePlay() {
         if (busy && paused || pauseRequested) {
-            throw new IllegalStateException("Cannot start automatic reduction in the current model state!");
+            throw new IllegalStateException(
+                    "Cannot start automatic reduction in the current model state!");
         }
 
         if (paused) {
@@ -162,12 +173,13 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
      * reduction is paused or a minimal term is reached. Performs at least one
      * reduction step.
      *
-     * @throws IllegalStateException if the model is busy or a pause is
-     * requested
+     * @throws IllegalStateException
+     *             if the model is busy or a pause is requested
      */
     public void step() {
         if (busy || pauseRequested) {
-            throw new IllegalStateException("Cannot perform a reduction step in the current model state!");
+            throw new IllegalStateException(
+                    "Cannot perform a reduction step in the current model state!");
         }
         busy = true;
         notifyState();
@@ -190,23 +202,37 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                         strategy.reset();
                         current.accept(strategy);
                     }
-                } while (!paused && !pauseRequested && strategy.hasReduced() && nodeCount <= LambdaTerm.MAX_NODES_PER_TERM);
+                } while (!paused && !pauseRequested && strategy.hasReduced()
+                        && nodeCount <= LambdaTerm.MAX_NODES_PER_TERM);
                 busy = false;
                 notifyState();
 
                 // Minimal term reached
                 if (!strategy.hasReduced()) {
-                    ReductionModel.this.notify(new Consumer<ReductionModelObserver>() {
-                        @Override
-                        public void accept(ReductionModelObserver observer) {
-                            if (context.getLevelModel().getId() == 0) {
-                                observer.reductionFinished(true);
-                            } else {
-                                observer.reductionFinished((current.equals(ReductionModel.this.context.getLevelModel().getGoal()) && ReductionModel.this.context.getLevelModel().isColorEquivalence())
-                                        || (current.accept(new IsAlphaEquivalentVisitor(ReductionModel.this.context.getLevelModel().getGoal())) && !ReductionModel.this.context.getLevelModel().isColorEquivalence()));
-                            }
-                        }
-                    });
+                    ReductionModel.this
+                            .notify(new Consumer<ReductionModelObserver>() {
+                                @Override
+                                public void accept(
+                                        ReductionModelObserver observer) {
+                                    if (context.getLevelModel().getId() == 0) {
+                                        observer.reductionFinished(true);
+                                    } else {
+                                        observer.reductionFinished((current
+                                                .equals(ReductionModel.this.context
+                                                        .getLevelModel()
+                                                        .getGoal()) && ReductionModel.this.context
+                                                .getLevelModel()
+                                                .isColorEquivalence())
+                                                || (current
+                                                        .accept(new IsAlphaEquivalentVisitor(
+                                                                ReductionModel.this.context
+                                                                        .getLevelModel()
+                                                                        .getGoal())) && !ReductionModel.this.context
+                                                        .getLevelModel()
+                                                        .isColorEquivalence()));
+                                    }
+                                }
+                            });
                 }
 
                 // Steps finished
@@ -220,13 +246,14 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
     /**
      * Reverts the last step in a separate thread.
      *
-     * @throws IllegalStateException if the automatic reduction isn't paused, a
-     * step is currently being performed, a pause is requested or the history is
-     * empty
+     * @throws IllegalStateException
+     *             if the automatic reduction isn't paused, a step is currently
+     *             being performed, a pause is requested or the history is empty
      */
     public void stepRevert() {
         if (!paused || busy || pauseRequested || history.isEmpty()) {
-            throw new IllegalStateException("Cannot revert the last reduction step in the current model state!");
+            throw new IllegalStateException(
+                    "Cannot revert the last reduction step in the current model state!");
         }
 
         // Reverts the last step in a separate thread
@@ -253,7 +280,8 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
         notify(new Consumer<ReductionModelObserver>() {
             @Override
             public void accept(ReductionModelObserver observer) {
-                observer.stateChanged(busy, history.size(), ReductionModel.this.paused, pauseRequested);
+                observer.stateChanged(busy, history.size(),
+                        ReductionModel.this.paused, pauseRequested);
             }
         });
     }

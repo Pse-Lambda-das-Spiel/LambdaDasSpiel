@@ -126,6 +126,28 @@ public class ShopModelTest {
         shop.getMusic().getActivatedItem().deactivate();
         assertEquals("default", shop.getMusic().getActivatedItem().getFilename()); 
     }
+    
+    @Test
+    public void testElementUIContextFamilyPartsInitialised() {
+        ElementUIContextFamily family = shop.getElementUIContextFamilies().getActivatedItem();
+        //Abstraction
+        assertNotNull(family.getAbstraction().getFront());
+        assertNotNull(family.getAbstraction().getmFront());
+        assertNotNull(family.getAbstraction().getCenter());
+        assertNotNull(family.getAbstraction().getmCenter());
+        assertNotNull(family.getAbstraction().getBack());
+        assertNotNull(family.getAbstraction().getmBack());
+        //Parenthesis
+        assertNotNull(family.getParenthesis().getFront());
+        assertNotNull(family.getParenthesis().getmFront());
+        assertNotNull(family.getParenthesis().getCenter());
+        assertNotNull(family.getParenthesis().getmCenter());
+        assertNotNull(family.getParenthesis().getBack());
+        assertNotNull(family.getParenthesis().getmBack());
+        //Variable
+        assertNotNull(family.getVariable().getTexture());
+        assertNotNull(family.getVariable().getMask());
+    }
 
     
     @After

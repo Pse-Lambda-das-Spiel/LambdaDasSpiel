@@ -34,9 +34,12 @@ public class AlphaConversionVisitor extends ValidLambdaTermVisitor {
     /**
      * Creates a new alpha conversion visitor.
      *
-     * @param oldColor the old color to be replaced
-     * @param newColor the new replacing color
-     * @throws IllegalArgumentException if oldColor is null or newColor is null
+     * @param oldColor
+     *            the old color to be replaced
+     * @param newColor
+     *            the new replacing color
+     * @throws IllegalArgumentException
+     *             if oldColor is null or newColor is null
      */
     public AlphaConversionVisitor(Color oldColor, Color newColor) {
         super("Cannot perform an alpha conversion on an invalid term!");
@@ -51,8 +54,10 @@ public class AlphaConversionVisitor extends ValidLambdaTermVisitor {
     /**
      * Visits the given lambda root and traverses to the child node.
      *
-     * @param node the root to be visited
-     * @throws InvalidLambdaTermException if the visited term is invalid
+     * @param node
+     *            the root to be visited
+     * @throws InvalidLambdaTermException
+     *             if the visited term is invalid
      */
     @Override
     public void visitValid(LambdaRoot node) {
@@ -62,8 +67,10 @@ public class AlphaConversionVisitor extends ValidLambdaTermVisitor {
     /**
      * Visits the given lambda application and traverses to both child nodes.
      *
-     * @param node the application to be visited
-     * @throws InvalidLambdaTermException if the visited term is invalid
+     * @param node
+     *            the application to be visited
+     * @throws InvalidLambdaTermException
+     *             if the visited term is invalid
      */
     @Override
     public void visitValid(LambdaApplication node) {
@@ -75,8 +82,10 @@ public class AlphaConversionVisitor extends ValidLambdaTermVisitor {
      * Visits the given lambda abstraction and replaces the color if necessary.
      * Then traverses to the child node.
      *
-     * @param node the abstraction to be visited
-     * @throws InvalidLambdaTermException if the visited term is invalid
+     * @param node
+     *            the abstraction to be visited
+     * @throws InvalidLambdaTermException
+     *             if the visited term is invalid
      */
     @Override
     public void visitValid(final LambdaAbstraction node) {
@@ -102,8 +111,10 @@ public class AlphaConversionVisitor extends ValidLambdaTermVisitor {
     /**
      * Visits the given lambda variable and replaces the color if necessary.
      *
-     * @param node the variable to be visited
-     * @throws InvalidLambdaTermException if the visited term is invalid
+     * @param node
+     *            the variable to be visited
+     * @throws InvalidLambdaTermException
+     *             if the visited term is invalid
      */
     @Override
     public void visitValid(final LambdaVariable node) {

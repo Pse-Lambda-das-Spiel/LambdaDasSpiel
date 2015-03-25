@@ -7,59 +7,68 @@ import lambda.model.profiles.ProfileManager;
 import lambda.model.statistics.StatisticModel;
 
 /**
- * This class represents an achievement unlocked by enchanting a specific number of lambs in a level.
+ * This class represents an achievement unlocked by enchanting a specific number
+ * of lambs in a level.
  * 
  * @author Robert Hochweiss
  */
-public class LambsEnchantedPerLevelAchievementModel extends PerLevelAchievementModel{
+public class LambsEnchantedPerLevelAchievementModel extends
+        PerLevelAchievementModel {
 
-	private int reqLambsEnchantedPerLevel;
-	
-	/**
-	 * Creates a new instance of this class.
-	 * 
-	 * @param reqLambsEnchantedPerLevel the number of enchanted lambs in a level needed for unlocking the achievement
-	 */
-	public LambsEnchantedPerLevelAchievementModel(int reqLambsEnchantedPerLevel) {
-		this.reqLambsEnchantedPerLevel = reqLambsEnchantedPerLevel;
-	}
+    private int reqLambsEnchantedPerLevel;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void changedLambsEnchantedPerLevel() {
-		if (isLocked()) {
-			checkRequirements(ProfileManager.getManager().getCurrentProfile().getStatistics());
-		}
-	}
+    /**
+     * Creates a new instance of this class.
+     * 
+     * @param reqLambsEnchantedPerLevel
+     *            the number of enchanted lambs in a level needed for unlocking
+     *            the achievement
+     */
+    public LambsEnchantedPerLevelAchievementModel(int reqLambsEnchantedPerLevel) {
+        this.reqLambsEnchantedPerLevel = reqLambsEnchantedPerLevel;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void reset(AssetManager assets) {
-		if (assets == null) {
-			throw new IllegalArgumentException("assets cannot be null!");
-		}
-		I18NBundle bundle = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class);
-		setDescription(bundle.format("lambsEnchantedPerLevelAchievement", reqLambsEnchantedPerLevel));
-		setRequirementsDescription(bundle.format("reqLambsEnchantedPerLevelAchievement", reqLambsEnchantedPerLevel));
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void checkRequirements(StatisticModel statistic) {
-		if (statistic == null) {
-			throw new IllegalArgumentException("statistic cannot be null!");
-		}
-		if (statistic.getLambsEnchantedPerLevel() >= reqLambsEnchantedPerLevel) {
-			setLocked(false);
-		} else {
-			setLocked(true);
-		}
-	}
-	
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void changedLambsEnchantedPerLevel() {
+        if (isLocked()) {
+            checkRequirements(ProfileManager.getManager().getCurrentProfile()
+                    .getStatistics());
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void reset(AssetManager assets) {
+        if (assets == null) {
+            throw new IllegalArgumentException("assets cannot be null!");
+        }
+        I18NBundle bundle = assets.get(ProfileManager.getManager()
+                .getCurrentProfile().getLanguage(), I18NBundle.class);
+        setDescription(bundle.format("lambsEnchantedPerLevelAchievement",
+                reqLambsEnchantedPerLevel));
+        setRequirementsDescription(bundle.format(
+                "reqLambsEnchantedPerLevelAchievement",
+                reqLambsEnchantedPerLevel));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void checkRequirements(StatisticModel statistic) {
+        if (statistic == null) {
+            throw new IllegalArgumentException("statistic cannot be null!");
+        }
+        if (statistic.getLambsEnchantedPerLevel() >= reqLambsEnchantedPerLevel) {
+            setLocked(false);
+        } else {
+            setLocked(true);
+        }
+    }
+
 }

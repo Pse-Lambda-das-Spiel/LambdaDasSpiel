@@ -27,11 +27,13 @@ public class LambdaApplication extends LambdaTerm {
     /**
      * Creates a new lambda application.
      *
-     * @param parent the parent node
-     * @param locked true if this node can be modified by the user, false
-     * otherwise
-     * @param explicit true if this application should be explicitly shown,
-     * false otherwise
+     * @param parent
+     *            the parent node
+     * @param locked
+     *            true if this node can be modified by the user, false otherwise
+     * @param explicit
+     *            true if this application should be explicitly shown, false
+     *            otherwise
      */
     public LambdaApplication(LambdaTerm parent, boolean locked, boolean explicit) {
         super(parent, locked);
@@ -50,7 +52,8 @@ public class LambdaApplication extends LambdaTerm {
     /**
      * Sets the left child node and notifies all observers of the change.
      *
-     * @param left the new left child node
+     * @param left
+     *            the new left child node
      * @return true if the left term has changed, false otherwise
      */
     public boolean setLeft(final LambdaTerm left) {
@@ -82,7 +85,8 @@ public class LambdaApplication extends LambdaTerm {
     /**
      * Sets the right child node and notifies all observers of the change.
      *
-     * @param right the new right child node
+     * @param right
+     *            the new right child node
      * @return true if the right term has changed, false otherwise
      */
     public boolean setRight(final LambdaTerm right) {
@@ -106,7 +110,7 @@ public class LambdaApplication extends LambdaTerm {
      * Returns whether this application should be explicitly shown.
      *
      * @return true if this application should be explicitly shown, false
-     * otherwise
+     *         otherwise
      */
     public boolean isExplicit() {
         return explicit;
@@ -116,8 +120,10 @@ public class LambdaApplication extends LambdaTerm {
      * Accepts the given visitor by letting it visit this lambda application.
      * Returns null if the visitor is null.
      *
-     * @param <T> the return type of the visit
-     * @param visitor the visitor
+     * @param <T>
+     *            the return type of the visit
+     * @param visitor
+     *            the visitor
      * @return the result of the visit
      */
     @Override
@@ -132,7 +138,8 @@ public class LambdaApplication extends LambdaTerm {
     /**
      * Returns whether this object is equal to the given object.
      *
-     * @param object the other object
+     * @param object
+     *            the other object
      * @return true if this object is equal to the given object, false otherwise
      */
     @Override
@@ -151,6 +158,7 @@ public class LambdaApplication extends LambdaTerm {
      */
     @Override
     public int hashCode() {
-        return getClass().hashCode() + 123 * Objects.hashCode(left) + 456 * Objects.hashCode(right);
+        return getClass().hashCode() + 123 * Objects.hashCode(left) + 456
+                * Objects.hashCode(right);
     }
 }

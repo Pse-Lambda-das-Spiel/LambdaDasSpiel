@@ -28,9 +28,10 @@ public abstract class LambdaTerm extends Observable<LambdaTermObserver> {
      * Creates a new instance of the LambdaTerm class. Used for setting
      * parameters by subclasses.
      *
-     * @param parent the parent node
-     * @param locked true if this node can be modified by the user, false
-     * otherwise
+     * @param parent
+     *            the parent node
+     * @param locked
+     *            true if this node can be modified by the user, false otherwise
      */
     public LambdaTerm(LambdaTerm parent, boolean locked) {
         this.parent = parent;
@@ -41,7 +42,7 @@ public abstract class LambdaTerm extends Observable<LambdaTermObserver> {
      * Returns whether this lambda term is a value (abstraction or variable).
      *
      * @return true if this lambda term is a value (abstraction or variable),
-     * false otherwise
+     *         false otherwise
      */
     public boolean isValue() {
         return false;
@@ -59,7 +60,8 @@ public abstract class LambdaTerm extends Observable<LambdaTermObserver> {
     /**
      * Sets the parent node.
      *
-     * @param parent the new parent node
+     * @param parent
+     *            the new parent node
      */
     public void setParent(LambdaTerm parent) {
         this.parent = parent;
@@ -77,8 +79,8 @@ public abstract class LambdaTerm extends Observable<LambdaTermObserver> {
     /**
      * Sets whether this node can be modified by the user.
      *
-     * @param locked true if this node can be modified by the user, false
-     * otherwise
+     * @param locked
+     *            true if this node can be modified by the user, false otherwise
      */
     public void setLocked(boolean locked) {
         this.locked = locked;
@@ -87,8 +89,10 @@ public abstract class LambdaTerm extends Observable<LambdaTermObserver> {
     /**
      * Accepts the given visitor by letting it visit this lambda term.
      *
-     * @param <T> the return type of the visit
-     * @param visitor the visitor
+     * @param <T>
+     *            the return type of the visit
+     * @param visitor
+     *            the visitor
      * @return the result of the visit
      */
     public abstract <T> T accept(LambdaTermVisitor<T> visitor);
@@ -97,8 +101,10 @@ public abstract class LambdaTerm extends Observable<LambdaTermObserver> {
      * Notifies all observers of the given message and then routes the message
      * to the parent.
      *
-     * @param message the function to call on all consumers
-     * @throws IllegalArgumentException if message is null
+     * @param message
+     *            the function to call on all consumers
+     * @throws IllegalArgumentException
+     *             if message is null
      */
     @Override
     public void notify(Consumer<LambdaTermObserver> message) {
@@ -111,7 +117,8 @@ public abstract class LambdaTerm extends Observable<LambdaTermObserver> {
     /**
      * Returns whether this object is equal to the given object.
      *
-     * @param object the other object
+     * @param object
+     *            the other object
      * @return true if this object is equal to the given object, false otherwise
      */
     @Override

@@ -12,7 +12,8 @@ import lambda.model.lambdaterm.LambdaVariable;
  *
  * @author Florian Fervers
  */
-public class ImplicitApplicationRemover implements LambdaTermVisitor<LambdaTerm> {
+public class ImplicitApplicationRemover implements
+        LambdaTermVisitor<LambdaTerm> {
     /**
      * The result of the visit.
      */
@@ -28,7 +29,8 @@ public class ImplicitApplicationRemover implements LambdaTermVisitor<LambdaTerm>
     /**
      * Visits the given lambda root.
      *
-     * @param node the root to be visited
+     * @param node
+     *            the root to be visited
      */
     @Override
     public void visit(LambdaRoot node) {
@@ -42,7 +44,8 @@ public class ImplicitApplicationRemover implements LambdaTermVisitor<LambdaTerm>
      * Visits the given lambda application, traverses to both children and then
      * saves the correct result without implicit applications.
      *
-     * @param node the application to be visited
+     * @param node
+     *            the application to be visited
      */
     @Override
     public void visit(LambdaApplication node) {
@@ -73,7 +76,8 @@ public class ImplicitApplicationRemover implements LambdaTermVisitor<LambdaTerm>
     /**
      * Visits the given lambda abstraction and traverses to its child.
      *
-     * @param node the abstraction to be visited
+     * @param node
+     *            the abstraction to be visited
      */
     @Override
     public void visit(LambdaAbstraction node) {
@@ -86,7 +90,8 @@ public class ImplicitApplicationRemover implements LambdaTermVisitor<LambdaTerm>
     /**
      * Visits the given lambda variable.
      *
-     * @param node the variable to be visited
+     * @param node
+     *            the variable to be visited
      */
     @Override
     public void visit(LambdaVariable node) {

@@ -32,7 +32,7 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
         lang.add("data/i18n/StringBundle_de");
         lang.add("data/i18n/StringBundle_en");
         lang.add("data/i18n/StringBundle_fr");
-        
+
         avatar = new LinkedList<String>();
         for (int i = 0; i < AVATAR_NUMBER; i++) {
             this.avatar.add("a" + i);
@@ -113,7 +113,8 @@ public class ProfileEditModel extends Observable<ProfileEditObserver> {
      * @return The current flag ID.
      */
     public String getLangPic() {
-        return lang.get(selectedLang).replace("StringBundle_", "flags/").concat("Flag.jpg");
+        return lang.get(selectedLang).replace("StringBundle_", "flags/")
+                .concat("Flag.jpg");
     }
 
     /**

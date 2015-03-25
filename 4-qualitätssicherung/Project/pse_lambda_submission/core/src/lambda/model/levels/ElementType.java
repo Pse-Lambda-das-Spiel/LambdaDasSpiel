@@ -1,4 +1,5 @@
 package lambda.model.levels;
+
 /**
  * Enumeration of the different element-types
  *
@@ -7,7 +8,8 @@ package lambda.model.levels;
 public enum ElementType {
     /**
      * Represents variable
-     *//**
+     */
+    /**
      * Represents variable
      */
     VARIABLE,

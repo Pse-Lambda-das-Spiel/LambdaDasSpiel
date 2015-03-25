@@ -23,35 +23,57 @@ public class LevelModel {
     private int coins;
     private int maxReductionSteps;
     private boolean standardMode;
-	private boolean colorEquivalence;
-	private List<Color> availableColors;
+    private boolean colorEquivalence;
+    private List<Color> availableColors;
     private List<Color> lockedColors;
     private ReductionStrategy defaultStrategy;
-    
+
     /**
-     * Creates a new instance of this class and initialize it with the given data.
+     * Creates a new instance of this class and initialize it with the given
+     * data.
      *
-     * @param id                 The id of this level
-     * @param start              the start board constellation of this level
-     * @param goal               the goal board constellation of this level
-     * @param hint               the hint to solve this level
-     * @param tutorial           the list of all associated Tutorial messages models
-     * @param availableRedStrats the list of all available reduction strategies for this level
-     * @param useableElements    the useable elements of this level
-     * @param difficulty         the level difficulty
-     * @param coins              the coins you will get if you complete the level
-     * @param maxReductionSteps	 the maximum number of allowed reductions steps in this level
-     * @param standardMode       indicates whether the level has to be solved in standard mode or reversed
-     * @param colorEquivalence	 indicates whether color equivalence or alpha equivalence is checked
-     * @param availableColors 	 the available colors for the coloring of this level(not available for alpha conversion)
-     * @param lockedColors		 the locked colors of this level 
-     * 							 (neither available for coloring dialog nor alpha conversion)
-     * @param defaultStrategy 	 the default reduction strategy of this level
+     * @param id
+     *            The id of this level
+     * @param start
+     *            the start board constellation of this level
+     * @param goal
+     *            the goal board constellation of this level
+     * @param hint
+     *            the hint to solve this level
+     * @param tutorial
+     *            the list of all associated Tutorial messages models
+     * @param availableRedStrats
+     *            the list of all available reduction strategies for this level
+     * @param useableElements
+     *            the useable elements of this level
+     * @param difficulty
+     *            the level difficulty
+     * @param coins
+     *            the coins you will get if you complete the level
+     * @param maxReductionSteps
+     *            the maximum number of allowed reductions steps in this level
+     * @param standardMode
+     *            indicates whether the level has to be solved in standard mode
+     *            or reversed
+     * @param colorEquivalence
+     *            indicates whether color equivalence or alpha equivalence is
+     *            checked
+     * @param availableColors
+     *            the available colors for the coloring of this level(not
+     *            available for alpha conversion)
+     * @param lockedColors
+     *            the locked colors of this level (neither available for
+     *            coloring dialog nor alpha conversion)
+     * @param defaultStrategy
+     *            the default reduction strategy of this level
      */
-	public LevelModel(int id, LambdaRoot start, LambdaRoot goal, LambdaRoot hint, List<TutorialMessageModel> tutorial,
-			List<ReductionStrategy> availableRedStrats, List<ElementType> useableElements, int difficulty, int coins,
-			int maxReductionSteps, boolean standardMode, boolean colorEquivalence, List<Color> availableColors,
-			List<Color> lockedColors, ReductionStrategy defaultStrategy) {
+    public LevelModel(int id, LambdaRoot start, LambdaRoot goal,
+            LambdaRoot hint, List<TutorialMessageModel> tutorial,
+            List<ReductionStrategy> availableRedStrats,
+            List<ElementType> useableElements, int difficulty, int coins,
+            int maxReductionSteps, boolean standardMode,
+            boolean colorEquivalence, List<Color> availableColors,
+            List<Color> lockedColors, ReductionStrategy defaultStrategy) {
         this.id = id;
         this.start = start;
         this.goal = goal;
@@ -66,7 +88,7 @@ public class LevelModel {
         this.colorEquivalence = colorEquivalence;
         this.availableColors = availableColors;
         this.lockedColors = lockedColors;
-        this.defaultStrategy = defaultStrategy; 
+        this.defaultStrategy = defaultStrategy;
     }
 
     /**
@@ -106,7 +128,8 @@ public class LevelModel {
     }
 
     /**
-     * Returns the configuration which should be achieved at the end of the level
+     * Returns the configuration which should be achieved at the end of the
+     * level
      *
      * @return goal
      */
@@ -133,7 +156,8 @@ public class LevelModel {
     }
 
     /**
-     * Returns a list of reduction-strategies which are allowed to solve the level
+     * Returns a list of reduction-strategies which are allowed to solve the
+     * level
      *
      * @return availabeRedStrats
      */
@@ -142,7 +166,8 @@ public class LevelModel {
     }
 
     /**
-     * Returns a list of elements which are allowed to create or modifiy the lambda-term
+     * Returns a list of elements which are allowed to create or modifiy the
+     * lambda-term
      *
      * @return useableElements
      */
@@ -160,54 +185,58 @@ public class LevelModel {
     }
 
     /**
-	 * Returns the maximum number of allowed reduction steps in this level. This maximum number is the limit for the
-	 * reduction steps of the ReductionViewcontroller for this level. If this limit is exceeded the whole reduction
-	 * process will be aborted and the level try will be counted as not solved.
-	 * 
-	 * @return the maximum number of allowed reduction steps in this level
-	 */
-	public int getMaxReductionSteps() {
-		return maxReductionSteps;
-	}
-    
-     /**
-      *  Returns the default strategy for the level.
-      *  
-      * @return the defaultStrategy
-      */
+     * Returns the maximum number of allowed reduction steps in this level. This
+     * maximum number is the limit for the reduction steps of the
+     * ReductionViewcontroller for this level. If this limit is exceeded the
+     * whole reduction process will be aborted and the level try will be counted
+     * as not solved.
+     * 
+     * @return the maximum number of allowed reduction steps in this level
+     */
+    public int getMaxReductionSteps() {
+        return maxReductionSteps;
+    }
+
+    /**
+     * Returns the default strategy for the level.
+     * 
+     * @return the defaultStrategy
+     */
     public ReductionStrategy getDefaultStrategy() {
         return defaultStrategy;
     }
-    
+
     /**
-     * Returns whether color equivalence is set or not.
-     * Color equivalence determines whether the colors of the lambda terms should be considered or not 
-     * when comparing the user input to the goal of the level.
-     * If color equivalence is false, alpha equivalence is automatically set.
+     * Returns whether color equivalence is set or not. Color equivalence
+     * determines whether the colors of the lambda terms should be considered or
+     * not when comparing the user input to the goal of the level. If color
+     * equivalence is false, alpha equivalence is automatically set.
      * 
-	 * @return the colorEquivalence
-	 */
-	public boolean isColorEquivalence() {
-		return colorEquivalence;
-	}
+     * @return the colorEquivalence
+     */
+    public boolean isColorEquivalence() {
+        return colorEquivalence;
+    }
 
-	/**
-	 * Returns all colors available for the coloring dialog of this level.
-	 * These colors are not available as new colors for an alpha conversion in this level.
-	 * 
-	 * @return the availableColors of this level
-	 */
-	public List<Color> getAvailableColors() {
-		return availableColors;
-	}
+    /**
+     * Returns all colors available for the coloring dialog of this level. These
+     * colors are not available as new colors for an alpha conversion in this
+     * level.
+     * 
+     * @return the availableColors of this level
+     */
+    public List<Color> getAvailableColors() {
+        return availableColors;
+    }
 
-	/**
-	 * Returns the list of colors which are neither available for the coloring dialog of this level 
-	 * nor as new colors for an alpha conversion in this level.
-	 * 
-	 * @return the lockedColors
-	 */
-	public List<Color> getLockedColors() {
-		return lockedColors;
-	}
+    /**
+     * Returns the list of colors which are neither available for the coloring
+     * dialog of this level nor as new colors for an alpha conversion in this
+     * level.
+     * 
+     * @return the lockedColors
+     */
+    public List<Color> getLockedColors() {
+        return lockedColors;
+    }
 }

@@ -14,13 +14,16 @@ public class BackgroundImageItemModel extends ShopItemModel {
     /**
      * Creates a new instance of this class
      * 
-     * @param id the if of this item
-     * @param price the price of this item
-     * @param filepath the path to the asset
+     * @param id
+     *            the if of this item
+     * @param price
+     *            the price of this item
+     * @param filepath
+     *            the path to the asset
      */
     public BackgroundImageItemModel(String id, int price, String filepath) {
-    	super(id, price, filepath);
-    	shopItemType = ShopModel.getShop().getImages();
+        super(id, price, filepath);
+        shopItemType = ShopModel.getShop().getImages();
     }
 
     /**

@@ -38,13 +38,19 @@ public class LambdaTermDropTarget extends Actor {
     /**
      * Creates a new drop location actor in the given rectangle.
      *
-     * @param rectangle the target drop rectangle
-     * @param viewController the view controller on which the drag&drop is
-     * @param insertOperation the operation for inserting an element into the
-     * term when it is dropped here happening
+     * @param rectangle
+     *            the target drop rectangle
+     * @param viewController
+     *            the view controller on which the drag&drop is
+     * @param insertOperation
+     *            the operation for inserting an element into the term when it
+     *            is dropped here happening
      */
-    public LambdaTermDropTarget(Rectangle rectangle, LambdaTermViewController viewController, Consumer<LambdaTerm> insertOperation) {
-        this.setBounds(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
+    public LambdaTermDropTarget(Rectangle rectangle,
+            LambdaTermViewController viewController,
+            Consumer<LambdaTerm> insertOperation) {
+        this.setBounds(rectangle.getX(), rectangle.getY(),
+                rectangle.getWidth(), rectangle.getHeight());
         this.insertOperation = insertOperation;
         glowTexture = viewController.getContext().getGlow();
         hovered = false;
@@ -55,8 +61,9 @@ public class LambdaTermDropTarget extends Actor {
      * Sets whether a drag&drop element is currently being hovered over this
      * actor.
      *
-     * @param hovered true if a drag&drop element is currently being hovered
-     * over this actor, false otherwise
+     * @param hovered
+     *            true if a drag&drop element is currently being hovered over
+     *            this actor, false otherwise
      */
     public void setHovered(boolean hovered) {
         this.hovered = hovered;
@@ -65,7 +72,8 @@ public class LambdaTermDropTarget extends Actor {
     /**
      * Performs the insert operation with the given lambda term.
      *
-     * @param term the lambda term to be inserted
+     * @param term
+     *            the lambda term to be inserted
      */
     public void insert(LambdaTerm term) {
         insertOperation.accept(term);
@@ -74,8 +82,10 @@ public class LambdaTermDropTarget extends Actor {
     /**
      * Draws this node.
      *
-     * @param batch the batch on which the node will be drawn
-     * @param alpha the parent's alpha
+     * @param batch
+     *            the batch on which the node will be drawn
+     * @param alpha
+     *            the parent's alpha
      */
     @Override
     public void draw(Batch batch, float alpha) {
@@ -89,12 +99,15 @@ public class LambdaTermDropTarget extends Actor {
     /**
      * Returns whether the given point is on this actor.
      *
-     * @param x the x-coordinate of the point
-     * @param y the y-coordinate of the point
+     * @param x
+     *            the x-coordinate of the point
+     * @param y
+     *            the y-coordinate of the point
      * @return true if the given point is on this actor, false otherwise
      */
     public boolean isOn(float x, float y) {
         Vector2 pos = screenToLocalCoordinates(new Vector2(x, y));
-        return pos.x >= 0.0f && pos.x < getWidth() && pos.y >= 0.0f && pos.y < getHeight();
+        return pos.x >= 0.0f && pos.x < getWidth() && pos.y >= 0.0f
+                && pos.y < getHeight();
     }
 }

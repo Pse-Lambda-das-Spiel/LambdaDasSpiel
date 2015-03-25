@@ -33,7 +33,8 @@ public class ColorCollectionVisitor implements LambdaTermVisitor<Set<Color>> {
     /**
      * Collect colors of all nodes.
      */
-    public static final int TYPE_ALL = TYPE_BOUND_VARIABLE | TYPE_FREE_VARIABLE | TYPE_ABSTRACTION;
+    public static final int TYPE_ALL = TYPE_BOUND_VARIABLE | TYPE_FREE_VARIABLE
+            | TYPE_ABSTRACTION;
 
     /**
      * The set of used colors.
@@ -47,7 +48,8 @@ public class ColorCollectionVisitor implements LambdaTermVisitor<Set<Color>> {
     /**
      * Creates a ColorCollectionVisitor.
      *
-     * @param type indicates which colors should be collected by this visitor.
+     * @param type
+     *            indicates which colors should be collected by this visitor.
      */
     public ColorCollectionVisitor(int type) {
         result = new HashSet<>();
@@ -57,7 +59,8 @@ public class ColorCollectionVisitor implements LambdaTermVisitor<Set<Color>> {
     /**
      * Visits the given lambda root and traverses to the child node if possible.
      *
-     * @param node the root to be visited
+     * @param node
+     *            the root to be visited
      */
     @Override
     public void visit(LambdaRoot node) {
@@ -70,8 +73,10 @@ public class ColorCollectionVisitor implements LambdaTermVisitor<Set<Color>> {
      * Visits the given lambda application and traverses to both child nodes if
      * possible.
      *
-     * @param node the application to be visited
-     * @throws InvalidLambdaTermException if the visited term is invalid
+     * @param node
+     *            the application to be visited
+     * @throws InvalidLambdaTermException
+     *             if the visited term is invalid
      */
     @Override
     public void visit(LambdaApplication node) {
@@ -87,7 +92,8 @@ public class ColorCollectionVisitor implements LambdaTermVisitor<Set<Color>> {
      * Visits the given lambda abstraction and saves the color if necessary.
      * Then traverses to the child node if possible.
      *
-     * @param node the abstraction to be visited
+     * @param node
+     *            the abstraction to be visited
      */
     @Override
     public void visit(LambdaAbstraction node) {
@@ -102,13 +108,16 @@ public class ColorCollectionVisitor implements LambdaTermVisitor<Set<Color>> {
     /**
      * Visits the given lambda variable and saves the color if necessary.
      *
-     * @param node the variable to be visited
-     * @throws InvalidLambdaTermException if the visited term is invalid
+     * @param node
+     *            the variable to be visited
+     * @throws InvalidLambdaTermException
+     *             if the visited term is invalid
      */
     @Override
     public void visit(LambdaVariable node) {
         boolean bound = node.accept(new IsColorBoundVisitor(node.getColor()));
-        if ((type | TYPE_BOUND_VARIABLE) != 0 && bound || (type | TYPE_FREE_VARIABLE) != 0 && !bound) {
+        if ((type | TYPE_BOUND_VARIABLE) != 0 && bound
+                || (type | TYPE_FREE_VARIABLE) != 0 && !bound) {
             result.add(node.getColor());
         }
     }

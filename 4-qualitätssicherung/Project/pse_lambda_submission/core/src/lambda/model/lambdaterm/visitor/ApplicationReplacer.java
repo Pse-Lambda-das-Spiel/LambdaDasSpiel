@@ -21,7 +21,8 @@ public class ApplicationReplacer implements LambdaTermVisitor<Object> {
     /**
      * Creates a new ApplicationReplacer.
      *
-     * @param replaced the application whose children are to be replaced
+     * @param replaced
+     *            the application whose children are to be replaced
      */
     public ApplicationReplacer(LambdaApplication replaced) {
         this.replaced = replaced;
@@ -30,7 +31,8 @@ public class ApplicationReplacer implements LambdaTermVisitor<Object> {
     /**
      * Visits the given lambda root.
      *
-     * @param node the root to be visited
+     * @param node
+     *            the root to be visited
      */
     @Override
     public void visit(LambdaRoot node) {
@@ -40,7 +42,8 @@ public class ApplicationReplacer implements LambdaTermVisitor<Object> {
      * Visits the given lambda application and checks whether it is a valid
      * node. Then traverses to both child nodes.
      *
-     * @param node the application to be visited
+     * @param node
+     *            the application to be visited
      */
     @Override
     public void visit(LambdaApplication node) {
@@ -52,7 +55,8 @@ public class ApplicationReplacer implements LambdaTermVisitor<Object> {
      * Visits the given lambda abstraction and checks whether it is a valid
      * node. Then traverses to the child node.
      *
-     * @param node the abstraction to be visited
+     * @param node
+     *            the abstraction to be visited
      */
     @Override
     public void visit(LambdaAbstraction node) {
@@ -61,7 +65,8 @@ public class ApplicationReplacer implements LambdaTermVisitor<Object> {
     /**
      * Visits the given lambda variable and checks whether it is a valid node.
      *
-     * @param node the variable to be visited
+     * @param node
+     *            the variable to be visited
      */
     @Override
     public void visit(LambdaVariable node) {
