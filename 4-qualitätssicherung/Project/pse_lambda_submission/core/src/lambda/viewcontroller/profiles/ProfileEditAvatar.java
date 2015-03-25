@@ -1,5 +1,10 @@
 package lambda.viewcontroller.profiles;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -62,6 +67,25 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
         } while (!current.equals(start));
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void show() {
+        InputProcessor backProcessor = new InputAdapter() {
+            @Override
+            public boolean keyDown(int keycode) {
+            	if (keycode == Keys.BACK) {
+            		ProfileManager.getManager().getCurrentProfile().setAvatar(profileEdit.getAvatar());
+                    getGame().setScreen(ProfileEditName.class);
+            	}
+    			return false;
+            }
+        };
+        InputMultiplexer multiplexer = new InputMultiplexer(getStage(), backProcessor);
+        Gdx.input.setInputProcessor(multiplexer);
+    }
+    
     @Override
     public void create(final AssetManager manager) {
         Image background = new Image(manager.get("data/backgrounds/default.png", Texture.class));
