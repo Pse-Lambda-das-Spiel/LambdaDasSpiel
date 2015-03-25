@@ -324,6 +324,11 @@ public final class EditorViewController extends StageViewController implements E
 
     private void showStartDialogs() {
         List<TutorialMessageModel> tutorialList = model.getLevelContext().getLevelModel().getTutorial();
+        for (int i = 0; i < tutorialList.size(); i++) {
+        	if (!tutorialList.get(i).isInEditorModel()) {
+        		tutorialList.remove(i);
+        	}
+        }
         AssetManager assets = getGame().getController(AssetViewController.class).getManager();
         final Skin dialogSkin = assets.get("data/skins/DialogTemp.json", Skin.class);
         I18NBundle language = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
@@ -348,10 +353,6 @@ public final class EditorViewController extends StageViewController implements E
             dialogs[dialogs.length - 1] = new TargetDialog(dialogSkin, language,
                     EditorViewController.this.model.getLevelContext(), getStage());
         }
-        /*
-         * special handling necessary if there is no target and no tutorials, 
-         * should not be necessary if non standard mode is rightly implemented
-         */
         if (dialogs.length > 0) {
             dialogs[0].show(getStage());
         }

@@ -49,10 +49,12 @@
 			{
 				"tutorialId": "0",
 				"image": "",
+				"inEditorMode": true,
 			},
 			{
 				"tutorialId": "1",
 				"image": "callbyname",
+				"inEditorMode": true,
 			},
 		],
 		"constellations": {

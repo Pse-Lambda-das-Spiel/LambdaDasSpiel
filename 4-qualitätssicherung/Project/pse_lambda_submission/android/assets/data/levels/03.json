@@ -46,6 +46,7 @@
 			{
 				"tutorialId": "0",
 				"image": "",
+				"inEditorMode": true,
 			}
 		],
 		"constellations": {
