@@ -43,122 +43,96 @@
 			},
 			{
 			"elementType": "PARENTHESIS"
-			},
+			}
 		],
 		"tutorial": [
+			{
+				"tutorialId": "0",
+				"image": "tutorials/alphakonversion3",
+				"inEditorMode": true,
+			},
+			{
+				"tutorialId": "1",
+				"image": "tutorials/reminder_goal",
+				"inEditorMode": true,
+			},
 		],
 		"constellations": {
 			"start": {
-				"_comment": "(lx.x)xx",
+				"_comment": "lt.t",
 				"child": {
-					"type": "application",
+					"type": "abstraction",
 					"locked": true,
-					"left": {
+					"color": "x",
+					"inside": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "x",
+						"color": "z",
 						"inside": {
-							"type": "variable",
-							"locked": true,
-							"color": "x"
-						}
-					},
-					"right": {
-						"type": "application",
-						"locked": true,
-						"left": {
-								"type": "variable",
-								"locked": true,
-								"color": "x"
-						},
-						"right": {
-							"type": "variable",
-							"locked": true,
-							"color": "x"
-						}			
-					}			
-				}
-			},
-			"goal": {
-				"_comment": "uuuu",
-				"child": {
-					"type": "application",
-					"locked": true,
-					"left": {
-						"type": "application",
-						"locked": true,
-						"left": {
-							"type": "variable",
-							"locked": true,
-							"color": "u"
-						},
-						"right": {
-							"type": "variable",
-							"locked": true,
-							"color": "u"
-						}
-					},
-					"right": {
-						"type": "application",
-						"locked": true,
-						"left": {
-							"type": "variable",
-							"locked": true,
-							"color": "u"
-						},
-						"right": {
-							"type": "variable",
-							"locked": true,
-							"color": "u"
-						}			
-					}			
-				}
-			},
-			"hint": {
-				"_comment": "(lw.)(lx.x)xx",
-				"child": {
-					"type": "application",
-					"locked": true,
-					"left": {
-						"type": "abstraction",
-						"locked": false,
-						"color": "w",
-						"inside": {
-							"type": "abstraction",
-							"locked": false,
-							"color": "w",
-							"inside": null
-						}
-					},
-					"right": {
-						"type": "application",
-						"locked": true,
-						"left": {
-							"type": "abstraction",
-							"locked": true,
-							"color": "x",
-							"inside": {
-								"type": "variable",
-								"locked": true,
-								"color": "x"
-							}
-						},
-						"right": {
 							"type": "application",
 							"locked": true,
 							"left": {
-								"type": "variable",
+								"type": "application",
 								"locked": true,
-								"color": "x"
+								"left": {
+									"type": "variable",
+									"locked": true,
+									"color": "x"
+								},
+								"right": {
+									"type": "variable",
+									"locked": true,
+									"color": "z"
+								}	
 							},
 							"right": {
-								"type": "variable",
+								"type": "abstraction",
 								"locked": true,
-								"color": "x"
-							}						
+								"color": "u",
+								"inside": {
+									"type": "variable",
+									"locked": true,
+									"color": "u"
+								}
+							}			
 						}
-					}			
+					}
 				}
+			},
+			"goal": {
+				"_comment": "u",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "application",
+						"locked": true,
+						"left": {
+							"type": "variable",
+							"locked": true,
+							"color": "z"
+						},
+						"right": {
+							"type": "variable",
+							"locked": true,
+							"color": "u"
+						}	
+					},
+					"right": {
+						"type": "abstraction",
+						"locked": true,
+						"color": "k",
+						"inside": {
+							"type": "variable",
+							"locked": true,
+							"color": "k"
+						}
+					}		
+				}
+			},
+			"hint": {
+				"_comment": "(lt.t)w",
+				"child": null,
 			}
 		}
 	}

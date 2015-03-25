@@ -8,16 +8,16 @@
 		"colorEquivalence": true,
 		"availableColors": [
 			{
-			"color": "s"
+			"color": "x"
 			},
 			{
 			"color": "y"
 			},
 			{
-			"color": "z"
+			"color": "s"
 			},
 			{
-			"color": "t"
+			"color": "r"
 			},
 			{
 			"color": "u"
@@ -28,7 +28,10 @@
 		],
 		"lockedColors": [
 			{
-			"color": "x"
+			"color": "z"
+			},
+			{
+			"color": "t"
 			}
 		],
 		"defaultStrategy": "NORMAL_ORDER",
@@ -38,110 +41,143 @@
 			}
 		],
 		"useableElements": [
-			{
-			"elementType": "VARIABLE"
-			},
 		],
 		"tutorial": [
 		],
 		"constellations": {
 			"start": {
-				"_comment": "ly.(lx.x)y)z",
+				"_comment": "(lu.wsw)(lz.tz)",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "y",
+						"color": "u",
 						"inside": {
 							"type": "application",
 							"locked": true,
 							"left": {
-								"type": "abstraction",
+								"type": "application",
 								"locked": true,
-								"color": "x",
-								"inside": {
+
+								"left": {
+									"type": "variable",
+									"locked": false,
+									"color": "w"
+								},
+								"right": {
 									"type": "variable",
 									"locked": true,
-									"color": "x"
+									"color": "s"
+								}
+							},
+							"right": {
+								"type": "variable",
+								"locked": false,
+								"color": "w"
+							}		
+						}
+					},
+					"right": {
+						"type": "abstraction",
+						"locked": true,
+						"color": "z",
+						"inside": {
+							"type": "application",
+								"locked": true,
+								"left": {
+									"type": "variable",
+									"locked": true,
+									"color": "t"
+								},
+								"right": {
+									"type": "variable",
+									"locked": true,
+									"color": "z"
+								}
+						}
+					}			
+				}
+			},
+			"goal": {
+				"_comment": "tsx",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "application",
+						"locked": true,
+						"left": {
+							"type": "variable",
+							"locked": true,
+							"color": "t"
+						},
+						"right": {
+							"type": "variable",
+							"locked": true,
+							"color": "s"
+						}
+					},
+					"right": {
+						"type": "variable",
+						"locked": true,
+						"color": "x"
+					}		
+				}
+			},
+			"hint": {
+				"_comment": "(lu.wsx)(lz.tz)",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "abstraction",
+						"locked": true,
+						"color": "u",
+						"inside": {
+							"type": "application",
+							"locked": true,
+							"left": {
+								"type": "application",
+								"locked": true,
+
+								"left": {
+									"type": "variable",
+									"locked": false,
+									"color": "w"
+								},
+								"right": {
+									"type": "variable",
+									"locked": true,
+									"color": "s"
 								}
 							},
 							"right": {
 								"type": "variable",
 								"locked": true,
-								"color": "y"
-							}			
+								"color": "x"
+							}		
 						}
 					},
 					"right": {
-						"type": "variable",
-						"locked": true,
-						"color": "z"
-					}			
-				}
-			},
-			"goal": {
-				"_comment": "zz",
-				"child": {
-					"type": "application",
-					"locked": true,
-					"left": {
-						"type": "variable",
-						"locked": true,
-						"color": "z"
-								
-					},
-					"right": {
-						"type": "variable",
-						"locked": true,
-						"color": "z"
-					}			
-				}
-			},
-			"hint": {
-				"_comment": "ly.(lx.x)yw)z",
-				"child": {
-					"type": "application",
-					"locked": true,
-					"left": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "y",
+						"color": "z",
 						"inside": {
 							"type": "application",
-							"locked": true,
-							"left": {
-								"type": "abstraction",
-								"locked": true,
-								"color": "x",
-								"inside": {
-									"type": "variable",
-									"locked": true,
-									"color": "x"
-								}
-							},
-							"right": {
-								"type": "application",
 								"locked": true,
 								"left": {
 									"type": "variable",
 									"locked": true,
-									"color": "y"
-								
+									"color": "t"
 								},
 								"right": {
 									"type": "variable",
-									"locked": false,
-									"color": "w"
-								}		
-							}			
+									"locked": true,
+									"color": "z"
+								}
 						}
-					},
-					"right": {
-						"type": "variable",
-						"locked": true,
-						"color": "z"
 					}			
 				}
 			}

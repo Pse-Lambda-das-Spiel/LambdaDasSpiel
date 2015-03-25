@@ -48,12 +48,12 @@
 		"tutorial": [
 			{
 				"tutorialId": "0",
-				"image": "",
+				"image": "tutorials/non_standardmode",
 				"inEditorMode": true,
 			},
 			{
 				"tutorialId": "1",
-				"image": "",
+				"image": "tutorials/reminder_goal",
 				"inEditorMode": true,
 			},
 		],

@@ -28,10 +28,10 @@
 		],
 		"lockedColors": [
 		],
-		"defaultStrategy": "CALL_BY_VALUE",
+		"defaultStrategy": "CALL_BY_NAME",
 		"availableRedStrats": [
 			{
-			"reductionStrategy": "CALL_BY_VALUE"
+			"reductionStrategy": "CALL_BY_NAME"
 			}
 		],
 		"useableElements": [
@@ -47,24 +47,29 @@
 		],
 		"tutorial": [
 			{
-				"tutorialId": "0",
-				"image": "",
-				"inEditorMode": true,
+			"tutorialId": "0",
+			"image": "callbyname1",
+			"inEditorMode": true,
 			},
 			{
-				"tutorialId": "1",
-				"image": "",
-				"inEditorMode": true,
+			"tutorialId": "1",
+			"image": "callbyname2",
+			"inEditorMode": true,
 			},
 			{
-				"tutorialId": "2",
-				"image": "callbyvalue",
-				"inEditorMode": true,
+			"tutorialId": "2",
+			"image": "choose_callbyname",
+			"inEditorMode": true,
+			},
+			{
+			"tutorialId": "3",
+			"image": "reminder_goal",
+			"inEditorMode": true,
 			},
 		],
 		"constellations": {
 			"start": {
-				"_comment": "(ly.(lx.y(lz.z)x)) ((lv.v)(lu.u))",
+				"_comment": "lt.t",
 				"child": {
 					"type": "application",
 					"locked": true,
@@ -75,70 +80,42 @@
 						"inside": {
 							"type": "abstraction",
 							"locked": true,
-							"color": "x",
+							"color": "v",
 							"inside": {
 								"type": "application",
 								"locked": true,
 								"left": {
-									"type": "application",
+									"type": "abstraction",
 									"locked": true,
-									"left": {
+									"color": "z",
+									"inside": {
 										"type": "variable",
 										"locked": true,
-										"color": "y"
-									},
-									"right": {
-										"type": "abstraction",
-										"locked": true,
-										"color": "z",
-										"inside": {
-											"type": "variable",
-											"locked": true,
-											"color": "z"
-										}
+										"color": "z"
 									}
 								},
 								"right": {
 									"type": "variable",
 									"locked": true,
-									"color": "x",
-								}
+									"color": "v"
+								}		
 							}
 						}
 					},
 					"right": {
-						"type": "application",
-							"locked": true,
-							"left": {
-								"type": "abstraction",
-								"locked": true,
-								"color": "v",
-								"inside": {
-									"type": "variable",
-									"locked": true,
-									"color": "v"
-								}
-							},
-							"right": {
-								"type": "abstraction",
-								"locked": true,
-								"color": "u",
-								"inside": {
-									"type": "variable",
-									"locked": true,
-									"color": "u"
-								}
-							}
-					}
+						"type": "variable",
+						"locked": true,
+						"color": "t"
+					}		
 				}
-
 			},
 			"goal": {
-				"_comment": "(ly.(lx.y(lz.z)x)) (lu.u)",
-				"child": null
+				"_comment": "u",
+				"child": null,
 			},
 			"hint": {
-				"child": null
+				"_comment": "(lt.t)w",
+				"child": null,
 			}
 		}
 	}

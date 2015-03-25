@@ -8,16 +8,16 @@
 		"colorEquivalence": true,
 		"availableColors": [
 			{
-			"color": "x"
+			"color": "t"
 			},
 			{
 			"color": "y"
 			},
 			{
-			"color": "s"
+			"color": "z"
 			},
 			{
-			"color": "r"
+			"color": "s"
 			},
 			{
 			"color": "u"
@@ -27,12 +27,6 @@
 			}
 		],
 		"lockedColors": [
-			{
-			"color": "z"
-			},
-			{
-			"color": "t"
-			}
 		],
 		"defaultStrategy": "NORMAL_ORDER",
 		"availableRedStrats": [
@@ -41,36 +35,54 @@
 			}
 		],
 		"useableElements": [
+			{
+			"elementType": "VARIABLE"
+			},
 		],
 		"tutorial": [
+			{
+				"tutorialId": "0",
+				"image": "tutorials/lambs_enchants_lamb1",
+				"inEditorMode": true,
+			},
+			{
+				"tutorialId": "1",
+				"image": "tutorials/lambs_enchants_lamb2",
+				"inEditorMode": true,
+			},
+			{
+				"tutorialId": "2",
+				"image": "tutorials/normalorder",
+				"inEditorMode": true,
+			},
+			{
+				"tutorialId": "3",
+				"image": "choose_normal",
+				"inEditorMode": true,
+			},
+			{
+				"tutorialId": "4",
+				"image": "tutorials/reminder_goal",
+				"inEditorMode": true,
+			},
 		],
 		"constellations": {
 			"start": {
-				"_comment": "(lu.wsw)(lz.tz)",
+				"_comment": "lt.t",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "u",
+						"color": "x",
 						"inside": {
 							"type": "application",
 							"locked": true,
 							"left": {
-								"type": "application",
+								"type": "variable",
 								"locked": true,
-
-								"left": {
-									"type": "variable",
-									"locked": false,
-									"color": "w"
-								},
-								"right": {
-									"type": "variable",
-									"locked": true,
-									"color": "s"
-								}
+								"color": "x"
 							},
 							"right": {
 								"type": "variable",
@@ -78,105 +90,61 @@
 								"color": "w"
 							}		
 						}
+							
 					},
 					"right": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "z",
+						"color": "red",
 						"inside": {
-							"type": "application",
-								"locked": true,
-								"left": {
-									"type": "variable",
-									"locked": true,
-									"color": "t"
-								},
-								"right": {
-									"type": "variable",
-									"locked": true,
-									"color": "z"
-								}
+							"type": "variable",
+							"locked": false,
+							"color": "w"
 						}
 					}			
 				}
 			},
 			"goal": {
-				"_comment": "tsx",
+				"_comment": "u",
 				"child": {
-					"type": "application",
+					"type": "variable",
 					"locked": true,
-					"left": {
-						"type": "application",
-						"locked": true,
-						"left": {
-							"type": "variable",
-							"locked": true,
-							"color": "t"
-						},
-						"right": {
-							"type": "variable",
-							"locked": true,
-							"color": "s"
-						}
-					},
-					"right": {
-						"type": "variable",
-						"locked": true,
-						"color": "x"
-					}		
+					"color": "z"
 				}
 			},
 			"hint": {
-				"_comment": "(lu.wsx)(lz.tz)",
+				"_comment": "(lt.t)w",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "u",
+						"color": "x",
 						"inside": {
 							"type": "application",
 							"locked": true,
 							"left": {
-								"type": "application",
-								"locked": true,
-
-								"left": {
-									"type": "variable",
-									"locked": false,
-									"color": "w"
-								},
-								"right": {
-									"type": "variable",
-									"locked": true,
-									"color": "s"
-								}
-							},
-							"right": {
 								"type": "variable",
 								"locked": true,
 								"color": "x"
+							},
+							"right": {
+								"type": "variable",
+								"locked": false,
+								"color": "w"
 							}		
 						}
+							
 					},
 					"right": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "z",
+						"color": "red",
 						"inside": {
-							"type": "application",
-								"locked": true,
-								"left": {
-									"type": "variable",
-									"locked": true,
-									"color": "t"
-								},
-								"right": {
-									"type": "variable",
-									"locked": true,
-									"color": "z"
-								}
+							"type": "variable",
+							"locked": true,
+							"color": "red"
 						}
 					}			
 				}

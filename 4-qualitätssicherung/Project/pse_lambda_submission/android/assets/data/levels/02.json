@@ -42,27 +42,27 @@
 		"tutorial": [
 			{
 				"tutorialId": "0",
-				"image": "",
+				"image": "tutorials/lamb_with_gem",
 				"inEditorMode": true,
 			},
 			{
 				"tutorialId": "1",
-				"image": "",
+				"image": "tutorials/lamb_enchants_gem",
 				"inEditorMode": true,
 			},
 			{
 				"tutorialId": "2",
-				"image": "",
+				"image": "tutorials/cloudanimation",
 				"inEditorMode": true,
 			},
 			{
 				"tutorialId": "3",
-				"image": "",
+				"image": "tutorials/lamb_without_magicwand",
 				"inEditorMode": true,
 			},
 			{
 				"tutorialId": "4",
-				"image": "",
+				"image": "tutorials/reminder_goal",
 				"inEditorMode": true,
 			}
 		],

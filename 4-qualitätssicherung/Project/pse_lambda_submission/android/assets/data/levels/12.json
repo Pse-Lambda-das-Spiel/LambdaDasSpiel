@@ -17,7 +17,7 @@
 			"color": "z"
 			},
 			{
-			"color": "t"
+			"color": "r"
 			},
 			{
 			"color": "u"
@@ -29,6 +29,9 @@
 		"lockedColors": [
 			{
 			"color": "s"
+			},
+			{
+			"color": "t"
 			}
 		],
 		"defaultStrategy": "NORMAL_ORDER",
@@ -52,43 +55,24 @@
 		],
 		"constellations": {
 			"start": {
-				"_comment": "(lu.uv)(ls.s)",
+				"_comment": "st",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
-						"type": "abstraction",
+						"type": "variable",
 						"locked": true,
-						"color": "u",
-						"inside": {
-							"type": "application",
-							"locked": true,
-							"left": {
-								"type": "variable",
-								"locked": true,
-								"color": "u"
-							},
-							"right": {
-								"type": "variable",
-								"locked": true,
-								"color": "v"
-							}			
-						}
+						"color": "s"
 					},
 					"right": {
-						"type": "abstraction",
+						"type": "variable",
 						"locked": true,
-						"color": "s",
-						"inside": {
-							"type": "variable",
-							"locked": true,
-							"color": "s"
-						}
+						"color": "t"
 					}			
 				}
 			},
 			"goal": {
-				"_comment": "vx(ls.sx)",
+				"_comment": "sst",
 				"child": {
 					"type": "application",
 					"locked": true,
@@ -98,72 +82,45 @@
 						"left": {
 							"type": "variable",
 							"locked": true,
-							"color": "v"
+							"color": "s"
 						},
 						"right": {
 							"type": "variable",
 							"locked": true,
-							"color": "x"
-						}
+							"color": "s"
+						}		
 					},
 					"right": {
-						"type": "application",
+						"type": "variable",
 						"locked": true,
-						"left": {
-							"type": "variable",
-							"locked": true,
-							"color": "u"
-						},
-						"right": {
-							"type": "variable",
-							"locked": true,
-							"color": "u"
-						}			
+						"color": "t"
 					}			
 				}
 			},
 			"hint": {
-				"_comment": "(lu.uv)(ls.sx)",
+				"_comment": "(lw.)st",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
-						"type": "abstraction",
+						"type": "application",
 						"locked": true,
-						"color": "u",
-						"inside": {
-							"type": "application",
+						"left": {
+							"type": "abstraction",
 							"locked": true,
-							"left": {
-								"type": "variable",
-								"locked": true,
-								"color": "u"
-							},
-							"right": {
-								"type": "variable",
-								"locked": true,
-								"color": "v"
-							}			
-						}
+							"color": "w",
+							"inside": null,
+						},
+						"right": {
+							"type": "variable",
+							"locked": true,
+							"color": "s"
+						}		
 					},
 					"right": {
-						"type": "abstraction",
+						"type": "variable",
 						"locked": true,
-						"color": "s",
-						"inside": {
-							"type": "application",
-							"locked": true,
-							"left": {
-								"type": "variable",
-								"locked": true,
-								"color": "s"
-							},
-							"right": {
-								"type": "variable",
-								"locked": true,
-								"color": "x"
-							}	
-						}		
+						"color": "t"
 					}			
 				}
 			}

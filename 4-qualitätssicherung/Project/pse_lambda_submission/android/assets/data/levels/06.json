@@ -8,7 +8,7 @@
 		"colorEquivalence": true,
 		"availableColors": [
 			{
-			"color": "x"
+			"color": "s"
 			},
 			{
 			"color": "y"
@@ -17,21 +17,18 @@
 			"color": "z"
 			},
 			{
-			"color": "s"
+			"color": "t"
 			},
 			{
 			"color": "u"
 			},
 			{
-			"color": "r"
+			"color": "v"
 			}
 		],
 		"lockedColors": [
 			{
-			"color": "t"
-			},
-			{
-			"color": "v"
+			"color": "x"
 			}
 		],
 		"defaultStrategy": "NORMAL_ORDER",
@@ -44,126 +41,107 @@
 			{
 			"elementType": "VARIABLE"
 			},
-			{
-			"elementType": "ABSTRACTION"
-			}
 		],
 		"tutorial": [
 		],
 		"constellations": {
 			"start": {
-				"_comment": "(lx.(lw.y)t)v",
+				"_comment": "ly.(lx.x)y)z",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
-						"type": "application",
+						"type": "abstraction",
 						"locked": true,
-						"left": {
-							"type": "abstraction",
+						"color": "y",
+						"inside": {
+							"type": "application",
 							"locked": true,
-							"color": "x",
-							"inside": {
+							"left": {
 								"type": "abstraction",
-								"locked": false,
-								"color": "w",
+								"locked": true,
+								"color": "x",
 								"inside": {
 									"type": "variable",
 									"locked": true,
-									"color": "y"
+									"color": "x"
 								}
-							}
-						},
-						"right": {
-							"type": "variable",
-							"locked": true,
-							"color": "t"
-						}			
+							},
+							"right": {
+								"type": "variable",
+								"locked": true,
+								"color": "y"
+							}			
+						}
 					},
 					"right": {
 						"type": "variable",
 						"locked": true,
-						"color": "v"
+						"color": "z"
 					}			
 				}
 			},
 			"goal": {
-				"_comment": "yvt",
+				"_comment": "zz",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
-						"type": "application",
+						"type": "variable",
 						"locked": true,
-						"left": {
-							"type": "variable",
-							"locked": true,
-							"color": "y"
-						},
-						"right": {
-							"type": "variable",
-							"locked": true,
-							"color": "v"
-						}			
+						"color": "z"
+								
 					},
 					"right": {
 						"type": "variable",
 						"locked": true,
-						"color": "t"
+						"color": "z"
 					}			
 				}
 			},
 			"hint": {
-				"_comment": "(lx.(lw.yww)t)v",
+				"_comment": "ly.(lx.x)yw)z",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
-						"type": "application",
+						"type": "abstraction",
 						"locked": true,
-						"left": {
-							"type": "abstraction",
+						"color": "y",
+						"inside": {
+							"type": "application",
 							"locked": true,
-							"color": "x",
-							"inside": {
+							"left": {
 								"type": "abstraction",
-								"locked": false,
-								"color": "w",
+								"locked": true,
+								"color": "x",
 								"inside": {
-									"type": "application",
+									"type": "variable",
 									"locked": true,
-									"left": {
-										"type": "application",
-										"locked": true,
-										"left": {
-											"type": "variable",
-											"locked": true,
-											"color": "y"
-										},
-										"right": {
-											"type": "variable",
-											"locked": false,
-											"color": "w"
-										}			
-									},
-									"right": {
-										"type": "variable",
-										"locked": false,
-										"color": "w"
-									}			
+									"color": "x"
 								}
-							}
-						},
-						"right": {
-							"type": "variable",
-							"locked": true,
-							"color": "t"
-						}			
+							},
+							"right": {
+								"type": "application",
+								"locked": true,
+								"left": {
+									"type": "variable",
+									"locked": true,
+									"color": "y"
+								
+								},
+								"right": {
+									"type": "variable",
+									"locked": false,
+									"color": "w"
+								}		
+							}			
+						}
 					},
 					"right": {
 						"type": "variable",
 						"locked": true,
-						"color": "v"
+						"color": "z"
 					}			
 				}
 			}

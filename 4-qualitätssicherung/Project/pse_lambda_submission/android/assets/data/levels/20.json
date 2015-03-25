@@ -48,82 +48,78 @@
 		"tutorial": [
 			{
 				"tutorialId": "0",
-				"image": "",
+				"image": "tutorials/applicativeorder",
 				"inEditorMode": true,
 			},
 			{
 				"tutorialId": "1",
-				"image": "",
+				"image": "tutorials/choose_applicativeorder",
 				"inEditorMode": true,
 			},
 			{
 				"tutorialId": "2",
-				"image": "applicativeorder",
+				"image": "tutorials/reminder_goal",
 				"inEditorMode": true,
-			}
+			},
 		],
 		"constellations": {
 			"start": {
-				"_comment": "(lv.v)(lz.z((lx.x)(ly.y)))",
+				"_comment": "(lu.wsw)(lz.tz)",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "v",
-						"inside": {
-							"type": "variable",
-							"locked": true,
-							"color": "v"
-						}
-					},
-					"right": {
-						"type": "abstraction",
-						"locked": true,
-						"color": "z",
+						"color": "x",
 						"inside": {
 							"type": "application",
 							"locked": true,
 							"left": {
-								"type": "variable",
+								"type": "abstraction",
 								"locked": true,
-								"color": "z",
-							},
-							"right": {
-								"type": "application",
-								"locked": true,
-								"left": {
-									"type": "abstraction",
+								"color": "u",
+								"inside": {
+									"type": "application",
 									"locked": true,
-									"color": "x",
-									"inside": {
+									"left": {
+										"type": "abstraction",
+										"locked": true,
+										"color": "t",
+										"inside": {
+											"type": "variable",
+											"locked": true,
+											"color": "t"
+										}
+									},
+									"right": {
 										"type": "variable",
 										"locked": true,
-										"color": "x"
-									}
-								},
-								"right": {
-									"type": "abstraction",
-									"locked": true,
-									"color": "y",
-									"inside": {
-										"type": "variable",
-										"locked": true,
-										"color": "y"
+										"color": "u"
 									}
 								}
-							}				
-						}
-					}			
+							},
+							"right": {
+								"type": "variable",
+								"locked": true,
+								"color": "x"
+							}
+						},
+					},
+					"right": {
+						"type": "variable",
+						"locked": true,
+						"color": "z"
+					}
 				}
 			},
 			"goal": {
-				"_comment": "lz.z(ly.y)",
-				"child": null
+				"_comment": "tsx",
+				"child": null,
 			},
 			"hint": {
-				"child": null
+				"_comment": "(lu.wsx)(lz.tz)",
+				"child": null,
 			}
 		}
 	}

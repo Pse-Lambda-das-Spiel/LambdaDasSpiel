@@ -44,10 +44,20 @@
 		],
 		"tutorial": [
 			{
-				"tutorialId": "0",
-				"image": "",
-				"inEditorMode": true,
-			}
+			"tutorialId": "0",
+			"image": "tutorials/draganddrop1",
+			"inEditorMode": true,
+			},
+			{
+			"tutorialId": "1",
+			"image": "tutorials/draganddrop2",
+			"inEditorMode": true,
+			},
+			{
+			"tutorialId": "2",
+			"image": "tutorials/reminder_goal",
+			"inEditorMode": true,
+			},
 		],
 		"constellations": {
 			"start": {

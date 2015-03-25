@@ -63,6 +63,11 @@ public class LevelLoadTest {
 		tutorial.add(new TutorialMessageModel("tutorial_2_2", "", true));
 		tutorial.add(new TutorialMessageModel("tutorial_2_3", "", true));
 		tutorial.add(new TutorialMessageModel("tutorial_2_4", "", true));
+		tutorial.add(new TutorialMessageModel("tutorial_2_0", "tutorials/lamb_with_gem", true));
+		tutorial.add(new TutorialMessageModel("tutorial_2_1", "tutorials/lamb_enchants_gem", true));
+		tutorial.add(new TutorialMessageModel("tutorial_2_2", "tutorials/cloudanimation", true));
+		tutorial.add(new TutorialMessageModel("tutorial_2_3", "tutorials/lamb_without_magicwand", true));
+		tutorial.add(new TutorialMessageModel("tutorial_2_4", "tutorials/reminder_goal", true));
 
 		// Initialize the test start constellation: (lx.x)y, lx is blue, x is white, y is white
 		LambdaApplication startApplication = new LambdaApplication(start, true, false);
@@ -116,6 +121,8 @@ public class LevelLoadTest {
 		for (int i = 0; i < jsonLevel.getTutorial().size(); i++) {
 			assertEquals(testLevel.getTutorial().get(i).getId(), jsonLevel.getTutorial().get(i).getId());
 			assertEquals(testLevel.getTutorial().get(i).getImageName(), jsonLevel.getTutorial().get(i).getImageName());
+			assertEquals(testLevel.getTutorial().get(i).isInEditorModel(), jsonLevel.getTutorial().get(i)
+					.isInEditorModel());
 		}
 		assertEquals(testLevel.getAvailableColors(), jsonLevel.getAvailableColors());
 		assertEquals(testLevel.getLockedColors(), jsonLevel.getLockedColors());

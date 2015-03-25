@@ -17,7 +17,7 @@
 			"color": "z"
 			},
 			{
-			"color": "r"
+			"color": "t"
 			},
 			{
 			"color": "u"
@@ -27,12 +27,6 @@
 			}
 		],
 		"lockedColors": [
-			{
-			"color": "s"
-			},
-			{
-			"color": "t"
-			}
 		],
 		"defaultStrategy": "NORMAL_ORDER",
 		"availableRedStrats": [
@@ -52,76 +46,102 @@
 			}
 		],
 		"tutorial": [
+			{
+				"tutorialId": "0",
+				"image": "tutorials/alphakonversion2",
+				"inEditorMode": true,
+			},
+			{
+				"tutorialId": "1",
+				"image": "tutorials/reminder_goal",
+				"inEditorMode": true,
+			},
 		],
 		"constellations": {
-			"start": {
-				"_comment": "st",
+			"hint": {
+				"_comment": "lz.z",
 				"child": {
-					"type": "application",
+					"type": "abstraction",
 					"locked": true,
-					"left": {
-						"type": "variable",
+					"color": "x",
+					"inside": {
+						"type": "abstraction",
 						"locked": true,
-						"color": "s"
-					},
-					"right": {
-						"type": "variable",
-						"locked": true,
-						"color": "t"
-					}			
+						"color": "x",
+						"inside": {
+							"type": "application",
+							"locked": true,
+							"left": {
+								"type": "application",
+								"locked": true,
+								"left": {
+									"type": "variable",
+									"locked": true,
+									"color": "x"
+								},
+								"right": {
+									"type": "abstraction",
+									"locked": true,
+									"color": "z",
+									"inside": {
+										"type": "variable",
+										"locked": true,
+										"color": "z"
+									}
+								}		
+							},
+							"right": {
+								"type": "abstraction",
+								"locked": false,
+								"color": "w",
+								"inside": {
+									"type": "variable",
+									"locked": false,
+									"color": "w"
+								}
+							}		
+						}	
+					}	
 				}
 			},
 			"goal": {
-				"_comment": "sst",
+				"_comment": "lr.r",
 				"child": {
-					"type": "application",
+					"type": "abstraction",
 					"locked": true,
-					"left": {
-						"type": "application",
-						"locked": true,
-						"left": {
-							"type": "variable",
-							"locked": true,
-							"color": "s"
-						},
-						"right": {
-							"type": "variable",
-							"locked": true,
-							"color": "s"
-						}		
-					},
-					"right": {
+					"color": "m",
+					"inside": {
 						"type": "variable",
 						"locked": true,
-						"color": "t"
-					}			
+						"color": "m"
+					}		
 				}
 			},
-			"hint": {
-				"_comment": "(lw.)st",
+			"start": {
+				"_comment": "(lz.z)(lw.w)",
 				"child": {
-					"type": "application",
+					"type": "abstraction",
 					"locked": true,
-					"left": {
+					"color": "x",
+					"inside": {
 						"type": "application",
 						"locked": true,
 						"left": {
-							"type": "abstraction",
-							"locked": true,
-							"color": "w",
-							"inside": null,
-						},
-						"right": {
 							"type": "variable",
 							"locked": true,
-							"color": "s"
-						}		
-					},
-					"right": {
-						"type": "variable",
-						"locked": true,
-						"color": "t"
-					}			
+							"color": "x"
+						},
+						"right": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "z",
+							"inside": {
+								"type": "variable",
+								"locked": true,
+								"color": "z"
+							}
+						}			
+					}		
 				}
 			}
 		}

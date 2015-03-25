@@ -5,7 +5,7 @@
 		"coins": 10,
 		"maxReductionSteps" : 50,
 		"standardMode": true,
-		"colorEquivalence": false,
+		"colorEquivalence": true,
 		"availableColors": [
 			{
 			"color": "x"
@@ -46,88 +46,74 @@
 			}
 		],
 		"tutorial": [
+			{
+				"tutorialId": "0",
+				"image": "tutorials/alphakonversion1",
+				"inEditorMode": true,
+			},
+			{
+				"tutorialId": "1",
+				"image": "",
+				"inEditorMode": true,
+			},
+			{
+				"tutorialId": "2",
+				"image": "tutorials/reminder_goal",
+				"inEditorMode": true,
+			},
 		],
 		"constellations": {
 			"start": {
-				"_comment": "lu.lt.ut",
+				"_comment": "lz.z",
 				"child": {
 					"type": "abstraction",
 					"locked": true,
-					"color": "u",
+					"color": "x",
 					"inside": {
-						"type": "abstraction",
+						"type": "application",
 						"locked": true,
-						"color": "t",
-						"inside": {
-							"type": "application",
+						"left": {
+							"type": "variable",
+							"locked": false,
+							"color": "w"
+						},
+						"right": {
+							"type": "abstraction",
 							"locked": true,
-							"left": {
+							"color": "z",
+							"inside": {
 								"type": "variable",
 								"locked": true,
-								"color": "u"
-							},
-							"right": {
-								"type": "variable",
-								"locked": true,
-								"color": "t"
-							}			
-						}
+								"color": "z"
+							}
+						}			
 					}		
 				}
 			},
 			"goal": {
-				"_comment": "lt.lq.tq",
+				"_comment": "lr.r",
 				"child": {
-					"type": "abstraction",
-					"locked": true,
-					"color": "t",
-					"inside": {
-						"type": "abstraction",
+					"type": "application",
 						"locked": true,
-						"color": "q",
-						"inside": {
-							"type": "application",
+						"left": {
+							"type": "variable",
 							"locked": true,
-							"left": {
+							"color": "z"
+						},
+						"right": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "m",
+							"inside": {
 								"type": "variable",
 								"locked": true,
-								"color": "t"
-							},
-							"right": {
-								"type": "variable",
-								"locked": true,
-								"color": "q"
-							}			
-						}
-					}		
+								"color": "m"
+							}
+						}				
 				}
 			},
 			"hint": {
-				"_comment": "lu.lt.ut",
-				"child": {
-					"type": "abstraction",
-					"locked": true,
-					"color": "u",
-					"inside": {
-						"type": "abstraction",
-						"locked": true,
-						"color": "t",
-						"inside": {
-							"type": "application",
-							"locked": true,
-							"left": {
-								"type": "variable",
-								"locked": true,
-								"color": "u"
-							},
-							"right": {
-								"type": "variable",
-								"locked": true,
-								"color": "t"
-							}			
-						}
-					}		
-				}
+				"child": null,
 			}
 		}
 	}

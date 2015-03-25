@@ -39,28 +39,53 @@
 		"tutorial": [
 			{	
 				"tutorialId": "0",
-				"image": "",
+				"image": "tutorials/press_goalbutton",
 				"inEditorMode": true,
 			},
 			{
 				"tutorialId": "1",
-				"image": "goal",
+				"image": "tutorials/purpose_of_goal",
 				"inEditorMode": true,
 			},
 			{
 				"tutorialId": "2",
-				"image": "info",
+				"image": "tutorials/standardmode",
 				"inEditorMode": true,
 			},
 			{
 				"tutorialId": "3",
-				"image": "",
+				"image": "tutorials/coloring",
 				"inEditorMode": true,
 			},
 			{
 				"tutorialId": "4",
-				"image": "tutorials/coloring",
+				"image": "tutorials/press_reductionbutton",
 				"inEditorMode": true,
+			},
+			{
+				"tutorialId": "5",
+				"image": "tutorials/press_hintbutton",
+				"inEditorMode": true,
+			},
+			{
+				"tutorialId": "6",
+				"image": "tutorials/press_helpbutton",
+				"inEditorMode": true,
+			},
+			{
+				"tutorialId": "7",
+				"image": "tutorials/reductionmode1",
+				"inEditorMode": false,
+			},
+			{
+				"tutorialId": "8",
+				"image": "tutorials/reductionmode2",
+				"inEditorMode": false,
+			},
+			{
+				"tutorialId": "9",
+				"image": "tutorials/reductionmode3",
+				"inEditorMode": false,
 			},
 		],
 		"constellations": {
