@@ -179,8 +179,8 @@ public class ShopModel {
             musicItem.setMusic(assets.get(directory + musicItem.getFilename() + type, Music.class));
         }
         // set the default music
-        MusicItemModel musicItem = new MusicItemModel("default", 0, "data/levels/music/default.mp3");
-        musicItem.setMusic(assets.get(musicItem.getFilename(), Music.class));
+        MusicItemModel musicItem = new MusicItemModel("default", 0, "default");
+        musicItem.setMusic(assets.get("data/levels/music/" + musicItem.getFilename() + type, Music.class));
         music.setDefaultItem(musicItem);
         
         // sets every asset to the image items
@@ -190,8 +190,8 @@ public class ShopModel {
             imageItem.setImage(assets.get(directory + imageItem.getFilename() + type, Texture.class));
         }
         // set the default image
-        BackgroundImageItemModel imageItem = new BackgroundImageItemModel("default", 0, "data/levels/images/default.png");
-        imageItem.setImage(assets.get(imageItem.getFilename(), Texture.class));
+        BackgroundImageItemModel imageItem = new BackgroundImageItemModel("default", 0, "default");
+        imageItem.setImage(assets.get("data/levels/images/" + imageItem.getFilename() + type, Texture.class));
         images.setDefaultItem(imageItem);
         
         // sets every asset to the element items
@@ -231,7 +231,7 @@ public class ShopModel {
                 atlas.findRegion("front_mask"),
                 atlas.findRegion("center_mask"),
                 atlas.findRegion("back_mask"));
-        ElementUIContextFamily familyItem = new ElementUIContextFamily("default", 0, "data/items/elementuis/default.atlas");
+        ElementUIContextFamily familyItem = new ElementUIContextFamily("default", 0, "default");
         familyItem.setAbstractionUIContext(abstraction);
         familyItem.setParanthesisUIContext(parenthesis);
         familyItem.setVariableUIContext(variable);  

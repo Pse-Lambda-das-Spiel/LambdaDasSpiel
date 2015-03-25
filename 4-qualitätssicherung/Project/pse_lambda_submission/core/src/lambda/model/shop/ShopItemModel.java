@@ -14,7 +14,6 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
     private String id;
     private int price;
     private String filename;
-    private ShopModel shop;
     @SuppressWarnings("rawtypes")
     protected ShopItemTypeModel shopItemType;
     protected boolean purchased;
@@ -69,7 +68,7 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
     @SuppressWarnings("unchecked")
     public void deactivate() {
         if(purchased){
-            shopItemType.setActivatedItem(null);
+            shopItemType.setActivatedItem(shopItemType.getDefaultItem());
             setActivated(false);
         }
     }
@@ -91,16 +90,6 @@ public class ShopItemModel extends Observable<ShopItemModelObserver> {
     public int getPrice() {
         return price;
     }
-
-    /**
-     * Returns the shop in which this item is available
-     *
-     * @return shop
-     */
-    public ShopModel getShop() {
-        return shop;
-    }
-
 
     /**
      * Returns if the item is already purchased.

@@ -52,7 +52,7 @@ public class ShopItemTypeModel<T extends ShopItemModel> {
      */
     public T getActivatedItem() {
         if (activatedItem == null) {
-            return defaultItem;
+            return getDefaultItem();
         }
         else {
             return activatedItem;
@@ -76,5 +76,14 @@ public class ShopItemTypeModel<T extends ShopItemModel> {
      */
     public void setActivatedItem(T activate) {
         activatedItem = activate;
+    }
+    
+    /**
+     * Returns the default Item
+     * 
+     * @return the default Item
+     */
+    public T getDefaultItem() {
+        return defaultItem;
     }
 }
