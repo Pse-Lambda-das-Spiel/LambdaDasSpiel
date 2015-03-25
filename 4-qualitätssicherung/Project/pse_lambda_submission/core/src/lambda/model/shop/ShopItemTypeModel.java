@@ -76,7 +76,9 @@ public class ShopItemTypeModel<T extends ShopItemModel> {
      */
     public void setActivatedItem(T activate) {
         activatedItem = activate;
-        activate.setActivated(true);
+        if (activate != null) {
+            activate.setActivated(true);
+        }
     }
     
     /**
