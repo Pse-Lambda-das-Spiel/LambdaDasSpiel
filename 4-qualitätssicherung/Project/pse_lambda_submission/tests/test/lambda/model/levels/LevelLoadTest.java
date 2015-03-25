@@ -58,11 +58,11 @@ public class LevelLoadTest {
 		// blue
 		lockedColors.add(Color.valueOf("0000ffff"));
 		availableRedStrats.add(ReductionStrategy.NORMAL_ORDER);
-		tutorial.add(new TutorialMessageModel("tutorial_2_0", ""));
-		tutorial.add(new TutorialMessageModel("tutorial_2_1", ""));
-		tutorial.add(new TutorialMessageModel("tutorial_2_2", ""));
-		tutorial.add(new TutorialMessageModel("tutorial_2_3", ""));
-		tutorial.add(new TutorialMessageModel("tutorial_2_4", ""));
+		tutorial.add(new TutorialMessageModel("tutorial_2_0", "", true));
+		tutorial.add(new TutorialMessageModel("tutorial_2_1", "", true));
+		tutorial.add(new TutorialMessageModel("tutorial_2_2", "", true));
+		tutorial.add(new TutorialMessageModel("tutorial_2_3", "", true));
+		tutorial.add(new TutorialMessageModel("tutorial_2_4", "", true));
 
 		// Initialize the test start constellation: (lx.x)y, lx is blue, x is white, y is white
 		LambdaApplication startApplication = new LambdaApplication(start, true, false);
