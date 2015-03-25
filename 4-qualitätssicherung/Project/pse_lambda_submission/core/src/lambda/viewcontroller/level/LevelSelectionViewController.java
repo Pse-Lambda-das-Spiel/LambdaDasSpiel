@@ -73,7 +73,7 @@ public class LevelSelectionViewController extends StageViewController implements
     	super.show();
     	AudioManager.playDefaultMusic();
     	int levelIndex = ProfileManager.getManager().getCurrentProfile().getLevelIndex();
-    	int pageNumber = levelIndex / LevelManager.LEVEL_PER_DIFFICULTY;
+    	int pageNumber = (levelIndex - 1) / LevelManager.LEVEL_PER_DIFFICULTY;
     	if (pageNumber >= levelStack.size()) {
     		pageNumber--;
     	} 
