@@ -1,4 +1,4 @@
-package lambda.viewcontroller.reduction;
+ package lambda.viewcontroller.reduction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -284,11 +284,12 @@ public class ReductionViewController extends StageViewController implements
     }
 
     private void showStartDialogs() {
-        List<TutorialMessageModel> tutorialList = model.getContext()
+    	List<TutorialMessageModel> realTutorialList = model.getContext()
                 .getLevelModel().getTutorial();
-        for (int i = 0; i < tutorialList.size(); i++) {
-            if (tutorialList.get(i).isInEditorModel()) {
-                tutorialList.remove(i);
+        List<TutorialMessageModel> tutorialList = new ArrayList<TutorialMessageModel>();
+        for (int i = 0; i < realTutorialList.size(); i++) {
+            if (!realTutorialList.get(i).isInEditorModel()) {
+                tutorialList.add(realTutorialList.get(i));
             }
         }
         AssetManager assets = getGame()
