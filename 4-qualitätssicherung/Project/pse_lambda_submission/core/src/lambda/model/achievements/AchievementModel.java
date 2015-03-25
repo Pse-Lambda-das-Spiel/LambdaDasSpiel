@@ -41,7 +41,7 @@ public abstract class AchievementModel extends Observable<AchievementModelObserv
 	 * 
 	 */
 	public void initialize() {
-		setIconPathAchievementUnlocked("achievement_unlocked");
+		setIconPathAchievementUnlocked("achievement_unlocked" + Integer.toString(index));
 		setIconPathAchievementLocked("achievement_locked");
 	}
 	

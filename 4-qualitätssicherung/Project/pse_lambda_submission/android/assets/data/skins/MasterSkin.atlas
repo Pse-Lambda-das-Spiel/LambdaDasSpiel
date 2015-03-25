@@ -370,13 +370,13 @@ sandbox
   orig: 200, 200
   offset: 0, 0
   index: -1
-achievement_unlocked
+achievement_unlocked1
   rotate: false
   xy: 484, 112
   size: 192, 218
   orig: 192, 218
   offset: 0, 0
-  index: 4
+  index: -1
 achievement_locked
   rotate: false
   xy: 1207, 878
@@ -384,34 +384,34 @@ achievement_locked
   orig: 192, 218
   offset: 0, 0
   index: -1
-achievement_unlocked
+achievement_unlocked3
   rotate: false
   xy: 1609, 221
-  size: 192, 218
-  orig: 192, 218
-  offset: 0, 0
-  index: 5
-achievement_unlocked
-  rotate: false
-  xy: 1609, 1
-  size: 192, 218
-  orig: 192, 218
-  offset: 0, 0
-  index: 3
-achievement_unlocked
-  rotate: false
-  xy: 1803, 221
   size: 192, 218
   orig: 192, 218
   offset: 0, 0
   index: -1
 achievement_unlocked
   rotate: false
+  xy: 1609, 1
+  size: 192, 218
+  orig: 192, 218
+  offset: 0, 0
+  index: -1
+achievement_unlocked2
+  rotate: false
+  xy: 1803, 221
+  size: 192, 218
+  orig: 192, 218
+  offset: 0, 0
+  index: -1
+achievement_unlocked5
+  rotate: false
   xy: 1803, 1
   size: 192, 218
   orig: 192, 218
   offset: 0, 0
-  index: 2
+  index: -1
 goal
   rotate: false
   xy: 678, 95
@@ -459,13 +459,13 @@ MasterSkin2.png
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-achievement_unlocked
+achievement_unlocked4
   rotate: false
   xy: 1, 804
   size: 192, 218
   orig: 192, 218
   offset: 0, 0
-  index: 1
+  index: -1
 coin
   rotate: false
   xy: 1, 598

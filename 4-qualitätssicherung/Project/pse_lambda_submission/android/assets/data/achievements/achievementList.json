@@ -42,7 +42,7 @@
 		},
 		{
 		"achievementType": "difficultyAchievement",
-		"achievementNumberPerType": 5
+		"achievementNumberPerType": 4
 		},
 		{
 		"achievementType": "timeAchievement",
@@ -268,12 +268,12 @@
 		},
 		{
 		"type": "la",
-		"req": 20,
+		"req": 16,
 		"index": 4
 		},
 		{
 		"type": "la",
-		"req": 30,
+		"req": 24,
 		"index": 5
 		},
 		{
@@ -320,11 +320,6 @@
 		"type": "da",
 		"req": 4,
 		"index": 4
-		},
-		{
-		"type": "da",
-		"req": 5,
-		"index": 5
 		},
 		{
 		"type": "ta",
