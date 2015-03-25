@@ -48,10 +48,8 @@ time.sleep(1)
 
 print "Change Name"
 #Without onescreen keyboard because of different keyboard layouts etc.
-device.type("Delta")
+device.type("Delta\n")
 time.sleep(1)
-
-#TODO maybe close Keyboard
 
 print "Clicking 'right' Button"
 device.touch(calcWidth(1150), calcHeight(600), "DOWN_AND_UP")
