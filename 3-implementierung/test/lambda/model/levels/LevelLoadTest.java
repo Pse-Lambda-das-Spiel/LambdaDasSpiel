@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.backends.lwjgl.LwjglFiles;
+import com.libgdxtesting.GdxTestRunner;
 
 import lambda.model.lambdaterm.LambdaAbstraction;
 import lambda.model.lambdaterm.LambdaApplication;
@@ -13,6 +13,7 @@ import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaVariable;
 
 import org.junit.*;
+import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ import static org.junit.Assert.assertEquals;
  * 
  * @author Robert Hochweiss
  */
+@RunWith(GdxTestRunner.class)
 public class LevelLoadTest {
 
 	private static LevelModel testLevel;
@@ -31,7 +33,6 @@ public class LevelLoadTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		Gdx.files = new LwjglFiles();
 		assets = new AssetManager();
 		LevelManager.getLevelManager();
 		LambdaRoot start = new LambdaRoot();
