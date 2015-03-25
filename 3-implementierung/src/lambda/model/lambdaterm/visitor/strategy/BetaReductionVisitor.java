@@ -19,7 +19,8 @@ import static lambda.model.levels.ReductionStrategy.NORMAL_ORDER;
  *
  * @author Florian Fervers
  */
-public abstract class BetaReductionVisitor extends ValidLambdaTermVisitor<LambdaTerm> {
+public abstract class BetaReductionVisitor extends
+        ValidLambdaTermVisitor<LambdaTerm> {
     /**
      * Stores the resulting lambda term after the reduction.
      */
@@ -43,26 +44,28 @@ public abstract class BetaReductionVisitor extends ValidLambdaTermVisitor<Lambda
      * Creates a new beta reduction visitor from the given reduction srategy
      * constant.
      *
-     * @param strategy the reduction srategy constant
+     * @param strategy
+     *            the reduction srategy constant
      * @return the new beta reduction visitor
      */
-    public static BetaReductionVisitor fromReductionStrategy(ReductionStrategy strategy) {
+    public static BetaReductionVisitor fromReductionStrategy(
+            ReductionStrategy strategy) {
         switch (strategy) {
-            case NORMAL_ORDER: {
-                return new ReductionStrategyNormalOrder();
-            }
-            case APPLICATIVE_ORDER: {
-                return new ReductionStrategyApplicativeOrder();
-            }
-            case CALL_BY_NAME: {
-                return new ReductionStrategyCallByName();
-            }
-            case CALL_BY_VALUE: {
-                return new ReductionStrategyCallByValue();
-            }
-            default: {
-                throw new IllegalArgumentException("Invalid reduction strategy!");
-            }
+        case NORMAL_ORDER: {
+            return new ReductionStrategyNormalOrder();
+        }
+        case APPLICATIVE_ORDER: {
+            return new ReductionStrategyApplicativeOrder();
+        }
+        case CALL_BY_NAME: {
+            return new ReductionStrategyCallByName();
+        }
+        case CALL_BY_VALUE: {
+            return new ReductionStrategyCallByValue();
+        }
+        default: {
+            throw new IllegalArgumentException("Invalid reduction strategy!");
+        }
         }
     }
 
@@ -85,8 +88,8 @@ public abstract class BetaReductionVisitor extends ValidLambdaTermVisitor<Lambda
 
     /**
      *
-     * @param alphaConversionColors colors that are available for alpha
-     * conversion
+     * @param alphaConversionColors
+     *            colors that are available for alpha conversion
      */
     public void setAlphaConversionColors(Set<Color> alphaConversionColors) {
         this.alphaConversionColors = alphaConversionColors;
@@ -95,8 +98,10 @@ public abstract class BetaReductionVisitor extends ValidLambdaTermVisitor<Lambda
     /**
      * Visits the given lambda root and traverses to the child node.
      *
-     * @param node the root to be visited
-     * @throws InvalidLambdaTermException if the visited term is invalid
+     * @param node
+     *            the root to be visited
+     * @throws InvalidLambdaTermException
+     *             if the visited term is invalid
      */
     @Override
     public void visitValid(LambdaRoot node) {
@@ -107,8 +112,10 @@ public abstract class BetaReductionVisitor extends ValidLambdaTermVisitor<Lambda
     /**
      * Visits the given lambda application and saves it as result.
      *
-     * @param node the application to be visited
-     * @throws InvalidLambdaTermException if the visited term is invalid
+     * @param node
+     *            the application to be visited
+     * @throws InvalidLambdaTermException
+     *             if the visited term is invalid
      */
     @Override
     public void visitValid(LambdaApplication node) {
@@ -118,8 +125,10 @@ public abstract class BetaReductionVisitor extends ValidLambdaTermVisitor<Lambda
     /**
      * Visits the given lambda abstraction and saves it as result.
      *
-     * @param node the abstraction to be visited
-     * @throws InvalidLambdaTermException if the visited term is invalid
+     * @param node
+     *            the abstraction to be visited
+     * @throws InvalidLambdaTermException
+     *             if the visited term is invalid
      */
     @Override
     public void visitValid(LambdaAbstraction node) {
@@ -129,8 +138,10 @@ public abstract class BetaReductionVisitor extends ValidLambdaTermVisitor<Lambda
     /**
      * Visits the given lambda variable and saves it as result.
      *
-     * @param node the variable to be visited
-     * @throws InvalidLambdaTermException if the visited term is invalid
+     * @param node
+     *            the variable to be visited
+     * @throws InvalidLambdaTermException
+     *             if the visited term is invalid
      */
     @Override
     public void visitValid(LambdaVariable node) {
@@ -141,7 +152,7 @@ public abstract class BetaReductionVisitor extends ValidLambdaTermVisitor<Lambda
      * Returns whether this visitor has performed an application.
      *
      * @return true if this visitor has performed an application, false
-     * otherwise
+     *         otherwise
      */
     public boolean hasReduced() {
         return hasReduced;

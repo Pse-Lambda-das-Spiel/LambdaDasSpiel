@@ -20,7 +20,7 @@ public class SettingsModelTest implements SettingsModelObserver {
     private boolean calledChangedMusicVolume;
     private boolean calledChangedSoundVolume;
     private SettingsModel settings;
-    
+
     @Before
     public void setUp() throws Exception {
         calledChangedMusicOn = false;
@@ -29,15 +29,15 @@ public class SettingsModelTest implements SettingsModelObserver {
         settings = new SettingsModel();
         settings.addObserver(this);
     }
-    
+
     @After
     public void tearDown() throws Exception {
         settings.removeObserver(this);
     }
 
     /**
-     * Sets musicOn to true and false,
-     * while making sure it works and the correct SettingsModelOberver-methods are called.
+     * Sets musicOn to true and false, while making sure it works and the
+     * correct SettingsModelOberver-methods are called.
      */
     @Test
     public void testSetMusicOn() {
@@ -49,10 +49,10 @@ public class SettingsModelTest implements SettingsModelObserver {
         assertFalse(settings.isMusicOn());
         assertTrue(calledChangedMusicOn);
     }
-    
+
     /**
-     * Checks if the music volume can be set.
-     * while making sure that changedMusicVolume() from the obervers is called. 
+     * Checks if the music volume can be set. while making sure that
+     * changedMusicVolume() from the obervers is called.
      */
     @Test
     public void testSetMusicVolume() {
@@ -61,10 +61,10 @@ public class SettingsModelTest implements SettingsModelObserver {
         assertEquals(testValue, settings.getMusicVolume(), EPSILON);
         assertTrue(calledChangedMusicVolume);
     }
-    
+
     /**
-     * Checks if the sound volume can be set.
-     * while making sure that changedSoundVolume() from the obervers is called. 
+     * Checks if the sound volume can be set. while making sure that
+     * changedSoundVolume() from the obervers is called.
      */
     @Test
     public void testSetSoundVolume() {
@@ -73,7 +73,7 @@ public class SettingsModelTest implements SettingsModelObserver {
         assertEquals(testValue, settings.getSoundVolume(), EPSILON);
         assertTrue(calledChangedSoundVolume);
     }
-    
+
     /**
      * Tests if setMusicVolume and setSoundVolume set the volumes to 0 or 1
      * depending on negative values or values bigger than 1.
@@ -89,7 +89,6 @@ public class SettingsModelTest implements SettingsModelObserver {
         settings.setSoundVolume(-12.3f);
         assertEquals(0.0f, settings.getSoundVolume(), 0.0f);
     }
-    
 
     @Override
     public void changedMusicOn() {
@@ -105,5 +104,5 @@ public class SettingsModelTest implements SettingsModelObserver {
     public void changedSoundVolume() {
         calledChangedSoundVolume = true;
     }
-    
+
 }

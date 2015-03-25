@@ -47,18 +47,24 @@ public class NodeViewControllerCreator implements LambdaTermVisitor {
     /**
      * Creates a new instance of NodeViewControllerCreator.
      *
-     * @param parent the parent node viewcontroller
-     * @param canCreateParenthesis indicates whether a parenthesis can be
-     * created if the visited node is an application
-     * @param viewController the viewController that the node will be inserted
-     * into
-     * @param rightSibling the right sibling of the inserted element
-     * @throws IllegalArgumentException if parent is null or viewController is
-     * null
+     * @param parent
+     *            the parent node viewcontroller
+     * @param canCreateParenthesis
+     *            indicates whether a parenthesis can be created if the visited
+     *            node is an application
+     * @param viewController
+     *            the viewController that the node will be inserted into
+     * @param rightSibling
+     *            the right sibling of the inserted element
+     * @throws IllegalArgumentException
+     *             if parent is null or viewController is null
      */
-    public NodeViewControllerCreator(LambdaNodeViewController parent, boolean canCreateParenthesis, LambdaTermViewController viewController, LambdaTerm rightSibling) {
+    public NodeViewControllerCreator(LambdaNodeViewController parent,
+            boolean canCreateParenthesis,
+            LambdaTermViewController viewController, LambdaTerm rightSibling) {
         if (parent == null) {
-            throw new IllegalArgumentException("Parent node viewcontroller cannot be null!");
+            throw new IllegalArgumentException(
+                    "Parent node viewcontroller cannot be null!");
         }
         if (viewController == null) {
             throw new IllegalArgumentException("ViewController cannot be null!");
@@ -74,7 +80,8 @@ public class NodeViewControllerCreator implements LambdaTermVisitor {
      * Cannot happen since the viewcontroller for the root is created
      * separately.
      *
-     * @param node the root to be visited
+     * @param node
+     *            the root to be visited
      */
     @Override
     public void visit(LambdaRoot node) {
@@ -85,16 +92,19 @@ public class NodeViewControllerCreator implements LambdaTermVisitor {
      * Visits the given lambda application and inserts a new parenthesis under
      * the given parent if possible. Then traverses to the child nodes.
      *
-     * @param node the application to be visited
+     * @param node
+     *            the application to be visited
      */
     @Override
     public void visit(LambdaApplication node) {
         if (canCreateParenthesis || node.isExplicit()) {
-            parent.insertChild(new LambdaParenthesisViewController(node, parent, viewController), rightSibling);
+            parent.insertChild(new LambdaParenthesisViewController(node,
+                    parent, viewController), rightSibling);
         }
         // Traverse
         if (node.getRight() != null) {
-            node.accept(new ViewInsertionVisitor(node.getRight(), viewController));
+            node.accept(new ViewInsertionVisitor(node.getRight(),
+                    viewController));
         }
         if (node.getLeft() != null) {
             node.accept(new ViewInsertionVisitor(node.getLeft(), viewController));
@@ -105,13 +115,16 @@ public class NodeViewControllerCreator implements LambdaTermVisitor {
      * Visits the given lambda abstraction and inserts a new abstraction under
      * the given parent. Then traverses to the child node.
      *
-     * @param node the abstraction to be visited
+     * @param node
+     *            the abstraction to be visited
      */
     @Override
     public void visit(LambdaAbstraction node) {
-        parent.insertChild(new LambdaAbstractionViewController(node, parent, viewController), rightSibling);
+        parent.insertChild(new LambdaAbstractionViewController(node, parent,
+                viewController), rightSibling);
         if (node.getInside() != null) {
-            node.accept(new ViewInsertionVisitor(node.getInside(), viewController));
+            node.accept(new ViewInsertionVisitor(node.getInside(),
+                    viewController));
         }
     }
 
@@ -119,11 +132,13 @@ public class NodeViewControllerCreator implements LambdaTermVisitor {
      * Visits the given lambda variable and inserts a new variable under the
      * given parent.
      *
-     * @param node the variable to be visited
+     * @param node
+     *            the variable to be visited
      */
     @Override
     public void visit(LambdaVariable node) {
-        parent.insertChild(new LambdaVariableViewController(node, parent, viewController), rightSibling);
+        parent.insertChild(new LambdaVariableViewController(node, parent,
+                viewController), rightSibling);
     }
 
     @Override

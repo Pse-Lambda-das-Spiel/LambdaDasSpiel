@@ -49,10 +49,12 @@ public class LambdaGame extends Game {
      * Returns the viewController with the given class or null if no such
      * viewController exists.
      *
-     * @param <T> the type of the viewController
-     * @param vcClass the class of the viewController
+     * @param <T>
+     *            the type of the viewController
+     * @param vcClass
+     *            the class of the viewController
      * @return the viewController with the given class or null if no such
-     * viewController exists
+     *         viewController exists
      */
     public <T extends ViewController> T getController(Class<T> vcClass) {
         return (T) viewControllers.get(vcClass);
@@ -61,7 +63,8 @@ public class LambdaGame extends Game {
     /**
      * Sets the viewController with the given name to be the current screen.
      *
-     * @param vcClass the class of the viewController
+     * @param vcClass
+     *            the class of the viewController
      */
     public void setScreen(Class vcClass) {
         setScreen(getController(vcClass));
@@ -70,7 +73,8 @@ public class LambdaGame extends Game {
     /**
      * Adds the given view controller to the map of view controllers.
      *
-     * @param viewController the new view controller
+     * @param viewController
+     *            the new view controller
      */
     private void addViewController(ViewController viewController) {
         viewController.setGame(this);
@@ -83,7 +87,8 @@ public class LambdaGame extends Game {
      */
     public void createViewControllers() {
         for (ViewController viewController : viewControllers.values()) {
-            viewController.create(getController(AssetViewController.class).getManager());
+            viewController.create(getController(AssetViewController.class)
+                    .getManager());
         }
     }
 
@@ -111,11 +116,13 @@ public class LambdaGame extends Game {
         addViewController(new StatisticViewController());
         addViewController(new ReductionViewController());
 
-        AudioManager.queueAssets(getController(AssetViewController.class).getManager());
+        AudioManager.queueAssets(getController(AssetViewController.class)
+                .getManager());
 
         // Queue all assets for loading
         for (ViewController viewController : viewControllers.values()) {
-            viewController.queueAssets(getController(AssetViewController.class).getManager());
+            viewController.queueAssets(getController(AssetViewController.class)
+                    .getManager());
         }
 
         // Show loading screen
@@ -123,8 +130,8 @@ public class LambdaGame extends Game {
     }
 
     /**
-     * Called when the Application is paused, usually when it's not active or visible on screen.
-     * An Application is also paused before it is destroyed.
+     * Called when the Application is paused, usually when it's not active or
+     * visible on screen. An Application is also paused before it is destroyed.
      */
     @Override
     public void pause() {
@@ -133,7 +140,7 @@ public class LambdaGame extends Game {
             viewController.pause();
         }
     }
-    
+
     /**
      * Called when the Application is exited. Releases all resources used by
      * this game.
@@ -161,8 +168,10 @@ public class LambdaGame extends Game {
      * during a non-paused state but will never happen before a call to
      * create().
      *
-     * @param width the new width in pixels
-     * @param height the new height in pixels
+     * @param width
+     *            the new width in pixels
+     * @param height
+     *            the new height in pixels
      */
     @Override
     public void resize(int width, int height) {

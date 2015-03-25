@@ -55,7 +55,8 @@ import lambda.viewcontroller.reduction.ReductionViewController;
  *
  * @author Florian Fervers
  */
-public final class EditorViewController extends StageViewController implements EditorModelObserver, LambdaTermObserver, InputProcessor {
+public final class EditorViewController extends StageViewController implements
+        EditorModelObserver, LambdaTermObserver, InputProcessor {
     /**
      * The initial offset of the term from the top left corner in percentages of
      * screen size.
@@ -131,8 +132,8 @@ public final class EditorViewController extends StageViewController implements E
 
         ImageButton pauseButton = new ImageButton(manager.get(
                 "data/skins/MasterSkin.json", Skin.class), "pauseButton");
-        hintButton = new ImageButton(manager.get(
-                "data/skins/MasterSkin.json", Skin.class), "infoButton");
+        hintButton = new ImageButton(manager.get("data/skins/MasterSkin.json",
+                Skin.class), "infoButton");
         ImageButton helpButton = new ImageButton(manager.get(
                 "data/skins/MasterSkin.json", Skin.class), "helpButton");
         targetButton = new ImageButton(manager.get(
@@ -161,11 +162,12 @@ public final class EditorViewController extends StageViewController implements E
         bottomToolBar = new Table();
         bottomToolBar.setBackground(new TextureRegionDrawable(manager.get(
                 "data/skins/MasterSkin.atlas", TextureAtlas.class).findRegion(
-                        "elements_bar")));
+                "elements_bar")));
 
         main.add(leftToolBar).expandY().left().top();
-        main.add(targetButton).size(0.10f * getStage().getWidth(),
-                0.10f * getStage().getWidth()).right().top();
+        main.add(targetButton)
+                .size(0.10f * getStage().getWidth(),
+                        0.10f * getStage().getWidth()).right().top();
         main.row();
         main.add(bottomToolBar).height(0.25f * getStage().getHeight())
                 .expandX().bottom();
@@ -188,7 +190,7 @@ public final class EditorViewController extends StageViewController implements E
         hintButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-            	EditorViewController.this.model.hintIsUsed();
+                EditorViewController.this.model.hintIsUsed();
                 new HintDialog(dialogSkin, manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
                         I18NBundle.class), EditorViewController.this.model
@@ -219,16 +221,19 @@ public final class EditorViewController extends StageViewController implements E
                 final float labelWidth = getStage().getWidth() / 2;
                 new Dialog("", dialogSkin) {
                     {
-                        I18NBundle language = manager.get(ProfileManager
-                                .getManager().getCurrentProfile().getLanguage(),
-                                I18NBundle.class);
+                        I18NBundle language = manager.get(
+                                ProfileManager.getManager().getCurrentProfile()
+                                        .getLanguage(), I18NBundle.class);
                         clear();
-                        final List<ReductionStrategy> strategies = EditorViewController.this.model.getLevelContext().getLevelModel().getAvailableRedStrats();
+                        final List<ReductionStrategy> strategies = EditorViewController.this.model
+                                .getLevelContext().getLevelModel()
+                                .getAvailableRedStrats();
                         pad((buttonSize + labelWidth) / 20);
                         Label labels[] = new Label[strategies.size()];
                         for (int n = 0; n < strategies.size(); n++) {
                             ImageButton stratButton = new ImageButton(
-                                    dialogSkin, strategies.get(n).name() + "_Button");
+                                    dialogSkin, strategies.get(n).name()
+                                            + "_Button");
                             final int t = n;
                             stratButton.addListener(new ClickListener() {
                                 @Override
@@ -239,13 +244,16 @@ public final class EditorViewController extends StageViewController implements E
                                 }
                             });
                             add(stratButton).size(buttonSize);
-                            labels[n] = new Label(language.get(strategies.get(n).name()), dialogSkin);
+                            labels[n] = new Label(language.get(strategies
+                                    .get(n).name()), dialogSkin);
                             add(labels[n]).width(labelWidth);
                             row();
                         }
                         float smallestScale = Float.POSITIVE_INFINITY;
                         for (Label label : labels) {
-                            float current = labelWidth / label.getStyle().font.getBounds(label.getText()).width;
+                            float current = labelWidth
+                                    / label.getStyle().font.getBounds(label
+                                            .getText()).width;
                             if (current < smallestScale) {
                                 smallestScale = current;
                             }
@@ -256,8 +264,10 @@ public final class EditorViewController extends StageViewController implements E
                         final Dialog dialog = this;
                         addListener(new ClickListener() {
                             @Override
-                            public void clicked(InputEvent event, float x, float y) {
-                                if (!(0 < x && 0 < y && x < dialog.getWidth() && y < dialog.getHeight())) {
+                            public void clicked(InputEvent event, float x,
+                                    float y) {
+                                if (!(0 < x && 0 < y && x < dialog.getWidth() && y < dialog
+                                        .getHeight())) {
                                     remove();
                                 }
                             }
@@ -269,33 +279,40 @@ public final class EditorViewController extends StageViewController implements E
         finishedButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                I18NBundle language = manager.get(ProfileManager
-                        .getManager().getCurrentProfile().getLanguage(),
-                        I18NBundle.class);
+                I18NBundle language = manager.get(ProfileManager.getManager()
+                        .getCurrentProfile().getLanguage(), I18NBundle.class);
                 if (model.getTerm().getChild() == null) {
                     showDialog(language.get("invalidTermEmpty"));
                 } else if (!model.getTerm().accept(new IsValidVisitor())) {
                     showDialog(language.get("invalidTermOther"));
-                } else if (model.getTerm().accept(new ColorCollectionVisitor(ColorCollectionVisitor.TYPE_ALL)).contains(Color.WHITE)) {
+                } else if (model
+                        .getTerm()
+                        .accept(new ColorCollectionVisitor(
+                                ColorCollectionVisitor.TYPE_ALL))
+                        .contains(Color.WHITE)) {
                     showDialog(language.get("invalidTermWhite"));
                 } else {
-                    getGame().getController(ReductionViewController.class).reset(model);
+                    getGame().getController(ReductionViewController.class)
+                            .reset(model);
                     getGame().setScreen(ReductionViewController.class);
                 }
             }
-            
-            private  void showDialog(final String message) {
+
+            private void showDialog(final String message) {
                 new Dialog("", dialogSkin) {
-                    {   
+                    {
                         clear();
                         pad(EditorViewController.this.getStage().getHeight() / 20);
                         Label errorLabel = new Label(message, dialogSkin);
                         errorLabel.setFontScale(0.7f);
                         errorLabel.setWrap(true);
-                        add(errorLabel).width(EditorViewController.this.getStage().getWidth() / 2);
+                        add(errorLabel)
+                                .width(EditorViewController.this.getStage()
+                                        .getWidth() / 2);
                         addListener(new ClickListener() {
                             @Override
-                            public void clicked(InputEvent event, float x, float y) {
+                            public void clicked(InputEvent event, float x,
+                                    float y) {
                                 remove();
                             }
                         });
@@ -311,7 +328,8 @@ public final class EditorViewController extends StageViewController implements E
     @Override
     public void show() {
         if (term == null) {
-            throw new IllegalStateException("Cannot show the editor viewController without calling reset before!");
+            throw new IllegalStateException(
+                    "Cannot show the editor viewController without calling reset before!");
         }
         AudioManager.playMusic(model.getLevelContext().getMusic());
         InputMultiplexer multiplexer = new InputMultiplexer();
@@ -323,17 +341,22 @@ public final class EditorViewController extends StageViewController implements E
     }
 
     private void showStartDialogs() {
-        List<TutorialMessageModel> tutorialList = model.getLevelContext().getLevelModel().getTutorial();
-        AssetManager assets = getGame().getController(AssetViewController.class).getManager();
-        final Skin dialogSkin = assets.get("data/skins/DialogTemp.json", Skin.class);
-        I18NBundle language = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
-                I18NBundle.class);
+        List<TutorialMessageModel> tutorialList = model.getLevelContext()
+                .getLevelModel().getTutorial();
+        AssetManager assets = getGame()
+                .getController(AssetViewController.class).getManager();
+        final Skin dialogSkin = assets.get("data/skins/DialogTemp.json",
+                Skin.class);
+        I18NBundle language = assets.get(ProfileManager.getManager()
+                .getCurrentProfile().getLanguage(), I18NBundle.class);
         final float width = getStage().getWidth();
         final float height = getStage().getHeight();
-        final Dialog[] dialogs = new Dialog[tutorialList.size() + (targetButton.isVisible() ? 1 : 0)];
+        final Dialog[] dialogs = new Dialog[tutorialList.size()
+                + (targetButton.isVisible() ? 1 : 0)];
         for (int i = 0; i + (targetButton.isVisible() ? 1 : 0) < dialogs.length; i++) {
             final int pos = i;
-            dialogs[pos] = new TutorialMessage(tutorialList.get(i), dialogSkin, language, height, width);
+            dialogs[pos] = new TutorialMessage(tutorialList.get(i), dialogSkin,
+                    language, height, width);
             dialogs[pos].addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -345,11 +368,13 @@ public final class EditorViewController extends StageViewController implements E
             });
         }
         if (targetButton.isVisible()) {
-            dialogs[dialogs.length - 1] = new TargetDialog(dialogSkin, language,
-                    EditorViewController.this.model.getLevelContext(), getStage());
+            dialogs[dialogs.length - 1] = new TargetDialog(dialogSkin,
+                    language,
+                    EditorViewController.this.model.getLevelContext(),
+                    getStage());
         }
         /*
-         * special handling necessary if there is no target and no tutorials, 
+         * special handling necessary if there is no target and no tutorials,
          * should not be necessary if non standard mode is rightly implemented
          */
         if (dialogs.length > 0) {
@@ -360,8 +385,10 @@ public final class EditorViewController extends StageViewController implements E
     /**
      * Resets this view controller with the given values.
      *
-     * @param context the current level context
-     * @throws IllegalArgumentException if context is null
+     * @param context
+     *            the current level context
+     * @throws IllegalArgumentException
+     *             if context is null
      */
     public void reset(LevelContext context) {
         if (context == null) {
@@ -375,8 +402,10 @@ public final class EditorViewController extends StageViewController implements E
         if (term != null) {
             term.remove();
         }
-        term = LambdaTermViewController.build(model.getTerm(), true, context, getStage());
-        term.setAssets(getGame().getController(AssetViewController.class).getManager());
+        term = LambdaTermViewController.build(model.getTerm(), true, context,
+                getStage());
+        term.setAssets(getGame().getController(AssetViewController.class)
+                .getManager());
         getStage().addActor(term);
         term.toBack();
         term.setPosition(getStage().getWidth() * INITIAL_TERM_OFFSET.x,
@@ -393,31 +422,43 @@ public final class EditorViewController extends StageViewController implements E
         // Reset toolbar elements
         toolbarElements.clear();
         bottomToolBar.clear();
-        if (model.getLevelContext().getLevelModel().getUseableElements().contains(ElementType.VARIABLE)) {
+        if (model.getLevelContext().getLevelModel().getUseableElements()
+                .contains(ElementType.VARIABLE)) {
             LambdaRoot variable = new LambdaRoot();
             variable.setChild(new LambdaVariable(variable, Color.WHITE, true));
-            toolbarElements.add(LambdaTermViewController.build(variable, false, model.getLevelContext(), getStage()));
+            toolbarElements.add(LambdaTermViewController.build(variable, false,
+                    model.getLevelContext(), getStage()));
         }
-        if (model.getLevelContext().getLevelModel().getUseableElements().contains(ElementType.ABSTRACTION)) {
+        if (model.getLevelContext().getLevelModel().getUseableElements()
+                .contains(ElementType.ABSTRACTION)) {
             LambdaRoot abstraction = new LambdaRoot();
-            abstraction.setChild(new LambdaAbstraction(abstraction, Color.WHITE, true));
-            toolbarElements.add(LambdaTermViewController.build(abstraction, false, model.getLevelContext(), getStage()));
+            abstraction.setChild(new LambdaAbstraction(abstraction,
+                    Color.WHITE, true));
+            toolbarElements.add(LambdaTermViewController.build(abstraction,
+                    false, model.getLevelContext(), getStage()));
         }
-        if (model.getLevelContext().getLevelModel().getUseableElements().contains(ElementType.PARENTHESIS)) {
+        if (model.getLevelContext().getLevelModel().getUseableElements()
+                .contains(ElementType.PARENTHESIS)) {
             LambdaRoot application = new LambdaRoot();
-            application.setChild(new LambdaApplication(application, true, true));
-            toolbarElements.add(LambdaTermViewController.build(application, false, model.getLevelContext(), getStage()));
+            application
+                    .setChild(new LambdaApplication(application, true, true));
+            toolbarElements.add(LambdaTermViewController.build(application,
+                    false, model.getLevelContext(), getStage()));
         }
         for (LambdaTermViewController toolbarElement : toolbarElements) {
             toolbarElement.addOffset(0.0f, toolbarElement.getHeight() / 4);
-            term.getDragAndDrop().addDragSource(new LambdaTermDragSource(toolbarElement.getRoot().getChild(0), false, true));
+            term.getDragAndDrop().addDragSource(
+                    new LambdaTermDragSource(toolbarElement.getRoot().getChild(
+                            0), false, true));
             bottomToolBar.add(toolbarElement).left();
         }
         bottomToolBar.row();
 
         // Reset button visibilities
-        hintButton.setVisible(model.getLevelContext().getLevelModel().getHint().getChild() != null);
-        targetButton.setVisible(model.getLevelContext().getLevelModel().getGoal().getChild() != null);
+        hintButton.setVisible(model.getLevelContext().getLevelModel().getHint()
+                .getChild() != null);
+        targetButton.setVisible(model.getLevelContext().getLevelModel()
+                .getGoal().getChild() != null);
 
         model.getTerm().addObserver(this);
         model.levelIsStarted();
@@ -427,7 +468,8 @@ public final class EditorViewController extends StageViewController implements E
      * Called when the a new reduction strategy is selected. Updates the
      * strategy button image.
      *
-     * @param strategy the new strategy
+     * @param strategy
+     *            the new strategy
      */
     @Override
     public void strategyChanged(ReductionStrategy strategy) {
@@ -488,7 +530,8 @@ public final class EditorViewController extends StageViewController implements E
         if (isDraggingScreen) {
             if (model.getTerm().getChild() == null) {
                 // Reset screen position if no element is present
-                term.setPosition(getStage().getWidth() * INITIAL_TERM_OFFSET.x, getStage().getHeight() * (1 - INITIAL_TERM_OFFSET.y));
+                term.setPosition(getStage().getWidth() * INITIAL_TERM_OFFSET.x,
+                        getStage().getHeight() * (1 - INITIAL_TERM_OFFSET.y));
             } else {
                 // Drag screen
                 term.moveBy((screenX - lastX) / 2.0f, (lastY - screenY) / 2.0f);
@@ -531,9 +574,10 @@ public final class EditorViewController extends StageViewController implements E
         public PauseDialog(Skin dialogSkin, I18NBundle language,
                 float stageWidth, float stageHeight) {
             super("", dialogSkin);
-            
-            Label mainMenuLabel = new Label(language.get("mainMenu"), dialogSkin);
-            
+
+            Label mainMenuLabel = new Label(language.get("mainMenu"),
+                    dialogSkin);
+
             ImageButton menuButton = new ImageButton(dialogSkin, "menuButton");
             menuButton.addListener(new ClickListener() {
                 @Override
@@ -543,9 +587,11 @@ public final class EditorViewController extends StageViewController implements E
                 }
             });
 
-            Label levelMenuLabel = new Label(language.get("levelMenu"), dialogSkin);
-            
-            ImageButton levelMenuButton = new ImageButton(dialogSkin, "levelMenuButton");
+            Label levelMenuLabel = new Label(language.get("levelMenu"),
+                    dialogSkin);
+
+            ImageButton levelMenuButton = new ImageButton(dialogSkin,
+                    "levelMenuButton");
             levelMenuButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -553,9 +599,9 @@ public final class EditorViewController extends StageViewController implements E
                     remove();
                 }
             });
-            
+
             Label resetLabel = new Label(language.get("reset"), dialogSkin);
-            
+
             ImageButton resetButton = new ImageButton(dialogSkin, "resetButton");
             resetButton.addListener(new ClickListener() {
                 @Override
@@ -565,9 +611,10 @@ public final class EditorViewController extends StageViewController implements E
                     remove();
                 }
             });
-            
-            Label continueLabel = new Label(language.get("continue"), dialogSkin);
-            
+
+            Label continueLabel = new Label(language.get("continue"),
+                    dialogSkin);
+
             ImageButton continueButton = new ImageButton(dialogSkin,
                     "continueButton");
             continueButton.addListener(new ClickListener() {
@@ -576,14 +623,16 @@ public final class EditorViewController extends StageViewController implements E
                     remove();
                 }
             });
-            
+
             clear();
             float buttonSize = stageHeight / 4;
             float labelWidth = buttonSize * 3 / 2;
             float smallestScale = Float.POSITIVE_INFINITY;
-            Label labels[] = {mainMenuLabel, continueLabel, levelMenuLabel, resetLabel};
+            Label labels[] = { mainMenuLabel, continueLabel, levelMenuLabel,
+                    resetLabel };
             for (Label label : labels) {
-                float current = labelWidth / label.getStyle().font.getBounds(label.getText()).width;
+                float current = labelWidth
+                        / label.getStyle().font.getBounds(label.getText()).width;
                 if (current < smallestScale) {
                     smallestScale = current;
                 }
@@ -625,21 +674,21 @@ public final class EditorViewController extends StageViewController implements E
     public void replaceTerm(LambdaTerm oldTerm, LambdaTerm newTerm) {
     }
 
-	/**
-	 * Returns the model of the editor.
-	 * 
-	 * @return the model of the editor
-	 */
-	public EditorModel getModel() {
-		return model;
-	}
+    /**
+     * Returns the model of the editor.
+     * 
+     * @return the model of the editor
+     */
+    public EditorModel getModel() {
+        return model;
+    }
 
-	@Override
-	public void levelStarted() {
-	}
+    @Override
+    public void levelStarted() {
+    }
 
-	@Override
-	public void hintUsed() {
-	}
+    @Override
+    public void hintUsed() {
+    }
 
 }

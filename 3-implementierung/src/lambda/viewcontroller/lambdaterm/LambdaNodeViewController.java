@@ -83,18 +83,24 @@ public abstract class LambdaNodeViewController extends Actor {
     /**
      * Creates a new instance of LambdaNodeViewController.
      *
-     * @param linkedTerm the term that is displayed by this viewcontroller
-     * @param parent the parent viewcontroller node
-     * @param viewController the viewcontroller on which this node is being
-     * @param canHaveChildren true if this node can have children, false
-     * otherwise
+     * @param linkedTerm
+     *            the term that is displayed by this viewcontroller
+     * @param parent
+     *            the parent viewcontroller node
+     * @param viewController
+     *            the viewcontroller on which this node is being
+     * @param canHaveChildren
+     *            true if this node can have children, false otherwise
      */
-    public LambdaNodeViewController(LambdaTerm linkedTerm, LambdaNodeViewController parent, LambdaTermViewController viewController, boolean canHaveChildren) {
+    public LambdaNodeViewController(LambdaTerm linkedTerm,
+            LambdaNodeViewController parent,
+            LambdaTermViewController viewController, boolean canHaveChildren) {
         if (linkedTerm == null) {
             throw new IllegalArgumentException("Linked term cannot be null!");
         }
         if (viewController == null) {
-            throw new IllegalArgumentException("Lambda term viewcontroller cannot be null!");
+            throw new IllegalArgumentException(
+                    "Lambda term viewcontroller cannot be null!");
         }
         this.linkedTerm = linkedTerm;
         this.parent = parent;
@@ -149,7 +155,8 @@ public abstract class LambdaNodeViewController extends Actor {
     /**
      * Returns the child at the given index.
      *
-     * @param index the child's index
+     * @param index
+     *            the child's index
      * @return the child at the given index
      */
     public LambdaNodeViewController getChild(int index) {
@@ -196,15 +203,19 @@ public abstract class LambdaNodeViewController extends Actor {
     /**
      * Draws the vanish animation over this node family if necessary.
      *
-     * @param batch the batch on which the node will be drawn
-     * @param alpha the parent's alpha
+     * @param batch
+     *            the batch on which the node will be drawn
+     * @param alpha
+     *            the parent's alpha
      */
     public void drawVanishAnimation(Batch batch, float alpha) {
         // Vanish animation
         synchronized (getViewController()) {
             if (animateVanishSmoke) {
                 float familyHeight = getFamilyHeight();
-                batch.draw(animation.getKeyFrame(vanishSmokeStateTime), getX(), getY() - familyHeight + BLOCK_HEIGHT, getWidth(), familyHeight);
+                batch.draw(animation.getKeyFrame(vanishSmokeStateTime), getX(),
+                        getY() - familyHeight + BLOCK_HEIGHT, getWidth(),
+                        familyHeight);
                 vanishSmokeStateTime += Gdx.graphics.getDeltaTime();
                 if (isVanishAnimationFinished()) {
                     animateVanishSmoke = false;
@@ -219,13 +230,18 @@ public abstract class LambdaNodeViewController extends Actor {
      * sibling. Will insert child at the end of the children list if right
      * sibling is null.
      *
-     * @param child the child to be inserted
-     * @param rightSibling the right sibling
-     * @throws IllegalArgumentException if child is null or rightSibling is null
+     * @param child
+     *            the child to be inserted
+     * @param rightSibling
+     *            the right sibling
+     * @throws IllegalArgumentException
+     *             if child is null or rightSibling is null
      */
-    public void insertChild(LambdaNodeViewController child, LambdaTerm rightSibling) {
+    public void insertChild(LambdaNodeViewController child,
+            LambdaTerm rightSibling) {
         if (child == null) {
-            throw new IllegalArgumentException("Child node viewcontroller cannot be null!");
+            throw new IllegalArgumentException(
+                    "Child node viewcontroller cannot be null!");
         }
         if (rightSibling == null) {
             // Insert at the end of the children list
@@ -233,7 +249,8 @@ public abstract class LambdaNodeViewController extends Actor {
         } else {
             // Insert before right sibling
             for (int i = 0; i < children.size() + 1; i++) {
-                if (i == children.size() || children.get(i).getLinkedTerm() == rightSibling) {
+                if (i == children.size()
+                        || children.get(i).getLinkedTerm() == rightSibling) {
                     children.add(i, child);
                     break;
                 }
@@ -247,12 +264,15 @@ public abstract class LambdaNodeViewController extends Actor {
     /**
      * Removes the given child node from this node.
      *
-     * @param child the child to be removed
-     * @throws IllegalArgumentException if child is null
+     * @param child
+     *            the child to be removed
+     * @throws IllegalArgumentException
+     *             if child is null
      */
     public void removeChild(LambdaNodeViewController child) {
         if (child == null) {
-            throw new IllegalArgumentException("Child node viewcontroller cannot be null!");
+            throw new IllegalArgumentException(
+                    "Child node viewcontroller cannot be null!");
         }
         children.remove(child);
 
@@ -274,14 +294,18 @@ public abstract class LambdaNodeViewController extends Actor {
         width = Math.max(width, getMinWidth());
         setWidth(width);
         if (DEBUG) {
-            System.out.println("        Updated size of " + this.getLinkedTerm().getClass().getSimpleName() + " (" + getLinkedTerm().toString() + ") to (" + getWidth() + ", " + getHeight() + ")");
+            System.out.println("        Updated size of "
+                    + this.getLinkedTerm().getClass().getSimpleName() + " ("
+                    + getLinkedTerm().toString() + ") to (" + getWidth() + ", "
+                    + getHeight() + ")");
         }
 
         // Recurse
         if (!isRoot()) {
             parent.updateWidth();
         } else {
-            // Update position downwards if root is reached, then update drag&drop sources and targets
+            // Update position downwards if root is reached, then update
+            // drag&drop sources and targets
             getViewController().setSize(0.0f, 0.0f);
             updatePosition(0.0f, 0.0f);
             updateDragAndDrop();
@@ -291,14 +315,22 @@ public abstract class LambdaNodeViewController extends Actor {
     /**
      * Sets the position for the current node. Then traverses down the tree.
      *
-     * @param x the new x-coordinate of this node
-     * @param y the new y-coordinate of this node
+     * @param x
+     *            the new x-coordinate of this node
+     * @param y
+     *            the new y-coordinate of this node
      */
     public void updatePosition(float x, float y) {
         setPosition(x, y);
-        getViewController().setSize(Math.max(getViewController().getX(), x + this.getWidth()), Math.max(getViewController().getY(), -y + this.getHeight() + BLOCK_HEIGHT));
+        getViewController().setSize(
+                Math.max(getViewController().getX(), x + this.getWidth()),
+                Math.max(getViewController().getY(), -y + this.getHeight()
+                        + BLOCK_HEIGHT));
         if (DEBUG) {
-            System.out.println("        Updated position of " + this.getLinkedTerm().getClass().getSimpleName() + " (" + getLinkedTerm().toString() + ") to (" + getX() + ", " + getY() + ")");
+            System.out.println("        Updated position of "
+                    + this.getLinkedTerm().getClass().getSimpleName() + " ("
+                    + getLinkedTerm().toString() + ") to (" + getX() + ", "
+                    + getY() + ")");
         }
 
         // Recurse
@@ -327,7 +359,8 @@ public abstract class LambdaNodeViewController extends Actor {
             } else if (!getLinkedTerm().isLocked()) {
                 // Add drag&drop source for all elements but the root
                 assert (this.getStage() != null);
-                getViewController().getDragAndDrop().addDragSource(new LambdaTermDragSource(this, true, false));
+                getViewController().getDragAndDrop().addDragSource(
+                        new LambdaTermDragSource(this, true, false));
             }
 
             // Add drop targets next to children
@@ -336,35 +369,74 @@ public abstract class LambdaNodeViewController extends Actor {
                 Rectangle target;
                 if (children.isEmpty()) {
                     // Drop target in the center below this element
-                    target = new Rectangle(this.getX() + this.getWidth() / 2.0f - GAP_SIZE / 2, this.getY() - BLOCK_HEIGHT, GAP_SIZE, BLOCK_HEIGHT);
+                    target = new Rectangle(this.getX() + this.getWidth() / 2.0f
+                            - GAP_SIZE / 2, this.getY() - BLOCK_HEIGHT,
+                            GAP_SIZE, BLOCK_HEIGHT);
                     if (DEBUG_DRAG_AND_DROP) {
-                        System.out.println("        Adding drop target below " + getLinkedTerm().getClass().getSimpleName() + " (" + getLinkedTerm().toString() + ")");
+                        System.out.println("        Adding drop target below "
+                                + getLinkedTerm().getClass().getSimpleName()
+                                + " (" + getLinkedTerm().toString() + ")");
                     }
-                    getViewController().getDragAndDrop().addDropTarget(new Consumer<LambdaTerm>() {
-                        @Override
-                        public void accept(LambdaTerm term) {
-                            if (DEBUG) {
-                                System.out.println("Inserting " + term.getClass().getSimpleName() + " (" + term.toString() + ") as first and only child of " + getLinkedTerm().getClass().getSimpleName() + " (" + getLinkedTerm().toString() + ")");
-                            }
-                            getLinkedTerm().accept(new FrontInserter(term));
-                        }
-                    }, target);
+                    getViewController().getDragAndDrop().addDropTarget(
+                            new Consumer<LambdaTerm>() {
+                                @Override
+                                public void accept(LambdaTerm term) {
+                                    if (DEBUG) {
+                                        System.out.println("Inserting "
+                                                + term.getClass()
+                                                        .getSimpleName()
+                                                + " ("
+                                                + term.toString()
+                                                + ") as first and only child of "
+                                                + getLinkedTerm().getClass()
+                                                        .getSimpleName() + " ("
+                                                + getLinkedTerm().toString()
+                                                + ")");
+                                    }
+                                    getLinkedTerm().accept(
+                                            new FrontInserter(term));
+                                }
+                            }, target);
                 } else {
                     // Drop target left of first child
-                    target = new Rectangle(children.get(0).getX(), children.get(0).getY(), GAP_SIZE, BLOCK_HEIGHT);
+                    target = new Rectangle(children.get(0).getX(), children
+                            .get(0).getY(), GAP_SIZE, BLOCK_HEIGHT);
                     if (DEBUG_DRAG_AND_DROP) {
-                        System.out.println("        Adding drop target left of " + children.get(0).getLinkedTerm().getClass().getSimpleName() + " (" + children.get(0).getLinkedTerm().toString() + ")");
+                        System.out
+                                .println("        Adding drop target left of "
+                                        + children.get(0).getLinkedTerm()
+                                                .getClass().getSimpleName()
+                                        + " ("
+                                        + children.get(0).getLinkedTerm()
+                                                .toString() + ")");
                     }
 
-                    getViewController().getDragAndDrop().addDropTarget(new Consumer<LambdaTerm>() {
-                        @Override
-                        public void accept(LambdaTerm term) {
-                            if (DEBUG) {
-                                System.out.println("Inserting " + term.getClass().getSimpleName() + " (" + term.toString() + ") as left sibling of " + children.get(0).getLinkedTerm().getClass().getSimpleName() + " (" + children.get(0).getLinkedTerm().toString() + ")");
-                            }
-                            children.get(0).getLinkedTerm().accept(new SiblingInserter(term, true));
-                        }
-                    }, target);
+                    getViewController().getDragAndDrop().addDropTarget(
+                            new Consumer<LambdaTerm>() {
+                                @Override
+                                public void accept(LambdaTerm term) {
+                                    if (DEBUG) {
+                                        System.out.println("Inserting "
+                                                + term.getClass()
+                                                        .getSimpleName()
+                                                + " ("
+                                                + term.toString()
+                                                + ") as left sibling of "
+                                                + children.get(0)
+                                                        .getLinkedTerm()
+                                                        .getClass()
+                                                        .getSimpleName()
+                                                + " ("
+                                                + children.get(0)
+                                                        .getLinkedTerm()
+                                                        .toString() + ")");
+                                    }
+                                    children.get(0)
+                                            .getLinkedTerm()
+                                            .accept(new SiblingInserter(term,
+                                                    true));
+                                }
+                            }, target);
                 }
 
                 // 2. Targets right of each child
@@ -378,21 +450,40 @@ public abstract class LambdaNodeViewController extends Actor {
                     }
 
                     if (DEBUG_DRAG_AND_DROP) {
-                        System.out.println("        Adding drop target right of " + childTerm.getClass().getSimpleName() + " (" + childTerm.toString() + ")");
+                        System.out
+                                .println("        Adding drop target right of "
+                                        + childTerm.getClass().getSimpleName()
+                                        + " (" + childTerm.toString() + ")");
                     }
 
                     final LambdaTerm siblingTerm = childTerm;
-                    target = new Rectangle(childVC.getX() + childVC.getWidth() - (index == children.size() - 1 ? GAP_SIZE : GAP_SIZE / 2), childVC.getY(), GAP_SIZE, BLOCK_HEIGHT);
-                    getViewController().getDragAndDrop().addDropTarget(new Consumer<LambdaTerm>() {
-                        @Override
-                        public void accept(LambdaTerm term) {
-                            if (DEBUG) {
-                                System.out.println("Inserting " + term.getClass().getSimpleName() + " (" + term.toString() + ") as right sibling of " + siblingTerm.getClass().getSimpleName() + " (" + siblingTerm.toString() + ")");
-                            }
-                            siblingTerm.accept(new SiblingInserter(term, false));
-                            LambdaUtils.getRoot(getLinkedTerm()).accept(new ImplicitApplicationRemover());
-                        }
-                    }, target);
+                    target = new Rectangle(childVC.getX()
+                            + childVC.getWidth()
+                            - (index == children.size() - 1 ? GAP_SIZE
+                                    : GAP_SIZE / 2), childVC.getY(), GAP_SIZE,
+                            BLOCK_HEIGHT);
+                    getViewController().getDragAndDrop().addDropTarget(
+                            new Consumer<LambdaTerm>() {
+                                @Override
+                                public void accept(LambdaTerm term) {
+                                    if (DEBUG) {
+                                        System.out.println("Inserting "
+                                                + term.getClass()
+                                                        .getSimpleName()
+                                                + " ("
+                                                + term.toString()
+                                                + ") as right sibling of "
+                                                + siblingTerm.getClass()
+                                                        .getSimpleName() + " ("
+                                                + siblingTerm.toString() + ")");
+                                    }
+                                    siblingTerm.accept(new SiblingInserter(
+                                            term, false));
+                                    LambdaUtils
+                                            .getRoot(getLinkedTerm())
+                                            .accept(new ImplicitApplicationRemover());
+                                }
+                            }, target);
                     index++;
                 }
 
@@ -417,7 +508,8 @@ public abstract class LambdaNodeViewController extends Actor {
     /**
      * Returns whether this and the other object are equal.
      *
-     * @param other the other object
+     * @param other
+     *            the other object
      * @return true if this and the other object are equal, false otherwise
      */
     @Override

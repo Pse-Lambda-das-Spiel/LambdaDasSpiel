@@ -42,7 +42,8 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
         currentProfile = null;
         profiles = loadProfiles(Gdx.files.local(PROFILE_FOLDER));
         if (profiles.size() > MAX_NUMBER_OF_PROFILES) {
-            throw new InvalidProfilesException("The profile-folder contains more than the maximum number of profiles.");
+            throw new InvalidProfilesException(
+                    "The profile-folder contains more than the maximum number of profiles.");
         }
         saveNames();
     }
@@ -86,8 +87,10 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
                 currentProfile = profile;
                 if (currentProfile.getName().equals("")) {
                     ShopModel shop = ShopModel.getShop();
-                    ShopItemTypeModel<?>[] types = {shop.getElementUIContextFamilies(), shop.getImages(), shop.getMusic()};
-                    for (ShopItemTypeModel<?> type: types) {
+                    ShopItemTypeModel<?>[] types = {
+                            shop.getElementUIContextFamilies(),
+                            shop.getImages(), shop.getMusic() };
+                    for (ShopItemTypeModel<?> type : types) {
                         type.setActivatedItem(null);
                         for (ShopItemModel item : type.getItems()) {
                             item.setPurchased(false);
@@ -255,8 +258,9 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     public ProfileEditModel getProfileEdit() {
         return profileEdit;
     }
-    
-    //loads profiles from profiles.json or calls loadAllSavedProfiles (if profiles.json is invalid) instead
+
+    // loads profiles from profiles.json or calls loadAllSavedProfiles (if
+    // profiles.json is invalid) instead
     private List<ProfileModel> loadProfiles(FileHandle profileFolder) {
         if (!profileFolder.exists()) {
             profileFolder.mkdirs();
@@ -295,8 +299,9 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
         }
         return loadAllSavedProfiles(profileFolder);
     }
-    
-    //tries all profiles currently in the profileFolder (ignoring profiles.json)
+
+    // tries all profiles currently in the profileFolder (ignoring
+    // profiles.json)
     private List<ProfileModel> loadAllSavedProfiles(FileHandle profileFolder) {
         List<ProfileModel> profiles = new LinkedList<ProfileModel>();
         for (FileHandle file : listSubdirectories(profileFolder.list())) {
@@ -304,15 +309,16 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
         }
         return profiles;
     }
-    
+
     private void saveNames() {
-        Gdx.files.local(PROFILE_FOLDER + ".json").writeString(new Json().prettyPrint(getNames()), false);
+        Gdx.files.local(PROFILE_FOLDER + ".json").writeString(
+                new Json().prettyPrint(getNames()), false);
     }
-    
+
     private FileHandle[] listSubdirectories(FileHandle[] files) {
-       int i = 0;
-       for (int j = 0; j < files.length; j++) {
-           if (files[j].isDirectory()) {
+        int i = 0;
+        for (int j = 0; j < files.length; j++) {
+            if (files[j].isDirectory()) {
                 i++;
             } else {
                 files[j] = null;
@@ -320,7 +326,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
         }
         FileHandle[] result = new FileHandle[i];
         i = 0;
-        for (FileHandle file: files) {
+        for (FileHandle file : files) {
             if (file != null) {
                 result[i] = file;
                 i++;

@@ -26,12 +26,13 @@ import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
 
 /**
- * Represents a screen of the profile configuration/creation.
- * It allows the user to change the profile's avatar picture.
+ * Represents a screen of the profile configuration/creation. It allows the user
+ * to change the profile's avatar picture.
  * 
  * @author Kai Fieger
  */
-public class ProfileEditAvatar extends StageViewController implements ProfileEditObserver {
+public class ProfileEditAvatar extends StageViewController implements
+        ProfileEditObserver {
 
     private final String avatarPath = "data/avatar";
     private final String skinJson = "data/skins/ProfileEditSkin.json";
@@ -41,22 +42,23 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
     private Label chooseAvatar;
     private boolean newProfile;
     private final float space;
-    
+
     /**
      * Creates a object of the class without initializing the screen.
      */
-	public ProfileEditAvatar() {
+    public ProfileEditAvatar() {
         ProfileManager.getManager().addObserver(this);
         profileEdit = ProfileManager.getManager().getProfileEdit();
         space = getStage().getWidth() / 64;
-	}
+    }
 
     @Override
     public void queueAssets(AssetManager assets) {
         String start = profileEdit.getAvatar();
         String current = start;
         do {
-            assets.load(avatarPath + "/" + profileEdit.getAvatar() + ".png", Texture.class);
+            assets.load(avatarPath + "/" + profileEdit.getAvatar() + ".png",
+                    Texture.class);
             profileEdit.nextAvatar();
             current = profileEdit.getAvatar();
         } while (!current.equals(start));
@@ -64,15 +66,16 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
 
     @Override
     public void create(final AssetManager manager) {
-        Image background = new Image(manager.get("data/backgrounds/default.png", Texture.class));
+        Image background = new Image(manager.get(
+                "data/backgrounds/default.png", Texture.class));
         background.setWidth(getStage().getWidth());
         background.setHeight(getStage().getHeight());
         getStage().addActor(background);
-        
+
         profileEdit.addObserver(this);
         this.manager = manager;
         setLastViewController(ProfileEditName.class);
-        
+
         Table avatarSelection = new Table();
         avatarSelection.align(Align.top);
         getStage().addActor(avatarSelection);
@@ -86,18 +89,24 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
         avatarSelection.row().height(getStage().getHeight() / 5);
         avatarSelection.add();
         avatarSelection.add(chooseAvatar).width(getStage().getWidth() / 2);
-        
+
         avatarSelection.row();
-        ImageButton selectLeft = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
-        avatarSelection.add(selectLeft).size(getStage().getHeight() / 5).space(space);
+        ImageButton selectLeft = new ImageButton(manager.get(skinJson,
+                Skin.class), "leftButton");
+        avatarSelection.add(selectLeft).size(getStage().getHeight() / 5)
+                .space(space);
         selectLeft.addListener(new SelectLeftClickListener());
         avatarPic = new Image();
-        avatarSelection.add(avatarPic).size(getStage().getHeight() / 2).space(space);
-        ImageButton selectRight = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
-        avatarSelection.add(selectRight).size(getStage().getHeight() / 5).space(space);
+        avatarSelection.add(avatarPic).size(getStage().getHeight() / 2)
+                .space(space);
+        ImageButton selectRight = new ImageButton(manager.get(skinJson,
+                Skin.class), "rightButton");
+        avatarSelection.add(selectRight).size(getStage().getHeight() / 5)
+                .space(space);
         selectRight.addListener(new SelectRightClickListener());
-        
-        ImageButton backButton = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
+
+        ImageButton backButton = new ImageButton(manager.get(skinJson,
+                Skin.class), "leftButton");
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
         buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
         buttonContainer.align(Align.bottomLeft);
@@ -105,8 +114,9 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
         backButton.addListener(new BackClickListener());
         getStage().addActor(buttonContainer);
         buttonContainer.setFillParent(true);
-        
-        ImageButton continueButton = new ImageButton(manager.get(skinJson, Skin.class), "acceptButton");
+
+        ImageButton continueButton = new ImageButton(manager.get(skinJson,
+                Skin.class), "acceptButton");
         buttonContainer = new Container<ImageButton>();
         buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
         buttonContainer.align(Align.bottomRight);
@@ -115,25 +125,27 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
         getStage().addActor(buttonContainer);
         buttonContainer.setFillParent(true);
     }
-    
-    @Override 
+
+    @Override
     public void changedProfile() {
         ProfileManager m = ProfileManager.getManager();
         newProfile = m.getCurrentProfile().getName().equals("");
         profileEdit.setAvatar(m.getCurrentProfile().getAvatar());
     }
-    
-    @Override 
+
+    @Override
     public void changedAvatar() {
-        avatarPic.setDrawable(new SpriteDrawable(
-                new Sprite(manager.get(avatarPath + "/" + profileEdit.getAvatar() + ".png", Texture.class))));
+        avatarPic.setDrawable(new SpriteDrawable(new Sprite(manager.get(
+                avatarPath + "/" + profileEdit.getAvatar() + ".png",
+                Texture.class))));
     }
-    
-    @Override 
+
+    @Override
     public void changedLanguage() {
-        chooseAvatar.setText(manager.get(profileEdit.getLang(), I18NBundle.class).get("chooseAvatar"));
+        chooseAvatar.setText(manager.get(profileEdit.getLang(),
+                I18NBundle.class).get("chooseAvatar"));
     }
-    
+
     private class SelectLeftClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
@@ -141,7 +153,7 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
             profileEdit.previousAvatar();
         }
     }
-    
+
     private class SelectRightClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
@@ -149,7 +161,7 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
             profileEdit.nextAvatar();
         }
     }
-    
+
     private class AcceptClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
@@ -159,19 +171,24 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
             m.save(m.getCurrentProfile().getName());
             if (newProfile) {
                 m.setCurrentProfile(m.getCurrentProfile().getName());
-                final Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
+                final Skin dialogSkin = manager.get(
+                        "data/skins/DialogTemp.json", Skin.class);
                 final float height = getStage().getHeight();
                 new Dialog("", dialogSkin) {
                     private boolean changedToMainMenu = false;
                     {
                         AudioManager.setLoggedIn(true);
                         clear();
-                        Label greeting = new Label(manager.get(profileEdit.getLang(), I18NBundle.class).get("hello")
-                                + " " + m.getCurrentProfile().getName() + " !", dialogSkin);
+                        Label greeting = new Label(manager.get(
+                                profileEdit.getLang(), I18NBundle.class).get(
+                                "hello")
+                                + " " + m.getCurrentProfile().getName() + " !",
+                                dialogSkin);
                         greeting.setFontScale(1.5f);
                         add(greeting);
                         row().space(height / 8);
-                        add(new Image(avatarPic.getDrawable())).size(height / 2);
+                        add(new Image(avatarPic.getDrawable()))
+                                .size(height / 2);
                         Timer.schedule(new Task() {
                             @Override
                             public void run() {
@@ -180,11 +197,13 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
                         }, 3);
                         addListener(new ClickListener() {
                             @Override
-                            public void clicked(InputEvent event, float x, float y) {
+                            public void clicked(InputEvent event, float x,
+                                    float y) {
                                 toMainMenu();
                             }
                         });
                     }
+
                     private void toMainMenu() {
                         if (!changedToMainMenu) {
                             changedToMainMenu = true;
@@ -198,12 +217,13 @@ public class ProfileEditAvatar extends StageViewController implements ProfileEdi
             }
         }
     }
-    
+
     private class BackClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             AudioManager.playSound("buttonClick");
-            ProfileManager.getManager().getCurrentProfile().setAvatar(profileEdit.getAvatar());
+            ProfileManager.getManager().getCurrentProfile()
+                    .setAvatar(profileEdit.getAvatar());
             getGame().setScreen(ProfileEditName.class);
         }
     }

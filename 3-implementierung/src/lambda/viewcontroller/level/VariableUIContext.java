@@ -8,7 +8,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 /**
  * @author: Kay Schmitteckert
  */
-public class VariableUIContext extends ElementUIContext implements ApplicationListener {
+public class VariableUIContext extends ElementUIContext implements
+        ApplicationListener {
 
     private TextureRegion tVariable;
     private TextureRegion mVariable;
@@ -17,11 +18,11 @@ public class VariableUIContext extends ElementUIContext implements ApplicationLi
         tVariable = variable;
         mVariable = mask;
     }
-    
+
     public TextureRegion getTexture() {
         return tVariable;
     }
-    
+
     public TextureRegion getMask() {
         return mVariable;
     }
@@ -54,6 +55,6 @@ public class VariableUIContext extends ElementUIContext implements ApplicationLi
 
     @Override
     public void dispose() {
-        //spriteBatch.dispose();
+        // spriteBatch.dispose();
     }
 }

@@ -41,7 +41,8 @@ import lambda.viewcontroller.mainmenu.MainMenuViewController;
  *
  * @author Florian Fervers
  */
-public class ReductionViewController extends StageViewController implements ReductionModelObserver, InputProcessor {
+public class ReductionViewController extends StageViewController implements
+        ReductionModelObserver, InputProcessor {
     /**
      * For debugging outputs.
      */
@@ -75,7 +76,7 @@ public class ReductionViewController extends StageViewController implements Redu
      * Toggles the automatic reduction.
      */
     private ImageButton playPauseButton;
-    //needed in reductionFinished(...)
+    // needed in reductionFinished(...)
     private AssetManager assets;
     /**
      * Last down cursor x position.
@@ -106,7 +107,7 @@ public class ReductionViewController extends StageViewController implements Redu
 
     @Override
     public void create(final AssetManager manager) {
-        //needed in reductionFinished(...)
+        // needed in reductionFinished(...)
         this.assets = manager;
         setLastViewController(EditorViewController.class);
         model.addObserver(this);
@@ -116,47 +117,76 @@ public class ReductionViewController extends StageViewController implements Redu
         getStage().addActor(main);
         main.setFillParent(true);
 
-        ImageButton pauseButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "pauseButton");
-        ImageButton helpButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "helpButton");
-        stepRevertButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "prevButton");
-        stepButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "forwardButton");
-        playPauseButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "playButton");
-        ImageButton backToEditorButton = new ImageButton(manager.get("data/skins/MasterSkin.json", Skin.class), "backButton");
+        ImageButton pauseButton = new ImageButton(manager.get(
+                "data/skins/MasterSkin.json", Skin.class), "pauseButton");
+        ImageButton helpButton = new ImageButton(manager.get(
+                "data/skins/MasterSkin.json", Skin.class), "helpButton");
+        stepRevertButton = new ImageButton(manager.get(
+                "data/skins/MasterSkin.json", Skin.class), "prevButton");
+        stepButton = new ImageButton(manager.get("data/skins/MasterSkin.json",
+                Skin.class), "forwardButton");
+        playPauseButton = new ImageButton(manager.get(
+                "data/skins/MasterSkin.json", Skin.class), "playButton");
+        ImageButton backToEditorButton = new ImageButton(manager.get(
+                "data/skins/MasterSkin.json", Skin.class), "backButton");
 
         Table leftToolBar = new Table();
-        leftToolBar.add(pauseButton).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
+        leftToolBar
+                .add(pauseButton)
+                .size(0.10f * getStage().getWidth(),
+                        0.10f * getStage().getWidth()).top();
         leftToolBar.row();
-        leftToolBar.add(helpButton).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).top();
+        leftToolBar
+                .add(helpButton)
+                .size(0.10f * getStage().getWidth(),
+                        0.10f * getStage().getWidth()).top();
 
         Table bottomToolBar = new Table();
-        bottomToolBar.setBackground(new TextureRegionDrawable(manager.get("data/skins/MasterSkin.atlas", TextureAtlas.class).findRegion("elements_bar")));
-        bottomToolBar.add(stepRevertButton).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).left();
-        bottomToolBar.add(playPauseButton).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).center();
-        bottomToolBar.add(stepButton).size(0.10f * getStage().getWidth(), 0.10f * getStage().getWidth()).right();
+        bottomToolBar.setBackground(new TextureRegionDrawable(manager.get(
+                "data/skins/MasterSkin.atlas", TextureAtlas.class).findRegion(
+                "elements_bar")));
+        bottomToolBar
+                .add(stepRevertButton)
+                .size(0.10f * getStage().getWidth(),
+                        0.10f * getStage().getWidth()).left();
+        bottomToolBar
+                .add(playPauseButton)
+                .size(0.10f * getStage().getWidth(),
+                        0.10f * getStage().getWidth()).center();
+        bottomToolBar
+                .add(stepButton)
+                .size(0.10f * getStage().getWidth(),
+                        0.10f * getStage().getWidth()).right();
 
         main.add(leftToolBar).expandY().left().top();
         main.row();
-        main.add(bottomToolBar).height(0.25f * getStage().getHeight()).expandX().bottom();
+        main.add(bottomToolBar).height(0.25f * getStage().getHeight())
+                .expandX().bottom();
 
-        final Skin dialogSkin = manager.get("data/skins/DialogTemp.json", Skin.class);
+        final Skin dialogSkin = manager.get("data/skins/DialogTemp.json",
+                Skin.class);
         pauseButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new PauseDialog(dialogSkin, manager.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
-                        I18NBundle.class), getStage().getWidth(), getStage().getHeight()).show(getStage());
+                new PauseDialog(dialogSkin, manager.get(ProfileManager
+                        .getManager().getCurrentProfile().getLanguage(),
+                        I18NBundle.class), getStage().getWidth(), getStage()
+                        .getHeight()).show(getStage());
             }
         });
         helpButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new HelpDialog(dialogSkin, manager.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
+                new HelpDialog(dialogSkin, manager.get(ProfileManager
+                        .getManager().getCurrentProfile().getLanguage(),
                         I18NBundle.class), getStage()).show(getStage());
             }
         });
         stepRevertButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (!stepRevertButton.isDisabled()) { // How come this is even necessary!?
+                if (!stepRevertButton.isDisabled()) { // How come this is even
+                                                      // necessary!?
                     model.stepRevert();
                 }
             }
@@ -188,9 +218,11 @@ public class ReductionViewController extends StageViewController implements Redu
     /**
      * Resets this view controller with the given values.
      *
-     * @param editorModel the model of the editor in which the term was created
-     * that is to be reduced
-     * @throws IllegalArgumentException if editorModel is null
+     * @param editorModel
+     *            the model of the editor in which the term was created that is
+     *            to be reduced
+     * @throws IllegalArgumentException
+     *             if editorModel is null
      */
     public void reset(EditorModel editorModel) {
         if (editorModel == null) {
@@ -204,10 +236,12 @@ public class ReductionViewController extends StageViewController implements Redu
         if (term != null) {
             term.remove();
         }
-        term = LambdaTermViewController.build(model.getTerm(), true, model.getContext(), getStage());
+        term = LambdaTermViewController.build(model.getTerm(), true,
+                model.getContext(), getStage());
         getStage().addActor(term);
         term.toBack();
-        term.setPosition(getStage().getWidth() * INITIAL_TERM_OFFSET.x, getStage().getHeight() * (1 - INITIAL_TERM_OFFSET.y));
+        term.setPosition(getStage().getWidth() * INITIAL_TERM_OFFSET.x,
+                getStage().getHeight() * (1 - INITIAL_TERM_OFFSET.y));
 
         // Reset background image
         if (background != null) {
@@ -234,7 +268,8 @@ public class ReductionViewController extends StageViewController implements Redu
     public void show() {
         super.show();
         if (term == null) {
-            throw new IllegalStateException("Cannot show the reduction viewController without calling reset before!");
+            throw new IllegalStateException(
+                    "Cannot show the reduction viewController without calling reset before!");
         }
 
         InputMultiplexer multiplexer = new InputMultiplexer();
@@ -246,24 +281,30 @@ public class ReductionViewController extends StageViewController implements Redu
     /**
      * Called when the model state changes.
      *
-     * @param busy indicates whether the model is currently performing a
-     * reduction step
-     * @param historySize the history size (>= 0)
-     * @param paused indicates whether the automatic reduction is currently
-     * paused
-     * @param pauseRequested indicates whether a pause of the automatic
-     * reduction is requested
+     * @param busy
+     *            indicates whether the model is currently performing a
+     *            reduction step
+     * @param historySize
+     *            the history size (>= 0)
+     * @param paused
+     *            indicates whether the automatic reduction is currently paused
+     * @param pauseRequested
+     *            indicates whether a pause of the automatic reduction is
+     *            requested
      */
     @Override
-    public void stateChanged(boolean busy, int historySize, boolean paused, boolean pauseRequested) {
+    public void stateChanged(boolean busy, int historySize, boolean paused,
+            boolean pauseRequested) {
         stepButton.setDisabled(busy || !paused);
         playPauseButton.setDisabled(busy && paused || pauseRequested);
         stepRevertButton.setDisabled(busy || !paused || historySize == 0);
 
         if (paused) {
-            playPauseButton.setStyle(assets.get("data/skins/MasterSkin.json", Skin.class).get("playButton", ImageButtonStyle.class));
+            playPauseButton.setStyle(assets.get("data/skins/MasterSkin.json",
+                    Skin.class).get("playButton", ImageButtonStyle.class));
         } else {
-            playPauseButton.setStyle(assets.get("data/skins/MasterSkin.json", Skin.class).get("pauseButton", ImageButtonStyle.class));
+            playPauseButton.setStyle(assets.get("data/skins/MasterSkin.json",
+                    Skin.class).get("pauseButton", ImageButtonStyle.class));
         }
     }
 
@@ -271,15 +312,17 @@ public class ReductionViewController extends StageViewController implements Redu
      * Called when the reduction reached a minimal term or the maximum number of
      * reduction steps. Shows the level-completion dialog.
      *
-     * @param levelComplete true if the final term is alpha equivalent to the
-     * level's target term, false otherwise
+     * @param levelComplete
+     *            true if the final term is alpha equivalent to the level's
+     *            target term, false otherwise
      */
     @Override
     public void reductionFinished(boolean levelComplete) {
-        //add coins to player etc.
-        new FinishDialog(levelComplete, model.getContext().getLevelModel().getCoins(),
-                assets.get("data/skins/DialogTemp.json", Skin.class),
-                assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(), I18NBundle.class),
+        // add coins to player etc.
+        new FinishDialog(levelComplete, model.getContext().getLevelModel()
+                .getCoins(), assets.get("data/skins/DialogTemp.json",
+                Skin.class), assets.get(ProfileManager.getManager()
+                .getCurrentProfile().getLanguage(), I18NBundle.class),
                 getStage().getWidth(), getStage().getHeight()).show(getStage());
     }
 
@@ -363,18 +406,20 @@ public class ReductionViewController extends StageViewController implements Redu
     /**
      * Returns the model of the reduction.
      * 
-	 * @return the model of the reduction.
-	 */
-	public ReductionModel getModel() {
-		return model;
-	}
+     * @return the model of the reduction.
+     */
+    public ReductionModel getModel() {
+        return model;
+    }
 
-	private class PauseDialog extends Dialog {
-        public PauseDialog(Skin dialogSkin, I18NBundle language, float stageWidth, float stageHeight) {
+    private class PauseDialog extends Dialog {
+        public PauseDialog(Skin dialogSkin, I18NBundle language,
+                float stageWidth, float stageHeight) {
             super("", dialogSkin);
-            
-            Label mainMenuLabel = new Label(language.get("mainMenu"), dialogSkin);
-            
+
+            Label mainMenuLabel = new Label(language.get("mainMenu"),
+                    dialogSkin);
+
             ImageButton menuButton = new ImageButton(dialogSkin, "menuButton");
             menuButton.addListener(new ClickListener() {
                 @Override
@@ -384,9 +429,11 @@ public class ReductionViewController extends StageViewController implements Redu
                 }
             });
 
-            Label levelMenuLabel = new Label(language.get("levelMenu"), dialogSkin);
-            
-            ImageButton levelMenuButton = new ImageButton(dialogSkin, "levelMenuButton");
+            Label levelMenuLabel = new Label(language.get("levelMenu"),
+                    dialogSkin);
+
+            ImageButton levelMenuButton = new ImageButton(dialogSkin,
+                    "levelMenuButton");
             levelMenuButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -394,21 +441,22 @@ public class ReductionViewController extends StageViewController implements Redu
                     remove();
                 }
             });
-            
+
             Label resetLabel = new Label(language.get("reset"), dialogSkin);
-            
+
             ImageButton resetButton = new ImageButton(dialogSkin, "resetButton");
             resetButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    getGame().getController(LevelSelectionViewController.class).
-                            startLevel(model.getContext().getLevelModel());
+                    getGame().getController(LevelSelectionViewController.class)
+                            .startLevel(model.getContext().getLevelModel());
                     remove();
                 }
             });
-            
-            Label continueLabel = new Label(language.get("continue"), dialogSkin);
-            
+
+            Label continueLabel = new Label(language.get("continue"),
+                    dialogSkin);
+
             ImageButton continueButton = new ImageButton(dialogSkin,
                     "continueButton");
             continueButton.addListener(new ClickListener() {
@@ -421,9 +469,11 @@ public class ReductionViewController extends StageViewController implements Redu
             float buttonSize = stageHeight / 4;
             float labelWidth = buttonSize * 3 / 2;
             float smallestScale = Float.POSITIVE_INFINITY;
-            Label labels[] = {mainMenuLabel, continueLabel, levelMenuLabel, resetLabel};
+            Label labels[] = { mainMenuLabel, continueLabel, levelMenuLabel,
+                    resetLabel };
             for (Label label : labels) {
-                float current = labelWidth / label.getStyle().font.getBounds(label.getText()).width;
+                float current = labelWidth
+                        / label.getStyle().font.getBounds(label.getText()).width;
                 if (current < smallestScale) {
                     smallestScale = current;
                 }
@@ -445,17 +495,22 @@ public class ReductionViewController extends StageViewController implements Redu
     }
 
     private class FinishDialog extends Dialog {
-        public FinishDialog(boolean levelComplete, int coins, Skin dialogSkin, I18NBundle language, float stageWidth, float stageHeight) {
+        public FinishDialog(boolean levelComplete, int coins, Skin dialogSkin,
+                I18NBundle language, float stageWidth, float stageHeight) {
             super("", dialogSkin);
             List<Label> labels = new ArrayList<Label>();
             final LevelModel playedLevel = model.getContext().getLevelModel();
-            ProfileModel currentProfile = ProfileManager.getManager().getCurrentProfile();
-            
-            Label levelLabel = new Label(language.get(levelComplete ? "levelCompleted" : "levelFailed"), dialogSkin);
-            
-            Label mainMenuLabel = new Label(language.get("mainMenu"), dialogSkin);
+            ProfileModel currentProfile = ProfileManager.getManager()
+                    .getCurrentProfile();
+
+            Label levelLabel = new Label(
+                    language.get(levelComplete ? "levelCompleted"
+                            : "levelFailed"), dialogSkin);
+
+            Label mainMenuLabel = new Label(language.get("mainMenu"),
+                    dialogSkin);
             labels.add(mainMenuLabel);
-            
+
             ImageButton menuButton = new ImageButton(dialogSkin, "menuButton");
             menuButton.addListener(new ClickListener() {
                 @Override
@@ -465,10 +520,12 @@ public class ReductionViewController extends StageViewController implements Redu
                 }
             });
 
-            Label levelMenuLabel = new Label(language.get("levelMenu"), dialogSkin);
+            Label levelMenuLabel = new Label(language.get("levelMenu"),
+                    dialogSkin);
             labels.add(levelMenuLabel);
-            
-            ImageButton levelMenuButton = new ImageButton(dialogSkin, "levelMenuButton");
+
+            ImageButton levelMenuButton = new ImageButton(dialogSkin,
+                    "levelMenuButton");
             levelMenuButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -479,46 +536,55 @@ public class ReductionViewController extends StageViewController implements Redu
 
             Label restartLabel = new Label(language.get("restart"), dialogSkin);
             labels.add(restartLabel);
-            
-            ImageButton restartButton = new ImageButton(dialogSkin, "restartButton");
+
+            ImageButton restartButton = new ImageButton(dialogSkin,
+                    "restartButton");
             restartButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    getGame().getController(LevelSelectionViewController.class).startLevel(playedLevel);
+                    getGame().getController(LevelSelectionViewController.class)
+                            .startLevel(playedLevel);
                     remove();
                 }
             });
 
-            Label nextLevelLabel = new Label(language.get("nextLevel"), dialogSkin);
+            Label nextLevelLabel = new Label(language.get("nextLevel"),
+                    dialogSkin);
 
-            ImageButton nextLevelButton = new ImageButton(dialogSkin, "nextLevelButton");
+            ImageButton nextLevelButton = new ImageButton(dialogSkin,
+                    "nextLevelButton");
             nextLevelButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     LevelManager levelManager = LevelManager.getLevelManager();
                     // if the last level was solved, start with level 1 again
                     if (playedLevel.getId() == levelManager.getNumberOfLevels()) {
-                        getGame().getController(LevelSelectionViewController.class).startLevel(levelManager.getLevel(1));
+                        getGame().getController(
+                                LevelSelectionViewController.class).startLevel(
+                                levelManager.getLevel(1));
                     } else {
-                        getGame().getController(LevelSelectionViewController.class).
-                                startLevel(levelManager.getLevel(playedLevel.getId() + 1));
+                        getGame().getController(
+                                LevelSelectionViewController.class).startLevel(
+                                levelManager.getLevel(playedLevel.getId() + 1));
                     }
                     remove();
                 }
             });
-            
-            Label coinsLabel = new Label(language.format("coinsGained", coins), dialogSkin);
-            
+
+            Label coinsLabel = new Label(language.format("coinsGained", coins),
+                    dialogSkin);
+
             // if the level is complete and not the sandbox
             if (levelComplete && (playedLevel.getId() != 0)) {
                 labels.add(nextLevelLabel);
             }
-            
+
             float buttonSize = stageHeight / 4;
             float labelWidth = buttonSize * 3 / 2;
             float smallestScale = Float.POSITIVE_INFINITY;
             for (Label label : labels) {
-                float current = labelWidth / label.getStyle().font.getBounds(label.getText()).width;
+                float current = labelWidth
+                        / label.getStyle().font.getBounds(label.getText()).width;
                 if (current < smallestScale) {
                     smallestScale = current;
                 }
@@ -531,7 +597,10 @@ public class ReductionViewController extends StageViewController implements Redu
             pad(buttonSize / 4);
             // if the level is not the sandbox
             if (playedLevel.getId() != 0) {
-                levelLabel.setFontScale(2 * labelWidth / levelLabel.getStyle().font.getBounds(levelLabel.getText()).width);
+                levelLabel.setFontScale(2
+                        * labelWidth
+                        / levelLabel.getStyle().font.getBounds(levelLabel
+                                .getText()).width);
                 add(levelLabel).colspan(2).width(2 * labelWidth);
             }
             row();
@@ -555,14 +624,19 @@ public class ReductionViewController extends StageViewController implements Redu
             if (levelComplete && (playedLevel.getId() != 0)) {
                 if (playedLevel.getId() == currentProfile.getLevelIndex()) {
                     row();
-                    coinsLabel.setFontScale(2 * labelWidth / coinsLabel.getStyle().font.getBounds(coinsLabel.getText()).width);
+                    coinsLabel.setFontScale(2
+                            * labelWidth
+                            / coinsLabel.getStyle().font.getBounds(coinsLabel
+                                    .getText()).width);
                     add(coinsLabel).colspan(2).width(2 * labelWidth);
-                    // update levelindex and coins only if a new level was solved
-                    currentProfile.setLevelIndex(currentProfile.getLevelIndex() + 1);
+                    // update levelindex and coins only if a new level was
+                    // solved
+                    currentProfile
+                            .setLevelIndex(currentProfile.getLevelIndex() + 1);
                     currentProfile.setCoins(currentProfile.getCoins() + coins);
                 }
             }
-            
+
         }
     }
 

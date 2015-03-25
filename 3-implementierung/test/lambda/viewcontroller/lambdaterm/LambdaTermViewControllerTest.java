@@ -13,7 +13,8 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 /**
- * A class for testing the LambdaTermViewController including LambdaNodeViewController and the corresponding visitors.
+ * A class for testing the LambdaTermViewController including
+ * LambdaNodeViewController and the corresponding visitors.
  * 
  * @author Florian Fervers
  */
@@ -21,36 +22,44 @@ public class LambdaTermViewControllerTest {
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
 
     /**
-     * Convert a lambda term model to lambda term viewcontroller, then reduce the model and convert the final lambda term to viewcontroller again. Compare both viewcontrollers for equality.
-     * @throws ParseException 
+     * Convert a lambda term model to lambda term viewcontroller, then reduce
+     * the model and convert the final lambda term to viewcontroller again.
+     * Compare both viewcontrollers for equality.
+     * 
+     * @throws ParseException
      */
     @Test
     public void testBetaReduction() throws ParseException {
-        LambdaRoot term = LambdaUtils.fromString("(/a.a f g h) ((/b.b) (/d. (/c.c) d)) (/f.f f) q");
-        
-        LambdaTermViewController vc = LambdaTermViewController.build(term, false, new LevelContext(null), null, false); // TODO Level context
-        
+        LambdaRoot term = LambdaUtils
+                .fromString("(/a.a f g h) ((/b.b) (/d. (/c.c) d)) (/f.f f) q");
+
+        LambdaTermViewController vc = LambdaTermViewController.build(term,
+                false, new LevelContext(null), null, false); // TODO Level
+                                                             // context
+
         ReductionStrategyNormalOrder strategy = new ReductionStrategyNormalOrder();
         do {
             strategy.reset();
             term.accept(strategy);
         } while (strategy.hasReduced());
-        
-        assertEquals("Updated ViewController and new ViewController for lambda term are different!", vc,
-                LambdaTermViewController.build(term, false, new LevelContext(null), null, false));
+
+        assertEquals(
+                "Updated ViewController and new ViewController for lambda term are different!",
+                vc, LambdaTermViewController.build(term, false,
+                        new LevelContext(null), null, false));
     }
 }

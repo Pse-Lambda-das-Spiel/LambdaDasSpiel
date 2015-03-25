@@ -28,12 +28,13 @@ import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.StageViewController;
 
 /**
- * Represents a screen of the profile configuration/creation.
- * It allows the user to change the profile's language.
+ * Represents a screen of the profile configuration/creation. It allows the user
+ * to change the profile's language.
  * 
  * @author Kai Fieger
  */
-public class ProfileEditLang extends StageViewController implements ProfileEditObserver {
+public class ProfileEditLang extends StageViewController implements
+        ProfileEditObserver {
 
     private final String skinJson = "data/skins/ProfileEditSkin.json";
     private final ProfileEditModel profileEdit;
@@ -43,15 +44,15 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
     private AssetManager manager;
     private boolean deleteOnBack;
     private final float space;
-    
+
     /**
      * Creates a object of the class without initializing the screen.
      */
-	public ProfileEditLang() {
+    public ProfileEditLang() {
         ProfileManager.getManager().addObserver(this);
         profileEdit = ProfileManager.getManager().getProfileEdit();
         space = getStage().getWidth() / 64;
-	}
+    }
 
     @Override
     public void queueAssets(AssetManager assets) {
@@ -63,38 +64,45 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
             profileEdit.nextLang();
             current = profileEdit.getLang();
         } while (!current.equals(start));
-        assets.load(skinJson, Skin.class,
-                new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
+        assets.load(skinJson, Skin.class, new SkinLoader.SkinParameter(
+                "data/skins/MasterSkin.atlas"));
     }
 
     @Override
     public void create(final AssetManager manager) {
-        Image background = new Image(manager.get("data/backgrounds/default.png", Texture.class));
+        Image background = new Image(manager.get(
+                "data/backgrounds/default.png", Texture.class));
         background.setWidth(getStage().getWidth());
         background.setHeight(getStage().getHeight());
         getStage().addActor(background);
-        
+
         profileEdit.addObserver(this);
         this.manager = manager;
         Table langSelection = new Table();
         getStage().addActor(langSelection);
         langSelection.setFillParent(true);
         langSelection.row().height(getStage().getHeight() / 2);
-        ImageButton selectLeft = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
-        langSelection.add(selectLeft).size(getStage().getHeight() / 5).space(space);
+        ImageButton selectLeft = new ImageButton(manager.get(skinJson,
+                Skin.class), "leftButton");
+        langSelection.add(selectLeft).size(getStage().getHeight() / 5)
+                .space(space);
         selectLeft.addListener(new SelectLeftClickListener());
         langPic = new Image();
-        langSelection.add(langPic).width(getStage().getWidth() / 2).space(space);
-        ImageButton selectRight = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
-        langSelection.add(selectRight).size(getStage().getHeight() / 5).space(space);
+        langSelection.add(langPic).width(getStage().getWidth() / 2)
+                .space(space);
+        ImageButton selectRight = new ImageButton(manager.get(skinJson,
+                Skin.class), "rightButton");
+        langSelection.add(selectRight).size(getStage().getHeight() / 5)
+                .space(space);
         selectRight.addListener(new SelectRightClickListener());
         lang = new Label(null, manager.get(skinJson, Skin.class));
         lang.setAlignment(Align.center);
         langSelection.row().height(getStage().getHeight() / 5);
         langSelection.add();
         langSelection.add(lang).width(getStage().getWidth() / 2);
-        
-        backButton = new ImageButton(manager.get(skinJson, Skin.class), "leftButton");
+
+        backButton = new ImageButton(manager.get(skinJson, Skin.class),
+                "leftButton");
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
         buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
         buttonContainer.align(Align.bottomLeft);
@@ -102,8 +110,9 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
         backButton.addListener(new BackClickListener());
         getStage().addActor(buttonContainer);
         buttonContainer.setFillParent(true);
-        
-        ImageButton continueButton = new ImageButton(manager.get(skinJson, Skin.class), "rightButton");
+
+        ImageButton continueButton = new ImageButton(manager.get(skinJson,
+                Skin.class), "rightButton");
         buttonContainer = new Container<ImageButton>();
         buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
         buttonContainer.align(Align.bottomRight);
@@ -113,43 +122,44 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
         buttonContainer.setFillParent(true);
     }
 
-    @Override 
+    @Override
     public void changedProfile() {
         ProfileManager m = ProfileManager.getManager();
         deleteOnBack = m.getCurrentProfile().getName().equals("");
         backButton.setVisible(m.getNames().size() != 1 || !deleteOnBack);
         profileEdit.setLang(m.getCurrentProfile().getLanguage());
     }
-    
-    @Override 
+
+    @Override
     public void changedLanguage() {
-        langPic.setDrawable(new SpriteDrawable(
-                new Sprite(manager.get(profileEdit.getLangPic(), Texture.class))));
-        lang.setText(manager.get(profileEdit.getLang(), I18NBundle.class).get("language"));
+        langPic.setDrawable(new SpriteDrawable(new Sprite(manager.get(
+                profileEdit.getLangPic(), Texture.class))));
+        lang.setText(manager.get(profileEdit.getLang(), I18NBundle.class).get(
+                "language"));
     }
-	
-	/**
+
+    /**
      * {@inheritDoc}
      */
-	@Override
-	public void show() {
-		InputProcessor backProcessor = new InputAdapter() {
-			@Override
-			public boolean keyDown(int keycode) {
-				if (keycode == Keys.BACK) {
-					ProfileManager m = ProfileManager.getManager();
-					if (m.getNames().size() != 1 || !deleteOnBack) {
-						getGame().setScreen(ProfileSelection.class);
-					}
-				}
-				return false;
-			}
-		};
-		InputMultiplexer multiplexer = new InputMultiplexer(getStage(),
-				backProcessor);
-		Gdx.input.setInputProcessor(multiplexer);
-	}
-    
+    @Override
+    public void show() {
+        InputProcessor backProcessor = new InputAdapter() {
+            @Override
+            public boolean keyDown(int keycode) {
+                if (keycode == Keys.BACK) {
+                    ProfileManager m = ProfileManager.getManager();
+                    if (m.getNames().size() != 1 || !deleteOnBack) {
+                        getGame().setScreen(ProfileSelection.class);
+                    }
+                }
+                return false;
+            }
+        };
+        InputMultiplexer multiplexer = new InputMultiplexer(getStage(),
+                backProcessor);
+        Gdx.input.setInputProcessor(multiplexer);
+    }
+
     private class SelectLeftClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
@@ -157,7 +167,7 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
             profileEdit.previousLang();
         }
     }
-    
+
     private class SelectRightClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
@@ -165,16 +175,17 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
             profileEdit.nextLang();
         }
     }
-    
+
     private class ContinueClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
             AudioManager.playSound("buttonClick");
-            ProfileManager.getManager().getCurrentProfile().setLanguage(profileEdit.getLang());
+            ProfileManager.getManager().getCurrentProfile()
+                    .setLanguage(profileEdit.getLang());
             getGame().setScreen(ProfileEditName.class);
         }
     }
-    
+
     private class BackClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
@@ -190,8 +201,8 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
         }
     }
 
-	@Override
-	public void changedAvatar() {		
-	}
-    
+    @Override
+    public void changedAvatar() {
+    }
+
 }

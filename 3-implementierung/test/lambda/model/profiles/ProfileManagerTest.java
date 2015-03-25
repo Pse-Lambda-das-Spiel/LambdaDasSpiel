@@ -27,7 +27,8 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 
 /**
- * Tests the functionality of the ProfileManager and with it also the Profile{Save,Load}Helper.
+ * Tests the functionality of the ProfileManager and with it also the
+ * Profile{Save,Load}Helper.
  * 
  * @author Kai Fieger
  */
@@ -37,11 +38,11 @@ public class ProfileManagerTest implements ProfileManagerObserver {
     private boolean calledChangedProfileList;
     private ProfileManager manager;
 
-    private static String[] testNames = {"testName0", "testName1", "testName2"};
+    private static String[] testNames = { "testName0", "testName1", "testName2" };
     private static String unusedName = "unusedName";
     private static FileHandle profileFolder;
     private static FileHandle nameFile;
-    
+
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
         Gdx.files = new LwjglFiles();
@@ -96,9 +97,9 @@ public class ProfileManagerTest implements ProfileManagerObserver {
         saveProfiles(maxProfiles);
         init();
     }
-    
+
     /**
-     * Tests, if ProfileManager can load correctly without savefiles. 
+     * Tests, if ProfileManager can load correctly without savefiles.
      */
     @Test
     public void testLoadWithoutSaves() {
@@ -122,9 +123,10 @@ public class ProfileManagerTest implements ProfileManagerObserver {
             assertTrue(names.contains(testNames[i]));
         }
     }
-    
+
     /**
-     * Tests if the ProfileManager loads and keeps a list of profiles in correct order. (given in the nameFile)
+     * Tests if the ProfileManager loads and keeps a list of profiles in correct
+     * order. (given in the nameFile)
      */
     @Test
     public void testLoadWithCorrectNames() {
@@ -137,14 +139,15 @@ public class ProfileManagerTest implements ProfileManagerObserver {
             assertEquals(testNames[i], names.get(i));
         }
     }
-    
+
     /**
-     * Tests if the ProfileManager loads all profiles even if not all names are in the nameFile.
+     * Tests if the ProfileManager loads all profiles even if not all names are
+     * in the nameFile.
      */
     @Test
     public void testLoadWithMissingNames() {
         saveProfiles(testNames);
-        saveNames(new String[] {testNames[0], testNames[1]});
+        saveNames(new String[] { testNames[0], testNames[1] });
         init();
         List<String> names = manager.getNames();
         assertEquals(testNames.length, names.size());
@@ -152,14 +155,15 @@ public class ProfileManagerTest implements ProfileManagerObserver {
             assertTrue(names.contains(testNames[i]));
         }
     }
-    
+
     /**
-     * Tests if the ProfileManager loads all profiles even if names in the nameFile are doubled.
+     * Tests if the ProfileManager loads all profiles even if names in the
+     * nameFile are doubled.
      */
     @Test
     public void testLoadWithSameNames() {
         saveProfiles(testNames);
-        saveNames(new String[] {testNames[0], testNames[0], testNames[0]});
+        saveNames(new String[] { testNames[0], testNames[0], testNames[0] });
         init();
         List<String> names = manager.getNames();
         assertEquals(testNames.length, names.size());
@@ -167,14 +171,15 @@ public class ProfileManagerTest implements ProfileManagerObserver {
             assertTrue(names.contains(testNames[i]));
         }
     }
-    
+
     /**
-     * Tests if the ProfileManager loads all profiles even if names in the nameFile are wrong.
+     * Tests if the ProfileManager loads all profiles even if names in the
+     * nameFile are wrong.
      */
     @Test
     public void testLoadWithWrongNames() {
         saveProfiles(testNames);
-        saveNames(new String[] {unusedName, testNames[1], testNames[2]});
+        saveNames(new String[] { unusedName, testNames[1], testNames[2] });
         init();
         List<String> names = manager.getNames();
         assertEquals(testNames.length, names.size());
@@ -182,14 +187,15 @@ public class ProfileManagerTest implements ProfileManagerObserver {
             assertTrue(names.contains(testNames[i]));
         }
     }
-    
+
     /**
-     * Tests if the ProfileManager loads all profiles even if a name in the nameFile is empty/"".
+     * Tests if the ProfileManager loads all profiles even if a name in the
+     * nameFile is empty/"".
      */
     @Test
     public void testLoadWithEmptyName() {
         saveProfiles(testNames);
-        saveNames(new String[] {"", testNames[1], testNames[2]});
+        saveNames(new String[] { "", testNames[1], testNames[2] });
         init();
         List<String> names = manager.getNames();
         assertEquals(testNames.length, names.size());
@@ -197,9 +203,10 @@ public class ProfileManagerTest implements ProfileManagerObserver {
             assertTrue(names.contains(testNames[i]));
         }
     }
-    
+
     /**
-     * Tests if the ProfileManager loads all profiles even if nameFile contains an error.
+     * Tests if the ProfileManager loads all profiles even if nameFile contains
+     * an error.
      */
     @Test
     public void testLoadWithCorruptedNames() {
@@ -212,14 +219,16 @@ public class ProfileManagerTest implements ProfileManagerObserver {
             assertTrue(names.contains(testNames[i]));
         }
     }
-    
+
     /**
-     * Tests if the ProfileManager ignores files that aren't directories while loading. 
+     * Tests if the ProfileManager ignores files that aren't directories while
+     * loading.
      */
     @Test
     public void testLoadExtraFiles() {
         saveProfiles(testNames);
-        FileHandle extra = new FileHandle(profileFolder.name() + "/NotSupposedToBeHere.json");
+        FileHandle extra = new FileHandle(profileFolder.name()
+                + "/NotSupposedToBeHere.json");
         extra.writeString("ButThatShouldn'tMatter", false);
         assertTrue(extra.exists());
         saveNames(testNames);
@@ -259,7 +268,7 @@ public class ProfileManagerTest implements ProfileManagerObserver {
         assertNull(manager.createProfile());
         assertFalse(calledChangedProfileList);
         assertTrue(manager.setCurrentProfile(""));
-        //tests for error. profiles with name "" can't be saved or deleted.
+        // tests for error. profiles with name "" can't be saved or deleted.
         manager.save(newProfile.getName());
         manager.delete(newProfile.getName());
         assertTrue(calledChangedProfileList);
@@ -280,7 +289,7 @@ public class ProfileManagerTest implements ProfileManagerObserver {
         init();
         assertNull(manager.createProfile());
     }
-    
+
     /**
      * Tests the renaming of a profile.
      */
@@ -290,8 +299,10 @@ public class ProfileManagerTest implements ProfileManagerObserver {
         saveNames(testNames);
         init();
         // Sets current profile to testNames[1]
-        FileHandle save = Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + testNames[1]);
-        FileHandle saveTemp = Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + unusedName);
+        FileHandle save = Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/"
+                + testNames[1]);
+        FileHandle saveTemp = Gdx.files.local(ProfileManager.PROFILE_FOLDER
+                + "/" + unusedName);
         assertTrue(save.exists());
         List<String> names = manager.getNames();
         assertEquals(testNames[1], names.get(1));
@@ -307,7 +318,7 @@ public class ProfileManagerTest implements ProfileManagerObserver {
         assertFalse(save.exists());
         assertTrue(saveTemp.exists());
     }
-    
+
     /**
      * Tests the renaming of a profile to null.
      */
@@ -319,7 +330,7 @@ public class ProfileManagerTest implements ProfileManagerObserver {
         manager.setCurrentProfile(testNames[0]);
         manager.changeCurrentName(null);
     }
-    
+
     /**
      * Tests the renaming of a profile to "".
      */
@@ -331,7 +342,7 @@ public class ProfileManagerTest implements ProfileManagerObserver {
         manager.setCurrentProfile(testNames[0]);
         manager.changeCurrentName("");
     }
-    
+
     /**
      * Tests the renaming of a profile into an existent name.
      */
@@ -363,7 +374,8 @@ public class ProfileManagerTest implements ProfileManagerObserver {
         for (int i = 1; i < testNames.length; i++) {
             assertEquals(testNames[i], names.get(i - 1));
         }
-        assertFalse(Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + testNames[0]).exists());
+        assertFalse(Gdx.files.local(
+                ProfileManager.PROFILE_FOLDER + "/" + testNames[0]).exists());
         // deletes a profile
         manager.delete(testNames[1]);
         assertTrue(calledChangedProfileList);
@@ -373,7 +385,8 @@ public class ProfileManagerTest implements ProfileManagerObserver {
         for (int i = 2; i < testNames.length; i++) {
             assertEquals(testNames[i], names.get(i - 2));
         }
-        assertFalse(Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + testNames[1]).exists());
+        assertFalse(Gdx.files.local(
+                ProfileManager.PROFILE_FOLDER + "/" + testNames[1]).exists());
     }
 
     /**
@@ -384,23 +397,25 @@ public class ProfileManagerTest implements ProfileManagerObserver {
     public void testDeleteSaveWrongProfile() {
         saveProfiles(testNames);
         init();
-        FileHandle save = Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/" + unusedName);
+        FileHandle save = Gdx.files.local(ProfileManager.PROFILE_FOLDER + "/"
+                + unusedName);
         assertFalse(save.exists());
         manager.save(unusedName);
         assertFalse(save.exists());
         manager.delete(unusedName);
         assertFalse(save.exists());
     }
-    
+
     /**
-     * Tests for an exception when calling setCurrentProfile() with null as argument.
+     * Tests for an exception when calling setCurrentProfile() with null as
+     * argument.
      */
     @Test(expected = IllegalArgumentException.class)
     public void testSetCurrentNull() {
         init();
         manager.setCurrentProfile(null);
     }
-    
+
     /**
      * Tests for an exception when calling save() with null as argument.
      */
@@ -409,7 +424,7 @@ public class ProfileManagerTest implements ProfileManagerObserver {
         init();
         manager.save(null);
     }
-    
+
     /**
      * Tests for an exception when calling delete() with null as argument.
      */
@@ -418,7 +433,7 @@ public class ProfileManagerTest implements ProfileManagerObserver {
         init();
         manager.delete(null);
     }
-    
+
     /**
      * Checks if profileEdit is initialized.
      */
@@ -427,17 +442,21 @@ public class ProfileManagerTest implements ProfileManagerObserver {
         init();
         assertNotNull(manager.getProfileEdit());
     }
-    
+
     /**
-     * Tests some basic functions of the Profile{Load,Save}Helper concerning the profile's shop state.
+     * Tests some basic functions of the Profile{Load,Save}Helper concerning the
+     * profile's shop state.
      */
     @Test
     public void testShopLoadSave() {
         ProfileLoadHelper.loadIntoShop("doesnotexist");
         ShopModel shop = ShopModel.getShop();
-        ShopItemTypeModel<?>[] types = {shop.getElementUIContextFamilies(), shop.getImages(), shop.getMusic()};
-        ElementUIContextFamily element = new ElementUIContextFamily("0", 1, "test");
-        BackgroundImageItemModel background = new BackgroundImageItemModel("0", 1, "test");
+        ShopItemTypeModel<?>[] types = { shop.getElementUIContextFamilies(),
+                shop.getImages(), shop.getMusic() };
+        ElementUIContextFamily element = new ElementUIContextFamily("0", 1,
+                "test");
+        BackgroundImageItemModel background = new BackgroundImageItemModel("0",
+                1, "test");
         MusicItemModel music = new MusicItemModel("0", 1, "test");
         for (ShopItemTypeModel<?> type : types) {
             type.getItems().clear();

@@ -7,14 +7,12 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-
-
 /**
  * @author Kay Schmitteckert
  */
 public class DifficultySettingTest {
 
-    DifficultySetting difficulty;
+    DifficultySetting difficultySetting;
     String musicString;
     String bgImageString;
     int difficultyNumber;
@@ -24,22 +22,25 @@ public class DifficultySettingTest {
         difficultyNumber = 1;
         musicString = "01.mp3";
         bgImageString = "01.jpg";
-        difficulty = new DifficultySetting(difficultyNumber, musicString, bgImageString);
+        difficultySetting = new DifficultySetting(difficultyNumber,
+                musicString, bgImageString);
 
     }
 
     @Test
     public void testGetter() {
-        
-        assertTrue(difficulty.getBgImageString().equals(bgImageString));
-        assertTrue(difficulty.getMusicString().equals(musicString));
-        assertTrue(difficulty.getDifficulty() == difficultyNumber);
+
+        assertTrue(difficultySetting.getBgImageString().equals(bgImageString));
+        assertTrue(difficultySetting.getMusicString().equals(musicString));
+        int i = difficultySetting.getDifficulty();
+        String number = Integer.toString(i);
+        assertTrue(number.equals("1"));
 
     }
 
     @After
     public void tearDown() throws Exception {
-        difficulty = null;
+        difficultySetting = null;
         bgImageString = null;
         musicString = null;
         difficultyNumber = 0;

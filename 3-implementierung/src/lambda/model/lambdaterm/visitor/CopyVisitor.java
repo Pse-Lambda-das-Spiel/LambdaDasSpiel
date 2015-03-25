@@ -29,7 +29,8 @@ public class CopyVisitor implements LambdaTermVisitor<LambdaTerm> {
      * Visits the given lambda root. Saves a new root as result and copies the
      * child node into the new root by traversing down the tree.
      *
-     * @param node the root to be visited
+     * @param node
+     *            the root to be visited
      */
     @Override
     public void visit(LambdaRoot node) {
@@ -49,11 +50,13 @@ public class CopyVisitor implements LambdaTermVisitor<LambdaTerm> {
      * and copies the child nodes into the new application by traversing down
      * the tree.
      *
-     * @param node the application to be visited
+     * @param node
+     *            the application to be visited
      */
     @Override
     public void visit(LambdaApplication node) {
-        LambdaApplication application = new LambdaApplication(null, node.isLocked(), node.isExplicit());
+        LambdaApplication application = new LambdaApplication(null,
+                node.isLocked(), node.isExplicit());
 
         LambdaTerm left = null;
         LambdaTerm right = null;
@@ -74,11 +77,13 @@ public class CopyVisitor implements LambdaTermVisitor<LambdaTerm> {
      * and copies the child node into the new abstraction by traversing down the
      * tree.
      *
-     * @param node the abstraction to be visited
+     * @param node
+     *            the abstraction to be visited
      */
     @Override
     public void visit(LambdaAbstraction node) {
-        LambdaAbstraction abstraction = new LambdaAbstraction(null, node.getColor(), node.isLocked());
+        LambdaAbstraction abstraction = new LambdaAbstraction(null,
+                node.getColor(), node.isLocked());
 
         LambdaTerm inside = null;
         if (node.getInside() != null) {
@@ -92,7 +97,8 @@ public class CopyVisitor implements LambdaTermVisitor<LambdaTerm> {
     /**
      * Visits the given lambda variable saves a copy of the variable as result.
      *
-     * @param node the variable to be visited
+     * @param node
+     *            the variable to be visited
      */
     @Override
     public void visit(LambdaVariable node) {

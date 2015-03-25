@@ -60,14 +60,13 @@ public class SettingsModel extends Observable<SettingsModelObserver> {
     }
 
     /**
-     * Sets the volume of the music. Afterwards it notifies its
-     * observers by calling their
-     * {@link SettingsModelObserver#changedMusicVolume() changedMusicVolume()}
-     * method.
+     * Sets the volume of the music. Afterwards it notifies its observers by
+     * calling their {@link SettingsModelObserver#changedMusicVolume()
+     * changedMusicVolume()} method.
      * 
      * @param musicVolume
-     *            should lie in the interval [0,1]. If not it gets set to 0 or
-     *            1 (depending on which is closer).
+     *            should lie in the interval [0,1]. If not it gets set to 0 or 1
+     *            (depending on which is closer).
      */
     public void setMusicVolume(float musicVolume) {
         if (musicVolume < 0) {
@@ -95,14 +94,13 @@ public class SettingsModel extends Observable<SettingsModelObserver> {
     }
 
     /**
-     * Sets the volume of the sound. Afterwards it notifies its
-     * Observers by calling their
-     * {@link SettingsModelObserver#changedSoundVolume() changedSoundVolume()}
-     * method.
+     * Sets the volume of the sound. Afterwards it notifies its Observers by
+     * calling their {@link SettingsModelObserver#changedSoundVolume()
+     * changedSoundVolume()} method.
      * 
      * @param soundVolume
-     *            should lie in the interval [0,1]. If not it gets set to 0 or
-     *            1 (depending on which is closer).
+     *            should lie in the interval [0,1]. If not it gets set to 0 or 1
+     *            (depending on which is closer).
      */
     public void setSoundVolume(float soundVolume) {
         if (soundVolume < 0) {

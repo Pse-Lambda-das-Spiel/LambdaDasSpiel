@@ -27,8 +27,10 @@ public class ReductionStrategyCallByName extends BetaReductionVisitor {
      * Visits the given lambda application and performs a call-by-name reduction
      * if possible.
      *
-     * @param node the application to be visited
-     * @throws InvalidLambdaTermException if the visited term is invalid
+     * @param node
+     *            the application to be visited
+     * @throws InvalidLambdaTermException
+     *             if the visited term is invalid
      */
     @Override
     public void visitValid(LambdaApplication node) {
@@ -41,11 +43,13 @@ public class ReductionStrategyCallByName extends BetaReductionVisitor {
             // Right child if no reduction was performed
             applicant = null;
             if (node.getRight() == null) {
-                // Left child is abstraction and application is performed. Application result is in left child node
+                // Left child is abstraction and application is performed.
+                // Application result is in left child node
                 result = node.getLeft();
             } else {
                 if (!hasReduced) {
-                    // No reduction happened in left child => continue with right child
+                    // No reduction happened in left child => continue with
+                    // right child
                     node.setRight(node.getRight().accept(this));
                 }
                 result = node;
@@ -59,8 +63,10 @@ public class ReductionStrategyCallByName extends BetaReductionVisitor {
      * Visits the given lambda abstraction and performs a call-by-name reduction
      * if possible.
      *
-     * @param node the abstraction to be visited
-     * @throws InvalidLambdaTermException if the visited term is invalid
+     * @param node
+     *            the abstraction to be visited
+     * @throws InvalidLambdaTermException
+     *             if the visited term is invalid
      */
     @Override
     public void visitValid(final LambdaAbstraction node) {
@@ -72,7 +78,9 @@ public class ReductionStrategyCallByName extends BetaReductionVisitor {
                     observer.applicationStarted(node, applicant);
                 }
             });
-            result = node.getInside().accept(new ApplicationVisitor(node.getColor(), applicant, alphaConversionColors));
+            result = node.getInside().accept(
+                    new ApplicationVisitor(node.getColor(), applicant,
+                            alphaConversionColors));
             applicant = null;
             hasReduced = true;
             // Don't reduce inside abstractions

@@ -34,7 +34,8 @@ public class LambdaRoot extends LambdaTerm {
     /**
      * Sets the child node and notifies all observers of the change.
      *
-     * @param child the new child node
+     * @param child
+     *            the new child node
      * @return true if the child term has changed, false otherwise
      */
     public boolean setChild(final LambdaTerm child) {
@@ -58,8 +59,10 @@ public class LambdaRoot extends LambdaTerm {
      * Accepts the given visitor by letting it visit this lambda root. Returns
      * null if the visitor is null.
      *
-     * @param <T> the return type of the visit
-     * @param visitor the visitor
+     * @param <T>
+     *            the return type of the visit
+     * @param visitor
+     *            the visitor
      * @return the result of the visit
      */
     @Override
@@ -74,7 +77,8 @@ public class LambdaRoot extends LambdaTerm {
     /**
      * Returns whether this object is equal to the given object.
      *
-     * @param object the other object
+     * @param object
+     *            the other object
      * @return true if this object is equal to the given object, false otherwise
      */
     @Override

@@ -21,11 +21,15 @@ public class HintDialog extends Dialog {
     /**
      * Creates a new hint-dialog.
      *
-     * @param skin Dialogskin
-     * @param context The HintDialog shows the hint given is this LevelContext
-     * @param stage Stage in which the Dialog will be shown.
+     * @param skin
+     *            Dialogskin
+     * @param context
+     *            The HintDialog shows the hint given is this LevelContext
+     * @param stage
+     *            Stage in which the Dialog will be shown.
      */
-    public HintDialog(Skin skin, I18NBundle language, LevelContext context, Stage stage) {
+    public HintDialog(Skin skin, I18NBundle language, LevelContext context,
+            Stage stage) {
         super("", skin);
         clear();
         setFillParent(true);
@@ -34,9 +38,11 @@ public class HintDialog extends Dialog {
             noHint.setWrap(true);
             add(noHint).width(stage.getWidth() * 0.8f);
         } else {
-            LambdaTermViewController hint = LambdaTermViewController.build(context.getLevelModel().getHint(), false, context, stage);
+            LambdaTermViewController hint = LambdaTermViewController.build(
+                    context.getLevelModel().getHint(), false, context, stage);
             hint.toBack();
-            hint.setPosition((stage.getWidth() - hint.getWidth()) / 2, stage.getHeight() * 0.7f);
+            hint.setPosition((stage.getWidth() - hint.getWidth()) / 2,
+                    stage.getHeight() * 0.7f);
             addActor(hint);
         }
         addListener(new ClickListener() {

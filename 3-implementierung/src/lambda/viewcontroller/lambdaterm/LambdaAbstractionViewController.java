@@ -56,19 +56,29 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
     /**
      * Creates a new instance of LambdaAbstractionViewController.
      *
-     * @param linkedTerm the abstraction displayed by this node
-     * @param parent the parent viewcontroller node
-     * @param viewController the viewcontroller on which this node will be
-     * displayed
+     * @param linkedTerm
+     *            the abstraction displayed by this node
+     * @param parent
+     *            the parent viewcontroller node
+     * @param viewController
+     *            the viewcontroller on which this node will be displayed
      */
-    public LambdaAbstractionViewController(LambdaAbstraction linkedTerm, LambdaNodeViewController parent, LambdaTermViewController viewController) {
+    public LambdaAbstractionViewController(LambdaAbstraction linkedTerm,
+            LambdaNodeViewController parent,
+            LambdaTermViewController viewController) {
         super(linkedTerm, parent, viewController, true);
-        front = viewController.getContext().getElementUIContextFamily().getAbstraction().getFront();
-        center = viewController.getContext().getElementUIContextFamily().getAbstraction().getCenter();
-        back = viewController.getContext().getElementUIContextFamily().getAbstraction().getBack();
-        frontMask = viewController.getContext().getElementUIContextFamily().getAbstraction().getmFront();
-        centerMask = viewController.getContext().getElementUIContextFamily().getAbstraction().getmCenter();
-        backMask = viewController.getContext().getElementUIContextFamily().getAbstraction().getmBack();
+        front = viewController.getContext().getElementUIContextFamily()
+                .getAbstraction().getFront();
+        center = viewController.getContext().getElementUIContextFamily()
+                .getAbstraction().getCenter();
+        back = viewController.getContext().getElementUIContextFamily()
+                .getAbstraction().getBack();
+        frontMask = viewController.getContext().getElementUIContextFamily()
+                .getAbstraction().getmFront();
+        centerMask = viewController.getContext().getElementUIContextFamily()
+                .getAbstraction().getmCenter();
+        backMask = viewController.getContext().getElementUIContextFamily()
+                .getAbstraction().getmBack();
         animation = viewController.getContext().getMagicAnimation();
         animate = false;
         magicStateTime = 0.0f;
@@ -87,8 +97,10 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
     /**
      * Draws this node.
      *
-     * @param batch the batch on which the node will be drawn
-     * @param alpha the parent's alpha
+     * @param batch
+     *            the batch on which the node will be drawn
+     * @param alpha
+     *            the parent's alpha
      */
     @Override
     public void draw(Batch batch, float alpha) {
@@ -96,20 +108,24 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
 
         // Back
         batch.draw(back, getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
-        batch.setColor(getCurrentColor().r, getCurrentColor().g, getCurrentColor().b, 1.0f);
+        batch.setColor(getCurrentColor().r, getCurrentColor().g,
+                getCurrentColor().b, 1.0f);
         batch.draw(backMask, getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
         batch.setColor(1f, 1f, 1f, 1f);
         // Center
         float x;
-        for (x = getX() + BLOCK_WIDTH; x < getX() + getWidth() - BLOCK_WIDTH - EPSILON; x += BLOCK_WIDTH) {
+        for (x = getX() + BLOCK_WIDTH; x < getX() + getWidth() - BLOCK_WIDTH
+                - EPSILON; x += BLOCK_WIDTH) {
             batch.draw(center, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
-            batch.setColor(getCurrentColor().r, getCurrentColor().g, getCurrentColor().b, 1.0f);
+            batch.setColor(getCurrentColor().r, getCurrentColor().g,
+                    getCurrentColor().b, 1.0f);
             batch.draw(centerMask, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
             batch.setColor(1f, 1f, 1f, 1f);
         }
         // Front
         batch.draw(front, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
-        batch.setColor(getCurrentColor().r, getCurrentColor().g, getCurrentColor().b, 1.0f);
+        batch.setColor(getCurrentColor().r, getCurrentColor().g,
+                getCurrentColor().b, 1.0f);
         batch.draw(frontMask, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
         batch.setColor(1f, 1f, 1f, 1f);
 
@@ -118,7 +134,8 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
         // Animation
         synchronized (getViewController()) {
             if (animate) {
-                batch.draw(animation.getKeyFrame(magicStateTime), x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+                batch.draw(animation.getKeyFrame(magicStateTime), x, getY(),
+                        BLOCK_WIDTH, BLOCK_HEIGHT);
                 magicStateTime += Gdx.graphics.getDeltaTime();
                 if (isMagicAnimationFinished()) {
                     animate = false;
@@ -147,7 +164,8 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
     /**
      * Returns whether this and the other object are equal.
      *
-     * @param other the other object
+     * @param other
+     *            the other object
      * @return true if this and the other object are equal, false otherwise
      */
     @Override
@@ -156,6 +174,7 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
             return false;
         }
         LambdaAbstractionViewController abstraction = (LambdaAbstractionViewController) other;
-        return super.equals(abstraction) && abstraction.getCurrentColor().equals(this.getCurrentColor());
+        return super.equals(abstraction)
+                && abstraction.getCurrentColor().equals(this.getCurrentColor());
     }
 }

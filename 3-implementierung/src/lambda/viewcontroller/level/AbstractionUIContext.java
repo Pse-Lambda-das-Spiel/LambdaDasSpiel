@@ -6,8 +6,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 /**
  * @author: Kay Schmitteckert
  */
-public class AbstractionUIContext extends ElementUIContext  implements ApplicationListener {
-    
+public class AbstractionUIContext extends ElementUIContext implements
+        ApplicationListener {
+
     private TextureRegion tFront;
     private TextureRegion tCenter;
     private TextureRegion tBack;
@@ -15,8 +16,9 @@ public class AbstractionUIContext extends ElementUIContext  implements Applicati
     private TextureRegion mCenter;
     private TextureRegion mBack;
 
-    public AbstractionUIContext(TextureRegion front, TextureRegion center, TextureRegion back, 
-            TextureRegion mFront, TextureRegion mCenter, TextureRegion mBack) {
+    public AbstractionUIContext(TextureRegion front, TextureRegion center,
+            TextureRegion back, TextureRegion mFront, TextureRegion mCenter,
+            TextureRegion mBack) {
         tFront = front;
         tCenter = center;
         tBack = back;
@@ -25,15 +27,14 @@ public class AbstractionUIContext extends ElementUIContext  implements Applicati
         this.setmBack(mBack);
     }
 
-    
     public TextureRegion getFront() { // TODO
         return tFront;
     }
-    
+
     public TextureRegion getCenter() { // TODO
         return tCenter;
     }
-    
+
     public TextureRegion getBack() { // TODO
         return tBack;
     }
@@ -42,31 +43,25 @@ public class AbstractionUIContext extends ElementUIContext  implements Applicati
         return mFront;
     }
 
-
     public void setmFront(TextureRegion mFront) {
         this.mFront = mFront;
     }
-
 
     public TextureRegion getmCenter() {
         return mCenter;
     }
 
-
     public void setmCenter(TextureRegion mCenter) {
         this.mCenter = mCenter;
     }
-
 
     public TextureRegion getmBack() {
         return mBack;
     }
 
-
     public void setmBack(TextureRegion mBack) {
         this.mBack = mBack;
     }
-
 
     @Override
     public void create() {

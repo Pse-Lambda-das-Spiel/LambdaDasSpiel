@@ -17,14 +17,18 @@ public class LambdaAbstraction extends LambdaValue {
      * The term inside this abstraction.
      */
     private LambdaTerm inside;
-    
+
     /**
      * Creates a new lambda abstraction.
      * 
-     * @param parent the parent node
-     * @param rgbColor the color of the variable bound by this abstraction
-     * @param locked true if this node can be modified by the user, false otherwise
-     * @throws IllegalArgumentException if color is null
+     * @param parent
+     *            the parent node
+     * @param rgbColor
+     *            the color of the variable bound by this abstraction
+     * @param locked
+     *            true if this node can be modified by the user, false otherwise
+     * @throws IllegalArgumentException
+     *             if color is null
      */
     public LambdaAbstraction(LambdaTerm parent, Color rgbColor, boolean locked) {
         super(parent, rgbColor, locked);
@@ -38,11 +42,12 @@ public class LambdaAbstraction extends LambdaValue {
     public LambdaTerm getInside() {
         return inside;
     }
-    
+
     /**
      * Sets the child node and notifies all observers of the change.
      * 
-     * @param inside the new child node
+     * @param inside
+     *            the new child node
      * @return true if the inside term has changed, false otherwise
      */
     public boolean setInside(final LambdaTerm inside) {
@@ -52,7 +57,7 @@ public class LambdaAbstraction extends LambdaValue {
             inside.setParent(this);
         }
         if (oldInside != inside) {
-            notify(new Consumer<LambdaTermObserver>(){
+            notify(new Consumer<LambdaTermObserver>() {
                 @Override
                 public void accept(LambdaTermObserver observer) {
                     observer.replaceTerm(oldInside, inside);
@@ -61,12 +66,15 @@ public class LambdaAbstraction extends LambdaValue {
         }
         return oldInside != inside;
     }
-    
+
     /**
-     * Accepts the given visitor by letting it visit this lambda abstraction. Returns null if the visitor is null.
+     * Accepts the given visitor by letting it visit this lambda abstraction.
+     * Returns null if the visitor is null.
      * 
-     * @param <T> the return type of the visit
-     * @param visitor the visitor
+     * @param <T>
+     *            the return type of the visit
+     * @param visitor
+     *            the visitor
      * @return the result of the visit
      */
     @Override
@@ -74,14 +82,15 @@ public class LambdaAbstraction extends LambdaValue {
         if (visitor != null) {
             visitor.visit(this);
             return (T) visitor.getResult();
-        } 
+        }
         return null;
     }
-    
+
     /**
      * Returns whether this object is equal to the given object.
      * 
-     * @param object the other object
+     * @param object
+     *            the other object
      * @return true if this object is equal to the given object, false otherwise
      */
     @Override
@@ -92,7 +101,7 @@ public class LambdaAbstraction extends LambdaValue {
         LambdaAbstraction other = (LambdaAbstraction) object;
         return this.inside.equals(other.inside);
     }
-    
+
     /**
      * Returns a hash code value for this object.
      * 
@@ -100,6 +109,7 @@ public class LambdaAbstraction extends LambdaValue {
      */
     @Override
     public int hashCode() {
-        return getClass().hashCode() + Objects.hashCode(inside) + getColor().hashCode();
+        return getClass().hashCode() + Objects.hashCode(inside)
+                + getColor().hashCode();
     }
 }

@@ -47,7 +47,8 @@ public class IsValidVisitor implements LambdaTermVisitor<Boolean> {
      * Visits the given lambda root and checks whether it is a valid node. Then
      * traverses to the child node.
      *
-     * @param node the root to be visited
+     * @param node
+     *            the root to be visited
      */
     @Override
     public void visit(LambdaRoot node) {
@@ -56,7 +57,8 @@ public class IsValidVisitor implements LambdaTermVisitor<Boolean> {
                 hasVisitedRoot = true;
                 LambdaUtils.getRoot(node).accept(this);
             } else {
-                result &= (node.getParent() == null) && (node.getChild() != null);
+                result &= (node.getParent() == null)
+                        && (node.getChild() != null);
                 if (result) {
                     node.getChild().accept(this);
                 }
@@ -68,7 +70,8 @@ public class IsValidVisitor implements LambdaTermVisitor<Boolean> {
      * Visits the given lambda application and checks whether it is a valid
      * node. Then traverses to both child nodes.
      *
-     * @param node the application to be visited
+     * @param node
+     *            the application to be visited
      */
     @Override
     public void visit(LambdaApplication node) {
@@ -77,7 +80,8 @@ public class IsValidVisitor implements LambdaTermVisitor<Boolean> {
                 hasVisitedRoot = true;
                 LambdaUtils.getRoot(node).accept(this);
             } else {
-                result &= node.getParent() != null && node.getLeft() != null && node.getRight() != null;
+                result &= node.getParent() != null && node.getLeft() != null
+                        && node.getRight() != null;
                 if (result) {
                     node.getLeft().accept(this);
                     node.getRight().accept(this);
@@ -90,7 +94,8 @@ public class IsValidVisitor implements LambdaTermVisitor<Boolean> {
      * Visits the given lambda abstraction and checks whether it is a valid
      * node. Then traverses to the child node.
      *
-     * @param node the abstraction to be visited
+     * @param node
+     *            the abstraction to be visited
      */
     @Override
     public void visit(LambdaAbstraction node) {
@@ -99,7 +104,8 @@ public class IsValidVisitor implements LambdaTermVisitor<Boolean> {
                 hasVisitedRoot = true;
                 LambdaUtils.getRoot(node).accept(this);
             } else {
-                result &= node.getParent() != null && node.getInside() != null && !mBoundColors.contains(node.getColor());
+                result &= node.getParent() != null && node.getInside() != null
+                        && !mBoundColors.contains(node.getColor());
                 mBoundColors.push(node.getColor());
                 if (result) {
                     node.getInside().accept(this);
@@ -112,7 +118,8 @@ public class IsValidVisitor implements LambdaTermVisitor<Boolean> {
     /**
      * Visits the given lambda variable and checks whether it is a valid node.
      *
-     * @param node the variable to be visited
+     * @param node
+     *            the variable to be visited
      */
     @Override
     public void visit(LambdaVariable node) {

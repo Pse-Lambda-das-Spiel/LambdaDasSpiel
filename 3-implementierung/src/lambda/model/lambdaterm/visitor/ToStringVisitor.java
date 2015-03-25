@@ -39,7 +39,8 @@ public class ToStringVisitor implements LambdaTermVisitor<String> {
      * Visits the given lambda root and saves the string representation as a
      * result.
      *
-     * @param node the root to be visited
+     * @param node
+     *            the root to be visited
      */
     @Override
     public void visit(LambdaRoot node) {
@@ -54,7 +55,8 @@ public class ToStringVisitor implements LambdaTermVisitor<String> {
      * Visits the given lambda application and saves the string representation
      * as a result.
      *
-     * @param node the application to be visited
+     * @param node
+     *            the application to be visited
      */
     @Override
     public void visit(LambdaApplication node) {
@@ -80,14 +82,16 @@ public class ToStringVisitor implements LambdaTermVisitor<String> {
 
         isLeftApplicationChild = false;
         isRightApplicationChild = false;
-        result = (paranthesis ? "(" : "") + left + " " + right + (paranthesis ? ")" : "");
+        result = (paranthesis ? "(" : "") + left + " " + right
+                + (paranthesis ? ")" : "");
     }
 
     /**
      * Visits the given lambda abstraction and saves the string representation
      * as a result.
      *
-     * @param node the abstraction to be visited
+     * @param node
+     *            the abstraction to be visited
      */
     @Override
     public void visit(LambdaAbstraction node) {
@@ -102,18 +106,23 @@ public class ToStringVisitor implements LambdaTermVisitor<String> {
             inside = "null";
         }
 
-        result = (paranthesis ? "(" : "") + "/" + Character.toString(LevelManager.convertColorToVariable(node.getColor())) + "." + inside + (paranthesis ? ")" : "");
+        result = (paranthesis ? "(" : "")
+                + "/"
+                + Character.toString(LevelManager.convertColorToVariable(node
+                        .getColor())) + "." + inside + (paranthesis ? ")" : "");
     }
 
     /**
      * Visits the given lambda variable and saves the string representation as a
      * result.
      *
-     * @param node the variable to be visited
+     * @param node
+     *            the variable to be visited
      */
     @Override
     public void visit(LambdaVariable node) {
-        result = Character.toString(LevelManager.convertColorToVariable(node.getColor()));
+        result = Character.toString(LevelManager.convertColorToVariable(node
+                .getColor()));
     }
 
     /**

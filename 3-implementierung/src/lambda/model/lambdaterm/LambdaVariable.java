@@ -13,11 +13,14 @@ public class LambdaVariable extends LambdaValue {
     /**
      * Creates a new lambda variable.
      *
-     * @param parent the parent node
-     * @param rgbColor the color of this variable
-     * @param locked true if this node can be modified by the user, false
-     * otherwise
-     * @throws IllegalArgumentException if color is null
+     * @param parent
+     *            the parent node
+     * @param rgbColor
+     *            the color of this variable
+     * @param locked
+     *            true if this node can be modified by the user, false otherwise
+     * @throws IllegalArgumentException
+     *             if color is null
      */
     public LambdaVariable(LambdaTerm parent, Color rgbColor, boolean locked) {
         super(parent, rgbColor, locked);
@@ -27,8 +30,10 @@ public class LambdaVariable extends LambdaValue {
      * Accepts the given visitor by letting it visit this lambda variable.
      * Returns null if the visitor is null.
      *
-     * @param <T> the return type of the visit
-     * @param visitor the visitor
+     * @param <T>
+     *            the return type of the visit
+     * @param visitor
+     *            the visitor
      * @return the result of the visit
      */
     @Override
@@ -43,7 +48,8 @@ public class LambdaVariable extends LambdaValue {
     /**
      * Returns whether this object is equal to the given object.
      *
-     * @param object the other object
+     * @param object
+     *            the other object
      * @return true if this object is equal to the given object, false otherwise
      */
     @Override

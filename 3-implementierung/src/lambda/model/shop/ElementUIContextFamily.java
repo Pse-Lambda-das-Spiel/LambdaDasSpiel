@@ -18,14 +18,16 @@ public class ElementUIContextFamily extends ShopItemModel {
     /**
      * Creates a new instance of this class
      * 
-     * @param id the if of this item
-     * @param price the price of this item
+     * @param id
+     *            the if of this item
+     * @param price
+     *            the price of this item
      */
     public ElementUIContextFamily(String id, int price, String filepath) {
         super(id, price, filepath);
         shopItemType = ShopModel.getShop().getElementUIContextFamilies();
     }
-    
+
     /**
      * Returns the parenthesis element
      *
@@ -56,29 +58,32 @@ public class ElementUIContextFamily extends ShopItemModel {
     /**
      * Sets the committed element as new parenthesis
      * 
-     * @param the new parenthesis
+     * @param the
+     *            new parenthesis
      */
-    public void setParanthesisUIContext(ParanthesisUIContext parenthesisUIContext) {
+    public void setParanthesisUIContext(
+            ParanthesisUIContext parenthesisUIContext) {
         this.paranthesisUIContext = parenthesisUIContext;
     }
 
-    
     /**
      * Sets the committed element as new variable
      * 
-     * @param the new variable
+     * @param the
+     *            new variable
      */
     public void setVariableUIContext(VariableUIContext variableUIContext) {
         this.variableUIContext = variableUIContext;
     }
 
-    
     /**
      * Sets the committed element as new abstraction
      * 
-     * @param the new abstraction
+     * @param the
+     *            new abstraction
      */
-    public void setAbstractionUIContext(AbstractionUIContext abstractionUIContext) {
+    public void setAbstractionUIContext(
+            AbstractionUIContext abstractionUIContext) {
         this.abstractionUIContext = abstractionUIContext;
     }
 }

@@ -43,31 +43,33 @@ public class SettingsViewController extends StageViewController {
     private Label soundLabel;
     private AssetManager manager;
     private final float space;
-    
+
     /**
      * Creates a object of the class without initializing the screen.
      */
-	public SettingsViewController() {
+    public SettingsViewController() {
         ProfileManager.getManager().addObserver(this);
         settings = new SettingsModel();
         space = getStage().getWidth() / 64;
-	}
+    }
 
     @Override
     public void queueAssets(AssetManager assets) {
-        assets.load(skinJson, Skin.class,
-                new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
-        assets.load("data/backgrounds/settings.png", Texture.class, new TextureParameter());
+        assets.load(skinJson, Skin.class, new SkinLoader.SkinParameter(
+                "data/skins/MasterSkin.atlas"));
+        assets.load("data/backgrounds/settings.png", Texture.class,
+                new TextureParameter());
     }
 
     @Override
     public void create(final AssetManager manager) {
-    	setLastViewController(MainMenuViewController.class);
-        Image background = new Image(manager.get("data/backgrounds/settings.png", Texture.class));
+        setLastViewController(MainMenuViewController.class);
+        Image background = new Image(manager.get(
+                "data/backgrounds/settings.png", Texture.class));
         background.setWidth(getStage().getWidth());
         background.setHeight(getStage().getHeight());
         getStage().addActor(background);
-        
+
         this.manager = manager;
         Table settingsView = new Table();
         settingsView.align(Align.top);
@@ -81,7 +83,8 @@ public class SettingsViewController extends StageViewController {
         musicLabel = new Label(null, manager.get(skinJson, Skin.class));
         settingsView.add(musicLabel).width(width);
         settingsView.row().height(height);
-        musicSlider = new Slider(0, 1, 0.01f, false,  manager.get(skinJson, Skin.class));
+        musicSlider = new Slider(0, 1, 0.01f, false, manager.get(skinJson,
+                Skin.class));
         musicSlider.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -93,7 +96,8 @@ public class SettingsViewController extends StageViewController {
         soundLabel = new Label(null, manager.get(skinJson, Skin.class));
         settingsView.add(soundLabel).width(width);
         settingsView.row().height(height);
-        soundSlider = new Slider(0, 1, 0.01f, false,  manager.get(skinJson, Skin.class));
+        soundSlider = new Slider(0, 1, 0.01f, false, manager.get(skinJson,
+                Skin.class));
         soundSlider.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -111,8 +115,9 @@ public class SettingsViewController extends StageViewController {
             }
         });
         settingsView.add(statistics).width(width * 2 / 3).space(space * 4);
-        
-        ImageButton backButton = new ImageButton(manager.get(skinJson, Skin.class), "backButton");
+
+        ImageButton backButton = new ImageButton(manager.get(skinJson,
+                Skin.class), "backButton");
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
         buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
         buttonContainer.align(Align.bottomLeft);
@@ -122,7 +127,7 @@ public class SettingsViewController extends StageViewController {
         buttonContainer.setFillParent(true);
         changedProfileList();
     }
-    
+
     @Override
     public void changedProfile() {
         ProfileModel current = ProfileManager.getManager().getCurrentProfile();
@@ -142,5 +147,5 @@ public class SettingsViewController extends StageViewController {
             getGame().setScreen(MainMenuViewController.class);
         }
     }
-    
+
 }

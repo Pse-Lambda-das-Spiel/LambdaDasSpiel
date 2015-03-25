@@ -37,7 +37,6 @@ public class ProfileEditModelTest implements ProfileEditObserver {
         edit.removeObserver(this);
     }
 
-    
     /**
      * Makes sure setLang() doesn't accept null as argument.
      */
@@ -45,9 +44,10 @@ public class ProfileEditModelTest implements ProfileEditObserver {
     public void testSetLangNull() {
         edit.setLang(null);
     }
-    
+
     /**
-     * Tries to set a language that doesn't exist. setLang() should than set back to the standard language.
+     * Tries to set a language that doesn't exist. setLang() should than set
+     * back to the standard language.
      */
     @Test
     public void testWrongLang() {
@@ -56,7 +56,7 @@ public class ProfileEditModelTest implements ProfileEditObserver {
         edit.setLang("noLang");
         assertEquals(baseLang, edit.getLang());
     }
-    
+
     /**
      * Tests nextLang and previousLang with their getters (getLang and
      * getLangPic), while making sure the correct ProfileEditObserver-methods
@@ -67,12 +67,15 @@ public class ProfileEditModelTest implements ProfileEditObserver {
         String start = edit.getLang();
         edit.nextLang();
         assertNotEquals(start, edit.getLang());
-        assertEquals(edit.getLang().replace("StringBundle_", "flags/").concat("Flag.jpg"), edit.getLangPic());
+        assertEquals(
+                edit.getLang().replace("StringBundle_", "flags/")
+                        .concat("Flag.jpg"), edit.getLangPic());
         assertTrue(calledChangedLanguage);
         calledChangedLanguage = false;
         edit.previousLang();
         assertEquals(start, edit.getLang());
-        assertEquals(start.replace("StringBundle_", "flags/").concat("Flag.jpg"), edit.getLangPic());
+        assertEquals(start.replace("StringBundle_", "flags/")
+                .concat("Flag.jpg"), edit.getLangPic());
         assertTrue(calledChangedLanguage);
     }
 
@@ -120,9 +123,10 @@ public class ProfileEditModelTest implements ProfileEditObserver {
     public void testSetAvatarNull() {
         edit.setAvatar(null);
     }
-    
+
     /**
-     * Tries to set an avatar that doesn't exist. setAvatar() should than set back to the standard avatar.
+     * Tries to set an avatar that doesn't exist. setAvatar() should than set
+     * back to the standard avatar.
      */
     @Test
     public void testWrongAvatar() {
@@ -131,8 +135,7 @@ public class ProfileEditModelTest implements ProfileEditObserver {
         edit.setAvatar("noAvatar");
         assertEquals(baseAvatar, edit.getAvatar());
     }
-    
-    
+
     /**
      * Tests nextAvatar and previousAvatar and their getter getAvatar, while
      * making sure the correct ProfileEditObserver-methods are called.
