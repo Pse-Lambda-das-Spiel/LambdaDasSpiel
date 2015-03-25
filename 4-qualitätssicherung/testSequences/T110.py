@@ -43,10 +43,8 @@ time.sleep(1)
 
 print "Enter Name"
 #Without onescreen keyboard because of different keyboard layouts etc.
-device.type("TestName")
+device.type("TestName\n")
 time.sleep(1)
-
-#TODO maybe close Keyboard
 
 print "Clicking 'right' Button"
 device.touch(calcWidth(1150), calcHeight(600), "DOWN_AND_UP")

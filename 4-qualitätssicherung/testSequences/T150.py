@@ -5,9 +5,8 @@ import os
 import time
 
 # Prerequisites:
-# - Application started.
-# - Logged in with a Profile that has unlocked Level 5
-# - Be in the LevelSelection-Screen with Level 5 visible.
+# - Logged in with a Profile that has unlocked Level 6.
+# - Be in the LevelSelection-Screen with Level 6 visible.
 
 # Tested with 1280x720 resolution
 
@@ -23,8 +22,8 @@ device = MonkeyRunner.waitForConnection()
 displayWidth = device.getProperty("display.width")
 displayHeight = device.getProperty("display.height")
 
-print "Select level 5"
-device.touch(calcWidth(640), calcHeight(460), "DOWN_AND_UP")
+print "Select level 6"
+device.touch(calcWidth(830), calcHeight(460), "DOWN_AND_UP")
 time.sleep(1)
 
 print "Close Levelgoal-Dialog"
