@@ -40,22 +40,27 @@
 			{	
 				"tutorialId": "0",
 				"image": "",
+				"inEditorMode": true,
 			},
 			{
 				"tutorialId": "1",
 				"image": "goal",
+				"inEditorMode": true,
 			},
 			{
 				"tutorialId": "2",
 				"image": "info",
+				"inEditorMode": true,
 			},
 			{
 				"tutorialId": "3",
 				"image": "",
+				"inEditorMode": true,
 			},
 			{
 				"tutorialId": "4",
 				"image": "tutorials/coloring",
+				"inEditorMode": true,
 			},
 		],
 		"constellations": {

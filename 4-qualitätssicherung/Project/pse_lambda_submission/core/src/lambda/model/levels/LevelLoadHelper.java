@@ -133,7 +133,8 @@ public final class LevelLoadHelper {
 				throw new InvalidJsonException("The image name of a tutorial id must not be null!");
 			}
 			String tutorialId = "tutorial_" + Integer.toString(levelId) + "_" + entry.getString("tutorialId");
-			tutorialMessageModelList.add(new TutorialMessageModel(tutorialId, entry.getString("image")));
+			tutorialMessageModelList.add(new TutorialMessageModel(tutorialId, entry.getString("image"), entry
+					.getBoolean("inEditorMode")));
 		}
 		return tutorialMessageModelList;
 	}

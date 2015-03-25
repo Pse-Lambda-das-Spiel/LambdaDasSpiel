@@ -43,22 +43,27 @@
 			{
 				"tutorialId": "0",
 				"image": "",
+				"inEditorMode": true,
 			},
 			{
 				"tutorialId": "1",
 				"image": "",
+				"inEditorMode": true,
 			},
 			{
 				"tutorialId": "2",
 				"image": "",
+				"inEditorMode": true,
 			},
 			{
 				"tutorialId": "3",
 				"image": "",
+				"inEditorMode": true,
 			},
 			{
 				"tutorialId": "4",
 				"image": "",
+				"inEditorMode": true,
 			}
 		],
 		"constellations": {

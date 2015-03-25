@@ -26,14 +26,18 @@ import lambda.model.editormode.EditorModel;
 import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.levels.LevelManager;
 import lambda.model.levels.LevelModel;
+import lambda.model.levels.TutorialMessageModel;
 import lambda.model.profiles.ProfileManager;
 import lambda.model.profiles.ProfileModel;
 import lambda.model.reductionmode.ReductionModel;
 import lambda.model.reductionmode.ReductionModelObserver;
 import lambda.viewcontroller.StageViewController;
+import lambda.viewcontroller.assets.AssetViewController;
 import lambda.viewcontroller.editor.EditorViewController;
+import lambda.viewcontroller.editor.TargetDialog;
 import lambda.viewcontroller.lambdaterm.LambdaTermViewController;
 import lambda.viewcontroller.level.LevelSelectionViewController;
+import lambda.viewcontroller.level.TutorialMessage;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
 
 /**
@@ -241,8 +245,41 @@ public class ReductionViewController extends StageViewController implements Redu
         multiplexer.addProcessor(getStage());
         multiplexer.addProcessor(this);
         Gdx.input.setInputProcessor(multiplexer);
+        showStartDialogs();
     }
 
+    private void showStartDialogs() {
+        List<TutorialMessageModel> tutorialList = model.getContext().getLevelModel().getTutorial();
+        for (int i = 0; i < tutorialList.size(); i++) {
+        	if (tutorialList.get(i).isInEditorModel()) {
+        		tutorialList.remove(i);
+        	}
+        }
+        AssetManager assets = getGame().getController(AssetViewController.class).getManager();
+        final Skin dialogSkin = assets.get("data/skins/DialogTemp.json", Skin.class);
+        I18NBundle language = assets.get(ProfileManager.getManager().getCurrentProfile().getLanguage(),
+                I18NBundle.class);
+        final float width = getStage().getWidth();
+        final float height = getStage().getHeight();
+        final Dialog[] dialogs = new Dialog[tutorialList.size()];
+        for (int i = 0; i < dialogs.length; i++) {
+            final int pos = i;
+            dialogs[pos] = new TutorialMessage(tutorialList.get(i), dialogSkin, language, height, width);
+            dialogs[pos].addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    if (pos + 1 < dialogs.length) {
+                        dialogs[pos + 1].show(getStage());
+                    }
+                    dialogs[pos].remove();
+                }
+            });
+        }
+        if (dialogs.length > 0) {
+            dialogs[0].show(getStage());
+        }
+    }
+    
     /**
      * Called when the model state changes.
      *
