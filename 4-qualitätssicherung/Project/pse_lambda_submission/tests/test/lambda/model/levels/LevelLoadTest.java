@@ -58,11 +58,6 @@ public class LevelLoadTest {
 		// blue
 		lockedColors.add(Color.valueOf("0000ffff"));
 		availableRedStrats.add(ReductionStrategy.NORMAL_ORDER);
-		tutorial.add(new TutorialMessageModel("tutorial_2_0", "", true));
-		tutorial.add(new TutorialMessageModel("tutorial_2_1", "", true));
-		tutorial.add(new TutorialMessageModel("tutorial_2_2", "", true));
-		tutorial.add(new TutorialMessageModel("tutorial_2_3", "", true));
-		tutorial.add(new TutorialMessageModel("tutorial_2_4", "", true));
 		tutorial.add(new TutorialMessageModel("tutorial_2_0", "tutorials/lamb_with_gem", true));
 		tutorial.add(new TutorialMessageModel("tutorial_2_1", "tutorials/lamb_enchants_gem", true));
 		tutorial.add(new TutorialMessageModel("tutorial_2_2", "tutorials/cloudanimation", true));
