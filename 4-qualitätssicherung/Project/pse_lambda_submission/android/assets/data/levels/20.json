@@ -1,0 +1,128 @@
+{
+	"level": {
+		"levelId": 20 ,
+		"difficulty": 4 ,
+		"coins": 10,
+		"maxReductionSteps" : 50,
+		"standardMode": false,
+		"colorEquivalence": true,
+		"availableColors": [
+			{
+			"color": "x"
+			},
+			{
+			"color": "y"
+			},
+			{
+			"color": "z"
+			},
+			{
+			"color": "t"
+			},
+			{
+			"color": "u"
+			},
+			{
+			"color": "v"
+			}
+		],
+		"lockedColors": [
+		],
+		"defaultStrategy": "APPLICATIVE_ORDER",
+		"availableRedStrats": [
+			{
+			"reductionStrategy": "APPLICATIVE_ORDER"
+			}
+		],
+		"useableElements": [
+			{
+			"elementType": "VARIABLE"
+			},
+			{
+			"elementType": "ABSTRACTION"
+			},
+			{
+			"elementType": "PARENTHESIS"
+			}
+		],
+		"tutorial": [
+			{
+				"tutorialId": "0",
+				"image": "",
+			},
+			{
+				"tutorialId": "1",
+				"image": "",
+			},
+			{
+				"tutorialId": "2",
+				"image": "applicativeorder",
+			}
+		],
+		"constellations": {
+			"start": {
+				"_comment": "(lv.v)(lz.z((lx.x)(ly.y)))",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "abstraction",
+						"locked": true,
+						"color": "v",
+						"inside": {
+							"type": "variable",
+							"locked": true,
+							"color": "v"
+						}
+					},
+					"right": {
+						"type": "abstraction",
+						"locked": true,
+						"color": "z",
+						"inside": {
+							"type": "application",
+							"locked": true,
+							"left": {
+								"type": "variable",
+								"locked": true,
+								"color": "z",
+							},
+							"right": {
+								"type": "application",
+								"locked": true,
+								"left": {
+									"type": "abstraction",
+									"locked": true,
+									"color": "x",
+									"inside": {
+										"type": "variable",
+										"locked": true,
+										"color": "x"
+									}
+								},
+								"right": {
+									"type": "abstraction",
+									"locked": true,
+									"color": "y",
+									"inside": {
+										"type": "variable",
+										"locked": true,
+										"color": "y"
+									}
+								}
+							}				
+						}
+					}			
+				}
+			},
+			"goal": {
+				"_comment": "lz.z(ly.y)",
+				"child": null
+			},
+			"hint": {
+				"child": null
+			}
+		}
+	}
+}
+

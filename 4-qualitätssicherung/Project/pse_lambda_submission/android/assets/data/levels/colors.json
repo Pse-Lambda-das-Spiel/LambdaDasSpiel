@@ -1,0 +1,90 @@
+{
+	"colors": [
+		{
+		"_comment": "green",
+		"variable": "z",
+		"color": "00ff00ff"
+		},
+		{
+		"_comment": "red",
+		"variable": "y",
+		"color": "ff0000ff"
+		},
+		{
+		"_comment": "blue",
+		"variable": "x",
+		"color": "0000ffff"
+		},
+		{
+		"_comment": "white",
+		"variable": "w",
+		"color": "ffffffff"
+		},
+		{
+		"_comment": "yellow",
+		"variable": "v",
+		"color": "ffff00ff"
+		},
+		{
+		"_comment": "orange",
+		"variable": "u",
+		"color": "ff8000ff"
+		},
+		{
+		"_comment": "cyan",
+		"variable": "t",
+		"color": "00ffffff"
+		},
+		{
+		"_comment": "pink",
+		"variable": "s",
+		"color": "ffc0cbff"
+		},
+		{
+		"_comment": "purple",
+		"variable": "r",
+		"color": "7f007fff"
+		},
+		{
+		"_comment": "dark green",
+		"variable": "q",
+		"color": "006400ff"
+		},
+		{
+		"_comment": "deep pink",
+		"variable": "p",
+		"color": "ff1493ff"
+		},
+		{
+		"_comment": "dark goldenrod",
+		"variable": "o",
+		"color": "b8860bff"
+		},
+		{
+		"_comment": "sienna",
+		"variable": "n",
+		"color": "ff8247ff"
+		},
+		{
+		"_comment": "saddle brown",
+		"variable": "m",
+		"color": "8b4513ff"
+		},
+		{
+		"_comment": "khaki",
+		"variable": "k",
+		"color": "f0e68cff"
+		},
+		{
+		"_comment": "dim gray",
+		"variable": "j",
+		"color": "696969ff"
+		},
+		{
+		"_comment": "black",
+		"variable": "i",
+		"color": "000000ff"
+		}
+	],
+}
+

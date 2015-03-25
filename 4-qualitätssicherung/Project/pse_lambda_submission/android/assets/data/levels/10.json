@@ -1,0 +1,166 @@
+{
+	"level": {
+		"levelId": 10 ,
+		"difficulty": 2 ,
+		"coins": 10,
+		"maxReductionSteps" : 50,
+		"standardMode": true,
+		"colorEquivalence": true,
+		"availableColors": [
+			{
+			"color": "x"
+			},
+			{
+			"color": "y"
+			},
+			{
+			"color": "z"
+			},
+			{
+			"color": "t"
+			},
+			{
+			"color": "u"
+			},
+			{
+			"color": "v"
+			}
+		],
+		"lockedColors": [
+		],
+		"defaultStrategy": "NORMAL_ORDER",
+		"availableRedStrats": [
+			{
+			"reductionStrategy": "NORMAL_ORDER"
+			}
+		],
+		"useableElements": [
+			{
+			"elementType": "VARIABLE"
+			},
+			{
+			"elementType": "ABSTRACTION"
+			},
+			{
+			"elementType": "PARENTHESIS"
+			},
+		],
+		"tutorial": [
+		],
+		"constellations": {
+			"start": {
+				"_comment": "(lx.x)xx",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "abstraction",
+						"locked": true,
+						"color": "x",
+						"inside": {
+							"type": "variable",
+							"locked": true,
+							"color": "x"
+						}
+					},
+					"right": {
+						"type": "application",
+						"locked": true,
+						"left": {
+								"type": "variable",
+								"locked": true,
+								"color": "x"
+						},
+						"right": {
+							"type": "variable",
+							"locked": true,
+							"color": "x"
+						}			
+					}			
+				}
+			},
+			"goal": {
+				"_comment": "uuuu",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "application",
+						"locked": true,
+						"left": {
+							"type": "variable",
+							"locked": true,
+							"color": "u"
+						},
+						"right": {
+							"type": "variable",
+							"locked": true,
+							"color": "u"
+						}
+					},
+					"right": {
+						"type": "application",
+						"locked": true,
+						"left": {
+							"type": "variable",
+							"locked": true,
+							"color": "u"
+						},
+						"right": {
+							"type": "variable",
+							"locked": true,
+							"color": "u"
+						}			
+					}			
+				}
+			},
+			"hint": {
+				"_comment": "(lw.)(lx.x)xx",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "abstraction",
+						"locked": false,
+						"color": "w",
+						"inside": {
+							"type": "abstraction",
+							"locked": false,
+							"color": "w",
+							"inside": null
+						}
+					},
+					"right": {
+						"type": "application",
+						"locked": true,
+						"left": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "x",
+							"inside": {
+								"type": "variable",
+								"locked": true,
+								"color": "x"
+							}
+						},
+						"right": {
+							"type": "application",
+							"locked": true,
+							"left": {
+								"type": "variable",
+								"locked": true,
+								"color": "x"
+							},
+							"right": {
+								"type": "variable",
+								"locked": true,
+								"color": "x"
+							}						
+						}
+					}			
+				}
+			}
+		}
+	}
+}
+

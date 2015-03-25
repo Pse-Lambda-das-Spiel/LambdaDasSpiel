@@ -1,0 +1,98 @@
+{
+	"level": {
+		"levelId": 3 ,
+		"difficulty": 1 ,
+		"coins": 10,
+		"maxReductionSteps" : 50,
+		"standardMode": true,
+		"colorEquivalence": true,
+		"availableColors": [
+			{
+			"color": "x"
+			},
+			{
+			"color": "y"
+			},
+			{
+			"color": "z"
+			},
+			{
+			"color": "s"
+			},
+			{
+			"color": "u"
+			},
+			{
+			"color": "v"
+			}
+		],
+		"lockedColors": [
+			{
+			"color": "t"
+			}
+		],
+		"defaultStrategy": "NORMAL_ORDER",
+		"availableRedStrats": [
+			{
+			"reductionStrategy": "NORMAL_ORDER"
+			}
+		],
+		"useableElements": [
+			{
+			"elementType": "VARIABLE"
+			},
+		],
+		"tutorial": [
+			{
+				"tutorialId": "0",
+				"image": "",
+			}
+		],
+		"constellations": {
+			"start": {
+				"_comment": "lt.t",
+				"child": {
+					"type": "abstraction",
+					"locked": true,
+					"color": "t",
+					"inside": {
+						"type": "variable",
+						"locked": true,
+						"color": "t"
+					}
+				}
+			},
+			"goal": {
+				"_comment": "u",
+				"child": {
+					"type": "variable",
+					"locked": true,
+					"color": "u"
+				}
+			},
+			"hint": {
+				"_comment": "(lt.t)w",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "abstraction",
+						"locked": true,
+						"color": "t",
+						"inside": {
+							"type": "variable",
+							"locked": true,
+							"color": "t"
+						}
+					},
+					"right": {
+						"type": "variable",
+						"locked": false,
+						"color": "w"
+					}			
+				}
+			}
+		}
+	}
+}
+

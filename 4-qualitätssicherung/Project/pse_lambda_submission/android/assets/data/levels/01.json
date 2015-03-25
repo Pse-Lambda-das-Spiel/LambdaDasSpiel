@@ -1,0 +1,116 @@
+{
+	"level": {
+		"levelId": 1 ,
+		"difficulty": 1 ,
+		"coins": 10,
+		"maxReductionSteps" : 50,
+		"standardMode": true,
+		"colorEquivalence": true,
+		"availableColors": [
+			{
+			"color": "x"
+			},
+			{
+			"color": "y"
+			},
+			{
+			"color": "z"
+			},
+			{
+			"color": "t"
+			},
+			{
+			"color": "u"
+			},
+			{
+			"color": "v"
+			}
+		],
+		"lockedColors": [
+		],
+		"defaultStrategy": "NORMAL_ORDER",
+		"availableRedStrats": [
+			{
+			"reductionStrategy": "NORMAL_ORDER"
+			}
+		],
+		"useableElements": [
+		],
+		"tutorial": [
+			{	
+				"tutorialId": "0",
+				"image": "",
+			},
+			{
+				"tutorialId": "1",
+				"image": "goal",
+			},
+			{
+				"tutorialId": "2",
+				"image": "info",
+			},
+			{
+				"tutorialId": "3",
+				"image": "",
+			},
+			{
+				"tutorialId": "4",
+				"image": "tutorials/coloring",
+			},
+		],
+		"constellations": {
+			"start": {
+				"_comment": "ww",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "variable",
+						"locked": false,
+						"color": "w",
+					},
+					"right": {
+						"type": "variable",
+						"locked": false,
+						"color": "w"
+					}			
+				}
+			},
+			"goal": {
+				"_comment": "xx",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "variable",
+						"locked": false,
+						"color": "x",
+					},
+					"right": {
+						"type": "variable",
+						"locked": false,
+						"color": "x"
+					}		
+				}
+			},
+			"hint": {
+				"_comment": "xw",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "variable",
+						"locked": false,
+						"color": "x",
+					},
+					"right": {
+						"type": "variable",
+						"locked": false,
+						"color": "w"
+					}	
+				}	
+			}
+		}
+	}
+}
+

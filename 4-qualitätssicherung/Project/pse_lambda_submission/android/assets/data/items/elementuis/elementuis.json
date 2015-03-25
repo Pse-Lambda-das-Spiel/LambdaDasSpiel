@@ -1,0 +1,13 @@
+{
+	"00": {
+		"id": "0",
+		"price": 30 ,
+		"filename": "Hat"
+	},
+	"01": {
+		"id": "1",
+		"price": 50 ,
+		"filename": "Cappy"
+	}
+}
+

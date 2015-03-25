@@ -1,0 +1,134 @@
+{
+	"level": {
+		"levelId": 19 ,
+		"difficulty": 4 ,
+		"coins": 10,
+		"maxReductionSteps" : 50,
+		"standardMode": false,
+		"colorEquivalence": true,
+		"availableColors": [
+			{
+			"color": "x"
+			},
+			{
+			"color": "y"
+			},
+			{
+			"color": "z"
+			},
+			{
+			"color": "t"
+			},
+			{
+			"color": "u"
+			},
+			{
+			"color": "v"
+			}
+		],
+		"lockedColors": [
+		],
+		"defaultStrategy": "NORMAL_ORDER",
+		"availableRedStrats": [
+			{
+			"reductionStrategy": "NORMAL_ORDER"
+			}
+		],
+		"useableElements": [
+			{
+			"elementType": "VARIABLE"
+			},
+			{
+			"elementType": "ABSTRACTION"
+			},
+			{
+			"elementType": "PARENTHESIS"
+			}
+		],
+		"tutorial": [
+		],
+		"constellations": {
+			"start": {
+				"_comment": "(lx.x)(lx.x)(lz.y(lv.v)z)u",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "application",
+						"locked": true,
+						"left": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "x",
+							"inside": {
+								"type": "variable",
+								"locked": true,
+								"color": "x"
+							}
+						},
+						"right": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "x",
+							"inside": {
+								"type": "variable",
+								"locked": true,
+								"color": "x"
+							}
+						}			
+					},
+					"right": {
+						"type": "application",
+						"locked": true,
+						"left": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "z",
+							"inside": {
+								"type": "application",
+								"locked": true,
+								"left": {
+									"type": "application",
+									"locked": true,
+									"left": {
+										"type": "variable",
+										"locked": true,
+										"color": "z",
+									},
+									"right": {
+										"type": "abstraction",
+										"locked": true,
+										"color": "v",
+										"inside": {
+											"type": "variable",
+											"locked": true,
+											"color": "v"
+										}
+									}	
+								},
+								"right": {
+									"type": "variable",
+									"locked": true,
+									"color": "z"
+								}	
+							}
+						},
+						"right": {
+							"type": "variable",
+							"locked": true,
+							"color": "u"
+						}			
+					}			
+				}
+			},
+			"goal": {
+				"_comment": "yu",
+				"child": null
+			},
+			"hint": {
+				"child": null
+			}
+		}
+	}
+}
+

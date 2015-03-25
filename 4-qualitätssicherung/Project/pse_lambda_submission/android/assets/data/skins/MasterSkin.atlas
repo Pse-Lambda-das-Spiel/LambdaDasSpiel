@@ -1,0 +1,933 @@
+DialogTemp.png
+size: 256,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+check-off
+  rotate: false
+  xy: 11, 5
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+textfield
+  rotate: false
+  xy: 11, 5
+  size: 14, 14
+  split: 3, 3, 3, 3
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+check-on
+  rotate: false
+  xy: 125, 35
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+cursor
+  rotate: false
+  xy: 23, 1
+  size: 3, 3
+  split: 1, 1, 1, 1
+  orig: 3, 3
+  offset: 0, 0
+  index: -1
+default-pane
+  rotate: false
+  xy: 11, 1
+  size: 5, 3
+  split: 1, 1, 1, 1
+  orig: 5, 3
+  offset: 0, 0
+  index: -1
+default-rect-pad
+  rotate: false
+  xy: 11, 1
+  size: 5, 3
+  split: 1, 1, 1, 1
+  orig: 5, 3
+  offset: 0, 0
+  index: -1
+default-pane-noborder
+  rotate: false
+  xy: 170, 44
+  size: 1, 1
+  split: 0, 0, 0, 0
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+default-rect
+  rotate: false
+  xy: 38, 25
+  size: 3, 3
+  split: 1, 1, 1, 1
+  orig: 3, 3
+  offset: 0, 0
+  index: -1
+default-rect-down
+  rotate: false
+  xy: 170, 46
+  size: 3, 3
+  split: 1, 1, 1, 1
+  orig: 3, 3
+  offset: 0, 0
+  index: -1
+default-round
+  rotate: false
+  xy: 112, 29
+  size: 12, 20
+  split: 5, 5, 5, 4
+  pad: 4, 4, 1, 1
+  orig: 12, 20
+  offset: 0, 0
+  index: -1
+default-round-down
+  rotate: false
+  xy: 99, 29
+  size: 12, 20
+  split: 5, 5, 5, 4
+  pad: 4, 4, 1, 1
+  orig: 12, 20
+  offset: 0, 0
+  index: -1
+default-round-large
+  rotate: false
+  xy: 57, 29
+  size: 20, 20
+  split: 5, 5, 5, 4
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+default-scroll
+  rotate: false
+  xy: 78, 29
+  size: 20, 20
+  split: 2, 2, 2, 2
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+default-select
+  rotate: false
+  xy: 29, 29
+  size: 27, 20
+  split: 4, 14, 4, 4
+  orig: 27, 20
+  offset: 0, 0
+  index: -1
+default-select-selection
+  rotate: false
+  xy: 26, 16
+  size: 3, 3
+  split: 1, 1, 1, 1
+  orig: 3, 3
+  offset: 0, 0
+  index: -1
+default-slider
+  rotate: false
+  xy: 29, 20
+  size: 8, 8
+  split: 2, 2, 2, 2
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+default-slider-knob
+  rotate: false
+  xy: 1, 1
+  size: 9, 18
+  orig: 9, 18
+  offset: 0, 0
+  index: -1
+default-splitpane
+  rotate: false
+  xy: 17, 1
+  size: 5, 3
+  split: 0, 5, 0, 0
+  orig: 5, 3
+  offset: 0, 0
+  index: -1
+default-splitpane-vertical
+  rotate: false
+  xy: 125, 29
+  size: 3, 5
+  split: 0, 0, 0, 5
+  orig: 3, 5
+  offset: 0, 0
+  index: -1
+default-window
+  rotate: false
+  xy: 1, 20
+  size: 27, 29
+  split: 4, 3, 20, 3
+  orig: 27, 29
+  offset: 0, 0
+  index: -1
+selection
+  rotate: false
+  xy: 174, 48
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+tree-minus
+  rotate: false
+  xy: 140, 35
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+tree-plus
+  rotate: false
+  xy: 155, 35
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+white
+  rotate: false
+  xy: 129, 31
+  size: 3, 3
+  orig: 3, 3
+  offset: 0, 0
+  index: -1
+
+MasterSkin.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+dialog
+  rotate: false
+  xy: 1, 1560
+  size: 800, 487
+  orig: 800, 487
+  offset: 0, 0
+  index: -1
+imageType
+  rotate: false
+  xy: 1, 1241
+  size: 700, 317
+  orig: 700, 317
+  offset: 0, 0
+  index: -1
+elementType
+  rotate: false
+  xy: 803, 1730
+  size: 700, 317
+  orig: 700, 317
+  offset: 0, 0
+  index: -1
+musicType
+  rotate: false
+  xy: 1, 975
+  size: 699, 264
+  orig: 699, 264
+  offset: 0, 0
+  index: -1
+text_button
+  rotate: false
+  xy: 1, 734
+  size: 600, 239
+  orig: 600, 239
+  offset: 0, 0
+  index: -1
+level_completed5
+  rotate: false
+  xy: 1, 332
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+level_unlocked4
+  rotate: false
+  xy: 1505, 1647
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+text_field
+  rotate: false
+  xy: 803, 1629
+  size: 595, 99
+  orig: 595, 99
+  offset: 0, 0
+  index: -1
+elements_bar
+  rotate: false
+  xy: 803, 1629
+  size: 595, 99
+  orig: 595, 99
+  offset: 0, 0
+  index: -1
+slide_bar
+  rotate: false
+  xy: 803, 1602
+  size: 656, 25
+  orig: 656, 25
+  offset: 0, 0
+  index: -1
+level_unlocked2
+  rotate: false
+  xy: 403, 332
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+activated
+  rotate: false
+  xy: 1, 230
+  size: 481, 100
+  orig: 481, 100
+  offset: 0, 0
+  index: -1
+purchased
+  rotate: false
+  xy: 1, 128
+  size: 481, 100
+  orig: 481, 100
+  offset: 0, 0
+  index: -1
+not_buyable
+  rotate: false
+  xy: 1, 26
+  size: 481, 100
+  orig: 481, 100
+  offset: 0, 0
+  index: -1
+buyable
+  rotate: false
+  xy: 803, 1500
+  size: 481, 100
+  orig: 481, 100
+  offset: 0, 0
+  index: -1
+level_completed1
+  rotate: false
+  xy: 703, 1098
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+level_unlocked5
+  rotate: false
+  xy: 1105, 1098
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+level_completed2
+  rotate: false
+  xy: 1507, 1245
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+level
+  rotate: false
+  xy: 1507, 843
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+level_completed4
+  rotate: false
+  xy: 805, 696
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+level_unlocked1
+  rotate: false
+  xy: 805, 294
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+level_locked
+  rotate: false
+  xy: 1207, 441
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+level_completed3
+  rotate: false
+  xy: 1609, 441
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+level_unlocked3
+  rotate: false
+  xy: 1207, 39
+  size: 400, 400
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+sandbox
+  rotate: false
+  xy: 603, 773
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+achievement_unlocked
+  rotate: false
+  xy: 484, 112
+  size: 192, 218
+  orig: 192, 218
+  offset: 0, 0
+  index: 4
+achievement_locked
+  rotate: false
+  xy: 1207, 878
+  size: 192, 218
+  orig: 192, 218
+  offset: 0, 0
+  index: -1
+achievement_unlocked
+  rotate: false
+  xy: 1609, 221
+  size: 192, 218
+  orig: 192, 218
+  offset: 0, 0
+  index: 5
+achievement_unlocked
+  rotate: false
+  xy: 1609, 1
+  size: 192, 218
+  orig: 192, 218
+  offset: 0, 0
+  index: 3
+achievement_unlocked
+  rotate: false
+  xy: 1803, 221
+  size: 192, 218
+  orig: 192, 218
+  offset: 0, 0
+  index: -1
+achievement_unlocked
+  rotate: false
+  xy: 1803, 1
+  size: 192, 218
+  orig: 192, 218
+  offset: 0, 0
+  index: 2
+goal
+  rotate: false
+  xy: 678, 95
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+forward_bw
+  rotate: false
+  xy: 872, 95
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+checkbox_on
+  rotate: false
+  xy: 1400, 1635
+  size: 82, 93
+  orig: 82, 93
+  offset: 0, 0
+  index: -1
+checkbox_off
+  rotate: false
+  xy: 1907, 1954
+  size: 82, 93
+  orig: 82, 93
+  offset: 0, 0
+  index: -1
+colorField
+  rotate: false
+  xy: 1286, 1536
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+slider
+  rotate: false
+  xy: 703, 1538
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+
+MasterSkin2.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+achievement_unlocked
+  rotate: false
+  xy: 1, 804
+  size: 192, 218
+  orig: 192, 218
+  offset: 0, 0
+  index: 1
+coin
+  rotate: false
+  xy: 1, 598
+  size: 192, 204
+  orig: 192, 204
+  offset: 0, 0
+  index: -1
+play_bw
+  rotate: false
+  xy: 195, 825
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+next
+  rotate: false
+  xy: 1, 399
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+accept
+  rotate: false
+  xy: 195, 626
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+play
+  rotate: false
+  xy: 389, 825
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+pause
+  rotate: false
+  xy: 1, 200
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+callbyvalue
+  rotate: false
+  xy: 195, 427
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+okay
+  rotate: false
+  xy: 389, 626
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+forward
+  rotate: false
+  xy: 583, 825
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+applicativeorder
+  rotate: false
+  xy: 1, 1
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+prev_bw
+  rotate: false
+  xy: 195, 228
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+help
+  rotate: false
+  xy: 389, 427
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+add
+  rotate: false
+  xy: 583, 626
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+strategy
+  rotate: false
+  xy: 777, 825
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+reload
+  rotate: false
+  xy: 195, 29
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+callbyname
+  rotate: false
+  xy: 389, 228
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+undo
+  rotate: false
+  xy: 583, 427
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+info
+  rotate: false
+  xy: 777, 626
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+normalorder
+  rotate: false
+  xy: 971, 825
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+back
+  rotate: false
+  xy: 389, 29
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+abort
+  rotate: false
+  xy: 583, 228
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+bin
+  rotate: false
+  xy: 777, 427
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+levelmenu
+  rotate: false
+  xy: 971, 626
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+prev
+  rotate: false
+  xy: 1165, 825
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+settings
+  rotate: false
+  xy: 583, 29
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+menu
+  rotate: false
+  xy: 777, 228
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+achievements
+  rotate: false
+  xy: 971, 427
+  size: 192, 197
+  orig: 192, 197
+  offset: 0, 0
+  index: -1
+start
+  rotate: false
+  xy: 1165, 631
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: -1
+muted
+  rotate: false
+  xy: 1359, 830
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: -1
+unmuted
+  rotate: false
+  xy: 777, 34
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: -1
+
+MasterSkin3.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+tutorials/alphakonversion3
+  rotate: false
+  xy: 1, 1745
+  size: 905, 294
+  orig: 905, 294
+  offset: 0, 0
+  index: -1
+tutorials/alphakonversion2
+  rotate: false
+  xy: 908, 1745
+  size: 782, 294
+  orig: 782, 294
+  offset: 0, 0
+  index: -1
+tutorials/draganddrop1
+  rotate: false
+  xy: 1692, 1763
+  size: 339, 276
+  orig: 339, 276
+  offset: 0, 0
+  index: -1
+tutorials/reductionmode3
+  rotate: false
+  xy: 1692, 1650
+  size: 339, 111
+  orig: 339, 111
+  offset: 0, 0
+  index: -1
+tutorials/enchanting_of_lambs2
+  rotate: false
+  xy: 1, 1487
+  size: 725, 256
+  orig: 725, 256
+  offset: 0, 0
+  index: -1
+tutorials/coloring
+  rotate: false
+  xy: 728, 1620
+  size: 713, 123
+  orig: 713, 123
+  offset: 0, 0
+  index: -1
+tutorials/enchanting_of_lambs1
+  rotate: false
+  xy: 1443, 1452
+  size: 595, 196
+  orig: 595, 196
+  offset: 0, 0
+  index: -1
+tutorials/lamb_enchants_gem
+  rotate: false
+  xy: 728, 1298
+  size: 710, 320
+  orig: 710, 320
+  offset: 0, 0
+  index: -1
+tutorials/alphakonversion1
+  rotate: false
+  xy: 1, 1191
+  size: 703, 294
+  orig: 703, 294
+  offset: 0, 0
+  index: -1
+tutorials/callbyvalue2
+  rotate: false
+  xy: 1440, 1056
+  size: 569, 394
+  orig: 569, 394
+  offset: 0, 0
+  index: -1
+tutorials/callbyvalue1
+  rotate: false
+  xy: 706, 902
+  size: 702, 394
+  orig: 702, 394
+  offset: 0, 0
+  index: -1
+tutorials/choose_callbyvalue
+  rotate: false
+  xy: 1410, 818
+  size: 539, 236
+  orig: 539, 236
+  offset: 0, 0
+  index: -1
+tutorials/choose_callbyname
+  rotate: false
+  xy: 1, 953
+  size: 539, 236
+  orig: 539, 236
+  offset: 0, 0
+  index: -1
+tutorials/lamb_with_gem
+  rotate: false
+  xy: 542, 1034
+  size: 110, 155
+  orig: 110, 155
+  offset: 0, 0
+  index: -1
+tutorials/choose_applicativeorder
+  rotate: false
+  xy: 1, 715
+  size: 539, 236
+  orig: 539, 236
+  offset: 0, 0
+  index: -1
+tutorials/reminder_goal
+  rotate: false
+  xy: 542, 664
+  size: 539, 236
+  orig: 539, 236
+  offset: 0, 0
+  index: -1
+tutorials/choose_normalorder
+  rotate: false
+  xy: 1, 477
+  size: 539, 236
+  orig: 539, 236
+  offset: 0, 0
+  index: -1
+tutorials/callbyname2
+  rotate: false
+  xy: 1083, 615
+  size: 323, 285
+  orig: 323, 285
+  offset: 0, 0
+  index: -1
+tutorials/applicativeorder
+  rotate: false
+  xy: 542, 277
+  size: 521, 385
+  orig: 521, 385
+  offset: 0, 0
+  index: -1
+tutorials/non_standardmode
+  rotate: false
+  xy: 1, 239
+  size: 510, 236
+  orig: 510, 236
+  offset: 0, 0
+  index: -1
+tutorials/standardmode
+  rotate: false
+  xy: 1, 1
+  size: 510, 236
+  orig: 510, 236
+  offset: 0, 0
+  index: -1
+tutorials/press_strategynutton
+  rotate: false
+  xy: 513, 39
+  size: 201, 236
+  orig: 201, 236
+  offset: 0, 0
+  index: -1
+tutorials/press_reductionbutton
+  rotate: false
+  xy: 716, 39
+  size: 201, 236
+  orig: 201, 236
+  offset: 0, 0
+  index: -1
+tutorials/press_goalbutton
+  rotate: false
+  xy: 919, 39
+  size: 201, 236
+  orig: 201, 236
+  offset: 0, 0
+  index: -1
+tutorials/callbyvalue3
+  rotate: false
+  xy: 1065, 328
+  size: 429, 285
+  orig: 429, 285
+  offset: 0, 0
+  index: -1
+tutorials/draganddrop2
+  rotate: false
+  xy: 1408, 635
+  size: 210, 181
+  orig: 210, 181
+  offset: 0, 0
+  index: -1
+tutorials/callbyname1
+  rotate: false
+  xy: 1620, 431
+  size: 391, 385
+  orig: 391, 385
+  offset: 0, 0
+  index: -1
+tutorials/lamb_without_magicwand
+  rotate: false
+  xy: 1496, 273
+  size: 496, 156
+  orig: 496, 156
+  offset: 0, 0
+  index: -1
+tutorials/cloudanimation
+  rotate: false
+  xy: 1122, 257
+  size: 357, 69
+  orig: 357, 69
+  offset: 0, 0
+  index: -1
+tutorials/press_helpbutton
+  rotate: false
+  xy: 1122, 19
+  size: 201, 236
+  orig: 201, 236
+  offset: 0, 0
+  index: -1
+tutorials/press_hintbutton
+  rotate: false
+  xy: 1325, 19
+  size: 201, 236
+  orig: 201, 236
+  offset: 0, 0
+  index: -1
+tutorials/normalorder
+  rotate: false
+  xy: 1528, 91
+  size: 336, 180
+  orig: 336, 180
+  offset: 0, 0
+  index: -1
+tutorials/purpose_of_goal
+  rotate: false
+  xy: 1528, 29
+  size: 300, 60
+  orig: 300, 60
+  offset: 0, 0
+  index: -1
+
+MasterSkin4.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+tutorials/reductionmode1
+  rotate: false
+  xy: 1, 1
+  size: 339, 111
+  orig: 339, 111
+  offset: 0, 0
+  index: -1
+tutorials/reductionmode2
+  rotate: false
+  xy: 342, 1
+  size: 339, 111
+  orig: 339, 111
+  offset: 0, 0
+  index: -1

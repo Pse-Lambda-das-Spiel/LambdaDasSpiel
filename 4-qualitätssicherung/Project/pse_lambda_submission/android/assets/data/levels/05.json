@@ -1,0 +1,151 @@
+{
+	"level": {
+		"levelId": 5 ,
+		"difficulty": 1 ,
+		"coins": 10,
+		"maxReductionSteps" : 50,
+		"standardMode": true,
+		"colorEquivalence": true,
+		"availableColors": [
+			{
+			"color": "s"
+			},
+			{
+			"color": "y"
+			},
+			{
+			"color": "z"
+			},
+			{
+			"color": "t"
+			},
+			{
+			"color": "u"
+			},
+			{
+			"color": "v"
+			}
+		],
+		"lockedColors": [
+			{
+			"color": "x"
+			}
+		],
+		"defaultStrategy": "NORMAL_ORDER",
+		"availableRedStrats": [
+			{
+			"reductionStrategy": "NORMAL_ORDER"
+			}
+		],
+		"useableElements": [
+			{
+			"elementType": "VARIABLE"
+			},
+		],
+		"tutorial": [
+		],
+		"constellations": {
+			"start": {
+				"_comment": "ly.(lx.x)y)z",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "abstraction",
+						"locked": true,
+						"color": "y",
+						"inside": {
+							"type": "application",
+							"locked": true,
+							"left": {
+								"type": "abstraction",
+								"locked": true,
+								"color": "x",
+								"inside": {
+									"type": "variable",
+									"locked": true,
+									"color": "x"
+								}
+							},
+							"right": {
+								"type": "variable",
+								"locked": true,
+								"color": "y"
+							}			
+						}
+					},
+					"right": {
+						"type": "variable",
+						"locked": true,
+						"color": "z"
+					}			
+				}
+			},
+			"goal": {
+				"_comment": "zz",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "variable",
+						"locked": true,
+						"color": "z"
+								
+					},
+					"right": {
+						"type": "variable",
+						"locked": true,
+						"color": "z"
+					}			
+				}
+			},
+			"hint": {
+				"_comment": "ly.(lx.x)yw)z",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "abstraction",
+						"locked": true,
+						"color": "y",
+						"inside": {
+							"type": "application",
+							"locked": true,
+							"left": {
+								"type": "abstraction",
+								"locked": true,
+								"color": "x",
+								"inside": {
+									"type": "variable",
+									"locked": true,
+									"color": "x"
+								}
+							},
+							"right": {
+								"type": "application",
+								"locked": true,
+								"left": {
+									"type": "variable",
+									"locked": true,
+									"color": "y"
+								
+								},
+								"right": {
+									"type": "variable",
+									"locked": false,
+									"color": "w"
+								}		
+							}			
+						}
+					},
+					"right": {
+						"type": "variable",
+						"locked": true,
+						"color": "z"
+					}			
+				}
+			}
+		}
+	}
+}
+

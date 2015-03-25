@@ -1,0 +1,120 @@
+{
+	"level": {
+		"levelId": 15 ,
+		"difficulty": 3 ,
+		"coins": 10,
+		"maxReductionSteps" : 50,
+		"standardMode": false,
+		"colorEquivalence": true,
+		"availableColors": [
+			{
+			"color": "x"
+			},
+			{
+			"color": "y"
+			},
+			{
+			"color": "z"
+			},
+			{
+			"color": "t"
+			},
+			{
+			"color": "u"
+			},
+			{
+			"color": "v"
+			}
+		],
+		"lockedColors": [
+		],
+		"defaultStrategy": "NORMAL_ORDER",
+		"availableRedStrats": [
+			{
+			"reductionStrategy": "NORMAL_ORDER"
+			}
+		],
+		"useableElements": [
+			{
+			"elementType": "VARIABLE"
+			},
+			{
+			"elementType": "ABSTRACTION"
+			},
+			{
+			"elementType": "PARENTHESIS"
+			}
+		],
+		"tutorial": [
+		],
+		"constellations": {
+			"start": {
+				"_comment": "(lu.(lt.tt)u)x",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "abstraction",
+						"locked": true,
+						"color": "u",
+						"inside": {
+							"type": "application",
+							"locked": true,
+							"left": {
+								"type": "abstraction",
+								"locked": true,
+								"color": "x",
+								"inside": {
+									"type": "application",
+									"locked": true,
+									"left": {
+										"type": "variable",
+										"locked": true,
+										"color": "t",
+									},
+									"right": {
+										"type": "variable",
+										"locked": true,
+										"color": "t"
+									}			
+								}
+							},
+							"right": {
+								"type": "variable",
+								"locked": true,
+								"color": "u"
+							}			
+						}
+					},
+					"right": {
+						"type": "variable",
+						"locked": true,
+						"color": "x"
+					}			
+				}
+			},
+			"goal": {
+				"_comment": "xx",
+				"child": null
+			},
+			"hint": {
+				"_comment": "ww",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "variable",
+						"locked": false,
+						"color": "w"
+					},
+					"right": {
+						"type": "variable",
+						"locked": false,
+						"color": "w"
+					}			
+				}
+			}
+		}
+	}
+}
+

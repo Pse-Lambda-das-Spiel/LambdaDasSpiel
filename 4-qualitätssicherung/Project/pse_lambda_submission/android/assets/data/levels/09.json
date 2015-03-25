@@ -1,0 +1,130 @@
+{
+	"level": {
+		"levelId": 9 ,
+		"difficulty": 2 ,
+		"coins": 10,
+		"maxReductionSteps" : 50,
+		"standardMode": true,
+		"colorEquivalence": true,
+		"availableColors": [
+			{
+			"color": "x"
+			},
+			{
+			"color": "y"
+			},
+			{
+			"color": "z"
+			},
+			{
+			"color": "r"
+			},
+			{
+			"color": "u"
+			},
+			{
+			"color": "v"
+			}
+		],
+		"lockedColors": [
+			{
+			"color": "s"
+			},
+			{
+			"color": "t"
+			}
+		],
+		"defaultStrategy": "NORMAL_ORDER",
+		"availableRedStrats": [
+			{
+			"reductionStrategy": "NORMAL_ORDER"
+			}
+		],
+		"useableElements": [
+			{
+			"elementType": "VARIABLE"
+			},
+			{
+			"elementType": "ABSTRACTION"
+			},
+			{
+			"elementType": "PARENTHESIS"
+			}
+		],
+		"tutorial": [
+		],
+		"constellations": {
+			"start": {
+				"_comment": "st",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "variable",
+						"locked": true,
+						"color": "s"
+					},
+					"right": {
+						"type": "variable",
+						"locked": true,
+						"color": "t"
+					}			
+				}
+			},
+			"goal": {
+				"_comment": "sst",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "application",
+						"locked": true,
+						"left": {
+							"type": "variable",
+							"locked": true,
+							"color": "s"
+						},
+						"right": {
+							"type": "variable",
+							"locked": true,
+							"color": "s"
+						}		
+					},
+					"right": {
+						"type": "variable",
+						"locked": true,
+						"color": "t"
+					}			
+				}
+			},
+			"hint": {
+				"_comment": "(lw.)st",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "application",
+						"locked": true,
+						"left": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "w",
+							"inside": null,
+						},
+						"right": {
+							"type": "variable",
+							"locked": true,
+							"color": "s"
+						}		
+					},
+					"right": {
+						"type": "variable",
+						"locked": true,
+						"color": "t"
+					}			
+				}
+			}
+		}
+	}
+}
+

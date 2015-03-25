@@ -1,0 +1,84 @@
+{
+	"level": {
+		"levelId": 0 ,
+		"difficulty": 1 ,
+		"coins": 0,
+		"maxReductionSteps" : 100,
+		"standardMode": true,
+		"colorEquivalence": true,
+		"availableColors": [
+			{
+			"color": "x"
+			},
+			{
+			"color": "y"
+			},
+			{
+			"color": "z"
+			},
+			{
+			"color": "t"
+			},
+			{
+			"color": "u"
+			},
+			{
+			"color": "v"
+			}
+		],
+		"lockedColors": [
+		],
+		"defaultStrategy": "NORMAL_ORDER",
+		"availableRedStrats": [
+			{
+			"reductionStrategy": "NORMAL_ORDER"
+			},
+			{
+			"reductionStrategy": "APPLICATIVE_ORDER"
+			},
+			{
+			"reductionStrategy": "CALL_BY_NAME"
+			},
+			{
+			"reductionStrategy": "CALL_BY_VALUE"
+			}
+		],
+		"useableElements": [
+			{
+			"elementType": "VARIABLE"
+			},
+			{
+			"elementType": "ABSTRACTION"
+			},
+			{
+			"elementType": "PARENTHESIS"
+			}
+		],
+		"tutorial": [
+			{
+				"tutorialId": "0",
+				"image": "",
+			},
+			{
+				"tutorialId": "1",
+				"image": "",
+			},
+			{
+				"tutorialId": "2",
+				"image": "",
+			}
+		],
+		"constellations": {
+			"start": {
+				"child": null
+			},
+			"goal": {
+				"child": null
+			},
+			"hint": {
+				"child": null
+			},
+		}
+	}
+}
+

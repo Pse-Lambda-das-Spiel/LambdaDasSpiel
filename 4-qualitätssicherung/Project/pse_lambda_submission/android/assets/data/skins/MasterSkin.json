@@ -1,0 +1,126 @@
+{
+com.badlogic.gdx.graphics.g2d.BitmapFont: { 
+	default-font: { file: default.fnt }, 
+	roboto-font: { file: roboto.fnt } ,
+	robotoLight-font: { file: roboto-light.fnt }
+},
+com.badlogic.gdx.graphics.Color: {
+	green: { a: 1, b: 0, g: 1, r: 0 },
+	white: { a: 1, b: 1, g: 1, r: 1 },
+	red: { a: 1, b: 0, g: 0, r: 1 },
+	black: { a: 1, b: 0, g: 0, r: 0 }
+},
+
+com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {
+	default: { font: default-font, fontColor: white },
+},
+com.badlogic.gdx.graphics.g2d.BitmapFont: { default-font: { file: default.fnt } },
+
+com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
+	dialogDim: { name: white, color: { r: 0, g: 0, b: 0, a: 0.45 } }
+},
+com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
+	default: { down: default-round-down, up: default-round },
+	toggle: { down: default-round-down, checked: default-round-down, up: default-round }
+},
+com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+	default: { down: default-round-down, up: default-round, font: default-font, fontColor: black },
+	toggle: { down: default-round-down, up: default-round, checked: default-round-down, font: default-font, fontColor: black, downFontColor: red },
+	buyable: { down: buyable, up: buyable, font: default-font, fontColor: black},
+	purchased: 	{ down: purchased, up: purchased, font: default-font, fontColor: black},
+	not_buyable: 	{ down: not_buyable, up: not_buyable, font: default-font, fontColor: black},
+	activated: 	{ down: activated, up: activated, font: default-font, fontColor: black},
+	level: { up: level, font: default-font, fontColor: black}
+},
+com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
+	default: { vScroll: default-scroll, hScrollKnob: default-round-large, background: default-rect, hScroll: default-scroll, vScrollKnob: default-round-large }
+},
+com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
+	default: {
+		font: default-font, fontColor: black, background: default-select,
+		scrollStyle: default,
+		listStyle: { font: default-font, selection: default-select-selection }
+	}
+},
+com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle: {
+	default-vertical: { handle: default-splitpane-vertical },
+	default-horizontal: { handle: default-splitpane }
+},
+com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
+	default: { titleFont: default-font, background: dialog, titleFontColor: white },
+	dialog: { titleFont: default-font, background: default-window, titleFontColor: white, stageBackground: dialogDim }
+},
+com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {
+	default-horizontal: { background: default-slider, knob: default-slider-knob },
+	default-vertical: { background: default-slider, knob: default-round-large }
+},
+com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
+	default-horizontal: { background: slide_bar, knob: slider },
+},
+com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+	default: { font: default-font, fontColor: black },
+	robotoLight: { font: robotoLight-font, fontColor: black },
+	roboto: { font: roboto-font, fontColor: black }
+},
+com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
+	default: { selection: selection, background: textfield, font: default-font, fontColor: black, cursor: cursor }
+},
+com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
+	default: { checkboxOn: checkbox_on, checkboxOff: checkbox_off, font: default-font, fontColor: black },
+	soundBox: { checkboxOn : unmuted, checkboxOff : muted },
+},
+com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
+	default: { fontColorUnselected: white, selection: selection, fontColorSelected: white, font: default-font }
+},
+com.badlogic.gdx.scenes.scene2d.ui.Touchpad$TouchpadStyle: {
+	default: { background: default-pane, knob: default-round-large }
+},
+com.badlogic.gdx.scenes.scene2d.ui.Tree$TreeStyle: {
+	default: { minus: tree-minus, plus: tree-plus, selection: default-select-selection }
+},
+com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
+	dialogDim: { name: white, color: { r: 0, g: 0, b: 0, a: 0.45 } }
+},
+com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
+	default: { },
+	acceptButton: 		{ up: accept},
+	backButton: 		{ up: back},
+	musicType: 			{ up: musicType},
+	imageType: 			{ up: imageType},
+	elementType: 		{ up: elementType},
+	abortButton: 		{ up: abort},
+	achievementsButton: { up: achievements},
+	forwardButton: 		{ up: forward},
+	helpButton: 		{ up: help},
+	infoButton: 		{ up: info},
+	mainMenuButton: 	{ up: menu},
+	nextButton: 		{ up: next},
+	okayButton: 		{ up: okay},
+	pauseButton: 		{ up: pause},
+	playButton: 		{ up: play},
+	prevButton: 		{ up: prev},
+	forwardButton: 		{ up: forward},
+	unmutedButton: 		{ up: unmuted},
+	mutedButton: 		{ up: muted},
+	levelMenuButton:	{ up: levelmenu},
+
+	reloadButton: 		{ up: reload},
+	settingsButton: 	{ up: settings},
+	startButton: 		{ up: start},
+	purchased: 	{ up: purchased},
+	buyable: 		{ up: buyable},
+	notBuyable: 	{ up: not_buyable},
+	activated: 	{ up: activated},
+	bin: 				{ up: bin },
+	goal:		{ up: goal},
+	undo:	{ up: undo},
+	applicativeOrder: { up: applicativeorder},
+	callByName: { up: callbyname},
+	normalOrder: { up: normalorder},
+	callByValue: { up: callbyvalue},
+	strategy: { up: strategy}
+
+
+
+},
+}

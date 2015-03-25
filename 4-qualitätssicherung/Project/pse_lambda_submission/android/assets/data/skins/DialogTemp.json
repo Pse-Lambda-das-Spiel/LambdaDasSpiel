@@ -1,0 +1,38 @@
+{
+com.badlogic.gdx.graphics.g2d.BitmapFont: { default-font: { file: default.fnt } },
+com.badlogic.gdx.graphics.Color: {
+	green: { a: 1, b: 0, g: 1, r: 0 },
+	white: { a: 1, b: 1, g: 1, r: 1 },
+	red: { a: 1, b: 0, g: 0, r: 1 },
+	black: { a: 1, b: 0, g: 0, r: 0 }
+},
+com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+	default: { up: text_button, font: default-font, fontColor: black }
+},
+com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
+	default: { titleFont: default-font, background: dialog, titleFontColor: white }
+},
+com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
+	default-horizontal: { background: not_buyable, knob: checkbox_off }
+},
+com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+	default: { font: default-font, fontColor: black }
+},
+com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
+	configButton: { up: settings },
+	deleteButton: { up: bin },
+	yesButton: { up: accept },
+	noButton: { up: abort },
+	NORMAL_ORDER_Button: { up: normalorder },
+	APPLICATIVE_ORDER_Button: { up: applicativeorder },
+	CALL_BY_NAME_Button: { up: callbyname },
+	CALL_BY_VALUE_Button: { up: callbyvalue },
+	continueButton: { up: play },
+	resetButton: { up: reload },
+	menuButton: { up: menu },
+	nextLevelButton: { up: next },
+	restartButton: { up: reload },
+	colorButton: { up: colorField },
+	levelMenuButton: { up: levelmenu}
+}
+}

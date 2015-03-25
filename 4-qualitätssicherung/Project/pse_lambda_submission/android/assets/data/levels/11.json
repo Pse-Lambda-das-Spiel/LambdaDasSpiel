@@ -1,0 +1,189 @@
+{
+	"level": {
+		"levelId": 11 ,
+		"difficulty": 2 ,
+		"coins": 10,
+		"maxReductionSteps" : 50,
+		"standardMode": true,
+		"colorEquivalence": true,
+		"availableColors": [
+			{
+			"color": "x"
+			},
+			{
+			"color": "y"
+			},
+			{
+			"color": "z"
+			},
+			{
+			"color": "t"
+			},
+			{
+			"color": "u"
+			},
+			{
+			"color": "v"
+			}
+		],
+		"lockedColors": [
+		],
+		"defaultStrategy": "NORMAL_ORDER",
+		"availableRedStrats": [
+			{
+			"reductionStrategy": "NORMAL_ORDER"
+			}
+		],
+		"useableElements": [
+			{
+			"elementType": "VARIABLE"
+			},
+			{
+			"elementType": "ABSTRACTION"
+			},
+			{
+			"elementType": "PARENTHESIS"
+			}
+		],
+		"tutorial": [
+		],
+		"constellations": {
+			"start": {
+				"_comment": "(lu.uw)(ly.w)(lx.x)t",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "application",
+						"locked": true,
+						"left": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "u",
+							"inside": {
+								"type": "application",
+								"locked": true,
+								"left": {
+									"type": "variable",
+									"locked": true,
+									"color": "u",
+								},
+								"right": {
+									"type": "variable",
+									"locked": false,
+									"color": "w"
+								}	
+							}
+						},
+						"right": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "y",
+							"inside": {
+								"type": "variable",
+								"locked": false,
+								"color": "w"
+							}
+						}
+					},
+					"right": {
+						"type": "application",
+						"locked": true,
+						"left": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "x",
+							"inside": {
+								"type": "variable",
+								"locked": true,
+								"color": "x"
+							}
+						},
+						"right": {
+							"type": "variable",
+							"locked": true,
+							"color": "t"
+						}			
+					}			
+				}
+			},
+			"goal": {
+				"_comment": "vt",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "variable",
+						"locked": true,
+						"color": "v",
+					},
+					"right": {
+						"type": "variable",
+						"locked": true,
+						"color": "t"
+					}	
+				}
+			},
+			"hint": {
+				"_comment": "(lu.uv)(ly.w)(lx.x)t",
+				"child": {
+					"type": "application",
+					"locked": true,
+					"left": {
+						"type": "application",
+						"locked": true,
+						"left": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "u",
+							"inside": {
+								"type": "application",
+								"locked": true,
+								"left": {
+									"type": "variable",
+									"locked": true,
+									"color": "u",
+								},
+								"right": {
+									"type": "variable",
+									"locked": true,
+									"color": "v"
+								}	
+							}
+						},
+						"right": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "y",
+							"inside": {
+								"type": "variable",
+								"locked": false,
+								"color": "w"
+							}
+						}
+					},
+					"right": {
+						"type": "application",
+						"locked": true,
+						"left": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "x",
+							"inside": {
+								"type": "variable",
+								"locked": true,
+								"color": "x"
+							}
+						},
+						"right": {
+							"type": "variable",
+							"locked": true,
+							"color": "t"
+						}			
+					}			
+				}
+			}
+		}
+	}
+}
+

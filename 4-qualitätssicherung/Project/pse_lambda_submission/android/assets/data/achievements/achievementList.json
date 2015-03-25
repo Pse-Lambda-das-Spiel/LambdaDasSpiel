@@ -1,0 +1,357 @@
+{
+	"achievementTypes": [
+		{
+		"achievementType": "gemsEnchantedAchievement",
+		"achievementNumberPerType": 5
+		},
+		{
+		"achievementType": "lambsEnchantedAchievement",
+		"achievementNumberPerType": 5
+		},
+		{
+		"achievementType": "gemsPlacedAchievement",
+		"achievementNumberPerType": 5
+		},
+		{
+		"achievementType": "lambsPlacedAchievement",
+		"achievementNumberPerType": 5
+		},
+		{
+		"achievementType": "gemsEnchantedPerLevelAchievement",
+		"achievementNumberPerType": 5
+		},
+		{
+		"achievementType": "lambsEnchantedPerLevelAchievement",
+		"achievementNumberPerType": 5
+		},
+		{
+		"achievementType": "gemsPlacedPerLevelAchievement",
+		"achievementNumberPerType": 5
+		},
+		{
+		"achievementType": "lambsPlacedPerLevelAchievement",
+		"achievementNumberPerType": 5
+		},
+		{
+		"achievementType": "levelAchievement",
+		"achievementNumberPerType": 5
+		},
+		{
+		"achievementType": "hintsAchievement",
+		"achievementNumberPerType": 5
+		},
+		{
+		"achievementType": "difficultyAchievement",
+		"achievementNumberPerType": 5
+		},
+		{
+		"achievementType": "timeAchievement",
+		"achievementNumberPerType": 5
+		},
+
+	],
+	"achievements": [
+		{
+		"type": "gea",
+		"req": 5,
+		"index": 1
+		},
+		{
+		"type": "gea",
+		"req": 20,
+		"index": 2
+		},
+		{
+		"type": "gea",
+		"req": 50,
+		"index": 3
+		},
+		{
+		"type": "gea",
+		"req": 100,
+		"index": 4
+		},
+		{
+		"type": "gea",
+		"req": 200,
+		"index": 5
+		},
+		{
+		"type": "lea",
+		"req": 5,
+		"index": 1
+		},
+		{
+		"type": "lea",
+		"req": 20,
+		"index": 2
+		},
+		{
+		"type": "lea",
+		"req": 50,
+		"index": 3
+		},
+		{
+		"type": "lea",
+		"req": 100,
+		"index": 4
+		},
+		{
+		"type": "lea",
+		"req": 200,
+		"index": 5
+		},
+		{
+		"type": "gpa",
+		"req": 5,
+		"index": 1
+		},
+		{
+		"type": "gpa",
+		"req": 20,
+		"index": 2
+		},
+		{
+		"type": "gpa",
+		"req": 40,
+		"index": 3
+		},
+		{
+		"type": "gpa",
+		"req": 80,
+		"index": 4
+		},
+		{
+		"type": "gpa",
+		"req": 100,
+		"index": 5
+		},
+		{
+		"type": "lpa",
+		"req": 5,
+		"index": 1
+		},
+		{
+		"type": "lpa",
+		"req": 20,
+		"index": 2
+		},
+		{
+		"type": "lpa",
+		"req": 40,
+		"index": 3
+		},
+		{
+		"type": "lpa",
+		"req": 60,
+		"index": 4
+		},
+		{
+		"type": "lpa",
+		"req": 80,
+		"index": 5
+		},
+		{
+		"type": "gepla",
+		"req": 2,
+		"index": 1
+		},
+		{
+		"type": "gepla",
+		"req": 5,
+		"index": 2
+		},
+		{
+		"type": "gepla",
+		"req": 10,
+		"index": 3
+		},
+		{
+		"type": "gepla",
+		"req": 15,
+		"index": 4
+		},
+		{
+		"type": "gepla",
+		"req": 20,
+		"index": 5
+		},
+		{
+		"type": "lepla",
+		"req": 2,
+		"index": 1
+		},
+		{
+		"type": "lepla",
+		"req": 5,
+		"index": 2
+		},
+		{
+		"type": "lepla",
+		"req": 10,
+		"index": 3
+		},
+		{
+		"type": "lepla",
+		"req": 15,
+		"index": 4
+		},
+		{
+		"type": "lepla",
+		"req": 20,
+		"index": 5
+		},
+		{
+		"type": "gppla",
+		"req": 2,
+		"index": 1
+		},
+		{
+		"type": "gppla",
+		"req": 4,
+		"index": 2
+		},
+		{
+		"type": "gppla",
+		"req": 8,
+		"index": 3
+		},
+		{
+		"type": "gppla",
+		"req": 12,
+		"index": 4
+		},
+		{
+		"type": "gppla",
+		"req": 16,
+		"index": 5
+		},
+		{
+		"type": "lppla",
+		"req": 2,
+		"index": 1
+		},
+		{
+		"type": "lppla",
+		"req": 4,
+		"index": 2
+		},
+		{
+		"type": "lppla",
+		"req": 8,
+		"index": 3
+		},
+		{
+		"type": "lppla",
+		"req": 12,
+		"index": 4
+		},
+		{
+		"type": "lppla",
+		"req": 16,
+		"index": 5
+		},
+		{
+		"type": "la",
+		"req": 1,
+		"index": 1
+		},
+		{
+		"type": "la",
+		"req": 5,
+		"index": 2
+		},
+		{
+		"type": "la",
+		"req": 10,
+		"index": 3
+		},
+		{
+		"type": "la",
+		"req": 20,
+		"index": 4
+		},
+		{
+		"type": "la",
+		"req": 30,
+		"index": 5
+		},
+		{
+		"type": "ha",
+		"req": 1,
+		"index": 1
+		},
+		{
+		"type": "ha",
+		"req": 3,
+		"index": 2
+		},
+		{
+		"type": "ha",
+		"req": 5,
+		"index": 3
+		},
+		{
+		"type": "ha",
+		"req": 10,
+		"index": 4
+		},
+		{
+		"type": "ha",
+		"req": 20,
+		"index": 5
+		},
+		{
+		"type": "da",
+		"req": 1,
+		"index": 1
+		},
+		{
+		"type": "da",
+		"req": 2,
+		"index": 2
+		},
+		{
+		"type": "da",
+		"req": 3,
+		"index": 3
+		},
+		{
+		"type": "da",
+		"req": 4,
+		"index": 4
+		},
+		{
+		"type": "da",
+		"req": 5,
+		"index": 5
+		},
+		{
+		"type": "ta",
+		"req": 20,
+		"index": 1
+		},
+		{
+		"type": "ta",
+		"req": 40,
+		"index": 2
+		},
+		{
+		"type": "ta",
+		"req": 60,
+		"index": 3
+		},
+		{
+		"type": "ta",
+		"req": 80,
+		"index": 4
+		},
+		{
+		"type": "ta",
+		"req": 120,
+		"index": 5
+		},
+	]
+
+}
+
