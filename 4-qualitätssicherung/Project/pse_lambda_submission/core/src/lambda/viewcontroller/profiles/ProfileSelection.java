@@ -127,7 +127,10 @@ public class ProfileSelection extends StageViewController {
 				backProcessor);
 		Gdx.input.setInputProcessor(multiplexer);
 		if (ProfileManager.getManager().getNames().size() == 0) {
-			new AddProfileClickListener().clicked(null, 0, 0);
+			ProfileManager m = ProfileManager.getManager();
+            m.createProfile();
+            m.setCurrentProfile("");
+            getGame().setScreen(ProfileEditLang.class);
 		}
 	}
 

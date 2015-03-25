@@ -139,7 +139,13 @@ public class ProfileEditLang extends StageViewController implements ProfileEditO
 				if (keycode == Keys.BACK) {
 					ProfileManager m = ProfileManager.getManager();
 					if (m.getNames().size() != 1 || !deleteOnBack) {
-						getGame().setScreen(ProfileSelection.class);
+						if (deleteOnBack) {
+			                m.delete(m.getCurrentProfile().getName());
+			            } else {
+			                m.getCurrentProfile().setLanguage(profileEdit.getLang());
+			                m.save(m.getCurrentProfile().getName());
+			            }
+			            getGame().setScreen(ProfileSelection.class);
 					}
 				}
 				return false;
