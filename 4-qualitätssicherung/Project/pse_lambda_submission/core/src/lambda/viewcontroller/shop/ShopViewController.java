@@ -47,6 +47,11 @@ public class ShopViewController extends StageViewController implements ProfileMo
     private boolean elementsB;
     private AssetManager assets;
     
+    private ImageButton musicTypeButton;
+    private ImageButton bgImageTypeButton;
+    private ImageButton elementUITypeButton;
+    
+    
     /**
      * Path to the MasterSkin
      */
@@ -120,7 +125,7 @@ public class ShopViewController extends StageViewController implements ProfileMo
         /*
          *  CATEGORY: MUSIC
          */
-        final ImageButton musicTypeButton = new ImageButton(getImageButtonStyle("musicType"));
+        musicTypeButton = new ImageButton(getImageButtonStyle("musicType"));
         musicTypeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -137,7 +142,7 @@ public class ShopViewController extends StageViewController implements ProfileMo
         /*
          * CATEGORY: IMAGES
          */
-        final ImageButton bgImageTypeButton = new ImageButton(manager.get(masterSkin, Skin.class), "imageType");
+        bgImageTypeButton = new ImageButton(manager.get(masterSkin, Skin.class), "imageType");
         bgImageTypeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -155,7 +160,7 @@ public class ShopViewController extends StageViewController implements ProfileMo
         /*
          * CATEGORY: ELEMENTS
          */
-        final ImageButton elementUITypeButton = new ImageButton(manager.get(masterSkin, Skin.class), "elementType");
+        elementUITypeButton = new ImageButton(manager.get(masterSkin, Skin.class), "elementType");
         elementUITypeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -256,27 +261,44 @@ public class ShopViewController extends StageViewController implements ProfileMo
     @SuppressWarnings("unchecked")
     public void changedCoins() {
         coins.setText(String.valueOf(ProfileManager.getManager().getCurrentProfile().getCoins()));
+        table.removeActor(musicTable);
+        musicTable = music.updateButtons();
+        if (musicB) {
+            table.addActorAfter(musicTypeButton, musicTable);
+        }
+        table.removeActor(imagesTable);
+        imagesTable = bgImages.updateButtons();
+        if (imageB) {
+            table.addActorAfter(bgImageTypeButton, imagesTable);
+        }
+        table.removeActor(elementsTable);
+        elementsTable = elementUIs.updateButtons();
+        if (elementsB) {
+            table.addActorAfter(elementUITypeButton, elementsTable);
+        }
+        /*
         for (Actor item : music.getGroupVCs().getChildren()) {
             ShopItemViewController<MusicItemModel> itemVC = (ShopItemViewController<MusicItemModel>) item;
             itemVC.setCurrentState();
             table.removeActor(musicTable);
-            musicB = !musicB;
             musicTable = music.updateButtons();
+            table.addActor(musicTable);
         }
         for (Actor item : bgImages.getGroupVCs().getChildren()) {
             ShopItemViewController<BackgroundImageItemModel> itemVC = (ShopItemViewController<BackgroundImageItemModel>) item;
             itemVC.setCurrentState();
             table.removeActor(imagesTable);
-            imageB = !imageB;
             imagesTable = bgImages.updateButtons();
+            table.addActor(imagesTable);
         }
         for (Actor item : elementUIs.getGroupVCs().getChildren()) {
             ShopItemViewController<ElementUIContextFamily> itemVC = (ShopItemViewController<ElementUIContextFamily>) item;
             itemVC.setCurrentState();
             table.removeActor(elementsTable);
-            elementsB = !elementsB;
             elementsTable = elementUIs.updateButtons();
+            table.addActor(elementsTable);
         }
+        */
     }
     
     /**

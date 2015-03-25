@@ -3,13 +3,10 @@ package lambda.model.shop;
 
 import static org.junit.Assert.*;
 import lambda.model.profiles.ProfileManager;
-import lambda.model.profiles.ProfileModel;
-import lambda.model.profiles.ProfileSaveHelper;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.backends.lwjgl.LwjglFiles;
-import com.badlogic.gdx.files.FileHandle;
 import com.libgdxtesting.GdxTestRunner;
 
 import org.junit.After;
@@ -31,11 +28,6 @@ public class ShopModelTest {
     private static AssetManager assets;
     private static ShopModel shop;
     private static ProfileManager manager;
-
-    private static String[] testNames = {"testName0", "testName1", "testName2"};
-    private static String unusedName = "unusedName";
-    private static FileHandle profileFolder;
-    private static FileHandle nameFile;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -143,6 +135,7 @@ public class ShopModelTest {
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
         shop = null;
+        assets.dispose();
     }
 
 }

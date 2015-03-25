@@ -88,9 +88,12 @@ public class LevelManager {
      * @param id the id of the level which will be returned
    	 * @return the level with this id
    	 */
-   	public LevelModel getLevel(int id) {
-   		LevelModel level = assetManager.get(levelFilePaths[id], LevelModel.class);
-   		return level;
+   	public LevelModel getLevel(int id) throws InvalidLevelIdException {
+   	    if (id > 0 && id <= getNumberOfLevels()) {
+   	        LevelModel level = assetManager.get(levelFilePaths[id], LevelModel.class);
+   	        return level;
+   	    }
+   	    throw new InvalidLevelIdException("The level id is invalid");
    	}
 
    	/**

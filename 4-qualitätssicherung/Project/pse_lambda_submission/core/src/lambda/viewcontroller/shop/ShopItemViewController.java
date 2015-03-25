@@ -141,6 +141,7 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor imple
                            activate.addListener(new ClickListener() {
                                @Override
                                public void clicked(InputEvent event, float x, float y) {
+                                   model.getShopItemType().getActivatedItem().deactivate();
                                    model.activate();
                                    setVisible(false);
                                    hide();
@@ -213,7 +214,6 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor imple
                         accept.addListener(new ClickListener() {
                             @Override
                             public void clicked(InputEvent event, float x, float y) {
-                                model.buy();
                                 setVisible(false);
                                 hide();
                             }
