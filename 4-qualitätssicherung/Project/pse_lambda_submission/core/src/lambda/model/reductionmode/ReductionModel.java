@@ -59,7 +59,7 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
     private LevelContext context;
 
     private LambdaRoot goal;
-    
+
     /**
      * Creates a new instance of ReductionModel.
      */
@@ -112,13 +112,13 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                     "Cannot start automatic reduction in the current model state!");
         }
         if (context.getLevelModel().isStandardMode()) {
-        	current = term;
-        	goal = context.getLevelModel().getGoal();
+            current = term;
+            goal = context.getLevelModel().getGoal();
         } else {
-            current =context.getLevelModel().getStart();
-        	goal = term;
+            current = context.getLevelModel().getStart();
+            goal = term;
         }
-        
+
         notify(new Consumer<ReductionModelObserver>() {
             @Override
             public void accept(ReductionModelObserver observer) {
@@ -232,7 +232,7 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                                                 .isColorEquivalence())
                                                 || (current
                                                         .accept(new IsAlphaEquivalentVisitor(
-                                                               goal)) && !ReductionModel.this.context
+                                                                goal)) && !ReductionModel.this.context
                                                         .getLevelModel()
                                                         .isColorEquivalence()));
                                     }

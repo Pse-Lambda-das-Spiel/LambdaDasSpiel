@@ -1,1 +1,14 @@
 \section{Lasttests}
+
+\begin{description}
+	\item[Expandierende Lambda-Terme]
+	Zunächst wurde die Auswertung eines immer weiter wachsenden Lambda-Terms im Reduktionsmodus in einer Endlosschleife durchgeführt. Dies führte dann häufig zu StackOverflowExceptions. Dieses Problem behoben wir, indem wir eine Maximalzahl an Knoten (100) in den Lambda-Termen und damit in den Elementen einführten, die die Reduktion der Lambda-Terme begrenzt.
+	
+	\item[Große Lambda-Terme]
+	Die Auswertung von Lambda-Termen, welche aus sehr vielen Lämmern und Edelsteinen bestehen, wurde ebenfalls getestet. Dabei kam es zu keinen größeren Performanceeinbußen, jedoch führten sehr große Lambda-Terme teilweise ebenfalls zu StackoverflowExceptions, was so wie bei expandierenden Ausdrücken durch Einführung einer Maximalanzahl Von Elementen behoben wurde. 
+		
+	\item[Willkürliche Bildschirmeingaben]
+	Mithilfe des monkey-Werkzeugs wurde getestet wie sich die Applikation bei zufälligen und hochfrequenten Bildschirmeingaben verhält. Das monkey-Werkzeug wurde also für Stress-Tests verwendet. Beim mehrmaligen Testläufen mit unterschiedlichen Event Sequenzen konnten unter normalen Bedingungen keine Auffälligkeiten festgestellt werden, es kam zu keinen Abstürzen oder sonstigen unerwarteten Verhaltensweisen.
+	
+		
+\end{description}
