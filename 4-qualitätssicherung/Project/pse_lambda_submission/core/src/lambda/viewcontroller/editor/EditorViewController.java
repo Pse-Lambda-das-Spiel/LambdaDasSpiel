@@ -341,7 +341,7 @@ public final class EditorViewController extends StageViewController implements
     }
 
     private void showStartDialogs() {
-    	List<TutorialMessageModel> realTutorialList = model.getLevelContext()
+        List<TutorialMessageModel> realTutorialList = model.getLevelContext()
                 .getLevelModel().getTutorial();
         List<TutorialMessageModel> tutorialList = new ArrayList<TutorialMessageModel>();
         for (int i = 0; i < realTutorialList.size(); i++) {

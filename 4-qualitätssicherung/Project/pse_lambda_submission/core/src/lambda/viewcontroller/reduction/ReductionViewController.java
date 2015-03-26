@@ -1,4 +1,4 @@
- package lambda.viewcontroller.reduction;
+package lambda.viewcontroller.reduction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -240,8 +240,8 @@ public class ReductionViewController extends StageViewController implements
         if (term != null) {
             term.remove();
         }
-        if(model.getContext().getLevelModel().isStandardMode()) {
-        	
+        if (model.getContext().getLevelModel().isStandardMode()) {
+
         }
         term = LambdaTermViewController.build(model.getTerm(), true,
                 model.getContext(), getStage());
@@ -287,7 +287,7 @@ public class ReductionViewController extends StageViewController implements
     }
 
     private void showStartDialogs() {
-    	List<TutorialMessageModel> realTutorialList = model.getContext()
+        List<TutorialMessageModel> realTutorialList = model.getContext()
                 .getLevelModel().getTutorial();
         List<TutorialMessageModel> tutorialList = new ArrayList<TutorialMessageModel>();
         for (int i = 0; i < realTutorialList.size(); i++) {

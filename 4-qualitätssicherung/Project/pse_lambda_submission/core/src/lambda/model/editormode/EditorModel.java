@@ -25,7 +25,7 @@ public class EditorModel extends Observable<EditorModelObserver> {
      */
     private ReductionStrategy strategy;
 
-	/**
+    /**
      * Stores the current lambda term
      */
     private LambdaRoot term;
@@ -54,7 +54,7 @@ public class EditorModel extends Observable<EditorModelObserver> {
         this.context = context;
         strategy = context.getLevelModel().getDefaultStrategy();
         if (context.getLevelModel().isStandardMode()) {
-        	 term = (LambdaRoot) context.getLevelModel().getStart()
+            term = (LambdaRoot) context.getLevelModel().getStart()
                      .accept(new CopyVisitor());
              notify(new Consumer<EditorModelObserver>() {
                  @Override
@@ -63,7 +63,7 @@ public class EditorModel extends Observable<EditorModelObserver> {
                  }
              });
         } else {
-        	term = (LambdaRoot) context.getLevelModel().getGoal()
+            term = (LambdaRoot) context.getLevelModel().getGoal()
                     .accept(new CopyVisitor());
             notify(new Consumer<EditorModelObserver>() {
                 @Override
@@ -163,9 +163,9 @@ public class EditorModel extends Observable<EditorModelObserver> {
     /**
      * Returns the reduction strategy
      * 
-	 * @return the strategy
-	 */
-	public ReductionStrategy getStrategy() {
-		return strategy;
-	}
+     * @return the strategy
+     */
+    public ReductionStrategy getStrategy() {
+        return strategy;
+    }
 }

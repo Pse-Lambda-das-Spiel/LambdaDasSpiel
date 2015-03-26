@@ -1,1 +1,32 @@
 \section{Testwerkzeuge}
+\subsection{Statische Werkzeuge zur Codeanalyse}
+\begin{itemize}
+\item Checkstyle
+\begin{itemize} 
+\item Checkstyle ist ein freies statisches Codeanalyse-Werkzeuge, welches verwendet wird, um die Java-Codequalität zu verbessern.
+	Dieses statische Analyse-Werkzeug lässt sich mit einer geeigneten Datei konfigurieren, um zu entscheiden nach welchen Kriterien
+	die Qualität verbessert wird. Der von uns verwendete Checkstyle ist im Repository vorzufinden und prüft unter anderem die Methodenlänge, 
+	Dateilänge, Anzahl an Methodenparameter, richtige Formatierung des Codes (Whitespaces etc.), Namenkonventionen 
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\item FindBugs
+\begin{itemize} 
+\item FindBugs ist ein freies statisches Codeanalyse-Werkzeug, welches verwendet wird, um insbesondere Fehlermuster in Java-Code bzw. im Java-Bytecode zu finden.
+	Diese Fehlermuster können unter anderem auf wirkliche Fehler hindeuten, müssen sie aber nicht.
+	Wir haben dieses Werkzeug verwendet, um die eben angesprochenen Fehlermuster aufzudecken und zu überprüfen, ob diese zu Fehlern
+	führen oder nicht. Alle gefundenen Bugs waren recht klein und führten demnach nicht zu Fehlern, weshalb eine Beseitigung nicht nötig war.
+\end{itemize}
+\end{itemize}
+
+\subsection{Dynamische Werkzeuge zur Codeanalyse}
+\begin{itemize}
+\item Code Coverage mit EMMA
+\begin{itemize} 
+\item EMMA ist ein dynamische Codeanalyse-Werkzeug, welches verwendet wird, um die Code Coverage (Testüberdeckung) von JUnit-Tests zu messen.
+	Mit dieser Testüberdeckung lässt sich oft  Code herausfiltern, welcher niemals ausgeführt wird und weiterhin die Abdeckung von diversen Modultests.
+	EMMA basiert auf einer partiellen Zeilenüberdeckung, in der teilweise ausgeführte Zeilen registriert werden, z.B. bei verzweigenden Anweisungen.
+	Dieses dynamische Werkzeug wurde von uns verwendet, um die Testüberdeckung der JUnit-Model-Tests zu beobachten und zu analysieren. 
+	\end{itemize}
+\end{itemize}
