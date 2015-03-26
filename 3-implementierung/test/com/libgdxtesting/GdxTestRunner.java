@@ -16,6 +16,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.headless.HeadlessApplication;
 import com.badlogic.gdx.backends.headless.HeadlessApplicationConfiguration;
 
+/**
+ * @author Robert
+ */
 public class GdxTestRunner extends BlockJUnit4ClassRunner implements
         ApplicationListener {
 

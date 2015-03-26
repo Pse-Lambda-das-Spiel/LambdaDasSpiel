@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 /**
  * This class represents a full tutorial including the area and vector
  *
- * @author Kay Schmitteckertm Robert Hochweiss
+ * @author Kay Schmitteckert, Robert Hochweiss
  */
 public class TutorialMessage extends Dialog {
 
