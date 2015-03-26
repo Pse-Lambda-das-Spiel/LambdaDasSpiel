@@ -1,3 +1,5 @@
+
+
 DialogTemp.png
 size: 256,128
 format: RGBA8888
@@ -683,251 +685,246 @@ filter: Linear,Linear
 repeat: none
 tutorials/alphakonversion3
   rotate: false
-  xy: 1, 1745
+  xy: 1, 1749
   size: 905, 294
   orig: 905, 294
   offset: 0, 0
   index: -1
+tutorials/callbyvalue1
+  rotate: false
+  xy: 1, 1353
+  size: 702, 394
+  orig: 702, 394
+  offset: 0, 0
+  index: -1
 tutorials/alphakonversion2
   rotate: false
-  xy: 908, 1745
+  xy: 908, 1749
   size: 782, 294
   orig: 782, 294
   offset: 0, 0
   index: -1
-tutorials/draganddrop1
-  rotate: false
-  xy: 1692, 1763
-  size: 339, 276
-  orig: 339, 276
-  offset: 0, 0
-  index: -1
-tutorials/reductionmode3
-  rotate: false
-  xy: 1692, 1650
-  size: 339, 111
-  orig: 339, 111
-  offset: 0, 0
-  index: -1
-tutorials/enchanting_of_lambs2
-  rotate: false
-  xy: 1, 1487
-  size: 725, 256
-  orig: 725, 256
-  offset: 0, 0
-  index: -1
-tutorials/coloring
-  rotate: false
-  xy: 728, 1620
-  size: 713, 123
-  orig: 713, 123
-  offset: 0, 0
-  index: -1
-tutorials/enchanting_of_lambs1
-  rotate: false
-  xy: 1443, 1452
-  size: 595, 196
-  orig: 595, 196
-  offset: 0, 0
-  index: -1
-tutorials/lamb_enchants_gem
-  rotate: false
-  xy: 728, 1298
-  size: 710, 320
-  orig: 710, 320
-  offset: 0, 0
-  index: -1
 tutorials/alphakonversion1
   rotate: false
-  xy: 1, 1191
+  xy: 705, 1453
   size: 703, 294
   orig: 703, 294
   offset: 0, 0
   index: -1
 tutorials/callbyvalue2
   rotate: false
-  xy: 1440, 1056
+  xy: 1, 957
   size: 569, 394
   orig: 569, 394
   offset: 0, 0
   index: -1
-tutorials/callbyvalue1
-  rotate: false
-  xy: 706, 902
-  size: 702, 394
-  orig: 702, 394
-  offset: 0, 0
-  index: -1
-tutorials/choose_callbyvalue
-  rotate: false
-  xy: 1410, 818
-  size: 539, 236
-  orig: 539, 236
-  offset: 0, 0
-  index: -1
-tutorials/choose_callbyname
-  rotate: false
-  xy: 1, 953
-  size: 539, 236
-  orig: 539, 236
-  offset: 0, 0
-  index: -1
-tutorials/lamb_with_gem
-  rotate: false
-  xy: 542, 1034
-  size: 110, 155
-  orig: 110, 155
-  offset: 0, 0
-  index: -1
-tutorials/choose_applicativeorder
-  rotate: false
-  xy: 1, 715
-  size: 539, 236
-  orig: 539, 236
-  offset: 0, 0
-  index: -1
-tutorials/reminder_goal
-  rotate: false
-  xy: 542, 664
-  size: 539, 236
-  orig: 539, 236
-  offset: 0, 0
-  index: -1
-tutorials/choose_normalorder
-  rotate: false
-  xy: 1, 477
-  size: 539, 236
-  orig: 539, 236
-  offset: 0, 0
-  index: -1
-tutorials/callbyname2
-  rotate: false
-  xy: 1083, 615
-  size: 323, 285
-  orig: 323, 285
-  offset: 0, 0
-  index: -1
 tutorials/applicativeorder
   rotate: false
-  xy: 542, 277
+  xy: 1, 570
   size: 521, 385
   orig: 521, 385
   offset: 0, 0
   index: -1
+tutorials/enchanting_of_lambs2
+  rotate: false
+  xy: 705, 1195
+  size: 725, 256
+  orig: 725, 256
+  offset: 0, 0
+  index: -1
+tutorials/callbyname1
+  rotate: false
+  xy: 1, 183
+  size: 391, 385
+  orig: 391, 385
+  offset: 0, 0
+  index: -1
+tutorials/coloring
+  rotate: false
+  xy: 572, 1070
+  size: 713, 123
+  orig: 713, 123
+  offset: 0, 0
+  index: -1
+tutorials/enchanting_of_lambs1
+  rotate: false
+  xy: 572, 872
+  size: 595, 196
+  orig: 595, 196
+  offset: 0, 0
+  index: -1
+tutorials/choose_callbyvalue
+  rotate: false
+  xy: 524, 634
+  size: 539, 236
+  orig: 539, 236
+  offset: 0, 0
+  index: -1
+tutorials/draganddrop1
+  rotate: false
+  xy: 1692, 1767
+  size: 339, 276
+  orig: 339, 276
+  offset: 0, 0
+  index: -1
+tutorials/choose_callbyname
+  rotate: false
+  xy: 524, 396
+  size: 539, 236
+  orig: 539, 236
+  offset: 0, 0
+  index: -1
+tutorials/choose_applicativeorder
+  rotate: false
+  xy: 394, 158
+  size: 539, 236
+  orig: 539, 236
+  offset: 0, 0
+  index: -1
+tutorials/callbyvalue3
+  rotate: false
+  xy: 1410, 1462
+  size: 429, 285
+  orig: 429, 285
+  offset: 0, 0
+  index: -1
 tutorials/non_standardmode
   rotate: false
-  xy: 1, 239
+  xy: 1432, 1224
   size: 510, 236
   orig: 510, 236
   offset: 0, 0
   index: -1
 tutorials/standardmode
   rotate: false
-  xy: 1, 1
+  xy: 1432, 986
   size: 510, 236
   orig: 510, 236
   offset: 0, 0
   index: -1
-tutorials/press_strategynutton
-  rotate: false
-  xy: 513, 39
-  size: 201, 236
-  orig: 201, 236
-  offset: 0, 0
-  index: -1
-tutorials/press_reductionbutton
-  rotate: false
-  xy: 716, 39
-  size: 201, 236
-  orig: 201, 236
-  offset: 0, 0
-  index: -1
-tutorials/press_goalbutton
-  rotate: false
-  xy: 919, 39
-  size: 201, 236
-  orig: 201, 236
-  offset: 0, 0
-  index: -1
-tutorials/callbyvalue3
-  rotate: false
-  xy: 1065, 328
-  size: 429, 285
-  orig: 429, 285
-  offset: 0, 0
-  index: -1
-tutorials/draganddrop2
-  rotate: false
-  xy: 1408, 635
-  size: 210, 181
-  orig: 210, 181
-  offset: 0, 0
-  index: -1
-tutorials/callbyname1
-  rotate: false
-  xy: 1620, 431
-  size: 391, 385
-  orig: 391, 385
-  offset: 0, 0
-  index: -1
-tutorials/lamb_without_magicwand
-  rotate: false
-  xy: 1496, 273
-  size: 496, 156
-  orig: 496, 156
-  offset: 0, 0
-  index: -1
-tutorials/cloudanimation
-  rotate: false
-  xy: 1122, 257
-  size: 357, 69
-  orig: 357, 69
-  offset: 0, 0
-  index: -1
-tutorials/press_helpbutton
-  rotate: false
-  xy: 1122, 19
-  size: 201, 236
-  orig: 201, 236
-  offset: 0, 0
-  index: -1
-tutorials/press_hintbutton
-  rotate: false
-  xy: 1325, 19
-  size: 201, 236
-  orig: 201, 236
-  offset: 0, 0
-  index: -1
 tutorials/normalorder
   rotate: false
-  xy: 1528, 91
+  xy: 1, 1
   size: 336, 180
   orig: 336, 180
   offset: 0, 0
   index: -1
-tutorials/purpose_of_goal
+tutorials/lamb_enchants_gem
   rotate: false
-  xy: 1528, 29
-  size: 300, 60
-  orig: 300, 60
+  xy: 339, 2
+  size: 505, 154
+  orig: 505, 154
   offset: 0, 0
   index: -1
-
-MasterSkin4.png
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
+tutorials/press_strategynutton
+  rotate: false
+  xy: 1841, 1529
+  size: 201, 236
+  orig: 201, 236
+  offset: 0, 0
+  index: -1
+tutorials/reminder_goal
+  rotate: false
+  xy: 1169, 748
+  size: 539, 236
+  orig: 539, 236
+  offset: 0, 0
+  index: -1
+tutorials/choose_normalorder
+  rotate: false
+  xy: 1065, 510
+  size: 539, 236
+  orig: 539, 236
+  offset: 0, 0
+  index: -1
+tutorials/lamb_without_magicwand
+  rotate: false
+  xy: 1065, 352
+  size: 496, 156
+  orig: 496, 156
+  offset: 0, 0
+  index: -1
+tutorials/callbyname2
+  rotate: false
+  xy: 1710, 699
+  size: 323, 285
+  orig: 323, 285
+  offset: 0, 0
+  index: -1
+tutorials/reductionmode3
+  rotate: false
+  xy: 1606, 586
+  size: 339, 111
+  orig: 339, 111
+  offset: 0, 0
+  index: -1
 tutorials/reductionmode1
   rotate: false
-  xy: 1, 1
+  xy: 1606, 473
   size: 339, 111
   orig: 339, 111
   offset: 0, 0
   index: -1
 tutorials/reductionmode2
   rotate: false
-  xy: 342, 1
+  xy: 1563, 360
   size: 339, 111
   orig: 339, 111
+  offset: 0, 0
+  index: -1
+tutorials/cloudanimation
+  rotate: false
+  xy: 1563, 289
+  size: 357, 69
+  orig: 357, 69
+  offset: 0, 0
+  index: -1
+tutorials/lamb_with_gem
+  rotate: false
+  xy: 572, 1196
+  size: 110, 155
+  orig: 110, 155
+  offset: 0, 0
+  index: -1
+tutorials/press_reductionbutton
+  rotate: false
+  xy: 935, 114
+  size: 201, 236
+  orig: 201, 236
+  offset: 0, 0
+  index: -1
+tutorials/press_goalbutton
+  rotate: false
+  xy: 1138, 114
+  size: 201, 236
+  orig: 201, 236
+  offset: 0, 0
+  index: -1
+tutorials/press_helpbutton
+  rotate: false
+  xy: 1341, 114
+  size: 201, 236
+  orig: 201, 236
+  offset: 0, 0
+  index: -1
+tutorials/draganddrop2
+  rotate: false
+  xy: 1544, 106
+  size: 210, 181
+  orig: 210, 181
+  offset: 0, 0
+  index: -1
+tutorials/press_hintbutton
+  rotate: false
+  xy: 1756, 51
+  size: 201, 236
+  orig: 201, 236
+  offset: 0, 0
+  index: -1
+tutorials/purpose_of_goal
+  rotate: false
+  xy: 846, 52
+  size: 300, 60
+  orig: 300, 60
   offset: 0, 0
   index: -1

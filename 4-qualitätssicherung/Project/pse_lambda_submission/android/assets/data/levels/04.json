@@ -57,7 +57,7 @@
 			},
 			{
 				"tutorialId": "3",
-				"image": "choose_normalorder",
+				"image": "tutorials/choose_normalorder",
 				"inEditorMode": true,
 			},
 			{
@@ -95,7 +95,7 @@
 					"right": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "red",
+						"color": "y",
 						"inside": {
 							"type": "variable",
 							"locked": false,

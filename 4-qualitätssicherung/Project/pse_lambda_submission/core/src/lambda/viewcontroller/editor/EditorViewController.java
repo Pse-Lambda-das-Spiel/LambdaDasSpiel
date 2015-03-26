@@ -459,8 +459,8 @@ public final class EditorViewController extends StageViewController implements
         // Reset button visibilities
         hintButton.setVisible(model.getLevelContext().getLevelModel().getHint()
                 .getChild() != null);
-        targetButton.setVisible(model.getLevelContext().getLevelModel()
-                .getGoal().getChild() != null);
+        targetButton.setVisible((model.getLevelContext().getLevelModel()
+                .getGoal().getChild() != null) || !model.getLevelContext().getLevelModel().isStandardMode());
 
         model.getTerm().addObserver(this);
         model.levelIsStarted();

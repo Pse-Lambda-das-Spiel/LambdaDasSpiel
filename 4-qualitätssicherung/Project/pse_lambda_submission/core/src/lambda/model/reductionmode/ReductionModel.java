@@ -115,7 +115,7 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
         	current = term;
         	goal = context.getLevelModel().getGoal();
         } else {
-        	current = context.getLevelModel().getGoal();
+            current =context.getLevelModel().getStart();
         	goal = term;
         }
         

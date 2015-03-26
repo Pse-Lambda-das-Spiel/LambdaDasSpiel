@@ -48,22 +48,22 @@
 		"tutorial": [
 			{
 			"tutorialId": "0",
-			"image": "callbyname1",
+			"image": "tutorials/callbyname1",
 			"inEditorMode": true,
 			},
 			{
 			"tutorialId": "1",
-			"image": "callbyname2",
+			"image": "tutorials/callbyname2",
 			"inEditorMode": true,
 			},
 			{
 			"tutorialId": "2",
-			"image": "choose_callbyname",
+			"image": "tutorials/choose_callbyname",
 			"inEditorMode": true,
 			},
 			{
 			"tutorialId": "3",
-			"image": "reminder_goal",
+			"image": "tutorials/reminder_goal",
 			"inEditorMode": true,
 			},
 		],

@@ -24,7 +24,8 @@ public class EditorModel extends Observable<EditorModelObserver> {
      * Stores the currently selected reduction strategy.
      */
     private ReductionStrategy strategy;
-    /**
+
+	/**
      * Stores the current lambda term
      */
     private LambdaRoot term;
@@ -158,4 +159,13 @@ public class EditorModel extends Observable<EditorModelObserver> {
             }
         });
     }
+    
+    /**
+     * Returns the reduction strategy
+     * 
+	 * @return the strategy
+	 */
+	public ReductionStrategy getStrategy() {
+		return strategy;
+	}
 }
