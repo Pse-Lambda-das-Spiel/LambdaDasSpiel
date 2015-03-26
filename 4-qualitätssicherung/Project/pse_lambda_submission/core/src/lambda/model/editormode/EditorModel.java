@@ -52,14 +52,25 @@ public class EditorModel extends Observable<EditorModelObserver> {
         }
         this.context = context;
         strategy = context.getLevelModel().getDefaultStrategy();
-        term = (LambdaRoot) context.getLevelModel().getStart()
-                .accept(new CopyVisitor());
-        notify(new Consumer<EditorModelObserver>() {
-            @Override
-            public void accept(EditorModelObserver observer) {
-                observer.termChanged(term);
-            }
-        });
+        if (context.getLevelModel().isStandardMode()) {
+        	 term = (LambdaRoot) context.getLevelModel().getStart()
+                     .accept(new CopyVisitor());
+             notify(new Consumer<EditorModelObserver>() {
+                 @Override
+                 public void accept(EditorModelObserver observer) {
+                     observer.termChanged(term);
+                 }
+             });
+        } else {
+        	term = (LambdaRoot) context.getLevelModel().getGoal()
+                    .accept(new CopyVisitor());
+            notify(new Consumer<EditorModelObserver>() {
+                @Override
+                public void accept(EditorModelObserver observer) {
+                    observer.termChanged(term);
+                }
+            });
+        }
     }
 
     /**

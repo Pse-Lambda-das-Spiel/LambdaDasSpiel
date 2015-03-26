@@ -58,6 +58,8 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
      */
     private LevelContext context;
 
+    private LambdaRoot goal;
+    
     /**
      * Creates a new instance of ReductionModel.
      */
@@ -109,7 +111,14 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
             throw new IllegalStateException(
                     "Cannot start automatic reduction in the current model state!");
         }
-        current = term;
+        if (context.getLevelModel().isStandardMode()) {
+        	current = term;
+        	goal = context.getLevelModel().getGoal();
+        } else {
+        	current = context.getLevelModel().getGoal();
+        	goal = term;
+        }
+        
         notify(new Consumer<ReductionModelObserver>() {
             @Override
             public void accept(ReductionModelObserver observer) {
@@ -218,16 +227,12 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                                         observer.reductionFinished(true);
                                     } else {
                                         observer.reductionFinished((current
-                                                .equals(ReductionModel.this.context
-                                                        .getLevelModel()
-                                                        .getGoal()) && ReductionModel.this.context
+                                                .equals(goal) && ReductionModel.this.context
                                                 .getLevelModel()
                                                 .isColorEquivalence())
                                                 || (current
                                                         .accept(new IsAlphaEquivalentVisitor(
-                                                                ReductionModel.this.context
-                                                                        .getLevelModel()
-                                                                        .getGoal())) && !ReductionModel.this.context
+                                                               goal)) && !ReductionModel.this.context
                                                         .getLevelModel()
                                                         .isColorEquivalence()));
                                     }

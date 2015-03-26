@@ -42,12 +42,12 @@
 		"tutorial": [
 			{
 				"tutorialId": "0",
-				"image": "tutorials/lambs_enchants_lamb1",
+				"image": "tutorials/enchanting_of_lambs1",
 				"inEditorMode": true,
 			},
 			{
 				"tutorialId": "1",
-				"image": "tutorials/lambs_enchants_lamb2",
+				"image": "tutorials/enchanting_of_lambs2",
 				"inEditorMode": true,
 			},
 			{
@@ -57,7 +57,7 @@
 			},
 			{
 				"tutorialId": "3",
-				"image": "choose_normal",
+				"image": "choose_normalorder",
 				"inEditorMode": true,
 			},
 			{
