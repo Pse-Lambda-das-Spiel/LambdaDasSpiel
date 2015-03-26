@@ -1,1 +1,19 @@
 \section{Unittests}
+\subsection{\texttt{package lambda.model.shop}}
+
+\begin{description}
+\item[ShopModelTest] Diese Testklasse des ShopModels überdeckt alle Models vom \texttt{package lambda.model.shop}.
+Die einzelnen Tests überprüfen das Zusammenwirken vom \texttt{ShopModel} mit den diversen Kategorien (\texttt{ShopItemTypeModel}), sowie den verschiedenen Items (\texttt{ShopItemModel} bzw. \texttt{MusicItemModel, BackgroundImageItemModel} und \texttt{ElementUIContextFamily}).
+
+\item[Coverage \texttt{package lambda.model.shop}: 98,0\%]
+\end{description}
+
+\subsection{\texttt{package lambda.model.level}}
+\item[LevelModelTest] Diese Testklasse überprüft, ob nach einem erstellten Level alle Attribute richtig übertragen und gesetzt wurden, sowie ob die Auswahl der Reduktionsstrategien und benutzbaren Elementen korrekt ist.
+
+\item[DifficultySettingTest] Diese Testklasse überprüft, ob nach einer erstellten Schwierigkeitsstufe der Grad der Stufe und die Dateinamen der Musik-Dateien und Bild-Dateien korrekt ist.
+
+\item[LevelContextTest] Diese Testklasse testet das Zusammenwirken der verschiedenen Klassen im package. \texttt{LevelContext} umfasst ein \texttt{LevelModel}, sowie eine \texttt{DifficultySetting}. In dieser Testklasse werden alle Levels und Schwierigkeitsgrade über den \texttt{LevelManager} geladen, der Shop komplett gesetzt und danach durch diverse Tests alles auf Richtigkeit überprüft.
+
+\item[Coverage \texttt{package lambda.model.level}: 88,2\%] Die Testüberdeckung ist beinahe maximal, da einige Zeilen wie beispielsweise der Header einer Enumeration nicht mit in die Überdeckung einbezogen werden.
+\end{description}
