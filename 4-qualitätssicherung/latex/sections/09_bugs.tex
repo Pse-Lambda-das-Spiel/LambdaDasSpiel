@@ -24,7 +24,11 @@
 	\end{itemize}
 \end{itemize}
 
+<<<<<<< Updated upstream
 \subsection{\texttt{package lambda.model.XXX}}
+=======
+\subsection{Editor- und Reduktionsmodus}
+>>>>>>> Stashed changes
 
 \begin{itemize}
 \item Maske zur Darstellung von Lämmern
@@ -79,5 +83,41 @@
 \item Mehrere Zeiger bei Drag\&Drop
 \begin{itemize} 
 \item Drag\&Drop ist jetzt nur noch mit dem ersten Zeiger möglich.
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\item Fehlende Optionen im Levelabschluss-Dialog
+\begin{itemize} 
+\item Der Bug im Reduktionsmodus, dass beim Levelabschluss-Dialog einige Optionen wie zB. der Level-Neustart-Button fehlt, wurde behoben. Dies wurde durch eine entsprechende Abfrageänderung im Dialog erreicht.
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\item Fehlerhafter Zielvergleich in der Sandbox
+\begin{itemize} 
+\item Der Bug im Reduktionsmodus, dass in der Sandbox nach Abschluss der Reduktion ein Vergleich mit einem nicht vorhandenen Zieldialog stattfindet, wurde behoben. Des Weiteren wurde dazu auch der Levelabschluss-Dialog für die Sandbox angepasst.
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\item Fehlerhafte Hinweis- und Ziel-Dialoge
+\begin{itemize} 
+\item Der Bug im Editormodus, dass größere, mehrzeilige Lambda-Terme nicht korrekt im Hinweis- und Ziel-Dialog angezeigt werden, wurde behoben. Diese Dialoge werden nun über den ganzen Bildschirm angezeigt.
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\item Nicht-Schließbarkeit von einigen Dialogen
+\begin{itemize} 
+\item Der Bug im Editormodus, dass sich einige Dialogen wie den Umfärbungs-Dialog oder den Dialog zum Wechsel der Reduktions-Strategie nur schließen lassen falls, deren Buttons gedrückt werden, wurde behoben. Nun schließen sich die Dialoge bereits, falls an eine beliebige Stelle des Bildschirms gedrückt wird.
+	\end{itemize}
+\end{itemize}
+
+\subsection{Statistik}
+\begin{itemize}
+\item Fehlerhafte Erfassung von Ereignissen in Leveln
+\begin{itemize} 
+\item Der Bug in der Statistik, dass einige der Ereignisse, die in einem Level stattfinden können wie bspw. die Anzahl der platzierten Spielelemente, nicht richtig erfasst werden können, wurde behoben. Dazu wurde die Klasse StatisticDeltaProcessor überarbeitet.
 	\end{itemize}
 \end{itemize}
