@@ -1,1 +1,25 @@
 \section{Systemtests}
+
+Die globalen Testfälle des Pflichtenhefts wurden mithilfe des MonkeyRunner-Werkzeuges umgesetzt.
+Jeder Testfall wurde in einer, durch MonkeyRunner ausführbaren, Python-Datei abgelegt. Benannt sind sie entsprechend der Testfälle
+(z.B. Testfall T110  in der "T110.py"-Datei). In ihnen befinden sich Anweisungen und Vorraussetzungen der Testfälle. Ist die Applikation auf einem Android-Gerät in den, in der Datei, beschriebenen Startzustand gebracht, kann das Testskript ausführt werden. MonkeyRunner geht dann automatisch das entsprechende Testszenario durch.
+
+In der Implementierung bzw. Qualitätssicherung kam es zu kleinen, gewollten Abweichungen zu den Testfällen.
+
+\begin{itemize}
+	\item \texttt{/T120/ Starten des Programms, nachdem mindestens ein Profil bereits erstellt wurde}\\
+		Der Begrüßungsbildschirm wurde hierbei verworfen. Die Applikation zeigt diesen nur noch an nachdem ein neues Profil 	erstellt wurde
+	\item \texttt{/T150/ Beispiellevel zur Eingabe-Bestimmung}\\ 
+		Die Art und Weise wie Spielelemente platziert werden, wurde grafisch geändert. Es wird jetzt kein transparentes Spielelement angezeigt. Stattdessen zeigt das Spiel weiße Markierungen an allen möglichen Stellen an, an denen man etwas ablegen kann. Ist man mit dem Element in der Nähe der Markierung färbt sie sich grün und signalisiert somit, dass man das Element dort beim Loslassen platziert.
+	\item \texttt{/T170/ Das Einkaufsmenü benutzen}\\ 
+		Items aktivieren sich nicht mehr automatisch nachdem sie gekauft wurden. Die Testsequenz wurde so abgeändert, dass nach dem Kaufen der 2 Items Item 2 und dann 1 aktiviert werden. Die Aktivierung von Item 1 deaktiviert wie gewohnt Item 2. 
+		Aktivierte Items werden ebenfalls nicht mehr mit Haken, sondern mit einer farblichen Veränderung des entsprechenden Knopfes gekennzeichnet.
+	\item \texttt{/T180/ Optionen auswählen}\\
+		Lehrermodus und Farbenblindenmodus sind schon in vorherigen Phasen entfernt worden. Dadurch ändert sich der Testfall entsprechend.
+\end{itemize}
+
+Anmerkung:
+\begin{itemize}
+\item \texttt{/T210/ Ein Profil ist eindeutig durch den Namen gekennzeichnet. Es kann nicht mehrere Profile mit demselben Namen geben.}\\ 
+	Dieser Testfall zur Datenkonsistenz wurde nicht wie oben durch MonkeyRunner umgesetzt. Seine Einhaltung ist aber schon durch die Unit-Tests gegeben.
+\end{itemize}
