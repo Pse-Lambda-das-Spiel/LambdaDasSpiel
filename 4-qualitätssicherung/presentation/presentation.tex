@@ -1,0 +1,189 @@
+%% LaTeX-Beamer template for KIT design
+%% by Erik Burger, Christian Hammer
+%% title picture by Klaus Krogmann
+%%
+%% version 2.1
+%%
+%% mostly compatible to KIT corporate design v2.0
+%% http://intranet.kit.edu/gestaltungsrichtlinien.php
+%%
+%% Problems, bugs and comments to
+%% burger@kit.edu
+\pdfminorversion=4
+
+\documentclass[18pt]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+%% SLIDE FORMAT
+
+% use 'beamerthemekit' for standard 4:3 ratio
+% for widescreen slides (16:9), use 'beamerthemekitwide'
+
+\usepackage{templates/beamerthemekit}
+% \usepackage{templates/beamerthemekitwide}
+
+%% TITLE PICTURE
+
+% if a custom picture is to be used on the title page, copy it into the 'logos'
+% directory, in the line below, replace 'mypicture' with the 
+% filename (without extension) and uncomment the following line
+% (picture proportions: 63 : 20 for standard, 169 : 40 for wide
+% *.eps format if you use latex+dvips+ps2pdf, 
+% *.jpg/*.png/*.pdf if you use pdflatex)
+
+\titleimage{../Media/background}
+
+%% TITLE LOGO
+
+% for a custom logo on the front page, copy your file into the 'logos'
+% directory, insert the filename in the line below and uncomment it
+
+\titlelogo{logo}
+
+% (*.eps format if you use latex+dvips+ps2pdf,
+% *.jpg/*.png/*.pdf if you use pdflatex)
+
+%% TikZ INTEGRATION
+
+% use these packages for PCM symbols and UML classes
+% \usepackage{templates/tikzkit}
+% \usepackage{templates/tikzuml}
+
+\usepackage{hyperref}
+\usepackage{color}
+
+% speech bubbles
+\usepackage{tikz}
+\usetikzlibrary{shapes.callouts}
+\usetikzlibrary{arrows,positioning}
+\usetikzlibrary{calc}
+
+% rotations
+\usepackage{rotating}
+
+% strike through in math mode
+\usepackage{cancel}
+
+% for embedded video
+\usepackage{multimedia}
+
+% for multiline comments
+\usepackage{verbatim} 
+
+\usepackage{color}
+
+% the presentation starts here
+
+\title[Lambda Spiel]{Lamb.da - Das Spiel: Qualitätssicherung}
+%\subtitle{Spielend die Denkweise des Programmierens lernen}
+\author{PSE 2014/2015}
+
+\institute{Farid Elhaddad | Florian Fervers | Kai Fieger | Robert Hochweiss | Kay Schmitteckert}
+\date{\today}
+
+\beamertemplatenavigationsymbolsempty
+
+\begin{document}
+
+% change the following line to "ngerman" for German style date and logos
+\selectlanguage{ngerman}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}
+	\frametitle{Änderung $\alpha$-Konversion}
+	\includegraphics<1>[width=\textwidth]{pictures/conversion1}
+	\includegraphics<2>[width=\textwidth]{pictures/conversion2}
+	\includegraphics<3>[width=\textwidth]{pictures/conversion3}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Verbesserungen}
+	\begin{itemize}[<+->]
+		\item Animationen
+		\item Verbesserte Benutzeroberfälche
+		\item Mehr Shop-Items
+		\item Unterschiedliche Musik und Hintergründe
+		\item Level und Tutorials komplett überarbeitet
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Verbesserungen}
+	\includegraphics<1>[width=\textwidth]{pictures/tutorial1}
+	\includegraphics<2>[width=\textwidth]{pictures/tutorial2}
+	\includegraphics<3>[width=\textwidth]{pictures/tutorial3}
+	\includegraphics<4>[width=\textwidth]{pictures/tutorial4}
+	\includegraphics<5>[width=\textwidth]{pictures/tutorial5}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Bugs}
+	\includegraphics<1>[width=\textwidth]{pictures/bug1}
+	\includegraphics<2>[width=\textwidth]{pictures/bug2}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Bugs}
+	\begin{itemize}[<+->]
+		\item Verschwindende Klammern
+		\item abgeschnittene Levelziele/Hinweise
+		\item Schreibfehler in einer Json
+		\item ...
+		\item viele kleine Bugs
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Testwerkzeuge}
+	\begin{itemize}[<+->]
+		\item statische Werkzeuge
+	\begin{itemize}
+		\item Checkstyle
+		\item FindBugs
+	\end{itemize}
+		\item dynamische Werkzeuge
+	\begin{itemize}
+		\item JUnit
+		\item EMMA
+		\item MonkeyRunner
+		\item Monkey
+	\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Unit-Tests}
+	\includegraphics<1>[width=\textwidth]{pictures/coverage1}
+	\includegraphics<2>[width=\textwidth]{pictures/coverage2}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Statistiken}
+	Für die Applikation
+	\begin{itemize}
+		\item 8764 $\Rightarrow$ 10890 Lines of Code
+		\item 26 Packages
+		\item 13 Interfaces
+		\item 134 $\Rightarrow$ 160 Klassen
+		\begin{itemize}
+			\item 348 $\Rightarrow$ 401 Attribute
+			\item 733 $\Rightarrow$ 853 Methoden
+		\end{itemize}
+	\end{itemize}
+	Für die Tests:
+	\begin{itemize}
+		\item 752 $\Rightarrow$ 1614 Lines of Code
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\centering
+	\huge Vielen Dank für Ihre Aufmerksamkeit!
+	\includegraphics[scale=0.8]{team_lambda_lg.png}
+\end{frame}
+
+\end{document}
