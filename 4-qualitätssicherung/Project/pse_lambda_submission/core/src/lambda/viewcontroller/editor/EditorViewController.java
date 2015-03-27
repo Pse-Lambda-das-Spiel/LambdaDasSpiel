@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.I18NBundle;
@@ -217,7 +218,7 @@ public final class EditorViewController extends StageViewController implements
         reductionStrategyButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                final float buttonSize = getStage().getHeight() / 6;
+                final float buttonSize = getStage().getHeight() / 5;
                 final float labelWidth = getStage().getWidth() / 2;
                 new Dialog("", dialogSkin) {
                     {
@@ -251,7 +252,7 @@ public final class EditorViewController extends StageViewController implements
                         }
                         float smallestScale = Float.POSITIVE_INFINITY;
                         for (Label label : labels) {
-                            float current = labelWidth
+                            float current = 2 * labelWidth
                                     / label.getStyle().font.getBounds(label
                                             .getText()).width;
                             if (current < smallestScale) {
@@ -259,7 +260,9 @@ public final class EditorViewController extends StageViewController implements
                             }
                         }
                         for (Label label : labels) {
+                        	label.setWrap(true);
                             label.setFontScale(smallestScale);
+                            label.setAlignment(Align.center);
                         }
                         final Dialog dialog = this;
                         addListener(new ClickListener() {
