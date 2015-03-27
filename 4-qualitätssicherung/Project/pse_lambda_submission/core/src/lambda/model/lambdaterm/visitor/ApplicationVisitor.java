@@ -41,9 +41,9 @@ public class ApplicationVisitor extends ValidLambdaTermVisitor<LambdaTerm> {
      */
     private boolean hasCheckedAlphaConversion;
     /**
-     * A set of all colors that can be used in an alpha conversion.
+     * A list of all colors that can be used in an alpha conversion.
      */
-    private Set<Color> alphaConversionColors;
+    private List<Color> alphaConversionColors;
 
     /**
      * Creates a new application visitor.
@@ -58,7 +58,7 @@ public class ApplicationVisitor extends ValidLambdaTermVisitor<LambdaTerm> {
      *             if color is null or applicant is null
      */
     public ApplicationVisitor(Color color, LambdaTerm applicant,
-            Set<Color> alphaConversionColors) {
+            List<Color> alphaConversionColors) {
         super("Cannot perform an application on an invalid lambda term!");
         if (color == null) {
             throw new IllegalArgumentException("Color cannot be null!");

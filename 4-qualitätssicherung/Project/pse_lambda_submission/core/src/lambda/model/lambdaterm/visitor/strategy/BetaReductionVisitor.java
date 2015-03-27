@@ -1,7 +1,9 @@
 package lambda.model.lambdaterm.visitor.strategy;
 
 import com.badlogic.gdx.graphics.Color;
-import java.util.Set;
+
+import java.util.List;
+
 import lambda.model.lambdaterm.InvalidLambdaTermException;
 import lambda.model.lambdaterm.LambdaAbstraction;
 import lambda.model.lambdaterm.LambdaApplication;
@@ -10,7 +12,6 @@ import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.LambdaVariable;
 import lambda.model.lambdaterm.visitor.ValidLambdaTermVisitor;
 import lambda.model.levels.ReductionStrategy;
-import static lambda.model.levels.ReductionStrategy.NORMAL_ORDER;
 
 /**
  * Represents a visitor on a lambda term that performs a beta reduction. Can
@@ -36,9 +37,9 @@ public abstract class BetaReductionVisitor extends
      */
     protected LambdaTerm applicant;
     /**
-     * A set of all colors that can be used in an alpha conversion.
+     * A list of all colors that can be used in an alpha conversion.
      */
-    protected Set<Color> alphaConversionColors;
+    protected List<Color> alphaConversionColors;
 
     /**
      * Creates a new beta reduction visitor from the given reduction srategy
@@ -91,7 +92,7 @@ public abstract class BetaReductionVisitor extends
      * @param alphaConversionColors
      *            colors that are available for alpha conversion
      */
-    public void setAlphaConversionColors(Set<Color> alphaConversionColors) {
+    public void setAlphaConversionColors(List<Color> alphaConversionColors) {
         this.alphaConversionColors = alphaConversionColors;
     }
 

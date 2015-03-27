@@ -137,11 +137,16 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                 .getAvailableColors());
         alphaConversionColors.removeAll(context.getLevelModel()
                 .getLockedColors());
+        
         // white should not be among the replacement colors for an alpha
         // conversion
         alphaConversionColors.remove(Color.valueOf("ffffffff"));
-        this.strategy.setAlphaConversionColors(new LinkedHashSet<>(
-                alphaConversionColors));
+        // this order is needed for the tutorial levels for the alpha conversion
+        alphaConversionColors.remove(LevelManager.convertVariableToColor('m'));
+        alphaConversionColors.remove(LevelManager.convertVariableToColor('k'));
+        alphaConversionColors.add(0, LevelManager.convertVariableToColor('m'));
+        alphaConversionColors.add(1, LevelManager.convertVariableToColor('k'));
+        this.strategy.setAlphaConversionColors(alphaConversionColors);
     }
 
     /**
