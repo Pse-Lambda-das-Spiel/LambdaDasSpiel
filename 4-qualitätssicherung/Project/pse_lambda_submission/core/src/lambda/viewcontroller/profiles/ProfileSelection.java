@@ -56,13 +56,10 @@ public class ProfileSelection extends StageViewController {
 
     @Override
     public void queueAssets(AssetManager assets) {
-        assets.load("data/skins/MasterSkin.atlas", TextureAtlas.class);
         assets.load(skinJson, Skin.class, new SkinLoader.SkinParameter(
                 "data/skins/MasterSkin.atlas"));
         assets.load("data/skins/DialogTemp.json", Skin.class,
                 new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
-        assets.load("data/backgrounds/default.png", Texture.class,
-                new TextureParameter());
     }
 
     /**

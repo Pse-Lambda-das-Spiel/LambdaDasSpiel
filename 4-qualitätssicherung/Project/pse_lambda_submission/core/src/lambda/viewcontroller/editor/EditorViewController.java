@@ -421,6 +421,8 @@ public final class EditorViewController extends StageViewController implements
             background.remove();
         }
         background = context.getBgImage();
+        background.setWidth(getStage().getWidth());
+        background.setHeight(getStage().getHeight());
         getStage().addActor(background);
         background.toBack();
 

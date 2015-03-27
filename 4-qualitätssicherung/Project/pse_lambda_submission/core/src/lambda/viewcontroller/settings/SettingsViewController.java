@@ -57,8 +57,11 @@ public class SettingsViewController extends StageViewController {
     public void queueAssets(AssetManager assets) {
         assets.load(skinJson, Skin.class, new SkinLoader.SkinParameter(
                 "data/skins/MasterSkin.atlas"));
+        TextureParameter textureParameter = new TextureParameter();
+        textureParameter.minFilter = Texture.TextureFilter.Linear;
+        textureParameter.magFilter = Texture.TextureFilter.Linear;
         assets.load("data/backgrounds/settings.png", Texture.class,
-                new TextureParameter());
+                textureParameter);
     }
 
     @Override

@@ -2,6 +2,7 @@ package lambda.model.shop;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
@@ -124,6 +125,9 @@ public class ShopModel {
      *            the asset manager
      */
     public void loadAllImageItems(AssetManager assets) {
+        TextureParameter textureParameter = new TextureParameter();
+        textureParameter.minFilter = Texture.TextureFilter.Linear;
+        textureParameter.magFilter = Texture.TextureFilter.Linear;
         String directory = "data/items/images/";
         String type = ".png";
         FileHandle file = Gdx.files.internal("data/items/images/images.json");
@@ -139,12 +143,12 @@ public class ShopModel {
             String filename = image.getString("filename");
             BackgroundImageItemModel imageItem = new BackgroundImageItemModel(
                     id, price, filename);
-            assets.load(directory + filename + type, Texture.class);
+            assets.load(directory + filename + type, Texture.class, textureParameter);
             this.images.getItems().add(imageItem);
             i++;
         }
         // default
-        assets.load("data/levels/images/default.png", Texture.class);
+        assets.load("data/levels/images/default.png", Texture.class, textureParameter);
     }
 
     /**

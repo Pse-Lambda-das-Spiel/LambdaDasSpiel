@@ -1,8 +1,7 @@
 package lambda.model.lambdaterm;
 
 import java.text.ParseException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import lambda.model.lambdaterm.visitor.CopyVisitor;
 import lambda.model.lambdaterm.visitor.FrontInserter;
@@ -37,12 +36,12 @@ import com.libgdxtesting.GdxTestRunner;
  */
 @RunWith(GdxTestRunner.class)
 public class LambdaTermVisitorTest {
-	static Set<Color> alphaConversionColors;
+	static List<Color> alphaConversionColors;
 	
     @BeforeClass
     public static void setUpClass() {
     	LevelManager.getLevelManager();
-    	alphaConversionColors = new HashSet<>(LevelManager.getAllColors());
+    	alphaConversionColors = LevelManager.getAllColors();
     }
     
     @AfterClass

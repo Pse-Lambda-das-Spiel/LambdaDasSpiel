@@ -78,7 +78,6 @@ public class DeltaStatisticProcessor implements EditorModelObserver,
                             - resultMapOld.get("gems");
                     gemsPlaced += gemsResult;
 
-                    System.out.println(oldTerm.toString());
                 } else {
                     lambsPlaced += resultMapNew.get("lambs");
                     gemsPlaced += resultMapNew.get("gems");

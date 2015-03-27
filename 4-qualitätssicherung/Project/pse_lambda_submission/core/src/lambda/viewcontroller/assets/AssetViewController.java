@@ -7,8 +7,10 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
+import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -129,5 +131,10 @@ public class AssetViewController extends StageViewController {
         manager.load("data/skins/MasterSkin.atlas", TextureAtlas.class);
         manager.load("data/skins/MasterSkin.json", Skin.class,
                 new SkinLoader.SkinParameter("data/skins/MasterSkin.atlas"));
+        TextureParameter textureParameter = new TextureParameter();
+        textureParameter.minFilter = TextureFilter.Linear;
+        textureParameter.magFilter = TextureFilter.Linear;
+        manager.load("data/backgrounds/default.png", Texture.class,
+                textureParameter);
     }
 }

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
@@ -99,8 +98,6 @@ public class AchievementMenuViewController extends StageViewController {
      */
     @Override
     public void queueAssets(AssetManager assets) {
-        assets.load("data/backgrounds/default.png", Texture.class,
-                new TextureParameter());
     }
 
     /**

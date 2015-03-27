@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -77,14 +76,13 @@ public class StatisticViewController extends StageViewController implements
 
     @Override
     public void queueAssets(AssetManager assets) {
-        assets.load("data/backgrounds/default.png", Texture.class,
-                new TextureParameter());
     }
 
     @Override
     public void create(final AssetManager manager) {
         this.manager = manager;
         ProfileManager.getManager().addObserver(this);
+        setLastViewController(SettingsViewController.class);
         getGame().getController(EditorViewController.class).getModel()
                 .addObserver(deltaProcessor);
         getGame().getController(ReductionViewController.class).getModel()

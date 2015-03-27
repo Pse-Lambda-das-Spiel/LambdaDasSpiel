@@ -61,8 +61,11 @@ public class LevelSelectionViewController extends StageViewController implements
     @Override
     public void queueAssets(AssetManager assets) {
         levelManager.queueAssets(assets);
+        TextureParameter textureParameter = new TextureParameter();
+        textureParameter.minFilter = Texture.TextureFilter.Linear;
+        textureParameter.magFilter = Texture.TextureFilter.Linear;
         assets.load("data/backgrounds/levelmenu.png", Texture.class,
-                new TextureParameter());
+                textureParameter);
     }
 
     /**

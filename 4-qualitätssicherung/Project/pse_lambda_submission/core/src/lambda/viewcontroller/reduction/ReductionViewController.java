@@ -34,7 +34,6 @@ import lambda.model.reductionmode.ReductionModelObserver;
 import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.assets.AssetViewController;
 import lambda.viewcontroller.editor.EditorViewController;
-import lambda.viewcontroller.editor.TargetDialog;
 import lambda.viewcontroller.lambdaterm.LambdaTermViewController;
 import lambda.viewcontroller.level.LevelSelectionViewController;
 import lambda.viewcontroller.level.TutorialMessage;
@@ -106,7 +105,6 @@ public class ReductionViewController extends StageViewController implements
 
     @Override
     public void queueAssets(AssetManager assets) {
-        // TODO master skin
     }
 
     @Override

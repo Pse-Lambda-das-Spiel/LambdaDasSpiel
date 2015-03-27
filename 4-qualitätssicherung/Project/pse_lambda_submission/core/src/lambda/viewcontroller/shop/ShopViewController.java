@@ -74,8 +74,6 @@ public class ShopViewController extends StageViewController implements
     @Override
     public void queueAssets(AssetManager assets) {
         shop.queueAssets(assets);
-        assets.load("data/backgrounds/default.png", Texture.class,
-                new TextureParameter());
     }
 
     @Override
