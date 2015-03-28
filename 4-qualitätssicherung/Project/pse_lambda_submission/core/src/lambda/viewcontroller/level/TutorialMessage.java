@@ -42,8 +42,10 @@ public class TutorialMessage extends Dialog {
             message.setFontScale(0.7f);
             add(message).width(stageWidth / 2);
         } else {
-            add(new Image(skin.getAtlas().createSprite(model.getImageName())))
-                    .row();
+            float scaleFactorX = stageWidth / 1280;
+            float scaleFactorY = stageHeight / 720;
+            Image tutorialImage = new Image(skin.getAtlas().createSprite(model.getImageName()));
+            add(tutorialImage).size( tutorialImage.getWidth() * scaleFactorX,  tutorialImage.getHeight() * scaleFactorY).row();
             message.setFontScale(0.7f);
             add(message).width(stageWidth / 2);
         }

@@ -158,7 +158,7 @@ public class MainMenuViewController extends StageViewController implements
         Table centerTable = new Table();
         centerTable.align(Align.center);
         centerTable.add().row();
-        centerTable.add(startButton).colspan(2).align(Align.center)
+        centerTable.add(startButton).colspan(2).align(Align.center).size(buttonSize * 1.22f)
                 .spaceBottom(getStage().getHeight() / 20).row();
         centerTable.add(levelMenuButton).size(buttonSize).align(Align.left)
                 .spaceRight(getStage().getWidth() / 20);
