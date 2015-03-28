@@ -53,7 +53,6 @@ public final class ProfileSaveHelper {
                         // create json structure
                         json.writeObjectStart();
                         json.writeObjectStart("profile_general_information");
-                        json.writeValue("name", profileModel.getName());
                         json.writeValue("avatar", profileModel.getAvatar());
                         json.writeValue("language", profileModel.getLanguage());
                         json.writeValue("levelIndex",

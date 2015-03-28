@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldFilter;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.I18NBundle;
@@ -83,7 +84,13 @@ public class ProfileEditName extends StageViewController implements
         enterName.setAlignment(Align.center);
         nameSelection.row().height(getStage().getHeight() / 3);
         nameField = new TextField("", manager.get(skinJson, Skin.class));
-        nameField.setMaxLength(20);
+        nameField.setMaxLength(ProfileManager.MAX_NAME_LENGTH);
+        nameField.setTextFieldFilter(new TextFieldFilter() {
+			@Override
+			public boolean acceptChar(TextField textField, char c) {
+				return String.valueOf(c).matches(ProfileManager.VALID_CHARS);
+			}
+        });
         nameField.setTextFieldListener(new TextField.TextFieldListener() {
             @Override
             public void keyTyped(TextField textField, char key) {

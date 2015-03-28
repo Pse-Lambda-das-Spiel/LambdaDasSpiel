@@ -24,7 +24,19 @@ import lambda.model.shop.ShopModel;
  */
 public class ProfileManager extends Observable<ProfileManagerObserver> {
 
-    /**
+	/**
+	 * Maximum length of a porfile's name.
+	 */
+	public static final int MAX_NAME_LENGTH = 20;
+	/**
+	 * Regex of all chars a profile name can contain.
+	 */
+	public static final String VALID_CHARS = "[a-zA-Z0-9 ]";
+	/**
+	 * Regex of a valid profile name.
+	 */
+	public static final String VALID_NAME = "[a-zA-Z0-9]|([a-zA-Z0-9][a-zA-Z0-9 ]{0," + (MAX_NAME_LENGTH - 2) + "}[a-zA-Z0-9])";
+	/**
      * The maximum number of allowed profiles.
      */
     public static final int MAX_NUMBER_OF_PROFILES = 6;
@@ -127,19 +139,30 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
             throw new IllegalArgumentException("newName cannot be null");
         }
         String name = newName.trim();
-        if (name.equals("")) {
-            throw new IllegalArgumentException("newName cannot empty");
+        if (!name.matches(VALID_NAME)) {
+            throw new IllegalArgumentException(newName + " is no valid profile name");
         }
         for (ProfileModel profile : profiles) {
-            if (profile.getName().equals(name)) {
-                return currentProfile == profile;
+            if (profile.getName().equalsIgnoreCase(name)) {
+            	if (currentProfile != profile) {
+            		return false;
+            	}
             }
         }
         ProfileModel newProfile = new ProfileModel(name, currentProfile);
         profiles.add(profiles.indexOf(currentProfile), newProfile);
-        save(name);
-        delete(currentProfile.getName());
-        currentProfile = newProfile;
+        if (currentProfile.getName().equals("")) {
+        	save(name);
+        	delete(currentProfile.getName());
+        } else {
+        	if (!Gdx.files.local(PROFILE_FOLDER + "/" + currentProfile.getName()).file().renameTo(
+        			Gdx.files.local(PROFILE_FOLDER + "/" + name).file())) {
+        		throw new InvalidProfilesException(PROFILE_FOLDER + "/" + currentProfile.getName() 
+        				+ " could not be renamed");
+        	}
+        	profiles.remove(currentProfile);
+        }
+    	currentProfile = newProfile;
         saveNames();
         notify(new Consumer<ProfileManagerObserver>() {
             @Override
@@ -280,7 +303,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
             }
             for (int i = 0; i + 1 < names.length; i++) {
                 for (int j = i + 1; j < names.length; j++) {
-                    if (names[i].equals(names[j]) || names[i].equals("")) {
+                    if (names[i].equalsIgnoreCase(names[j]) || names[i].equals("")) {
                         return loadAllSavedProfiles(profileFolder);
                     }
                 }
@@ -288,6 +311,9 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
             if (listSubdirectories(profileFolder.list()).length == names.length) {
                 List<ProfileModel> profiles = new LinkedList<ProfileModel>();
                 for (String name : names) {
+                	if (!name.matches(VALID_NAME)) {
+                		return loadAllSavedProfiles(profileFolder);
+                	}
                     ProfileModel profile = ProfileLoadHelper.loadProfile(name);
                     if (profile == null) {
                         return loadAllSavedProfiles(profileFolder);
@@ -305,6 +331,10 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     private List<ProfileModel> loadAllSavedProfiles(FileHandle profileFolder) {
         List<ProfileModel> profiles = new LinkedList<ProfileModel>();
         for (FileHandle file : listSubdirectories(profileFolder.list())) {
+        	if (!file.name().matches(VALID_NAME)) {
+        		throw new InvalidProfilesException(file.name()
+                        + " is no valid profile name.");
+        	}
             profiles.add(ProfileLoadHelper.loadProfile(file.name()));
         }
         return profiles;
