@@ -140,11 +140,11 @@
 					"right": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "red",
+						"color": "y",
 						"inside": {
 							"type": "variable",
 							"locked": true,
-							"color": "red"
+							"color": "y"
 						}
 					}			
 				}
