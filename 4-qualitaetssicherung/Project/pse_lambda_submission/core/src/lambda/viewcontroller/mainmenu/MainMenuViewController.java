@@ -169,6 +169,7 @@ public class MainMenuViewController extends StageViewController implements
         logoutButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 ProfileManager pManager = ProfileManager.getManager();
                 pManager.save(pManager.getCurrentProfile().getName());
                 AudioManager.setLoggedIn(false);
@@ -178,6 +179,7 @@ public class MainMenuViewController extends StageViewController implements
         startButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 int levelIndex = ProfileManager.getManager()
                         .getCurrentProfile().getLevelIndex();
                 // start with the first level again, if all level have been
@@ -195,24 +197,28 @@ public class MainMenuViewController extends StageViewController implements
         levelMenuButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 getGame().setScreen(LevelSelectionViewController.class);
             }
         });
         achievementsButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 getGame().setScreen(AchievementMenuViewController.class);
             }
         });
         coinButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 getGame().setScreen(ShopViewController.class);
             }
         });
         settingsButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 getGame().setScreen(SettingsViewController.class);
             }
         });

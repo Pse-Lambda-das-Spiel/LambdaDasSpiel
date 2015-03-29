@@ -20,6 +20,7 @@ import lambda.model.shop.BackgroundImageItemModel;
 import lambda.model.shop.ElementUIContextFamily;
 import lambda.model.shop.MusicItemModel;
 import lambda.model.shop.ShopModel;
+import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
 
@@ -113,6 +114,7 @@ public class ShopViewController extends StageViewController implements
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 table.removeActor(musicTable);
                 table.removeActor(imagesTable);
                 table.removeActor(elementsTable);
@@ -130,6 +132,7 @@ public class ShopViewController extends StageViewController implements
         musicTypeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 musicB = !musicB;
                 if (musicB) {
                     table.addActorAfter(musicTypeButton, musicTable);
@@ -147,6 +150,7 @@ public class ShopViewController extends StageViewController implements
         bgImageTypeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 imageB = !imageB;
                 if (imageB) {
                     table.addActorAfter(bgImageTypeButton, imagesTable);
@@ -164,6 +168,7 @@ public class ShopViewController extends StageViewController implements
         elementUITypeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 elementsB = !elementsB;
                 if (elementsB) {
                     table.addActorAfter(elementUITypeButton, elementsTable);

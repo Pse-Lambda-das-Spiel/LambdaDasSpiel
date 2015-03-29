@@ -184,6 +184,7 @@ public class LevelSelectionViewController extends StageViewController implements
             levelButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    AudioManager.playSound("buttonClick");
                     startLevel(level);
                 }
             });
@@ -193,6 +194,7 @@ public class LevelSelectionViewController extends StageViewController implements
             levelButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    AudioManager.playSound("buttonClick");
                     startLevel(level);
                 }
             });
@@ -268,6 +270,7 @@ public class LevelSelectionViewController extends StageViewController implements
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 getGame().setScreen(MainMenuViewController.class);
             }
         });
@@ -275,6 +278,7 @@ public class LevelSelectionViewController extends StageViewController implements
         sandboxButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 startLevel(levelManager.getLevel(0));
             }
         });
@@ -282,6 +286,7 @@ public class LevelSelectionViewController extends StageViewController implements
         helpButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 new HelpDialog(manager.get("data/skins/DialogTemp.json",
                         Skin.class), manager.get(ProfileManager.getManager()
                         .getCurrentProfile().getLanguage(), I18NBundle.class),

@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 
 import lambda.model.achievements.AchievementManager;
 import lambda.model.profiles.ProfileManager;
+import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
 
@@ -152,6 +153,7 @@ public class AchievementMenuViewController extends StageViewController {
         back.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 getGame().setScreen(MainMenuViewController.class);
             }
         });
@@ -163,6 +165,7 @@ public class AchievementMenuViewController extends StageViewController {
     private class AchievementClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
+            AudioManager.playSound("buttonClick");
             final AchievementViewController clickedActor = (AchievementViewController) event
                     .getListenerActor();
             final float height = getStage().getHeight();

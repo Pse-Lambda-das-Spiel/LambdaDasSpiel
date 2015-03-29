@@ -15,6 +15,7 @@ import lambda.model.profiles.ProfileManager;
 import lambda.model.shop.ShopItemModel;
 import lambda.model.shop.ShopItemModelObserver;
 import lambda.model.shop.ShopModel;
+import lambda.viewcontroller.AudioManager;
 
 /**
  * Represents the ImageTextButtons of an item in the shop This class updates the
@@ -133,6 +134,7 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
     private class ItemClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
+            AudioManager.playSound("buttonClick");
             if (model.isPurchased()) {
                 if (model.isActivated()) {
                     model.deactivate();

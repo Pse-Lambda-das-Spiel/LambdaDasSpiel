@@ -182,6 +182,7 @@ public final class EditorViewController extends StageViewController implements
         pauseButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 new PauseDialog(dialogSkin, manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
                         I18NBundle.class), getStage().getWidth(), getStage()
@@ -191,6 +192,7 @@ public final class EditorViewController extends StageViewController implements
         hintButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 EditorViewController.this.model.hintIsUsed();
                 new HintDialog(dialogSkin, manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
@@ -201,6 +203,7 @@ public final class EditorViewController extends StageViewController implements
         helpButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 new HelpDialog(dialogSkin, manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
                         I18NBundle.class), getStage()).show(getStage());
@@ -209,6 +212,7 @@ public final class EditorViewController extends StageViewController implements
         targetButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 new TargetDialog(dialogSkin, manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
                         I18NBundle.class), EditorViewController.this.model
@@ -218,6 +222,7 @@ public final class EditorViewController extends StageViewController implements
         reductionStrategyButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 final float buttonSize = getStage().getHeight() / 5;
                 final float labelWidth = getStage().getWidth() / 2;
                 new Dialog("", dialogSkin) {
@@ -282,6 +287,7 @@ public final class EditorViewController extends StageViewController implements
         finishedButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 I18NBundle language = manager.get(ProfileManager.getManager()
                         .getCurrentProfile().getLanguage(), I18NBundle.class);
                 if (model.getTerm().getChild() == null) {

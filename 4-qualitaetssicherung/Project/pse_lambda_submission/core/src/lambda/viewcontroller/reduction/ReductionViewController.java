@@ -31,6 +31,7 @@ import lambda.model.profiles.ProfileManager;
 import lambda.model.profiles.ProfileModel;
 import lambda.model.reductionmode.ReductionModel;
 import lambda.model.reductionmode.ReductionModelObserver;
+import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.assets.AssetViewController;
 import lambda.viewcontroller.editor.EditorViewController;
@@ -170,6 +171,7 @@ public class ReductionViewController extends StageViewController implements
         pauseButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 new PauseDialog(dialogSkin, manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
                         I18NBundle.class), getStage().getWidth(), getStage()
@@ -179,6 +181,7 @@ public class ReductionViewController extends StageViewController implements
         helpButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 new HelpDialog(dialogSkin, manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
                         I18NBundle.class), getStage()).show(getStage());
@@ -187,6 +190,7 @@ public class ReductionViewController extends StageViewController implements
         stepRevertButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 if (!stepRevertButton.isDisabled()) { // How come this is even
                                                       // necessary!?
                     model.stepRevert();
@@ -196,6 +200,7 @@ public class ReductionViewController extends StageViewController implements
         stepButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 if (!stepButton.isDisabled()) {
                     model.step();
                 }
@@ -204,6 +209,7 @@ public class ReductionViewController extends StageViewController implements
         playPauseButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                AudioManager.playSound("buttonClick");
                 if (!playPauseButton.isDisabled()) {
                     model.togglePlay();
                 }
