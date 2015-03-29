@@ -1,5 +1,8 @@
 package lambda.viewcontroller.profiles;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
@@ -86,9 +89,10 @@ public class ProfileEditName extends StageViewController implements
         nameField = new TextField("", manager.get(skinJson, Skin.class));
         nameField.setMaxLength(ProfileManager.MAX_NAME_LENGTH);
         nameField.setTextFieldFilter(new TextFieldFilter() {
+            private Matcher matcher = Pattern.compile(ProfileManager.VALID_CHARS).matcher("");
 			@Override
 			public boolean acceptChar(TextField textField, char c) {
-				return String.valueOf(c).matches(ProfileManager.VALID_CHARS);
+				return matcher.reset(String.valueOf(c)).matches();
 			}
         });
         nameField.setTextFieldListener(new TextField.TextFieldListener() {

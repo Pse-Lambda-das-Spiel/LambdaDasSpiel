@@ -3,6 +3,8 @@ package lambda.model.profiles;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -24,19 +26,20 @@ import lambda.model.shop.ShopModel;
  */
 public class ProfileManager extends Observable<ProfileManagerObserver> {
 
-	/**
-	 * Maximum length of a porfile's name.
-	 */
-	public static final int MAX_NAME_LENGTH = 20;
-	/**
-	 * Regex of all chars a profile name can contain.
-	 */
-	public static final String VALID_CHARS = "[a-zA-Z0-9 ]";
-	/**
-	 * Regex of a valid profile name.
-	 */
-	public static final String VALID_NAME = "[a-zA-Z0-9]|([a-zA-Z0-9][a-zA-Z0-9 ]{0," + (MAX_NAME_LENGTH - 2) + "}[a-zA-Z0-9])";
-	/**
+    /**
+     * Maximum length of a porfile's name.
+     */
+    public static final int MAX_NAME_LENGTH = 20;
+    private static final String chars = "[a-zA-Z0-9ßáâàäéêèëíîìïóôòöúûùüÿçæœñÁÂÀÄÉÊÈËÍÎÌÏÓÔÒÖÚÛÙÜŸÇÆŒÑ]";
+    /**
+     * Regex of all chars a profile name can contain.
+     */
+    public static final String VALID_CHARS = "(" + chars + "| )";
+    /**
+     * Regex of a valid profile name.
+     */
+    public static final String VALID_NAME = chars + "(" + VALID_CHARS + "{0," + (MAX_NAME_LENGTH - 2) + "}" + chars + ")?";
+    /**
      * The maximum number of allowed profiles.
      */
     public static final int MAX_NUMBER_OF_PROFILES = 6;
@@ -48,8 +51,10 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     private final ProfileEditModel profileEdit;
     private ProfileModel currentProfile;
     private List<ProfileModel> profiles;
+    private Matcher validNameMatcher;
 
     private ProfileManager() {
+        validNameMatcher = Pattern.compile(VALID_NAME).matcher("");
         profileEdit = new ProfileEditModel();
         currentProfile = null;
         profiles = loadProfiles(Gdx.files.local(PROFILE_FOLDER));
@@ -139,7 +144,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
             throw new IllegalArgumentException("newName cannot be null");
         }
         String name = newName.trim();
-        if (!name.matches(VALID_NAME)) {
+        if (!validNameMatcher.reset(name).matches()) {
             throw new IllegalArgumentException(newName + " is no valid profile name");
         }
         for (ProfileModel profile : profiles) {
@@ -311,7 +316,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
             if (listSubdirectories(profileFolder.list()).length == names.length) {
                 List<ProfileModel> profiles = new LinkedList<ProfileModel>();
                 for (String name : names) {
-                	if (!name.matches(VALID_NAME)) {
+                    if (!validNameMatcher.reset(name).matches()) {
                 		return loadAllSavedProfiles(profileFolder);
                 	}
                     ProfileModel profile = ProfileLoadHelper.loadProfile(name);
@@ -331,7 +336,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     private List<ProfileModel> loadAllSavedProfiles(FileHandle profileFolder) {
         List<ProfileModel> profiles = new LinkedList<ProfileModel>();
         for (FileHandle file : listSubdirectories(profileFolder.list())) {
-        	if (!file.name().matches(VALID_NAME)) {
+            if (!validNameMatcher.reset(file.name()).matches()) {
         		throw new InvalidProfilesException(file.name()
                         + " is no valid profile name.");
         	}
