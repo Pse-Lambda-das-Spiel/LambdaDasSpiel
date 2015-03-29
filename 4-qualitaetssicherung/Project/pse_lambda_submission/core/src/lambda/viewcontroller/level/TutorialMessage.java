@@ -2,18 +2,16 @@ package lambda.viewcontroller.level;
 
 import lambda.model.levels.TutorialMessageModel;
 
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.I18NBundle;
 
 /**
  * This class represents a full tutorial including the area and vector
  *
- * @author Kay Schmitteckertm Robert Hochweiss
+ * @author Kay Schmitteckert, Robert Hochweiss
  */
 public class TutorialMessage extends Dialog {
 
@@ -45,7 +43,8 @@ public class TutorialMessage extends Dialog {
             float scaleFactorX = stageWidth / 1280;
             float scaleFactorY = stageHeight / 720;
             Image tutorialImage = new Image(skin.getAtlas().createSprite(model.getImageName()));
-            add(tutorialImage).size( tutorialImage.getWidth() * scaleFactorX,  tutorialImage.getHeight() * scaleFactorY).row();
+            add(tutorialImage).size(tutorialImage.getWidth() * scaleFactorX, tutorialImage.getHeight() * scaleFactorY)
+                    .row();
             message.setFontScale(0.7f);
             add(message).width(stageWidth / 2);
         }

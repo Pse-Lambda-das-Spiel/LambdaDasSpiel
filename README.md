@@ -1,7 +1,7 @@
 LambdaDasSpiel
 ==============
 
-Unser Programm befindet sich in dem Verzeichnis qualtätssicherung/Projekt/pse_lambda_submission.
+Unser Programm befindet sich in dem Verzeichnis qualtaetssicherung/Projekt/pse_lambda_submission.
 
 Zur erfolgreichen Programmausführung und -einbindung wird benötigt:
 
