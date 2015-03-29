@@ -73,13 +73,13 @@
 		],
 		"constellations": {
 			"start": {
-				"child": null
+				"child": null,
 			},
 			"goal": {
-				"child": null
+				"child": null,
 			},
 			"hint": {
-				"child": null
+				"child": null,
 			},
 		}
 	}

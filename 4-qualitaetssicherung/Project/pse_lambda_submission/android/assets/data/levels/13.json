@@ -96,29 +96,29 @@
 						"type": "application",
 						"locked": true,
 						"left": {
-							"type": "variable",
-							"locked": true,
-							"color": "v"
+							"type": "application",
+                            "locked": true,
+                            "left": {
+                                "type": "variable",
+                                "locked": true,
+                                "color": "v"
+                            },
+                            "right": {
+                                "type": "variable",
+                                "locked": true,
+                                "color": "x"
+                            }           
 						},
 						"right": {
 							"type": "variable",
 							"locked": true,
-							"color": "x"
+							"color": "u"
 						}
 					},
 					"right": {
-						"type": "application",
-						"locked": true,
-						"left": {
-							"type": "variable",
-							"locked": true,
-							"color": "u"
-						},
-						"right": {
-							"type": "variable",
-							"locked": true,
-							"color": "u"
-						}			
+    					"type": "variable",
+    					"locked": true,
+    					"color": "u"
 					}			
 				}
 			},

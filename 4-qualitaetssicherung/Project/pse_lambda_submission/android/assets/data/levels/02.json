@@ -98,7 +98,7 @@
 				}
 			},
 			"hint": {
-				"_comment": "(lx.x)w",
+				"_comment": "(lx.x)y",
 				"child": {
 					"type": "application",
 					"locked": true,
@@ -114,8 +114,8 @@
 					},
 					"right": {
 						"type": "variable",
-						"locked": false,
-						"color": "w"
+						"locked": true,
+						"color": "y"
 					}			
 				}
 			}

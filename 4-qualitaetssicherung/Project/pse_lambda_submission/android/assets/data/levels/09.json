@@ -61,48 +61,43 @@
 			"hint": {
 				"_comment": "lz.z",
 				"child": {
-					"type": "abstraction",
-					"locked": true,
-					"color": "x",
-					"inside": {
-						"type": "abstraction",
-						"locked": true,
-						"color": "x",
-						"inside": {
-							"type": "application",
-							"locked": true,
-							"left": {
-								"type": "application",
-								"locked": true,
-								"left": {
-									"type": "variable",
-									"locked": true,
-									"color": "x"
-								},
-								"right": {
-									"type": "abstraction",
-									"locked": true,
-									"color": "z",
-									"inside": {
-										"type": "variable",
-										"locked": true,
-										"color": "z"
-									}
-								}		
-							},
-							"right": {
-								"type": "abstraction",
-								"locked": false,
-								"color": "w",
-								"inside": {
-									"type": "variable",
-									"locked": false,
-									"color": "w"
-								}
-							}		
-						}	
-					}	
-				}
+                    "type": "application",
+                        "locked": true,
+                        "left": {
+                            "type": "abstraction",
+                            "locked": true,
+                            "color": "x",
+                            "inside": {
+                                "type": "application",
+                                "locked": true,
+                                "left": {
+                                    "type": "variable",
+                                    "locked": true,
+                                    "color": "x"
+                                },
+                                "right": {
+                                    "type": "abstraction",
+                                    "locked": true,
+                                    "color": "z",
+                                    "inside": {
+                                        "type": "variable",
+                                        "locked": true,
+                                        "color": "z"
+                                    }
+                                }           
+                            }       
+                        },
+                        "right": {
+                            "type": "abstraction",
+                            "locked": true,
+                            "color": "w",
+                            "inside": {
+                                "type": "variable",
+                                "locked": true,
+                                "color": "w"
+                            }
+                        }           
+                }
 			},
 			"goal": {
 				"_comment": "lr.r",

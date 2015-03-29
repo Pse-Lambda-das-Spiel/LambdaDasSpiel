@@ -113,7 +113,39 @@
 				}
 			},
 			"hint": {
-				"child": null,
+				"child": {
+                    "type": "application",
+                    "locked": true,
+                    "left": {
+                        "type": "abstraction",
+                        "locked": true,
+                        "color": "x",
+                        "inside": {
+                            "type": "application",
+                            "locked": true,
+                            "left": {
+                                "type": "variable",
+                                "locked": true,
+                                "color": "w"
+                            },
+                            "right": {
+                                "type": "abstraction",
+                                "locked": true,
+                                "color": "z",
+                                "inside": {
+                                    "type": "variable",
+                                    "locked": true,
+                                    "color": "z"
+                                }
+                            }           
+                        }       
+                    },
+                    "right": {
+                            "type": "variable",
+                            "locked": true,
+                            "color": "w"
+                    }               
+                }
 			}
 		}
 	}

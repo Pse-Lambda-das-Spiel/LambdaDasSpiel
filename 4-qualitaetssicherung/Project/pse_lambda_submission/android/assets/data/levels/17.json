@@ -4,7 +4,7 @@
 		"difficulty": 3 ,
 		"coins": 10,
 		"maxReductionSteps" : 50,
-		"standardMode":false,
+		"standardMode": false,
 		"colorEquivalence": true,
 		"availableColors": [
 			{
@@ -49,52 +49,90 @@
 		],
 		"constellations": {
 			"start": {
-				"_comment": "(lt.lx.tx)(ly.y)",
+				"_comment": "(lv.lx.ly.vxy)(lt.t)(lu.u)",
 				"child": {
 					"type": "application",
 					"locked": true,
 					"left": {
-						"type": "abstraction",
+						"type": "application",
 						"locked": true,
-						"color": "t",
-						"inside": {
+						"left": {
 							"type": "abstraction",
 							"locked": true,
-							"color": "x",
+							"color": "v",
 							"inside": {
-								"type": "application",
+								"type": "abstraction",
 								"locked": true,
-								"left": {
-									"type": "variable",
+								"color": "x",
+								"inside": {
+									"type": "abstraction",
 									"locked": true,
-									"color": "t"
-								},
-								"right": {
-									"type": "variable",
-									"locked": true,
-									"color": "x"
-								}			
+									"color": "y",
+									"inside": {
+										"type": "application",
+										"locked": true,
+										"left": {
+											"type": "application",
+											"locked": true,
+											"left": {
+												"type": "variable",
+												"locked": true,
+												"color": "v",
+											},
+											"right": {
+												"type": "variable",
+												"locked": true,
+												"color": "x"
+											}		
+										},
+										"right": {
+											"type": "variable",
+											"locked": true,
+											"color": "y"
+										}		
+									}
+								}
 							}
-						}
+						},
+						"right": {
+							"type": "abstraction",
+							"locked": true,
+							"color": "t",
+							"inside": {
+								"type": "variable",
+								"locked": true,
+								"color": "t"
+							}
+						}			
 					},
 					"right": {
 						"type": "abstraction",
 						"locked": true,
-						"color": "y",
+						"color": "u",
 						"inside": {
 							"type": "variable",
 							"locked": true,
-							"color": "y"
+							"color": "u"
 						}
 					}			
 				}
 			},
 			"goal": {
-				"_comment": "x",
-				"child": null,
+				"_comment": "ly.y",
+				"child": null
 			},
 			"hint": {
-				"child": null,	
+				"_comment": "lw.w",
+				"child": {
+					"type": "abstraction",
+					"locked": false,
+					"color": "w",
+					"inside": {
+						"type": "variable",
+						"locked": false,
+						"color": "w"
+					}
+				}
 			}
 		}
 	}

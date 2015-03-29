@@ -112,29 +112,28 @@
 							"type": "application",
 							"locked": true,
 							"left": {
-								"type": "abstraction",
-								"locked": true,
-								"color": "x",
-								"inside": {
-									"type": "variable",
-									"locked": true,
-									"color": "x"
-								}
+							     "type": "application",
+                                "locked": true,
+                                "left": {
+                                    "type": "abstraction",
+                                    "locked": true,
+                                    "color": "x",
+                                    "inside": {
+                                        "type": "variable",
+                                        "locked": true,
+                                        "color": "x"
+                                    }
+                                },
+                                "right": {
+                                    "type": "variable",
+                                    "locked": true,
+                                    "color": "y"
+                                }       
 							},
 							"right": {
-								"type": "application",
-								"locked": true,
-								"left": {
-									"type": "variable",
-									"locked": true,
-									"color": "y"
-								
-								},
-								"right": {
-									"type": "variable",
-									"locked": false,
-									"color": "w"
-								}		
+    							"type": "variable",
+    							"locked": true,
+    							"color": "w"	
 							}			
 						}
 					},

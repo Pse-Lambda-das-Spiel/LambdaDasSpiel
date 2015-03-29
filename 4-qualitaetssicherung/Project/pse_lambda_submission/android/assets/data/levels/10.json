@@ -132,7 +132,62 @@
 			},
 			"hint": {
 				"_comment": "(lt.t)w",
-				"child": null,
+				"child": {
+				    "type": "application",
+                    "locked": true,
+                    "left": {
+                        "type": "abstraction",
+                        "locked": true,
+                        "color": "x",
+                        "inside": {
+                            "type": "application",
+                            "locked": true,
+                            "left": {
+                                "type": "abstraction",
+                                "locked": true,
+                                "color": "z",
+                                "inside": {
+                                    "type": "application",
+                                    "locked": true,
+                                    "left": {
+                                        "type": "application",
+                                        "locked": true,
+                                        "left": {
+                                            "type": "variable",
+                                            "locked": true,
+                                            "color": "x"
+                                        },
+                                        "right": {
+                                            "type": "variable",
+                                            "locked": true,
+                                            "color": "z"
+                                        }   
+                                    },
+                                    "right": {
+                                        "type": "abstraction",
+                                        "locked": true,
+                                        "color": "u",
+                                        "inside": {
+                                            "type": "variable",
+                                            "locked": true,
+                                            "color": "u"
+                                        }
+                                    }           
+                                }
+                            },
+                            "right": {
+                                "type": "variable",
+                                "locked": true,
+                                "color": "w"
+                            }   
+                        }
+                    },
+                    "right": {
+                        "type": "variable",
+                        "locked": true,
+                        "color": "w"
+                    }   
+				}
 			}
 		}
 	}

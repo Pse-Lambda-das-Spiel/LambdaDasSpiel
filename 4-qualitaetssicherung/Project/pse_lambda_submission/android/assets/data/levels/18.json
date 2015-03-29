@@ -126,7 +126,11 @@
 				"child":null
 			},
 			"hint": {
-				"child": null
+				"child": {
+                    "type": "variable",
+                    "locked": true,
+                    "color": "w"
+                }
 			}
 		}
 	}
