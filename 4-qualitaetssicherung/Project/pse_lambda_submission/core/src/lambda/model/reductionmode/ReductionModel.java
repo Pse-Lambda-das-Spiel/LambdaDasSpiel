@@ -17,6 +17,7 @@ import lambda.model.lambdaterm.visitor.strategy.BetaReductionVisitor;
 import lambda.model.lambdaterm.visitor.strategy.NodeCounter;
 import lambda.model.levels.LevelContext;
 import lambda.model.levels.LevelManager;
+import lambda.model.profiles.ProfileManager;
 
 /**
  * Contains data and logics of the reduction mode. Will be observed by the
@@ -243,6 +244,9 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                                     }
                                 }
                             });
+                    // save progress in the level
+                    ProfileManager pManager = ProfileManager.getManager();
+                    pManager.save(pManager.getCurrentProfile().getName());
                 }
 
                 // Steps finished

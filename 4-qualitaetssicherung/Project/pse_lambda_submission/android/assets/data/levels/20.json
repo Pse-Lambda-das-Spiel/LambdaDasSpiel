@@ -56,11 +56,6 @@
 				"image": "tutorials/choose_applicativeorder",
 				"inEditorMode": true,
 			},
-			{
-				"tutorialId": "2",
-				"image": "tutorials/reminder_goal",
-				"inEditorMode": true,
-			},
 		],
 		"constellations": {
 			"start": {

@@ -48,12 +48,7 @@
 		"tutorial": [
 			{
 				"tutorialId": "0",
-				"image": "tutorials/alphakonversion2",
-				"inEditorMode": true,
-			},
-			{
-				"tutorialId": "1",
-				"image": "tutorials/reminder_goal",
+				"image": "tutorials/alphaconversion2",
 				"inEditorMode": true,
 			},
 		],

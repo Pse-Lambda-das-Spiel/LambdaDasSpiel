@@ -113,9 +113,9 @@ public class LambdaGame extends Game {
         addViewController(new ShopViewController());
         addViewController(new LevelSelectionViewController());
         addViewController(new EditorViewController());
-        addViewController(new StatisticViewController());
         addViewController(new ReductionViewController());
-
+        addViewController(new StatisticViewController());
+       
         AudioManager.queueAssets(getController(AssetViewController.class)
                 .getManager());
 

@@ -670,22 +670,19 @@ public class ReductionViewController extends StageViewController implements
             right.add(restartLabel).width(labelWidth);
             add(right);
             // if the level is not the sandbox
-            if (levelComplete && (playedLevel.getId() != 0)) {
-                if (playedLevel.getId() == currentProfile.getLevelIndex()) {
-                    row();
-                    coinsLabel.setFontScale(2
-                            * labelWidth
-                            / coinsLabel.getStyle().font.getBounds(coinsLabel
-                                    .getText()).width);
-                    add(coinsLabel).colspan(2).width(2 * labelWidth);
-                    // update levelindex and coins only if a new level was
-                    // solved
-                    currentProfile
-                            .setLevelIndex(currentProfile.getLevelIndex() + 1);
-                    currentProfile.setCoins(currentProfile.getCoins() + coins);
-                }
+            if (levelComplete && (playedLevel.getId() != 0) && (playedLevel.getId() == currentProfile.getLevelIndex())) {
+                row();
+                coinsLabel.setFontScale(2
+                        * labelWidth
+                        / coinsLabel.getStyle().font.getBounds(coinsLabel
+                                .getText()).width);
+                add(coinsLabel).colspan(2).width(2 * labelWidth);
+                // update levelindex and coins only if a new level was
+                // solved
+                currentProfile
+                        .setLevelIndex(currentProfile.getLevelIndex() + 1);
+                currentProfile.setCoins(currentProfile.getCoins() + coins);
             }
-
         }
     }
 

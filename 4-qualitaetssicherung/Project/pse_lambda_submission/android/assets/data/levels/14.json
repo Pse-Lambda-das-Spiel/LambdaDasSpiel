@@ -51,11 +51,6 @@
 				"image": "tutorials/non_standardmode",
 				"inEditorMode": true,
 			},
-			{
-				"tutorialId": "1",
-				"image": "tutorials/reminder_goal",
-				"inEditorMode": true,
-			},
 		],
 		"constellations": {
 			"start": {

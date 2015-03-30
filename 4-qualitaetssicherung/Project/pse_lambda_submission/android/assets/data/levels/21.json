@@ -61,11 +61,6 @@
 			"image": "tutorials/choose_callbyname",
 			"inEditorMode": true,
 			},
-			{
-			"tutorialId": "3",
-			"image": "tutorials/reminder_goal",
-			"inEditorMode": true,
-			},
 		],
 		"constellations": {
 			"start": {

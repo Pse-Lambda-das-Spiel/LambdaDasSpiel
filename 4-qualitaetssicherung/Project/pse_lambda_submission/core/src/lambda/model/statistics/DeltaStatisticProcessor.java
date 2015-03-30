@@ -38,10 +38,10 @@ public class DeltaStatisticProcessor implements EditorModelObserver,
      * Creates a new DeltaStatisticProcessor.
      */
     public DeltaStatisticProcessor() {
-        inEditorMode = true;
     }
 
     private void reset() {
+        inEditorMode = true;
         hintUsed = false;
         gemsEnchanted = 0;
         lambsEnchanted = 0;
