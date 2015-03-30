@@ -24,7 +24,16 @@
 			},
 			{
 			"color": "v"
-			}
+			},
+			{
+            "color": "r"
+            },
+            {
+            "color": "s"
+            },
+            {
+            "color": "q"
+            },
 		],
 		"lockedColors": [
 		],

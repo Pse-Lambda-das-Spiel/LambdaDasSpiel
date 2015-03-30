@@ -694,7 +694,7 @@ public final class EditorViewController extends StageViewController implements
     }
 
     @Override
-    public void levelStarted() {
+    public void levelStarted(int levelId) {
     }
 
     @Override

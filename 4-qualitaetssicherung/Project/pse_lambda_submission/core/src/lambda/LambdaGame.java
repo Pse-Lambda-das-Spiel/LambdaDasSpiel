@@ -140,6 +140,17 @@ public class LambdaGame extends Game {
             viewController.pause();
         }
     }
+    
+    /**
+     * Called when the Application is resumed from a paused state.
+     */
+    @Override
+    public void resume() {
+        super.resume();
+        for (ViewController viewController : viewControllers.values()) {
+            viewController.resume();
+        }
+    }
 
     /**
      * Called when the Application is exited. Releases all resources used by

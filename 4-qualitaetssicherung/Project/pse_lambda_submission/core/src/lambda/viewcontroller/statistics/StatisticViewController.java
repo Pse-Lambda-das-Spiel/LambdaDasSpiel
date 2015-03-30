@@ -73,7 +73,17 @@ public class StatisticViewController extends StageViewController implements
         space = getStage().getWidth() / 64;
         textLabelWidth = getStage().getWidth() / 2;
     }
-
+    
+    @Override
+    public void pause() {
+       deltaProcessor.gamePaused();
+    }
+    
+    @Override
+    public void resume() {
+        deltaProcessor.gameResumed();
+    }
+    
     @Override
     public void queueAssets(AssetManager assets) {
     }

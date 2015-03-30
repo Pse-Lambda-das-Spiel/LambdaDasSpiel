@@ -141,7 +141,7 @@ public class EditorModel extends Observable<EditorModelObserver> {
         notify(new Consumer<EditorModelObserver>() {
             @Override
             public void accept(EditorModelObserver observer) {
-                observer.levelStarted();
+                observer.levelStarted(context.getLevelModel().getId());
             }
         });
     }

@@ -32,7 +32,9 @@ public class DeltaStatisticProcessor implements EditorModelObserver,
     private int lambsPlaced;
     private long startTime;
     private long endTime;
+    private long diffTime;
     private boolean inEditorMode;
+    private boolean inSandbox;
 
     /**
      * Creates a new DeltaStatisticProcessor.
@@ -41,6 +43,7 @@ public class DeltaStatisticProcessor implements EditorModelObserver,
     }
 
     private void reset() {
+        inSandbox = false;
         inEditorMode = true;
         hintUsed = false;
         gemsEnchanted = 0;
@@ -49,6 +52,24 @@ public class DeltaStatisticProcessor implements EditorModelObserver,
         lambsPlaced = 0;
         startTime = 0l;
         endTime = 0l;
+        diffTime = 0l;
+    }
+    
+    /**
+     * Called by the {@link StatisticViewController} when the game is paused.
+     */
+    public void gamePaused() {
+        // save the time played until now in the current level
+        long tmpTime = System.currentTimeMillis();
+        diffTime += tmpTime - startTime;
+    }
+    
+    /**
+     * Called by the {@link StatisticViewController} when the game is resumed.
+     */
+    public void gameResumed() {
+        // Set the new start time after the game is resumed
+        startTime = System.currentTimeMillis();
     }
 
     @Override
@@ -87,8 +108,11 @@ public class DeltaStatisticProcessor implements EditorModelObserver,
     }
 
     @Override
-    public void levelStarted() {
+    public void levelStarted(int levelId) {
         reset();
+        if (levelId == 0) {
+            inSandbox = true;
+        }
         startTime = System.currentTimeMillis();
     }
 
@@ -125,17 +149,19 @@ public class DeltaStatisticProcessor implements EditorModelObserver,
         endTime = System.currentTimeMillis();
         StatisticModel statistic = ProfileManager.getManager()
                 .getCurrentProfile().getStatistics();
-        long diffTime = endTime - startTime;
+        diffTime += endTime - startTime;
         // the time has to be stored in seconds in the StatisticModel
         diffTime /= 1000;
         // update the statistic data
         statistic.setTimePlayed(statistic.getTimePlayed() + diffTime);
-        statistic.setLevelTries(statistic.getLevelTries() + 1);
-        if (levelComplete) {
-            statistic.setSuccessfulLevelTries(statistic
-                    .getSuccessfulLevelTries() + 1);
-            if (!hintUsed) {
-                statistic.setHintsNotUsed(statistic.getHintsNotUsed() + 1);
+        if (!inSandbox) {
+            statistic.setLevelTries(statistic.getLevelTries() + 1);
+            if (levelComplete) {
+                statistic.setSuccessfulLevelTries(statistic
+                        .getSuccessfulLevelTries() + 1);
+                if (!hintUsed) {
+                    statistic.setHintsNotUsed(statistic.getHintsNotUsed() + 1);
+                }
             }
         }
         // only update these values if they are bigger, so that the statistic

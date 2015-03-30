@@ -28,8 +28,11 @@ public interface EditorModelObserver {
 
     /**
      * Called when the level is started.
+     * 
+     * @param levelId
+     *            the id of the started level
      */
-    public void levelStarted();
+    public void levelStarted(int levelId);
 
     /**
      * Called when the hint of the level is used.

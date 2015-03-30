@@ -31,7 +31,7 @@ public final class LambdaTermViewController extends Group implements
     /**
      * The size of a display block relative to the size of the stage.
      */
-    public static final float BLOCK_SIZE_PROPORTION = 0.17f;
+    public static final float BLOCK_SIZE_PROPORTION = 0.14f;
     /**
      * The size of a drag&drop gap relative to a display block.
      */
