@@ -80,7 +80,7 @@ public class LevelLoadTest {
 		hintApplication.setLeft(hintAbstraction);
 		hintApplication.setRight(new LambdaVariable(hintApplication, Color.valueOf("ffffffff"), false));
 		hint.setChild(hintApplication);
-		testLevel = new LevelModel(2, start, goal, hint, tutorial, availableRedStrats, useableElements, 1, 10, 50,
+		testLevel = new LevelModel(2, start, goal, hint, tutorial, availableRedStrats, useableElements, 1, 5, 50,
 				true, true, availableColors, lockedColors, ReductionStrategy.NORMAL_ORDER);
 
 	}

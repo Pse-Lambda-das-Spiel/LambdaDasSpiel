@@ -33,6 +33,7 @@ import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.LambdaTermObserver;
+import lambda.model.lambdaterm.LambdaUtils;
 import lambda.model.lambdaterm.LambdaValue;
 import lambda.model.lambdaterm.LambdaVariable;
 import lambda.model.lambdaterm.visitor.ColorCollectionVisitor;
@@ -302,6 +303,7 @@ public final class EditorViewController extends StageViewController implements
                         .contains(Color.WHITE)) {
                     showDialog(language.get("invalidTermWhite"));
                 } else {
+                    LambdaUtils.setLambdaNodeViewControllerLocked(term.getRoot());
                     getGame().getController(ReductionViewController.class)
                             .reset(model);
                     getGame().setScreen(ReductionViewController.class);

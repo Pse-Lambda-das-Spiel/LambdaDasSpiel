@@ -2,13 +2,11 @@ package lambda.model.reductionmode;
 
 import com.badlogic.gdx.graphics.Color;
 
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Stack;
 
 import lambda.Consumer;
 import lambda.Observable;
-import lambda.model.editormode.EditorModelObserver;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.visitor.CopyVisitor;
@@ -240,6 +238,9 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                                             }
                                         }
                             });
+                    // save progress in the level
+                    ProfileManager pManager = ProfileManager.getManager();
+                    pManager.save(pManager.getCurrentProfile().getName());
                 } else if (nodeCount > LambdaTerm.MAX_NODES_PER_TERM) {
                     ReductionModel.this
                             .notify(new Consumer<ReductionModelObserver>() {
@@ -249,6 +250,9 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                                     observer.maxNodesReached();
                                 }
                             });
+                    // save progress in the level
+                    ProfileManager pManager = ProfileManager.getManager();
+                    pManager.save(pManager.getCurrentProfile().getName());
                 } else if (history.size() > context.getLevelModel().getMaxReductionSteps()) {
                     ReductionModel.this
                             .notify(new Consumer<ReductionModelObserver>() {
@@ -258,14 +262,11 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                                     observer.maxStepsReached();
                                 }
                             });
-                }
-                
-                if (!paused && !pauseRequested) {
                     // save progress in the level
                     ProfileManager pManager = ProfileManager.getManager();
                     pManager.save(pManager.getCurrentProfile().getName());
                 }
-
+                
                 // Steps finished
                 pauseRequested = false;
                 paused = true;

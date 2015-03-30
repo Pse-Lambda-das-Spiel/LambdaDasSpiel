@@ -113,6 +113,15 @@ public abstract class LambdaNodeViewController extends Actor {
     }
 
     /**
+     * Returns the viewcontroller child nodes.
+     * 
+     * @return the viewcontroller child nodes.
+     */
+    public List<LambdaNodeViewController> getChildren() {
+        return children;
+    }
+
+    /**
      * Returns the term that is displayed by this viewcontroller.
      *
      * @return the term that is displayed by this viewcontroller

@@ -200,6 +200,16 @@ public class DeltaStatisticProcessor implements EditorModelObserver,
     }
 
     @Override
+    public void maxNodesReached() {
+        reductionFinished(false);
+    }
+
+    @Override
+    public void maxStepsReached() {
+        reductionFinished(false);
+    }
+    
+    @Override
     public void setColor(LambdaValue term, Color color) {
     }
 
@@ -227,14 +237,6 @@ public class DeltaStatisticProcessor implements EditorModelObserver,
 
     @Override
     public void strategyChanged(ReductionStrategy strategy) {
-    }
-
-    @Override
-    public void maxNodesReached() {
-    }
-
-    @Override
-    public void maxStepsReached() {
     }
 
 }

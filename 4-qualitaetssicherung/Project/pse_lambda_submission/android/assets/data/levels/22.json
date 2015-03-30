@@ -2,7 +2,7 @@
 	"level": {
 		"levelId": 22 ,
 		"difficulty": 4 ,
-		"coins": 10,
+		"coins": 20,
 		"maxReductionSteps" : 50,
 		"standardMode": false,
 		"colorEquivalence": true,

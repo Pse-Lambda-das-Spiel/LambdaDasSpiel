@@ -8,6 +8,7 @@ import lambda.model.lambdaterm.visitor.IsValidVisitor;
 import java.text.ParseException;
 
 import lambda.model.levels.LevelManager;
+import lambda.viewcontroller.lambdaterm.LambdaNodeViewController;
 
 /**
  * A utility class with helper methods for lambda terms.
@@ -153,7 +154,25 @@ public final class LambdaUtils {
         }
         return term.getParent() == null ? term : getRoot(term.getParent());
     }
-
+    
+    /**
+     * Sets the linked {@link LambdaTerm} of the given {@link LambdaNodeViewController} as locked
+     *
+     * @param nodeViewController
+     *           the given NodeViewController with the to be locked LambdaTerm
+     * @throws IllegalArgumentException
+     *             if nodeViewController is null
+     */
+    public static void setLambdaNodeViewControllerLocked(LambdaNodeViewController nodeViewController) {
+        if (nodeViewController == null) {
+            throw new IllegalArgumentException("the node viewcontroller cannot be null!");
+        }
+       nodeViewController.getLinkedTerm().setLocked(true);
+       for (LambdaNodeViewController nodeVC : nodeViewController.getChildren()) {
+           setLambdaNodeViewControllerLocked(nodeVC);
+       }
+    }
+    
     /**
      * Prevents the instantiation of this class.
      */
