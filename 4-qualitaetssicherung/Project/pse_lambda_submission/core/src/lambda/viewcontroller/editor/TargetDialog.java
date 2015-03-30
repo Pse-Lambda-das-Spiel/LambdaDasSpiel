@@ -61,7 +61,7 @@ public class TargetDialog extends Dialog {
         goal.toBack();
         goal.setPosition((stage.getWidth() - goal.getWidth()) / 2,
                 stage.getHeight() - goalCell.getPrefHeight() - 2 * pad
-                        - LambdaValueViewController.BLOCK_HEIGHT);
+                        - goal.getBlockSize());
         addActor(goal);
         addListener(new ClickListener() {
             @Override

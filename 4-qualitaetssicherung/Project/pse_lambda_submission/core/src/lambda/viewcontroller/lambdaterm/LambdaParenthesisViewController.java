@@ -74,7 +74,7 @@ public class LambdaParenthesisViewController extends LambdaNodeViewController {
      */
     @Override
     public float getMinWidth() {
-        return 2 * BLOCK_WIDTH;
+        return 2 * getViewController().getBlockSize();
     }
 
     /**
@@ -89,18 +89,18 @@ public class LambdaParenthesisViewController extends LambdaNodeViewController {
     public void draw(Batch batch, float alpha) {
         // Color is white
         // Back
-        batch.draw(back, getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
-        batch.draw(backMask, getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+        batch.draw(back, getX(), getY(), getViewController().getBlockSize(), getViewController().getBlockSize());
+        batch.draw(backMask, getX(), getY(), getViewController().getBlockSize(), getViewController().getBlockSize());
         // Center
         float x;
-        for (x = getX() + BLOCK_WIDTH; x < getX() + getWidth() - BLOCK_WIDTH
-                - EPSILON; x += BLOCK_WIDTH) {
-            batch.draw(center, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
-            batch.draw(centerMask, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+        for (x = getX() + getViewController().getBlockSize(); x < getX() + getWidth() - getViewController().getBlockSize()
+                - EPSILON; x += getViewController().getBlockSize()) {
+            batch.draw(center, x, getY(), getViewController().getBlockSize(), getViewController().getBlockSize());
+            batch.draw(centerMask, x, getY(), getViewController().getBlockSize(), getViewController().getBlockSize());
         }
         // Front
-        batch.draw(front, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
-        batch.draw(frontMask, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+        batch.draw(front, x, getY(), getViewController().getBlockSize(), getViewController().getBlockSize());
+        batch.draw(frontMask, x, getY(), getViewController().getBlockSize(), getViewController().getBlockSize());
 
         drawVanishAnimation(batch, alpha);
     }

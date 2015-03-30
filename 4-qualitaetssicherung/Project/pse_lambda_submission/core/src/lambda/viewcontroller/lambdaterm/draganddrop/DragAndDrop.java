@@ -59,12 +59,15 @@ public class DragAndDrop extends InputAdapter {
      * The source from which the current drag&drop operation started.
      */
     private LambdaTermDragSource currentSource = null;
+    /**
+     * Indicates whether drag&drop is currently enabled.
+     */
+    private boolean enabled;
 
     /**
      * Creates a new drag&drop handler.
      *
-     * @param vc
-     *            the lambda term vc
+     * @param vc the lambda term vc
      */
     public DragAndDrop(LambdaTermViewController vc) {
         this.dropTargets = new LinkedList<>();
@@ -72,99 +75,111 @@ public class DragAndDrop extends InputAdapter {
         this.dragged = null;
         this.vc = vc;
         this.currentTarget = null;
+        this.enabled = true;
+    }
+
+    /**
+     * Sets whether drag&drop should be enabled.
+     *
+     * @param enabled true if drag&drop should be enabled, false otherwise
+     */
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     /**
      * Called when a drag is started.
      *
-     * @param source
-     *            the drag source
+     * @param source the drag source
      */
     public void dragStart(LambdaTermDragSource source) {
-        LambdaTerm term;
-        if (source.shouldSplit()) {
-            source.getNode().getLinkedTerm()
-                    .accept(new ReplaceTermVisitor(null));
-            vc.getRoot().getLinkedTerm()
-                    .accept(new ImplicitApplicationRemover());
-            term = source.getNode().getLinkedTerm();
-        } else {
-            term = source.getNode().getLinkedTerm().accept(new CopyVisitor());
-        }
-        term.setLocked(false);
+        if (enabled) {
+            LambdaTerm term;
+            if (source.shouldSplit()) {
+                source.getNode().getLinkedTerm()
+                        .accept(new ReplaceTermVisitor(null));
+                vc.getRoot().getLinkedTerm()
+                        .accept(new ImplicitApplicationRemover());
+                term = source.getNode().getLinkedTerm();
+            } else {
+                term = source.getNode().getLinkedTerm().accept(new CopyVisitor());
+            }
+            term.setLocked(false);
 
-        // Drag actor is a new lambda term vc for the selected node
-        LambdaRoot selection = new LambdaRoot();
-        selection.setChild((LambdaTerm) term);
-        dragged = LambdaTermViewController.build(selection, false,
-                vc.getContext(), vc.getStage());
-        dragged.addOffset(-dragged.getWidth() / 2.0f,
-                -dragged.getHeight() / 2.0f);
-        vc.getStage().addActor(dragged);
+            // Drag actor is a new lambda term vc for the selected node
+            LambdaRoot selection = new LambdaRoot();
+            selection.setChild((LambdaTerm) term);
+            dragged = LambdaTermViewController.build(selection, false,
+                    vc.getContext(), vc.getStage());
+            dragged.addOffset(-dragged.getWidth() / 2.0f,
+                    -dragged.getHeight() / 2.0f);
+            vc.getStage().addActor(dragged);
 
-        for (LambdaTermDropTarget actor : dropTargets) {
-            actor.setVisible(true);
-        }
+            for (LambdaTermDropTarget actor : dropTargets) {
+                actor.setVisible(true);
+            }
 
-        if (DEBUG) {
-            System.out.println("Dragging " + term.toString() + " from "
-                    + vc.getRoot().getLinkedTerm().toString());
+            if (DEBUG) {
+                System.out.println("Dragging " + term.toString() + " from "
+                        + vc.getRoot().getLinkedTerm().toString());
+            }
         }
     }
 
     /**
      * Called when a drag is performed.
      *
-     * @param target
-     *            the currently hovered drag target or null if no target is
-     *            being hovered
+     * @param target the currently hovered drag target or null if no target is
+     * being hovered
      */
     public void drag(LambdaTermDropTarget target) {
-        Vector2 pos = vc.getStage().screenToStageCoordinates(
-                new Vector2(Gdx.input.getX(), Gdx.input.getY()));
-        dragged.setPosition(pos.x, pos.y);
+        if (enabled) {
+            Vector2 pos = vc.getStage().screenToStageCoordinates(
+                    new Vector2(Gdx.input.getX(), Gdx.input.getY()));
+            dragged.setPosition(pos.x, pos.y);
 
-        if (currentTarget != null) {
-            currentTarget.setHovered(false);
+            if (currentTarget != null) {
+                currentTarget.setHovered(false);
+            }
+            if (target != null) {
+                target.setHovered(true);
+            }
+            currentTarget = target;
         }
-        if (target != null) {
-            target.setHovered(true);
-        }
-        currentTarget = target;
     }
 
     /**
      * Called when a drag is stopped.
      */
     public void dragStop() {
-        dragged.remove();
-        for (LambdaTermDropTarget actor : dropTargets) {
-            actor.setVisible(false);
-        }
+        if (enabled) {
+            dragged.remove();
+            for (LambdaTermDropTarget actor : dropTargets) {
+                actor.setVisible(false);
+            }
 
-        if (currentTarget != null) {
-            currentTarget.insert(dragged.getRoot().getChild(0).getLinkedTerm());
-            currentTarget.setHovered(false);
-            vc.getRoot().getLinkedTerm()
-                    .accept(new ImplicitApplicationRemover());
-        }
+            if (currentTarget != null) {
+                currentTarget.insert(dragged.getRoot().getChild(0).getLinkedTerm());
+                currentTarget.setHovered(false);
+                vc.getRoot().getLinkedTerm()
+                        .accept(new ImplicitApplicationRemover());
+            }
 
-        if (DEBUG) {
-            System.out.println("Dropped "
-                    + dragged.getRoot().getLinkedTerm().toString()
-                    + " resulting in "
-                    + vc.getRoot().getLinkedTerm().toString());
+            if (DEBUG) {
+                System.out.println("Dropped "
+                        + dragged.getRoot().getLinkedTerm().toString()
+                        + " resulting in "
+                        + vc.getRoot().getLinkedTerm().toString());
+            }
         }
     }
 
     /**
      * Adds a new drag&drop target.
      *
-     * @param insertOperation
-     *            the operation for inserting an element into the term when it
-     *            is dropped here
-     * @param target
-     *            the drop location
+     * @param insertOperation the operation for inserting an element into the
+     * term when it is dropped here
+     * @param target the drop location
      */
     public void addDropTarget(Consumer<LambdaTerm> insertOperation,
             Rectangle target) {
@@ -177,8 +192,7 @@ public class DragAndDrop extends InputAdapter {
     /**
      * Adds a new drag&drop source.
      *
-     * @param source
-     *            the new drag&drop source
+     * @param source the new drag&drop source
      */
     public void addDragSource(final LambdaTermDragSource source) {
         dragSources.add(source);

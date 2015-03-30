@@ -13,31 +13,55 @@ import lambda.model.lambdaterm.LambdaAbstraction;
  */
 public class LambdaAbstractionViewController extends LambdaValueViewController {
     /**
-     * The texture of the first block of the lamb.
+     * The texture of the first block of the abstraction lamb.
      */
-    private final TextureRegion front;
+    private final TextureRegion abstractionFront;
     /**
-     * The center texture of the lamb. Will be used multiple times.
+     * The center texture of the abstraction lamb. Will be used multiple times.
      */
-    private final TextureRegion center;
+    private final TextureRegion abstractionCenter;
     /**
-     * The back texture of the lamb.
+     * The back texture of the abstraction lamb.
      */
-    private final TextureRegion back;
+    private final TextureRegion abstractionBack;
     /**
-     * The texture mask of the first block of the lamb. Color in this part will
+     * The texture mask of the first block of the abstraction lamb. Color in this part will
      * be adjusted.
      */
-    private final TextureRegion frontMask;
+    private final TextureRegion abstractionFrontMask;
     /**
-     * The center texture mask of the lamb. Will be used multiple times. Color
+     * The center texture mask of the abstraction lamb. Will be used multiple times. Color
      * in this part will be adjusted.
      */
-    private final TextureRegion centerMask;
+    private final TextureRegion abstractionCenterMask;
     /**
-     * The back texture mask of the lamb. Color in this part will be adjusted.
+     * The back texture mask of the abstraction lamb. Color in this part will be adjusted.
      */
-    private final TextureRegion backMask;
+    private final TextureRegion abstractionBackMask;
+    /**
+     * The texture of the first block of the parenthesis lamb.
+     */
+    private final TextureRegion parenthesisFront;
+    /**
+     * The center texture of the parenthesis lamb. Will be used multiple times.
+     */
+    private final TextureRegion parenthesisCenter;
+    /**
+     * The back texture of the parenthesis lamb.
+     */
+    private final TextureRegion parenthesisBack;
+    /**
+     * The texture mask of the first block of the lamb.
+     */
+    private final TextureRegion parenthesisFrontMask;
+    /**
+     * The center texture mask of the parenthesis lamb. Will be used multiple times.
+     */
+    private final TextureRegion parenthesisCenterMask;
+    /**
+     * The back texture mask of the parenthesis lamb.
+     * */
+    private final TextureRegion parenthesisBackMask;
     /**
      * The animation that is shown before an application is performed.
      */
@@ -56,29 +80,39 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
     /**
      * Creates a new instance of LambdaAbstractionViewController.
      *
-     * @param linkedTerm
-     *            the abstraction displayed by this node
-     * @param parent
-     *            the parent viewcontroller node
-     * @param viewController
-     *            the viewcontroller on which this node will be displayed
+     * @param linkedTerm the abstraction displayed by this node
+     * @param parent the parent viewcontroller node
+     * @param viewController the viewcontroller on which this node will be
+     * displayed
      */
     public LambdaAbstractionViewController(LambdaAbstraction linkedTerm,
             LambdaNodeViewController parent,
             LambdaTermViewController viewController) {
         super(linkedTerm, parent, viewController, true);
-        front = viewController.getContext().getElementUIContextFamily()
+        abstractionFront = viewController.getContext().getElementUIContextFamily()
                 .getAbstraction().getFront();
-        center = viewController.getContext().getElementUIContextFamily()
+        abstractionCenter = viewController.getContext().getElementUIContextFamily()
                 .getAbstraction().getCenter();
-        back = viewController.getContext().getElementUIContextFamily()
+        abstractionBack = viewController.getContext().getElementUIContextFamily()
                 .getAbstraction().getBack();
-        frontMask = viewController.getContext().getElementUIContextFamily()
+        abstractionFrontMask = viewController.getContext().getElementUIContextFamily()
                 .getAbstraction().getmFront();
-        centerMask = viewController.getContext().getElementUIContextFamily()
+        abstractionCenterMask = viewController.getContext().getElementUIContextFamily()
                 .getAbstraction().getmCenter();
-        backMask = viewController.getContext().getElementUIContextFamily()
+        abstractionBackMask = viewController.getContext().getElementUIContextFamily()
                 .getAbstraction().getmBack();
+        parenthesisFront = viewController.getContext().getElementUIContextFamily()
+                .getParenthesis().getFront();
+        parenthesisCenter = viewController.getContext().getElementUIContextFamily()
+                .getParenthesis().getCenter();
+        parenthesisBack = viewController.getContext().getElementUIContextFamily()
+                .getParenthesis().getBack();
+        parenthesisFrontMask = viewController.getContext().getElementUIContextFamily()
+                .getParenthesis().getmFront();
+        parenthesisCenterMask = viewController.getContext().getElementUIContextFamily()
+                .getParenthesis().getmCenter();
+        parenthesisBackMask = viewController.getContext().getElementUIContextFamily()
+                .getParenthesis().getmBack();
         animation = viewController.getContext().getMagicAnimation();
         animate = false;
         magicStateTime = 0.0f;
@@ -91,42 +125,61 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
      */
     @Override
     public float getMinWidth() {
-        return 2 * BLOCK_WIDTH;
+        return 2 * getViewController().getBlockSize();
     }
 
     /**
      * Draws this node.
      *
-     * @param batch
-     *            the batch on which the node will be drawn
-     * @param alpha
-     *            the parent's alpha
+     * @param batch the batch on which the node will be drawn
+     * @param alpha the parent's alpha
      */
     @Override
     public void draw(Batch batch, float alpha) {
         updateColorAnimation();
 
-        // Back
-        batch.draw(back, getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
-        batch.setColor(getCurrentColor().r, getCurrentColor().g,
-                getCurrentColor().b, 1.0f);
-        batch.draw(backMask, getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
-        batch.setColor(1f, 1f, 1f, 1f);
-        // Center
-        float x;
-        for (x = getX() + BLOCK_WIDTH; x < getX() + getWidth() - BLOCK_WIDTH
-                - EPSILON; x += BLOCK_WIDTH) {
-            batch.draw(center, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+        float t = Math.max(0.0f, Math.min(1.0f, magicStateTime / (float) animation.getAnimationDuration()));
+
+        float x = 0.0f;
+        if (t < 1.0f) {
+            // Back
+            batch.draw(abstractionBack, getX(), getY(), getViewController().getBlockSize(), getViewController().getBlockSize());
             batch.setColor(getCurrentColor().r, getCurrentColor().g,
-                    getCurrentColor().b, 1.0f);
-            batch.draw(centerMask, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
-            batch.setColor(1f, 1f, 1f, 1f);
+                    getCurrentColor().b, 1.0f - t);
+            batch.draw(abstractionBackMask, getX(), getY(), getViewController().getBlockSize(), getViewController().getBlockSize());
+            batch.setColor(1f, 1f, 1f, 1.0f - t);
+            // Center
+
+            for (x = getX() + getViewController().getBlockSize(); x < getX() + getWidth() - getViewController().getBlockSize()
+                    - EPSILON; x += getViewController().getBlockSize()) {
+                batch.draw(abstractionCenter, x, getY(), getViewController().getBlockSize(), getViewController().getBlockSize());
+                batch.setColor(getCurrentColor().r, getCurrentColor().g,
+                        getCurrentColor().b, 1.0f - t);
+                batch.draw(abstractionCenterMask, x, getY(), getViewController().getBlockSize(), getViewController().getBlockSize());
+                batch.setColor(1f, 1f, 1f, 1.0f - t);
+            }
+            // Front
+            batch.draw(abstractionFront, x, getY(), getViewController().getBlockSize(), getViewController().getBlockSize());
+            batch.setColor(getCurrentColor().r, getCurrentColor().g,
+                    getCurrentColor().b, 1.0f - t);
+            batch.draw(abstractionFrontMask, x, getY(), getViewController().getBlockSize(), getViewController().getBlockSize());
+            batch.setColor(1f, 1f, 1f, 1.0f - t);
         }
-        // Front
-        batch.draw(front, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
-        batch.setColor(getCurrentColor().r, getCurrentColor().g,
-                getCurrentColor().b, 1.0f);
-        batch.draw(frontMask, x, getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+        if (t > 0.0f) {
+            batch.setColor(1f, 1f, 1f, t);
+            // Back
+            batch.draw(parenthesisBack, getX(), getY(), getViewController().getBlockSize(), getViewController().getBlockSize());
+            batch.draw(parenthesisBackMask, getX(), getY(), getViewController().getBlockSize(), getViewController().getBlockSize());
+            // Center
+            for (x = getX() + getViewController().getBlockSize(); x < getX() + getWidth() - getViewController().getBlockSize()
+                    - EPSILON; x += getViewController().getBlockSize()) {
+                batch.draw(parenthesisCenter, x, getY(), getViewController().getBlockSize(), getViewController().getBlockSize());
+                batch.draw(parenthesisCenterMask, x, getY(), getViewController().getBlockSize(), getViewController().getBlockSize());
+            }
+            // Front
+            batch.draw(parenthesisFront, x, getY(), getViewController().getBlockSize(), getViewController().getBlockSize());
+            batch.draw(parenthesisFrontMask, x, getY(), getViewController().getBlockSize(), getViewController().getBlockSize());
+        }
         batch.setColor(1f, 1f, 1f, 1f);
 
         drawVanishAnimation(batch, alpha);
@@ -135,7 +188,7 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
         synchronized (getViewController()) {
             if (animate) {
                 batch.draw(animation.getKeyFrame(magicStateTime), x, getY(),
-                        BLOCK_WIDTH, BLOCK_HEIGHT);
+                        getViewController().getBlockSize(), getViewController().getBlockSize());
                 magicStateTime += Gdx.graphics.getDeltaTime();
                 if (isMagicAnimationFinished()) {
                     animate = false;
@@ -164,8 +217,7 @@ public class LambdaAbstractionViewController extends LambdaValueViewController {
     /**
      * Returns whether this and the other object are equal.
      *
-     * @param other
-     *            the other object
+     * @param other the other object
      * @return true if this and the other object are equal, false otherwise
      */
     @Override

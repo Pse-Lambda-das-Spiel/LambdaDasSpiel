@@ -24,7 +24,6 @@ public class EditorModel extends Observable<EditorModelObserver> {
      * Stores the currently selected reduction strategy.
      */
     private ReductionStrategy strategy;
-
     /**
      * Stores the current lambda term
      */
@@ -42,10 +41,8 @@ public class EditorModel extends Observable<EditorModelObserver> {
     /**
      * Resets the model with the given values.
      *
-     * @param context
-     *            contains all data of the current level
-     * @throws IllegalArgumentException
-     *             if context is null
+     * @param context contains all data of the current level
+     * @throws IllegalArgumentException if context is null
      */
     public void reset(LevelContext context) {
         if (context == null) {
@@ -54,24 +51,16 @@ public class EditorModel extends Observable<EditorModelObserver> {
         this.context = context;
         strategy = context.getLevelModel().getDefaultStrategy();
         if (context.getLevelModel().isStandardMode()) {
-            term = (LambdaRoot) context.getLevelModel().getStart()
-                     .accept(new CopyVisitor());
-             notify(new Consumer<EditorModelObserver>() {
-                 @Override
-                 public void accept(EditorModelObserver observer) {
-                     observer.termChanged(term);
-                 }
-             });
+            term = (LambdaRoot) context.getLevelModel().getStart().accept(new CopyVisitor());
         } else {
-            term = (LambdaRoot) context.getLevelModel().getGoal()
-                    .accept(new CopyVisitor());
-            notify(new Consumer<EditorModelObserver>() {
-                @Override
-                public void accept(EditorModelObserver observer) {
-                    observer.termChanged(term);
-                }
-            });
+            term = new LambdaRoot();
         }
+        notify(new Consumer<EditorModelObserver>() {
+            @Override
+            public void accept(EditorModelObserver observer) {
+                observer.termChanged(term);
+            }
+        });
     }
 
     /**
@@ -86,10 +75,8 @@ public class EditorModel extends Observable<EditorModelObserver> {
     /**
      * Sets the currently selected reduction strategy.
      *
-     * @param strategy
-     *            the new selected reduction strategy
-     * @throws IllegalArgumentException
-     *             if strategy is null
+     * @param strategy the new selected reduction strategy
+     * @throws IllegalArgumentException if strategy is null
      */
     public void setStrategy(final ReductionStrategy strategy) {
         if (strategy == null) {
@@ -128,8 +115,7 @@ public class EditorModel extends Observable<EditorModelObserver> {
     /**
      * Resets the reduction model with the current state of this editor model.
      *
-     * @param model
-     *            the reduction model to be reset
+     * @param model the reduction model to be reset
      */
     public void update(ReductionModel model) {
         model.reset((LambdaRoot) term.accept(new CopyVisitor()),
@@ -159,10 +145,10 @@ public class EditorModel extends Observable<EditorModelObserver> {
             }
         });
     }
-    
+
     /**
      * Returns the reduction strategy
-     * 
+     *
      * @return the strategy
      */
     public ReductionStrategy getStrategy() {

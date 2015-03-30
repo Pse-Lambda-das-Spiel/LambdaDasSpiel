@@ -31,19 +31,6 @@ public abstract class LambdaNodeViewController extends Actor {
      */
     public static final float EPSILON = 1e-3f;
     /**
-     * The width of one displayed block. Variables consist of one block,
-     * parenthesis and abstractions of at least three.
-     */
-    public static final float BLOCK_WIDTH = 100.0f;
-    /**
-     * The height of one displayed block.
-     */
-    public static final float BLOCK_HEIGHT = 100.0f;
-    /**
-     * The size of the gap between two nodes.
-     */
-    public static final float GAP_SIZE = 50.0f;
-    /**
      * The term that is displayed by this viewcontroller.
      */
     private final LambdaTerm linkedTerm;
@@ -110,7 +97,7 @@ public abstract class LambdaNodeViewController extends Actor {
         animateVanishSmoke = false;
         vanishSmokeStateTime = 0.0f;
         children = new LinkedList<>();
-        setHeight(BLOCK_HEIGHT);
+        setHeight(viewController.getBlockSize());
         assert (viewController.getStage() != null);
         setStage(viewController.getStage());
     }
@@ -181,7 +168,7 @@ public abstract class LambdaNodeViewController extends Actor {
         for (LambdaNodeViewController child : children) {
             result = Math.max(child.getFamilyHeight(), result);
         }
-        return result + BLOCK_HEIGHT;
+        return result + viewController.getBlockSize();
     }
 
     /**
@@ -214,7 +201,7 @@ public abstract class LambdaNodeViewController extends Actor {
             if (animateVanishSmoke) {
                 float familyHeight = getFamilyHeight();
                 batch.draw(animation.getKeyFrame(vanishSmokeStateTime), getX(),
-                        getY() - familyHeight + BLOCK_HEIGHT, getWidth(),
+                        getY() - familyHeight + viewController.getBlockSize(), getWidth(),
                         familyHeight);
                 vanishSmokeStateTime += Gdx.graphics.getDeltaTime();
                 if (isVanishAnimationFinished()) {
@@ -325,7 +312,7 @@ public abstract class LambdaNodeViewController extends Actor {
         getViewController().setSize(
                 Math.max(getViewController().getX(), x + this.getWidth()),
                 Math.max(getViewController().getY(), -y + this.getHeight()
-                        + BLOCK_HEIGHT));
+                        + viewController.getBlockSize()));
         if (DEBUG) {
             System.out.println("        Updated position of "
                     + this.getLinkedTerm().getClass().getSimpleName() + " ("
@@ -335,7 +322,7 @@ public abstract class LambdaNodeViewController extends Actor {
 
         // Recurse
         if (!isRoot()) {
-            y -= BLOCK_HEIGHT;
+            y -= viewController.getBlockSize();
         }
         for (LambdaNodeViewController child : children) {
             child.updatePosition(x, y);
@@ -370,8 +357,8 @@ public abstract class LambdaNodeViewController extends Actor {
                 if (children.isEmpty()) {
                     // Drop target in the center below this element
                     target = new Rectangle(this.getX() + this.getWidth() / 2.0f
-                            - GAP_SIZE / 2, this.getY() - BLOCK_HEIGHT,
-                            GAP_SIZE, BLOCK_HEIGHT);
+                            - viewController.getGapWidth() / 2, this.getY() - viewController.getBlockSize(),
+                            viewController.getGapWidth(), viewController.getBlockSize());
                     if (DEBUG_DRAG_AND_DROP) {
                         System.out.println("        Adding drop target below "
                                 + getLinkedTerm().getClass().getSimpleName()
@@ -400,7 +387,7 @@ public abstract class LambdaNodeViewController extends Actor {
                 } else {
                     // Drop target left of first child
                     target = new Rectangle(children.get(0).getX(), children
-                            .get(0).getY(), GAP_SIZE, BLOCK_HEIGHT);
+                            .get(0).getY(), viewController.getGapWidth(), viewController.getBlockSize());
                     if (DEBUG_DRAG_AND_DROP) {
                         System.out
                                 .println("        Adding drop target left of "
@@ -459,9 +446,9 @@ public abstract class LambdaNodeViewController extends Actor {
                     final LambdaTerm siblingTerm = childTerm;
                     target = new Rectangle(childVC.getX()
                             + childVC.getWidth()
-                            - (index == children.size() - 1 ? GAP_SIZE
-                                    : GAP_SIZE / 2), childVC.getY(), GAP_SIZE,
-                            BLOCK_HEIGHT);
+                            - (index == children.size() - 1 ? viewController.getGapWidth()
+                                    : viewController.getGapWidth() / 2), childVC.getY(), viewController.getGapWidth(),
+                            viewController.getBlockSize());
                     getViewController().getDragAndDrop().addDropTarget(
                             new Consumer<LambdaTerm>() {
                                 @Override

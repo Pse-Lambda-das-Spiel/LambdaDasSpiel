@@ -5,8 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import lambda.model.lambdaterm.LambdaVariable;
-import static lambda.viewcontroller.lambdaterm.LambdaNodeViewController.BLOCK_HEIGHT;
-import static lambda.viewcontroller.lambdaterm.LambdaNodeViewController.BLOCK_WIDTH;
 
 /**
  * Represents a viewcontroller variable node in a LambdaTermViewController.
@@ -36,12 +34,10 @@ public class LambdaVariableViewController extends LambdaValueViewController {
     /**
      * Creates a new instance of LambdaVariableViewController.
      *
-     * @param linkedTerm
-     *            the variable displayed by this node
-     * @param parent
-     *            the parent viewcontroller node
-     * @param viewController
-     *            the viewcontroller on which this node will be displayed
+     * @param linkedTerm the variable displayed by this node
+     * @param parent the parent viewcontroller node
+     * @param viewController the viewcontroller on which this node will be
+     * displayed
      */
     public LambdaVariableViewController(LambdaVariable linkedTerm,
             LambdaNodeViewController parent,
@@ -62,16 +58,14 @@ public class LambdaVariableViewController extends LambdaValueViewController {
      */
     @Override
     public float getMinWidth() {
-        return BLOCK_WIDTH;
+        return getViewController().getBlockSize();
     }
 
     /**
      * Draws this node.
      *
-     * @param batch
-     *            the batch on which the node will be drawn
-     * @param alpha
-     *            the parent's alpha
+     * @param batch the batch on which the node will be drawn
+     * @param alpha the parent's alpha
      */
     @Override
     public void draw(Batch batch, float alpha) {
@@ -79,7 +73,7 @@ public class LambdaVariableViewController extends LambdaValueViewController {
 
         // Texture
         batch.setColor(getCurrentColor());
-        batch.draw(texture, getX(), getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+        batch.draw(texture, getX(), getY(), getViewController().getBlockSize(), getViewController().getBlockSize());
         batch.setColor(1f, 1f, 1f, 1f);
 
         drawVanishAnimation(batch, alpha);
@@ -88,7 +82,7 @@ public class LambdaVariableViewController extends LambdaValueViewController {
         synchronized (getViewController()) {
             if (animateSmoke) {
                 batch.draw(animation.getKeyFrame(smokeStateTime), getX(),
-                        getY(), BLOCK_WIDTH, BLOCK_HEIGHT);
+                        getY(), getViewController().getBlockSize(), getViewController().getBlockSize());
                 smokeStateTime += Gdx.graphics.getDeltaTime();
                 if (isSmokeAnimationFinished()) {
                     animateSmoke = false;
@@ -117,8 +111,7 @@ public class LambdaVariableViewController extends LambdaValueViewController {
     /**
      * Returns whether this and the other object are equal.
      *
-     * @param other
-     *            the other object
+     * @param other the other object
      * @return true if this and the other object are equal, false otherwise
      */
     @Override

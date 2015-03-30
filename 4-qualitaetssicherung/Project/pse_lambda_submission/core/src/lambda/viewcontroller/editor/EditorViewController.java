@@ -163,7 +163,7 @@ public final class EditorViewController extends StageViewController implements
         bottomToolBar = new Table();
         bottomToolBar.setBackground(new TextureRegionDrawable(manager.get(
                 "data/skins/MasterSkin.atlas", TextureAtlas.class).findRegion(
-                "elements_bar")));
+                        "elements_bar")));
 
         main.add(leftToolBar).expandY().left().top();
         main.add(targetButton)
@@ -229,7 +229,7 @@ public final class EditorViewController extends StageViewController implements
                     {
                         I18NBundle language = manager.get(
                                 ProfileManager.getManager().getCurrentProfile()
-                                        .getLanguage(), I18NBundle.class);
+                                .getLanguage(), I18NBundle.class);
                         clear();
                         final List<ReductionStrategy> strategies = EditorViewController.this.model
                                 .getLevelContext().getLevelModel()
@@ -239,7 +239,7 @@ public final class EditorViewController extends StageViewController implements
                         for (int n = 0; n < strategies.size(); n++) {
                             ImageButton stratButton = new ImageButton(
                                     dialogSkin, strategies.get(n).name()
-                                            + "_Button");
+                                    + "_Button");
                             final int t = n;
                             stratButton.addListener(new ClickListener() {
                                 @Override
@@ -265,7 +265,7 @@ public final class EditorViewController extends StageViewController implements
                             }
                         }
                         for (Label label : labels) {
-                        	label.setWrap(true);
+                            label.setWrap(true);
                             label.setFontScale(smallestScale);
                             label.setAlignment(Align.center);
                         }
@@ -297,7 +297,7 @@ public final class EditorViewController extends StageViewController implements
                 } else if (model
                         .getTerm()
                         .accept(new ColorCollectionVisitor(
-                                ColorCollectionVisitor.TYPE_ALL))
+                                        ColorCollectionVisitor.TYPE_ALL))
                         .contains(Color.WHITE)) {
                     showDialog(language.get("invalidTermWhite"));
                 } else {
@@ -396,10 +396,8 @@ public final class EditorViewController extends StageViewController implements
     /**
      * Resets this view controller with the given values.
      *
-     * @param context
-     *            the current level context
-     * @throws IllegalArgumentException
-     *             if context is null
+     * @param context the current level context
+     * @throws IllegalArgumentException if context is null
      */
     public void reset(LevelContext context) {
         if (context == null) {
@@ -462,7 +460,7 @@ public final class EditorViewController extends StageViewController implements
             toolbarElement.addOffset(0.0f, toolbarElement.getHeight() / 4);
             term.getDragAndDrop().addDragSource(
                     new LambdaTermDragSource(toolbarElement.getRoot().getChild(
-                            0), false, true));
+                                    0), false, true));
             bottomToolBar.add(toolbarElement).left();
         }
         bottomToolBar.row();
@@ -481,8 +479,7 @@ public final class EditorViewController extends StageViewController implements
      * Called when the a new reduction strategy is selected. Updates the
      * strategy button image.
      *
-     * @param strategy
-     *            the new strategy
+     * @param strategy the new strategy
      */
     @Override
     public void strategyChanged(ReductionStrategy strategy) {
@@ -642,7 +639,7 @@ public final class EditorViewController extends StageViewController implements
             float labelWidth = buttonSize * 3 / 2;
             float smallestScale = Float.POSITIVE_INFINITY;
             Label labels[] = {
-                    mainMenuLabel, continueLabel, levelMenuLabel, resetLabel };
+                mainMenuLabel, continueLabel, levelMenuLabel, resetLabel};
             for (Label label : labels) {
                 float current = labelWidth
                         / label.getStyle().font.getBounds(label.getText()).width;
@@ -689,7 +686,7 @@ public final class EditorViewController extends StageViewController implements
 
     /**
      * Returns the model of the editor.
-     * 
+     *
      * @return the model of the editor
      */
     public EditorModel getModel() {

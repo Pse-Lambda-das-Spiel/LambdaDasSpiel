@@ -86,16 +86,13 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
     /**
      * Resets the model with the given values.
      *
-     * @param term
-     *            the term to be reduced
-     * @param strategy
-     *            the reduction strategy
-     * @param context
-     *            the current level context
-     * @throws IllegalArgumentException
-     *             if term is null, strategy is null or context is null
-     * @throws IllegalStateException
-     *             if the model is currently busy or not paused
+     * @param term the term to be reduced
+     * @param strategy the reduction strategy
+     * @param context the current level context
+     * @throws IllegalArgumentException if term is null, strategy is null or
+     * context is null
+     * @throws IllegalStateException if the model is currently busy or not
+     * paused
      */
     public void reset(LambdaRoot term, BetaReductionVisitor strategy,
             LevelContext context) {
@@ -114,9 +111,9 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
         }
         if (context.getLevelModel().isStandardMode()) {
             current = term;
-            goal = context.getLevelModel().getGoal();
+            goal = (LambdaRoot)context.getLevelModel().getGoal().accept(new CopyVisitor());
         } else {
-            current = context.getLevelModel().getStart();
+            current = (LambdaRoot) context.getLevelModel().getStart().accept(new CopyVisitor());
             goal = term;
         }
 
@@ -138,7 +135,7 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                 .getAvailableColors());
         alphaConversionColors.removeAll(context.getLevelModel()
                 .getLockedColors());
-        
+
         // white should not be among the replacement colors for an alpha
         // conversion
         alphaConversionColors.remove(Color.valueOf("ffffffff"));
@@ -162,9 +159,8 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
     /**
      * Toggles the automatic reduction.
      *
-     * @throws IllegalStateException
-     *             if a step is currently being performed or a pause is
-     *             requested
+     * @throws IllegalStateException if a step is currently being performed or a
+     * pause is requested
      */
     public void togglePlay() {
         if (busy && paused || pauseRequested) {
@@ -188,8 +184,8 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
      * reduction is paused or a minimal term is reached. Performs at least one
      * reduction step.
      *
-     * @throws IllegalStateException
-     *             if the model is busy or a pause is requested
+     * @throws IllegalStateException if the model is busy or a pause is
+     * requested
      */
     public void step() {
         if (busy || pauseRequested) {
@@ -218,7 +214,7 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                         current.accept(strategy);
                     }
                 } while (!paused && !pauseRequested && strategy.hasReduced()
-                        && nodeCount <= LambdaTerm.MAX_NODES_PER_TERM);
+                        && nodeCount <= LambdaTerm.MAX_NODES_PER_TERM && history.size() <= context.getLevelModel().getMaxReductionSteps());
                 busy = false;
                 notifyState();
 
@@ -229,20 +225,20 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                                 @Override
                                 public void accept(
                                         ReductionModelObserver observer) {
-                                    if (context.getLevelModel().getId() == 0) {
-                                        observer.reductionFinished(true);
-                                    } else {
-                                        observer.reductionFinished((current
-                                                .equals(goal) && ReductionModel.this.context
-                                                .getLevelModel()
-                                                .isColorEquivalence())
-                                                || (current
+                                            if (context.getLevelModel().getId() == 0) {
+                                                observer.reductionFinished(true);
+                                            } else {
+                                                observer.reductionFinished((current
+                                                        .equals(goal) && ReductionModel.this.context
+                                                        .getLevelModel()
+                                                        .isColorEquivalence())
+                                                        || (current
                                                         .accept(new IsAlphaEquivalentVisitor(
-                                                                goal)) && !ReductionModel.this.context
+                                                                        goal)) && !ReductionModel.this.context
                                                         .getLevelModel()
                                                         .isColorEquivalence()));
-                                    }
-                                }
+                                            }
+                                        }
                             });
                     // save progress in the level
                     ProfileManager pManager = ProfileManager.getManager();
@@ -260,9 +256,9 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
     /**
      * Reverts the last step in a separate thread.
      *
-     * @throws IllegalStateException
-     *             if the automatic reduction isn't paused, a step is currently
-     *             being performed, a pause is requested or the history is empty
+     * @throws IllegalStateException if the automatic reduction isn't paused, a
+     * step is currently being performed, a pause is requested or the history is
+     * empty
      */
     public void stepRevert() {
         if (!paused || busy || pauseRequested || history.isEmpty()) {
