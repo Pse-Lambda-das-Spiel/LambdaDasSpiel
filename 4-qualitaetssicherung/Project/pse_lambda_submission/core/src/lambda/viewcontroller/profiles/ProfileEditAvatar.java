@@ -210,8 +210,11 @@ public class ProfileEditAvatar extends StageViewController implements
                                 "hello")
                                 + " " + m.getCurrentProfile().getName() + " !",
                                 dialogSkin);
-                        greeting.setFontScale(1.5f);
-                        add(greeting);
+                        float scaleFactor = ProfileEditAvatar.this.getStage().getWidth() * 0.8f
+                                / greeting.getStyle().font.getBounds(greeting.getText()).width / 1.5f;
+                        greeting.setFontScale(1.5f * (scaleFactor < 1 ? scaleFactor : 1));
+                        add(greeting).width(ProfileEditAvatar.this.getStage().getWidth() * 0.8f);
+                        greeting.setAlignment(Align.center);
                         row().space(height / 8);
                         add(new Image(avatarPic.getDrawable()))
                                 .size(height / 2);

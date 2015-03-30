@@ -3,7 +3,6 @@ package lambda.viewcontroller.editor;
 import lambda.model.levels.LevelContext;
 import lambda.model.levels.LevelModel;
 import lambda.viewcontroller.lambdaterm.LambdaTermViewController;
-import lambda.viewcontroller.lambdaterm.LambdaValueViewController;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;

@@ -7,6 +7,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -245,6 +246,7 @@ public final class EditorViewController extends StageViewController implements
                                 @Override
                                 public void clicked(InputEvent event, float x,
                                         float y) {
+                                    AudioManager.playSound("buttonClick");
                                     model.setStrategy(strategies.get(t));
                                     remove();
                                 }
@@ -255,11 +257,11 @@ public final class EditorViewController extends StageViewController implements
                             add(labels[n]).width(labelWidth);
                             row();
                         }
+                        BitmapFont font = new Label("", dialogSkin).getStyle().font;
                         float smallestScale = Float.POSITIVE_INFINITY;
-                        for (Label label : labels) {
+                        for (ReductionStrategy strat: ReductionStrategy.values()) {
                             float current = 2 * labelWidth
-                                    / label.getStyle().font.getBounds(label
-                                            .getText()).width;
+                                    / font.getBounds(language.get(strat.name())).width;
                             if (current < smallestScale) {
                                 smallestScale = current;
                             }
@@ -592,6 +594,7 @@ public final class EditorViewController extends StageViewController implements
             menuButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    AudioManager.playSound("buttonClick");
                     getGame().setScreen(MainMenuViewController.class);
                     remove();
                 }
@@ -605,6 +608,7 @@ public final class EditorViewController extends StageViewController implements
             levelMenuButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    AudioManager.playSound("buttonClick");
                     getGame().setScreen(LevelSelectionViewController.class);
                     remove();
                 }
@@ -616,6 +620,7 @@ public final class EditorViewController extends StageViewController implements
             resetButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    AudioManager.playSound("buttonClick");
                     EditorViewController.this.reset(model.getLevelContext());
                     EditorViewController.this.show();
                     remove();
@@ -630,6 +635,7 @@ public final class EditorViewController extends StageViewController implements
             continueButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    AudioManager.playSound("buttonClick");
                     remove();
                 }
             });

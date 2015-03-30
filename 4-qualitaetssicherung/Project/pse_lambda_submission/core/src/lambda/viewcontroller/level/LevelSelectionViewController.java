@@ -338,6 +338,7 @@ public class LevelSelectionViewController extends StageViewController implements
     private class SelectLeftClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
+            AudioManager.playSound("buttonClick");
             // for cyclic display
             if ((currentPage - 1) < 0) {
                 currentPage = levelStack.size() - 1;
@@ -351,6 +352,7 @@ public class LevelSelectionViewController extends StageViewController implements
     private class SelectRightClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
+            AudioManager.playSound("buttonClick");
             // for cyclic display
             if ((currentPage + 1) == levelStack.size()) {
                 currentPage = 0;

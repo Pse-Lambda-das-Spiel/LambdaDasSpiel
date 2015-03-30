@@ -473,6 +473,7 @@ public class ReductionViewController extends StageViewController implements
             menuButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    AudioManager.playSound("buttonClick");
                     getGame().setScreen(MainMenuViewController.class);
                     remove();
                 }
@@ -486,6 +487,7 @@ public class ReductionViewController extends StageViewController implements
             levelMenuButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    AudioManager.playSound("buttonClick");
                     getGame().setScreen(LevelSelectionViewController.class);
                     remove();
                 }
@@ -497,6 +499,7 @@ public class ReductionViewController extends StageViewController implements
             resetButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    AudioManager.playSound("buttonClick");
                     getGame().getController(LevelSelectionViewController.class)
                             .startLevel(model.getContext().getLevelModel());
                     remove();
@@ -511,6 +514,7 @@ public class ReductionViewController extends StageViewController implements
             continueButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    AudioManager.playSound("buttonClick");
                     remove();
                 }
             });
@@ -564,6 +568,7 @@ public class ReductionViewController extends StageViewController implements
             menuButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    AudioManager.playSound("buttonClick");
                     getGame().setScreen(MainMenuViewController.class);
                     remove();
                 }
@@ -578,6 +583,7 @@ public class ReductionViewController extends StageViewController implements
             levelMenuButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    AudioManager.playSound("buttonClick");
                     getGame().setScreen(LevelSelectionViewController.class);
                     remove();
                 }
@@ -591,6 +597,7 @@ public class ReductionViewController extends StageViewController implements
             restartButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    AudioManager.playSound("buttonClick");
                     getGame().getController(LevelSelectionViewController.class)
                             .startLevel(playedLevel);
                     remove();
@@ -605,6 +612,7 @@ public class ReductionViewController extends StageViewController implements
             nextLevelButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    AudioManager.playSound("buttonClick");
                     LevelManager levelManager = LevelManager.getLevelManager();
                     // if the last level was solved, start with level 1 again
                     if (playedLevel.getId() == levelManager.getNumberOfLevels()) {
