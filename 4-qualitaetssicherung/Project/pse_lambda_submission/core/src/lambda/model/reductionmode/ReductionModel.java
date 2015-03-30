@@ -240,6 +240,27 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                                             }
                                         }
                             });
+                } else if (nodeCount > LambdaTerm.MAX_NODES_PER_TERM) {
+                    ReductionModel.this
+                            .notify(new Consumer<ReductionModelObserver>() {
+                                @Override
+                                public void accept(
+                                        ReductionModelObserver observer) {
+                                    observer.maxNodesReached();
+                                }
+                            });
+                } else if (history.size() > context.getLevelModel().getMaxReductionSteps()) {
+                    ReductionModel.this
+                            .notify(new Consumer<ReductionModelObserver>() {
+                                @Override
+                                public void accept(
+                                        ReductionModelObserver observer) {
+                                    observer.maxStepsReached();
+                                }
+                            });
+                }
+                
+                if (!paused && !pauseRequested) {
                     // save progress in the level
                     ProfileManager pManager = ProfileManager.getManager();
                     pManager.save(pManager.getCurrentProfile().getName());

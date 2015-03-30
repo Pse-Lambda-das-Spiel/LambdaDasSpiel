@@ -35,12 +35,21 @@ public interface ReductionModelObserver {
             boolean pauseRequested);
 
     /**
-     * Called when the reduction reached a minimal term or the maximum number of
-     * reduction steps.
+     * Called when the reduction reached a minimal term.
      *
      * @param levelComplete
      *            true if the final term is alpha equivalent to the level's
      *            target term, false otherwise
      */
     public void reductionFinished(boolean levelComplete);
+    
+    /**
+     * Called when the reduction reached the maximum number of nodes per term.
+     */
+    public void maxNodesReached();
+    
+    /**
+     * Called when the reduction reached the maximum number of reduction steps.
+     */
+    public void maxStepsReached();
 }

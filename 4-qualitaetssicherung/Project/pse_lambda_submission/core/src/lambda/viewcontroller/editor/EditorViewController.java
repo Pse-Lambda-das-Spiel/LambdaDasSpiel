@@ -186,8 +186,7 @@ public final class EditorViewController extends StageViewController implements
                 AudioManager.playSound("buttonClick");
                 new PauseDialog(dialogSkin, manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
-                        I18NBundle.class), getStage().getWidth(), getStage()
-                        .getHeight()).show(getStage());
+                        I18NBundle.class)).show(getStage());
             }
         });
         hintButton.addListener(new ClickListener() {
@@ -583,8 +582,7 @@ public final class EditorViewController extends StageViewController implements
     }
 
     private class PauseDialog extends Dialog {
-        public PauseDialog(Skin dialogSkin, I18NBundle language,
-                float stageWidth, float stageHeight) {
+        public PauseDialog(Skin dialogSkin, I18NBundle language) {
             super("", dialogSkin);
 
             Label mainMenuLabel = new Label(language.get("mainMenu"),
@@ -641,7 +639,7 @@ public final class EditorViewController extends StageViewController implements
             });
 
             clear();
-            float buttonSize = stageHeight / 4;
+            float buttonSize = EditorViewController.this.getStage().getHeight() / 4;
             float labelWidth = buttonSize * 3 / 2;
             float smallestScale = Float.POSITIVE_INFINITY;
             Label labels[] = {

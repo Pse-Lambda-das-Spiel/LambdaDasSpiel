@@ -174,8 +174,7 @@ public class ReductionViewController extends StageViewController implements
                 AudioManager.playSound("buttonClick");
                 new PauseDialog(dialogSkin, manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
-                        I18NBundle.class), getStage().getWidth(), getStage()
-                        .getHeight()).show(getStage());
+                        I18NBundle.class)).show(getStage());
             }
         });
         helpButton.addListener(new ClickListener() {
@@ -368,11 +367,11 @@ public class ReductionViewController extends StageViewController implements
     @Override
     public void reductionFinished(boolean levelComplete) {
         // add coins to player etc.
+        I18NBundle language = assets.get(ProfileManager.getManager()
+                .getCurrentProfile().getLanguage());
         new FinishDialog(levelComplete, model.getContext().getLevelModel()
                 .getCoins(), assets.get("data/skins/DialogTemp.json",
-                Skin.class), assets.get(ProfileManager.getManager()
-                .getCurrentProfile().getLanguage(), I18NBundle.class),
-                getStage().getWidth(), getStage().getHeight()).show(getStage());
+                Skin.class), language, null).show(getStage());
     }
 
     /**
@@ -462,8 +461,7 @@ public class ReductionViewController extends StageViewController implements
     }
 
     private class PauseDialog extends Dialog {
-        public PauseDialog(Skin dialogSkin, I18NBundle language,
-                float stageWidth, float stageHeight) {
+        public PauseDialog(Skin dialogSkin, I18NBundle language) {
             super("", dialogSkin);
 
             Label mainMenuLabel = new Label(language.get("mainMenu"),
@@ -519,7 +517,7 @@ public class ReductionViewController extends StageViewController implements
                 }
             });
             clear();
-            float buttonSize = stageHeight / 4;
+            float buttonSize = ReductionViewController.this.getStage().getHeight() / 4;
             float labelWidth = buttonSize * 3 / 2;
             float smallestScale = Float.POSITIVE_INFINITY;
             Label labels[] = {
@@ -549,7 +547,7 @@ public class ReductionViewController extends StageViewController implements
 
     private class FinishDialog extends Dialog {
         public FinishDialog(boolean levelComplete, int coins, Skin dialogSkin,
-                I18NBundle language, float stageWidth, float stageHeight) {
+                I18NBundle language, String specialMessage) {
             super("", dialogSkin);
             List<Label> labels = new ArrayList<Label>();
             final LevelModel playedLevel = model.getContext().getLevelModel();
@@ -557,8 +555,9 @@ public class ReductionViewController extends StageViewController implements
                     .getCurrentProfile();
 
             Label levelLabel = new Label(
-                    language.get(levelComplete ? "levelCompleted"
-                            : "levelFailed"), dialogSkin);
+                    specialMessage != null ? specialMessage
+                            : language.get(levelComplete ? "levelCompleted"
+                                    : "levelFailed"), dialogSkin);
 
             Label mainMenuLabel = new Label(language.get("mainMenu"),
                     dialogSkin);
@@ -636,7 +635,7 @@ public class ReductionViewController extends StageViewController implements
                 labels.add(nextLevelLabel);
             }
 
-            float buttonSize = stageHeight / 4;
+            float buttonSize = ReductionViewController.this.getStage().getHeight() / 4;
             float labelWidth = buttonSize * 3 / 2;
             float smallestScale = Float.POSITIVE_INFINITY;
             for (Label label : labels) {
@@ -653,7 +652,7 @@ public class ReductionViewController extends StageViewController implements
             clear();
             pad(buttonSize / 4);
             // if the level is not the sandbox
-            if (playedLevel.getId() != 0) {
+            if (playedLevel.getId() != 0 || specialMessage != null) {
                 levelLabel.setFontScale(2
                         * labelWidth
                         / levelLabel.getStyle().font.getBounds(levelLabel
@@ -692,6 +691,24 @@ public class ReductionViewController extends StageViewController implements
                 currentProfile.setCoins(currentProfile.getCoins() + coins);
             }
         }
+    }
+
+    @Override
+    public void maxNodesReached() {
+        I18NBundle language = assets.get(ProfileManager.getManager()
+                .getCurrentProfile().getLanguage());
+        new FinishDialog(false, model.getContext().getLevelModel()
+                .getCoins(), assets.get("data/skins/DialogTemp.json",
+                Skin.class), language, language.get("maxNodesReached")).show(getStage());
+    }
+
+    @Override
+    public void maxStepsReached() {
+        I18NBundle language = assets.get(ProfileManager.getManager()
+                .getCurrentProfile().getLanguage());
+        new FinishDialog(false, model.getContext().getLevelModel()
+                .getCoins(), assets.get("data/skins/DialogTemp.json",
+                Skin.class), language, language.get("maxStepsReached")).show(getStage());
     }
 
 }

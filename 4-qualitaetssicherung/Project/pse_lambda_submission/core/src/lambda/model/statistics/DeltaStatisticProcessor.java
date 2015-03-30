@@ -229,4 +229,12 @@ public class DeltaStatisticProcessor implements EditorModelObserver,
     public void strategyChanged(ReductionStrategy strategy) {
     }
 
+    @Override
+    public void maxNodesReached() {
+    }
+
+    @Override
+    public void maxStepsReached() {
+    }
+
 }
