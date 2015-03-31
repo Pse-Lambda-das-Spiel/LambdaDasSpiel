@@ -134,7 +134,7 @@
 								},
 								"right": {
 									"type": "variable",
-									"locked": false,
+									"locked": true,
 									"color": "z",
 								}
 							}
