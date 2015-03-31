@@ -259,6 +259,8 @@ public class ReductionViewController extends StageViewController implements
             background.remove();
         }
         background = model.getContext().getBgImage();
+        background.setWidth(getStage().getWidth());
+        background.setHeight(getStage().getHeight());
         getStage().addActor(background);
         background.toBack();
 
@@ -277,7 +279,6 @@ public class ReductionViewController extends StageViewController implements
      */
     @Override
     public void show() {
-        super.show();
         if (term == null) {
             throw new IllegalStateException(
                     "Cannot show the reduction viewController without calling reset before!");
@@ -288,6 +289,14 @@ public class ReductionViewController extends StageViewController implements
         multiplexer.addProcessor(this);
         Gdx.input.setInputProcessor(multiplexer);
         showStartDialogs();
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void hide() {
+        model.resetState();
     }
 
     private void showStartDialogs() {

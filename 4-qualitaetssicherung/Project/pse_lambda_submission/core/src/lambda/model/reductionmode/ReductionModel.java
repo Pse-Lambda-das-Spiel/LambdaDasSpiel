@@ -56,8 +56,14 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
      * Contains all data of the current level.
      */
     private LevelContext context;
-
+    /**
+     * The goal of the level, used for comparison with the current lambda term after a complete beta reduction.
+     */
     private LambdaRoot goal;
+    /**
+     * A volatile attribute for the reduction thread.
+     */
+    private volatile boolean running;
 
     /**
      * Creates a new instance of ReductionModel.
@@ -70,6 +76,7 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
         paused = true;
         pauseRequested = false;
         busy = false;
+        running = true;
     }
 
     /**
@@ -114,7 +121,6 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
             current = (LambdaRoot) context.getLevelModel().getStart().accept(new CopyVisitor());
             goal = term;
         }
-
         notify(new Consumer<ReductionModelObserver>() {
             @Override
             public void accept(ReductionModelObserver observer) {
@@ -127,6 +133,7 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
         paused = true;
         pauseRequested = false;
         busy = false;
+        running = true;
 
         List<Color> alphaConversionColors = LevelManager.getAllColors();
         alphaConversionColors.removeAll(context.getLevelModel()
@@ -211,66 +218,60 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
                         strategy.reset();
                         current.accept(strategy);
                     }
-                } while (!paused && !pauseRequested && strategy.hasReduced()
-                        && nodeCount <= LambdaTerm.MAX_NODES_PER_TERM && history.size() <= context.getLevelModel().getMaxReductionSteps());
-                busy = false;
-                notifyState();
-
-                // Minimal term reached
-                if (!strategy.hasReduced()) {
-                    ReductionModel.this
-                            .notify(new Consumer<ReductionModelObserver>() {
-                                @Override
-                                public void accept(
-                                        ReductionModelObserver observer) {
-                                            if (context.getLevelModel().getId() == 0) {
-                                                observer.reductionFinished(true);
-                                            } else {
-                                                observer.reductionFinished((current
-                                                        .equals(goal) && ReductionModel.this.context
-                                                        .getLevelModel()
-                                                        .isColorEquivalence())
-                                                        || (current
-                                                        .accept(new IsAlphaEquivalentVisitor(
-                                                                        goal)) && !ReductionModel.this.context
-                                                        .getLevelModel()
-                                                        .isColorEquivalence()));
-                                            }
-                                        }
-                            });
-                    // save progress in the level
-                    ProfileManager pManager = ProfileManager.getManager();
-                    pManager.save(pManager.getCurrentProfile().getName());
-                } else if (nodeCount > LambdaTerm.MAX_NODES_PER_TERM) {
-                    ReductionModel.this
-                            .notify(new Consumer<ReductionModelObserver>() {
-                                @Override
-                                public void accept(
-                                        ReductionModelObserver observer) {
-                                    observer.maxNodesReached();
-                                }
-                            });
-                    // save progress in the level
-                    ProfileManager pManager = ProfileManager.getManager();
-                    pManager.save(pManager.getCurrentProfile().getName());
-                } else if (history.size() > context.getLevelModel().getMaxReductionSteps()) {
-                    ReductionModel.this
-                            .notify(new Consumer<ReductionModelObserver>() {
-                                @Override
-                                public void accept(
-                                        ReductionModelObserver observer) {
-                                    observer.maxStepsReached();
-                                }
-                            });
-                    // save progress in the level
-                    ProfileManager pManager = ProfileManager.getManager();
-                    pManager.save(pManager.getCurrentProfile().getName());
+                } while (running && !paused && !pauseRequested && strategy.hasReduced()
+                        && nodeCount <= LambdaTerm.MAX_NODES_PER_TERM
+                        && history.size() <= context.getLevelModel().getMaxReductionSteps());
+                if (running) {
+                    busy = false;
+                    notifyState();
                 }
-                
-                // Steps finished
-                pauseRequested = false;
-                paused = true;
-                notifyState();
+     
+                if (running) {
+                    // Minimal term reached
+                    if (!strategy.hasReduced()) {
+                        ReductionModel.this.notify(new Consumer<ReductionModelObserver>() {
+                            @Override
+                            public void accept(ReductionModelObserver observer) {
+                                if (context.getLevelModel().getId() == 0) {
+                                    observer.reductionFinished(true);
+                                } else {
+                                    observer.reductionFinished((current.equals(goal) && ReductionModel.this.context
+                                            .getLevelModel().isColorEquivalence())
+                                            || (current.accept(new IsAlphaEquivalentVisitor(goal)) && !ReductionModel.this.context
+                                                    .getLevelModel().isColorEquivalence()));
+                                }
+                            }
+                        });
+                        // save progress in the level
+                        ProfileManager pManager = ProfileManager.getManager();
+                        pManager.save(pManager.getCurrentProfile().getName());
+                    } else if (nodeCount > LambdaTerm.MAX_NODES_PER_TERM) {
+                        ReductionModel.this.notify(new Consumer<ReductionModelObserver>() {
+                            @Override
+                            public void accept(ReductionModelObserver observer) {
+                                observer.maxNodesReached();
+                            }
+                        });
+                        // save progress in the level
+                        ProfileManager pManager = ProfileManager.getManager();
+                        pManager.save(pManager.getCurrentProfile().getName());
+                    } else if (history.size() > context.getLevelModel().getMaxReductionSteps()) {
+                        ReductionModel.this.notify(new Consumer<ReductionModelObserver>() {
+                            @Override
+                            public void accept(ReductionModelObserver observer) {
+                                observer.maxStepsReached();
+                            }
+                        });
+                        // save progress in the level
+                        ProfileManager pManager = ProfileManager.getManager();
+                        pManager.save(pManager.getCurrentProfile().getName());
+                    }
+
+                    // Steps finished
+                    pauseRequested = false;
+                    paused = true;
+                    notifyState();
+                }
             }
         }.start();
     }
@@ -305,6 +306,17 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
         return context;
     }
 
+    /**
+     * Resets the state of this model to its start state.
+     */
+    public void resetState() {
+        running = false;
+        paused = true;
+        pauseRequested = false;
+        busy = false;
+        notifyState();
+    }
+    
     /**
      * Notifies all observers of a state change.
      */
