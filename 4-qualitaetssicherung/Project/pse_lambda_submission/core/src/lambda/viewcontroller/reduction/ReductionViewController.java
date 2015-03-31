@@ -94,7 +94,11 @@ public class ReductionViewController extends StageViewController implements
      * Indicates whether the screen is currently being dragged.
      */
     private boolean isDraggingScreen;
-
+    /**
+     * Used to close the help-dialog or pause-dialog if the reduction finishes while one of them is open.
+     */
+    private Dialog lastDialog;
+    
     /**
      * Creates a new instance of ReductionViewController.
      */
@@ -172,7 +176,7 @@ public class ReductionViewController extends StageViewController implements
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 AudioManager.playSound("buttonClick");
-                new PauseDialog(dialogSkin, manager.get(ProfileManager
+                lastDialog = new PauseDialog(dialogSkin, manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
                         I18NBundle.class)).show(getStage());
             }
@@ -181,7 +185,7 @@ public class ReductionViewController extends StageViewController implements
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 AudioManager.playSound("buttonClick");
-                new HelpDialog(dialogSkin, manager.get(ProfileManager
+                lastDialog = new HelpDialog(dialogSkin, manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
                         I18NBundle.class), getStage()).show(getStage());
             }
@@ -546,6 +550,10 @@ public class ReductionViewController extends StageViewController implements
         public FinishDialog(boolean levelComplete, int coins, Skin dialogSkin,
                 I18NBundle language, String specialMessage) {
             super("", dialogSkin);
+            if (lastDialog != null) {
+                lastDialog.remove();
+                lastDialog = null;
+            }
             List<Label> labels = new ArrayList<Label>();
             final LevelModel playedLevel = model.getContext().getLevelModel();
             ProfileModel currentProfile = ProfileManager.getManager()
