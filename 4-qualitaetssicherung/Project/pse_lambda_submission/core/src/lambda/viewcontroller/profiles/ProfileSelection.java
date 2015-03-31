@@ -69,10 +69,11 @@ public class ProfileSelection extends StageViewController {
             @Override
             public boolean keyDown(int keycode) {
                 if (keycode == Keys.BACK) {
+                    removeLastDialog();
                     final Skin dialogSkin = manager.get(
                             "data/skins/DialogTemp.json", Skin.class);
                     final float size = getStage().getHeight() / 5;
-                    new Dialog("", dialogSkin) {
+                    showDialog(new Dialog("", dialogSkin) {
                         {
                             clear();
                             pad(space * 3);
@@ -118,7 +119,7 @@ public class ProfileSelection extends StageViewController {
                             });
                             add(noButton).size(size);
                         }
-                    }.show(getStage());
+                    });
                 }
                 return false;
             }
@@ -239,7 +240,7 @@ public class ProfileSelection extends StageViewController {
                     Skin.class);
             final float size = getStage().getHeight() / 5;
             // dialog to choose between editing the profile or deleting it.
-            new Dialog("", dialogSkin) {
+            showDialog(new Dialog("", dialogSkin) {
                 {
                     clear();
                     pad(space * 3 / 2);
@@ -313,7 +314,7 @@ public class ProfileSelection extends StageViewController {
                     });
                     add(noButton).size(size);
                 }
-            }.show(getStage());
+            });
         }
     }
 

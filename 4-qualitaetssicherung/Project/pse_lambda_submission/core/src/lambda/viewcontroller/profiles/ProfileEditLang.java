@@ -147,6 +147,7 @@ public class ProfileEditLang extends StageViewController implements
             @Override
             public boolean keyDown(int keycode) {
                 if (keycode == Keys.BACK) {
+                    removeLastDialog();
                     ProfileManager m = ProfileManager.getManager();
                     if (m.getNames().size() != 1 || !deleteOnBack) {
                         if (deleteOnBack) {

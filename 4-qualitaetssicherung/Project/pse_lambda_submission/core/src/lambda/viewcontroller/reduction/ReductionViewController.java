@@ -94,10 +94,6 @@ public class ReductionViewController extends StageViewController implements
      * Indicates whether the screen is currently being dragged.
      */
     private boolean isDraggingScreen;
-    /**
-     * Used to close the help-dialog or pause-dialog if the reduction finishes while one of them is open.
-     */
-    private Dialog lastDialog;
     
     /**
      * Creates a new instance of ReductionViewController.
@@ -176,18 +172,18 @@ public class ReductionViewController extends StageViewController implements
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 AudioManager.playSound("buttonClick");
-                lastDialog = new PauseDialog(dialogSkin, manager.get(ProfileManager
+                showDialog(new PauseDialog(dialogSkin, manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
-                        I18NBundle.class)).show(getStage());
+                        I18NBundle.class)));
             }
         });
         helpButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 AudioManager.playSound("buttonClick");
-                lastDialog = new HelpDialog(dialogSkin, manager.get(ProfileManager
+                showDialog(new HelpDialog(dialogSkin, manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
-                        I18NBundle.class), getStage()).show(getStage());
+                        I18NBundle.class), getStage()));
             }
         });
         stepRevertButton.addListener(new ClickListener() {
@@ -325,14 +321,14 @@ public class ReductionViewController extends StageViewController implements
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     if (pos + 1 < dialogs.length) {
-                        dialogs[pos + 1].show(getStage());
+                        showDialog(dialogs[pos + 1]);
                     }
                     dialogs[pos].remove();
                 }
             });
         }
         if (dialogs.length > 0) {
-            dialogs[0].show(getStage());
+            showDialog(dialogs[0]);
         }
     }
 
@@ -379,9 +375,9 @@ public class ReductionViewController extends StageViewController implements
         // add coins to player etc.
         I18NBundle language = assets.get(ProfileManager.getManager()
                 .getCurrentProfile().getLanguage());
-        new FinishDialog(levelComplete, model.getContext().getLevelModel()
+        showDialog(new FinishDialog(levelComplete, model.getContext().getLevelModel()
                 .getCoins(), assets.get("data/skins/DialogTemp.json",
-                Skin.class), language, null).show(getStage());
+                Skin.class), language, null));
     }
 
     /**
@@ -559,10 +555,7 @@ public class ReductionViewController extends StageViewController implements
         public FinishDialog(boolean levelComplete, int coins, Skin dialogSkin,
                 I18NBundle language, String specialMessage) {
             super("", dialogSkin);
-            if (lastDialog != null) {
-                lastDialog.remove();
-                lastDialog = null;
-            }
+            removeLastDialog();
             List<Label> labels = new ArrayList<Label>();
             final LevelModel playedLevel = model.getContext().getLevelModel();
             ProfileModel currentProfile = ProfileManager.getManager()
@@ -711,18 +704,18 @@ public class ReductionViewController extends StageViewController implements
     public void maxNodesReached() {
         I18NBundle language = assets.get(ProfileManager.getManager()
                 .getCurrentProfile().getLanguage());
-        new FinishDialog(false, model.getContext().getLevelModel()
+        showDialog(new FinishDialog(false, model.getContext().getLevelModel()
                 .getCoins(), assets.get("data/skins/DialogTemp.json",
-                Skin.class), language, language.get("maxNodesReached")).show(getStage());
+                Skin.class), language, language.get("maxNodesReached")));
     }
 
     @Override
     public void maxStepsReached() {
         I18NBundle language = assets.get(ProfileManager.getManager()
                 .getCurrentProfile().getLanguage());
-        new FinishDialog(false, model.getContext().getLevelModel()
+        showDialog(new FinishDialog(false, model.getContext().getLevelModel()
                 .getCoins(), assets.get("data/skins/DialogTemp.json",
-                Skin.class), language, language.get("maxStepsReached")).show(getStage());
+                Skin.class), language, language.get("maxStepsReached")));
     }
 
 }

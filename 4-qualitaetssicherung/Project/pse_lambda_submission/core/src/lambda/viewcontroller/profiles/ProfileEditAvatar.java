@@ -78,6 +78,7 @@ public class ProfileEditAvatar extends StageViewController implements
             @Override
             public boolean keyDown(int keycode) {
                 if (keycode == Keys.BACK) {
+                    removeLastDialog();
                     ProfileManager.getManager().getCurrentProfile()
                             .setAvatar(profileEdit.getAvatar());
                     getGame().setScreen(ProfileEditName.class);
@@ -200,7 +201,7 @@ public class ProfileEditAvatar extends StageViewController implements
                 final Skin dialogSkin = manager.get(
                         "data/skins/DialogTemp.json", Skin.class);
                 final float height = getStage().getHeight();
-                new Dialog("", dialogSkin) {
+                showDialog(new Dialog("", dialogSkin) {
                     private boolean changedToMainMenu = false;
                     {
                         AudioManager.setLoggedIn(true);
@@ -240,7 +241,7 @@ public class ProfileEditAvatar extends StageViewController implements
                             getGame().setScreen(MainMenuViewController.class);
                         }
                     }
-                }.show(getStage()).setFillParent(true);
+                }).setFillParent(true);
             } else {
                 getGame().setScreen(ProfileSelection.class);
             }

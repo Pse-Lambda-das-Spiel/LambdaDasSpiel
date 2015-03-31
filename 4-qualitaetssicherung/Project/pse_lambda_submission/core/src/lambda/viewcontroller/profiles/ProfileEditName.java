@@ -163,6 +163,7 @@ public class ProfileEditName extends StageViewController implements
             @Override
             public boolean keyDown(int keycode) {
                 if (keycode == Keys.BACK) {
+                    removeLastDialog();
                     String name = nameField.getText().trim();
                     if (newProfile) {
                         getGame().setScreen(ProfileEditLang.class);
@@ -170,12 +171,10 @@ public class ProfileEditName extends StageViewController implements
                         if (ProfileManager.getManager().changeCurrentName(name)) {
                             getGame().setScreen(ProfileEditLang.class);
                         } else {
-                            new NameDialog("nameTaken", getStage().getHeight())
-                                    .show(getStage());
+                            showDialog(new NameDialog("nameTaken", getStage().getHeight()));
                         }
                     } else {
-                        new NameDialog("nameEmpty", getStage().getHeight())
-                                .show(getStage());
+                        showDialog(new NameDialog("nameEmpty", getStage().getHeight()));
                     }
                 }
                 return false;
@@ -195,12 +194,10 @@ public class ProfileEditName extends StageViewController implements
                 if (ProfileManager.getManager().changeCurrentName(name)) {
                     getGame().setScreen(ProfileEditAvatar.class);
                 } else {
-                    new NameDialog("nameTaken", getStage().getHeight())
-                            .show(getStage());
+                    showDialog(new NameDialog("nameTaken", getStage().getHeight()));
                 }
             } else {
-                new NameDialog("nameEmpty", getStage().getHeight())
-                        .show(getStage());
+                showDialog(new NameDialog("nameEmpty", getStage().getHeight()));
             }
         }
     }
@@ -216,12 +213,10 @@ public class ProfileEditName extends StageViewController implements
                 if (ProfileManager.getManager().changeCurrentName(name)) {
                     getGame().setScreen(ProfileEditLang.class);
                 } else {
-                    new NameDialog("nameTaken", getStage().getHeight())
-                            .show(getStage());
+                    showDialog(new NameDialog("nameTaken", getStage().getHeight()));
                 }
             } else {
-                new NameDialog("nameEmpty", getStage().getHeight())
-                        .show(getStage());
+                showDialog(new NameDialog("nameEmpty", getStage().getHeight()));
             }
         }
     }

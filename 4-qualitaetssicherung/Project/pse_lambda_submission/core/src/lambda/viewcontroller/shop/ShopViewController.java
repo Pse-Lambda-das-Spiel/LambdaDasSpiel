@@ -101,11 +101,11 @@ public class ShopViewController extends StageViewController implements
         mainTable.setFillParent(true);
         getStage().addActor(mainTable);
         music = new DropDownMenuViewController<MusicItemModel>(shop.getMusic(),
-                getStage());
+                this);
         bgImages = new DropDownMenuViewController<BackgroundImageItemModel>(
-                shop.getImages(), getStage());
+                shop.getImages(), this);
         elementUIs = new DropDownMenuViewController<ElementUIContextFamily>(
-                shop.getElementUIContextFamilies(), getStage());
+                shop.getElementUIContextFamilies(), this);
 
         /*
          * BACK-BUTTON

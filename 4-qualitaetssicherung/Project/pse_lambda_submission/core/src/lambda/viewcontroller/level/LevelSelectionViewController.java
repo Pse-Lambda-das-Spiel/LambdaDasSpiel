@@ -287,11 +287,10 @@ public class LevelSelectionViewController extends StageViewController implements
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 AudioManager.playSound("buttonClick");
-                new HelpDialog(manager.get("data/skins/DialogTemp.json",
+                showDialog(new HelpDialog(manager.get("data/skins/DialogTemp.json",
                         Skin.class), manager.get(ProfileManager.getManager()
                         .getCurrentProfile().getLanguage(), I18NBundle.class),
-                        getStage().getWidth(), getStage().getHeight())
-                        .show(getStage());
+                        getStage().getWidth(), getStage().getHeight()));
             }
         });
 

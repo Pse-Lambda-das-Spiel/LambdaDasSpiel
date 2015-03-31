@@ -27,11 +27,11 @@ public class DropDownMenuViewController<T extends ShopItemModel> extends Actor {
      * 
      * @param shopItemTypeModel
      *            the category of the items
-     * @param stage
-     *            the stage
+     * @param vc
+     *            the ShopViewController
      */
     public DropDownMenuViewController(ShopItemTypeModel<T> shopItemTypeModel,
-            Stage stage) {
+            ShopViewController vc) {
         this.shopItemTypeModel = shopItemTypeModel;
         groupButtons = new VerticalGroup().align(Align.center);
         groupVCs = new VerticalGroup().align(Align.center);
@@ -40,7 +40,7 @@ public class DropDownMenuViewController<T extends ShopItemModel> extends Actor {
         // them into the list "itemVCList"
         for (int i = 0; i < shopItemTypeModel.getItems().size(); i++) {
             ShopItemViewController<T> itemVC = new ShopItemViewController<T>(
-                    shopItemTypeModel.getItems().get(i), stage);
+                    shopItemTypeModel.getItems().get(i), vc);
             groupButtons.addActor(itemVC.getCurrentState());
             groupVCs.addActor(itemVC);
         }

@@ -7,6 +7,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 /**
@@ -19,6 +20,7 @@ public abstract class StageViewController extends ViewController {
 
     private final Stage stage;
     private ViewController lastViewController;
+    private Dialog lastDialog;
 
     /**
      * Creates an new instance of this class.
@@ -71,6 +73,7 @@ public abstract class StageViewController extends ViewController {
             @Override
             public boolean keyDown(int keycode) {
                 if (keycode == Keys.BACK) {
+                    removeLastDialog();
                     getGame().setScreen(lastViewController.getClass());
                 }
                 return false;
@@ -79,6 +82,18 @@ public abstract class StageViewController extends ViewController {
         InputMultiplexer multiplexer = new InputMultiplexer(stage,
                 backProcessor);
         Gdx.input.setInputProcessor(multiplexer);
+    }
+    
+    public Dialog showDialog(Dialog dialog) {
+        lastDialog = dialog;
+        return dialog.show(stage);
+    }
+    
+    public void removeLastDialog() {
+        if (lastDialog != null) {
+            lastDialog.remove();
+            lastDialog = null;
+        }
     }
 
     /**

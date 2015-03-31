@@ -28,19 +28,21 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
 
     private T model;
     private TextButton currentState;
+    private ShopViewController vc;
     private Stage stage;
-
+    
     /**
      * Creates a new instance of this class
      * 
      * @param model
      *            the model of the item
-     * @param stage
-     *            the stage
+     * @param vc
+     *            the ShopViewController
      */
-    public ShopItemViewController(T model, Stage stage) {
+    public ShopItemViewController(T model, ShopViewController vc) {
         this.model = model;
-        this.stage = stage;
+        this.vc = vc;
+        this.stage = vc.getStage();
         model.addObserver(this);
         currentState = new TextButton(model.getShopItemType().getTypeName()
                 + " " + model.getId(),
@@ -139,7 +141,7 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
                 if (model.isActivated()) {
                     model.deactivate();
                 } else {
-                    new Dialog("", ShopViewController.getSkin()) {
+                    vc.showDialog(new Dialog("", ShopViewController.getSkin()) {
                         {
                             clear();
                             // getImage() removes the image from its button so
@@ -186,11 +188,11 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
                                     .align(Align.bottomLeft);
                         }
 
-                    }.show(stage);
+                    });
                 }
             } else if (model.getPrice() <= ProfileManager.getManager()
                     .getCurrentProfile().getCoins()) {
-                new Dialog("", ShopViewController.getSkin()) {
+                vc.showDialog(new Dialog("", ShopViewController.getSkin()) {
                     {
                         clear();
                         // getImage() removes the image from its button so the
@@ -234,9 +236,9 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
                         add(noButton).pad(space).padBottom(space * 3 / 2)
                                 .align(Align.bottomLeft);
                     }
-                }.show(stage);
+                });
             } else {
-                new Dialog("", ShopViewController.getSkin()) {
+                vc.showDialog(new Dialog("", ShopViewController.getSkin()) {
                     {
                         clear();
                         // getImage() removes the image from its button so the
@@ -279,7 +281,7 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
                         add(noButton).pad(space).padBottom(space * 3 / 2)
                                 .align(Align.bottomLeft);
                     }
-                }.show(stage);
+                });
             }
         }
     }

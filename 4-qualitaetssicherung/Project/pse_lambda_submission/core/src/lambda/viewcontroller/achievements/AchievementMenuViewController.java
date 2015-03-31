@@ -170,7 +170,7 @@ public class AchievementMenuViewController extends StageViewController {
                     .getListenerActor();
             final float height = getStage().getHeight();
             final float width = getStage().getWidth();
-            new Dialog("", skin) {
+            showDialog(new Dialog("", skin) {
                 {
                     clear();
                     pad(height / 20);
@@ -193,7 +193,7 @@ public class AchievementMenuViewController extends StageViewController {
                         }
                     });
                 }
-            }.show(getStage());
+            });
         }
     }
 

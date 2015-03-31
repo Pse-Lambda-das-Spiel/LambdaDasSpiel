@@ -1,6 +1,7 @@
 package lambda.viewcontroller.lambdaterm;
 
 import com.badlogic.gdx.Gdx;
+
 import java.util.List;
 
 import com.badlogic.gdx.graphics.Color;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import lambda.model.lambdaterm.LambdaValue;
+import lambda.viewcontroller.assets.AssetViewController;
 
 /**
  * Represents a viewcontroller value node (abstraction or variable) in a
@@ -64,10 +66,11 @@ public abstract class LambdaValueViewController extends
                 public void clicked(InputEvent event, float x, float y) {
                     if (!getLinkedTerm().isLocked()
                             && viewController.isEditable()) {
-                        final Skin dialogSkin = viewController.getAssets().get(
+                        final Skin dialogSkin = viewController.getStageVC().getGame()
+                                .getController(AssetViewController.class).getManager().get(
                                 "data/skins/DialogTemp.json", Skin.class);
                         final float height = getStage().getHeight();
-                        new Dialog("", dialogSkin) {
+                        viewController.getStageVC().showDialog(new Dialog("", dialogSkin) {
                             {
                                 clear();
                                 List<Color> colors = viewController
@@ -110,7 +113,7 @@ public abstract class LambdaValueViewController extends
                                     }
                                 });
                             }
-                        }.show(getStage());
+                        });
                         getViewController().getDragAndDrop().resetTouchState();
                     }
                 }

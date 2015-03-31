@@ -16,6 +16,7 @@ import lambda.model.lambdaterm.LambdaTermObserver;
 import lambda.model.lambdaterm.LambdaValue;
 import lambda.model.lambdaterm.LambdaVariable;
 import lambda.model.levels.LevelContext;
+import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.lambdaterm.draganddrop.DragAndDrop;
 import lambda.viewcontroller.lambdaterm.visitor.ViewInsertionVisitor;
 import lambda.viewcontroller.lambdaterm.visitor.ViewRemovalVisitor;
@@ -71,7 +72,7 @@ public final class LambdaTermViewController extends Group implements
      */
     private LambdaValueViewController lastAlphaConvertedNode;
 
-    private AssetManager assets;
+    private StageViewController vc;
 
     /**
      * Creates a new instance of LambdaTermViewController.
@@ -119,12 +120,12 @@ public final class LambdaTermViewController extends Group implements
         return result;
     }
 
-    public void setAssets(AssetManager assets) {
-        this.assets = assets;
+    public void setStageVC(StageViewController vc) {
+        this.vc = vc;
     }
 
-    public AssetManager getAssets() {
-        return assets;
+    public StageViewController getStageVC() {
+        return vc;
     }
 
     /**

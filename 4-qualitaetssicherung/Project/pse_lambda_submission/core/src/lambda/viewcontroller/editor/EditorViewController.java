@@ -105,7 +105,7 @@ public final class EditorViewController extends StageViewController implements
      * Displays the level goal on click.
      */
     private ImageButton targetButton;
-
+    
     /**
      * Creates a new instance of EditorViewController.
      */
@@ -185,9 +185,9 @@ public final class EditorViewController extends StageViewController implements
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 AudioManager.playSound("buttonClick");
-                new PauseDialog(dialogSkin, manager.get(ProfileManager
+                showDialog(new PauseDialog(dialogSkin, manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
-                        I18NBundle.class)).show(getStage());
+                        I18NBundle.class)));
             }
         });
         hintButton.addListener(new ClickListener() {
@@ -195,29 +195,29 @@ public final class EditorViewController extends StageViewController implements
             public void clicked(InputEvent event, float x, float y) {
                 AudioManager.playSound("buttonClick");
                 EditorViewController.this.model.hintIsUsed();
-                new HintDialog(dialogSkin, manager.get(ProfileManager
+                showDialog(new HintDialog(dialogSkin, manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
                         I18NBundle.class), EditorViewController.this.model
-                        .getLevelContext(), getStage()).show(getStage());
+                        .getLevelContext(), getStage()));
             }
         });
         helpButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 AudioManager.playSound("buttonClick");
-                new HelpDialog(dialogSkin, manager.get(ProfileManager
+                showDialog(new HelpDialog(dialogSkin, manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
-                        I18NBundle.class), getStage()).show(getStage());
+                        I18NBundle.class), getStage()));
             }
         });
         targetButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 AudioManager.playSound("buttonClick");
-                new TargetDialog(dialogSkin, manager.get(ProfileManager
+                showDialog(new TargetDialog(dialogSkin, manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
                         I18NBundle.class), EditorViewController.this.model
-                        .getLevelContext(), getStage()).show(getStage());
+                        .getLevelContext(), getStage()));
             }
         });
         reductionStrategyButton.addListener(new ClickListener() {
@@ -226,7 +226,7 @@ public final class EditorViewController extends StageViewController implements
                 AudioManager.playSound("buttonClick");
                 final float buttonSize = getStage().getHeight() / 5;
                 final float labelWidth = getStage().getWidth() / 2;
-                new Dialog("", dialogSkin) {
+                showDialog(new Dialog("", dialogSkin) {
                     {
                         I18NBundle language = manager.get(
                                 ProfileManager.getManager().getCurrentProfile()
@@ -283,7 +283,7 @@ public final class EditorViewController extends StageViewController implements
                             }
                         });
                     }
-                }.show(getStage());
+                });
             }
         });
         finishedButton.addListener(new ClickListener() {
@@ -293,15 +293,15 @@ public final class EditorViewController extends StageViewController implements
                 I18NBundle language = manager.get(ProfileManager.getManager()
                         .getCurrentProfile().getLanguage(), I18NBundle.class);
                 if (model.getTerm().getChild() == null) {
-                    showDialog(language.get("invalidTermEmpty"));
+                    showHelpDialog(language.get("invalidTermEmpty"));
                 } else if (!model.getTerm().accept(new IsValidVisitor())) {
-                    showDialog(language.get("invalidTermOther"));
+                    showHelpDialog(language.get("invalidTermOther"));
                 } else if (model
                         .getTerm()
                         .accept(new ColorCollectionVisitor(
                                         ColorCollectionVisitor.TYPE_ALL))
                         .contains(Color.WHITE)) {
-                    showDialog(language.get("invalidTermWhite"));
+                    showHelpDialog(language.get("invalidTermWhite"));
                 } else {
                     LambdaUtils.setLambdaNodeViewControllerLocked(term.getRoot());
                     getGame().getController(ReductionViewController.class)
@@ -310,8 +310,8 @@ public final class EditorViewController extends StageViewController implements
                 }
             }
 
-            private void showDialog(final String message) {
-                new Dialog("", dialogSkin) {
+            private void showHelpDialog(final String message) {
+                showDialog(new Dialog("", dialogSkin) {
                     {
                         clear();
                         pad(EditorViewController.this.getStage().getHeight() / 20);
@@ -329,7 +329,7 @@ public final class EditorViewController extends StageViewController implements
                             }
                         });
                     }
-                }.show(getStage());
+                });
             }
         });
     }
@@ -379,7 +379,7 @@ public final class EditorViewController extends StageViewController implements
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     if (pos + 1 < dialogs.length) {
-                        dialogs[pos + 1].show(getStage());
+                        showDialog(dialogs[pos + 1]);
                     }
                     dialogs[pos].remove();
                 }
@@ -392,7 +392,7 @@ public final class EditorViewController extends StageViewController implements
                     getStage());
         }
         if (dialogs.length > 0) {
-            dialogs[0].show(getStage());
+            showDialog(dialogs[0]);
         }
     }
 
@@ -416,8 +416,7 @@ public final class EditorViewController extends StageViewController implements
         }
         term = LambdaTermViewController.build(model.getTerm(), true, context,
                 getStage());
-        term.setAssets(getGame().getController(AssetViewController.class)
-                .getManager());
+        term.setStageVC(this);
         getStage().addActor(term);
         term.toBack();
         term.setPosition(getStage().getWidth() * INITIAL_TERM_OFFSET.x,
@@ -494,6 +493,7 @@ public final class EditorViewController extends StageViewController implements
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Keys.BACK) {
+            removeLastDialog();
             getGame().setScreen(LevelSelectionViewController.class);
         }
         return false;
