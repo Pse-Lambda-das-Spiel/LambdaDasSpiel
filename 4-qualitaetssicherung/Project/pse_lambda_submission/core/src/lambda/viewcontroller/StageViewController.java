@@ -28,6 +28,7 @@ public abstract class StageViewController extends ViewController {
     public StageViewController() {
         stage = new Stage(new ScreenViewport());
         lastViewController = null;
+        lastDialog = null;
     }
 
     /**
@@ -86,7 +87,7 @@ public abstract class StageViewController extends ViewController {
     
     public Dialog showDialog(Dialog dialog) {
         lastDialog = dialog;
-        return dialog.show(stage);
+        return lastDialog.show(stage);
     }
     
     public void removeLastDialog() {

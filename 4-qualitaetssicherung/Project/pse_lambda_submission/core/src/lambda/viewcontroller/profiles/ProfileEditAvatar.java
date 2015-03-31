@@ -47,11 +47,13 @@ public class ProfileEditAvatar extends StageViewController implements
     private Label chooseAvatar;
     private boolean newProfile;
     private final float space;
+    private boolean showsHelloDialog;
 
     /**
      * Creates a object of the class without initializing the screen.
      */
     public ProfileEditAvatar() {
+        showsHelloDialog = false;
         ProfileManager.getManager().addObserver(this);
         profileEdit = ProfileManager.getManager().getProfileEdit();
         space = getStage().getWidth() / 64;
@@ -78,10 +80,12 @@ public class ProfileEditAvatar extends StageViewController implements
             @Override
             public boolean keyDown(int keycode) {
                 if (keycode == Keys.BACK) {
-                    removeLastDialog();
-                    ProfileManager.getManager().getCurrentProfile()
+                    if (!showsHelloDialog) {
+                        removeLastDialog();
+                        ProfileManager.getManager().getCurrentProfile()
                             .setAvatar(profileEdit.getAvatar());
-                    getGame().setScreen(ProfileEditName.class);
+                        getGame().setScreen(ProfileEditName.class);
+                    }
                 }
                 return false;
             }
@@ -201,6 +205,8 @@ public class ProfileEditAvatar extends StageViewController implements
                 final Skin dialogSkin = manager.get(
                         "data/skins/DialogTemp.json", Skin.class);
                 final float height = getStage().getHeight();
+
+                showsHelloDialog = true;
                 showDialog(new Dialog("", dialogSkin) {
                     private boolean changedToMainMenu = false;
                     {
@@ -239,6 +245,7 @@ public class ProfileEditAvatar extends StageViewController implements
                             changedToMainMenu = true;
                             remove();
                             getGame().setScreen(MainMenuViewController.class);
+                            showsHelloDialog = false;
                         }
                     }
                 }).setFillParent(true);
