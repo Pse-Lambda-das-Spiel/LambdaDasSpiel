@@ -37,6 +37,7 @@ public class TargetDialog extends Dialog {
             Stage stage) {
         super("", skin);
         clear();
+        EditorViewController.disableDragAndDrop();
         align(Align.top);
         setFillParent(true);
         LevelModel level = context.getLevelModel();
@@ -65,6 +66,7 @@ public class TargetDialog extends Dialog {
         addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                EditorViewController.enableDragAndDrop();
                 remove();
             }
         });

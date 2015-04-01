@@ -68,7 +68,7 @@ public final class EditorViewController extends StageViewController implements
     /**
      * The viewcontroller of the term that is being edited.
      */
-    private LambdaTermViewController term;
+    private static LambdaTermViewController term;
     /**
      * The model of the editor.
      */
@@ -228,6 +228,7 @@ public final class EditorViewController extends StageViewController implements
                 final float labelWidth = getStage().getWidth() / 2;
                 showDialog(new Dialog("", dialogSkin) {
                     {
+                        EditorViewController.disableDragAndDrop();
                         I18NBundle language = manager.get(
                                 ProfileManager.getManager().getCurrentProfile()
                                 .getLanguage(), I18NBundle.class);
@@ -248,6 +249,7 @@ public final class EditorViewController extends StageViewController implements
                                         float y) {
                                     AudioManager.playSound("buttonClick");
                                     model.setStrategy(strategies.get(t));
+                                    EditorViewController.enableDragAndDrop();
                                     remove();
                                 }
                             });
@@ -278,6 +280,7 @@ public final class EditorViewController extends StageViewController implements
                                     float y) {
                                 if (!(0 < x && 0 < y && x < dialog.getWidth() && y < dialog
                                         .getHeight())) {
+                                    EditorViewController.enableDragAndDrop();
                                     remove();
                                 }
                             }
@@ -312,6 +315,7 @@ public final class EditorViewController extends StageViewController implements
             private void showHelpDialog(final String message) {
                 showDialog(new Dialog("", dialogSkin) {
                     {
+                        EditorViewController.disableDragAndDrop();
                         clear();
                         pad(EditorViewController.this.getStage().getHeight() / 20);
                         Label errorLabel = new Label(message, dialogSkin);
@@ -324,6 +328,7 @@ public final class EditorViewController extends StageViewController implements
                             @Override
                             public void clicked(InputEvent event, float x,
                                     float y) {
+                                EditorViewController.enableDragAndDrop();
                                 remove();
                             }
                         });
@@ -379,6 +384,8 @@ public final class EditorViewController extends StageViewController implements
                 public void clicked(InputEvent event, float x, float y) {
                     if (pos + 1 < dialogs.length) {
                         showDialog(dialogs[pos + 1]);
+                    } else {
+                        EditorViewController.enableDragAndDrop();
                     }
                     dialogs[pos].remove();
                 }
@@ -391,10 +398,41 @@ public final class EditorViewController extends StageViewController implements
                     getStage());
         }
         if (dialogs.length > 0) {
+            EditorViewController.disableDragAndDrop();
             showDialog(dialogs[0]);
         }
     }
 
+    /**
+     * Disables drag&drop in the EditorViewController.
+     * 
+     * @throws IllegalStateException if the editable term of the EditorViewController or its drag&drop handler is null
+     */
+    public static void disableDragAndDrop() {
+        if (term == null) {
+            throw new IllegalStateException("reset hast to be called before accessing term!");
+        } 
+        if (term.getDragAndDrop() == null) {
+            throw new IllegalStateException("reset hast to be called before accessing the drag&drop of term!");
+        } 
+        term.getDragAndDrop().setEnabled(false);
+    }
+    
+    /**
+     * Enables drag&drop in the EditorViewController.
+     * 
+     * @throws IllegalStateException if the editable term of the EditorViewController or its drag&drop handler is null
+     */
+    public static void enableDragAndDrop() {
+        if (term == null) {
+            throw new IllegalStateException("reset hast to be called before accessing term!");
+        } 
+        if (term.getDragAndDrop() == null) {
+            throw new IllegalStateException("reset hast to be called before accessing the drag&drop handler of term!");
+        } 
+        term.getDragAndDrop().setEnabled(true);
+    }
+    
     /**
      * Resets this view controller with the given values.
      *
@@ -585,7 +623,7 @@ public final class EditorViewController extends StageViewController implements
     private class PauseDialog extends Dialog {
         public PauseDialog(Skin dialogSkin, I18NBundle language) {
             super("", dialogSkin);
-
+            EditorViewController.disableDragAndDrop();
             Label mainMenuLabel = new Label(language.get("mainMenu"),
                     dialogSkin);
 
@@ -594,6 +632,7 @@ public final class EditorViewController extends StageViewController implements
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     AudioManager.playSound("buttonClick");
+                    EditorViewController.enableDragAndDrop();
                     getGame().setScreen(MainMenuViewController.class);
                     remove();
                 }
@@ -608,6 +647,7 @@ public final class EditorViewController extends StageViewController implements
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     AudioManager.playSound("buttonClick");
+                    EditorViewController.enableDragAndDrop();
                     getGame().setScreen(LevelSelectionViewController.class);
                     remove();
                 }
@@ -620,6 +660,7 @@ public final class EditorViewController extends StageViewController implements
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     AudioManager.playSound("buttonClick");
+                    EditorViewController.enableDragAndDrop();
                     EditorViewController.this.reset(model.getLevelContext());
                     EditorViewController.this.show();
                     remove();
@@ -635,6 +676,7 @@ public final class EditorViewController extends StageViewController implements
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     AudioManager.playSound("buttonClick");
+                    EditorViewController.enableDragAndDrop();
                     remove();
                 }
             });

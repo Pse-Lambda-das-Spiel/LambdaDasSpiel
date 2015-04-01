@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import lambda.model.lambdaterm.LambdaValue;
 import lambda.viewcontroller.assets.AssetViewController;
+import lambda.viewcontroller.editor.EditorViewController;
 
 /**
  * Represents a viewcontroller value node (abstraction or variable) in a
@@ -64,58 +65,47 @@ public abstract class LambdaValueViewController extends
             this.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    if (!getLinkedTerm().isLocked()
-                            && viewController.isEditable()) {
-                        final Skin dialogSkin = viewController.getStageVC().getGame()
-                                .getController(AssetViewController.class).getManager().get(
-                                "data/skins/DialogTemp.json", Skin.class);
-                        final float height = getStage().getHeight();
-                        viewController.getStageVC().showDialog(new Dialog("", dialogSkin) {
-                            {
-                                clear();
-                                List<Color> colors = viewController
-                                        .getContext().getLevelModel()
-                                        .getAvailableColors();
-                                int size = (int) Math.ceil(Math.sqrt(colors
-                                        .size()));
-                                pad(height / 72 * size);
-                                int i = 0;
-                                for (final Color color : colors) {
-                                    if (i++ % size == 0) {
-                                        row().size(height / 9).space(10);
-                                    }
-                                    ImageButton colorButton = new ImageButton(
-                                            dialogSkin, "colorButton");
-                                    colorButton.setColor(color);
-                                    colorButton
-                                            .addListener(new ClickListener() {
-                                                @Override
-                                                public void clicked(
-                                                        InputEvent event,
-                                                        float x, float y) {
-                                                    ((LambdaValue) getLinkedTerm())
-                                                            .setColor(color);
-                                                    remove();
-                                                }
-                                            });
-                                    add(colorButton);
+                    final Skin dialogSkin = viewController.getStageVC().getGame()
+                            .getController(AssetViewController.class).getManager()
+                            .get("data/skins/DialogTemp.json", Skin.class);
+                    final float height = getStage().getHeight();
+                    viewController.getStageVC().showDialog(new Dialog("", dialogSkin) {
+                        {
+                            clear();
+                            EditorViewController.disableDragAndDrop();
+                            List<Color> colors = viewController.getContext().getLevelModel().getAvailableColors();
+                            int size = (int) Math.ceil(Math.sqrt(colors.size()));
+                            pad(height / 72 * size);
+                            int i = 0;
+                            for (final Color color : colors) {
+                                if (i++ % size == 0) {
+                                    row().size(height / 9).space(10);
                                 }
-                                final Dialog dialog = this;
-                                addListener(new ClickListener() {
+                                ImageButton colorButton = new ImageButton(dialogSkin, "colorButton");
+                                colorButton.setColor(color);
+                                colorButton.addListener(new ClickListener() {
                                     @Override
-                                    public void clicked(InputEvent event,
-                                            float x, float y) {
-                                        if (!(0 < x && 0 < y
-                                                && x < dialog.getWidth() && y < dialog
-                                                .getHeight())) {
-                                            remove();
-                                        }
+                                    public void clicked(InputEvent event, float x, float y) {
+                                        ((LambdaValue) getLinkedTerm()).setColor(color);
+                                        EditorViewController.enableDragAndDrop();
+                                        remove();
                                     }
                                 });
+                                add(colorButton);
                             }
-                        });
-                        getViewController().getDragAndDrop().resetTouchState();
-                    }
+                            final Dialog dialog = this;
+                            addListener(new ClickListener() {
+                                @Override
+                                public void clicked(InputEvent event, float x, float y) {
+                                    if (!(0 < x && 0 < y && x < dialog.getWidth() && y < dialog.getHeight())) {
+                                        EditorViewController.enableDragAndDrop();
+                                        remove();
+                                    }
+                                }
+                            });
+                        }
+                    });
+                    getViewController().getDragAndDrop().resetTouchState();
                 }
             });
         }

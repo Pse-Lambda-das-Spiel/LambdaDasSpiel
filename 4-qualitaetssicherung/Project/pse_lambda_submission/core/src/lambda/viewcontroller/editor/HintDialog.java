@@ -33,6 +33,7 @@ public class HintDialog extends Dialog {
         super("", skin);
         clear();
         setFillParent(true);
+        EditorViewController.disableDragAndDrop();
         if (context.getLevelModel().getHint().getChild() == null) {
             Label noHint = new Label(language.get("noHint"), skin);
             noHint.setWrap(true);
@@ -48,6 +49,7 @@ public class HintDialog extends Dialog {
         addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                EditorViewController.enableDragAndDrop();
                 remove();
             }
         });
