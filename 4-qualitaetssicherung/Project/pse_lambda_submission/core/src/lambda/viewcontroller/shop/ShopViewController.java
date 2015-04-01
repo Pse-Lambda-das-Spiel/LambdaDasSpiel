@@ -1,5 +1,10 @@
 package lambda.viewcontroller.shop;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.graphics.Texture;
@@ -23,6 +28,7 @@ import lambda.model.shop.ShopModel;
 import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
+import lambda.viewcontroller.profiles.ProfileEditName;
 
 /**
  * This class represents the view of the shop
@@ -79,7 +85,25 @@ public class ShopViewController extends StageViewController implements
 
     @Override
     public void show() {
-        super.show();
+        InputProcessor backProcessor = new InputAdapter() {
+            @Override
+            public boolean keyDown(int keycode) {
+                if (keycode == Keys.BACK) {
+                    removeLastDialog();
+                    table.removeActor(musicTable);
+                    table.removeActor(imagesTable);
+                    table.removeActor(elementsTable);
+                    musicB = false;
+                    imageB = false;
+                    elementsB = false;
+                    getGame().setScreen(MainMenuViewController.class);  
+                }
+                return false;
+            }
+        };
+        InputMultiplexer multiplexer = new InputMultiplexer(getStage(),
+                backProcessor);
+        Gdx.input.setInputProcessor(multiplexer);
         coins.setText(Integer.toString(ProfileManager.getManager()
                 .getCurrentProfile().getCoins()));
     }
