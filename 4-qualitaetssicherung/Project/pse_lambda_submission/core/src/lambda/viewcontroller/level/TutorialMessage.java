@@ -39,6 +39,7 @@ public class TutorialMessage extends Dialog {
         if (model.getImageName().equals("")) {
             message.setFontScale(0.7f);
             add(message).width(stageWidth / 2);
+            message.setFontScale(stageHeight / 720 * message.getFontScaleY());
         } else {
             float scaleFactorX = stageWidth / 1280;
             float scaleFactorY = stageHeight / 720;
@@ -47,6 +48,7 @@ public class TutorialMessage extends Dialog {
                     .row();
             message.setFontScale(0.7f);
             add(message).width(stageWidth / 2);
+            message.setFontScale(stageHeight / 720 * message.getFontScaleY());
         }
     }
 

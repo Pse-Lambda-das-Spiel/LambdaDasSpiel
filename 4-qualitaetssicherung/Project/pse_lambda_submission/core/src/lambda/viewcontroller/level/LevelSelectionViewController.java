@@ -241,8 +241,10 @@ public class LevelSelectionViewController extends StageViewController implements
         ImageButton sandboxButton = new ImageButton(sandboxStyle);
 
         for (int i = 0; i < levelManager.getNumberOfLevels(); i++) {
-            levelButtons.add(new TextButton(Integer.toString(i + 1), skin,
-                    "level"));
+            TextButton newButton = new TextButton(Integer.toString(i + 1), skin,
+                    "level");
+            newButton.getLabel().setFontScale(getStage().getHeight() / 720 * newButton.getLabel().getFontScaleY());
+            levelButtons.add(newButton);
         }
         levelStack = new LevelStack();
         displayLevelButtons();

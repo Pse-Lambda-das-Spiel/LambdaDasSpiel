@@ -171,6 +171,8 @@ public class AchievementMenuViewController extends StageViewController {
             final float width = getStage().getWidth();
             showDialog(new Dialog("", skin) {
                 {
+                    this.getStyle().background.setMinHeight(0);
+                    this.getStyle().background.setMinWidth(0);
                     clear();
                     pad(height / 20);
                     // getImage() removes the image from its button so the

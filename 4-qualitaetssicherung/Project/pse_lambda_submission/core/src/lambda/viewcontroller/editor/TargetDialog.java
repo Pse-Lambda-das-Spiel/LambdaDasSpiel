@@ -51,6 +51,7 @@ public class TargetDialog extends Dialog {
         if (scaleFactor < 1) {
             goalLabel.setFontScale(scaleFactor);
         }
+        goalLabel.setFontScale(stage.getHeight() / 720 * goalLabel.getFontScaleY());
         float pad = stage.getHeight() / 15;
         Cell<Label> goalCell = add(goalLabel).width(stage.getWidth() * 2 / 3)
                 .padTop(pad);
