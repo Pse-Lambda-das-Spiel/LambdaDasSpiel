@@ -86,13 +86,12 @@ public abstract class StageViewController extends ViewController {
     }
     
     public Dialog showDialog(Dialog dialog) {
-        lastDialog = dialog;
-        return lastDialog.show(stage);
+        return lastDialog = dialog.show(stage);
     }
     
     public void removeLastDialog() {
         if (lastDialog != null) {
-            lastDialog.remove();
+            stage.getActors().removeValue(lastDialog, true);
             lastDialog = null;
         }
     }

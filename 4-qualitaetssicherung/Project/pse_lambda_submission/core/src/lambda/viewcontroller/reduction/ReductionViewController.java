@@ -82,7 +82,7 @@ public class ReductionViewController extends StageViewController implements
     private ImageButton playPauseButton;
     // needed in reductionFinished(...)
     private AssetManager assets;
-    private Dialog lastDialog;
+    
     /**
      * Last down cursor x position.
      */
@@ -173,18 +173,18 @@ public class ReductionViewController extends StageViewController implements
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 AudioManager.playSound("buttonClick");
-                lastDialog = new PauseDialog(dialogSkin, manager.get(ProfileManager
+                showDialog(new PauseDialog(dialogSkin, manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
-                        I18NBundle.class)).show(getStage());
+                        I18NBundle.class)));
             }
         });
         helpButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 AudioManager.playSound("buttonClick");
-                lastDialog = new HelpDialog(dialogSkin, manager.get(ProfileManager
+                showDialog(new HelpDialog(dialogSkin, manager.get(ProfileManager
                         .getManager().getCurrentProfile().getLanguage(),
-                        I18NBundle.class), getStage()).show(getStage());
+                        I18NBundle.class), getStage()));
             }
         });
         stepRevertButton.addListener(new ClickListener() {
@@ -373,16 +373,12 @@ public class ReductionViewController extends StageViewController implements
      */
     @Override
     public void reductionFinished(boolean levelComplete) {
-        if (lastDialog != null) {
-            getStage().getActors().removeIndex(getStage().getActors().indexOf(lastDialog, true));
-            lastDialog = null;
-        }
         // add coins to player etc.
         I18NBundle language = assets.get(ProfileManager.getManager()
                 .getCurrentProfile().getLanguage());
-        new FinishDialog(levelComplete, model.getContext().getLevelModel()
+        showDialog(new FinishDialog(levelComplete, model.getContext().getLevelModel()
                 .getCoins(), assets.get("data/skins/DialogTemp.json",
-                Skin.class), language, null).show(getStage());
+                Skin.class), language, null));
     }
 
     /**
@@ -561,6 +557,8 @@ public class ReductionViewController extends StageViewController implements
                 I18NBundle language, String specialMessage) {
             super("", dialogSkin);
             
+            removeLastDialog();
+            
             List<Label> labels = new ArrayList<Label>();
             final LevelModel playedLevel = model.getContext().getLevelModel();
             ProfileModel currentProfile = ProfileManager.getManager()
@@ -707,28 +705,20 @@ public class ReductionViewController extends StageViewController implements
 
     @Override
     public void maxNodesReached() {
-        if (lastDialog != null) {
-            getStage().getActors().removeIndex(getStage().getActors().indexOf(lastDialog, true));
-            lastDialog = null;
-        }
         I18NBundle language = assets.get(ProfileManager.getManager()
                 .getCurrentProfile().getLanguage());
-        new FinishDialog(false, model.getContext().getLevelModel()
+        showDialog(new FinishDialog(false, model.getContext().getLevelModel()
                 .getCoins(), assets.get("data/skins/DialogTemp.json",
-                Skin.class), language, language.get("maxNodesReached")).show(getStage());
+                Skin.class), language, language.get("maxNodesReached")));
     }
 
     @Override
     public void maxStepsReached() {
-        if (lastDialog != null) {
-            getStage().getActors().removeIndex(getStage().getActors().indexOf(lastDialog, true));
-            lastDialog = null;
-        }
         I18NBundle language = assets.get(ProfileManager.getManager()
                 .getCurrentProfile().getLanguage());
-        new FinishDialog(false, model.getContext().getLevelModel()
+        showDialog(new FinishDialog(false, model.getContext().getLevelModel()
                 .getCoins(), assets.get("data/skins/DialogTemp.json",
-                Skin.class), language, language.get("maxStepsReached")).show(getStage());
+                Skin.class), language, language.get("maxStepsReached")));
     }
 
 }
