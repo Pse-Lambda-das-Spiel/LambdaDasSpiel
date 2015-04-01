@@ -120,6 +120,7 @@ public class AchievementMenuViewController extends StageViewController {
         mainTable.setFillParent(true);
         getStage().addActor(mainTable);
         titleLabel = new Label("Initial string", skin, "roboto");
+        titleLabel.setFontScale(getStage().getHeight() / 720 * titleLabel.getFontScaleY());
         achievementTable = new Table();
         achievementTable.pad(space);
         achievementTable.defaults().space(space * 1.5f, space * 1.5f,
@@ -130,6 +131,7 @@ public class AchievementMenuViewController extends StageViewController {
         for (int i = 0; i < achievementTypeList.size(); i++) {
             // the labels have to be stored to change their text at a later time
             Label label = new Label("Initial string", skin, "roboto");
+            label.setFontScale(getStage().getHeight() / 720 * label.getFontScaleY());
             labelMap.put(achievementTypeList.get(i), label);
             achievementTable.add(label).center().colspan(ACHIEVEMENTS_PER_ROW);
             int n = achievementManager.getAchievementNumberPerType().get(
@@ -184,6 +186,7 @@ public class AchievementMenuViewController extends StageViewController {
                             space * 1.5f);
                     Label label = new Label(clickedActor.getText(), skin,
                             "roboto");
+                    label.setFontScale(height / 720 * label.getFontScaleY());
                     label.setWrap(true);
                     add(label).width(width / 2);
                     addListener(new ClickListener() {

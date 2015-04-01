@@ -121,6 +121,7 @@ public class MainMenuViewController extends StageViewController implements
         coinButton.add(new Image(skin, "coin"));
         coinButton.add(coins);
         profileName = new Label("Initial string", skin, "roboto");
+        profileName.setFontScale(getStage().getHeight() / 720 * profileName.getFontScaleY());
         profileImg = new Image();
 
         Container<ImageButton> settingsButtonContainer = new Container<>();
@@ -140,18 +141,19 @@ public class MainMenuViewController extends StageViewController implements
         Container<ImageTextButton> coinButtonContainer = new Container<>();
         coinButtonContainer.pad(padSpace).align(Align.topRight)
                 .setSize(buttonSize, buttonSize);
-        coinButtonContainer.setActor(coinButton);
+        coinButtonContainer.setActor(coinButton);      
+        coinButton.getLabel().setFontScale(getStage().getHeight() / 720 * coinButton.getLabel().getFontScaleY());
         getStage().addActor(coinButtonContainer);
         coinButtonContainer.setFillParent(true);
         coinButtonContainer.maxSize(buttonSize * 2f);
 
         Table profileTable = new Table();
-        profileTable.pad(padSpace * 1.5f).align(Align.topLeft);
+        profileTable.pad(padSpace * 1.0f).align(Align.topLeft);
         profileTable.add(logoutButton).align(Align.left)
-                .spaceBottom(getStage().getHeight() / 50).maxSize(buttonSize)
+                .spaceBottom(getStage().getHeight() / 80).maxSize(buttonSize)
                 .row();
-        profileTable.add(profileImg).align(Align.left).size(buttonSize).row();
-        profileTable.add(profileName).align(Align.left);
+        profileTable.add(profileImg).align(Align.center).size(buttonSize * 0.75f).spaceTop(0).row();
+        profileTable.add(profileName).align(Align.center);
         getStage().addActor(profileTable);
         profileTable.setFillParent(true);
 

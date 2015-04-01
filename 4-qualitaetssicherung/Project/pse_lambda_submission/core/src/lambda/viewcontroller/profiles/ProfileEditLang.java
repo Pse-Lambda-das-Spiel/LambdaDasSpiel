@@ -7,7 +7,9 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;
+import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
@@ -58,9 +60,12 @@ public class ProfileEditLang extends StageViewController implements
     public void queueAssets(AssetManager assets) {
         String start = profileEdit.getLang();
         String current = start;
+        TextureParameter param = new TextureParameter();
+        param.magFilter = TextureFilter.Linear;
+        param.minFilter = TextureFilter.Linear;
         do {
             assets.load(current, I18NBundle.class);
-            assets.load(profileEdit.getLangPic(), Texture.class);
+            assets.load(profileEdit.getLangPic(), Texture.class, param);
             profileEdit.nextLang();
             current = profileEdit.getLang();
         } while (!current.equals(start));

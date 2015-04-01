@@ -6,9 +6,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
@@ -28,7 +26,6 @@ import lambda.model.shop.ShopModel;
 import lambda.viewcontroller.AudioManager;
 import lambda.viewcontroller.StageViewController;
 import lambda.viewcontroller.mainmenu.MainMenuViewController;
-import lambda.viewcontroller.profiles.ProfileEditName;
 
 /**
  * This class represents the view of the shop
@@ -311,24 +308,6 @@ public class ShopViewController extends StageViewController implements
         if (elementsB) {
             table.addActorAfter(elementUITypeButton, elementsTable);
         }
-        /*
-         * for (Actor item : music.getGroupVCs().getChildren()) {
-         * ShopItemViewController<MusicItemModel> itemVC =
-         * (ShopItemViewController<MusicItemModel>) item;
-         * itemVC.setCurrentState(); table.removeActor(musicTable); musicTable =
-         * music.updateButtons(); table.addActor(musicTable); } for (Actor item
-         * : bgImages.getGroupVCs().getChildren()) {
-         * ShopItemViewController<BackgroundImageItemModel> itemVC =
-         * (ShopItemViewController<BackgroundImageItemModel>) item;
-         * itemVC.setCurrentState(); table.removeActor(imagesTable); imagesTable
-         * = bgImages.updateButtons(); table.addActor(imagesTable); } for (Actor
-         * item : elementUIs.getGroupVCs().getChildren()) {
-         * ShopItemViewController<ElementUIContextFamily> itemVC =
-         * (ShopItemViewController<ElementUIContextFamily>) item;
-         * itemVC.setCurrentState(); table.removeActor(elementsTable);
-         * elementsTable = elementUIs.updateButtons();
-         * table.addActor(elementsTable); }
-         */
     }
 
     /**

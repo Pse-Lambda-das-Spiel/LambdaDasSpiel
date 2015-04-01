@@ -9,12 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.I18NBundle;
 
 import lambda.model.profiles.ProfileManager;
 import lambda.model.shop.ShopItemModel;
 import lambda.model.shop.ShopItemModelObserver;
-import lambda.model.shop.ShopModel;
 import lambda.viewcontroller.AudioManager;
 
 /**

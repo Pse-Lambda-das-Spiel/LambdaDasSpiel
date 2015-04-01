@@ -218,7 +218,6 @@ public class ReductionViewController extends StageViewController implements
         backToEditorButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                // TODO
             }
         });
     }

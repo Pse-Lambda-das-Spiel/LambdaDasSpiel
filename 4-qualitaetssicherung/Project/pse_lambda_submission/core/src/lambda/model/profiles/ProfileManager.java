@@ -29,7 +29,7 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     /**
      * Maximum length of a porfile's name.
      */
-    public static final int MAX_NAME_LENGTH = 20;
+    public static final int MAX_NAME_LENGTH = 12;
     private static final String chars = "[a-zA-Z0-9ßáâàäéêèëíîìïóôòöúûùüÿçæœñÁÂÀÄÉÊÈËÍÎÌÏÓÔÒÖÚÛÙÜŸÇÆŒÑ]";
     /**
      * Regex of all chars a profile name can contain.
