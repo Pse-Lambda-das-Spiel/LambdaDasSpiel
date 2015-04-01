@@ -93,6 +93,7 @@ public class ProfileSelection extends StageViewController {
                             }
                             Label nameLabel = new Label(exitString, dialogSkin);
                             add(nameLabel).colspan(2);
+                            nameLabel.setFontScale(ProfileSelection.this.getStage().getHeight() / 720 * nameLabel.getFontScaleY());
                             row().space(10);
                             // yes
                             ImageButton yesButton = new ImageButton(dialogSkin,
@@ -173,9 +174,11 @@ public class ProfileSelection extends StageViewController {
             profileView.row().height(height);
             TextButton pButton = new TextButton("", manager.get(skinJson,
                     Skin.class));
-            pButton.getLabel().setFontScale(0.5f);
+            pButton.getLabel().setFontScale(0.7f);
             profileView.add(pButton).width(getStage().getWidth() * 0.55f)
                     .space(space);
+            pButton.getLabel().setFontScale(height / (720 * 3 / 5
+                    / ProfileManager.MAX_NUMBER_OF_PROFILES) * pButton.getLabel().getFontScaleY());
             profileButtons.add(pButton);
             pButton.addListener(new SelectProfileClickListener());
             ImageButton eButton = new ImageButton(manager.get(skinJson,
@@ -246,6 +249,7 @@ public class ProfileSelection extends StageViewController {
                     pad(space * 3 / 2);
                     Label nameLabel = new Label(name, dialogSkin);
                     add(nameLabel).colspan(2);
+                    nameLabel.setFontScale(ProfileSelection.this.getStage().getHeight() / 720 * nameLabel.getFontScaleY());
                     row().space(10);
                     // configuration/edit option
                     ImageButton configButton = new ImageButton(dialogSkin,
@@ -289,6 +293,7 @@ public class ProfileSelection extends StageViewController {
                     pad(space * 3 / 2);
                     Label nameLabel = new Label(name, dialogSkin);
                     add(nameLabel).colspan(2);
+                    nameLabel.setFontScale(ProfileSelection.this.getStage().getHeight() / 720 * nameLabel.getFontScaleY());
                     row().space(10);
                     // yes
                     ImageButton yesButton = new ImageButton(dialogSkin,

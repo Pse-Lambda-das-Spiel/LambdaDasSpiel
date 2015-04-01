@@ -81,13 +81,14 @@ public class ProfileEditName extends StageViewController implements
         nameSelection.add();
         nameSelection.row().height(getStage().getHeight() / 5);
         enterName = new Label(null, manager.get(skinJson, Skin.class));
-        enterName.setFontScale(0.7f);
         nameSelection.add(enterName).width(getStage().getHeight() * 0.8f)
                 .space(space);
         enterName.setAlignment(Align.center);
+        enterName.setFontScale(getStage().getHeight() / 720 * enterName.getFontScaleY());
         nameSelection.row().height(getStage().getHeight() / 3);
         nameField = new TextField("", manager.get(skinJson, Skin.class));
         nameField.setMaxLength(ProfileManager.MAX_NAME_LENGTH);
+        nameField.getStyle().font.setScale(getStage().getHeight() / 720);
         nameField.setTextFieldFilter(new TextFieldFilter() {
             private Matcher matcher = Pattern.compile(ProfileManager.VALID_CHARS).matcher("");
 			@Override
@@ -225,11 +226,12 @@ public class ProfileEditName extends StageViewController implements
         public NameDialog(String key, float stageHeight) {
             super("", manager.get("data/skins/DialogTemp.json", Skin.class));
             clear();
-            pad(space);
+            pad(space * 2);
             Label enterName = new Label(manager.get(profileEdit.getLang(),
                     I18NBundle.class).get(key), manager.get(
                     "data/skins/DialogTemp.json", Skin.class));
-            enterName.setFontScale(0.5f);
+            enterName.setFontScale(0.7f);
+            enterName.setFontScale(ProfileEditName.this.getStage().getHeight() / 720 * enterName.getFontScaleY());
             add(enterName);
             row();
             ImageButton yesButton = new ImageButton(manager.get(

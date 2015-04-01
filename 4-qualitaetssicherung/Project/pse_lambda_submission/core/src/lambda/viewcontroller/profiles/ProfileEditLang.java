@@ -100,7 +100,8 @@ public class ProfileEditLang extends StageViewController implements
         langSelection.row().height(getStage().getHeight() / 5);
         langSelection.add();
         langSelection.add(lang).width(getStage().getWidth() / 2);
-
+        lang.setFontScale(getStage().getHeight() / 720 * lang.getFontScaleY());
+        
         backButton = new ImageButton(manager.get(skinJson, Skin.class),
                 "leftButton");
         Container<ImageButton> buttonContainer = new Container<ImageButton>();

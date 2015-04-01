@@ -113,14 +113,14 @@ public class ProfileEditAvatar extends StageViewController implements
         avatarSelection.setFillParent(true);
 
         chooseAvatar = new Label(null, manager.get(skinJson, Skin.class));
-        chooseAvatar.setFontScale(0.7f);
         chooseAvatar.setAlignment(Align.center);
         avatarSelection.row().height(getStage().getHeight() / 20);
         avatarSelection.add();
         avatarSelection.row().height(getStage().getHeight() / 5);
         avatarSelection.add();
         avatarSelection.add(chooseAvatar).width(getStage().getWidth() / 2);
-
+        chooseAvatar.setFontScale(getStage().getHeight() / 720 * chooseAvatar.getFontScaleY());
+        
         avatarSelection.row();
         ImageButton selectLeft = new ImageButton(manager.get(skinJson,
                 Skin.class), "leftButton");

@@ -84,6 +84,7 @@ public class SettingsViewController extends StageViewController {
         settingsView.add();
         settingsView.row().height(height);
         musicLabel = new Label(null, manager.get(skinJson, Skin.class));
+        musicLabel.setFontScale(getStage().getHeight() / 720 * musicLabel.getFontScaleY());
         settingsView.add(musicLabel).width(width);
         settingsView.row().height(height);
         musicSlider = new Slider(0, 1, 0.01f, false, manager.get(skinJson,
@@ -97,6 +98,7 @@ public class SettingsViewController extends StageViewController {
         settingsView.add(musicSlider).width(width);
         settingsView.row().height(height);
         soundLabel = new Label(null, manager.get(skinJson, Skin.class));
+        soundLabel.setFontScale(getStage().getHeight() / 720 * soundLabel.getFontScaleY());
         settingsView.add(soundLabel).width(width);
         settingsView.row().height(height);
         soundSlider = new Slider(0, 1, 0.01f, false, manager.get(skinJson,
@@ -118,7 +120,8 @@ public class SettingsViewController extends StageViewController {
             }
         });
         settingsView.add(statistics).width(width * 2 / 3).space(space * 4);
-
+        statistics.getLabel().setFontScale(getStage().getHeight() / 720 * statistics.getLabel().getFontScaleY());
+        
         ImageButton backButton = new ImageButton(manager.get(skinJson,
                 Skin.class), "backButton");
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
