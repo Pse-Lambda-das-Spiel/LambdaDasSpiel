@@ -44,7 +44,7 @@ public class TargetDialog extends Dialog {
         Label goalLabel = new Label(
                 language.get(level.isStandardMode() ? "goalDialog"
                         : "reverseGoalDialog"), skin);
-        float scaleFactor = stage.getWidth()
+        float scaleFactor = 1280
                 * 2
                 / 3
                 / goalLabel.getStyle().font.getBounds(goalLabel.getText()).width;
