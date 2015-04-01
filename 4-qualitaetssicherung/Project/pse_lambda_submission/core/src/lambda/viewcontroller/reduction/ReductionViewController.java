@@ -244,7 +244,7 @@ public class ReductionViewController extends StageViewController implements
         if (term != null) {
             term.remove();
         }
-        term = LambdaTermViewController.build(model.getTerm(), true,
+        term = LambdaTermViewController.build(model.getTerm(), false,
                 model.getContext(), getStage());
         getStage().addActor(term);
         term.toBack();

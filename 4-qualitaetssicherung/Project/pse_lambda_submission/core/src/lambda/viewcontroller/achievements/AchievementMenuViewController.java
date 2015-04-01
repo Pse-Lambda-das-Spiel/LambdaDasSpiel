@@ -129,8 +129,7 @@ public class AchievementMenuViewController extends StageViewController {
                 .getAchievementTypeList();
         for (int i = 0; i < achievementTypeList.size(); i++) {
             // the labels have to be stored to change their text at a later time
-            Label label = new Label("Initial string", skin, "robotoLight");
-            // only tmp, does not look so nice with scaling
+            Label label = new Label("Initial string", skin, "roboto");
             labelMap.put(achievementTypeList.get(i), label);
             achievementTable.add(label).center().colspan(ACHIEVEMENTS_PER_ROW);
             int n = achievementManager.getAchievementNumberPerType().get(
@@ -182,7 +181,7 @@ public class AchievementMenuViewController extends StageViewController {
                     add(image).top().pad(space * 1.5f, space / 2, space * 1.5f,
                             space * 1.5f);
                     Label label = new Label(clickedActor.getText(), skin,
-                            "robotoLight");
+                            "roboto");
                     label.setWrap(true);
                     add(label).width(width / 2);
                     addListener(new ClickListener() {

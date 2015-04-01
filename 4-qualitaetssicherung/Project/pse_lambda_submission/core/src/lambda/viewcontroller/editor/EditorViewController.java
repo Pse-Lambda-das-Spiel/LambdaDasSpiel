@@ -303,7 +303,6 @@ public final class EditorViewController extends StageViewController implements
                         .contains(Color.WHITE)) {
                     showHelpDialog(language.get("invalidTermWhite"));
                 } else {
-                    LambdaUtils.setLambdaNodeViewControllerLocked(term.getRoot());
                     getGame().getController(ReductionViewController.class)
                             .reset(model);
                     getGame().setScreen(ReductionViewController.class);

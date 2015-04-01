@@ -34,11 +34,11 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
      * is requested, a minimal term is reached or the maximum number of
      * reduction steps has been performed.
      */
-    private boolean paused;
+    private volatile boolean paused;
     /**
      * Indicates whether a pause of the automatic reduction has been requested.
      */
-    private boolean pauseRequested;
+    private volatile boolean pauseRequested;
     /**
      * The reduction strategy used for beta reductions.
      */
@@ -51,7 +51,7 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
      * Indicates whether the model is busy, i.e. whether a step is being
      * performed at the moment.
      */
-    private boolean busy;
+    private volatile boolean busy;
     /**
      * Contains all data of the current level.
      */
