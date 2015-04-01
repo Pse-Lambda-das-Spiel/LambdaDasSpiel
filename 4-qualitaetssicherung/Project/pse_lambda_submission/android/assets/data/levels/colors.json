@@ -84,7 +84,37 @@
 		"_comment": "black",
 		"variable": "i",
 		"color": "000000ff"
-		}
+		},
+		{
+		"_comment": "light green",
+		"variable": "h",
+		"color": "90ee90ff"
+		},
+		{
+		"_comment": "dark cyan",
+		"variable": "g",
+		"color": "008b8bff"
+		},
+		{
+		"_comment": "salmon1",
+		"variable": "f",
+		"color": "ff8c69ff"
+		},
+		{
+		"_comment": "plum3",
+		"variable": "e",
+		"color": "cd96cdff"
+		},
+		{
+		"_comment": "olive drab 1",
+		"variable": "d",
+		"color": "c0ff3eff"
+		},
+		{
+		"_comment": "firebrick",
+		"variable": "c",
+		"color": "b22222ff"
+		},
 	],
 }
 

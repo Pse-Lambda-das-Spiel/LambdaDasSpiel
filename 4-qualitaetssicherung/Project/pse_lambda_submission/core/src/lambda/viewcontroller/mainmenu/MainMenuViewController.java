@@ -152,8 +152,8 @@ public class MainMenuViewController extends StageViewController implements
         profileTable.add(logoutButton).align(Align.left)
                 .spaceBottom(getStage().getHeight() / 80).maxSize(buttonSize)
                 .row();
-        profileTable.add(profileImg).align(Align.center).size(buttonSize * 0.75f).spaceTop(0).row();
-        profileTable.add(profileName).align(Align.center);
+        profileTable.add(profileImg).align(Align.left).size(buttonSize * 0.75f).spaceTop(0).row();
+        profileTable.add(profileName).align(Align.left);
         getStage().addActor(profileTable);
         profileTable.setFillParent(true);
 
