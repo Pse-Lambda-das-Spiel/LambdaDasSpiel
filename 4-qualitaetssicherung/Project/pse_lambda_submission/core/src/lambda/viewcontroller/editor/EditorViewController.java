@@ -107,6 +107,11 @@ public final class EditorViewController extends StageViewController implements
     private ImageButton targetButton;
     
     /**
+     * Indicates whether the finish button was presed.
+     */
+    private boolean finishButtonPressed;
+    
+    /**
      * Creates a new instance of EditorViewController.
      */
     public EditorViewController() {
@@ -115,6 +120,7 @@ public final class EditorViewController extends StageViewController implements
         background = null;
         toolbarElements = new LinkedList<>();
         isDraggingScreen = false;
+        finishButtonPressed = false;
     }
 
     @Override
@@ -293,6 +299,7 @@ public final class EditorViewController extends StageViewController implements
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 AudioManager.playSound("buttonClick");
+                finishButtonPressed = true;
                 I18NBundle language = manager.get(ProfileManager.getManager()
                         .getCurrentProfile().getLanguage(), I18NBundle.class);
                 if (model.getTerm().getChild() == null) {
@@ -353,7 +360,13 @@ public final class EditorViewController extends StageViewController implements
         multiplexer.addProcessor(getStage());
         multiplexer.addProcessor(this);
         Gdx.input.setInputProcessor(multiplexer);
+        model.levelIsStarted();
         showStartDialogs();
+    }
+    
+    @Override
+    public void hide() {
+        model.leaveLevel(!finishButtonPressed);
     }
 
     private void showStartDialogs() {
@@ -444,6 +457,8 @@ public final class EditorViewController extends StageViewController implements
             throw new IllegalArgumentException("Level context cannot be null!");
         }
 
+        finishButtonPressed = false;
+        
         // Reset editor model
         model.reset(context);
 
@@ -511,7 +526,6 @@ public final class EditorViewController extends StageViewController implements
                 .getGoal().getChild() != null) || !model.getLevelContext().getLevelModel().isStandardMode());
 
         model.getTerm().addObserver(this);
-        model.levelIsStarted();
     }
 
     /**
@@ -746,6 +760,10 @@ public final class EditorViewController extends StageViewController implements
 
     @Override
     public void hintUsed() {
+    }
+
+    @Override
+    public void levelLeft(boolean canSave) {
     }
 
 }

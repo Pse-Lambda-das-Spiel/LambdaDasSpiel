@@ -8,6 +8,7 @@ import lambda.model.lambdaterm.visitor.strategy.BetaReductionVisitor;
 import lambda.model.levels.LevelContext;
 import lambda.model.levels.ReductionStrategy;
 import lambda.model.reductionmode.ReductionModel;
+import lambda.model.reductionmode.ReductionModelObserver;
 
 /**
  * Contains data and logics of the editor mode. Will be observed by the editor
@@ -142,6 +143,21 @@ public class EditorModel extends Observable<EditorModelObserver> {
             @Override
             public void accept(EditorModelObserver observer) {
                 observer.levelStarted(context.getLevelModel().getId());
+            }
+        });
+    }
+    
+    /**
+     * Notifies all observers that the played level is left.
+     * 
+     * @param canSave
+     *            true if the level data can be saved, false otherwise
+     */
+    public void leaveLevel(final boolean canSave) {
+        notify(new Consumer<EditorModelObserver>() {
+            @Override
+            public void accept(EditorModelObserver observer) {
+                observer.levelLeft(canSave);
             }
         });
     }

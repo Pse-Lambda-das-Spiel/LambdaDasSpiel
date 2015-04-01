@@ -52,4 +52,11 @@ public interface ReductionModelObserver {
      * Called when the reduction reached the maximum number of reduction steps.
      */
     public void maxStepsReached();
+    
+    /**
+     * Called when the level is left.
+     * 
+     * @param canSave true if the level data can be saved, false otherwise
+     */
+    public void levelLeft(boolean canSave);
 }

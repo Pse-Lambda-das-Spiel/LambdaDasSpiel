@@ -318,6 +318,21 @@ public class ReductionModel extends Observable<ReductionModelObserver> {
     }
     
     /**
+     * Notifies all observers that the played level is left.
+     * 
+     * @param canSave
+     *            true if the level data can be saved, false otherwise
+     */
+    public void leaveLevel(final boolean canSave) {
+        notify(new Consumer<ReductionModelObserver>() {
+            @Override
+            public void accept(ReductionModelObserver observer) {
+                observer.levelLeft(canSave);
+            }
+        });
+    }
+    
+    /**
      * Notifies all observers of a state change.
      */
     private void notifyState() {

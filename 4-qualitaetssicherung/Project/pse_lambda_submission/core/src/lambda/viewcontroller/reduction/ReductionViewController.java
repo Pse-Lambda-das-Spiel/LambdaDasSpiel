@@ -294,6 +294,7 @@ public class ReductionViewController extends StageViewController implements
     @Override
     public void hide() {
         model.resetState();
+        model.leaveLevel(true);
     }
 
     private void showStartDialogs() {
@@ -719,6 +720,10 @@ public class ReductionViewController extends StageViewController implements
         showDialog(new FinishDialog(false, model.getContext().getLevelModel()
                 .getCoins(), assets.get("data/skins/DialogTemp.json",
                 Skin.class), language, language.get("maxStepsReached")));
+    }
+
+    @Override
+    public void levelLeft(boolean canSave) {        
     }
 
 }

@@ -30,6 +30,9 @@ public class DeltaStatisticProcessor implements EditorModelObserver,
     private int lambsEnchanted;
     private int gemsPlaced;
     private int lambsPlaced;
+    private int levelTries;
+    private int successfulLevelTries;
+    private int hintsNotUsed;
     private long startTime;
     private long endTime;
     private long diffTime;
@@ -50,6 +53,9 @@ public class DeltaStatisticProcessor implements EditorModelObserver,
         lambsEnchanted = 0;
         gemsPlaced = 0;
         lambsPlaced = 0;
+        levelTries = 0;
+        successfulLevelTries = 0;
+        hintsNotUsed = 0;
         startTime = 0l;
         endTime = 0l;
         diffTime = 0l;
@@ -146,59 +152,68 @@ public class DeltaStatisticProcessor implements EditorModelObserver,
 
     @Override
     public void reductionFinished(boolean levelComplete) {
-        endTime = System.currentTimeMillis();
-        StatisticModel statistic = ProfileManager.getManager()
-                .getCurrentProfile().getStatistics();
-        diffTime += endTime - startTime;
-        // the time has to be stored in seconds in the StatisticModel
-        diffTime /= 1000;
-        // update the statistic data
-        statistic.setTimePlayed(statistic.getTimePlayed() + diffTime);
         if (!inSandbox) {
-            statistic.setLevelTries(statistic.getLevelTries() + 1);
+           levelTries++;
             if (levelComplete) {
-                statistic.setSuccessfulLevelTries(statistic
-                        .getSuccessfulLevelTries() + 1);
+               successfulLevelTries++;
                 if (!hintUsed) {
-                    statistic.setHintsNotUsed(statistic.getHintsNotUsed() + 1);
+                   hintsNotUsed++;
                 }
             }
         }
-        // only update these values if they are bigger, so that the statistic
-        // observers do not get notified needlessly
-        if (gemsEnchanted > 0) {
-            statistic.setGemsEnchanted(statistic.getGemsEnchanted()
-                    + gemsEnchanted);
-        }
-        if (lambsEnchanted > 0) {
-            statistic.setLambsEnchanted(statistic.getLambsEnchanted()
-                    + lambsEnchanted);
-        }
-        if (gemsPlaced > 0) {
-            statistic.setGemsPlaced(statistic.getGemsPlaced() + gemsPlaced);
-        }
-        if (lambsPlaced > 0) {
-            statistic.setLambsPlaced(statistic.getLambsPlaced() + lambsPlaced);
-        }
-        // update per level values if the new ones are bigger
-        if (gemsEnchanted > statistic.getGemsEnchantedPerLevel()) {
-            statistic.setGemsEnchantedPerLevel(statistic
-                    .getGemsEnchantedPerLevel() + gemsEnchanted);
-        }
-        if (lambsEnchanted > statistic.getLambsEnchantedPerLevel()) {
-            statistic.setLambsEnchantedPerLevel(statistic
-                    .getLambsEnchantedPerLevel() + lambsEnchanted);
-        }
-        if (gemsPlaced > statistic.getGemsPlacedPerLevel()) {
-            statistic.setGemsPlacedPerLevel(statistic.getGemsPlacedPerLevel()
-                    + gemsPlaced);
-        }
-        if (lambsPlaced > statistic.getLambsPlacedPerLevel()) {
-            statistic.setLambsPlacedPerLevel(statistic.getLambsPlacedPerLevel()
-                    + lambsPlaced);
-        }
     }
 
+    @Override
+    public void levelLeft(boolean canSave) {
+        if (canSave) {
+            endTime = System.currentTimeMillis();
+            StatisticModel statistic = ProfileManager.getManager().getCurrentProfile().getStatistics();
+            diffTime += endTime - startTime;
+            // the time has to be stored in seconds in the StatisticModel
+            diffTime /= 1000;
+
+            // update the statistic data
+            statistic.setTimePlayed(statistic.getTimePlayed() + diffTime);
+            // only update these values if they are bigger, so that the statistic
+            // observers do not get notified needlessly
+            if (levelTries > 0) {
+                statistic.setLevelTries(statistic.getLevelTries() + levelTries);
+            }
+            if (successfulLevelTries > 0) {
+                statistic.setSuccessfulLevelTries(statistic.getSuccessfulLevelTries() + successfulLevelTries);
+            }
+            if (hintsNotUsed > 0) {
+                statistic.setHintsNotUsed(statistic.getHintsNotUsed() + hintsNotUsed);
+            }
+
+            if (gemsEnchanted > 0) {
+                statistic.setGemsEnchanted(statistic.getGemsEnchanted() + gemsEnchanted);
+            }
+            if (lambsEnchanted > 0) {
+                statistic.setLambsEnchanted(statistic.getLambsEnchanted() + lambsEnchanted);
+            }
+            if (gemsPlaced > 0) {
+                statistic.setGemsPlaced(statistic.getGemsPlaced() + gemsPlaced);
+            }
+            if (lambsPlaced > 0) {
+                statistic.setLambsPlaced(statistic.getLambsPlaced() + lambsPlaced);
+            }
+            // update per level values if the new ones are bigger
+            if (gemsEnchanted > statistic.getGemsEnchantedPerLevel()) {
+                statistic.setGemsEnchantedPerLevel(statistic.getGemsEnchantedPerLevel() + gemsEnchanted);
+            }
+            if (lambsEnchanted > statistic.getLambsEnchantedPerLevel()) {
+                statistic.setLambsEnchantedPerLevel(statistic.getLambsEnchantedPerLevel() + lambsEnchanted);
+            }
+            if (gemsPlaced > statistic.getGemsPlacedPerLevel()) {
+                statistic.setGemsPlacedPerLevel(statistic.getGemsPlacedPerLevel() + gemsPlaced);
+            }
+            if (lambsPlaced > statistic.getLambsPlacedPerLevel()) {
+                statistic.setLambsPlacedPerLevel(statistic.getLambsPlacedPerLevel() + lambsPlaced);
+            }
+        }
+    }
+    
     @Override
     public void maxNodesReached() {
         reductionFinished(false);

@@ -38,4 +38,11 @@ public interface EditorModelObserver {
      * Called when the hint of the level is used.
      */
     public void hintUsed();
+    
+    /**
+     * Called when the level is left.
+     * 
+     * @param canSave true if the level data can be saved, false otherwise
+     */
+    public void levelLeft(boolean canSave);
 }
