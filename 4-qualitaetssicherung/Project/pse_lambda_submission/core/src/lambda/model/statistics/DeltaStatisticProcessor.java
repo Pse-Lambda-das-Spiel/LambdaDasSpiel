@@ -68,6 +68,7 @@ public class DeltaStatisticProcessor implements EditorModelObserver,
         // save the time played until now in the current level
         long tmpTime = System.currentTimeMillis();
         diffTime += tmpTime - startTime;
+        startTime = System.currentTimeMillis();
     }
     
     /**

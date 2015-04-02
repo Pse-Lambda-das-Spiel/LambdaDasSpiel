@@ -286,6 +286,13 @@ public class ProfileManager extends Observable<ProfileManagerObserver> {
     public ProfileEditModel getProfileEdit() {
         return profileEdit;
     }
+    
+    /**
+     * Disposes the single ProfileManager instance.
+     */
+    public void dispose() {
+        manager = null;
+    }
 
     // loads profiles from profiles.json or calls loadAllSavedProfiles (if
     // profiles.json is invalid) instead

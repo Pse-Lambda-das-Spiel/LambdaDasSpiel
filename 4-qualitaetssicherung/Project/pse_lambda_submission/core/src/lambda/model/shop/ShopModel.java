@@ -49,6 +49,13 @@ public class ShopModel {
         }
         return shop;
     }
+    
+    /**
+     * Disposes the single instance of the shop.
+     */
+    public void dispose() {
+        shop = null;
+    }
 
     /**
      * Returns the item-category of the music

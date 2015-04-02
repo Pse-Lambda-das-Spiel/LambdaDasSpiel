@@ -50,6 +50,13 @@ public class AchievementManager {
     }
 
     /**
+     * Disposes the single instance of the achievement manager.
+     */
+    public void dispose() {
+        manager = null;
+    }
+    
+    /**
      * Returns the collection of all achievements.
      * 
      * @return the achievements

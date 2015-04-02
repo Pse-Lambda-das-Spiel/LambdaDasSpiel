@@ -103,7 +103,7 @@ public class ProfileSelection extends StageViewController {
                                 public void clicked(InputEvent event, float x,
                                         float y) {
                                     AudioManager.playSound("buttonClick");
-                                    System.exit(0);
+                                    Gdx.app.exit();
                                 }
                             });
                             add(yesButton).size(size);

@@ -36,6 +36,13 @@ public class StyleManager {
     }
 
     /**
+     * Disposes the single instance of the style manager.
+     */
+    public void dispose() {
+        styleManager = null;
+    }
+    
+    /**
      * 
      * @param assets
      */

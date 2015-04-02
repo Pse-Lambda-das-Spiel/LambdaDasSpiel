@@ -75,6 +75,13 @@ public class LevelManager {
         }
         return manager;
     }
+    
+    /**
+     * Disposes the single instance of the level manager.
+     */
+    public void dispose() {
+        manager = null;
+    }
 
     /**
      * Returns the number of levels (sandbox excluded).

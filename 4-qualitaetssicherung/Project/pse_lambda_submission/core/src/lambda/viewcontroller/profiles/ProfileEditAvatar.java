@@ -6,7 +6,9 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
@@ -61,11 +63,14 @@ public class ProfileEditAvatar extends StageViewController implements
 
     @Override
     public void queueAssets(AssetManager assets) {
+        TextureParameter param = new TextureParameter();
+        param.magFilter = TextureFilter.Linear;
+        param.minFilter = TextureFilter.Linear;
         String start = profileEdit.getAvatar();
         String current = start;
         do {
             assets.load(avatarPath + "/" + profileEdit.getAvatar() + ".png",
-                    Texture.class);
+                    Texture.class, param);
             profileEdit.nextAvatar();
             current = profileEdit.getAvatar();
         } while (!current.equals(start));

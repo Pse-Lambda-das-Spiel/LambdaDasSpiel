@@ -1,5 +1,9 @@
 package lambda;
 
+import lambda.model.achievements.AchievementManager;
+import lambda.model.levels.LevelManager;
+import lambda.model.profiles.ProfileManager;
+import lambda.model.shop.ShopModel;
 import lambda.viewcontroller.editor.EditorViewController;
 
 import com.badlogic.gdx.Game;
@@ -100,7 +104,6 @@ public class LambdaGame extends Game {
         Gdx.input.setCatchBackKey(true);
         Gdx.input.setCatchMenuKey(true);
 
-        // TODO Use reflection?
         addViewController(new AssetViewController());
 
         addViewController(new ProfileSelection());
@@ -116,6 +119,7 @@ public class LambdaGame extends Game {
         addViewController(new ReductionViewController());
         addViewController(new StatisticViewController());
        
+        AudioManager.getAudioManager();
         AudioManager.queueAssets(getController(AssetViewController.class)
                 .getManager());
 
@@ -159,6 +163,16 @@ public class LambdaGame extends Game {
     @Override
     public void dispose() {
         super.dispose();
+        // for saving the statistics
+        getController(ProfileSelection.class).pause();
+        // dispose the singletons for android
+        ProfileManager.getManager().dispose();
+        StyleManager.getStyleManager().dispose();
+        AudioManager.getAudioManager().dispose();
+        LevelManager.getLevelManager().dispose();
+        AchievementManager.getManager().dispose();
+        ShopModel.getShop().dispose();
+        
         for (ViewController viewController : viewControllers.values()) {
             viewController.dispose();
         }
