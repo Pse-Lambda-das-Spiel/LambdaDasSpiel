@@ -6,7 +6,6 @@ import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -89,6 +88,12 @@ public class SettingsViewController extends StageViewController {
         settingsView.row().height(height);
         musicSlider = new Slider(0, 1, 0.01f, false, manager.get(skinJson,
                 Skin.class));
+        musicSlider.getStyle().background.setMinHeight(getStage().getHeight() / 720 
+                * musicSlider.getStyle().background.getMinHeight());
+        musicSlider.getStyle().knob.setMinHeight(getStage().getHeight() / 720 
+                * musicSlider.getStyle().knob.getMinHeight());
+        musicSlider.getStyle().knob.setMinWidth(getStage().getHeight() / 720 
+                * musicSlider.getStyle().knob.getMinWidth());
         musicSlider.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -124,13 +129,10 @@ public class SettingsViewController extends StageViewController {
         
         ImageButton backButton = new ImageButton(manager.get(skinJson,
                 Skin.class), "backButton");
-        Container<ImageButton> buttonContainer = new Container<ImageButton>();
-        buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
-        buttonContainer.align(Align.bottomLeft);
-        buttonContainer.setActor(backButton);
+        backButton.setBounds(space * 5 / 2, space * 5 / 2, getStage().getHeight() / 5,
+                getStage().getHeight() / 5);
         backButton.addListener(new BackClickListener());
-        getStage().addActor(buttonContainer);
-        buttonContainer.setFillParent(true);
+        getStage().addActor(backButton);
         changedProfileList();
     }
 

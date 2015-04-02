@@ -55,6 +55,9 @@ public class ShopViewController extends StageViewController implements
     private ImageButton bgImageTypeButton;
     private ImageButton elementUITypeButton;
 
+    private final float buttonSize;
+    private final float padSpace;
+    
     /**
      * Path to the MasterSkin
      */
@@ -73,6 +76,8 @@ public class ShopViewController extends StageViewController implements
         musicB = false;
         imageB = false;
         elementsB = false;
+        buttonSize = getStage().getWidth() / 8;
+        padSpace = getStage().getHeight() / 48;
     }
 
     @Override
@@ -117,6 +122,12 @@ public class ShopViewController extends StageViewController implements
         language = manager.get(profile.getLanguage(), I18NBundle.class);
 
         skin = manager.get(masterSkin, Skin.class);
+        new Dialog("", skin) {
+            {
+                this.getStyle().background.setMinHeight(0);
+                this.getStyle().background.setMinWidth(0);;
+            }
+        };
         shop.setAllAssets(manager);
         Table mainTable = new Table();
         mainTable.setFillParent(true);
@@ -166,8 +177,7 @@ public class ShopViewController extends StageViewController implements
         /*
          * CATEGORY: IMAGES
          */
-        bgImageTypeButton = new ImageButton(
-                manager.get(masterSkin, Skin.class), "imageType");
+        bgImageTypeButton = new ImageButton(getImageButtonStyle("imageType"));
         bgImageTypeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -184,8 +194,7 @@ public class ShopViewController extends StageViewController implements
         /*
          * CATEGORY: ELEMENTS
          */
-        elementUITypeButton = new ImageButton(manager.get(masterSkin,
-                Skin.class), "elementType");
+        elementUITypeButton = new ImageButton(getImageButtonStyle("elementType"));
         elementUITypeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -203,30 +212,52 @@ public class ShopViewController extends StageViewController implements
          * COINS
          */
         coins = new Label("", skin);
+        coins.setFontScale(getStage().getHeight() / 720 * coins.getFontScaleY());
         ImageTextButton coinBar = new ImageTextButton("", skin);
-        coinBar.add(new Image(skin, "coin"));
+        coinBar.clear();
+        coinBar.add(new Image(skin, "coin")).size(buttonSize);
         coinBar.add(coins);
 
         // VerticalGroup which includes the different categories
-        table = new VerticalGroup().align(Align.top).pad(15);
-        getStage().addActor(table);
-        table.addActor(musicTypeButton);
-
+        table = new VerticalGroup().align(Align.top).pad(padSpace);
+        
         // MUSIC
-        musicTable = new VerticalGroup().align(Align.center);
+        musicTypeButton.getImageCell().width(getStage().getHeight() / 720 
+                * musicTypeButton.getImage().getPrefWidth()).height(
+                getStage().getHeight() / 720 * musicTypeButton.getImage()
+                .getPrefHeight());
+        table.addActor(musicTypeButton);
         musicTable = music.getGroup();
         // IMAGES
+        bgImageTypeButton.getImageCell().width(getStage().getHeight() / 720 
+                * bgImageTypeButton.getImage().getPrefWidth()).height(
+                getStage().getHeight() / 720 * bgImageTypeButton.getImage()
+                .getPrefHeight());
         table.addActor(bgImageTypeButton);
         imagesTable = bgImages.getGroup();
         // ELEMENTS
+        elementUITypeButton.getImageCell().width(getStage().getHeight() / 720 
+                * elementUITypeButton.getImage().getPrefWidth()).height(
+                getStage().getHeight() / 720 * elementUITypeButton.getImage()
+                .getPrefHeight());
         table.addActor(elementUITypeButton);
         elementsTable = elementUIs.getGroup();
         // scroll pane and other buttons
-        mainTable.add(backButton).pad(15).align(Align.bottomLeft);
         ScrollPane scrollpane = new ScrollPane(table);
-        mainTable.add(scrollpane).expand().center();
-        mainTable.add(coinBar).pad(15).align(Align.topRight);
-
+        scrollpane.debug();
+        scrollpane.setFillParent(true);
+        getStage().addActor(scrollpane);
+        
+        backButton.setSize(buttonSize, buttonSize);
+        backButton.setPosition(padSpace, padSpace);
+        getStage().addActor(backButton);
+        
+        Container<ImageTextButton> coinButtonContainer = new Container<>();
+        coinButtonContainer.pad(padSpace).align(Align.topRight);
+        coinButtonContainer.setActor(coinBar);      
+        getStage().addActor(coinButtonContainer);
+        coinButtonContainer.setFillParent(true);
+        
     }
 
     /**

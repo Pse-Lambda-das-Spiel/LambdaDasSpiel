@@ -146,9 +146,13 @@ public class ReductionViewController extends StageViewController implements
                         0.10f * getStage().getWidth()).top();
 
         Table bottomToolBar = new Table();
-        bottomToolBar.setBackground(new TextureRegionDrawable(manager.get(
+        bottomToolBar = new Table();
+        TextureRegionDrawable bar = new TextureRegionDrawable(manager.get(
                 "data/skins/MasterSkin.atlas", TextureAtlas.class).findRegion(
-                "elements_bar")));
+                "elements_bar"));
+        bar.setMinWidth(getStage().getHeight() / 720 * bar.getMinWidth());
+        bar.setMinHeight(getStage().getHeight() / 720 * bar.getMinHeight());
+        bottomToolBar.setBackground(bar);
         bottomToolBar
                 .add(stepRevertButton)
                 .size(0.10f * getStage().getWidth(),

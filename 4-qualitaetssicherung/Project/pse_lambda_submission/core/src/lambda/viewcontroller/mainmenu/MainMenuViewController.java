@@ -117,8 +117,10 @@ public class MainMenuViewController extends StageViewController implements
         ImageButton achievementsButton = new ImageButton(skin,
                 "achievementsButton");
         coins = new Label("Initial string", skin);
+        coins.setFontScale(getStage().getHeight() / 720 * coins.getFontScaleY());
         ImageTextButton coinButton = new ImageTextButton("", skin);
-        coinButton.add(new Image(skin, "coin"));
+        coinButton.clear();
+        coinButton.add(new Image(skin, "coin")).size(buttonSize);
         coinButton.add(coins);
         profileName = new Label("Initial string", skin, "roboto");
         profileName.setFontScale(getStage().getHeight() / 720 * profileName.getFontScaleY());
@@ -139,21 +141,16 @@ public class MainMenuViewController extends StageViewController implements
         soundButtonContainer.maxSize(buttonSize);
 
         Container<ImageTextButton> coinButtonContainer = new Container<>();
-        coinButtonContainer.pad(padSpace).align(Align.topRight)
-                .setSize(buttonSize, buttonSize);
+        coinButtonContainer.pad(padSpace).align(Align.topRight);
         coinButtonContainer.setActor(coinButton);      
-        coinButton.getLabel().setFontScale(getStage().getHeight() / 720 * coinButton.getLabel().getFontScaleY());
         getStage().addActor(coinButtonContainer);
         coinButtonContainer.setFillParent(true);
-        coinButtonContainer.maxSize(buttonSize * 2f);
 
         Table profileTable = new Table();
         profileTable.pad(padSpace * 1.0f).align(Align.topLeft);
-        profileTable.add(logoutButton).align(Align.left)
-                .spaceBottom(getStage().getHeight() / 80).maxSize(buttonSize)
-                .row();
-        profileTable.add(profileImg).align(Align.left).size(buttonSize * 0.75f).spaceTop(0).row();
-        profileTable.add(profileName).align(Align.left);
+        profileTable.add(logoutButton).align(Align.topLeft).size(buttonSize).row();
+        profileTable.add(profileImg).align(Align.left).size(buttonSize).row();
+        profileTable.add(profileName).align(Align.center);
         getStage().addActor(profileTable);
         profileTable.setFillParent(true);
 

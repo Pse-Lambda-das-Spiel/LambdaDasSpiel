@@ -53,8 +53,8 @@ public class AchievementMenuViewController extends StageViewController {
         labelMap = new HashMap<>();
         achievementManager = AchievementManager.getManager();
         achievementManager.loadAchievements(achievementVCList);
-        buttonSize = getStage().getWidth() / 10;
-        space = getStage().getHeight() / 36;
+        buttonSize = getStage().getHeight() / 5;
+        space = getStage().getWidth() / 64;
     }
 
     /**
@@ -159,7 +159,7 @@ public class AchievementMenuViewController extends StageViewController {
             }
         });
         mainTable.add(titleLabel).colspan(2).center().row();
-        mainTable.add(back).align(Align.bottomLeft).pad(space).size(buttonSize);
+        mainTable.add(back).align(Align.bottomLeft).pad(space * 5 / 2).size(buttonSize);
         mainTable.add(scrollPane).expand().fill().left();
     }
 
@@ -181,9 +181,8 @@ public class AchievementMenuViewController extends StageViewController {
                     // button has to be copied before that
                     Image image = (new ImageButton(clickedActor.getStyle())
                             .getImage());
-                    image.sizeBy(buttonSize * 1.5f);
                     add(image).top().pad(space * 1.5f, space / 2, space * 1.5f,
-                            space * 1.5f);
+                            space * 1.5f).size(buttonSize * 1.5f);
                     Label label = new Label(clickedActor.getText(), skin,
                             "roboto");
                     label.setFontScale(height / 720 * label.getFontScaleY());

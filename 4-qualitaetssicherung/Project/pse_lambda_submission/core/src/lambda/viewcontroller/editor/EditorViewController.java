@@ -33,7 +33,6 @@ import lambda.model.lambdaterm.LambdaApplication;
 import lambda.model.lambdaterm.LambdaRoot;
 import lambda.model.lambdaterm.LambdaTerm;
 import lambda.model.lambdaterm.LambdaTermObserver;
-import lambda.model.lambdaterm.LambdaUtils;
 import lambda.model.lambdaterm.LambdaValue;
 import lambda.model.lambdaterm.LambdaVariable;
 import lambda.model.lambdaterm.visitor.ColorCollectionVisitor;
@@ -169,9 +168,12 @@ public final class EditorViewController extends StageViewController implements
                         0.10f * getStage().getWidth()).top();
 
         bottomToolBar = new Table();
-        bottomToolBar.setBackground(new TextureRegionDrawable(manager.get(
+        TextureRegionDrawable bar = new TextureRegionDrawable(manager.get(
                 "data/skins/MasterSkin.atlas", TextureAtlas.class).findRegion(
-                        "elements_bar")));
+                        "elements_bar"));
+        bar.setMinWidth(getStage().getHeight() / 720 * bar.getMinWidth());
+        bar.setMinHeight(getStage().getHeight() / 720 * bar.getMinHeight());
+        bottomToolBar.setBackground(bar);
 
         main.add(leftToolBar).expandY().left().top();
         main.add(targetButton)
@@ -326,7 +328,7 @@ public final class EditorViewController extends StageViewController implements
                         clear();
                         pad(EditorViewController.this.getStage().getHeight() / 20);
                         Label errorLabel = new Label(message, dialogSkin);
-                        errorLabel.setFontScale(0.7f);
+                        errorLabel.setFontScale(EditorViewController.this.getStage().getHeight() / 720 * 0.7f);
                         errorLabel.setWrap(true);
                         add(errorLabel)
                                 .width(EditorViewController.this.getStage()

@@ -28,7 +28,7 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
     private TextButton currentState;
     private ShopViewController vc;
     private Stage stage;
-    
+    private final float buttonSize;
     /**
      * Creates a new instance of this class
      * 
@@ -41,6 +41,7 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
         this.model = model;
         this.vc = vc;
         this.stage = vc.getStage();
+        this.buttonSize = stage.getWidth() / 6;
         model.addObserver(this);
         currentState = new TextButton(model.getShopItemType().getTypeName()
                 + " " + model.getId(),
@@ -96,10 +97,8 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
      * Updates the view of the button
      */
     public void setCurrentState() {
-
         currentState = new TextButton(model.getFilename(),
                 ShopViewController.getTextButtonStyle("not_buyable"));
-
         if (model.isPurchased()) {
             if (model.isActivated()) {
                 currentState.setStyle(ShopViewController
@@ -125,6 +124,12 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
      * @return a text button of the current state
      */
     public TextButton getCurrentState() {
+        float temp = stage.getHeight() / 720;
+        currentState.getLabel().setFontScale(temp);
+        currentState.getStyle().up.setMinHeight(temp * 100);
+        currentState.getStyle().up.setMinWidth(temp * 481);
+        currentState.getStyle().down.setMinHeight(temp * 100);
+        currentState.getStyle().down.setMinWidth(temp * 481);
         return currentState;
     }
 
@@ -145,12 +150,13 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
                             // getImage() removes the image from its button so
                             // the button has to be copied before that
                             float space = stage.getWidth() / 64;
+                            pad(space * 2);
                             Label label = new Label(ShopViewController
                                     .getLanguage().format("item_activate",
                                             model.getFilename()),
                                     ShopViewController.getSkin());
-                            add(label).pad(stage.getWidth() / 64).padBottom(0)
-                                    .padRight(400);
+                            add(label).width(stage.getWidth() * 2 / 3).colspan(2);
+                            label.setFontScale(stage.getHeight() / 720 * label.getFontScaleY());
                             row();
 
                             label.setWrap(true);
@@ -161,6 +167,7 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
                                 @Override
                                 public void clicked(InputEvent event, float x,
                                         float y) {
+                                    AudioManager.playSound("buttonClick");
                                     model.getShopItemType().getActivatedItem()
                                             .deactivate();
                                     model.activate();
@@ -168,8 +175,7 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
                                     hide();
                                 }
                             });
-                            add(activate).pad(space).padBottom(space * 3 / 2)
-                                    .align(Align.bottomRight);
+                            add(activate).pad(space).align(Align.right).size(buttonSize);
                             // no
                             ImageButton abort = new ImageButton(
                                     ShopViewController
@@ -178,12 +184,12 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
                                 @Override
                                 public void clicked(InputEvent event, float x,
                                         float y) {
+                                    AudioManager.playSound("buttonClick");
                                     setVisible(false);
                                     hide();
                                 }
                             });
-                            add(abort).pad(space).padBottom(space * 3 / 2)
-                                    .align(Align.bottomLeft);
+                            add(abort).pad(space).align(Align.left).size(buttonSize);
                         }
 
                     });
@@ -196,12 +202,13 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
                         // getImage() removes the image from its button so the
                         // button has to be copied before that
                         float space = stage.getWidth() / 64;
+                        pad(space * 2);
                         Label label = new Label(ShopViewController
                                 .getLanguage().format("item_buy",
                                         model.getPrice(), model.getFilename()),
                                 ShopViewController.getSkin());
-                        add(label).pad(stage.getWidth() / 64).padBottom(0)
-                                .padRight(400);
+                        label.setFontScale(stage.getHeight() / 720 * label.getFontScaleY());
+                        add(label).width(stage.getWidth() * 2 / 3).colspan(2);
                         row();
 
                         label.setWrap(true);
@@ -213,13 +220,14 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
                             @Override
                             public void clicked(InputEvent event, float x,
                                     float y) {
+                                AudioManager.playSound("buttonClick");
                                 model.buy();
                                 setVisible(false);
                                 hide();
                             }
                         });
-                        add(accept).pad(space).padBottom(space * 3 / 2)
-                                .align(Align.bottomRight);
+                        add(accept).pad(space).align(Align.right).size(buttonSize);
+                        
                         // no
                         ImageButton noButton = new ImageButton(
                                 ShopViewController.getImageButtonStyle("abort"));
@@ -227,12 +235,12 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
                             @Override
                             public void clicked(InputEvent event, float x,
                                     float y) {
+                                AudioManager.playSound("buttonClick");
                                 setVisible(false);
                                 hide();
                             }
                         });
-                        add(noButton).pad(space).padBottom(space * 3 / 2)
-                                .align(Align.bottomLeft);
+                        add(noButton).pad(space).align(Align.left).size(buttonSize);
                     }
                 });
             } else {
@@ -242,12 +250,13 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
                         // getImage() removes the image from its button so the
                         // button has to be copied before that
                         float space = stage.getWidth() / 64;
+                        pad(space * 2);
                         Label label = new Label(ShopViewController
                                 .getLanguage().format("item_notBuyable",
                                         model.getFilename(), model.getPrice()),
                                 ShopViewController.getSkin());
-                        add(label).pad(stage.getWidth() / 64).padBottom(0)
-                                .padRight(400);
+                        label.setFontScale(stage.getHeight() / 720 * label.getFontScaleY());
+                        add(label).width(stage.getWidth() * 2 / 3);
                         row();
 
                         label.setWrap(true);
@@ -259,25 +268,12 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
                             @Override
                             public void clicked(InputEvent event, float x,
                                     float y) {
+                                AudioManager.playSound("buttonClick");
                                 setVisible(false);
                                 hide();
                             }
                         });
-                        add(accept).pad(space).padBottom(space * 3 / 2)
-                                .align(Align.bottomRight);
-                        // no
-                        ImageButton noButton = new ImageButton(
-                                ShopViewController.getImageButtonStyle("abort"));
-                        noButton.addListener(new ClickListener() {
-                            @Override
-                            public void clicked(InputEvent event, float x,
-                                    float y) {
-                                setVisible(false);
-                                hide();
-                            }
-                        });
-                        add(noButton).pad(space).padBottom(space * 3 / 2)
-                                .align(Align.bottomLeft);
+                        add(accept).size(buttonSize);
                     }
                 });
             }

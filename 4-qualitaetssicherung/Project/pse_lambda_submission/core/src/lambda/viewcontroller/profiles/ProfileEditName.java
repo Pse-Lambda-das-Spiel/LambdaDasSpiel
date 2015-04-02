@@ -88,7 +88,8 @@ public class ProfileEditName extends StageViewController implements
         nameSelection.row().height(getStage().getHeight() / 3);
         nameField = new TextField("", manager.get(skinJson, Skin.class));
         nameField.setMaxLength(ProfileManager.MAX_NAME_LENGTH);
-        nameField.getStyle().font.setScale(getStage().getHeight() / 720);
+        nameField.getStyle().font.setScale(getStage().getHeight() / 720 * nameField.getStyle().font.getScaleY());
+        nameField.setAlignment(Align.center);
         nameField.setTextFieldFilter(new TextFieldFilter() {
             private Matcher matcher = Pattern.compile(ProfileManager.VALID_CHARS).matcher("");
 			@Override
@@ -116,8 +117,6 @@ public class ProfileEditName extends StageViewController implements
                 return false;
             }
         });
-        nameField.getStyle().background.setLeftWidth(space * 3);
-        nameField.getStyle().background.setRightWidth(space * 3);
         nameSelection.add(nameField).width(getStage().getWidth() * 2 / 3)
                 .space(space);
 
