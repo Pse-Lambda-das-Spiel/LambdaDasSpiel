@@ -87,8 +87,9 @@ public class ProfileEditName extends StageViewController implements
         enterName.setFontScale(getStage().getHeight() / 720 * enterName.getFontScaleY());
         nameSelection.row().height(getStage().getHeight() / 3);
         nameField = new TextField("", manager.get(skinJson, Skin.class));
-        nameField.setMaxLength(ProfileManager.MAX_NAME_LENGTH);
         nameField.getStyle().font.setScale(getStage().getHeight() / 720 * nameField.getStyle().font.getScaleY());
+        nameField = new TextField("", manager.get(skinJson, Skin.class));
+        nameField.setMaxLength(ProfileManager.MAX_NAME_LENGTH);
         nameField.setAlignment(Align.center);
         nameField.setTextFieldFilter(new TextFieldFilter() {
             private Matcher matcher = Pattern.compile(ProfileManager.VALID_CHARS).matcher("");
