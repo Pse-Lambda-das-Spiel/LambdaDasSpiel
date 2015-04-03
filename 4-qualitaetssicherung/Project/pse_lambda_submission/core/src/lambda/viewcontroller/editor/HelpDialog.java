@@ -32,27 +32,28 @@ public class HelpDialog extends Dialog {
         clear();
         EditorViewController.disableDragAndDrop();
         pad(stage.getHeight() / 20);
+        defaults().space(stage.getHeight() / 72);
         float size = stage.getHeight() / 8;
         float labelWidth = stage.getWidth() / 2;
         add(new Image(skin.getAtlas().createSprite("pause"))).size(size);
         Label pauseGameHelp = new Label(language.get("pauseGameHelp"), skin);
-        add(pauseGameHelp).width(labelWidth);
+        add(pauseGameHelp).width(labelWidth).height(size);
         row();
         add(new Image(skin.getAtlas().createSprite("goal"))).size(size);
         Label goalHelp = new Label(language.get("goalHelp"), skin);
-        add(goalHelp).width(labelWidth);
+        add(goalHelp).width(labelWidth).height(size);
         row();
         add(new Image(skin.getAtlas().createSprite("info"))).size(size);
         Label infoHelp = new Label(language.get("infoHelp"), skin);
-        add(infoHelp).width(labelWidth);
+        add(infoHelp).width(labelWidth).height(size);
         row();
         add(new Image(skin.getAtlas().createSprite("play"))).size(size);
         Label goToRedHelp = new Label(language.get("goToRedHelp"), skin);
-        add(goToRedHelp).width(labelWidth);
+        add(goToRedHelp).width(labelWidth).height(size);
         row();
         add(new Image(skin.getAtlas().createSprite("strategy"))).size(size);
         Label strategyHelp = new Label(language.get("strategyHelp"), skin);
-        add(strategyHelp).width(labelWidth);
+        add(strategyHelp).width(labelWidth).height(size);
 
         Label[] labels = {
 pauseGameHelp, goalHelp, infoHelp, goToRedHelp,

@@ -31,6 +31,7 @@ public class HelpDialog extends Dialog {
         super("", skin);
         clear();
         pad(stage.getHeight() / 20);
+        defaults().space(stage.getHeight() / 72);
         float size = stage.getHeight() / 8;
         float labelWidth = stage.getWidth() / 2;
         add(new Image(skin.getAtlas().createSprite("pause"))).size(size); // TODO
@@ -39,23 +40,23 @@ public class HelpDialog extends Dialog {
                                                                           // gamePause
                                                                           // image
         Label pauseGameHelp = new Label(language.get("pauseGameHelp"), skin);
-        add(pauseGameHelp).width(labelWidth);
+        add(pauseGameHelp).width(labelWidth).height(size);
         row();
         add(new Image(skin.getAtlas().createSprite("play"))).size(size);
         Label playHelp = new Label(language.get("playHelp"), skin);
-        add(playHelp).width(labelWidth);
+        add(playHelp).width(labelWidth).height(size);
         row();
         add(new Image(skin.getAtlas().createSprite("pause"))).size(size);
         Label pauseHelp = new Label(language.get("pauseHelp"), skin);
-        add(pauseHelp).width(labelWidth);
+        add(pauseHelp).width(labelWidth).height(size);
         row();
         add(new Image(skin.getAtlas().createSprite("prev"))).size(size);
         Label prevHelp = new Label(language.get("prevHelp"), skin);
-        add(prevHelp).width(labelWidth);
+        add(prevHelp).width(labelWidth).height(size);
         row();
         add(new Image(skin.getAtlas().createSprite("forward"))).size(size);
         Label forwardHelp = new Label(language.get("forwardHelp"), skin);
-        add(forwardHelp).width(labelWidth);
+        add(forwardHelp).width(labelWidth).height(size);
         row();
 
         Label[] labels = {

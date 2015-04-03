@@ -33,38 +33,34 @@ public class HelpDialog extends Dialog {
         super("", skin);
         clear();
         pad(stageHeight / 20);
+        defaults().space(stageHeight / 72);
         float labelWidth = stageWidth / 2;
-        add(new Image(skin.getAtlas().createSprite("back"))).size(
-                stageHeight / 8);
-        add(new Image(skin.getAtlas().createSprite("next"))).size(
-                stageHeight / 8);
+        float size = stageHeight / 8;
+        add(new Image(skin.getAtlas().createSprite("back"))).size(size);
+        add(new Image(skin.getAtlas().createSprite("next"))).size(size);
         Label selectLevelHelp = new Label(language.get("selectLevelHelp"), skin);
-        add(selectLevelHelp).width(labelWidth);
+        add(selectLevelHelp).width(labelWidth).height(size);
         row();
-        add(new Image(skin.getAtlas().createSprite("level_completed1"))).size(
-                stageHeight / 8).colspan(2);
+        add(new Image(skin.getAtlas().createSprite("level_completed1"))).size(size).colspan(2);
         Label completedLevelHelp = new Label(
                 language.get("completedLevelHelp"), skin);
-        add(completedLevelHelp).width(labelWidth);
+        add(completedLevelHelp).width(labelWidth).height(size);
         row();
-        add(new Image(skin.getAtlas().createSprite("level_unlocked1"))).size(
-                stageHeight / 8).colspan(2);
+        add(new Image(skin.getAtlas().createSprite("level_unlocked1"))).size(size).colspan(2);
         Label unlockedLevelHelp = new Label(language.get("unlockedLevelHelp"),
                 skin);
-        add(unlockedLevelHelp).width(labelWidth);
+        add(unlockedLevelHelp).width(labelWidth).height(size);
         row();
         Label levelColorHelp = new Label(language.get("levelColorHelp"), skin);
-        add(levelColorHelp).colspan(3).width(labelWidth);
+        add(levelColorHelp).colspan(3).width(labelWidth).height(size);
         row();
-        add(new Image(skin.getAtlas().createSprite("level_locked"))).size(
-                stageHeight / 8).colspan(2);
+        add(new Image(skin.getAtlas().createSprite("level_locked"))).size(size).colspan(2);
         Label lockedLevelHelp = new Label(language.get("lockedLevelHelp"), skin);
-        add(lockedLevelHelp).width(labelWidth);
+        add(lockedLevelHelp).width(labelWidth).height(size);
         row();
-        add(new Image(skin.getAtlas().createSprite("sandbox"))).size(
-                stageHeight / 8).colspan(2);
+        add(new Image(skin.getAtlas().createSprite("sandbox"))).size(size).colspan(2);
         Label sandboxHelp = new Label(language.get("sandboxHelp"), skin);
-        add(sandboxHelp).width(labelWidth);
+        add(sandboxHelp).width(labelWidth).height(size);
         
         Label[] labels = {
                 selectLevelHelp, completedLevelHelp, unlockedLevelHelp, levelColorHelp, lockedLevelHelp, sandboxHelp};

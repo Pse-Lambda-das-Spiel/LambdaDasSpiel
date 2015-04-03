@@ -123,7 +123,7 @@ public class ProfileEditName extends StageViewController implements
         ImageButton backButton = new ImageButton(manager.get(skinJson,
                 Skin.class), "leftButton");
         Container<ImageButton> buttonContainer = new Container<ImageButton>();
-        buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
+        buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5).minSize(getStage().getHeight() / 5);
         buttonContainer.align(Align.bottomLeft);
         buttonContainer.setActor(backButton);
         backButton.addListener(new BackClickListener());
@@ -133,7 +133,7 @@ public class ProfileEditName extends StageViewController implements
         ImageButton continueButton = new ImageButton(manager.get(skinJson,
                 Skin.class), "rightButton");
         buttonContainer = new Container<ImageButton>();
-        buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5);
+        buttonContainer.pad(space * 5 / 2).maxSize(getStage().getHeight() / 5).minSize(getStage().getHeight() / 5);
         buttonContainer.align(Align.bottomRight);
         buttonContainer.setActor(continueButton);
         continueButton.addListener(new ContinueClickListener());

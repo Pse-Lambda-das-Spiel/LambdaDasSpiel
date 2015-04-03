@@ -79,7 +79,7 @@ public abstract class LambdaValueViewController extends
                             int i = 0;
                             for (final Color color : colors) {
                                 if (i++ % size == 0) {
-                                    row().size(height / 9).space(10);
+                                    row().size(height / 9).space(height / 72);
                                 }
                                 ImageButton colorButton = new ImageButton(dialogSkin, "colorButton");
                                 colorButton.setColor(color);

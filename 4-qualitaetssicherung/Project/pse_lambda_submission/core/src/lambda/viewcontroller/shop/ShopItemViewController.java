@@ -46,6 +46,7 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
         currentState = new TextButton(model.getShopItemType().getTypeName()
                 + " " + model.getId(),
                 ShopViewController.getTextButtonStyle("not_buyable"));
+        fitButton();
     }
 
     /**
@@ -75,6 +76,7 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
             currentState.setStyle(ShopViewController
                     .getTextButtonStyle("not_buyable"));
         }
+        fitButton();
     }
 
     /**
@@ -91,6 +93,7 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
             currentState.setStyle(ShopViewController
                     .getTextButtonStyle("purchased"));
         }
+        fitButton();
     }
 
     /**
@@ -116,6 +119,7 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
                     .getTextButtonStyle("not_buyable"));
         }
         currentState.addListener(new ItemClickListener());
+        fitButton();
     }
 
     /**
@@ -124,15 +128,18 @@ public class ShopItemViewController<T extends ShopItemModel> extends Actor
      * @return a text button of the current state
      */
     public TextButton getCurrentState() {
+        return currentState;
+    }
+
+    private void fitButton() {
         float temp = stage.getHeight() / 720;
         currentState.getLabel().setFontScale(temp);
         currentState.getStyle().up.setMinHeight(temp * 100);
         currentState.getStyle().up.setMinWidth(temp * 481);
         currentState.getStyle().down.setMinHeight(temp * 100);
         currentState.getStyle().down.setMinWidth(temp * 481);
-        return currentState;
     }
-
+    
     /**
      * ClickListener for the button of this item
      */

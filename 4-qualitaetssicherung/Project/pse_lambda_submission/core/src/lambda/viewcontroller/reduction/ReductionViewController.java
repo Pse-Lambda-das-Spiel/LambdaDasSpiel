@@ -544,15 +544,16 @@ public class ReductionViewController extends StageViewController implements
                 label.setFontScale(smallestScale);
             }
             pad(buttonSize / 4);
+            defaults().space(ReductionViewController.this.getStage().getHeight() / 72);
             add(menuButton).size(buttonSize);
-            add(mainMenuLabel).width(labelWidth);
+            add(mainMenuLabel).width(labelWidth).height(buttonSize);
             add(continueButton).size(buttonSize);
-            add(continueLabel).width(labelWidth);
+            add(continueLabel).width(labelWidth).height(buttonSize);
             row();
             add(levelMenuButton).size(buttonSize);
-            add(levelMenuLabel).width(labelWidth);
+            add(levelMenuLabel).width(labelWidth).height(buttonSize);
             add(resetButton).size(buttonSize);
-            add(resetLabel).width(labelWidth);
+            add(resetLabel).width(labelWidth).height(buttonSize);
         }
     }
 
@@ -665,13 +666,15 @@ public class ReductionViewController extends StageViewController implements
 
             clear();
             pad(buttonSize / 4);
+            defaults().space(ReductionViewController.this.getStage().getHeight() / 72);
             // if the level is not the sandbox
             if (playedLevel.getId() != 0 || specialMessage != null) {
                 levelLabel.setFontScale(2
                         * labelWidth
                         / levelLabel.getStyle().font.getBounds(levelLabel
                                 .getText()).width);
-                add(levelLabel).colspan(2).width(2 * labelWidth);
+                add(levelLabel).colspan(2).width(2 * labelWidth).height(
+                        ReductionViewController.this.getStage().getHeight() / 720 * levelLabel.getHeight());
             }
             row();
             Table left = new Table();
@@ -697,7 +700,8 @@ public class ReductionViewController extends StageViewController implements
                         * labelWidth
                         / coinsLabel.getStyle().font.getBounds(coinsLabel
                                 .getText()).width);
-                add(coinsLabel).colspan(2).width(2 * labelWidth);
+                add(coinsLabel).colspan(2).width(2 * labelWidth).height(
+                        ReductionViewController.this.getStage().getHeight() / 720 * coinsLabel.getHeight());
                 // update levelindex and coins only if a new level was
                 // solved
                 currentProfile

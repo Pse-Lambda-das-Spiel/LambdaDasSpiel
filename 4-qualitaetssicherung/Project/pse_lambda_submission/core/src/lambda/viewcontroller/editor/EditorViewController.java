@@ -264,7 +264,7 @@ public final class EditorViewController extends StageViewController implements
                             add(stratButton).size(buttonSize);
                             labels[n] = new Label(language.get(strategies
                                     .get(n).name()), dialogSkin);
-                            add(labels[n]).width(labelWidth);
+                            add(labels[n]).width(labelWidth).height(buttonSize);
                             row();
                         }
                         BitmapFont font = new Label("", dialogSkin).getStyle().font;
@@ -714,15 +714,16 @@ public final class EditorViewController extends StageViewController implements
                 label.setFontScale(smallestScale);
             }
             pad(buttonSize / 4);
+            defaults().space(EditorViewController.this.getStage().getHeight() / 72);
             add(menuButton).size(buttonSize);
-            add(mainMenuLabel).width(labelWidth);
+            add(mainMenuLabel).width(labelWidth).height(buttonSize);
             add(continueButton).size(buttonSize);
-            add(continueLabel).width(labelWidth);
+            add(continueLabel).width(labelWidth).height(buttonSize);
             row();
             add(levelMenuButton).size(buttonSize);
-            add(levelMenuLabel).width(labelWidth);
+            add(levelMenuLabel).width(labelWidth).height(buttonSize);
             add(resetButton).size(buttonSize);
-            add(resetLabel).width(labelWidth);
+            add(resetLabel).width(labelWidth).height(buttonSize);
         }
     }
 

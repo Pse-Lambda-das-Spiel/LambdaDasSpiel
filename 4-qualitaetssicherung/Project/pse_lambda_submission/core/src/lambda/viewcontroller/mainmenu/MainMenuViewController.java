@@ -131,14 +131,14 @@ public class MainMenuViewController extends StageViewController implements
         settingsButtonContainer.setActor(settingsButton);
         getStage().addActor(settingsButtonContainer);
         settingsButtonContainer.setFillParent(true);
-        settingsButtonContainer.maxSize(buttonSize);
+        settingsButtonContainer.maxSize(buttonSize).minSize(buttonSize);
 
         soundButtonContainer = new Container<>();
         soundButtonContainer.pad(padSpace).align(Align.bottomRight);
         soundButtonContainer.setActor(soundUnmuted);
         getStage().addActor(soundButtonContainer);
         soundButtonContainer.setFillParent(true);
-        soundButtonContainer.maxSize(buttonSize);
+        soundButtonContainer.maxSize(buttonSize).minSize(buttonSize);
 
         Container<ImageTextButton> coinButtonContainer = new Container<>();
         coinButtonContainer.pad(padSpace).align(Align.topRight);
