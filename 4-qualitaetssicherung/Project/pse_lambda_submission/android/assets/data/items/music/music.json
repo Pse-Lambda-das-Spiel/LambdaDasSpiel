@@ -1,38 +1,29 @@
 {
+
 	"00": {
-		"id": "0",
-		"price": 10 ,
-		"filename": "MetalMint-KIT"
-	},
-	"01": {
 		"id": "1",
-		"price": 15 ,
+		"price": 10 ,
 		"filename": "Happy Day"
 	},
-	"02": {
+	"01": {
 		"id": "2",
 		"price": 20 ,
 		"filename": "Deep Space"
 	},
-	"03": {
+	"02": {
 		"id": "3",
-		"price": 25 ,
+		"price": 30 ,
 		"filename": "Dark Night"
 	},
-	"04": {
+	"03": {
 		"id": "4",
-		"price": 30 ,
+		"price": 40 ,
 		"filename": "Adventure"
 	},
-	"05": {
+	"04": {
 		"id": "5",
-		"price": 35 ,
+		"price": 50 ,
 		"filename": "Future Tech"
-	},
-	"06": {
-		"id": "6",
-		"price": 40 ,
-		"filename": "KIT Electro"
 	}
 }
 
