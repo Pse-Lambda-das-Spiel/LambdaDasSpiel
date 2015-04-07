@@ -1,0 +1,35 @@
+Titel:
+Lamb.da
+
+APK:
+https://github.com/Pse-Lambda-das-Spiel/LambdaDasSpiel/releases/download/store/Lambda.apk
+
+Kurzbeschreibung:
+Lamb.da ist ein Rätselspiel der besonderen Art!
+
+Lamb.da is a particular kind of puzzle!
+
+Ausführliche Beschreibung:
+Du hast Spaß an Rätseln und am besten auch noch als App? Sieh dir Lamb.da an, verstehe das Spielprinzip und sammle pro erfolgreich abgeschlossenem Level Münzen, die du gegen tolle Musik und andere Belohnungen eintauschen kannst.
+Versuch dich also an den 24 kniffligen Leveln und zeig den Lämmern wo der Edelstein hängt!
+
+Die Applikation Lamb.da wurde im Sinne von Praxis der Softwareentwicklung vom Team Lamb.da am Karlsruher Institut für Technologie (KIT) entwickelt und dient als Lernapplikation für Kinder ab 8 Jahren. 
+Es sollen die Grundprinzipien des untypisiertem Lambda-Kalküls, welches die theoretische Grundlage für funktionale Programmierung bildet, spielerisch gelehrt werden. Dies geschieht durch Gamification dieses Kalküls,
+was ursprünglich die Idee von Bret Victor war.
+
+Team Lamb.da
+
+Credits to deleket.deviantart.com for the avatars!
+
+You are interested in puzzles and preferably in the form of an application? Look at Lamb.da, understand the principles of the game and collect coins for each successfully completed level which you can swap for great music and other awards.
+So try to complete the 24 tricky levels and show the lambds how to perform magic!
+
+The application Lamb.da was developed by Team Lamb.da on the Karlsruher Institut of Technology (KIT) and serves as an interactive learning application for children aged 8+. This app should playful teach the basic principles of the untyped lambda-calculus, which is the theoretical foundation of functional programming.
+
+Team Lamb.da
+
+Credits to deleket.deviantart.com for the avatars!
+
+Website:
+https://github.com/Pse-Lambda-das-Spiel/LambdaDasSpiel
+(reicht das git als website?)
