@@ -154,11 +154,11 @@ public class DeltaStatisticProcessor implements EditorModelObserver,
     @Override
     public void reductionFinished(boolean levelComplete) {
         if (!inSandbox) {
-           levelTries++;
+            levelTries++;
             if (levelComplete) {
-               successfulLevelTries++;
+                successfulLevelTries++;
                 if (!hintUsed) {
-                   hintsNotUsed++;
+                    hintsNotUsed++;
                 }
             }
         }
@@ -201,16 +201,16 @@ public class DeltaStatisticProcessor implements EditorModelObserver,
             }
             // update per level values if the new ones are bigger
             if (gemsEnchanted > statistic.getGemsEnchantedPerLevel()) {
-                statistic.setGemsEnchantedPerLevel(statistic.getGemsEnchantedPerLevel() + gemsEnchanted);
+                statistic.setGemsEnchantedPerLevel(gemsEnchanted);
             }
             if (lambsEnchanted > statistic.getLambsEnchantedPerLevel()) {
-                statistic.setLambsEnchantedPerLevel(statistic.getLambsEnchantedPerLevel() + lambsEnchanted);
+                statistic.setLambsEnchantedPerLevel(lambsEnchanted);
             }
             if (gemsPlaced > statistic.getGemsPlacedPerLevel()) {
-                statistic.setGemsPlacedPerLevel(statistic.getGemsPlacedPerLevel() + gemsPlaced);
+                statistic.setGemsPlacedPerLevel(gemsPlaced);
             }
             if (lambsPlaced > statistic.getLambsPlacedPerLevel()) {
-                statistic.setLambsPlacedPerLevel(statistic.getLambsPlacedPerLevel() + lambsPlaced);
+                statistic.setLambsPlacedPerLevel(lambsPlaced);
             }
         }
     }
