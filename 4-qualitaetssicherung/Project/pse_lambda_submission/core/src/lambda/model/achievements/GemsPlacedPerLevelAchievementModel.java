@@ -63,7 +63,7 @@ public class GemsPlacedPerLevelAchievementModel extends
         if (statistic == null) {
             throw new IllegalArgumentException("statistic cannot be null!");
         }
-        if (statistic.getGemsPlaced() >= reqGemsPlacedPerLevel) {
+        if (statistic.getGemsPlacedPerLevel() >= reqGemsPlacedPerLevel) {
             setLocked(false);
         } else {
             setLocked(true);
